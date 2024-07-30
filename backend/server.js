@@ -1,15 +1,21 @@
 const dotenv = require('dotenv');
-const http = require('http');
+const express = require('express');
+const employeeRoutes = require('./routes/employee.routes.js'); // Importer les routes d'employés
 
 dotenv.config({ path: '.env.development.local' });
 
 const PORT = process.env.PORT || 3000;
+const app = express();
 
-const server = http.createServer((req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/plain' });
-  res.end('Test!');
+app.use(express.json()); // passer le corps de la demande en JSON
+
+app.get('/', (req, res) => {
+  res.send('Test!');
 });
 
-server.listen(PORT, () => {
+// Routes d'employés
+app.use('/', employeeRoutes);
+
+app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
