@@ -16,6 +16,9 @@ app.get('/', (req, res) => {
 // Routes d'employés
 app.use('/', employeeRoutes);
 
+// Routes des clients
+app.use ('/', clientRoutes);
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
