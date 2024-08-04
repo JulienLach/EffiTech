@@ -29,6 +29,7 @@ class Appointment extends Event {
         this.planIntervention = planIntervention;
     }
     // méthode spécifique à la sous classe
+    static async fillAppointmentForm() {}
 }
 
 class Intervention extends Event {
@@ -38,6 +39,7 @@ class Intervention extends Event {
         this.planIntervention = planIntervention;
     }
     // méthode spécifique à la sous classe
+    static async fillInterventionForm() {}
 }
 
 module.exports = { Event, Appointment, Intervention };

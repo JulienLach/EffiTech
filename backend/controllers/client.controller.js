@@ -1,4 +1,4 @@
-const Client = require('../models/client.model'); // Importer le modèle Client
+const Client = require('../models/client.model.js'); // Importer le modèle Client
 
 exports.getAllClients = async (req, res) => {
     try {
