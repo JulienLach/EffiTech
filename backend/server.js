@@ -19,6 +19,9 @@ app.use('/', employeeRoutes);
 // Routes des clients
 app.use ('/', clientRoutes);
 
+// Routes des événements
+app.use ('/', eventRoutes);
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });

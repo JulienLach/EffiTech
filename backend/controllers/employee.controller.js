@@ -1,35 +1,63 @@
-const pool = require('../config/db.config'); //importer la configuration de la base de données pour utiliser pool.query
+const Employee = require('../models/employee.model'); // Importer le modèle Employee
 
 exports.getAllEmployees = async (req, res) => {
     try {
-        const result = await pool.query('SELECT * FROM employees'); //obtenir tous les employés
-        res.status(200).json(result.rows); //renvoyer les employés
+        const employees = await Employee.getAllEmployees(); // Utiliser la méthode du modèle
+        res.status(200).json(employees); // Renvoyer les employés
     } catch (error) {
         res.status(500).json({ message: 'Erreur lors de la récupération des employés', error: error.message });
     }
 };
-  
-exports.getEmployeeById = (req, res) => {
+
+exports.getEmployeeById = async (req, res) => {
     const employeeId = req.params.id;
-    // 
-    res.send(`Obtenir l'employé avec l'ID ${employeeId}`);
+    try {
+        const employee = await Employee.getEmployeeById(employeeId); // Utiliser la méthode du modèle
+        if (employee) {
+            res.status(200).json(employee);
+        } else {
+            res.status(404).json({ message: 'Employé non trouvé' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Erreur lors de la récupération de l\'employé', error: error.message });
+    }
 };
 
-exports.createEmployee = (req, res) => {
+exports.createEmployee = async (req, res) => {
     const newEmployee = req.body;
-    //
-    res.send('Créer un nouvel employé');
+    try {
+        const createdEmployee = await Employee.createEmployee(newEmployee); // Utiliser la méthode du modèle
+        res.status(201).json(createdEmployee);
+    } catch (error) {
+        res.status(500).json({ message: 'Erreur lors de la création de l\'employé', error: error.message });
+    }
 };
 
-exports.updateEmployee = (req, res) => {
+exports.updateEmployee = async (req, res) => {
     const employeeId = req.params.id;
     const updatedEmployee = req.body;
-    //
-    res.send(`Mettre à jour l'employé avec l'ID ${employeeId}`);
+    try {
+        const result = await Employee.updateEmployee(employeeId, updatedEmployee); // Utiliser la méthode du modèle
+        if (result) {
+            res.status(200).json({ message: 'Employé mis à jour avec succès' });
+        } else {
+            res.status(404).json({ message: 'Employé non trouvé' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Erreur lors de la mise à jour de l\'employé', error: error.message });
+    }
 };
 
-exports.deleteEmployee = (req, res) => {
+exports.deleteEmployee = async (req, res) => {
     const employeeId = req.params.id;
-    // 
-    res.send(`Supprimer l'employé avec l'ID ${employeeId}`);
+    try {
+        const result = await Employee.deleteEmployee(employeeId); // Utiliser la méthode du modèle
+        if (result) {
+            res.status(200).json({ message: 'Employé supprimé avec succès' });
+        } else {
+            res.status(404).json({ message: 'Employé non trouvé' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Erreur lors de la suppression de l\'employé', error: error.message });
+    }
 };

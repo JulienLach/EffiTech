@@ -1,35 +1,63 @@
-const pool = require('../config/db.config'); //importer la configuration de la base de données pour utiliser pool.query
+const Client = require('../models/client.model'); // Importer le modèle Client
 
-const getAllClients = async (req, res) => {
+exports.getAllClients = async (req, res) => {
     try {
-        const result = await pool.query('SELECT * FROM clients'); // obtenir tous les clients
-        res.status(200).json(result.rows); //renvoyer les clients
+        const clients = await Client.getAllClients(); // Utiliser la méthode du modèle
+        res.status(200).json(clients); // Renvoyer les clients
     } catch (error) {
-        res.status(500).json({message: 'Erreur lors de la récupération des employés', error: error.message});
+        res.status(500).json({ message: 'Erreur lors de la récupération des clients', error: error.message });
     }
-}
+};
 
-const getClientById = (req, res) => {
+exports.getClientById = async (req, res) => {
     const clientId = req.params.id;
-    // logique pour récuperer l'id du client
-    res.send(`Obtenir le client avec l'ID ${clientId}`);
-}
+    try {
+        const client = await Client.getClientById(clientId); // Utiliser la méthode du modèle
+        if (client) {
+            res.status(200).json(client);
+        } else {
+            res.status(404).json({ message: 'Client non trouvé' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Erreur lors de la récupération du client', error: error.message });
+    }
+};
 
-const createClient = (req, res) => {
+exports.createClient = async (req, res) => {
     const newClient = req.body;
-    // logique pour récupérer les inputs du nouveau client crééé
-    res.send(`Créer un nouveau client`)
-}
+    try {
+        const createdClient = await Client.createClient(newClient); // Utiliser la méthode du modèle
+        res.status(201).json(createdClient);
+    } catch (error) {
+        res.status(500).json({ message: 'Erreur lors de la création du client', error: error.message });
+    }
+};
 
-const updateClient = (req, res) => {
+exports.updateClient = async (req, res) => {
     const clientId = req.params.id;
-    const updatedClient = req.body
-    //
-    res.send(`Mettre à jour le client avec l'ID ${clientId}`);
-}
+    const updatedClient = req.body;
+    try {
+        const result = await Client.updateClient(clientId, updatedClient); // Utiliser la méthode du modèle
+        if (result) {
+            res.status(200).json({ message: 'Client mis à jour avec succès' });
+        } else {
+            res.status(404).json({ message: 'Client non trouvé' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Erreur lors de la mise à jour du client', error: error.message });
+    }
+};
 
-const deleteCLient = (req, res) => {
+exports.deleteClient = async (req, res) => {
     const clientId = req.params.id;
-    //
-    res.send(`Supprimer le client avec l'ID ${clientId}`);
-}
+    try {
+        const result = await Client.deleteClient(clientId); // Utiliser la méthode du modèle
+        if (result) {
+            res.status(200).json({ message: 'Client supprimé avec succès' });
+        } else {
+            res.status(404).json({ message: 'Client non trouvé' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Erreur lors de la suppression du client', error: error.message });
+    }
+};
