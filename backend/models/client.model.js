@@ -1,13 +1,13 @@
 const pool = require('../config/db.config'); // Importer la configuration de la base de données
 
 class Client {
-    constructor(id_client, category, firstname, lastname, email, id_address, phoneNumber) {
-        this.id_client = id_client;
+    constructor(idClient, category, firstname, lastname, email, idAddress, phoneNumber) {
+        this.idClient = idClient;
         this.category = category;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
-        this.id_address = id_address;
+        this.idAddress = idAddress;
         this.phoneNumber = phoneNumber;
     }
 

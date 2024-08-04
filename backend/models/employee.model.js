@@ -1,8 +1,8 @@
 const pool = require('../config/db.config'); // Importer la configuration de la base de données
 
 class Employee {
-    constructor(id_employee, firstname, lastname, job, phoneNumber, email, isAdmin, password, speciality) {
-        this.id_employee = id_employee;
+    constructor(idEmployee, firstname, lastname, job, phoneNumber, email, isAdmin, password, speciality) {
+        this.idEmployee = idEmployee;
         this.firstname = firstname;
         this.lastname = lastname;
         this.job = job;
