@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const employeeController = require('../controllers/event.controller');
+const employeeController = require('../controllers/event.controller.js');
 
 router.get('/events', eventController.getAllEvents);
 
