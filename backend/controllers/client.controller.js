@@ -10,9 +10,9 @@ exports.getAllClients = async (req, res) => {
 };
 
 exports.getClientById = async (req, res) => {
-    const clientId = req.params.id;
+    const idClient = req.params.id;
     try {
-        const client = await Client.getClientById(clientId); // Utiliser la méthode du modèle
+        const client = await Client.getClientById(idClient); // Utiliser la méthode du modèle
         if (client) {
             res.status(200).json(client);
         } else {

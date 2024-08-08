@@ -10,9 +10,9 @@ exports.getAllEmployees = async (req, res) => {
 };
 
 exports.getEmployeeById = async (req, res) => {
-    const employeeId = req.params.id;
+    const idEmployee = req.params.id;
     try {
-        const employee = await Employee.getEmployeeById(employeeId); // Utiliser la méthode du modèle
+        const employee = await Employee.getEmployeeById(idEmployee); // Utiliser la méthode du modèle
         if (employee) {
             res.status(200).json(employee);
         } else {
@@ -34,10 +34,10 @@ exports.createEmployee = async (req, res) => {
 };
 
 exports.updateEmployee = async (req, res) => {
-    const employeeId = req.params.id;
+    const idEmployee = req.params.id;
     const updatedEmployee = req.body;
     try {
-        const result = await Employee.updateEmployee(employeeId, updatedEmployee); // Utiliser la méthode du modèle
+        const result = await Employee.updateEmployee(idEmployee, updatedEmployee); // Utiliser la méthode du modèle
         if (result) {
             res.status(200).json({ message: 'Employé mis à jour avec succès' });
         } else {
@@ -49,9 +49,9 @@ exports.updateEmployee = async (req, res) => {
 };
 
 exports.deleteEmployee = async (req, res) => {
-    const employeeId = req.params.id;
+    const idEmployee = req.params.id;
     try {
-        const result = await Employee.deleteEmployee(employeeId); // Utiliser la méthode du modèle
+        const result = await Employee.deleteEmployee(idEmployee); // Utiliser la méthode du modèle
         if (result) {
             res.status(200).json({ message: 'Employé supprimé avec succès' });
         } else {
