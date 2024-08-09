@@ -8,3 +8,31 @@ exports.getAllEvents = async (req, res) => {
         res.status(500).json({ message: 'Erreur lors de la récupération des événements', error: error.message });
     }
 };
+
+exports.getEventById = (req, res) => {
+   
+};
+
+exports.createEvent = (req, res) => {
+    
+};
+
+exports.updateEvent = (req, res) => {
+
+};
+
+exports.validateEvent = (req, res) => {
+
+};
+
+exports.deleteEvent = (req, res) => {
+
+};
+
+exports.fillInterventionForm = (req, res) => {
+
+};
+
+exports.fillAppointmentForm = (req, res) => {
+
+};

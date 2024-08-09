@@ -1,6 +1,8 @@
 const dotenv = require('dotenv');
 const express = require('express');
 const employeeRoutes = require('./routes/employee.routes.js'); // Importer les routes d'employés
+const clientRoutes = require('./routes/client.routes.js');
+const eventRoutes = require('./routes/event.routes.js');
 
 dotenv.config({ path: '.env.development.local' });
 
@@ -14,13 +16,13 @@ app.get('/', (req, res) => {
 });
 
 // Routes d'employés
-app.use('/', employeeRoutes);
+app.use('/employees', employeeRoutes); 
 
 // Routes des clients
-app.use ('/', clientRoutes);
+app.use('/clients', clientRoutes);
 
 // Routes des événements
-app.use ('/', eventRoutes);
+app.use('/events', eventRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

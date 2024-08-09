@@ -10,6 +10,11 @@ class Invoice {
         this.file = file;
     }
 
+    static async getAllInvoices() {
+        const result = await pool.query('SELECT * FROM invoices');
+        return result.rows;
+    }
+
     static async getInvoiceById(idInvoice) {
         const query = 'SELECT * FROM invoices WHERE idInvoice = $1';
         const values = [idInvoice];
