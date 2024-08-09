@@ -13,7 +13,11 @@ class Company {
     }
 
     static async getCompanyById(idCompany) {
-        const result = await pool.query('SELECT * FROM companies WHERE idCompany = $1', [idCompany]);
+        const query = 'SELECT * FROM companies WHERE idCompany = $1';
+        const values = [idCompany];
+        const result = await pool.query(query, values);
         return result.rows[0];
     }
 }
+
+module.exports = Company;

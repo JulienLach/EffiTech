@@ -8,13 +8,17 @@ class Address {
         this.zipcode = zipcode;
     }
 
-    static async getAddressById() {
-        const result = await pool.query('SELECT * FROM addresses WHERE idAddress = $1', [this.idAddress]);
+    static async getAddressById(idAddress) {
+        const query = 'SELECT * FROM addresses WHERE idAddress = $1';
+        const values = [idAddress];
+        const result = await pool.query(query, values);
         return result.rows[0];
     }
-
-    static async createAddress() {
-        const result = await pool.query('INSERT INTO addresses (address, city, zipcode) VALUES ($1, $2, $3) RETURNING *', [this.address, this.city, this.zipcode]);
+    
+    static async createAddress(address, city, zipcode) {
+        const query = 'INSERT INTO addresses (address, city, zipcode) VALUES ($1, $2, $3) RETURNING *';
+        const values = [address, city, zipcode];
+        const result = await pool.query(query, values);
         return result.rows[0];
     }
 }

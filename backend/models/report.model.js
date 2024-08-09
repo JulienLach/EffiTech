@@ -14,20 +14,18 @@ class Report {
     }
 
     static async sendReport(reportData) {
-        const result = await pool.query(
-            `INSERT INTO reports (breakdown, work_done, reschedule, ending_hour, duration, client_signature, employee_signature, id_event)
-             VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
-            [
-                reportData.breakdown,
-                reportData.workDone,
-                reportData.reschedule,
-                reportData.endingHour,
-                reportData.duration,
-                reportData.clientSignature,
-                reportData.employeeSignature,
-                reportData.idEvent
-            ]
-        );
+        const query = 'INSERT INTO reports (breakdown, work_done, reschedule, ending_hour, duration, client_signature, employee_signature, id_event) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)';
+        const values = [
+            reportData.breakdown,
+            reportData.workDone,
+            reportData.reschedule,
+            reportData.endingHour,
+            reportData.duration,
+            reportData.clientSignature,
+            reportData.employeeSignature,
+            reportData.idEvent
+        ];
+        const result = await pool.query(query, values);
         const row = result.rows[0];
         return new Report(
             row.id_report,
