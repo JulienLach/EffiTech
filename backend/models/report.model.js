@@ -13,32 +13,7 @@ class Report {
         this.idEvent = idEvent;
     }
 
-    static async sendReport(reportData) {
-        const query = 'INSERT INTO reports (breakdown, work_done, reschedule, ending_hour, duration, client_signature, employee_signature, id_event) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)';
-        const values = [
-            reportData.breakdown,
-            reportData.workDone,
-            reportData.reschedule,
-            reportData.endingHour,
-            reportData.duration,
-            reportData.clientSignature,
-            reportData.employeeSignature,
-            reportData.idEvent
-        ];
-        const result = await pool.query(query, values);
-        const row = result.rows[0];
-        return new Report(
-            row.id_report,
-            row.breakdown,
-            row.work_done,
-            row.reschedule,
-            row.ending_hour,
-            row.duration,
-            row.client_signature,
-            row.employee_signature,
-            row.id_event
-        );
-    }
+    static async sendReportByEmail(reportData) {}
 }
 
 module.exports = Report;
