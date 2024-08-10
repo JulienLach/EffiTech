@@ -18,7 +18,18 @@ class Employee {
         return result.rows;
     }
 
-    // Suite des méthodes
+    static async getEmployeeById(idEmployee) {
+        const query = 'SELECT * FROM employees WHERE idEmployee = $1';
+        const values = [idEmployee];
+        const result = await pool.query(query, values);
+        return result.rows[0];
+    }
+
+    static async createEmployee(firstname, lastname, job, phoneNumber, email, isAdmin, password, speciality) {
+        const query = 'INSERT INTO employees (firstname, lastname, job, phoneNumber, email, isAdmin, password, speciality) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)';
+        const values = [firstname, lastname, job, phoneNumber, email, isAdmin, password, speciality];
+        await pool.query(query, values);
+    }
 }
 
 module.exports = Employee;
