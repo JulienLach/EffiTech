@@ -45,6 +45,49 @@ class Event {
         const values = [idEvent];
         await pool.query(query, values);
     }
+
+    static async getEventStatus(idEvent) {
+        const query = 'SELECT status FROM events WHERE idEvent = $1';
+        const values = [idEvent];
+        const result = await pool.query(query, values);
+
+        const status = result.rows[0].status;
+        
+        switch (status) {
+            case '4':
+                return 'Terminé';
+            case '3':
+                return 'Aujourd\'hui';
+            case '2':
+                return 'En retard';
+            case '1':
+                return 'À venir';
+            case '0':
+                return 'À planifier';}
+    }
+
+    static async getEventsStatuses() {
+        const query = 'SELECT id, status FROM events';
+        const result = await pool.query(query);
+        const statuses = result.rows.map(row => ({
+            id: row.id,
+            status: (() => {
+                switch (row.status) {
+                    case '4':
+                        return 'Terminé';
+                    case '3':
+                        return 'Aujourd\'hui';
+                    case '2':
+                        return 'En retard';
+                    case '1':
+                        return 'À venir';
+                    case '0':
+                        return 'À planifier';
+                }
+            })()
+        }));
+        return statuses;
+    }
 }
 
 class Appointment extends Event {
