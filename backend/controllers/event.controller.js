@@ -23,12 +23,24 @@ exports.getEventById = async (req, res) => {
     }
 };
 
-exports.createEvent = (req, res) => {
-    
+exports.createEvent = async (req, res) => {
+    const { title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee } = req.body;
+    try {
+        await Event.createEvent(title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee);
+        res.status(201).json({ message: 'Événement créé avec succès' });
+    } catch (error) {
+        res.status(500).json({ message: 'Erreur lors de la création de l\'événement', error: error.message });
+    }
 };
 
-exports.updateEvent = (req, res) => {
-
+exports.updateEvent = async (req, res) => {
+    const {title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee, idEvent} = req.body;
+    try {
+        await Event.updateEvent(title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee, idEvent);
+        res.status(200).json({ message: 'Événement modifié avec succès' });
+    } catch (error) {
+        res.status(500).json({ message: 'Erreur lors de la modification de l\'événement', error: error.message });
+    }
 };
 
 exports.validateEvent = (req, res) => {
