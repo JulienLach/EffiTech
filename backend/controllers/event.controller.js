@@ -43,18 +43,14 @@ exports.updateEvent = async (req, res) => {
     }
 };
 
-exports.validateEvent = (req, res) => {
+exports.submitInterventionForm = (req, res) => {
+    
+};
+
+exports.submitAppointmentForm = (req, res) => {
 
 };
 
 exports.deleteEvent = (req, res) => {
-
-};
-
-exports.fillInterventionForm = (req, res) => {
-
-};
-
-exports.fillAppointmentForm = (req, res) => {
 
 };

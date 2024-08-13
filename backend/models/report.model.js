@@ -13,6 +13,13 @@ class Report {
         this.idEvent = idEvent;
     }
 
+    static async getReportById(idReport) {
+        const query = 'SELECT * FROM reports WHERE idReport = $1';
+        const values = [idReport];
+        const result = await pool.query(query, values);
+        return result.rows[0];
+    }
+
     static async sendReportByEmail(reportData) {}
 }
 

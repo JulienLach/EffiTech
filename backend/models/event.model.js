@@ -106,7 +106,7 @@ class Appointment extends Event {
         this.planIntervention = planIntervention;
     }
     // méthode spécifique à la sous classe
-    static async fillAppointmentForm() {
+    static async submitAppointmentForm() {
 
     }
 }
@@ -117,17 +117,13 @@ class Intervention extends Event {
         this.report = report; // Voir la dépendence à la classe report
         this.planIntervention = planIntervention;
     }
-    // méthode spécifique à la sous classe
-    static async fillInterventionForm() {
-        const query = '';
-        const values = [];
-        // ajouter la conditon si coché crée directement l'intervention, créer un nouvel event
-    }
 
-    static async createInterventionReport(idEvent, breakdown, workDone, reschedule, endingHour, duration, clientSignature, employeeSignature) {
+    // méthode spécifique à la sous classe
+    static async submitInterventionForm(idEvent, breakdown, workDone, reschedule, endingHour, duration, clientSignature, employeeSignature) {
         const query = 'INSERT INTO reports (breakdown, work_done, reschedule, ending_hour, duration, client_signature, employee_signature, id_event) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)';
         const values = [breakdown, workDone, reschedule, endingHour, duration, clientSignature, employeeSignature, idEvent];
         await pool.query(query, values);
+        // ajouter la conditon "planIntervention" si coché crée directement l'intervention, créer un nouvel event avec la méthode createEvent
     }
 }
 
