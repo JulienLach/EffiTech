@@ -9,8 +9,18 @@ exports.getAllEvents = async (req, res) => {
     }
 };
 
-exports.getEventById = (req, res) => {
-   
+exports.getEventById = async (req, res) => {
+   const idEvent = req.params.idEvent;
+    try {
+         const event = await Event.getEventById(idEvent);
+         if (event) {
+              res.status(200).json(event);
+         } else {
+              res.status(404).json({ message: 'Événement non trouvé' });
+         }
+    } catch (error) {
+         res.status(500).json({ message: 'Erreur lors de la récupération de l\'événement', error: error.message });
+    }
 };
 
 exports.createEvent = (req, res) => {

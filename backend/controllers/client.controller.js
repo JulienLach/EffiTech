@@ -10,7 +10,7 @@ exports.getAllClients = async (req, res) => {
 };
 
 exports.getClientById = async (req, res) => {
-    const idClient = req.params.id;
+    const idClient = req.params.idClient;
     try {
         const client = await Client.getClientById(idClient); // Utiliser la méthode du modèle
         if (client) {

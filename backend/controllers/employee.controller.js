@@ -10,7 +10,7 @@ exports.getAllEmployees = async (req, res) => {
 };
 
 exports.getEmployeeById = async (req, res) => {
-    const idEmployee = req.params.id;
+    const idEmployee = req.params.idEmployee;
     try {
         const employee = await Employee.getEmployeeById(idEmployee); // Utiliser la méthode du modèle
         if (employee) {

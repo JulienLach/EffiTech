@@ -22,14 +22,14 @@ class Event {
     }
 
     static async getEventById(idEvent) {
-        const query = 'SELECT * FROM employees WHERE idEmployee = $1';
+        const query = 'SELECT * FROM events WHERE idEvent = $1';
         const values = [idEvent];
         const result = await pool.query(query, values);
         return result.rows[0];
     }
 
     static async createEvent(title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee) {
-        const query = 'INSERT INTO employees (title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee) VALUES ()';
+        const query = 'INSERT INTO events (title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee) VALUES ()';
         const values = [title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee];
         await pool.query(query, values);
     }
@@ -88,6 +88,15 @@ class Event {
         }));
         return statuses;
     }
+
+    static async sortEventsByClient(idClient) {}
+
+    static async sortEventsByStatus(status) {}
+
+    static async sortEventsByidEmployee(idEmployee) {}
+
+    static async sortEventsByType(type) {}
+
 }
 
 class Appointment extends Event {
