@@ -106,8 +106,10 @@ class Appointment extends Event {
         this.planIntervention = planIntervention;
     }
     // méthode spécifique à la sous classe
-    static async submitAppointmentForm() {
-
+    static async submitAppointmentForm(idEvent, workToDo, planIntervention) {
+        const query = 'UPDATE events SET work_to_do = $1, plan_intervention = $2 WHERE idEvent = $3';
+        const values = [workToDo, planIntervention, idEvent];
+        await pool.query(query, values);
     }
 }
 
