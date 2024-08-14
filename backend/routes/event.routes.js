@@ -10,13 +10,11 @@ router.post('/events', eventController.createEvent);
 
 router.put('/events/:id', eventController.updateEvent);
 
-router.put('/events/:id/validate', eventController.validateEvent);
-
 router.delete('/events/:id', eventController.deleteEvent);
 
 // Méthodes spécifiques aux sous classes
-router.get('/events/:id/intervention', eventController.fillInterventionForm);
+router.get('/events/:id/intervention', eventController.submitInterventionForm);
 
-router.get('/events/:id/appointment', eventController.fillAppointmentForm);
+router.get('/events/:id/appointment', eventController.submitAppointmentForm);
 
 module.exports = router;
