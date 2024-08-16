@@ -1,0 +1,19 @@
+.sidebar {
+    width: 10vw;
+    padding: 1em;
+    height: 20vh;
+    border: 0.2em solid #ccc;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 10px 0;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+}

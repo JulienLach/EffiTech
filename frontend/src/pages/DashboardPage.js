@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from '../components/Header';
-import SidebarMenu from '../components/SidebarMenu';
+import Header from '../components/Header/Header';
+import SidebarMenu from '../components/SidebarMenu/SidebarMenu';
 
 const DashboardPage = () => {
   return (

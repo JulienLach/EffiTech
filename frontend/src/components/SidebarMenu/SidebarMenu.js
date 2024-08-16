@@ -1,8 +1,9 @@
 import React from 'react';
+import styles from './SidebarMenu.module.css';
 
 const SibebarMenu = () => {
     return (
-        <div>
+        <div className={styles.sidebar}>
             <ul>
                 <li><a href="/dashboard">Calendrier</a></li>
                 <li><a href="/clients">Clients</a></li>
