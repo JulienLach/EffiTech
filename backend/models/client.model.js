@@ -11,28 +11,46 @@ class Client {
         this.phoneNumber = phoneNumber;
     }
 
-    static async getAllClients() {
-        const result = await pool.query('SELECT * FROM clients');
-        return result.rows;
+    static getAllClients(callback) {
+        const query = 'SELECT * FROM clients';
+        pool.query(query, (error, result) => {
+            if (error) {
+                return callback(error, null);
+            }
+            callback(null, result.rows);
+        });
     }
 
-    static async getClientById(idClient) {
+    static getClientById(idClient, callback) {
         const query = 'SELECT * FROM clients WHERE idClient = $1';
-        const values = [idClient];
-        const result = await pool.query(query, values);
-        return result.rows[0];
+        pool.query(query, [idClient], (error, result) => {
+            if (error) {
+                return callback(error, null);
+            }
+            callback(null, result.rows[0]);
+        });
     }
 
-    static async createClient(category, firstname, lastname, email, idAddress, phoneNumber) {
+    static createClient(category, firstname, lastname, email, idAddress, phoneNumber, callback) {
         const query = 'INSERT INTO clients (category, firstname, lastname, email, idAddress, phoneNumber) VALUES ($1, $2, $3, $4, $5, $6)';
         const values = [category, firstname, lastname, email, idAddress, phoneNumber];
-        await pool.query(query, values);
+        pool.query(query, values, (error, result) => {
+            if (error) {
+                return callback(error, null);
+            }
+            callback(null, result.rows[0]);
+        });
     }
 
-    static async updateClient(category, firstname, lastname, email, idAddress, phoneNumber, idClient) {
+    static updateClient(category, firstname, lastname, email, idAddress, phoneNumber, idClient, callback) {
         const query = 'UPDATE clients SET category = $1, firstname = $2, lastname = $3, email = $4, idAddress = $5, phoneNumber = $6 WHERE idClient = $7';
         const values = [category, firstname, lastname, email, idAddress, phoneNumber, idClient];
-        await pool.query(query, values);
+        pool.query(query, values, (error, result) => {
+            if (error) {
+                return callback(error, null);
+            }
+            callback(null, result.rows[0]);
+        });
     }
 }
 
