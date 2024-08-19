@@ -16,77 +16,120 @@ class Event {
         this.idEmployee = idEmployee;
     }
 
-    static async getAllEvents() {
-        const result = await pool.query('SELECT * FROM events');
-        return result.rows;
+    static getAllEvents(callback) {
+        const query = 'SELECT * FROM events';
+        pool.query(query, (error, result) => {
+            if (error) {
+                return callback(error, null);
+            }
+            callback(null, result.rows);
+        });
     }
 
-    static async getEventById(idEvent) {
+    static async getEventById(idEvent, callback) {
         const query = 'SELECT * FROM events WHERE idEvent = $1';
         const values = [idEvent];
-        const result = await pool.query(query, values);
-        return result.rows[0];
+        pool.query(query, values, (error, result) => {
+            if (error) {
+                return callback(error, null);
+            }
+            callback(null, result.rows[0]);
+        });
     }
 
-    static async createEvent(title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee) {
+    static async createEvent(title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee, callback) {
         const query = 'INSERT INTO events (title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee) VALUES ()';
         const values = [title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee];
-        await pool.query(query, values);
+        pool.query(query, values, (error, result) => {
+            if (error) {
+                return callback(error, null);
+            }
+            callback(null, result);
+        });
     }
 
-    static async updateEvent(title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee, idEvent) {
+    static async updateEvent(title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee, idEvent, callback) {
         const query = 'UPDATE events SET title = $1, description = $2, status = $3, isPlanned = $4, type = $5, idClient = $6, idAddress = $7, startingDate = $8, startingHour = $9, endingHour = $10, idEmployee = $11 WHERE idEvent = $12';
         const values = [title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee, idEvent];
-        await pool.query(query, values);
+        pool.query(query, values, (error, result) => {
+            if (error) {
+                return callback(error, null);
+            }
+            callback(null, result);
+        });
     }
 
-    static async deleteEvent(idEvent) {
+    static async deleteEvent(idEvent, callback) {
         const query = 'DELETE FROM events WHERE idEvent = $1';
         const values = [idEvent];
-        await pool.query(query, values);
+        pool.query(query, values, (error, result) => {
+            if (error) {
+                return callback(error, null);
+            }
+            callback(null, result);
+        });
     }
 
-    static async getEventStatus(idEvent) {
+    static getEventStatus(idEvent, callback) {
         const query = 'SELECT status FROM events WHERE idEvent = $1';
         const values = [idEvent];
-        const result = await pool.query(query, values);
-
-        const status = result.rows[0].status;
-        
-        switch (status) {
-            case '4':
-                return 'Terminé';
-            case '3':
-                return 'Aujourd\'hui';
-            case '2':
-                return 'En retard';
-            case '1':
-                return 'À venir';
-            case '0':
-                return 'À planifier';}
+        pool.query(query, values, (error, result) => {
+            if (error) {
+                return callback(error, null);
+            }
+            const status = result.rows[0].status;
+            let statusText;
+            switch (status) {
+                case '4':
+                    statusText = 'Terminé';
+                    break;
+                case '3':
+                    statusText = 'Aujourd\'hui';
+                    break;
+                case '2':
+                    statusText = 'En retard';
+                    break;
+                case '1':
+                    statusText = 'À venir';
+                    break;
+                case '0':
+                    statusText = 'À planifier';
+                    break;
+                default:
+                    statusText = 'Statut inconnu';
+            }
+    
+            callback(null, statusText);
+        });
     }
 
-    static async getEventsStatuses() {
+    static getEventsStatuses(callback) {
         const query = 'SELECT id, status FROM events';
-        const result = await pool.query(query);
-        const statuses = result.rows.map(row => ({
-            id: row.id,
-            status: (() => {
-                switch (row.status) {
-                    case '4':
-                        return 'Terminé';
-                    case '3':
-                        return 'Aujourd\'hui';
-                    case '2':
-                        return 'En retard';
-                    case '1':
-                        return 'À venir';
-                    case '0':
-                        return 'À planifier';
-                }
-            })()
-        }));
-        return statuses;
+        pool.query(query, (error, result) => {
+            if (error) {
+                return callback(error, null);
+            }
+            const statuses = result.rows.map(row => ({
+                id: row.id,
+                status: (() => {
+                    switch (row.status) {
+                        case '4':
+                            return 'Terminé';
+                        case '3':
+                            return 'Aujourd\'hui';
+                        case '2':
+                            return 'En retard';
+                        case '1':
+                            return 'À venir';
+                        case '0':
+                            return 'À planifier';
+                        default:
+                            return 'Statut inconnu';
+                    }
+                })()
+            }));
+            callback(null, statuses);
+        });
     }
 
     static async sortEventsByClient(idClient) {}

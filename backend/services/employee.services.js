@@ -1,4 +1,4 @@
-const Employee = require('../models/employee.model.js'); // Importer le modèle Employee
+const Employee = require('../data/employee.data.js'); // Importer le modèle Employee
 
 exports.getAllEmployees = async (req, res) => {
     try {

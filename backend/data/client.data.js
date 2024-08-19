@@ -38,7 +38,7 @@ class Client {
             if (error) {
                 return callback(error, null);
             }
-            callback(null, result.rows[0]);
+            callback(null, result);
         });
     }
 
@@ -49,7 +49,7 @@ class Client {
             if (error) {
                 return callback(error, null);
             }
-            callback(null, result.rows[0]);
+            callback(null, result);
         });
     }
 }
