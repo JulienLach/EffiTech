@@ -12,11 +12,15 @@ class Company {
         this.databaseVersion = databaseVersion;
     }
 
-    static async getCompanyById(idCompany) {
+    static getCompanyById(idCompany, callback) {
         const query = 'SELECT * FROM companies WHERE idCompany = $1';
         const values = [idCompany];
-        const result = await pool.query(query, values);
-        return result.rows[0];
+        pool.query(query, values, (error, result) => {
+            if (error) {
+                return callback(error);
+            }
+            return callback(null, result.rows[0]);
+        });
     }
 }
 
