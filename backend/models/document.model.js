@@ -9,29 +9,47 @@ class Document {
         this.file = file;
     }
 
-    static async getAllDocuments() {
-        const result = await pool.query('SELECT * FROM documents');
-        return result.rows;
+    static getAllDocuments(callback) {
+        query = 'SELECT * FROM documents';
+        pool.query(query, (error, result) => {
+            if (error) {
+                return callback(error, null);
+            }
+            callback(null, result.rows);
+        }); 
     }
 
-    static async getDocumentById(idDocument) {
+    static getDocumentById(idDocument, callback) {
         const query = 'SELECT * FROM documents WHERE idDocument = $1'
         const values = [idDocument];
-        const result = await pool.query(query, values);
-        return result.rows[0];
+        pool.query(query, values, (error, result) => {
+            if (error) {
+                return callback(error, null);
+            }
+            callback(null, result.rows[0]);
+        });
     }
 
-    static async importDocument(idDocument, title, brand, model, file) {
-        const query = 'INSERT INTO documents (idDocument, title, brand, model, file) VALUES ($1, $2, $3, $4, $5)'
-        const values = [idDocument, title, brand, model, file]
-        await pool.query(query, values);
+    static importDocument(idDocument, title, brand, model, file, callback) {
+        const query = 'INSERT INTO documents (idDocument, title, brand, model, file) VALUES ($1, $2, $3, $4, $5)';
+        const values = [idDocument, title, brand, model, file];
+        pool.query(query, values, (error, result) => {
+            if (error) {
+                return callback(error);
+            }
+            return callback(null);
+        });
     }
 
-    static async downloadDocument(idDocument) {
-        const query = 'SELECT file FROM documents WHERE idDocument = $1'
+    static downloadDocument(idDocument, callback) {
+        const query = 'SELECT file FROM documents WHERE idDocument = $1';
         const values = [idDocument];
-        const result = await pool.query(query, values);
-        return result.rows[0].file;
+        pool.query(query, values, (error, result) => {
+            if (error) {
+                return callback(error, null);
+            }
+            callback(null, result.rows[0].file);
+        });
     }
 };
 
