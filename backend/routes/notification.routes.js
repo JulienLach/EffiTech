@@ -1,5 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const notificationController = require('../controllers/notification.controller.js');
+const notificationServices = require('../services/notification.services.js');
 
-router.get('/notifications', notificationController.getAllNotifications);
+router.get('/notifications', notificationServices.getAllNotifications);

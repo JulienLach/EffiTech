@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const documentController = require('../controllers/document.controller');
+const documentServices = require('../services/document.services.js');
 
-router.get('/documents/:id/download', documentController.downloadDocument);
+router.get('/documents/:id/download', documentServices.downloadDocument);
 
 module.exports = router;

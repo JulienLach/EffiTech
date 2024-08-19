@@ -132,13 +132,13 @@ class Event {
         });
     }
 
-    static async sortEventsByClient(idClient) {}
+    static async sortEventsByClient(idClient, callback) {}
 
-    static async sortEventsByStatus(status) {}
+    static async sortEventsByStatus(status, callback) {}
 
-    static async sortEventsByidEmployee(idEmployee) {}
+    static async sortEventsByidEmployee(idEmployee, callback) {}
 
-    static async sortEventsByType(type) {}
+    static async sortEventsByType(type, callback) {}
 
 }
 
@@ -149,10 +149,15 @@ class Appointment extends Event {
         this.planIntervention = planIntervention;
     }
     // méthode spécifique à la sous classe
-    static async submitAppointmentForm(idEvent, workToDo, planIntervention) {
+    static submitAppointmentForm(idEvent, workToDo, planIntervention, callback) {
         const query = 'UPDATE events SET work_to_do = $1, plan_intervention = $2 WHERE idEvent = $3';
         const values = [workToDo, planIntervention, idEvent];
-        await pool.query(query, values);
+        pool.query(query, values, (error, result) => {
+            if (error) {
+                return callback(error, null);
+            }
+            callback(null, result);
+        });
     }
 }
 
@@ -164,11 +169,16 @@ class Intervention extends Event {
     }
 
     // méthode spécifique à la sous classe
-    static async submitInterventionForm(idEvent, breakdown, workDone, reschedule, endingHour, duration, clientSignature, employeeSignature) {
+    static submitInterventionForm(idEvent, breakdown, workDone, reschedule, endingHour, duration, clientSignature, employeeSignature, callback) {
         const query = 'INSERT INTO reports (breakdown, work_done, reschedule, ending_hour, duration, client_signature, employee_signature, id_event) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)';
         const values = [breakdown, workDone, reschedule, endingHour, duration, clientSignature, employeeSignature, idEvent];
-        await pool.query(query, values);
-        // ajouter la conditon "planIntervention" si coché crée directement l'intervention, créer un nouvel event avec la méthode createEvent
+        pool.query(query, values, (error, result) => {
+            if (error) {
+                return callback(error, null);
+            }
+            callback(null, result);
+            // ajouter la condition "planIntervention" si coché crée directement l'intervention, créer un nouvel event avec la méthode createEvent
+        });
     }
 }
 
