@@ -10,25 +10,39 @@ class Invoice {
         this.file = file;
     }
 
-    static async getAllInvoices() {
-        const result = await pool.query('SELECT * FROM invoices');
-        return result.rows;
+    static async getAllInvoices(callback) {
+        const query = 'SELECT * FROM invoices';
+        pool.query(query, (error, result) => {
+            if (error) {
+                return callback(error, null);
+            }
+            callback(null, result.rows);
+        });
     }
 
-    static async getInvoiceById(idInvoice) {
+    static async getInvoiceById(idInvoice, callback) {
         const query = 'SELECT * FROM invoices WHERE idInvoice = $1';
         const values = [idInvoice];
-        const result = await pool.query(query, values);
-        return result.rows[0];
+        pool.query(query, values, (error, result) => {
+            if (error) {
+                return callback(error, null);
+            }
+            callback(null, result.rows[0]);
+        });
     }
 
-    static async importInvoice(idClient, amountIncludingTax, amountWithoutTax, invoiceDate, file) {
+    static async importInvoice(idClient, amountIncludingTax, amountWithoutTax, invoiceDate, file, callback) {
         const query = `
             INSERT INTO invoices (idClient, amountIncludingTax, amountWithoutTax, invoiceDate, file) 
             VALUES ($1, $2, $3, $4, $5)
         `;
         const values = [idClient, amountIncludingTax, amountWithoutTax, invoiceDate, file];
-        await pool.query(query, values);
+        pool.query(query, values, (error, result) => {
+            if (error) {
+                return callback(error, null);
+            }
+            callback(null, result);
+        }); 
     }
 }
 
