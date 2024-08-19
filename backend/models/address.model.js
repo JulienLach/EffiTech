@@ -8,18 +8,26 @@ class Address {
         this.zipcode = zipcode;
     }
 
-    static async getAddressById(idAddress) {
+    static getAddressById(idAddress, callback) {
         const query = 'SELECT * FROM addresses WHERE idAddress = $1';
         const values = [idAddress];
-        const result = await pool.query(query, values);
-        return result.rows[0];
+        pool.query(query, values, (error, result) => {
+            if (error) {
+                return callback(error, null);
+            }
+            callback(null, result.rows[0]);
+        });
     }
     
-    static async createAddress(address, city, zipcode) {
+    static createAddress(address, city, zipcode, callback) {
         const query = 'INSERT INTO addresses (address, city, zipcode) VALUES ($1, $2, $3) RETURNING *';
         const values = [address, city, zipcode];
-        const result = await pool.query(query, values);
-        return result.rows[0];
+        pool.query(query, values, (error, result) => {
+            if (error) {
+                return callback(error, null);
+            }
+            callback(null, result.rows[0]);
+        });
     }
 }
 
