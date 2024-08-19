@@ -11,8 +11,13 @@ class Notification {
         this.creationHour = creationHour;
     }
 
-    static async getAllNotifications() {
-        const result = await pool.query('SELECT * FROM notifications');
-        return result.rows;
+    static async getAllNotifications(callback) {
+        const rquery = 'SELECT * FROM notifications';
+        pool.query(query, (error, result) => {
+            if (error) {
+                return callback(error, null);
+            }
+            callback(null, result.rows);
+        });
     }
 }
