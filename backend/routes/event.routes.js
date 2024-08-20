@@ -2,19 +2,19 @@ const express = require('express');
 const router = express.Router();
 const eventServices = require('../services/event.services.js');
 
-router.get('/events', eventServices.getAllEvents);
+router.get('/', eventServices.getAllEvents);
 
-router.get('/events/:id', eventServices.getEventById);
+router.get('/:id', eventServices.getEventById);
 
-router.post('/events', eventServices.createEvent);
+router.post('/', eventServices.createEvent);
 
-router.put('/events/:id', eventServices.updateEvent);
+router.put('/:id', eventServices.updateEvent);
 
-router.delete('/events/:id', eventServices.deleteEvent);
+router.delete('/:id', eventServices.deleteEvent);
 
 // Méthodes spécifiques aux sous classes
-router.get('/events/:id/intervention', eventServices.submitInterventionForm);
+router.get('/:id/intervention', eventServices.submitInterventionForm);
 
-router.get('/events/:id/appointment', eventServices.submitAppointmentForm);
+router.get('/:id/appointment', eventServices.submitAppointmentForm);
 
 module.exports = router;

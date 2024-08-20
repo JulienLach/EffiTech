@@ -2,14 +2,12 @@ const express = require('express');
 const router = express.Router();
 const employeeServices = require('../services/employee.services.js');
 
-router.get('/employees', employeeServices.getAllEmployees);
+router.get('/', employeeServices.getAllEmployees);
 
-router.get('/employees/:id', employeeServices.getEmployeeById);
+router.get('/:id', employeeServices.getEmployeeById);
 
-router.post('/employees', employeeServices.createEmployee);
+router.post('/', employeeServices.createEmployee);
 
-router.put('/employees/:id', employeeServices.updateEmployee);
-
-router.delete('/employees/:id', employeeServices.deleteEmployee);
+router.put('/:id', employeeServices.updateEmployee);
 
 module.exports = router;

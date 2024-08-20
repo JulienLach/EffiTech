@@ -182,5 +182,7 @@ class Intervention extends Event {
     }
 }
 
-module.exports = { Event, Appointment, Intervention };
+module.exports = Event;
+module.exports = Appointment;
+module.exports = Intervention;
 
