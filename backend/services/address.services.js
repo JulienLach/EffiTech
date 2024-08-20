@@ -1,8 +1,8 @@
 const Address = require('../data/address.data.js')
 
-exports.getAddressById = (req, res) => {
+exports.getAddressById = function(req, res) {
     const idAddress = req.params.idAddress;
-    Address.getAddressById(idAddress, (error, address) => {
+    Address.getAddressById(idAddress, function(error, address) {
         if (error) {
             return res.status(500).send({ message: 'Erreur lors de la récupération de l\'adresse', error: error.message });
         }

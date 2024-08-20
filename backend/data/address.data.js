@@ -24,11 +24,16 @@ class Address {
     static createAddress(address, city, zipcode, callback) {
         const query = 'INSERT INTO addresses (address, city, zipcode) VALUES ($1, $2, $3) RETURNING *';
         const values = [address, city, zipcode];
-        pool.query(query, values, (error, result) => {
+        pool.query(query, values, (error, newAddress) => {
             if (error) {
                 return callback(error, null);
             }
-            callback(null, result);
+            //récupérer la première ligne du résultat
+            const row = newAddress.rows[0];
+            //créer un nouvel objet Address avec les données de la ligne SQL
+            newAddress = new Address(row.idAddress, row.address, row.city, row.zipcode);
+            //retourner l'objet Address avec ses données par le callback
+            callback(null, newAddress);
         });
     }
 }
