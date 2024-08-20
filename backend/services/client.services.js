@@ -1,63 +1,64 @@
 const Client = require('../models/client.model.js'); // Importer le modèle Client
 
-exports.getAllClients = async (req, res) => {
-    try {
-        const clients = await Client.getAllClients(); // Utiliser la méthode du modèle
+exports.getAllClients = (req, res) => {
+    Client.getAllClients((error, clients) => {
+        if (error) {
+            return res.status(500).json({ message: 'Erreur lors de la récupération des clients', error: error.message });
+        }
         res.status(200).json(clients); // Renvoyer les clients
-    } catch (error) {
-        res.status(500).json({ message: 'Erreur lors de la récupération des clients', error: error.message });
-    }
+    });
 };
 
-exports.getClientById = async (req, res) => {
+exports.getClientById = (req, res) => {
     const idClient = req.params.idClient;
-    try {
-        const client = await Client.getClientById(idClient); // Utiliser la méthode du modèle
+    Client.getClientById(idClient, (error, client) => {
+        if (error) {
+            return res.status(500).json({ message: 'Erreur lors de la récupération du client', error: error.message });
+        }
         if (client) {
             res.status(200).json(client);
         } else {
             res.status(404).json({ message: 'Client non trouvé' });
         }
-    } catch (error) {
-        res.status(500).json({ message: 'Erreur lors de la récupération du client', error: error.message });
-    }
+    });
 };
 
-exports.createClient = async (req, res) => {
+
+exports.createClient = (req, res) => {
     const newClient = req.body;
-    try {
-        const createdClient = await Client.createClient(newClient); // Utiliser la méthode du modèle
+    Client.createClient(newClient, (error, createdClient) => {
+        if (error) {
+            return res.status(500).json({ message: 'Erreur lors de la création du client', error: error.message });
+        }
         res.status(201).json(createdClient);
-    } catch (error) {
-        res.status(500).json({ message: 'Erreur lors de la création du client', error: error.message });
-    }
+    });
 };
 
-exports.updateClient = async (req, res) => {
+exports.updateClient = (req, res) => {
     const clientId = req.params.id;
     const updatedClient = req.body;
-    try {
-        const result = await Client.updateClient(clientId, updatedClient); // Utiliser la méthode du modèle
-        if (result) {
-            res.status(200).json({ message: 'Client mis à jour avec succès' });
+    Client.updateClient(clientId, updatedClient, (error, updatedClient) => {
+        if (error) {
+            return res.status(500).json({ message: 'Erreur lors de la modification du client', error: error.message });
+        }
+        if (updatedClient) {
+            res.status(200).json(updatedClient);
         } else {
             res.status(404).json({ message: 'Client non trouvé' });
         }
-    } catch (error) {
-        res.status(500).json({ message: 'Erreur lors de la mise à jour du client', error: error.message });
-    }
+    });
 };
 
-exports.deleteClient = async (req, res) => {
+exports.deleteClient = (req, res) => {
     const clientId = req.params.id;
-    try {
-        const result = await Client.deleteClient(clientId); // Utiliser la méthode du modèle
-        if (result) {
-            res.status(200).json({ message: 'Client supprimé avec succès' });
+    Client.deleteClient(clientId, (error, deletedClient) => {
+        if (error) {
+            return res.status(500).json({ message: 'Erreur lors de la suppression du client', error: error.message });
+        }
+        if (deletedClient) {
+            res.status(204).json();
         } else {
             res.status(404).json({ message: 'Client non trouvé' });
         }
-    } catch (error) {
-        res.status(500).json({ message: 'Erreur lors de la suppression du client', error: error.message });
-    }
+    });
 };
