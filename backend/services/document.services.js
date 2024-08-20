@@ -1,15 +1,25 @@
-const Document = require('../models/document.model');
+const Document = require('../data/document.data.js');
 
-exports.downloadDocument = async (req, res) => {
+exports.getAllDocuments = (req, res) => {}
+
+exports.getDocumentById = (req, res) => {
     const idDocument = req.params.id;
-    try {
-        const file = await Document.downloadDocument(idDocument);
-        if (file) {
-            res.status(200).send(file);
+}
+
+exports.importDocument = (req, res) => {
+    const { idDocument, title, brand, model, file } = req.body
+}
+
+exports.downloadDocument = (req, res) => {
+    const idDocument = req.params.id;
+    Document.getDocumentById(idDocument, (error, document) => {
+        if (error) {
+            return res.status(500).json({ message: 'Erreur lors de la récupération du document', error: error.message });
+        }
+                if (document) {
+            res.download(document.path, document.name);
         } else {
             res.status(404).json({ message: 'Document non trouvé' });
         }
-    } catch (error) {
-        res.status(500).json({ message: 'Erreur lors du téléchargement du document', error: error.message });
-    }
+    });
 };

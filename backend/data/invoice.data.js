@@ -10,7 +10,7 @@ class Invoice {
         this.file = file;
     }
 
-    static async getAllInvoices(callback) {
+    static getAllInvoices(callback) {
         const query = 'SELECT * FROM invoices';
         pool.query(query, (error, result) => {
             if (error) {
@@ -20,7 +20,7 @@ class Invoice {
         });
     }
 
-    static async getInvoiceById(idInvoice, callback) {
+    static getInvoiceById(idInvoice, callback) {
         const query = 'SELECT * FROM invoices WHERE idInvoice = $1';
         const values = [idInvoice];
         pool.query(query, values, (error, result) => {
@@ -31,7 +31,7 @@ class Invoice {
         });
     }
 
-    static async importInvoice(idClient, amountIncludingTax, amountWithoutTax, invoiceDate, file, callback) {
+    static importInvoice(idClient, amountIncludingTax, amountWithoutTax, invoiceDate, file, callback) {
         const query = `
             INSERT INTO invoices (idClient, amountIncludingTax, amountWithoutTax, invoiceDate, file) 
             VALUES ($1, $2, $3, $4, $5)

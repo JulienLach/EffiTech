@@ -1,4 +1,4 @@
-const Client = require('../models/client.model.js'); // Importer le modèle Client
+const Client = require('../data/client.data.js'); // Importer le modèle Client
 
 exports.getAllClients = (req, res) => {
     Client.getAllClients((error, clients) => {
@@ -25,8 +25,8 @@ exports.getClientById = (req, res) => {
 
 
 exports.createClient = (req, res) => {
-    const newClient = req.body;
-    Client.createClient(newClient, (error, createdClient) => {
+    const { category, firstname, lastname, email, idAddress, phoneNumber } = req.body;
+    Client.createClient(category, firstname, lastname, email, idAddress, phoneNumber, (error, createdClient) => {
         if (error) {
             return res.status(500).json({ message: 'Erreur lors de la création du client', error: error.message });
         }
@@ -35,28 +35,14 @@ exports.createClient = (req, res) => {
 };
 
 exports.updateClient = (req, res) => {
-    const clientId = req.params.id;
-    const updatedClient = req.body;
-    Client.updateClient(clientId, updatedClient, (error, updatedClient) => {
+    const clientId = req.params.clientId;
+    const { category, firstname, lastname, email, idAddress, phoneNumber } = req.body;
+    Client.updateClient(category, firstname, lastname, email, idAddress, phoneNumber, clientId, (error, updatedClient) => {
         if (error) {
             return res.status(500).json({ message: 'Erreur lors de la modification du client', error: error.message });
         }
         if (updatedClient) {
             res.status(200).json(updatedClient);
-        } else {
-            res.status(404).json({ message: 'Client non trouvé' });
-        }
-    });
-};
-
-exports.deleteClient = (req, res) => {
-    const clientId = req.params.id;
-    Client.deleteClient(clientId, (error, deletedClient) => {
-        if (error) {
-            return res.status(500).json({ message: 'Erreur lors de la suppression du client', error: error.message });
-        }
-        if (deletedClient) {
-            res.status(204).json();
         } else {
             res.status(404).json({ message: 'Client non trouvé' });
         }

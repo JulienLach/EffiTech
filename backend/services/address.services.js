@@ -1,4 +1,4 @@
-const Address = require('../models/address.model.js')
+const Address = require('../data/address.data.js')
 
 exports.getAddressById = (req, res) => {
     const idAddress = req.params.idAddress;

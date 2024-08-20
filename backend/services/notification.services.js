@@ -1,10 +1,13 @@
-const Event = require('../models/notification.model.js')
+const Event = require('../data/notification.data.js')
 
-exports.getAllNotifications = async (req, res) => {
-    try {
-        const notifications = await Notification.getAllNotifications(); // Utiliser la méthode du modèle
-        res.status(200).json(notifications); // Renvoyer tous les événements
-    } catch (error) {
-        res.status(500).json({ message: 'Erreur lors de la récupération des notifications', error: error.message });
-    }
+exports.getAllNotifications = (req, res) => {
+    Event.getAllNotifications((error, result) => {
+        if (error) {
+            res.status(500).send({
+                message: error.message || "Une erreur s'est produite lors de la récupération des notifications."
+            });
+        } else {
+            res.send(result);
+        }
+    });
 }

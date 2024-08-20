@@ -11,8 +11,8 @@ class Notification {
         this.creationHour = creationHour;
     }
 
-    static async getAllNotifications(callback) {
-        const rquery = 'SELECT * FROM notifications';
+    static getAllNotifications(callback) {
+        const query = 'SELECT * FROM notifications';
         pool.query(query, (error, result) => {
             if (error) {
                 return callback(error, null);

@@ -13,7 +13,7 @@ class Employee {
         this.speciality = speciality;
     }
 
-    static async getAllEmployees(callback) {
+    static getAllEmployees(callback) {
         const query = 'SELECT * FROM employees';
         pool.query(query, (error, result) => {
             if (error) {
@@ -23,7 +23,7 @@ class Employee {
         });
     }
 
-    static async getEmployeeById(idEmployee, callback) {
+    static getEmployeeById(idEmployee, callback) {
         const query = 'SELECT * FROM employees WHERE idEmployee = $1';
         const values = [idEmployee];
         pool.query(query, values, (error, result) => {
@@ -42,6 +42,17 @@ class Employee {
                 return callback(error, null);
             }
             callback(null, result);
+        });
+    }
+    
+    static updateEmployee(idEmployee, firstname, lastname, job, phoneNumber, email, isAdmin, password, speciality, callback) {
+        const query = 'UPDATE employees SET firstname = $1, lastname = $2, job = $3, phoneNumber = $4, email = $5, isAdmin = $6, password = $7, speciality = $8 WHERE idEmployee = $9';
+        const values = [firstname, lastname, job, phoneNumber, email, isAdmin, password, speciality, idEmployee];
+        pool.query(query, values, (error, result) => {
+            if (error) {
+                return callback(error, null);
+            }
+            callback(null, result.rowCount > 0); // Renvoie true si une ligne a été mise à jour
         });
     }
 }

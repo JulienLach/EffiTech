@@ -1,24 +1,18 @@
-const Report = require('../models/report.model.js'); // Importer le modèle Report
+const Report = require('../data/report.data.js'); // Importer le modèle Report
 
-exports.sendReport = async (req, res) => {
-    try {
-        const reportData = {
-            breakdown: req.body.breakdown,
-            workDone: req.body.workDone,
-            reschedule: req.body.reschedule,
-            endingHour: req.body.endingHour,
-            duration: req.body.duration,
-            clientSignature: req.body.clientSignature,
-            employeeSignature: req.body.employeeSignature,
-            idEvent: req.body.idEvent
-        };
-        const report = await Report.sendReport(reportData); // Utiliser la méthode du modèle
-        if (report) {
-            res.status(201).json(report);
-        } else {
-            res.status(400).json({ message: 'Échec de l\'envoi du rapport' });
+
+exports.getReportById = (req, res) => {
+    const idReport = req.params.idReport;
+    Report.getReportById(idReport, (error, report) => {
+        if (error) {
+            return res.status(500).json({ message: 'Erreur lors de la récupération du rapport', error: error.message });
         }
-    } catch (error) {
-        res.status(500).json({ message: 'Erreur lors de l\'envoi du rapport d\'intervention', error: error.message });
-    }
+        if (report) {
+            res.status(200).json(report);
+        } else {
+            res.status(404).json({ message: 'Rapport non trouvé' });
+        }
+    });
 };
+
+exports.sendReport = (req, res) => {};

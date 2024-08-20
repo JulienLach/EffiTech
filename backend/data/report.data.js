@@ -13,7 +13,7 @@ class Report {
         this.idEvent = idEvent;
     }
 
-    static async getReportById(idReport, callback) {
+    static getReportById(idReport, callback) {
         const query = 'SELECT * FROM reports WHERE idReport = $1';
         const values = [idReport];
         pool.query(query, values, (error, result) => {
@@ -24,7 +24,7 @@ class Report {
         });
     }
 
-    static async sendReportByEmail(reportData, callback) {}
+    static sendReportByEmail(reportData, callback) {}
 }
 
 module.exports = Report;

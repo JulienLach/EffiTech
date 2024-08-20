@@ -26,7 +26,7 @@ class Event {
         });
     }
 
-    static async getEventById(idEvent, callback) {
+    static getEventById(idEvent, callback) {
         const query = 'SELECT * FROM events WHERE idEvent = $1';
         const values = [idEvent];
         pool.query(query, values, (error, result) => {
@@ -37,7 +37,7 @@ class Event {
         });
     }
 
-    static async createEvent(title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee, callback) {
+    static createEvent(title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee, callback) {
         const query = 'INSERT INTO events (title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee) VALUES ()';
         const values = [title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee];
         pool.query(query, values, (error, result) => {
@@ -48,7 +48,7 @@ class Event {
         });
     }
 
-    static async updateEvent(title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee, idEvent, callback) {
+    static updateEvent(title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee, idEvent, callback) {
         const query = 'UPDATE events SET title = $1, description = $2, status = $3, isPlanned = $4, type = $5, idClient = $6, idAddress = $7, startingDate = $8, startingHour = $9, endingHour = $10, idEmployee = $11 WHERE idEvent = $12';
         const values = [title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee, idEvent];
         pool.query(query, values, (error, result) => {
@@ -59,7 +59,7 @@ class Event {
         });
     }
 
-    static async deleteEvent(idEvent, callback) {
+    static deleteEvent(idEvent, callback) {
         const query = 'DELETE FROM events WHERE idEvent = $1';
         const values = [idEvent];
         pool.query(query, values, (error, result) => {
@@ -132,13 +132,13 @@ class Event {
         });
     }
 
-    static async sortEventsByClient(idClient, callback) {}
+    static sortEventsByClient(idClient, callback) {}
 
-    static async sortEventsByStatus(status, callback) {}
+    static sortEventsByStatus(status, callback) {}
 
-    static async sortEventsByidEmployee(idEmployee, callback) {}
+    static sortEventsByidEmployee(idEmployee, callback) {}
 
-    static async sortEventsByType(type, callback) {}
+    static sortEventsByType(type, callback) {}
 
 }
 

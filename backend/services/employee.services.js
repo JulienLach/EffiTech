@@ -1,63 +1,49 @@
 const Employee = require('../data/employee.data.js'); // Importer le modèle Employee
 
-exports.getAllEmployees = async (req, res) => {
-    try {
-        const employees = await Employee.getAllEmployees(); // Utiliser la méthode du modèle
+exports.getAllEmployees = (req, res) => {
+    Employee.getAllEmployees((error, employees) => {
+        if (error) {
+            return res.status(500).json({ message: 'Erreur lors de la récupération des employés', error: error.message });
+        }
         res.status(200).json(employees); // Renvoyer les employés
-    } catch (error) {
-        res.status(500).json({ message: 'Erreur lors de la récupération des employés', error: error.message });
-    }
+    });
 };
 
-exports.getEmployeeById = async (req, res) => {
+exports.getEmployeeById = (req, res) => {
     const idEmployee = req.params.idEmployee;
-    try {
-        const employee = await Employee.getEmployeeById(idEmployee); // Utiliser la méthode du modèle
+    Employee.getEmployeeById(idEmployee, (error, employee) => {
+        if (error) {
+            return res.status(500).json({ message: 'Erreur lors de la récupération de l\'employé', error: error.message });
+        }
         if (employee) {
             res.status(200).json(employee);
         } else {
             res.status(404).json({ message: 'Employé non trouvé' });
         }
-    } catch (error) {
-        res.status(500).json({ message: 'Erreur lors de la récupération de l\'employé', error: error.message });
-    }
+    });
 };
 
-exports.createEmployee = async (req, res) => {
-    const newEmployee = req.body;
-    try {
-        const createdEmployee = await Employee.createEmployee(newEmployee); // Utiliser la méthode du modèle
+exports.createEmployee = (req, res) => {
+    const { firstname, lastname, job, phoneNumber, email, isAdmin, password, speciality } = req.body;
+    Employee.createEmployee(firstname, lastname, job, phoneNumber, email, isAdmin, password, speciality, (error, createdEmployee) => {
+        if (error) {
+            return res.status(500).json({ message: 'Erreur lors de la création de l\'employé', error: error.message });
+        }
         res.status(201).json(createdEmployee);
-    } catch (error) {
-        res.status(500).json({ message: 'Erreur lors de la création de l\'employé', error: error.message });
-    }
+    });
 };
 
-exports.updateEmployee = async (req, res) => {
-    const idEmployee = req.params.id;
-    const updatedEmployee = req.body;
-    try {
-        const result = await Employee.updateEmployee(idEmployee, updatedEmployee); // Utiliser la méthode du modèle
-        if (result) {
-            res.status(200).json({ message: 'Employé mis à jour avec succès' });
+exports.updateEmployee = (req, res) => {
+    const idEmployee = req.params.idEmployee;
+    const { firstname, lastname, job, phoneNumber, email, isAdmin, password, speciality } = req.body;
+    Employee.updateEmployee(idEmployee, firstname, lastname, job, phoneNumber, email, isAdmin, password, speciality, (error, success) => {
+        if (error) {
+            return res.status(500).json({ message: 'Erreur lors de la mise à jour de l\'employé', error: error.message });
+        }
+        if (success) {
+            res.status(200).json({ message: 'Fiche Employé mise à jour' });
         } else {
             res.status(404).json({ message: 'Employé non trouvé' });
         }
-    } catch (error) {
-        res.status(500).json({ message: 'Erreur lors de la mise à jour de l\'employé', error: error.message });
-    }
-};
-
-exports.deleteEmployee = async (req, res) => {
-    const idEmployee = req.params.id;
-    try {
-        const result = await Employee.deleteEmployee(idEmployee); // Utiliser la méthode du modèle
-        if (result) {
-            res.status(200).json({ message: 'Employé supprimé avec succès' });
-        } else {
-            res.status(404).json({ message: 'Employé non trouvé' });
-        }
-    } catch (error) {
-        res.status(500).json({ message: 'Erreur lors de la suppression de l\'employé', error: error.message });
-    }
+    });
 };
