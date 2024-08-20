@@ -10,7 +10,7 @@ exports.getAddressById = function(req, res) {
     });
 };
 
-exports.createAddress = (req, res) => {
+exports.createAddress = function(req, res) {
     const { address, city, zipcode } = req.body;
     Address.createAddress(address, city, zipcode, (error, newAddress) => {
         if (error) {
