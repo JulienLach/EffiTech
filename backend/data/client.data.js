@@ -17,39 +17,47 @@ class Client {
             if (error) {
                 return callback(error, null);
             }
-            callback(null, result.rows);
+            const clients = result.rows.map(row => new Client(row.idClient, row.category, row.firstname, row.lastname, row.email, row.idAddress, row.phoneNumber));
+            callback(null, clients);
         });
     }
 
     static getClientById(idClient, callback) {
         const query = 'SELECT * FROM clients WHERE idClient = $1';
-        pool.query(query, [idClient], (error, result) => {
+        const values = [idClient];
+        pool.query(query, values, (error, result) => {
             if (error) {
                 return callback(error, null);
             }
-            callback(null, result.rows[0]);
+            const row = result.rows[0];
+            let client = new Client(row.idClient, row.category, row.firstname, row.lastname, row.email, row.idAddress, row.phoneNumber);
+            callback(null, client);
         });
     }
 
     static createClient(category, firstname, lastname, email, idAddress, phoneNumber, callback) {
         const query = 'INSERT INTO clients (category, firstname, lastname, email, idAddress, phoneNumber) VALUES ($1, $2, $3, $4, $5, $6)';
         const values = [category, firstname, lastname, email, idAddress, phoneNumber];
-        pool.query(query, values, (error, result) => {
+        pool.query(query, values, (error, newClient) => {
             if (error) {
                 return callback(error, null);
             }
-            callback(null, result);
+            const row = newClient.rows[0];
+            newClient = new Client(row.idClient, row.category, row.firstname, row.lastname, row.email, row.idAddress, row.phoneNumber);
+            callback(null, newClient);
         });
     }
 
     static updateClient(category, firstname, lastname, email, idAddress, phoneNumber, idClient, callback) {
         const query = 'UPDATE clients SET category = $1, firstname = $2, lastname = $3, email = $4, idAddress = $5, phoneNumber = $6 WHERE idClient = $7';
         const values = [category, firstname, lastname, email, idAddress, phoneNumber, idClient];
-        pool.query(query, values, (error, result) => {
+        pool.query(query, values, (error, updatedClient) => {
             if (error) {
                 return callback(error, null);
             }
-            callback(null, result);
+            const row = updatedClient.rows[0];
+            updatedClient = new Client(row.idClient, row.category, row.firstname, row.lastname, row.email, row.idAddress, row.phoneNumber);
+            callback(null, updatedClient);
         });
     }
 }
