@@ -22,7 +22,8 @@ class Event {
             if (error) {
                 return callback(error, null);
             }
-            callback(null, result.rows);
+            const events = result.rows.map(row => new Event(row.idEvent, row.title, row.description, row.status, row.isPlanned, row.type, row.idClient, row.idAddress, row.startingDate, row.startingHour, row.endingHour, row.idEmployee));
+            callback(null, events);
         });
     }
 
@@ -33,53 +34,61 @@ class Event {
             if (error) {
                 return callback(error, null);
             }
-            callback(null, result.rows[0]);
+            const row = result.rows[0];
+            let event = new Event(row.idEvent, row.title, row.description, row.status, row.isPlanned, row.type, row.idClient, row.idAddress, row.startingDate, row.startingHour, row.endingHour, row.idEmployee);
+            callback(null, event); 
         });
     }
 
     static createEvent(title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee, callback) {
         const query = 'INSERT INTO events (title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee) VALUES ()';
         const values = [title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee];
-        pool.query(query, values, (error, result) => {
+        pool.query(query, values, (error, newEvent) => {
             if (error) {
                 return callback(error, null);
             }
-            callback(null, result);
+            const row = newEvent.rows[0];
+            newEvent = new Event(row.idEvent, row.title, row.description, row.status, row.isPlanned, row.type, row.idClient, row.idAddress, row.startingDate, row.startingHour, row.endingHour, row.idEmployee);
+            callback(null, newEvent);
         });
     }
 
     static updateEvent(title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee, idEvent, callback) {
         const query = 'UPDATE events SET title = $1, description = $2, status = $3, isPlanned = $4, type = $5, idClient = $6, idAddress = $7, startingDate = $8, startingHour = $9, endingHour = $10, idEmployee = $11 WHERE idEvent = $12';
         const values = [title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee, idEvent];
-        pool.query(query, values, (error, result) => {
+        pool.query(query, values, (error, updatedEvent) => {
             if (error) {
                 return callback(error, null);
             }
-            callback(null, result);
+            const row = updatedEvent.rows[0];
+            updatedEvent = new Event(row.idEvent, row.title, row.description, row.status, row.isPlanned, row.type, row.idClient, row.idAddress, row.startingDate, row.startingHour, row.endingHour, row.idEmployee);
+            callback(null, updatedEvent);
         });
     }
 
     static deleteEvent(idEvent, callback) {
-        const query = 'DELETE FROM events WHERE idEvent = $1';
+        const query = 'DELETE FROM events WHERE idEvent = $1 RETURNING *';
         const values = [idEvent];
         pool.query(query, values, (error, result) => {
             if (error) {
                 return callback(error, null);
             }
-            callback(null, result);
+            const row = result.rows[0];
+            const deletedEvent = new Event(row.idEvent, row.title, row.description, row.status, row.isPlanned, row.type, row.idClient, row.idAddress, row.startingDate, row.startingHour, row.endingHour, row.idEmployee);
+            callback(null, deletedEvent);
         });
     }
 
     static getEventStatus(idEvent, callback) {
-        const query = 'SELECT status FROM events WHERE idEvent = $1';
+        const query = 'SELECT * FROM events WHERE idEvent = $1';
         const values = [idEvent];
         pool.query(query, values, (error, result) => {
             if (error) {
                 return callback(error, null);
             }
-            const status = result.rows[0].status;
+            const row = result.rows[0];
             let statusText;
-            switch (status) {
+            switch (row.status) {
                 case '4':
                     statusText = 'Terminé';
                     break;
@@ -98,37 +107,41 @@ class Event {
                 default:
                     statusText = 'Statut inconnu';
             }
-    
-            callback(null, statusText);
+            const event = new Event(row.idEvent, row.title, row.description, statusText, row.isPlanned, row.type, row.idClient, row.idAddress, row.startingDate, row.startingHour, row.endingHour, row.idEmployee);
+            callback(null, event);
         });
     }
 
     static getEventsStatuses(callback) {
-        const query = 'SELECT id, status FROM events';
+        const query = 'SELECT * FROM events';
         pool.query(query, (error, result) => {
             if (error) {
                 return callback(error, null);
             }
-            const statuses = result.rows.map(row => ({
-                id: row.id,
-                status: (() => {
-                    switch (row.status) {
-                        case '4':
-                            return 'Terminé';
-                        case '3':
-                            return 'Aujourd\'hui';
-                        case '2':
-                            return 'En retard';
-                        case '1':
-                            return 'À venir';
-                        case '0':
-                            return 'À planifier';
-                        default:
-                            return 'Statut inconnu';
-                    }
-                })()
-            }));
-            callback(null, statuses);
+            const events = result.rows.map(row => {
+                let statusText;
+                switch (row.status) {
+                    case '4':
+                        statusText = 'Terminé';
+                        break;
+                    case '3':
+                        statusText = 'Aujourd\'hui';
+                        break;
+                    case '2':
+                        statusText = 'En retard';
+                        break;
+                    case '1':
+                        statusText = 'À venir';
+                        break;
+                    case '0':
+                        statusText = 'À planifier';
+                        break;
+                    default:
+                        statusText = 'Statut inconnu';
+                }
+                return new Event(row.idEvent, row.title, row.description, statusText, row.isPlanned, row.type, row.idClient, row.idAddress, row.startingDate, row.startingHour, row.endingHour, row.idEmployee);
+            });
+            callback(null, events);
         });
     }
 
@@ -150,13 +163,15 @@ class Appointment extends Event {
     }
     // méthode spécifique à la sous classe
     static submitAppointmentForm(idEvent, workToDo, planIntervention, callback) {
-        const query = 'UPDATE events SET work_to_do = $1, plan_intervention = $2 WHERE idEvent = $3';
+        const query = 'UPDATE events SET work_to_do = $1, plan_intervention = $2 WHERE idEvent = $3 RETURNING *';
         const values = [workToDo, planIntervention, idEvent];
         pool.query(query, values, (error, result) => {
             if (error) {
                 return callback(error, null);
             }
-            callback(null, result);
+            const row = result.rows[0];
+            const updatedAppointment = new Appointment(row.idEvent, row.title, row.description, row.status, row.isPlanned, row.type, row.idClient, row.idAddress, row.startingDate, row.startingHour, row.endingHour, row.idEmployee, row.work_to_do, row.plan_intervention);
+            callback(null, updatedAppointment);
         });
     }
 }
@@ -176,7 +191,9 @@ class Intervention extends Event {
             if (error) {
                 return callback(error, null);
             }
-            callback(null, result);
+            const row = result.rows[0];
+            const updatedIntervention = new Intervention(row.idEvent, row.title, row.description, row.status, row.isPlanned, row.type, row.idClient, row.idAddress, row.startingDate, row.startingHour, row.endingHour, row.idEmployee, row.report, row.planIntervention);
+            callback(null, updatedIntervention);
             // ajouter la condition "planIntervention" si coché crée directement l'intervention, créer un nouvel event avec la méthode createEvent
         });
     }
