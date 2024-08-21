@@ -1,6 +1,6 @@
 const Invoice = require('../data/invoice.data.js')
 
-exports.getAllInvoices = (req, res) => {
+function getAllInvoices(req, res) {
     Invoice.getAllInvoices((error, invoices) => {
         if (error) {
             return res.status(500).send({ message: 'Erreur lors de la récupération des factures', error: error.message });
@@ -9,7 +9,7 @@ exports.getAllInvoices = (req, res) => {
     });
 };
 
-exports.getInvoiceById = (req, res) => {
+function getInvoiceById(req, res) {
     const idInvoice = req.params.idInvoice;
     Invoice.getInvoiceById(idInvoice, (error, invoice) => {
         if (error) {
@@ -23,7 +23,7 @@ exports.getInvoiceById = (req, res) => {
     });
 };
 
-exports.importInvoice = (req, res) => {
+function importInvoice(req, res) {
     const { idClient, amountIncludingTax, amountWithoutTax, invoiceDate, file } = req.body;
     Invoice.importInvoice(idClient, amountIncludingTax, amountWithoutTax, invoiceDate, file, (error, result) => {
         if (error) {
@@ -32,3 +32,7 @@ exports.importInvoice = (req, res) => {
         res.status(201).send({ message: 'Facture importée avec succès', result });
     });
 };
+
+exports.getAllInvoices = getAllInvoices;
+exports.getInvoiceById = getInvoiceById;
+exports.importInvoice = importInvoice;
