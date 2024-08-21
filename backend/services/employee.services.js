@@ -1,6 +1,6 @@
 const Employee = require('../data/employee.data.js'); // Importer le modèle Employee
 
-exports.getAllEmployees = (req, res) => {
+function getAllEmployees(req, res) {
     Employee.getAllEmployees((error, employees) => {
         if (error) {
             return res.status(500).send({ message: 'Erreur lors de la récupération des employés', error: error.message });
@@ -9,7 +9,7 @@ exports.getAllEmployees = (req, res) => {
     });
 };
 
-exports.getEmployeeById = (req, res) => {
+function getEmployeeById(req, res) {
     const idEmployee = req.params.idEmployee;
     Employee.getEmployeeById(idEmployee, (error, employee) => {
         if (error) {
@@ -23,7 +23,7 @@ exports.getEmployeeById = (req, res) => {
     });
 };
 
-exports.createEmployee = (req, res) => {
+function createEmployee(req, res) {
     const { firstname, lastname, job, phoneNumber, email, isAdmin, password, speciality } = req.body;
     Employee.createEmployee(firstname, lastname, job, phoneNumber, email, isAdmin, password, speciality, (error, createdEmployee) => {
         if (error) {
@@ -33,7 +33,7 @@ exports.createEmployee = (req, res) => {
     });
 };
 
-exports.updateEmployee = (req, res) => {
+function updateEmployee(req, res) {
     const idEmployee = req.params.idEmployee;
     const { firstname, lastname, job, phoneNumber, email, isAdmin, password, speciality } = req.body;
     Employee.updateEmployee(idEmployee, firstname, lastname, job, phoneNumber, email, isAdmin, password, speciality, (error, success) => {
@@ -47,3 +47,8 @@ exports.updateEmployee = (req, res) => {
         }
     });
 };
+
+exports.getAllEmployees = getAllEmployees;
+exports.getEmployeeById = getEmployeeById;
+exports.createEmployee = createEmployee;
+exports.updateEmployee = updateEmployee;
