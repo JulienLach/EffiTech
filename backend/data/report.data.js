@@ -20,7 +20,9 @@ class Report {
             if (error) {
                 return callback(error, null);
             }
-            callback(null, result.rows[0]);
+            const row = result.rows[0];
+            let report = new Report(row.idReport, row.breakdown, row.workDone, row.reschedule, row.endingHour, row.duration, row.clientSignature, row.employeeSignature, row.idEvent);
+            callback(null, report);
         });
     }
 

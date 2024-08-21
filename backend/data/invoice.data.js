@@ -16,7 +16,8 @@ class Invoice {
             if (error) {
                 return callback(error, null);
             }
-            callback(null, result.rows);
+            const invoices = result.rows.map(row => new Invoice(row.idInvoice, row.idClient, row.amountIncludingTax, row.amountWithoutTax, row.invoiceDate, row.file));
+            callback(null, invoices);
         });
     }
 
@@ -27,7 +28,9 @@ class Invoice {
             if (error) {
                 return callback(error, null);
             }
-            callback(null, result.rows[0]);
+            const row = result.rows[0];
+            let invoice = new Invoice(row.idInvoice, row.idClient, row.amountIncludingTax, row.amountWithoutTax, row.invoiceDate, row.file);
+            callback(null, invoice);
         });
     }
 
@@ -41,7 +44,9 @@ class Invoice {
             if (error) {
                 return callback(error, null);
             }
-            callback(null, result);
+            const row = result.rows[0];
+            let invoice = new Invoice(row.idInvoice, row.idClient, row.amountIncludingTax, row.amountWithoutTax, row.invoiceDate, row.file);
+            callback(null, invoice);
         }); 
     }
 }

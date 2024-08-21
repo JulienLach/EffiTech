@@ -17,7 +17,8 @@ class Notification {
             if (error) {
                 return callback(error, null);
             }
-            callback(null, result.rows);
+            const notifications = result.rows.map(row => new Notification(row.idNotification, row.idEmployee, row.action, row.type, row.title, row.creationDate, row.creationHour));
+            callback(null, notifications);
         });
     }
 }
