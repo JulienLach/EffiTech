@@ -26,19 +26,29 @@ const DashboardPage = function() {
           <h1>Page d'accueil</h1>
           <p>test paragraphe</p>
           <div>
-            <h2>Événements</h2>
-            <ul>
+          <h2>Événements</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Date de début</th>
+              </tr>
+            </thead>
+            <tbody>
               {events.map(function(event) {
                 return (
-                  <li key={event.idEvent}>
-                    <h3>{event.title}</h3>
-                    <p>{event.description}</p>
-                    <p>Status: {event.status}</p>
-                    <p>Date de début: {event.startingDate}</p>
-                  </li>
+                  <tr key={event.idEvent}>
+                    <td>{event.title}</td>
+                    <td>{event.description}</td>
+                    <td>{event.status}</td>
+                    <td>{event.startingDate}</td>
+                  </tr>
                 );
               })}
-            </ul>
+            </tbody>
+          </table>
           </div>
         </div>
       </div>
