@@ -1,0 +1,78 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(160deg, white 50%, #c93c2c 50%);
+}
+
+.formCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  border-radius: 20px;
+  border: #e7e7e7 1px solid;
+  background-color: white;
+  width: 450px;
+  height: 50%;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+    rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+
+.titleConnection {
+  font-size: 30px;
+  font-family: "Outfit", sans-serif;
+  font-weight: 500;
+}
+
+.labelInput {
+  font-size: 20px;
+  font-family: "Outfit", sans-serif;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.formCard input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 10px;
+}
+
+.formElements {
+  display: flex;
+  flex-direction: column;
+}
+
+.formElements button {
+    width: 50%;
+    margin: auto;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: #c93c2c;
+    color: white;
+    font-size: 20px;
+    font-family: "Outfit", sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.formElements p {
+  font-size: 15px;
+  font-family: "Outfit", sans-serif;
+  font-weight: 300;
+  margin-top: 20px;
+}
+
+.formElements a {
+    text-align: right;
+    font-size: 15px;
+    font-family: "Outfit", sans-serif;
+    font-weight: 300;
+    margin-bottom: 20px;
+  }
