@@ -51,5 +51,5 @@ function updateClient(req, res) {
 
 exports.getAllClients = getAllClients;
 exports.getClientById = getClientById;
-exports.getClientById = getClientById;
+exports.createClient = createClient;
 exports.updateClient = updateClient;
