@@ -1,6 +1,6 @@
 const Address = require('../data/address.data.js')
 
-exports.getAddressById = function(req, res) {
+function getAddressById(req, res) {
     const idAddress = req.params.idAddress;
     Address.getAddressById(idAddress, function(error, address) {
         if (error) {
@@ -8,9 +8,9 @@ exports.getAddressById = function(req, res) {
         }
         res.status(200).send(address);
     });
-};
+}
 
-exports.createAddress = function(req, res) {
+function createAddress(req, res) {
     const { address, city, zipcode } = req.body;
     Address.createAddress(address, city, zipcode, (error, newAddress) => {
         if (error) {
@@ -18,4 +18,7 @@ exports.createAddress = function(req, res) {
         }
         res.status(201).send(newAddress);
     });
-};
+}
+
+exports.getAddressById = getAddressById;
+exports.createAddress = createAddress;
