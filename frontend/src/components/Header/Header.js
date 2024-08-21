@@ -1,22 +1,22 @@
-import React from 'react';
-import logo from '../../images/logo.svg';
-import GlobalStyle from '../../styles/GlobalStyle.module.css';
-import style from './Header.module.css';
+import React from "react";
+import logo from "../../images/logo.svg";
+import bellIcon from "../../images/notificationBell.svg";
+import GlobalStyle from "../../styles/GlobalStyle.module.css";
+import style from "./Header.module.css";
 
 const Header = () => {
   return (
     <header className={style.header}>
-      <div className={style.logo}>Effitech</div>
+      <div className={style.logo}>
+        <img src={logo} alt="Effitech Logo" />
+      </div>
       <div className={style.headerRight}>
-        <button className={style.planifierButton}>Planifier</button>
+        <button className={style.planifierButton}>+ Planifier</button>
         <div className={style.notificationIcon}>
-          <span className={style.icon}>🔔</span>
-          <span className={style.notificationCount}>3</span>
+          <img src={bellIcon} className={style.notificationBell}></img>
+          <span className={style.notificationCount}>2</span>
         </div>
-        <div className={style.profileIcon}>
-          <span className={style.icon}>👤</span>
-          <div className={style.profileBubble}>A</div>
-        </div>
+        <div className={style.profileBubble}>JD</div>
       </div>
     </header>
   );
