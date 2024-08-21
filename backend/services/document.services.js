@@ -1,16 +1,16 @@
 const Document = require('../data/document.data.js');
 
-exports.getAllDocuments = (req, res) => {}
+function getAllDocuments(req, res) {}
 
-exports.getDocumentById = (req, res) => {
+function getDocumentById(req, res) {
     const idDocument = req.params.id;
 }
 
-exports.importDocument = (req, res) => {
+function importDocument(req, res) {
     const { idDocument, title, brand, model, file } = req.body
 }
 
-exports.downloadDocument = (req, res) => {
+function downloadDocument(req, res) {
     const idDocument = req.params.id;
     Document.getDocumentById(idDocument, (error, document) => {
         if (error) {
@@ -23,3 +23,8 @@ exports.downloadDocument = (req, res) => {
         }
     });
 };
+
+exports.getAllDocuments = getAllDocuments;
+exports.getDocumentById = getDocumentById;
+exports.importDocument = importDocument;
+exports.downloadDocument = downloadDocument;
