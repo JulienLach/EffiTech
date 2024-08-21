@@ -1,6 +1,6 @@
 const Event = require('../data/notification.data.js')
 
-exports.getAllNotifications = (req, res) => {
+function getAllNotifications(req, res) {
     Event.getAllNotifications((error, result) => {
         if (error) {
             res.status(500).send({
@@ -11,3 +11,5 @@ exports.getAllNotifications = (req, res) => {
         }
     });
 }
+
+exports.getAllNotifications = getAllNotifications;

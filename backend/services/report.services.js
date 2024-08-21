@@ -1,7 +1,7 @@
 const Report = require('../data/report.data.js'); // Importer le modèle Report
 
 
-exports.getReportById = (req, res) => {
+function getReportById(req, res) {
     const idReport = req.params.idReport;
     Report.getReportById(idReport, (error, report) => {
         if (error) {
@@ -15,4 +15,7 @@ exports.getReportById = (req, res) => {
     });
 };
 
-exports.sendReport = (req, res) => {};
+function sendReport(req, res) {};
+
+exports.getReportById = getReportById;
+exports.sendReport = sendReport;
