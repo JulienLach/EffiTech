@@ -5,6 +5,7 @@ const cors = require('cors'); // Importer le middleware cors
 const employeeRoutes = require('./routes/employee.routes.js'); // Importer les routes d'employés
 const clientRoutes = require('./routes/client.routes.js');
 const eventRoutes = require('./routes/event.routes.js');
+const companyRoutes = require('./routes/company.routes.js');
 
 dotenv.config({ path: '.env.development.local' });
 

@@ -6,13 +6,21 @@ import { getAllEvents } from '../../services/api';
 
 const DashboardPage = function() {
   const [events, setEvents] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(function() {
-    getAllEvents()
-      .then(setEvents)
-      .catch(function(error) {
-        console.error('Erreur lors de la récupération des événements', error);
-      });
+    getAllEvents(function(error, data) {
+      if (error) {
+        setError(err.message);
+      } else {
+        try {
+          const parsedData = JSON.parse(data);
+          setEvents(parsedData);
+        } catch (parseError) {
+          setError('Erreur lors de la conversion des données JSON');
+        }
+      }
+    });
   }, []);
 
   return (
