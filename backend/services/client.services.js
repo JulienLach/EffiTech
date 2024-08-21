@@ -1,6 +1,6 @@
 const Client = require('../data/client.data.js'); // Importer le modèle Client
 
-exports.getAllClients = (req, res) => {
+function getAllClients(req, res) {
     Client.getAllClients((error, clients) => {
         if (error) {
             return res.status(500).send({ message: 'Erreur lors de la récupération des clients', error: error.message });
@@ -9,7 +9,7 @@ exports.getAllClients = (req, res) => {
     });
 };
 
-exports.getClientById = (req, res) => {
+function getClientById(req, res) {
     const idClient = req.params.idClient;
     Client.getClientById(idClient, (error, client) => {
         if (error) {
@@ -24,7 +24,7 @@ exports.getClientById = (req, res) => {
 };
 
 
-exports.createClient = (req, res) => {
+function createClient(req, res) {
     const { category, firstname, lastname, email, idAddress, phoneNumber } = req.body;
     Client.createClient(category, firstname, lastname, email, idAddress, phoneNumber, (error, createdClient) => {
         if (error) {
@@ -34,7 +34,7 @@ exports.createClient = (req, res) => {
     });
 };
 
-exports.updateClient = (req, res) => {
+function updateClient(req, res) {
     const clientId = req.params.clientId;
     const { category, firstname, lastname, email, idAddress, phoneNumber } = req.body;
     Client.updateClient(category, firstname, lastname, email, idAddress, phoneNumber, clientId, (error, updatedClient) => {
@@ -48,3 +48,8 @@ exports.updateClient = (req, res) => {
         }
     });
 };
+
+exports.getAllClients = getAllClients;
+exports.getClientById = getClientById;
+exports.getClientById = getClientById;
+exports.updateClient = updateClient;
