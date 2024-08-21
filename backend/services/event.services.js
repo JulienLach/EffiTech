@@ -1,6 +1,6 @@
 const Event = require('../data/event.data.js')
 
-exports.getAllEvents = (req, res) => {
+function getAllEvents(req, res) {
     Event.getAllEvents((error, events) => {
         if (error) {
             return res.status(500).json({ message: 'Erreur lors de la récupération des événements', error: error.message });
@@ -9,7 +9,7 @@ exports.getAllEvents = (req, res) => {
     });
 };
 
-exports.getEventById = (req, res) => {
+function getEventById(req, res) {
     const idEvent = req.params.idEvent;
     Event.getEventById(idEvent, (error, event) => {
         if (error) {
@@ -23,7 +23,7 @@ exports.getEventById = (req, res) => {
     });
 };
 
-exports.createEvent = (req, res) => {
+function createEvent(req, res) {
     const { title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee } = req.body;
     Event.createEvent(title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee, (error) => {
         if (error) {
@@ -33,7 +33,7 @@ exports.createEvent = (req, res) => {
     });
 };
 
-exports.updateEvent = (req, res) => {
+function updateEvent(req, res) {
     const { title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee, idEvent } = req.body;
     Event.updateEvent(title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee, idEvent, (error) => {
         if (error) {
@@ -43,7 +43,7 @@ exports.updateEvent = (req, res) => {
     });
 };
 
-exports.submitInterventionForm = (req, res) => {
+function submitInterventionForm(req, res) {
     const { idEvent, breakdown, workDone, reschedule, endingHour, duration, clientSignature, employeeSignature } = req.body;
     Intervention.submitInterventionForm(idEvent, breakdown, workDone, reschedule, endingHour, duration, clientSignature, employeeSignature, (error) => {
         if (error) {
@@ -53,7 +53,7 @@ exports.submitInterventionForm = (req, res) => {
     });
 };
 
-exports.submitAppointmentForm = (req, res) => {
+function submitAppointmentForm(req, res) {
     const { idEvent, workToDo, planIntervention } = req.body;
     Appointment.submitAppointmentForm(idEvent, workToDo, planIntervention, (error) => {
         if (error) {
@@ -63,4 +63,12 @@ exports.submitAppointmentForm = (req, res) => {
     });
 };
 
-exports.deleteEvent = (req, res) => {};
+function deleteEvent(req, res) {};
+
+exports.getAllEvents = getAllEvents;
+exports.getEventById = getEventById;
+exports.createEvent = createEvent;
+exports.updateEvent = updateEvent;
+exports.submitInterventionForm = submitInterventionForm;
+exports.submitAppointmentForm = submitAppointmentForm;
+exports.deleteEvent = deleteEvent;
