@@ -25,8 +25,8 @@ function getClientById(req, res) {
 
 
 function createClient(req, res) {
-    const { category, firstname, lastname, email, idAddress, phoneNumber } = req.body;
-    Client.createClient(category, firstname, lastname, email, idAddress, phoneNumber, (error, createdClient) => {
+    const { category, firstname, lastname, email, addressDetails, phoneNumber } = req.body;
+    Client.createClient(category, firstname, lastname, email, addressDetails, phoneNumber, (error, createdClient) => {
         if (error) {
             return res.status(500).send({ message: 'Erreur lors de la création du client', error: error.message });
         }
