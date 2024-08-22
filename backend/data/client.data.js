@@ -12,12 +12,44 @@ class Client {
     }
 
     static getAllClients(callback) {
-        const query = 'SELECT * FROM clients';
+        const query = `
+            SELECT 
+                clients.id_client,
+                clients.category,
+                clients.company,
+                clients.firstname,
+                clients.lastname,
+                clients.email,
+                clients.phone_number,
+                addresses.address_street,
+                addresses.zipcode,
+                addresses.city
+            FROM 
+                clients
+            LEFT JOIN 
+                addresses ON clients.id_client = addresses.id_client;
+        `;
         pool.query(query, (error, result) => {
             if (error) {
                 return callback(error, null);
             }
-            const clients = result.rows.map(row => new Client(row.idClient, row.category, row.firstname, row.lastname, row.email, row.idAddress, row.phoneNumber));
+            const clients = result.rows.map(row => {
+                const client = new Client(
+                    row.id_client, 
+                    row.category, 
+                    row.firstname, 
+                    row.lastname, 
+                    row.email, 
+                    row.id_address, 
+                    row.phone_number
+                );
+                client.idAddress = {
+                    street: row.address_street,
+                    zipcode: row.zipcode,
+                    city: row.city
+                };
+                return client;
+            });
             callback(null, clients);
         });
     }
