@@ -118,15 +118,15 @@ class Client {
         });
     }
 
-    static updateClient(category, firstname, lastname, email, idAddress, phoneNumber, idClient, callback) {
-        const query = 'UPDATE clients SET category = $1, firstname = $2, lastname = $3, email = $4, idAddress = $5, phoneNumber = $6 WHERE idClient = $7';
-        const values = [category, firstname, lastname, email, idAddress, phoneNumber, idClient];
+    static updateClient(idClient, category, firstname, lastname, email, phoneNumber, callback) {
+        const query = 'UPDATE clients SET category = $1, firstname = $2, lastname = $3, email = $4, phone_number = $5 WHERE id_client = $6 RETURNING *';
+        const values = [category, firstname, lastname, email, phoneNumber, idClient];
         pool.query(query, values, (error, updatedClient) => {
             if (error) {
                 return callback(error, null);
             }
             const row = updatedClient.rows[0];
-            updatedClient = new Client(row.idClient, row.category, row.firstname, row.lastname, row.email, row.idAddress, row.phoneNumber);
+            updatedClient = new Client(row.id_client, row.category, row.firstname, row.lastname, row.email, row.phone_number);
             callback(null, updatedClient);
         });
     }

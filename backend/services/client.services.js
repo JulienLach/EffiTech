@@ -35,16 +35,14 @@ function createClient(req, res) {
 };
 
 function updateClient(req, res) {
-    const clientId = req.params.clientId;
-    const { category, firstname, lastname, email, idAddress, phoneNumber } = req.body;
-    Client.updateClient(category, firstname, lastname, email, idAddress, phoneNumber, clientId, (error, updatedClient) => {
+    const idClient = req.params.idClient;
+    const { category, firstname, lastname, email, phoneNumber } = req.body;
+    Client.updateClient(idClient, category, firstname, lastname, email, phoneNumber, (error, updatedClient) => {
         if (error) {
             return res.status(500).send({ message: 'Erreur lors de la modification du client', error: error.message });
         }
         if (updatedClient) {
-            res.status(200).send(updatedClient);
-        } else {
-            res.status(404).send({ message: 'Client non trouvé' });
+            res.status(200).send({message: 'Client modifié avec succès'});
         }
     });
 };
