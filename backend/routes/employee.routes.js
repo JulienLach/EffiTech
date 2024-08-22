@@ -8,6 +8,6 @@ router.get('/:idEmployee', employeeServices.getEmployeeById);
 
 router.post('/', employeeServices.createEmployee);
 
-router.put('/:id', employeeServices.updateEmployee);
+router.put('/:idEmployee', employeeServices.updateEmployee);
 
 module.exports = router;
