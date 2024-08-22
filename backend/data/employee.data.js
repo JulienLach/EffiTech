@@ -19,20 +19,20 @@ class Employee {
             if (error) {
                 return callback(error, null);
             }
-            const employees = result.rows.map(row => new Employee(row.idEmployee, row.firstname, row.lastname, row.job, row.phoneNumber, row.email, row.isAdmin, row.password, row.speciality));
+            const employees = result.rows.map(row => new Employee(row.id_employee, row.firstname, row.lastname, row.job, row.phone_number, row.email, row.is_admin, row.password, row.speciality));
             callback(null, employees);
         });
     }
 
     static getEmployeeById(idEmployee, callback) {
-        const query = 'SELECT * FROM employees WHERE idEmployee = $1';
+        const query = 'SELECT * FROM employees WHERE id_employee = $1';
         const values = [idEmployee];
         pool.query(query, values, (error, result) => {
             if (error) {
                 return callback(error, null);
             }
             const row = result.rows[0];
-            let employee = new Employee(row.idEmployee, row.firstname, row.lastname, row.job, row.phoneNumber, row.email, row.isAdmin, row.password, row.speciality);
+            let employee = new Employee(row.id_employee, row.firstname, row.lastname, row.job, row.phone_number, row.email, row.is_admin, row.password, row.speciality);
             callback(null, employee);
         });
     }

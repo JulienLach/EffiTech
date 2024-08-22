@@ -4,7 +4,7 @@ const employeeServices = require('../services/employee.services.js');
 
 router.get('/', employeeServices.getAllEmployees);
 
-router.get('/:id', employeeServices.getEmployeeById);
+router.get('/:idEmployee', employeeServices.getEmployeeById);
 
 router.post('/', employeeServices.createEmployee);
 
