@@ -11,12 +11,14 @@ const Header = () => {
         <img src={logo} alt="Effitech Logo" />
       </div>
       <div className={style.headerRight}>
-        <button className={style.planifierButton}>+ Planifier</button>
+        <div>   
+        <button className={style.planifierButton}><i class="fa-solid fa-plus"></i>Planifier</button>
+        </div>
         <div className={style.notificationIcon}>
           <img src={bellIcon} className={style.notificationBell}></img>
           <span className={style.notificationCount}>2</span>
         </div>
-        <div className={style.profileBubble}>JD</div>
+        <div className={style.profileBubble}>JL</div>
       </div>
     </header>
   );

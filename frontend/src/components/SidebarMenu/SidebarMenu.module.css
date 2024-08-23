@@ -1,19 +1,38 @@
 .sidebar {
-    width: 10vw;
-    padding: 1em;
-    height: 20vh;
-    border: 0.2em solid #ccc;
+  margin-left: 20px;
 }
 
 .sidebar ul {
-    list-style-type: none;
-    padding: 0;
+  list-style-type: none;
+  padding: 0;
 }
 
-.sidebar ul li {
-    margin: 10px 0;
+.sidebar li {
+  display: flex;
+  align-items: center;
+  margin: 10px;
+  padding: 5px;
 }
 
-.sidebar ul li a {
-    text-decoration: none;
+.sidebar li a {
+  margin-left: 15px;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 450;
+  color: black;
+}
+
+.sidebar li:hover a,
+.sidebar li:hover i {
+  color: white;
+}
+
+.sidebar li:hover {
+  padding: 5px;
+  background-color: #c93c2c;
+  border-radius: 5px;
+}
+
+i {
+  width: 20px;
 }

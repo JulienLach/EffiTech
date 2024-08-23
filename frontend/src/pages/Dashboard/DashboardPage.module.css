@@ -1,14 +1,32 @@
 body {
-    box-sizing: border-box;
-    margin: 0;
+  box-sizing: border-box;
+  margin: 0;
 }
 
 .container {
-    display: flex;
-    height: 100vh;
+  display: flex;
+  height: 100vh;
 }
 
-.sidebar {
-    max-width: 30vh;
-    border: 1px solid #C93C2C;
+.calendarContainer {
+  display: flex;
+  flex-direction: column;
+  margin-left: 30px;
+}
+
+th,
+td {
+  text-align: center;
+  width: 150px; /* Définit une largeur fixe pour les cellules */
+  padding: 20px; /* Augmente l'espace à l'intérieur des cellules */
+  border-bottom: 1px solid #d3d3d3;
+}
+
+table {
+  border-collapse: collapse; /* Assure que les bordures ne se chevauchent pas */
+}
+
+a {
+  color: #c93c2c; 
+  text-decoration: underline #c93c2c;
 }
