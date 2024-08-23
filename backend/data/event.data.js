@@ -55,7 +55,8 @@ class Event {
         const query = `
             SELECT * FROM events 
             JOIN clients ON events.id_client = clients.id_client 
-            JOIN addresses ON events.id_address = addresses.id_address 
+            JOIN addresses ON events.id_address = addresses.id_address
+            JOIN employees ON events.id_employee = employees.id_employee
             WHERE events.id_event = $1
         `;
         const values = [idEvent];
@@ -81,19 +82,24 @@ class Event {
                 zipcode: row.zipcode,
                 city: row.city
             };
+            event.idEmployee = {
+                firstname: row.firstname,
+                lastname: row.lastname,
+            }
             callback(null, event); 
         });
     }
 
+    // ajouter les champs pour adresse et employé
     static createEvent(title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee, callback) {
-        const query = 'INSERT INTO events (title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee) VALUES ()';
+        const query = 'INSERT INTO events (title, description, status, is_planned, type, id_client, id_address, starting_date, starting_hour, ending_hour, id_employee) VALUES ($1 ,$2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *';
         const values = [title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee];
         pool.query(query, values, (error, newEvent) => {
             if (error) {
                 return callback(error, null);
             }
             const row = newEvent.rows[0];
-            newEvent = new Event(row.idEvent, row.title, row.description, row.status, row.isPlanned, row.type, row.idClient, row.idAddress, row.startingDate, row.startingHour, row.endingHour, row.idEmployee);
+            newEvent = new Event(row.title, row.description, row.status, row.is_planned, row.type, row.id_client, row.id_address, row.starting_date, row.starting_hour, row.ending_hour, row.id_employee);
             callback(null, newEvent);
         });
     }
