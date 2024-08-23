@@ -36,8 +36,8 @@ function createClient(req, res) {
 
 function updateClient(req, res) {
     const idClient = req.params.idClient;
-    const { category, firstname, lastname, email, phoneNumber } = req.body;
-    Client.updateClient(idClient, category, firstname, lastname, email, phoneNumber, (error, updatedClient) => {
+    const { category, firstname, lastname, email, phoneNumber, addressDetails } = req.body;
+    Client.updateClient(idClient, category, firstname, lastname, email, phoneNumber, addressDetails,(error, updatedClient) => {
         if (error) {
             return res.status(500).send({ message: 'Erreur lors de la modification du client', error: error.message });
         }
