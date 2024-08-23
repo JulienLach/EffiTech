@@ -118,16 +118,27 @@ class Client {
         });
     }
 
-    static updateClient(idClient, category, firstname, lastname, email, phoneNumber, callback) {
-        const query = 'UPDATE clients SET category = $1, firstname = $2, lastname = $3, email = $4, phone_number = $5 WHERE id_client = $6 RETURNING *';
-        const values = [category, firstname, lastname, email, phoneNumber, idClient];
-        pool.query(query, values, (error, updatedClient) => {
+    static updateClient(idClient, category, firstname, lastname, email, phoneNumber, idAddress, callback) {
+        const clientQuery = 'UPDATE clients SET category = $1, firstname = $2, lastname = $3, email = $4, phone_number = $5 WHERE id_client = $6 RETURNING *';
+        const clientValues = [category, firstname, lastname, email, phoneNumber, idClient];
+    
+        pool.query(clientQuery, clientValues, (error, clientResult) => {
             if (error) {
                 return callback(error, null);
             }
-            const row = updatedClient.rows[0];
-            updatedClient = new Client(row.id_client, row.category, row.firstname, row.lastname, row.email, row.phone_number);
-            callback(null, updatedClient);
+            const updatedClientRow = clientResult.rows[0];
+            const updatedClient = new Client(updatedClientRow.id_client, updatedClientRow.category, updatedClientRow.firstname, updatedClientRow.lastname, updatedClientRow.email, updatedClientRow.phone_number);
+    
+            const addressQuery = 'UPDATE addresses SET address = $1, city = $2, zipcode = $3 WHERE id_client = $4 RETURNING *';
+            const addressValues = [idAddress.address, idAddress.city, idAddress.zipcode, idClient];
+    
+            pool.query(addressQuery, addressValues, (error, addressResult) => {
+                if (error) {
+                    return callback(error, null);
+                }
+                const updatedAddress = addressResult.rows[0];
+                callback(null, { updatedClient, updatedAddress });
+            });
         });
     }
 }
