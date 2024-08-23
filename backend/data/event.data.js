@@ -17,12 +17,36 @@ class Event {
     }
 
     static getAllEvents(callback) {
-        const query = 'SELECT * FROM events';
+        const query = `
+            SELECT * FROM events 
+            JOIN clients ON events.id_client = clients.id_client 
+            JOIN addresses ON events.id_address = addresses.id_address 
+            JOIN employees ON events.id_employee = employees.id_employee
+        `;
         pool.query(query, (error, result) => {
             if (error) {
                 return callback(error, null);
             }
-            const events = result.rows.map(row => new Event(row.idEvent, row.title, row.description, row.status, row.isPlanned, row.type, row.idClient, row.idAddress, row.startingDate, row.startingHour, row.endingHour, row.idEmployee));
+            const events = result.rows.map(row => {
+                const event = new Event(
+                    row.id_event, row.title, row.description, row.status, 
+                    row.is_planned, row.type, row.id_client, row.id_address, 
+                    row.starting_date, row.startingHour, row.endingHour, row.idEmployee
+                );
+                event.idClient = {
+                    category: row.category,
+                    firstname: row.firstname,
+                    lastname: row.lastname,
+                    email: row.email,
+                    phoneNumber: row.phoneNumber
+                };
+                event.idAddress = {
+                    street: row.address,
+                    zipcode: row.zipcode,
+                    city: row.city
+                };
+                return event;
+            });
             callback(null, events);
         });
     }
