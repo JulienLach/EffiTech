@@ -40,7 +40,7 @@ const DashboardPage = function () {
           </div>
           <div>
             <table>
-              <thead>
+              <thead className={styles.stickyThead}>
                 <tr>
                   <th>Client</th>
                   <th>Référence</th>
@@ -58,7 +58,7 @@ const DashboardPage = function () {
                   </td>
                   <td>INT00001</td>
                   <td>Intervention</td>
-                  <td>Réparation chaudière</td>
+                  <td><a href="#">Réparation chaudière</a></td>
                   <td>À venir</td>
                   <td>18/07/2024</td>
                   <td>
@@ -71,7 +71,7 @@ const DashboardPage = function () {
                   </td>
                   <td>INT000002</td>
                   <td>Rendez-vous</td>
-                  <td>Radiateur en panne</td>
+                  <td><a href="#">Radiateur en panne</a></td>
                   <td>A venir</td>
                   <td>14/10/2024</td>
                   <td>

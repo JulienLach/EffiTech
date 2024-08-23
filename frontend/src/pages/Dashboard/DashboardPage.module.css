@@ -7,11 +7,20 @@ body {
   display: flex;
   height: 100vh;
   margin-top: 100px;
+  background-color: white;
 }
 
 .stickyFilter {
   position: fixed;
-  top: 100px;
+  top: 90px;
+  background-color: white;
+  z-index: 1000;
+  width: 100%;
+}
+
+.stickyThead {
+  position: fixed;
+  top: 280px;
   background-color: white;
   z-index: 1000;
 }
@@ -20,7 +29,8 @@ body {
   display: flex;
   flex-direction: column;
   margin-left: 252px;
-  margin-top: 200px;
+  margin-top: 250px;
+  z-index: 0;
 }
 
 th,

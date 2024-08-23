@@ -14,7 +14,7 @@ const Header = () => {
         <div className={style.headerRight}>
           <div>
             <button className={style.planifierButton}>
-              <i class="fa-solid fa-plus"></i>Planifier
+              <i class="fa-solid fa-plus"></i>Créer
             </button>
           </div>
           <div className={style.notificationIcon}>
