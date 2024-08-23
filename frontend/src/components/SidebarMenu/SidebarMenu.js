@@ -5,7 +5,7 @@ import GlobalStyle from "../../styles/GlobalStyle.module.css";
 const SidedarMenu = () => {
   return (
     <>
-      <div>
+      <div className={styles.sidebarAndOrange}>
         <div className={styles.sidebar}>
           <ul>
             <li>
@@ -34,8 +34,10 @@ const SidedarMenu = () => {
             </li>
           </ul>
         </div>
+        <div className={styles.sideOrange}>
+        <i class="fa-solid fa-caret-down"></i>
+        </div>
       </div>
-      <div></div>
     </>
   );
 };

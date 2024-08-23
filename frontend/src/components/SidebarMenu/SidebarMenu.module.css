@@ -1,5 +1,7 @@
 .sidebar {
   margin-left: 20px;
+  border-top-right-radius: 10px;
+  height: 100vh;
 }
 
 .sidebar ul {
@@ -35,4 +37,29 @@
 
 i {
   width: 20px;
+}
+
+/* placement des deux division sidebar */
+.sidebarAndOrange {
+  display: flex;
+  position: fixed;
+}
+
+/* Couleur orange de la div pour le liseret de la sidebar */
+.sideOrange {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #c93c2c;
+  height: 100vh;
+  width: 12px;
+  border-top-right-radius: 10px;
+  box-shadow: 6px 0 5px -2px rgba(0, 0, 0, 0.377);
+  cursor: pointer;
+}
+
+/*Rotation de l'icône de flèche*/
+.sideOrange i {
+  transform: rotate(90deg);
+  color: white;
 }

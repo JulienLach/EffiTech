@@ -34,9 +34,11 @@ const DashboardPage = function () {
           <SidebarMenu />
         </div>
         <div className={styles.calendarContainer}>
-          <FilterBar />
-          <div>
+          <div className={styles.stickyFilter}>
+            <FilterBar />
             <h2>Événements</h2>
+          </div>
+          <div>
             <table>
               <thead>
                 <tr>
@@ -51,22 +53,30 @@ const DashboardPage = function () {
               </thead>
               <tbody>
                 <tr>
-                  <td><a href="#">Jean Bombeur</a></td>
+                  <td>
+                    <a href="#">Jean Bombeur</a>
+                  </td>
                   <td>INT00001</td>
                   <td>Intervention</td>
                   <td>Réparation chaudière</td>
                   <td>À venir</td>
                   <td>18/07/2024</td>
-                  <td><a href="#">William Leplombier</a></td>
+                  <td>
+                    <a href="#">William Leplombier</a>
+                  </td>
                 </tr>
                 <tr>
-                  <td><a href="#">Sandra Pô</a></td>
+                  <td>
+                    <a href="#">Sandra Pô</a>
+                  </td>
                   <td>INT000002</td>
                   <td>Rendez-vous</td>
                   <td>Radiateur en panne</td>
                   <td>A venir</td>
                   <td>14/10/2024</td>
-                  <td><a href="#">Jacques Padefuite</a></td>
+                  <td>
+                    <a href="#">Jacques Padefuite</a>
+                  </td>
                 </tr>
               </tbody>
             </table>

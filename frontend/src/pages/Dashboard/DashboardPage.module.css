@@ -6,12 +6,21 @@ body {
 .container {
   display: flex;
   height: 100vh;
+  margin-top: 100px;
+}
+
+.stickyFilter {
+  position: fixed;
+  top: 100px;
+  background-color: white;
+  z-index: 1000;
 }
 
 .calendarContainer {
   display: flex;
   flex-direction: column;
-  margin-left: 30px;
+  margin-left: 252px;
+  margin-top: 200px;
 }
 
 th,
