@@ -52,14 +52,35 @@ class Event {
     }
 
     static getEventById(idEvent, callback) {
-        const query = 'SELECT * FROM events WHERE idEvent = $1';
+        const query = `
+            SELECT * FROM events 
+            JOIN clients ON events.id_client = clients.id_client 
+            JOIN addresses ON events.id_address = addresses.id_address 
+            WHERE events.id_event = $1
+        `;
         const values = [idEvent];
         pool.query(query, values, (error, result) => {
             if (error) {
                 return callback(error, null);
             }
             const row = result.rows[0];
-            let event = new Event(row.idEvent, row.title, row.description, row.status, row.isPlanned, row.type, row.idClient, row.idAddress, row.startingDate, row.startingHour, row.endingHour, row.idEmployee);
+            let event = new Event(
+                row.id_event, row.title, row.description, row.status, 
+                row.is_planned, row.type, row.id_client, row.id_address, 
+                row.starting_date, row.starting_hour, row.ending_hour, row.id_employee
+            );
+            event.idClient = {
+                category: row.category,
+                firstname: row.firstname,
+                lastname: row.lastname,
+                email: row.email,
+                phoneNumber: row.phoneNumber
+            };
+            event.idAddress = {
+                street: row.address,
+                zipcode: row.zipcode,
+                city: row.city
+            };
             callback(null, event); 
         });
     }
