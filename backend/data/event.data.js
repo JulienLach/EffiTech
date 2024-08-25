@@ -90,7 +90,7 @@ class Event {
         });
     }
 
-    // ajouter les champs pour adresse et employé
+    // appeler les données pour adresse, client et employé directement dans le formulaire de création d'événement au clique du bouton dans le front
     static createEvent(title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee, callback) {
         const query = 'INSERT INTO events (title, description, status, is_planned, type, id_client, id_address, starting_date, starting_hour, ending_hour, id_employee) VALUES ($1 ,$2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *';
         const values = [title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee];
