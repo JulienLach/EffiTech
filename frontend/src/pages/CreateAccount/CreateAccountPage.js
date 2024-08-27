@@ -1,5 +1,4 @@
 import React from "react";
-import Header from "../.././components/Header/Header";
 import GlobalStyles from "../../styles/GlobalStyles.module.css";
 import styles from "./CreateAccount.module.css";
 import LogoDesktop from "../../components/LogoDesktop/LogoDesktop";
@@ -32,8 +31,8 @@ const createAccountPage = () => {
             <input type="number" id="phone_number" name="phone_number" />
           </div>
           <div className={styles.buttonPosition}>
-            <button type="reset" className={styles.cancelButton}>Annuler</button>
-            <button type="submit" className={styles.submitButton}>Créer mon compte</button>
+            <button type="reset" onClick={() => (window.location.href = "/login")} className={styles.cancelButton}>Annuler</button>
+            <button type="submit" onClick={() => (window.location.href = "/dashboard")} className={styles.submitButton}>Créer mon compte</button>
           </div>
         </form>
       </div>

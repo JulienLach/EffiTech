@@ -4,6 +4,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     height: 100vh;
     background: linear-gradient(160deg, white 50%, #c93c2c 50%);
   }
@@ -18,7 +19,7 @@
     background-color: white;
     width: 455px;
     height: auto;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 14px 28px,
       rgba(0, 0, 0, 0.22) 0px 10px 10px;
   }
   
@@ -35,7 +36,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
   }
   
   /* CSS for input comportement */
@@ -46,12 +47,12 @@
     border-radius: 10px;
   }
 
-  /* CSS for the label comportement */
-    .labelInput label {
-        margin: 0px 30px;
-        padding: 5px 0px;
-    }
-  
+/* CSS for the label comportement */
+  .labelInput label {
+      margin: 0px 30px;
+      padding: 5px 0px;
+  }
+
   /* CSS for elements placement */
   .formElements {
     display: flex;

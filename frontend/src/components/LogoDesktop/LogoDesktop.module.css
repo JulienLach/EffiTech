@@ -1,8 +1,7 @@
 .logoEffitech {
   display: flex;
   align-items: center;
-  padding: 20px;
 }
 img {
-  height: 100px;
+  height: 80px;
 }
