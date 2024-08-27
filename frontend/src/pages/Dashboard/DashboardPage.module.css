@@ -12,7 +12,7 @@ body {
 
 .stickyFilter {
   position: fixed;
-  top: 90px;
+  top: 65px;
   background-color: white;
   z-index: 1000;
   width: 100%;
@@ -20,7 +20,7 @@ body {
 
 .stickyThead {
   position: fixed;
-  top: 260px;
+  top: 240px;
   background-color: white;
   z-index: 1000;
 }
@@ -29,7 +29,7 @@ body {
   display: flex;
   flex-direction: column;
   margin-left: 252px;
-  margin-top: 250px;
+  margin-top: 190px;
   z-index: 0;
 }
 
@@ -43,7 +43,6 @@ td {
 
 table {
   border-collapse: collapse; /* Assure que les bordures ne se chevauchent pas */
-  margin: 50px 0;
 }
 
 a {
