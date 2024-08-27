@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "../../images/logo.svg";
 import bellIcon from "../../images/notificationBell.svg";
-import GlobalStyle from "../../styles/GlobalStyle.module.css";
+import GlobalStyles from "../../styles/GlobalStyles.module.css";
 import style from "./Header.module.css";
 
 const Header = () => {

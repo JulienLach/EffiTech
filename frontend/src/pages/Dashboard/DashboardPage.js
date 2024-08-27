@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../../components/Header/Header";
 import SidebarMenu from "../../components/SidebarMenu/SidebarMenu";
 import styles from "./DashboardPage.module.css";
-import GlobalStyle from "../../styles/GlobalStyle.module.css";
+import GlobalStyles from "../../styles/GlobalStyles.module.css";
 import { getAllEvents } from "../../services/api";
 import FilterBar from "../../components/FilterBar/FilterBar";
 

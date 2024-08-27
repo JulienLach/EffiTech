@@ -1,6 +1,6 @@
 import React from 'react';
 import logoDesktop from '../../images/logo.svg';
-import GlobalStyle from '../../styles/GlobalStyle.module.css';
+import GlobalStyles from '../../styles/GlobalStyles.module.css';
 import style from './LogoDesktop.module.css';
 
 const LogoDesktop = () => {

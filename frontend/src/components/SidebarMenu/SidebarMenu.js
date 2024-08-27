@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./SidebarMenu.module.css";
-import GlobalStyle from "../../styles/GlobalStyle.module.css";
+import GlobalStyles from "../../styles/GlobalStyles.module.css";
 
 const SidedarMenu = () => {
   return (

@@ -1,5 +1,5 @@
 import React from "react";
-import GlobalStyle from "../../styles/GlobalStyle.module.css";
+import GlobalStyles from "../../styles/GlobalStyles.module.css";
 import style from "./FilterBar.module.css";
 
 const FilterBar = () => {

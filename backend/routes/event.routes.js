@@ -13,8 +13,8 @@ router.put('/:idEvent', eventServices.updateEvent);
 router.delete('/:id', eventServices.deleteEvent);
 
 // Méthodes spécifiques aux sous classes
-router.get('/:id/intervention', eventServices.submitInterventionForm);
+router.post('/:idEvent/submitInterventionForm', eventServices.submitInterventionForm);
 
-router.get('/:id/appointment', eventServices.submitAppointmentForm);
+router.post('/:idEvent/submitAppointmentForm', eventServices.submitAppointmentForm);
 
 module.exports = router;

@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../.././components/Header/Header";
-import GlobalStyle from "../../styles/GlobalStyle.module.css";
+import GlobalStyles from "../../styles/GlobalStyles.module.css";
 import styles from "./CreateAccount.module.css";
 import LogoDesktop from "../../components/LogoDesktop/LogoDesktop";
 
