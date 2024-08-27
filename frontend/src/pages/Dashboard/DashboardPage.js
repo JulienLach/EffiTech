@@ -36,7 +36,7 @@ const DashboardPage = function () {
         <div className={styles.calendarContainer}>
           <div className={styles.stickyFilter}>
             <FilterBar />
-            <h2>Événements</h2>
+            <h3>Événements</h3>
           </div>
           <div>
             <table>
@@ -66,6 +66,123 @@ const DashboardPage = function () {
                   </td>
                 </tr>
                 <tr>
+                  <td>
+                    <a href="#">Sandra Pô</a>
+                  </td>
+                  <td>INT000002</td>
+                  <td>Rendez-vous</td>
+                  <td><a href="#">Radiateur en panne</a></td>
+                  <td>A venir</td>
+                  <td>14/10/2024</td>
+                  <td>
+                    <a href="#">Jacques Padefuite</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a href="#">Sandra Pô</a>
+                  </td>
+                  <td>INT000002</td>
+                  <td>Rendez-vous</td>
+                  <td><a href="#">Radiateur en panne</a></td>
+                  <td>A venir</td>
+                  <td>14/10/2024</td>
+                  <td>
+                    <a href="#">Jacques Padefuite</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a href="#">Sandra Pô</a>
+                  </td>
+                  <td>INT000002</td>
+                  <td>Rendez-vous</td>
+                  <td><a href="#">Radiateur en panne</a></td>
+                  <td>A venir</td>
+                  <td>14/10/2024</td>
+                  <td>
+                    <a href="#">Jacques Padefuite</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a href="#">Sandra Pô</a>
+                  </td>
+                  <td>INT000002</td>
+                  <td>Rendez-vous</td>
+                  <td><a href="#">Radiateur en panne</a></td>
+                  <td>A venir</td>
+                  <td>14/10/2024</td>
+                  <td>
+                    <a href="#">Jacques Padefuite</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a href="#">Sandra Pô</a>
+                  </td>
+                  <td>INT000002</td>
+                  <td>Rendez-vous</td>
+                  <td><a href="#">Radiateur en panne</a></td>
+                  <td>A venir</td>
+                  <td>14/10/2024</td>
+                  <td>
+                    <a href="#">Jacques Padefuite</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a href="#">Sandra Pô</a>
+                  </td>
+                  <td>INT000002</td>
+                  <td>Rendez-vous</td>
+                  <td><a href="#">Radiateur en panne</a></td>
+                  <td>A venir</td>
+                  <td>14/10/2024</td>
+                  <td>
+                    <a href="#">Jacques Padefuite</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a href="#">Sandra Pô</a>
+                  </td>
+                  <td>INT000002</td>
+                  <td>Rendez-vous</td>
+                  <td><a href="#">Radiateur en panne</a></td>
+                  <td>A venir</td>
+                  <td>14/10/2024</td>
+                  <td>
+                    <a href="#">Jacques Padefuite</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a href="#">Sandra Pô</a>
+                  </td>
+                  <td>INT000002</td>
+                  <td>Rendez-vous</td>
+                  <td><a href="#">Radiateur en panne</a></td>
+                  <td>A venir</td>
+                  <td>14/10/2024</td>
+                  <td>
+                    <a href="#">Jacques Padefuite</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a href="#">Sandra Pô</a>
+                  </td>
+                  <td>INT000002</td>
+                  <td>Rendez-vous</td>
+                  <td><a href="#">Radiateur en panne</a></td>
+                  <td>A venir</td>
+                  <td>14/10/2024</td>
+                  <td>
+                    <a href="#">Jacques Padefuite</a>
+                  </td>
+                </tr>
+                                <tr>
                   <td>
                     <a href="#">Sandra Pô</a>
                   </td>

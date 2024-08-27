@@ -6,7 +6,7 @@ body {
 .container {
   display: flex;
   height: 100vh;
-  margin-top: 100px;
+  margin-top: 85px;
   background-color: white;
 }
 
@@ -20,7 +20,7 @@ body {
 
 .stickyThead {
   position: fixed;
-  top: 280px;
+  top: 260px;
   background-color: white;
   z-index: 1000;
 }
@@ -35,14 +35,15 @@ body {
 
 th,
 td {
-  text-align: center;
+  text-align: start;
   width: 150px; /* Définit une largeur fixe pour les cellules */
-  padding: 20px; /* Augmente l'espace à l'intérieur des cellules */
+  padding: 10px; /* Augmente l'espace à l'intérieur des cellules */
   border-bottom: 1px solid #d3d3d3;
 }
 
 table {
   border-collapse: collapse; /* Assure que les bordures ne se chevauchent pas */
+  margin: 50px 0;
 }
 
 a {
