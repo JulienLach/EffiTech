@@ -5,9 +5,9 @@ import style from './LogoDesktop.module.css';
 
 const LogoDesktop = () => {
     return (
-      <header className={style.logoEffitech}>
+      <div className={style.logoEffitech}>
         <img src={logoDesktop} alt="LogoDesktop"/>
-      </header>
+      </div>
     )
 };
 

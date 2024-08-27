@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "../.././components/Header/Header";
 import styles from "./Login.module.css";
 import GlobalStyles from "../../styles/GlobalStyles.module.css";
 import LogoDesktop from "../../components/LogoDesktop/LogoDesktop";
