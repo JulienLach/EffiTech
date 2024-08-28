@@ -64,45 +64,52 @@ static getAllEvents(callback) {
     });
 }
 
-    static getEventById(idEvent, callback) {
-        const query = `
-            SELECT * FROM events 
-            JOIN clients ON events.id_client = clients.id_client 
-            JOIN addresses ON events.id_address = addresses.id_address
-            JOIN employees ON events.id_employee = employees.id_employee
-            WHERE events.id_event = $1
-        `;
-        const values = [idEvent];
-        pool.query(query, values, (error, result) => {
-            if (error) {
-                return callback(error, null);
-            }
-            const row = result.rows[0];
-            let event = new Event(
-                row.id_event, row.title, row.description, row.status, 
-                row.is_planned, row.type, row.id_client, row.id_address, 
-                row.starting_date, row.starting_hour, row.ending_hour, row.id_employee
-            );
-            event.idClient = {
-                category: row.category,
-                firstname: row.firstname,
-                lastname: row.lastname,
-                email: row.email,
-                phoneNumber: row.phoneNumber
-            };
-            event.idAddress = {
-                street: row.address,
-                zipcode: row.zipcode,
-                city: row.city
-            };
-            event.idEmployee = {
-                firstname: row.firstname,
-                lastname: row.lastname,
-            }
-            callback(null, event); 
-        });
-    }
-
+static getEventById(idEvent, callback) {
+    const query = `
+        SELECT 
+            events.id_event, events.title, events.description, events.status, 
+            events.is_planned, events.type, events.starting_date, events.starting_hour, 
+            events.ending_hour, events.id_client, events.id_address, events.id_employee,
+            clients.firstname AS client_firstname, clients.lastname AS client_lastname,
+            clients.category AS client_category, clients.email AS client_email, clients.phone_number AS client_phone_number,
+            addresses.address AS address, addresses.zipcode AS address_zipcode, addresses.city AS address_city,
+            employees.firstname AS employee_firstname, employees.lastname AS employee_lastname
+        FROM events 
+        JOIN clients ON events.id_client = clients.id_client 
+        JOIN addresses ON events.id_address = addresses.id_address
+        JOIN employees ON events.id_employee = employees.id_employee
+        WHERE events.id_event = $1
+    `;
+    const values = [idEvent];
+    pool.query(query, values, (error, result) => {
+        if (error) {
+            return callback(error, null);
+        }
+        const row = result.rows[0];
+        let event = new Event(
+            row.id_event, row.title, row.description, row.status, 
+            row.is_planned, row.type, row.id_client, row.id_address, 
+            row.starting_date, row.starting_hour, row.ending_hour, row.id_employee
+        );
+        event.idClient = {
+            category: row.client_category,
+            firstname: row.client_firstname,
+            lastname: row.client_lastname,
+            email: row.client_email,
+            phoneNumber: row.client_phone_number
+        };
+        event.idAddress = {
+            street: row.address,
+            zipcode: row.address_zipcode,
+            city: row.address_city
+        };
+        event.idEmployee = {
+            firstname: row.employee_firstname,
+            lastname: row.employee_lastname,
+        }
+        callback(null, event); 
+    });
+}
     // appeler les données pour adresse, client et employé directement dans le formulaire de création d'événement au clique du bouton dans le front
     static createEvent(title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee, callback) {
         const query = 'INSERT INTO events (title, description, status, is_planned, type, id_client, id_address, starting_date, starting_hour, ending_hour, id_employee) VALUES ($1 ,$2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *';
