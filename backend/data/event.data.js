@@ -16,40 +16,53 @@ class Event {
         this.idEmployee = idEmployee;
     }
 
-    static getAllEvents(callback) {
-        const query = `
-            SELECT * FROM events 
-            JOIN clients ON events.id_client = clients.id_client 
-            JOIN addresses ON events.id_address = addresses.id_address 
-            JOIN employees ON events.id_employee = employees.id_employee
-        `;
-        pool.query(query, (error, result) => {
-            if (error) {
-                return callback(error, null);
-            }
-            const events = result.rows.map(row => {
-                const event = new Event(
-                    row.id_event, row.title, row.description, row.status, 
-                    row.is_planned, row.type, row.id_client, row.id_address, 
-                    row.starting_date, row.startingHour, row.endingHour, row.idEmployee
-                );
-                event.idClient = {
-                    category: row.category,
-                    firstname: row.firstname,
-                    lastname: row.lastname,
-                    email: row.email,
-                    phoneNumber: row.phoneNumber
-                };
-                event.idAddress = {
-                    street: row.address,
-                    zipcode: row.zipcode,
-                    city: row.city
-                };
-                return event;
-            });
-            callback(null, events);
+static getAllEvents(callback) {
+    const query = `
+        SELECT 
+            events.id_event, events.title, events.description, events.status, 
+            events.is_planned, events.type, events.starting_date, events.starting_hour, 
+            events.ending_hour, events.id_client, events.id_address, events.id_employee,
+            clients.firstname AS client_firstname, clients.lastname AS client_lastname,
+            employees.firstname AS employee_firstname, employees.lastname AS employee_lastname
+        FROM events 
+        JOIN clients ON events.id_client = clients.id_client 
+        JOIN addresses ON events.id_address = addresses.id_address 
+        JOIN employees ON events.id_employee = employees.id_employee
+    `;
+    pool.query(query, (error, result) => {
+        if (error) {
+            return callback(error, null);
+        }
+        const events = result.rows.map(row => {
+            const event = {
+                idEvent: row.id_event,
+                title: row.title,
+                description: row.description,
+                status: row.status,
+                isPlanned: row.is_planned,
+                type: row.type,
+                startingDate: row.starting_date,
+                startingHour: row.starting_hour,
+                endingHour: row.ending_hour,
+                idClient: {
+                    id: row.id_client,
+                    firstname: row.client_firstname,
+                    lastname: row.client_lastname
+                },
+                idAddress: {
+                    id: row.id_address
+                },
+                idEmployee: {
+                    id: row.id_employee,
+                    firstname: row.employee_firstname,
+                    lastname: row.employee_lastname
+                }
+            };
+            return event;
         });
-    }
+        callback(null, events);
+    });
+}
 
     static getEventById(idEvent, callback) {
         const query = `

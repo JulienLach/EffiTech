@@ -13,7 +13,7 @@ const DashboardPage = function () {
   useEffect(function () {
     getAllEvents(function (error, data) {
       if (error) {
-        setError(err.message);
+        setError(error.message);
       } else {
         try {
           const parsedData = JSON.parse(data);
@@ -52,149 +52,25 @@ const DashboardPage = function () {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>
-                    <a href="#">Jean Bombeur</a>
-                  </td>
-                  <td>INT00001</td>
-                  <td>Intervention</td>
-                  <td><a href="#">Réparation chaudière</a></td>
-                  <td>À venir</td>
-                  <td>18/07/2024</td>
-                  <td>
-                    <a href="#">William Leplombier</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <a href="#">Sandra Pô</a>
-                  </td>
-                  <td>INT000002</td>
-                  <td>Rendez-vous</td>
-                  <td><a href="#">Radiateur en panne</a></td>
-                  <td>A venir</td>
-                  <td>14/10/2024</td>
-                  <td>
-                    <a href="#">Jacques Padefuite</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <a href="#">Sandra Pô</a>
-                  </td>
-                  <td>INT000002</td>
-                  <td>Rendez-vous</td>
-                  <td><a href="#">Radiateur en panne</a></td>
-                  <td>A venir</td>
-                  <td>14/10/2024</td>
-                  <td>
-                    <a href="#">Jacques Padefuite</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <a href="#">Sandra Pô</a>
-                  </td>
-                  <td>INT000002</td>
-                  <td>Rendez-vous</td>
-                  <td><a href="#">Radiateur en panne</a></td>
-                  <td>A venir</td>
-                  <td>14/10/2024</td>
-                  <td>
-                    <a href="#">Jacques Padefuite</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <a href="#">Sandra Pô</a>
-                  </td>
-                  <td>INT000002</td>
-                  <td>Rendez-vous</td>
-                  <td><a href="#">Radiateur en panne</a></td>
-                  <td>A venir</td>
-                  <td>14/10/2024</td>
-                  <td>
-                    <a href="#">Jacques Padefuite</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <a href="#">Sandra Pô</a>
-                  </td>
-                  <td>INT000002</td>
-                  <td>Rendez-vous</td>
-                  <td><a href="#">Radiateur en panne</a></td>
-                  <td>A venir</td>
-                  <td>14/10/2024</td>
-                  <td>
-                    <a href="#">Jacques Padefuite</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <a href="#">Sandra Pô</a>
-                  </td>
-                  <td>INT000002</td>
-                  <td>Rendez-vous</td>
-                  <td><a href="#">Radiateur en panne</a></td>
-                  <td>A venir</td>
-                  <td>14/10/2024</td>
-                  <td>
-                    <a href="#">Jacques Padefuite</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <a href="#">Sandra Pô</a>
-                  </td>
-                  <td>INT000002</td>
-                  <td>Rendez-vous</td>
-                  <td><a href="#">Radiateur en panne</a></td>
-                  <td>A venir</td>
-                  <td>14/10/2024</td>
-                  <td>
-                    <a href="#">Jacques Padefuite</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <a href="#">Sandra Pô</a>
-                  </td>
-                  <td>INT000002</td>
-                  <td>Rendez-vous</td>
-                  <td><a href="#">Radiateur en panne</a></td>
-                  <td>A venir</td>
-                  <td>14/10/2024</td>
-                  <td>
-                    <a href="#">Jacques Padefuite</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <a href="#">Sandra Pô</a>
-                  </td>
-                  <td>INT000002</td>
-                  <td>Rendez-vous</td>
-                  <td><a href="#">Radiateur en panne</a></td>
-                  <td>A venir</td>
-                  <td>14/10/2024</td>
-                  <td>
-                    <a href="#">Jacques Padefuite</a>
-                  </td>
-                </tr>
-                                <tr>
-                  <td>
-                    <a href="#">Sandra Pô</a>
-                  </td>
-                  <td>INT000002</td>
-                  <td>Rendez-vous</td>
-                  <td><a href="#">Radiateur en panne</a></td>
-                  <td>A venir</td>
-                  <td>14/10/2024</td>
-                  <td>
-                    <a href="#">Jacques Padefuite</a>
-                  </td>
-                </tr>
+                {events.map(event => (
+                  <tr key={event.idEvent}>
+                    <td>
+                      <a href="#">
+                        {event.idClient.firstname} {event.idClient.lastname}
+                      </a>
+                    </td>
+                    <td>INT-{event.idEvent}</td>
+                    <td>{event.type}</td>
+                    <td><a href="#">{event.title}</a></td>
+                    <td>{event.status}</td>
+                    <td>{new Date(event.startingDate).toLocaleDateString()}</td>
+                    <td>
+                      <a href="#">
+                        {event.idEmployee.firstname} {event.idEmployee.lastname}
+                      </a>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
