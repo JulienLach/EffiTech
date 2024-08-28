@@ -125,14 +125,14 @@ static getEventById(idEvent, callback) {
     }
 
     static updateEvent(title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee, idEvent, callback) {
-        const query = 'UPDATE events SET title = $1, description = $2, status = $3, isPlanned = $4, type = $5, idClient = $6, idAddress = $7, startingDate = $8, startingHour = $9, endingHour = $10, idEmployee = $11 WHERE idEvent = $12';
+        const query = 'UPDATE events SET title = $1, description = $2, status = $3, is_planned = $4, type = $5, id_client = $6, id_address = $7, starting_date = $8, starting_hour = $9, ending_hour = $10, id_employee = $11 WHERE id_event = $12';
         const values = [title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee, idEvent];
         pool.query(query, values, (error, updatedEvent) => {
             if (error) {
                 return callback(error, null);
             }
             const row = updatedEvent.rows[0];
-            updatedEvent = new Event(row.idEvent, row.title, row.description, row.status, row.isPlanned, row.type, row.idClient, row.idAddress, row.startingDate, row.startingHour, row.endingHour, row.idEmployee);
+            updatedEvent = new Event(row.id_event, row.title, row.description, row.status, row.is_planned, row.type, row.id_client, row.id_address, row.starting_date, row.starting_hour, row.ending_hour, row.id_employee);
             callback(null, updatedEvent);
         });
     }
