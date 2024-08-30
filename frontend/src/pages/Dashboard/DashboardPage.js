@@ -6,13 +6,15 @@ import GlobalStyles from "../../styles/GlobalStyles.module.css";
 import { getAllEvents } from "../../services/api";
 import FilterBar from "../../components/FilterBar/FilterBar";
 import InterventionForm from "../../components/InterventionForm/InterventionForm";
+import CreateEventForm from "../../components/CreateEventForm/CreateEventForm";
 
 const DashboardPage = function () {
   const [events, setEvents] = useState([]);
   const [error, setError] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEventModalOpen, setIsModalOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
-
+  const [isCreateEventModalOpen, setIsCreateEventModalOpen] = useState(false);
+  
   useEffect(function () {
     getAllEvents(function (error, data) {
       if (error) {
@@ -51,9 +53,13 @@ const DashboardPage = function () {
     }
   };
 
-  function toggleModal(event = null) {
+  function toggleEventModal(event = null) {
     setSelectedEvent(event);
     setIsModalOpen(event !== null);
+  }
+
+  function toggleCreateEventModal() {
+    setIsCreateEventModalOpen(!isCreateEventModalOpen);
   }
 
   return (
@@ -66,7 +72,7 @@ const DashboardPage = function () {
         </div>
         <div className={styles.calendarContainer}>
           <div className={styles.stickyFilter}>
-            <FilterBar />
+            <FilterBar toggleCreateEventModal={toggleCreateEventModal} />
             <h3>Événements</h3>
           </div>
           <div>
@@ -92,7 +98,7 @@ const DashboardPage = function () {
                     </td>
                     <td>INT-{event.idEvent}</td>
                     <td>{event.type}</td>
-                    <td><a href="#" onClick={function(){toggleModal(event);}}>{event.title}</a></td>
+                    <td><a href="#" onClick={function(){toggleEventModal(event);}}>{event.title}</a></td>
                     <td>{getStatusIndicator(event.status)}</td>
                     <td>{new Date(event.startingDate).toLocaleDateString()}</td>
                     <td>
@@ -107,7 +113,8 @@ const DashboardPage = function () {
           </div>
         </div>
       </div>
-      {isModalOpen && (<InterventionForm event={selectedEvent} closeModal={function() { toggleModal(); }} />)}
+      {isEventModalOpen && (<InterventionForm event={selectedEvent} closeModal={function() { toggleEventModal(); }} />)}
+      {isCreateEventModalOpen && (<CreateEventForm closeModal={toggleCreateEventModal} />)}
     </div>
   );
 };
