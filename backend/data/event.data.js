@@ -22,7 +22,8 @@ class Event {
                 events.id_event, events.title, events.description, events.status, 
                 events.is_planned, events.type, events.starting_date, events.starting_hour, 
                 events.ending_hour, events.id_client, events.id_address, events.id_employee,
-                clients.firstname AS client_firstname, clients.lastname AS client_lastname,
+                clients.firstname AS client_firstname, clients.lastname AS client_lastname, clients.phone_number,
+                addresses.id_address, addresses.address, addresses.zipcode, addresses.city,
                 employees.firstname AS employee_firstname, employees.lastname AS employee_lastname
             FROM events 
             JOIN clients ON events.id_client = clients.id_client 
@@ -47,10 +48,14 @@ class Event {
                     idClient: {
                         id: row.id_client,
                         firstname: row.client_firstname,
-                        lastname: row.client_lastname
+                        lastname: row.client_lastname,
+                        phoneNumber: row.phone_number
                     },
                     idAddress: {
-                        id: row.id_address
+                        id: row.id_address,
+                        address: row.address, 
+                        zipcode: row.zipcode,
+                        city: row.city
                     },
                     idEmployee: {
                         id: row.id_employee,
@@ -129,7 +134,7 @@ class Event {
     }
 
     static updateEvent(title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee, idEvent, callback) {
-        // Extraire les identifiants des objets JSON
+        // Extraire les identifiants du Json pour les utiliser dans la requête
         const clientId = idClient.id;
         const addressId = idAddress.id;
         const employeeId = idEmployee.id;
@@ -187,72 +192,6 @@ class Event {
             const row = result.rows[0];
             const deletedEvent = new Event(row.idEvent, row.title, row.description, row.status, row.isPlanned, row.type, row.idClient, row.idAddress, row.startingDate, row.startingHour, row.endingHour, row.idEmployee);
             callback(null, deletedEvent);
-        });
-    }
-
-    static getEventStatus(idEvent, callback) {
-        const query = 'SELECT * FROM events WHERE idEvent = $1';
-        const values = [idEvent];
-        pool.query(query, values, (error, result) => {
-            if (error) {
-                return callback(error, null);
-            }
-            const row = result.rows[0];
-            let statusText;
-            switch (row.status) {
-                case '4':
-                    statusText = 'Terminé';
-                    break;
-                case '3':
-                    statusText = 'Aujourd\'hui';
-                    break;
-                case '2':
-                    statusText = 'En retard';
-                    break;
-                case '1':
-                    statusText = 'À venir';
-                    break;
-                case '0':
-                    statusText = 'À planifier';
-                    break;
-                default:
-                    statusText = 'Statut inconnu';
-            }
-            const event = new Event(row.idEvent, row.title, row.description, statusText, row.isPlanned, row.type, row.idClient, row.idAddress, row.startingDate, row.startingHour, row.endingHour, row.idEmployee);
-            callback(null, event);
-        });
-    }
-
-    static getEventsStatuses(callback) {
-        const query = 'SELECT * FROM events';
-        pool.query(query, (error, result) => {
-            if (error) {
-                return callback(error, null);
-            }
-            const events = result.rows.map(row => {
-                let statusText;
-                switch (row.status) {
-                    case '4':
-                        statusText = 'Terminé';
-                        break;
-                    case '3':
-                        statusText = 'Aujourd\'hui';
-                        break;
-                    case '2':
-                        statusText = 'En retard';
-                        break;
-                    case '1':
-                        statusText = 'À venir';
-                        break;
-                    case '0':
-                        statusText = 'À planifier';
-                        break;
-                    default:
-                        statusText = 'Statut inconnu';
-                }
-                return new Event(row.idEvent, row.title, row.description, statusText, row.isPlanned, row.type, row.idClient, row.idAddress, row.startingDate, row.startingHour, row.endingHour, row.idEmployee);
-            });
-            callback(null, events);
         });
     }
 

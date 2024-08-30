@@ -4,9 +4,8 @@ import style from "./FilterBar.module.css";
 
 const FilterBar = () => {
   return (
-    <>
     <div>
-    <h1 className={style.pageTitle}>Calendrier</h1>
+      <h1 className={style.pageTitle}>Calendrier</h1>
       <div className={style.searchInput}>
         <label htmlFor="email" hidden >Email:</label>
         <i class="fa-solid fa-magnifying-glass"></i>
@@ -29,7 +28,6 @@ const FilterBar = () => {
         <p>Type</p>
       </div>
     </div>
-    </>
   );
 };
 
