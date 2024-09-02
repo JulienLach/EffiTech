@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styles from "./CreateEventForm.module.css";
-import { getAllClients, getAllEmployees } from "../../services/api";
+import { getAllClients, getAllEmployees, getAddressById } from "../../services/api"; // Assurez-vous que le chemin est correct
 
 const CreateEventForm = ({ closeModal }) => { // mettre en props la fonction closeModal pour ouvrir et fermer le modal
     
     const [clients, setClients] = useState([]); // définir la variable des clients avec le useSat
-    const [employees, setEmployees] = useState([]); // 
+    const [employees, setEmployees] = useState([]);
+    const [address, setAddress] = useState(null);
+    const [selectedClient, setSelectedClient] = useState(null);
 
     useEffect(() => {
         // Faire une requête pour récupérer les clients
@@ -28,7 +30,20 @@ const CreateEventForm = ({ closeModal }) => { // mettre en props la fonction clo
         });
     }, []);
 
+    useEffect(() => {
+        if (selectedClient) {
+            const addressDetails = selectedClient.idAddress;
+            const fullAddress = `${addressDetails.street}, ${addressDetails.city}, ${addressDetails.zipcode}`;
+            setAddress(fullAddress);            
+        }
+    }, [selectedClient]);
     
+    const handleClientChange = (selectClient) => {
+        const clientId = selectClient.target.value;
+        const client = clients.find(client => client.idClient.toString() === clientId);
+        setSelectedClient(client);
+    };
+
     return (
         <form className={`${styles.modal} ${styles.open}`}>
             <div>
@@ -53,7 +68,7 @@ const CreateEventForm = ({ closeModal }) => { // mettre en props la fonction clo
             </div>
             <div>
                 <label>Sélectionner un client</label>
-                <select>
+                <select onChange={handleClientChange}>
                     <option value="">Sélectionner un client</option>
                     {clients.map(client =>
                         <option key={client.idClient} value={client.idClient}>
@@ -64,7 +79,7 @@ const CreateEventForm = ({ closeModal }) => { // mettre en props la fonction clo
             </div>
             <div>
                 <label>Adresse</label>
-                <input type="text" />
+                <input type="text" value={address} readOnly />
             </div>
             <div>
                 <label>Sélectionner un technicien</label>

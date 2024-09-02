@@ -41,3 +41,17 @@ export const getAllEmployees = function(callback) {
     };
     xhr.send();
 };
+
+export const getAddressById = function(idAddress, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', `${API_URL}/addresses/${idAddress}`);
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            callback(null, JSON.parse(xhr.responseText));
+        } else {
+            console.error('Erreur de récupération de l\'adresse', xhr.statusText);
+            callback(new Error(xhr.statusText), null);
+        }
+    };
+    xhr.send();
+};

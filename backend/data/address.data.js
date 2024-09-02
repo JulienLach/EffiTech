@@ -9,7 +9,7 @@ class Address {
     }
 
     static getAddressById(idAddress, callback) {
-        const query = 'SELECT * FROM addresses WHERE idAddress = $1';
+        const query = 'SELECT * FROM addresses WHERE id_address = $1';
         const values = [idAddress];
         pool.query(query, values, (error, result) => {
             if (error) {

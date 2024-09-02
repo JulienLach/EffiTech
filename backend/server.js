@@ -6,6 +6,7 @@ const employeeRoutes = require('./routes/employee.routes.js'); // Importer les r
 const clientRoutes = require('./routes/client.routes.js');
 const eventRoutes = require('./routes/event.routes.js');
 const companyRoutes = require('./routes/company.routes.js');
+const addressRoutes = require('./routes/address.routes.js');
 
 dotenv.config({ path: '.env.development.local' });
 
@@ -29,6 +30,9 @@ app.use('/clients', clientRoutes);
 
 // Routes des événements
 app.use('/events', eventRoutes);
+
+// // Routes des adresses
+app.use('/addresses', addressRoutes);
 
 // Routes company
 app.use('/company', companyRoutes);
