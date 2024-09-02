@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styles from "./CreateEventForm.module.css";
-import { getAllClients } from "../../services/api";
+import { getAllClients, getAllEmployees } from "../../services/api";
 
 const CreateEventForm = ({ closeModal }) => { // mettre en props la fonction closeModal pour ouvrir et fermer le modal
     
-    const [clients, setClients] = useState([]); // définir
+    const [clients, setClients] = useState([]); // définir la variable des clients avec le useSat
+    const [employees, setEmployees] = useState([]); // 
 
     useEffect(() => {
         // Faire une requête pour récupérer les clients
@@ -13,6 +14,16 @@ const CreateEventForm = ({ closeModal }) => { // mettre en props la fonction clo
                 console.error('Erreur lors de la récupération des clients', error);
             } else {
                 setClients(data);
+            }
+        });
+    }, []);
+
+    useEffect(() => {
+        getAllEmployees((error, data) => {
+            if (error) {
+                console.error('Erreur lors de la récupération des employés', error);
+            } else {
+                setEmployees(data);
             }
         });
     }, []);
@@ -59,15 +70,17 @@ const CreateEventForm = ({ closeModal }) => { // mettre en props la fonction clo
                 <label>Sélectionner un technicien</label>
                 <select>
                     <option value="">Sélectionner un technicien</option>
-                    <option value="technician1">Technicien 1</option>
-                    <option value="technician2">Technicien 2</option>
-                    <option value="technician3">Technicien 3</option>
+                    {employees.map(employee =>
+                        <option key={employee.idEmployee} value={employee.idEmployee}>
+                            {employee.firstname} {employee.lastname}
+                        </option>
+                    )}
                 </select>
             </div>
             <div>
                 <button type="button" onClick={closeModal}>Annuler</button>
                 <button type="button">Créer</button>
-  Ici dan          </div>
+            </div>
         </form>
     );
 };
