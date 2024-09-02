@@ -20,12 +20,7 @@ const DashboardPage = function () {
       if (error) {
         setError(error.message);
       } else {
-        try {
-          const parsedData = JSON.parse(data);
-          setEvents(parsedData);
-        } catch (parseError) {
-          setError("Erreur lors de la conversion des données JSON");
-        }
+        setEvents(data);
       }
     });
   }, []);

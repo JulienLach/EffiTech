@@ -1,7 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./CreateEventForm.module.css";
+import { getAllClients } from "../../services/api";
 
-const CreateEventForm = ({ closeModal }) => {
+const CreateEventForm = ({ closeModal }) => { // mettre en props la fonction closeModal pour ouvrir et fermer le modal
+    
+    const [clients, setClients] = useState([]); // définir
+
+    useEffect(() => {
+        // Faire une requête pour récupérer les clients
+        getAllClients((error, data) => {
+            if (error) {
+                console.error('Erreur lors de la récupération des clients', error);
+            } else {
+                setClients(data);
+            }
+        });
+    }, []);
+
+    
     return (
         <form className={`${styles.modal} ${styles.open}`}>
             <div>
@@ -28,9 +44,11 @@ const CreateEventForm = ({ closeModal }) => {
                 <label>Sélectionner un client</label>
                 <select>
                     <option value="">Sélectionner un client</option>
-                    <option value="client1">Client 1</option>
-                    <option value="client2">Client 2</option>
-                    <option value="client3">Client 3</option>
+                    {clients.map(client =>
+                        <option key={client.idClient} value={client.idClient}>
+                            {client.firstname} {client.lastname}
+                        </option>
+                    )}
                 </select>
             </div>
             <div>
@@ -49,7 +67,7 @@ const CreateEventForm = ({ closeModal }) => {
             <div>
                 <button type="button" onClick={closeModal}>Annuler</button>
                 <button type="button">Créer</button>
-            </div>
+  Ici dan          </div>
         </form>
     );
 };
