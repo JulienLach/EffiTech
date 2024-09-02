@@ -88,7 +88,7 @@ const DashboardPage = function () {
                   <tr key={event.idEvent}>
                     <td>
                       <a href="#">
-                        {event.idClient.firstname} {event.idClient.lastname}
+                        {event.client.firstname} {event.client.lastname}
                       </a>
                     </td>
                     <td>INT-{event.idEvent}</td>
@@ -98,7 +98,7 @@ const DashboardPage = function () {
                     <td>{new Date(event.startingDate).toLocaleDateString()}</td>
                     <td>
                       <a href="#">
-                        {event.idEmployee.firstname} {event.idEmployee.lastname}
+                        {event.employee.firstname} {event.employee.lastname}
                       </a>
                     </td>
                   </tr>

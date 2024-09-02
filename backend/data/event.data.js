@@ -1,19 +1,19 @@
 const pool = require('../config/db.config'); // Importer la configuration de la base de données
 
 class Event {
-    constructor(idEvent, title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee) {
+    constructor(idEvent, title, description, status, isPlanned, type, client, address, startingDate, startingHour, endingHour, employee) {
         this.idEvent = idEvent;
         this.title = title;
         this.description = description;
         this.status = status;
         this.isPlanned = isPlanned;
         this.type = type;
-        this.idClient = idClient;
-        this.idAddress = idAddress;
+        this.client = client;
+        this.address = address;
         this.startingDate = startingDate;
         this.startingHour = startingHour;
         this.endingHour = endingHour;
-        this.idEmployee = idEmployee;
+        this.employee = employee;
     }
 
     static getAllEvents(callback) {
@@ -35,39 +35,39 @@ class Event {
                 return callback(error, null);
             }
             const events = result.rows.map(row => {
-                const event = {
-                    idEvent: row.id_event,
-                    title: row.title,
-                    description: row.description,
-                    status: row.status,
-                    isPlanned: row.is_planned,
-                    type: row.type,
-                    startingDate: row.starting_date,
-                    startingHour: row.starting_hour,
-                    endingHour: row.ending_hour,
-                    idClient: {
+                return new Event(
+                    row.id_event,
+                    row.title,
+                    row.description,
+                    row.status,
+                    row.is_planned,
+                    row.type,
+                    {
                         id: row.id_client,
                         firstname: row.client_firstname,
                         lastname: row.client_lastname,
                         phoneNumber: row.phone_number
                     },
-                    idAddress: {
+                    {
                         id: row.id_address,
-                        address: row.address, 
+                        street: row.address,
                         zipcode: row.zipcode,
                         city: row.city
                     },
-                    idEmployee: {
+                    row.starting_date,
+                    row.starting_hour,
+                    row.ending_hour,
+                    {
                         id: row.id_employee,
                         firstname: row.employee_firstname,
                         lastname: row.employee_lastname
                     }
-                };
-                return event;
+                );
             });
             callback(null, events);
         });
     }
+
 
     static getEventById(idEvent, callback) {
         const query = `
@@ -91,31 +91,37 @@ class Event {
                 return callback(error, null);
             }
             const row = result.rows[0];
-            let event = new Event(
-                row.id_event, row.title, row.description, row.status, 
-                row.is_planned, row.type, row.id_client, row.id_address, 
-                row.starting_date, row.starting_hour, row.ending_hour, row.id_employee
+            const event = new Event(
+                row.id_event,
+                row.title,
+                row.description,
+                row.status,
+                row.is_planned,
+                row.type,
+                {
+                    id: row.id_client,
+                    category: row.category,
+                    firstname: row.client_firstname,
+                    lastname: row.client_lastname,
+                    email: row.email,
+                    phoneNumber: row.phone_number
+                },
+                {
+                    id: row.id_address,
+                    street: row.address,
+                    zipcode: row.zipcode,
+                    city: row.city
+                },
+                row.starting_date,
+                row.starting_hour,
+                row.ending_hour,
+                {
+                    id: row.id_employee,
+                    firstname: row.employee_firstname,
+                    lastname: row.employee_lastname
+                }
             );
-            event.idClient = {
-                id: row.id_client,
-                category: row.category,
-                firstname: row.client_firstname,
-                lastname: row.client_lastname,
-                email: row.email,
-                phoneNumber: row.phone_number
-            };
-            event.idAddress = {
-                id: row.id_address,
-                address: row.address,
-                zipcode: row.zipcode,
-                city: row.city
-            };
-            event.idEmployee = {
-                id: row.id_employee,
-                firstname: row.employee_firstname,
-                lastname: row.employee_lastname,
-            }
-            callback(null, event); 
+            callback(null, event);
         });
     }
 
@@ -154,30 +160,36 @@ class Event {
                 return callback(error, null);
             }
             const row = result.rows[0];
-            let updatedEvent = new Event(
-                row.id_event, row.title, row.description, row.status, 
-                row.is_planned, row.type, row.id_client, row.id_address, 
-                row.starting_date, row.starting_hour, row.ending_hour, row.id_employee
+            const updatedEvent = new Event(
+                row.id_event,
+                row.title,
+                row.description,
+                row.status,
+                row.is_planned,
+                row.type,
+                {
+                    id: row.id_client,
+                    category: row.client_category,
+                    firstname: row.client_firstname,
+                    lastname: row.client_lastname,
+                    email: row.client_email,
+                    phoneNumber: row.client_phone_number
+                },
+                {
+                    id: row.id_address,
+                    street: row.address,
+                    zipcode: row.address_zipcode,
+                    city: row.address_city
+                },
+                row.starting_date,
+                row.starting_hour,
+                row.ending_hour,
+                {
+                    id: row.id_employee,
+                    firstname: row.employee_firstname,
+                    lastname: row.employee_lastname
+                }
             );
-            updatedEvent.idClient = {
-                id: row.id_client,
-                category: row.client_category,
-                firstname: row.client_firstname,
-                lastname: row.client_lastname,
-                email: row.client_email,
-                phoneNumber: row.client_phone_number
-            };
-            updatedEvent.idAddress = {
-                id: row.id_address,
-                address: row.address,
-                zipcode: row.address_zipcode,
-                city: row.address_city
-            };
-            updatedEvent.idEmployee = {
-                id: row.id_employee,
-                firstname: row.employee_firstname,
-                lastname: row.employee_lastname,
-            }
             callback(null, updatedEvent);
         });
     }

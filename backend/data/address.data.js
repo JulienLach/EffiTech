@@ -16,7 +16,7 @@ class Address {
                 return callback(error, null);
             }
             const row = result.rows[0];
-            let address = new Address(row.idAddress, row.address, row.city, row.zipcode);
+            let address = new Address(row.id_address, row.address, row.city, row.zipcode);
             callback(null, address);
         });
     }

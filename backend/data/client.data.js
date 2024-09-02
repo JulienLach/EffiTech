@@ -1,13 +1,13 @@
 const pool = require('../config/db.config'); // Importer la configuration de la base de données
 
 class Client {
-    constructor(idClient, category, firstname, lastname, email, idAddress, phoneNumber) {
+    constructor(idClient, category, firstname, lastname, email, address, phoneNumber) {
         this.idClient = idClient;
         this.category = category;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
-        this.idAddress = idAddress;
+        this.address = address;
         this.phoneNumber = phoneNumber;
     }
 
@@ -19,21 +19,19 @@ class Client {
                 return callback(error, null);
             }
             const clients = result.rows.map(row => {
-                const client = new Client(
+                return new Client(
                     row.id_client, 
                     row.category, 
                     row.firstname, 
                     row.lastname, 
                     row.email, 
-                    row.id_address, 
+                    {
+                        street: row.address,
+                        zipcode: row.zipcode,
+                        city: row.city
+                    },
                     row.phone_number
                 );
-                client.idAddress = {
-                    street: row.address,
-                    zipcode: row.zipcode,
-                    city: row.city
-                };
-                return client;
             });
             callback(null, clients);
         });
@@ -55,14 +53,13 @@ class Client {
                 row.firstname, 
                 row.lastname, 
                 row.email, 
-                row.id_address, 
+                { // ici c'est address qui correspond au constructeur de la classe Client
+                    street: row.address,
+                    zipcode: row.zipcode,
+                    city: row.city
+                },
                 row.phone_number
             );
-            client.idAddress = {
-                street: row.address, 
-                zipcode: row.zipcode, 
-                city: row.city
-            };
             callback(null, client);
         });
     }

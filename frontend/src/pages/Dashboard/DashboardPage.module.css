@@ -41,7 +41,7 @@ td {
 }
 
 table {
-  border-collapse: collapse; /* Assure que les bordures ne se chevauchent pas */
+  border-collapse: collapse;
 }
 
 a {

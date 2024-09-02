@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from "react";
 import styles from "./CreateEventForm.module.css";
-import { getAllClients, getAllEmployees, getAddressById } from "../../services/api"; // Assurez-vous que le chemin est correct
+import { getAllClients, getAllEmployees } from "../../services/api";
 
-const CreateEventForm = ({ closeModal }) => { // mettre en props la fonction closeModal pour ouvrir et fermer le modal
-    
-    const [clients, setClients] = useState([]); // définir la variable des clients avec le useSat
+const CreateEventForm = ({ closeModal }) => {
+    const [clients, setClients] = useState([]);
     const [employees, setEmployees] = useState([]);
-    const [address, setAddress] = useState(null);
+    const [address, setAddress] = useState("");
     const [selectedClient, setSelectedClient] = useState(null);
+    const [selectedEmployee, setSelectedEmployee] = useState("");
+    const [title, setTitle] = useState("");
+    const [startingDate, setStartingDate] = useState("");
+    const [startingHour, setStartingHour] = useState("");
+    const [endingHour, setEndingHour] = useState("");
+    const [description, setDescription] = useState("");
+    const [isPlanned, setIsPlanned] = useState(false);
 
     useEffect(() => {
-        // Faire une requête pour récupérer les clients
         getAllClients((error, data) => {
             if (error) {
                 console.error('Erreur lors de la récupération des clients', error);
@@ -32,23 +37,28 @@ const CreateEventForm = ({ closeModal }) => { // mettre en props la fonction clo
 
     useEffect(() => {
         if (selectedClient) {
-            const addressDetails = selectedClient.idAddress;
+            const addressDetails = selectedClient.address;
             const fullAddress = `${addressDetails.street}, ${addressDetails.city}, ${addressDetails.zipcode}`;
-            setAddress(fullAddress);            
+            setAddress(fullAddress);
+            console.log('Adresse complète:', fullAddress);
         }
     }, [selectedClient]);
-    
-    const handleClientChange = (selectClient) => {
-        const clientId = selectClient.target.value;
+
+    const handleClientChange = (event) => {
+        const clientId = event.target.value;
         const client = clients.find(client => client.idClient.toString() === clientId);
         setSelectedClient(client);
+    };
+
+    const handleEmployeeChange = (event) => {
+        setSelectedEmployee(event.target.value);
     };
 
     return (
         <form className={`${styles.modal} ${styles.open}`}>
             <div>
                 <label>Titre</label>
-                <input type="text" />
+                <input type="text" name="title" />
             </div>
             <div>
                 <label>Date d'intervention</label>
@@ -83,7 +93,7 @@ const CreateEventForm = ({ closeModal }) => { // mettre en props la fonction clo
             </div>
             <div>
                 <label>Sélectionner un technicien</label>
-                <select>
+                <select value={selectedEmployee} onChange={handleEmployeeChange}>
                     <option value="">Sélectionner un technicien</option>
                     {employees.map(employee =>
                         <option key={employee.idEmployee} value={employee.idEmployee}>
@@ -93,8 +103,11 @@ const CreateEventForm = ({ closeModal }) => { // mettre en props la fonction clo
                 </select>
             </div>
             <div>
+                <input type="hidden" value={isPlanned ? 'true' : 'false'} />
+            </div>
+            <div>
                 <button type="button" onClick={closeModal}>Annuler</button>
-                <button type="button">Créer</button>
+                <button type="button" >Créer</button>
             </div>
         </form>
     );

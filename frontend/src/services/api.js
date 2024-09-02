@@ -42,31 +42,20 @@ function getAllEmployees(callback) {
     xhr.send();
 }
 
-function getAddressById(idAddress, callback) {
+function createEvent(eventData) {
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', `${API_URL}/addresses/${idAddress}`);
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-            callback(null, JSON.parse(xhr.responseText));
-        } else {
-            console.error('Erreur de récupération de l\'adresse', xhr.statusText);
-            callback(new Error(xhr.statusText), null);
-        }
-    };
-    xhr.send();
-}
-
-function createEvent() {
-    const xhr = new XMLHttpRequest();
-    xhr.open('PUT', `${API_URL}/events`);
+    xhr.open('POST', `${API_URL}/events`);
+    xhr.setRequestHeader('Content-Type', 'application/json'); // Définir le contenu de la requête est en JSON
     xhr.onload = function() {
         if (xhr.status === 200) {
             console.log('Evénement créé');
+            closeModal();
         } else {
             console.error('Erreur de création de l\'événement', xhr.statusText);
         }
     };
-    xhr.send();
+    console.log('Données envoyées:', eventData); // Ajouter un log pour vérifier les données envoyées
+    xhr.send(JSON.stringify(eventData)); // Convertir les données en JSON
 }
 
-export { getAllEvents, getAllClients, getAllEmployees, getAddressById, createEvent };
+export { getAllEvents, getAllClients, getAllEmployees, createEvent };
