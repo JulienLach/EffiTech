@@ -1,20 +1,20 @@
 const API_URL = 'http://localhost:3001';
 
-export const getAllEvents = function(callback) {
-  const xhr = new XMLHttpRequest();
-  xhr.open('GET', `${API_URL}/events`); // c'est l'URL de la requête
-  xhr.onload = function() { //le onload est appelé lorsque la requête est terminée le callback est en attente
-      if (xhr.status === 200) {
-        callback(null, JSON.parse(xhr.responseText)); // parser la réponse en JSON et appeler le callback avec les données
-      } else {
-          console.error('Erreur de récupération des events', xhr.statusText);
-          callback(new Error(xhr.statusText), null);
-      }
-  };
-  xhr.send(); // envoi de la requête et et callback est rappelé quand la requête est terminée
-};
+function getAllEvents(callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', `${API_URL}/events`);
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            callback(null, JSON.parse(xhr.responseText));
+        } else {
+            console.error('Erreur de récupération des events', xhr.statusText);
+            callback(new Error(xhr.statusText), null);
+        }
+    };
+    xhr.send();
+}
 
-export const getAllClients = function(callback) {
+function getAllClients(callback) {
     const xhr = new XMLHttpRequest();
     xhr.open('GET', `${API_URL}/clients`);
     xhr.onload = function() {
@@ -26,9 +26,9 @@ export const getAllClients = function(callback) {
         }
     };
     xhr.send();
-};
+}
 
-export const getAllEmployees = function(callback) {
+function getAllEmployees(callback) {
     const xhr = new XMLHttpRequest();
     xhr.open('GET', `${API_URL}/employees`);
     xhr.onload = function() {
@@ -40,9 +40,9 @@ export const getAllEmployees = function(callback) {
         }
     };
     xhr.send();
-};
+}
 
-export const getAddressById = function(idAddress, callback) {
+function getAddressById(idAddress, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open('GET', `${API_URL}/addresses/${idAddress}`);
     xhr.onload = function() {
@@ -54,4 +54,19 @@ export const getAddressById = function(idAddress, callback) {
         }
     };
     xhr.send();
-};
+}
+
+function createEvent() {
+    const xhr = new XMLHttpRequest();
+    xhr.open('PUT', `${API_URL}/events`);
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            console.log('Evénement créé');
+        } else {
+            console.error('Erreur de création de l\'événement', xhr.statusText);
+        }
+    };
+    xhr.send();
+}
+
+export { getAllEvents, getAllClients, getAllEmployees, getAddressById, createEvent };
