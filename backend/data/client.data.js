@@ -53,7 +53,7 @@ class Client {
                 row.firstname, 
                 row.lastname, 
                 row.email, 
-                { // ici c'est address qui correspond au constructeur de la classe Client
+                { // ici l'objet défini correspond à la propriété address du constructeur de la classe Client
                     street: row.address,
                     zipcode: row.zipcode,
                     city: row.city
@@ -65,7 +65,7 @@ class Client {
     }
 
     static createClient(category, firstname, lastname, email, addressDetails, phoneNumber, callback) {
-        //première requête insérer l'adresse
+        // Première requête : insérer l'adresse
         const createAddressQuery = 'INSERT INTO addresses (address, city, zipcode) VALUES ($1, $2, $3) RETURNING id_address';
         const addressValues = [addressDetails.address, addressDetails.city, addressDetails.zipcode];
     
@@ -75,7 +75,7 @@ class Client {
             }
             const addressId = addressResult.rows[0].id_address;
     
-            //deuxième requête insérer le client
+            // Deuxième requête : insérer le client
             const createClientQuery = 'INSERT INTO clients (category, firstname, lastname, email, phone_number) VALUES ($1, $2, $3, $4, $5) RETURNING id_client, category, firstname, lastname, email, phone_number';
             const clientValues = [category, firstname, lastname, email, phoneNumber];
     
@@ -85,7 +85,7 @@ class Client {
                 }
                 const clientId = clientResult.rows[0].id_client;
     
-                //troisième requête mettre à jour l'adresse avec l'id_client créé
+                // Troisième requête : mettre à jour l'adresse avec l'id_client créé
                 const updateAddressQuery = 'UPDATE addresses SET id_client = $1 WHERE id_address = $2 RETURNING id_address, address, city, zipcode, id_client';
                 const updateValues = [clientId, addressId];
     
@@ -95,40 +95,51 @@ class Client {
                     }
                     const row = clientResult.rows[0];
                     const updatedAddress = updateResult.rows[0];
-                    const newClient = {
-                        idClient: row.id_client,
-                        category: row.category,
-                        firstname: row.firstname,
-                        lastname: row.lastname,
-                        email: row.email,
-                        phoneNumber: row.phone_number,
-                        address: {
-                            idAddress: updatedAddress.id_address,
-                            address: updatedAddress.address,
-                            city: updatedAddress.city,
-                            zipcode: updatedAddress.zipcode
-                        }
-                    };
+                    const newClient = new Client(
+                        row.id_client,
+                        row.category,
+                        row.firstname,
+                        row.lastname,
+                        row.email,
+                        {
+                            street: updatedAddress.address,
+                            zipcode: updatedAddress.zipcode,
+                            city: updatedAddress.city
+                        },
+                        row.phone_number
+                    );
                     callback(null, newClient);
                 });
             });
         });
     }
 
-    static updateClient(idClient, category, firstname, lastname, email, phoneNumber, idAddress, callback) {
+    static updateClient(idClient, category, firstname, lastname, email, phoneNumber, addressDetails, callback) {
         const clientQuery = 'UPDATE clients SET category = $1, firstname = $2, lastname = $3, email = $4, phone_number = $5 WHERE id_client = $6 RETURNING *';
         const clientValues = [category, firstname, lastname, email, phoneNumber, idClient];
-    
+
         pool.query(clientQuery, clientValues, (error, clientResult) => {
             if (error) {
                 return callback(error, null);
             }
             const updatedClientRow = clientResult.rows[0];
-            const updatedClient = new Client(updatedClientRow.id_client, updatedClientRow.category, updatedClientRow.firstname, updatedClientRow.lastname, updatedClientRow.email, updatedClientRow.phone_number);
-    
+            const updatedClient = new Client(
+                updatedClientRow.id_client,
+                updatedClientRow.category,
+                updatedClientRow.firstname,
+                updatedClientRow.lastname,
+                updatedClientRow.email,
+                {
+                    street: addressDetails.address,
+                    city: addressDetails.city,
+                    zipcode: addressDetails.zipcode
+                },
+                updatedClientRow.phone_number
+            );
+
             const addressQuery = 'UPDATE addresses SET address = $1, city = $2, zipcode = $3 WHERE id_client = $4 RETURNING *';
-            const addressValues = [idAddress.address, idAddress.city, idAddress.zipcode, idClient];
-    
+            const addressValues = [addressDetails.address, addressDetails.city, addressDetails.zipcode, idClient];
+
             pool.query(addressQuery, addressValues, (error, addressResult) => {
                 if (error) {
                     return callback(error, null);
