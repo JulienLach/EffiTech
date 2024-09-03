@@ -20,61 +20,57 @@ class Event {
     }
 
     static getAllEvents(callback) {
-        const query = `
-            SELECT 
-                events.id_event, events.title, events.description, events.status, 
-                events.is_planned, events.type, events.starting_date, events.starting_hour, 
-                events.ending_hour, events.id_client, events.id_address, events.id_employee,
-                clients.id_client, clients.firstname AS client_firstname, clients.lastname AS client_lastname,
-                clients.category, clients.email, clients.phone_number,                
-                addresses.id_address, addresses.address, addresses.zipcode, addresses.city,
-                employees.id_employee, employees.firstname AS employee_firstname, employees.lastname AS employee_lastname
-            FROM events 
-            JOIN clients ON events.id_client = clients.id_client 
-            JOIN addresses ON events.id_address = addresses.id_address 
-            JOIN employees ON events.id_employee = employees.id_employee
-        `;
-        pool.query(query, function(error, result) {
+        
+        Client.getAllClients(function(error, clients) {
             if (error) {
                 return callback(error, null);
             }
-            const events = result.rows.map(function(row) {
-                const address = new Address(
-                    row.id_address,
-                    row.address,
-                    row.zipcode,
-                    row.city
-                );
-                const client = new Client(
-                    row.id_client,
-                    row.category,
-                    row.client_firstname,
-                    row.client_lastname,
-                    row.email,
-                    address,
-                    row.phone_number
-                );
-                const employee = new Employee(
-                    row.id_employee,
-                    row.employee_firstname,
-                    row.employee_lastname
-                );
-                return new Event(
-                    row.id_event,
-                    row.title,
-                    row.description,
-                    row.status,
-                    row.is_planned,
-                    row.type,
-                    client,
-                    address,
-                    row.starting_date,
-                    row.starting_hour,
-                    row.ending_hour,
-                    employee
-                );
+            
+            const query = `
+                SELECT 
+                    events.id_event, events.title, events.description, events.status, 
+                    events.is_planned, events.type, events.starting_date, events.starting_hour, 
+                    events.ending_hour, events.id_client, events.id_employee,
+                    employees.id_employee, employees.firstname AS employee_firstname, employees.lastname AS employee_lastname
+                FROM events 
+                JOIN employees ON events.id_employee = employees.id_employee
+            `;
+    
+            pool.query(query, function(error, result) {
+                if (error) {
+                    return callback(error, null);
+                }
+    
+                const events = result.rows.map(function(row) {
+                    
+                    const client = clients.find(function(client) {
+                        return client.idClient === row.id_client;
+                    });
+    
+                    const employee = new Employee(
+                        row.id_employee,
+                        row.employee_firstname,
+                        row.employee_lastname
+                    );
+    
+                    return new Event(
+                        row.id_event,
+                        row.title,
+                        row.description,
+                        row.status,
+                        row.is_planned,
+                        row.type,
+                        client,
+                        client.address, // Utilisez l'adresse du client
+                        row.starting_date,
+                        row.starting_hour,
+                        row.ending_hour,
+                        employee
+                    );
+                });
+    
+                callback(null, events);
             });
-            callback(null, events);
         });
     }
 
