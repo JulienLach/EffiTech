@@ -8,11 +8,11 @@ const CreateEventForm = ({ closeModal }) => {
     const [address, setAddress] = useState("");
     const [selectedClient, setSelectedClient] = useState(null);
     const [selectedEmployee, setSelectedEmployee] = useState("");
-    const [title, setTitle] = useState("");
-    const [startingDate, setStartingDate] = useState("");
-    const [startingHour, setStartingHour] = useState("");
-    const [endingHour, setEndingHour] = useState("");
-    const [description, setDescription] = useState("");
+    // const [title, setTitle] = useState("");
+    // const [startingDate, setStartingDate] = useState("");
+    // const [startingHour, setStartingHour] = useState("");
+    // const [endingHour, setEndingHour] = useState("");
+    // const [description, setDescription] = useState("");
     const [isPlanned, setIsPlanned] = useState(false);
 
     useEffect(() => {
@@ -38,7 +38,7 @@ const CreateEventForm = ({ closeModal }) => {
     useEffect(() => {
         if (selectedClient) {
             const addressDetails = selectedClient.address;
-            const fullAddress = `${addressDetails.address}, ${addressDetails.city}, ${addressDetails.zipcode}`;
+            const fullAddress = `${addressDetails.idAddress} ${addressDetails.address}, ${addressDetails.city}, ${addressDetails.zipcode}`;
             setAddress(fullAddress);
             console.log('Adresse complète:', fullAddress);
         }
