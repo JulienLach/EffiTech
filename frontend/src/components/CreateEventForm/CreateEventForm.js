@@ -38,7 +38,7 @@ const CreateEventForm = ({ closeModal }) => {
     useEffect(() => {
         if (selectedClient) {
             const addressDetails = selectedClient.address;
-            const fullAddress = `${addressDetails.street}, ${addressDetails.city}, ${addressDetails.zipcode}`;
+            const fullAddress = `${addressDetails.address}, ${addressDetails.city}, ${addressDetails.zipcode}`;
             setAddress(fullAddress);
             console.log('Adresse complète:', fullAddress);
         }
