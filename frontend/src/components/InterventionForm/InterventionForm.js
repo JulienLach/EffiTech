@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './InterventionForm.module.css';
 
+
 const InterventionForm = ({ event, closeModal }) => {
     return (
         <div className={`${styles.modal} ${styles.open}`}>

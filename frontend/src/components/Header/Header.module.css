@@ -1,11 +1,11 @@
-header {
-  position: fixed;
+.header {
+  position: sticky;
   top: 0;
   width: 100%;
   z-index: 1000;
   background-color: white;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  height: 75px;
+  height: 80px;
 }
 
 /* Header.css */
@@ -17,7 +17,7 @@ header {
   }
 
   .logo img {
-    height: 50px;
+    height: 60px;
   }
   
   .headerRight {

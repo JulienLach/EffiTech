@@ -1,7 +1,10 @@
 .sidebar {
   margin-left: 20px;
   border-top-right-radius: 10px;
-  height: 100vh;
+  border-bottom-right-radius: 10px;
+  border-right: 5px solid #c93c2c;
+  border-bottom: 3px solid #c93c2c;
+  height: auto;
 }
 
 .sidebar ul {
@@ -39,7 +42,12 @@ i {
   width: 20px;
 }
 
-/* placement des deux division sidebar */
+/* placement générale de la sidebar */
+.sideBarGeneral {
+  border: 4px solid black;
+}
+
+/* placement des deux division sidebar entre elles */
 .sidebarAndOrange {
   display: flex;
   position: fixed;
