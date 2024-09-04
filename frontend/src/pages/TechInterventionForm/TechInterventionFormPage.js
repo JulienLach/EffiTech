@@ -9,19 +9,28 @@ const TechInterventionFormPage = () => {
       <TemplateHeaderSidebar />
       <div className={styles.container}>
         <div className={styles.card}>
-          <h2>Formulaire d'intervention technique</h2>
-          <p>Numéro d'intervention</p>
-          <p>Titre intervention</p>
-          <p>----</p>
+          <div className={styles.alignButton}>
+            <h2>Formulaire d'intervention technique</h2>
+            <button type="button">
+              <i class="fa-solid fa-arrow-right"></i>Retour
+            </button>
+          </div>
+          <div className={styles.interventionInfo}>
+            <div>
+              <p>INT-1 - </p>
+            </div>
+            <p>Titre intervention</p>
+          </div>
+          <div className={styles.separation}></div>
           <h3>Rapport d'intervention</h3>
           <div>
-            <div className={styles.labelInput}>
+            <div className={styles.inputDisplay}>
               <label htmlFor="client">Client</label>
               <input type="text" id="client" name="client" />
             </div>
           </div>
           <div>
-            <div className={styles.labelInput}>
+            <div className={styles.inputDisplay}>
               <label htmlFor="address">Adresse</label>
               <input type="text" id="address" name="address" />
             </div>
@@ -42,7 +51,9 @@ const TechInterventionFormPage = () => {
             <h3>Planification</h3>
             <div className={styles.checkbox}>
               <input type="checkbox" id="planify" name="planify"></input>
-              <label htmlFor="planify">Planifier une nouvelle intervention</label>
+              <label htmlFor="planify">
+                Planifier une nouvelle intervention
+              </label>
             </div>
           </div>
           <div>
@@ -86,9 +97,9 @@ const TechInterventionFormPage = () => {
             </div>
           </div>
           <div>
-                <button type="button">Annuler</button>
-                <button type="button" >Valider le rapport</button>
-            </div>
+            <button type="button">Annuler</button>
+            <button type="button">Valider le rapport</button>
+          </div>
         </div>
       </div>
     </>
