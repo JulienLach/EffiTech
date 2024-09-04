@@ -42,20 +42,20 @@ function getAllEmployees(callback) {
     xhr.send();
 }
 
-function createEvent(eventData) {
+function createEvent(eventData, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open('POST', `${API_URL}/events`);
-    xhr.setRequestHeader('Content-Type', 'application/json'); // Définir le contenu de la requête est en JSON
+    xhr.setRequestHeader('Content-Type', 'application/json'); // définir le contenu de la requête est en JSON
     xhr.onload = function() {
-        if (xhr.status === 200) {
+        if (xhr.status === 200 || xhr.status === 201) {
             console.log('Evénement créé');
-            closeModal();
+            callback(null, JSON.parse(xhr.responseText));
         } else {
             console.error('Erreur de création de l\'événement', xhr.statusText);
+            callback(new Error(xhr.statusText), null);
         }
     };
-    console.log('Données envoyées:', eventData); // Ajouter un log pour vérifier les données envoyées
-    xhr.send(JSON.stringify(eventData)); // Convertir les données en JSON
+    xhr.send(JSON.stringify(eventData)); // envoyer les données au serveur
 }
 
 export { getAllEvents, getAllClients, getAllEmployees, createEvent };
