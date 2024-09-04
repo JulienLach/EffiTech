@@ -5,7 +5,6 @@ import GlobalStyles from "../../styles/GlobalStyles.module.css";
 const SidedarMenu = () => {
   return (
     <>
-      <div className={SidebarStyle.sideBarGeneral}>
         <div className={SidebarStyle.sidebarAndOrange}>
           <div className={SidebarStyle.sidebar}>
             <ul>
@@ -35,11 +34,10 @@ const SidedarMenu = () => {
               </li>
             </ul>
           </div>
-          {/* <div className={SidebarStyle.sideOrange}>
+          <div className={SidebarStyle.sideOrange}>
             <i class="fa-solid fa-caret-down"></i>
-          </div> */}
+          </div>
         </div>
-      </div>
     </>
   );
 };

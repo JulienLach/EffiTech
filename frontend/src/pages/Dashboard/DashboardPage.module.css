@@ -6,7 +6,6 @@ body {
 .container {
   display: flex;
   height: 100vh;
-  margin-top: 85px;
   background-color: white;
 }
 
