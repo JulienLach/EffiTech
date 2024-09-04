@@ -5,10 +5,10 @@
     width: 30vw;
     height: 100vh;
     background-color: white;
-    box-shadow: -2px 0 3px rgba(0, 0, 0, 0.2);
+    box-shadow: -3px 0 3px rgba(0, 0, 0, 0.2);
     z-index: 1000;
     padding: 1.5em;
-    border-radius: 10px 0 0 8px;
+    border-radius: 1em;
     display: none;
 }
 
@@ -16,13 +16,32 @@
     display: block;
 }
 
-.modal-body {
-    padding: 20px;
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
 }
 
-.modal-footer {
-    padding: 10px;
-    background-color: #f1f1f1;
-    border-top: 1px solid #ccc;
-    text-align: right;
+.modalFooter {
+    display: flex;
+    flex: row;
+    justify-content: space-around;
+}
+
+.modalFooter button {
+    padding: 0.4em;
+    border: 1px solid #ccc;
+    border-radius: 0.3em;
+    width: 30%;
+    font-size: 1em;
+}
+
+.modalFooter button:hover {
+    background-color: #C93C2C;
+    color: white;
+}
+
+.separator {
+    margin: 1em 0;
+    border-bottom: 1px solid #ccc;
 }

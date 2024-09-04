@@ -26,7 +26,7 @@ const LoginPage = () => {
             <input type="password" id="password" name="password" />
           </div>
           <a href="/forgot-password">Mot de passe oublié ?</a>
-          <button type="submit" onClick={() => (window.location.href = "/dashboard")} className={styles.submitButton}>
+          <button type="submit" className={styles.submitButton}>
             Se connecter
           </button>
           <p>

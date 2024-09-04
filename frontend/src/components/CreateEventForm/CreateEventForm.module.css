@@ -3,16 +3,64 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 25vw;
-    height: 80vh;
     background-color: white;
     border-radius: 0.8em;
     z-index: 1000;
     padding: 1.5em;
     display: none; /* mettre 'none' pour masquer par défaut */
-    border: 3px solid red;
+    border: 3px solid lightgray;
+    overflow: auto; 
 }
 
 .modal.open {
     display: block;
+}
+
+.form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.7em;
+}
+
+.form input {
+    display: flex;
+    padding: 0.5em;
+    width: 25vw;
+    border: 1px solid #ccc;
+    border-radius: 0.3em;
+}
+
+.form select {
+    display: flex;
+    padding: 0.5em;
+    width: 25vw;
+    border: 1px solid #ccc;
+    border-radius: 0.3em;
+}
+
+.form textarea {
+    display: flex;
+    padding: 0.5em;
+    width: 25vw;
+    border: 1px solid #ccc;
+    border-radius: 0.3em;
+}
+
+.modalFooter {
+    display: flex;
+    flex-direction: row;
+    gap: 3em;
+}
+
+.modalFooter button {
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 0.3em;
+    font-size: 1em;
+}
+
+.modalFooter button:hover {
+    background-color: #C93C2C;
+    color: white;
 }
