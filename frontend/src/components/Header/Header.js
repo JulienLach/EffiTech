@@ -2,29 +2,29 @@ import React from "react";
 import logo from "../../images/logo.svg";
 import bellIcon from "../../images/notificationBell.svg";
 import GlobalStyles from "../../styles/GlobalStyles.module.css";
-import style from "./Header.module.css";
+import HeaderStyle from "./Header.module.css";
 
 const Header = () => {
   return (
-    <header className={style.header}>
-      <div className={style.headerDiv}>
-        <div className={style.logo}>
+    <div className={HeaderStyle.header}>
+      <div className={HeaderStyle.headerDiv}>
+        <div className={HeaderStyle.logo}>
           <img src={logo} alt="Effitech Logo" />
         </div>
-        <div className={style.headerRight}>
+        <div className={HeaderStyle.headerRight}>
           <div>
-            <button className={style.planifierButton}>
+            <button className={HeaderStyle.planifierButton}>
               <i class="fa-solid fa-plus"></i>Créer
             </button>
           </div>
-          <div className={style.notificationIcon}>
-            <img src={bellIcon} className={style.notificationBell}></img>
-            <span className={style.notificationCount}>2</span>
+          <div className={HeaderStyle.notificationIcon}>
+            <img src={bellIcon} className={HeaderStyle.notificationBell}></img>
+            <span className={HeaderStyle.notificationCount}>2</span>
           </div>
-          <div className={style.profileBubble}>JL</div>
+          <div className={HeaderStyle.profileBubble}>JL</div>
         </div>
       </div>
-    </header>
+    </div>
   );
 };
 

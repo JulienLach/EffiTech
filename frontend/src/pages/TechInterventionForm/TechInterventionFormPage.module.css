@@ -1,0 +1,11 @@
+/* TechInterventionForm.module.css */
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}

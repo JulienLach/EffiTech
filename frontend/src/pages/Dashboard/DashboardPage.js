@@ -60,7 +60,6 @@ const DashboardPage = function () {
   return (
     <div>
       <Header />
-
       <div className={styles.container}>
         <div className={styles.sidebar}>
           <SidebarMenu />
