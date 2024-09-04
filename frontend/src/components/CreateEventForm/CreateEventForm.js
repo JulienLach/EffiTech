@@ -91,57 +91,62 @@ const CreateEventForm = ({ closeModal }) => {
     return (
         <form className={`${styles.modal} ${styles.open}`}>
             <div>
-                <label>Titre</label>
-                <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+                <h2>Plannifier un évènement</h2>
             </div>
-            <div>
-                <label>Date d'intervention</label>
-                <input type="date" value={startingDate} onChange={(e) => setStartingDate(e.target.value)} />
-            </div>
-            <div>
-                <label>Heure de début</label>
-                <input type="time" value={startingHour} onChange={(e) => setStartingHour(e.target.value)} />
-            </div>
-            <div>
-                <label>Heure de fin</label>
-                <input type="time" value={endingHour} onChange={(e) => setEndingHour(e.target.value)} />
-            </div>
-            <div>
-                <label>Description</label>
-                <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
-            </div>
-            <div>
-                <label>Sélectionner un client</label>
-                <select onChange={handleClientChange}>
-                    <option value="">Sélectionner un client</option>
-                    {clients.map(client =>
-                        <option key={client.idClient} value={client.idClient}>
-                            {client.firstname} {client.lastname}
-                        </option>
-                    )}
-                </select>
-            </div>
-            <div>
-                <label>Adresse</label>
-                <input type="text" value={address} readOnly />
-            </div>
-            <div>
-                <label>Sélectionner un technicien</label>
-                <select value={selectedEmployee} onChange={handleEmployeeChange}>
-                    <option value="">Sélectionner un technicien</option>
-                    {employees.map(employee =>
-                        <option key={employee.idEmployee} value={employee.idEmployee}>
-                            {employee.firstname} {employee.lastname}
-                        </option>
-                    )}
-                </select>
-            </div>
-            <div>
-                <input type="hidden" value={isPlanned ? 'true' : 'false'} />
-            </div>
-            <div>
-                <button type="button" onClick={closeModal}>Annuler</button>
-                <button type="button" onClick={handleSubmit}>Créer</button>
+            <div className={styles.form}>
+                <div>
+                    <label>Titre *</label>
+                    <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+                </div>
+                <div>
+                    <label>Date d'intervention</label>
+                    <input type="date" value={startingDate} onChange={(e) => setStartingDate(e.target.value)} />
+                </div>
+                <div>
+                    <label>Heure de début</label>
+                    <input type="time" value={startingHour} onChange={(e) => setStartingHour(e.target.value)} />
+                </div>
+                <div>
+                    <label>Heure de fin</label>
+                    <input type="time" value={endingHour} onChange={(e) => setEndingHour(e.target.value)} />
+                </div>
+                <div>
+                    <label>Description</label>
+                    <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
+                </div>
+                <div>
+                    <label>Sélectionner un client *</label>
+                    <select onChange={handleClientChange}>
+                        <option value="">Sélectionner un client</option>
+                        {clients.map(client =>
+                            <option key={client.idClient} value={client.idClient}>
+                                {client.firstname} {client.lastname}
+                            </option>
+                        )}
+                    </select>
+                </div>
+                <div>
+                    <label>Adresse *</label>
+                    <input type="text" value={address} readOnly />
+                </div>
+                <div>
+                    <label>Sélectionner un technicien *</label>
+                    <select value={selectedEmployee} onChange={handleEmployeeChange}>
+                        <option value="">Sélectionner un technicien</option>
+                        {employees.map(employee =>
+                            <option key={employee.idEmployee} value={employee.idEmployee}>
+                                {employee.firstname} {employee.lastname}
+                            </option>
+                        )}
+                    </select>
+                </div>
+                <div>
+                    <input type="hidden" value={isPlanned ? 'true' : 'false'} />
+                </div>
+                <div className={styles.modalFooter}>
+                    <button type="button" onClick={closeModal}>Annuler</button>
+                    <button type="button" onClick={handleSubmit}>Créer</button>
+                </div>
             </div>
         </form>
     );
