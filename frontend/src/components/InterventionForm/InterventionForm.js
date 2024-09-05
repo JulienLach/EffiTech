@@ -6,9 +6,9 @@ import styles from './InterventionForm.module.css';
 const InterventionForm = ({ event, closeModal }) => {
     const navigate = useNavigate();
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        navigate("/technician-intervention-form-page");
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        navigate("/technician-intervention-form-page", { state: { event } });
     };
 
     return (
