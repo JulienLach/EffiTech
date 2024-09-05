@@ -5,6 +5,7 @@ import CreateAccountPage from './pages/CreateAccount/CreateAccountPage';
 import DashboardPage from './pages/Dashboard/DashboardPage';
 import InterventionForm from './components/InterventionForm/InterventionForm';
 import TechInterventionFormPage from './pages/TechInterventionForm/TechInterventionFormPage';
+import GeneratedInterventionPage from './pages/GeneratedIntervention/GeneratedInterventionPage';
 
 
 const App = () => {
@@ -15,6 +16,7 @@ const App = () => {
         <Route path="/create-account" element={<CreateAccountPage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/technician-intervention-form-page" element={<TechInterventionFormPage />} />
+        <Route path="/generated-intervention-page" element={<GeneratedInterventionPage />} />
       </Routes>
     </Router>
   );
