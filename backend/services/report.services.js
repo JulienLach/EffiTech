@@ -1,5 +1,14 @@
 const Report = require('../data/report.data.js'); // Importer le modèle Report
 
+function createReport(req, res) {
+    const report = req.body;
+    Report.createReport(report, (error, report) => {
+        if (error) {
+            return res.status(500).send({ message: 'Erreur lors de la création du rapport', error: error.message });
+        }
+        res.status(201).send(report);
+    });
+}
 
 function getReportById(req, res) {
     const idReport = req.params.idReport;
@@ -18,4 +27,4 @@ function getReportById(req, res) {
 function sendReport(req, res) {};
 
 exports.getReportById = getReportById;
-exports.sendReport = sendReport;
+exports.createReport = createReport;

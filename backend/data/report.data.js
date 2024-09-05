@@ -13,6 +13,11 @@ class Report {
         this.idEvent = idEvent;
     }
 
+    static createReport() {
+        
+    }
+
+
     static getReportById(idReport, callback) {
         const query = 'SELECT * FROM reports WHERE idReport = $1';
         const values = [idReport];

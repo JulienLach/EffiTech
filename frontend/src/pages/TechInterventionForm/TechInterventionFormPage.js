@@ -1,9 +1,16 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./TechInterventionFormPage.module.css";
 import TemplateHeaderSidebar from "../Template/TemplateHeaderSidebar";
 
 const TechInterventionFormPage = () => {
+  const navigate = useNavigate();
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate("/generated-intervention-page", { state: { event } });
+  };
+
   const location = useLocation();
   //réception des données de l'événement avec useLocation
   const { event } = location.state;
@@ -16,7 +23,7 @@ const TechInterventionFormPage = () => {
   return (
     <>
       <TemplateHeaderSidebar />
-      <div className={styles.container}>
+      <form onSubmit={handleSubmit} className={styles.container}>
         <div className={styles.card}>
           <div className={styles.alignButton}>
             <h2>Intervention</h2>
@@ -105,11 +112,11 @@ const TechInterventionFormPage = () => {
             </div>
           </div>
           <div className={styles.modalFooter}>
-            <button type="button">Annuler</button>
-            <button type="button">Valider le rapport</button>
+            <button type="reset">Annuler</button>
+            <button type="submit" >Valider le rapport</button>
           </div>
         </div>
-      </div>
+      </form>
     </>
   );
 };
