@@ -1,12 +1,12 @@
 import React from "react";
-import SidebarStyle from "./SidebarMenu.module.css";
+import styles from "./SidebarMenu.module.css";
 import GlobalStyles from "../../styles/GlobalStyles.module.css";
 
 const SidedarMenu = () => {
   return (
     <>
-        <div className={SidebarStyle.sidebarAndOrange}>
-          <div className={SidebarStyle.sidebar}>
+        <div className={styles.sidebarAndOrange}>
+          <div className={styles.sidebar}>
             <ul>
               <li>
                 <i class="fa-solid fa-calendar"></i>
@@ -34,7 +34,7 @@ const SidedarMenu = () => {
               </li>
             </ul>
           </div>
-          <div className={SidebarStyle.sideOrange}>
+          <div className={styles.sideOrange}>
             <i class="fa-solid fa-caret-down"></i>
           </div>
         </div>
