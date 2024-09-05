@@ -1,10 +1,18 @@
 import React from 'react';
+import { useNavigate } from "react-router-dom";
 import styles from './InterventionForm.module.css';
 
 
 const InterventionForm = ({ event, closeModal }) => {
+    const navigate = useNavigate();
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        navigate("/technician-intervention-form-page");
+    };
+
     return (
-        <div className={`${styles.modal} ${styles.open}`}>
+        <form onSubmit={handleSubmit} className={`${styles.modal} ${styles.open}`}>
             <div className={styles.container}>
                 <div>
                     <h2>Intervention</h2>
@@ -26,10 +34,14 @@ const InterventionForm = ({ event, closeModal }) => {
                 <div className={styles.modalFooter}>
                     <button onClick={closeModal}>Retour</button>
                     <button>Modifier</button>
-                    <button>{event.status === 5 ? 'Visualiser le rapport' : 'Remplir le rapport'}</button>
+                    {event.status === 5 ? (
+                        <button type="submit">Visualiser le rapport</button>
+                    ) : (
+                        <button type="submit">Remplir le rapport</button>
+                    )}
                 </div>
             </div>
-        </div>
+        </form>
     );
 };
 
