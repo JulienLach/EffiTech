@@ -1,4 +1,8 @@
 .modal {
+    display: none; /* mettre 'none' pour masquer par défaut */
+}
+
+.modal.open {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -7,13 +11,12 @@
     border-radius: 0.8em;
     z-index: 1000;
     padding: 1.5em;
-    display: none; /* mettre 'none' pour masquer par défaut */
-    border: 3px solid lightgray;
-    overflow: auto; 
-}
-
-.modal.open {
     display: block;
+    border: 3px solid lightgray;
+    overflow: auto;
+    max-width: 90%;
+    max-height: 90%;
+    box-sizing: border-box;
 }
 
 .form {

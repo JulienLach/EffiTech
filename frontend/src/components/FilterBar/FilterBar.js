@@ -26,7 +26,10 @@ const FilterBar = ({ toggleCreateEventModal }) => {
         <i class="fa-solid fa-filter"></i>
         <p>Type</p>
       </div>
-      <button onClick={toggleCreateEventModal}>Créer un évènement </button>
+      <button className={styles.createEventbutton} onClick={toggleCreateEventModal}>
+        <i className="fa-solid fa-plus" style={{ marginRight: '8px' }}></i>
+        Créer un évènement
+      </button>
     </div>
   );
 };

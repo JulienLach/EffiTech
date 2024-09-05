@@ -19,8 +19,8 @@ const TechInterventionFormPage = () => {
       <div className={styles.container}>
         <div className={styles.card}>
           <div className={styles.alignButton}>
-            <h2>Formulaire d'intervention technique</h2>
-            <button type="button">
+            <h2>Intervention</h2>
+            <button type="button" onClick={() => window.location.href='/dashboard'}>              
               <i class="fa-solid fa-arrow-right"></i>Retour
             </button>
           </div>
@@ -104,7 +104,7 @@ const TechInterventionFormPage = () => {
               <textarea rows="4"></textarea>
             </div>
           </div>
-          <div>
+          <div className={styles.modalFooter}>
             <button type="button">Annuler</button>
             <button type="button">Valider le rapport</button>
           </div>

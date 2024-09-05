@@ -79,3 +79,35 @@
     flex-direction: column;
     margin-bottom: 20px;
 }
+
+.labelInput {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.labelInput input {
+    width: 20%;
+    height: 2.5em;
+    border-radius: 5px;
+    border: 1px solid #919191;
+    background-color: #c5c5c5;
+}
+
+.modalFooter {
+    display: flex;
+    flex-direction: row;
+    gap: 3em;
+}
+
+.modalFooter button {
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 0.3em;
+    font-size: 1em;
+}
+
+.modalFooter button:hover {
+    background-color: #C93C2C;
+    color: white;
+}
