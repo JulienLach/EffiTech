@@ -70,7 +70,6 @@ h1 {
     height: 300px;
 }
 
-.pdf img{
-    width: auto;
-    height: 100%;
+.documentLink {
+    margin-bottom: 20px;
 }

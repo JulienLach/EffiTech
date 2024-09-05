@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./GeneratedInterventionPage.module.css";
-import Header from "../../components/Header/Header";
 import TemplateHeaderSidebar from "../Template/TemplateHeaderSidebar";
 import imagePDF from "../../images/rapport_intervention.png";
+import PDFGenerator from "../../components/PDFGenerator/PDFGenerator";
 
 const GeneratedInterventionPage = () => {
   return (
@@ -41,10 +41,8 @@ const GeneratedInterventionPage = () => {
               <i class="fa-regular fa-file-pdf"></i>
               <a href="#">INT[id_event]-[client]-[title]</a>
             </div>
-            <div className={styles.pdf}>
-                <img src={imagePDF} alt="pdf" />
-            </div>
           </div>
+          <PDFGenerator />
         </div>
       </div>
     </>
