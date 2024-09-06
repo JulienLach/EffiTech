@@ -7,6 +7,7 @@ const clientRoutes = require('./routes/client.routes.js');
 const eventRoutes = require('./routes/event.routes.js');
 const companyRoutes = require('./routes/company.routes.js');
 const addressRoutes = require('./routes/address.routes.js');
+const reportRoutes = require('./routes/report.routes.js');
 
 dotenv.config({ path: '.env.development.local' });
 
@@ -36,6 +37,9 @@ app.use('/addresses', addressRoutes);
 
 // Routes company
 app.use('/company', companyRoutes);
+
+// Route des reports
+app.use('/reports', reportRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

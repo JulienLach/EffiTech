@@ -13,10 +13,17 @@ class Report {
         this.idEvent = idEvent;
     }
 
-    static createReport() {
-        
+    static createReport(breakdown, workDone, reschedule, startingDate, startingHour, endingHour, duration, clientSignature, employeeSignature, idEvent, callback) {
+        const query = 'INSERT INTO reports (breakdown, workDone, reschedule, startingDate, startingHour, endingHour, duration, clientSignature, employeeSignature, idEvent) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING idReport';
+        const values = [breakdown, workDone, reschedule, startingDate, startingHour, endingHour, duration, clientSignature, employeeSignature, idEvent];
+        pool.query(query, values, (error, result) => {
+            if (error) {
+                return callback(error, null);
+            }
+            const idReport = result.rows[0].idReport;
+            callback(null, idReport);
+        });
     }
-
 
     static getReportById(idReport, callback) {
         const query = 'SELECT * FROM reports WHERE idReport = $1';

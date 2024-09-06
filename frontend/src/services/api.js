@@ -58,4 +58,20 @@ function createEvent(eventData, callback) {
     xhr.send(JSON.stringify(eventData)); // envoyer les données au serveur
 }
 
-export { getAllEvents, getAllClients, getAllEmployees, createEvent };
+function createReport(reportData, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', `${API_URL}/reports`);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = function() {
+        if (xhr.status === 200 || xhr.status === 201) {
+            console.log('Rapport créé');
+            callback(null, JSON.parse(xhr.responseText));
+        } else {
+            console.error('Erreur de création du rapport', xhr.statusText);
+            callback(new Error(xhr.statusText), null);
+        }
+    };
+    xhr.send(JSON.stringify(reportData));
+}
+
+export { getAllEvents, getAllClients, getAllEmployees, createEvent, createReport };
