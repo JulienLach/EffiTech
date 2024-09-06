@@ -6,8 +6,6 @@
   margin-top: 20px;
 }
 
-
-
 .sidebar ul {
   list-style-type: none;
   padding: 0;
@@ -42,9 +40,6 @@
 i {
   width: 20px;
 }
-
-/* placement générale de la sidebar */
-
 
 /* placement des deux division sidebar entre elles */
 .sidebarAndOrange {

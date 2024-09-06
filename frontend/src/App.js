@@ -6,7 +6,7 @@ import DashboardPage from './pages/Dashboard/DashboardPage';
 import InterventionForm from './components/InterventionForm/InterventionForm';
 import TechInterventionFormPage from './pages/TechInterventionForm/TechInterventionFormPage';
 import GeneratedInterventionPage from './pages/GeneratedIntervention/GeneratedInterventionPage';
-
+import TeamPage from './pages/Team/TeamPage';
 
 const App = () => {
   return (
@@ -17,6 +17,7 @@ const App = () => {
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/technician-intervention-form-page" element={<TechInterventionFormPage />} />
         <Route path="/generated-intervention-page" element={<GeneratedInterventionPage />} />
+        <Route path="/team" element={<TeamPage />} />
       </Routes>
     </Router>
   );

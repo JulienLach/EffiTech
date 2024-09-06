@@ -1,0 +1,46 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 100px 20px 0 250px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.card {
+    display: flex;
+    margin: 15px;
+    width: 25%;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+
+.profilPicture {
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+}
+
+.profilPicture img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.info {
+    margin: 5px;
+    padding: 0;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.lastname, .firstname {
+    margin: 5px;
+    padding: 0;
+    font-size: 22px;
+    font-weight: 600;
+}

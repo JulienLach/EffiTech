@@ -5,7 +5,6 @@ import styles from "./FilterBar.module.css";
 const FilterBar = ({ toggleCreateEventModal }) => {
   return (
     <div>
-      <h1 className={styles.pageTitle}>Calendrier</h1>
       <div className={styles.searchInput}>
         <i class="fa-solid fa-magnifying-glass"></i>
         <input type="text" id="search" name="search" placeholder="Recherche"/>
