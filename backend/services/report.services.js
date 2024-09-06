@@ -1,9 +1,12 @@
 const Report = require('../data/report.data.js'); // Importer le modèle Report
 
 function createReport(req, res) {
-    const report = req.body;
-    Report.createReport(report, (error, report) => {
+    const { breakdown, workDone, reschedule, startingDate, startingHour, endingHour, duration, clientSignature, employeeSignature, idEvent } = req.body;
+    console.log('Données reçues:', req.body); // Log des données reçues
+
+    Report.createReport(breakdown, workDone, reschedule, startingDate, startingHour, endingHour, duration, clientSignature, employeeSignature, idEvent, (error, report) => {
         if (error) {
+            console.error('Erreur lors de l\'insertion dans la base de données:', error); // Log de l'erreur
             return res.status(500).send({ message: 'Erreur lors de la création du rapport', error: error.message });
         }
         res.status(201).send(report);

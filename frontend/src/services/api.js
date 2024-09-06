@@ -58,7 +58,7 @@ function createEvent(eventData, callback) {
     xhr.send(JSON.stringify(eventData)); // envoyer les données au serveur
 }
 
-function createReport(reportData, callback) {
+function createReport(newReport, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open('POST', `${API_URL}/reports`);
     xhr.setRequestHeader('Content-Type', 'application/json');
@@ -71,7 +71,7 @@ function createReport(reportData, callback) {
             callback(new Error(xhr.statusText), null);
         }
     };
-    xhr.send(JSON.stringify(reportData));
+    xhr.send(JSON.stringify(newReport));
 }
 
 export { getAllEvents, getAllClients, getAllEmployees, createEvent, createReport };

@@ -11,7 +11,7 @@ const GeneratedInterventionPage = () => {
   //réception des données de l'événement avec useLocation
   const { event } = location.state;
 
-  // données du rapport d'intervention pour créer le rapport
+  // données du rapport d'intervention pour les mettre dans le PDF
   //
   
   return (
