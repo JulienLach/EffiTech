@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./TechInterventionFormPage.module.css";
-import TemplateHeaderSidebar from "../Template/TemplateHeaderSidebar";
+import TemplateGlobal from "../Template/TemplateGlobal";
 import { createReport } from "../../services/api";
 
 const TechInterventionFormPage = () => {
@@ -48,7 +48,7 @@ const TechInterventionFormPage = () => {
   
   return (
     <>
-      <TemplateHeaderSidebar />
+      <TemplateGlobal />
       <form onSubmit={handleSubmit} className={styles.container}>
         <div className={styles.card}>
           <div className={styles.alignButton}>

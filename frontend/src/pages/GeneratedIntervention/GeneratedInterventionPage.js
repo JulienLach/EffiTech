@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import styles from "./GeneratedInterventionPage.module.css";
-import TemplateHeaderSidebar from "../Template/TemplateHeaderSidebar";
+import TemplateGlobal from "../Template/TemplateGlobal";
 import PDFGenerator from "../../components/PDFGenerator/PDFGenerator";
 import { getReportById } from "../../services/api";
 
@@ -45,7 +45,7 @@ const GeneratedInterventionPage = () => {
   
   return (
     <>
-      <TemplateHeaderSidebar />
+      <TemplateGlobal />
       <div className={styles.container}>
         <div className={styles.card}>
           <div className={styles.alignButton}>
