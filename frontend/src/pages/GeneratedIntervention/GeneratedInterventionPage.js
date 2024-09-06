@@ -1,28 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import styles from "./GeneratedInterventionPage.module.css";
 import TemplateHeaderSidebar from "../Template/TemplateHeaderSidebar";
 import PDFGenerator from "../../components/PDFGenerator/PDFGenerator";
+import { getReportById } from "../../services/api";
 
 const GeneratedInterventionPage = () => {
   const location = useLocation();
-  const { event } = location.state;  
+  const { event, report } = location.state;
+
+  const [reportData, setReportData] = useState(report);
+
+  // Récupérer le rapport d'intervention par ID pour qu'il soit stocké dans le state local
+  useEffect(() => {
+    const idEvent = event.idEvent;
+    getReportById(idEvent, (error, data) => {
+      if (error) {
+        console.error("Erreur lors de la récupération du rapport", error);
+      } else {
+        setReportData(data);
+        console.log("Donnée du rapport récupérée:", data);
+      }
+    });
+  }, [event.idEvent]);
+  
+  console.log("Donnée du rapport avec évènement", reportData);
 
   // Préparer les données du rapport d'intervention
-  const report = {
+  const reportDetails = reportData ? {
     idEvent: event.idEvent,
     title: event.title,
-    breakdown: event.breakdown,
-    workDone: event.workDone,
+    breakdown: reportData.breakdown,
+    workDone: reportData.workDone,
     startingDate: event.startingDate,
     startingHour: event.startingHour,
     endingHour: event.endingHour,
     duration: event.duration,
     client: event.client,
-    clientSignature: event.clientSignature,
-    employeeSignature: event.employeeSignature,
-  };
+    clientSignature: reportData.client_signature,
+    employeeSignature: reportData.employee_signature,
+  } : null;
 
+  console.log("donnée du rapport", reportDetails);
+  
   return (
     <>
       <TemplateHeaderSidebar />
@@ -30,7 +50,7 @@ const GeneratedInterventionPage = () => {
         <div className={styles.card}>
           <div className={styles.alignButton}>
             <h2>Rapport d'intervention</h2>
-            <button type="button">
+            <button type="button" onClick={() => window.location.href='/dashboard'}>
               <i className="fa-solid fa-arrow-right"></i>Retour
             </button>
           </div>
@@ -60,7 +80,7 @@ const GeneratedInterventionPage = () => {
               <a href="#">INT{event.idEvent}-{event.client.firstname}-{event.client.lastname}-{event.title}</a>
             </div>
           </div>
-          <PDFGenerator report={report} />
+          {reportDetails && <PDFGenerator report={reportDetails} />}
         </div>
       </div>
     </>

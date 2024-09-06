@@ -80,7 +80,9 @@ const PDFGenerator = ({ report }) => {
             <Text style={styles.interventionIdTitle}>
               INT-{report.idEvent} - {report.title}
             </Text>
+            <Text style={styles.dateAndHour}>Panne constatée :</Text>
             <Text style={styles.breakdown}>{report.breakdown}</Text>
+            <Text style={styles.dateAndHour}>Réparation :</Text>
             <Text style={styles.workDone}>{report.workDone}</Text>
             <Text style={styles.dateAndHour}>
               Intervenu le: {new Date(report.startingDate).toLocaleDateString()}

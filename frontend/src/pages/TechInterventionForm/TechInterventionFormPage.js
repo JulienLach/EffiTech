@@ -15,10 +15,8 @@ const TechInterventionFormPage = () => {
   const [employeeSignature, setEmployeeSignature] = useState("");
 
   const location = useLocation();
-  // Réception des données de l'événement avec useLocation
   const { event } = location.state;
 
-  // Calcul de la durée de l'intervention
   const startingHour = new Date(`1970-01-01T${event.startingHour}Z`);
   const endingHour = new Date(`1970-01-01T${event.endingHour}Z`);
   const duration = new Date(endingHour - startingHour).toISOString().substring(11, 16);
@@ -32,30 +30,20 @@ const TechInterventionFormPage = () => {
       startingDate,
       clientSignature,
       employeeSignature,
+      startingHour: event.startingHour,
+      endingHour: event.endingHour,
+      duration: duration,
+      idEvent: event.idEvent,
     };
   
-    createReport(
-      {
-        breakdown: reportData.breakdown,
-        workDone: reportData.workDone,
-        reschedule: reportData.reschedule,
-        startingDate: reportData.startingDate,
-        startingHour: event.startingHour,
-        endingHour: event.endingHour,
-        duration: duration,
-        clientSignature: reportData.clientSignature,
-        employeeSignature: reportData.employeeSignature,
-        idEvent: event.idEvent,
-      },
-      (error, newReport) => {
-        if (error) {
-          console.error("Erreur lors de la création du rapport", error);
-        } else {
-          console.log("Rapport créé avec succès, ID:", newReport.idReport);
-          navigate("/generated-intervention-page", { state: { event } });
-        }
+    createReport(reportData, (error, newReport) => {
+      if (error) {
+        console.error("Erreur lors de la création du rapport", error);
+      } else {
+        console.log("Rapport créé avec succès, ID:", newReport.idReport);
+        navigate("/generated-intervention-page", { state: { event, report: newReport } });
       }
-    );
+    });
   };
   
   return (

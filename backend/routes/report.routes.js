@@ -4,6 +4,6 @@ const reportServices = require('../services/report.services.js');
 
 router.post('/', reportServices.createReport);
 
-router.get('/:idReport', reportServices.getReportById);
+router.get('/:idEvent', reportServices.getReportById);
 
 module.exports = router;

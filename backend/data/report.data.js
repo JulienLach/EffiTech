@@ -41,9 +41,9 @@ class Report {
         });
     }
 
-    static getReportById(idReport, callback) {
-        const query = 'SELECT * FROM reports WHERE id_report = $1';
-        const values = [idReport];
+    static getReportById(idEvent, callback) {
+        const query = 'SELECT * FROM reports WHERE id_event = $1';
+        const values = [idEvent];
         pool.query(query, values, (error, result) => {
             if (error) {
                 return callback(error, null);

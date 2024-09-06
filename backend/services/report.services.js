@@ -14,8 +14,8 @@ function createReport(req, res) {
 }
 
 function getReportById(req, res) {
-    const idReport = req.params.idReport;
-    Report.getReportById(idReport, (error, report) => {
+    const idEvent = req.params.idEvent;
+    Report.getReportById(idEvent, (error, report) => {
         if (error) {
             return res.status(500).send({ message: 'Erreur lors de la récupération du rapport', error: error.message });
         }
@@ -25,9 +25,6 @@ function getReportById(req, res) {
             res.status(404).send({ message: 'Rapport non trouvé' });
         }
     });
-};
-
-function sendReport(req, res) {};
-
+}
 exports.getReportById = getReportById;
 exports.createReport = createReport;
