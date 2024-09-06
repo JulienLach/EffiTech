@@ -65,6 +65,7 @@ function createReport(newReport, callback) {
     xhr.onload = function() {
         if (xhr.status === 200 || xhr.status === 201) {
             console.log('Rapport créé');
+            console.log(newReport);
             callback(null, JSON.parse(xhr.responseText));
         } else {
             console.error('Erreur de création du rapport', xhr.statusText);
@@ -74,4 +75,18 @@ function createReport(newReport, callback) {
     xhr.send(JSON.stringify(newReport));
 }
 
-export { getAllEvents, getAllClients, getAllEmployees, createEvent, createReport };
+function getReportById(idEvent, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', `${API_URL}/reports/${idEvent}`);
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            callback(null, JSON.parse(xhr.responseText));
+        } else {
+            console.error('Erreur de récupération du rapport', xhr.statusText);
+            callback(new Error(xhr.statusText), null);
+        }
+    };
+    xhr.send();
+}
+
+export { getAllEvents, getAllClients, getAllEmployees, createEvent, createReport, getReportById };

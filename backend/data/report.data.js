@@ -23,7 +23,6 @@ class Report {
             if (error) {
                 return callback(error, null);
             }
-            
             const row = result.rows[0];
             const newReport = new Report(
                 row.id_report,
@@ -43,19 +42,27 @@ class Report {
     }
 
     static getReportById(idReport, callback) {
-        const query = 'SELECT * FROM reports WHERE idReport = $1';
+        const query = 'SELECT * FROM reports WHERE id_report = $1';
         const values = [idReport];
         pool.query(query, values, (error, result) => {
             if (error) {
                 return callback(error, null);
             }
             const row = result.rows[0];
-            let report = new Report(row.idReport, row.breakdown, row.workDone, row.reschedule, row.endingHour, row.duration, row.clientSignature, row.employeeSignature, row.idEvent);
+            let report = new Report(
+                row.id_report, 
+                row.breakdown, 
+                row.work_done, 
+                row.reschedule, 
+                row.ending_hour, 
+                row.duration, 
+                row.client_signature, 
+                row.employee_signature, 
+                row.id_event
+            );
             callback(null, report);
         });
     }
-
-    static sendReportByEmail(reportData, callback) {}
 }
 
 module.exports = Report;

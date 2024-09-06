@@ -1,15 +1,5 @@
 import React, { useState, useEffect } from "react";
-import globalStyles from "../../styles/GlobalStyles.module.css";
-import {
-  Page,
-  Text,
-  View,
-  Document,
-  StyleSheet,
-  Font,
-  Image,
-  pdf,
-} from "@react-pdf/renderer";
+import { Page, Text, View, Document, StyleSheet, pdf} from "@react-pdf/renderer";
 import logo from "../../images/logo.svg";
 
 const styles = StyleSheet.create({
@@ -69,7 +59,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const PDFGenerator = () => {
+const PDFGenerator = ({ report }) => {
   const [pdfBlob, setPdfBlob] = useState(null);
 
   useEffect(() => {
@@ -80,36 +70,30 @@ const PDFGenerator = () => {
             <Text style={styles.logo}>[LOGO COMPANY]</Text>
             <View style={styles.infoClientCompany}>
               <View>
-                <Text>[client]</Text>
-                <Text>[address]</Text>
-                <Text>[zipcode][city]</Text>
-                <Text>[phone]</Text>
-              </View>
-              <View style={styles.infoCompany}>
-                <Text>[company]</Text>
-                <Text>[address]</Text>
-                <Text>[zipcode][city]</Text>
-                <Text>[phone]</Text>
+                <Text>{report.client.firstname} {report.client.lastname}</Text>
+                <Text>{report.client.address.address}</Text>
+                <Text>{report.client.address.zipcode} {report.client.address.city}</Text>
+                <Text>{report.client.phoneNumber}</Text>
               </View>
             </View>
             <Text style={styles.title}>Rapport d'intervention</Text>
             <Text style={styles.interventionIdTitle}>
-              INT[id_event] - [title]
+              INT-{report.idEvent} - {report.title}
             </Text>
-            <Text style={styles.breakdown}>[breakdown]</Text>
-            <Text style={styles.workDone}>[work_done]</Text>
+            <Text style={styles.breakdown}>{report.breakdown}</Text>
+            <Text style={styles.workDone}>{report.workDone}</Text>
             <Text style={styles.dateAndHour}>
-              Intervenu le: [starting_date]
-            </Text>
-            <Text style={styles.dateAndHour}>
-              Heure de l’intervention : de [starting_hour] à [ending_hour]{" "}
+              Intervenu le: {new Date(report.startingDate).toLocaleDateString()}
             </Text>
             <Text style={styles.dateAndHour}>
-              Durée de l’intervention : [duration]{" "}
+              Heure de l’intervention : de {report.startingHour} à {report.endingHour}
+            </Text>
+            <Text style={styles.dateAndHour}>
+              Durée de l’intervention : {report.duration} heures
             </Text>
             <View style={styles.signature}>
-              <Text>[client_signature]</Text>
-              <Text>[company_signature]</Text>
+              <Text>{report.clientSignature}</Text>
+              <Text>{report.employeeSignature}</Text>
             </View>
           </Page>
         </Document>
@@ -122,7 +106,7 @@ const PDFGenerator = () => {
     };
 
     generatePdf();
-  }, []);
+  }, [report]);
 
   return (
     <div>

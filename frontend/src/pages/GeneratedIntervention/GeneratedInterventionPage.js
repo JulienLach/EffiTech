@@ -1,19 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useLocation } from "react-router-dom";
 import styles from "./GeneratedInterventionPage.module.css";
 import TemplateHeaderSidebar from "../Template/TemplateHeaderSidebar";
-import imagePDF from "../../images/rapport_intervention.png";
 import PDFGenerator from "../../components/PDFGenerator/PDFGenerator";
 
 const GeneratedInterventionPage = () => {
-
   const location = useLocation();
-  //réception des données de l'événement avec useLocation
-  const { event } = location.state;
+  const { event } = location.state;  
 
-  // données du rapport d'intervention pour les mettre dans le PDF
-  //
-  
+  // Préparer les données du rapport d'intervention
+  const report = {
+    idEvent: event.idEvent,
+    title: event.title,
+    breakdown: event.breakdown,
+    workDone: event.workDone,
+    startingDate: event.startingDate,
+    startingHour: event.startingHour,
+    endingHour: event.endingHour,
+    duration: event.duration,
+    client: event.client,
+    clientSignature: event.clientSignature,
+    employeeSignature: event.employeeSignature,
+  };
+
   return (
     <>
       <TemplateHeaderSidebar />
@@ -22,7 +31,7 @@ const GeneratedInterventionPage = () => {
           <div className={styles.alignButton}>
             <h2>Rapport d'intervention</h2>
             <button type="button">
-              <i class="fa-solid fa-arrow-right"></i>Retour
+              <i className="fa-solid fa-arrow-right"></i>Retour
             </button>
           </div>
           <div className={styles.interventionInfo}>
@@ -47,11 +56,11 @@ const GeneratedInterventionPage = () => {
           <div className={styles.documentInfo}>
             <h2>Document associé</h2>
             <div className={styles.documentLink}>
-              <i class="fa-regular fa-file-pdf"></i>
+              <i className="fa-regular fa-file-pdf"></i>
               <a href="#">INT{event.idEvent}-{event.client.firstname}-{event.client.lastname}-{event.title}</a>
             </div>
           </div>
-          <PDFGenerator />
+          <PDFGenerator report={report} />
         </div>
       </div>
     </>
