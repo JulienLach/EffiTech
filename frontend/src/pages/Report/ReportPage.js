@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import styles from "./GeneratedInterventionPage.module.css";
+import styles from "./ReportPage.module.css";
 import TemplateGlobal from "../Template/TemplateGlobal";
 import PDFGenerator from "../../components/PDFGenerator/PDFGenerator";
 import { getReportById } from "../../services/api";
 
-const GeneratedInterventionPage = () => {
+const ReportPage = () => {
   const location = useLocation();
   const { event, report } = location.state;
 
@@ -87,4 +87,4 @@ const GeneratedInterventionPage = () => {
   );
 };
 
-export default GeneratedInterventionPage;
+export default ReportPage;

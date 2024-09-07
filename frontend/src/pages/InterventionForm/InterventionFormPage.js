@@ -41,7 +41,7 @@ const InterventionFormPage = () => {
         console.error("Erreur lors de la création du rapport", error);
       } else {
         console.log("Rapport créé avec succès, ID:", newReport.idReport);
-        navigate("/generated-intervention-page", { state: { event, report: newReport } });
+        navigate("/report", { state: { event, report: newReport } });
       }
     });
   };
