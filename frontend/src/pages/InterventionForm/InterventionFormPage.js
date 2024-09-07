@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import styles from "./TechInterventionFormPage.module.css";
+import styles from "./InterventionFormPage.module.css";
 import TemplateGlobal from "../Template/TemplateGlobal";
 import { createReport } from "../../services/api";
 
-const TechInterventionFormPage = () => {
+const InterventionFormPage = () => {
   const navigate = useNavigate();
 
   const [breakdown, setBreakdown] = useState("");
@@ -147,4 +147,4 @@ const TechInterventionFormPage = () => {
   );
 };
 
-export default TechInterventionFormPage;
+export default InterventionFormPage;

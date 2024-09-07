@@ -8,7 +8,7 @@ const InterventionForm = ({ event, closeModal }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        navigate("/technician-intervention-form-page", { state: { event } });
+        navigate("/intervention-form", { state: { event } });
     };
 
     return (
