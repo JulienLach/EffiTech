@@ -9,33 +9,33 @@ const SidedarMenu = () => {
           <div className={styles.sidebar}>
             <ul>
               <li>
-                <i class="fa-solid fa-calendar"></i>
+                <i className="fa-solid fa-calendar"></i>
                 <a href="/calendar">Calendrier</a>
               </li>
               <li>
-                <i class="fa-solid fa-user"></i>
+                <i className="fa-solid fa-user"></i>
                 <a href="/clients">Clients</a>
               </li>
               <li>
-                <i class="fa-solid fa-users"></i>
+                <i className="fa-solid fa-users"></i>
                 <a href="/employees">Équipes</a>
               </li>
               <li>
-                <i class="fa-solid fa-building"></i>
+                <i className="fa-solid fa-building"></i>
                 <a href="/company">Société</a>
               </li>
               <li>
-                <i class="fa-solid fa-file-lines"></i>
+                <i className="fa-solid fa-file-lines"></i>
                 <a href="/invoices">Facture/Devis</a>
               </li>
               <li>
-                <i class="fa-solid fa-folder"></i>
+                <i className="fa-solid fa-folder"></i>
                 <a href="/documents">Documents</a>
               </li>
             </ul>
           </div>
           <div className={styles.sideOrange}>
-            <i class="fa-solid fa-caret-down"></i>
+            <i className="fa-solid fa-caret-down"></i>
           </div>
         </div>
     </>

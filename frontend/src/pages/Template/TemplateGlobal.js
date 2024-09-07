@@ -15,7 +15,7 @@ const TemplateGlobal = function () {
           <div className={styles.headerRight}>
             <div>
               <button className={styles.planifierButton}>
-                <i class="fa-solid fa-plus"></i>Créer
+                <i className="fa-solid fa-plus"></i>Créer
               </button>
             </div>
             <div className={styles.notificationIcon}>
@@ -27,40 +27,40 @@ const TemplateGlobal = function () {
         </div>
       </div>
 
-{/* Partie sidebar */}
+    {/* Partie sidebar */}
       <div className={styles.sidebarAndOrange}>
-          <div className={styles.sidebar}>
-            <ul>
-              <li>
-                <i class="fa-solid fa-calendar"></i>
-                <a href="/calendar">Calendrier</a>
-              </li>
-              <li>
-                <i class="fa-solid fa-user"></i>
-                <a href="/clients">Clients</a>
-              </li>
-              <li>
-                <i class="fa-solid fa-users"></i>
-                <a href="/employees">Équipes</a>
-              </li>
-              <li>
-                <i class="fa-solid fa-building"></i>
-                <a href="/company">Société</a>
-              </li>
-              <li>
-                <i class="fa-solid fa-file-lines"></i>
-                <a href="/invoices">Facture/Devis</a>
-              </li>
-              <li>
-                <i class="fa-solid fa-folder"></i>
-                <a href="/documents">Documents</a>
-              </li>
-            </ul>
-          </div>
-          <div className={styles.sideOrange}>
-            <i class="fa-solid fa-caret-down"></i>
-          </div>
+        <div className={styles.sidebar}>
+          <ul>
+            <li>
+              <i className="fa-solid fa-calendar"></i>
+              <a href="/calendar">Calendrier</a>
+            </li>
+            <li>
+              <i className="fa-solid fa-user"></i>
+              <a href="/clients">Clients</a>
+            </li>
+            <li>
+              <i className="fa-solid fa-users"></i>
+              <a href="/employees">Équipes</a>
+            </li>
+            <li>
+              <i className="fa-solid fa-building"></i>
+              <a href="/company">Société</a>
+            </li>
+            <li>
+              <i className="fa-solid fa-file-lines"></i>
+              <a href="/invoices">Facture/Devis</a>
+            </li>
+            <li>
+              <i className="fa-solid fa-folder"></i>
+              <a href="/documents">Documents</a>
+            </li>
+          </ul>
         </div>
+        <div className={styles.sideOrange}>
+          <i className="fa-solid fa-caret-down"></i>
+        </div>
+      </div>
 
 {/* partie container a copier pour les nouvelles pages */}
         {/* <div className={styles.container}>
