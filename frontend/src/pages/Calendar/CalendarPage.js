@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import TemplateGlobal from "../Template/TemplateGlobal";
-import styles from "./DashboardPage.module.css";
+import styles from "./CalendarPage.module.css";
 import GlobalStyles from "../../styles/GlobalStyles.module.css";
 import { getAllEvents } from "../../services/api";
 import FilterBar from "../../components/FilterBar/FilterBar";
 import InterventionForm from "../../components/InterventionForm/InterventionForm";
 import CreateEventForm from "../../components/CreateEventForm/CreateEventForm";
 
-const DashboardPage = function () {
+const CalendarPage = function () {
   const [events, setEvents] = useState([]);
   const [error, setError] = useState(null);
   const [isEventModalOpen, setIsModalOpen] = useState(false);
@@ -158,4 +158,4 @@ const DashboardPage = function () {
   );
 };
 
-export default DashboardPage;
+export default CalendarPage;

@@ -9,7 +9,7 @@ const LoginPage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    navigate("/dashboard");
+    navigate("/calendar");
   };
   return (
     <div className={styles.container}>

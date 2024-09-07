@@ -53,7 +53,7 @@ const TechInterventionFormPage = () => {
         <div className={styles.card}>
           <div className={styles.alignButton}>
             <h2>Intervention</h2>
-            <button type="button" onClick={() => window.location.href='/dashboard'}>
+            <button type="button" onClick={() => window.location.href='/calendar'}>
               <i className="fa-solid fa-arrow-right"></i>Retour
             </button>
           </div>

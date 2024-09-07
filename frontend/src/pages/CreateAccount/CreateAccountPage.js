@@ -32,7 +32,7 @@ const createAccountPage = () => {
           </div>
           <div className={styles.buttonPosition}>
             <button type="reset" onClick={() => (window.location.href = "/login")} className={styles.cancelButton}>Annuler</button>
-            <button type="submit" onClick={() => (window.location.href = "/dashboard")} className={styles.submitButton}>Créer mon compte</button>
+            <button type="submit" onClick={() => (window.location.href = "/calendar")} className={styles.submitButton}>Créer mon compte</button>
           </div>
         </form>
       </div>

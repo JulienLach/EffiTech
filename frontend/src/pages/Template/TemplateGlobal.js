@@ -33,7 +33,7 @@ const TemplateGlobal = function () {
             <ul>
               <li>
                 <i class="fa-solid fa-calendar"></i>
-                <a href="/dashboard">Calendrier</a>
+                <a href="/calendar">Calendrier</a>
               </li>
               <li>
                 <i class="fa-solid fa-user"></i>
