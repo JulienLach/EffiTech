@@ -1,9 +1,9 @@
 import React from "react";
 import TemplateGlobal from "../Template/TemplateGlobal";
-import styles from "./TeamPage.module.css";
+import styles from "./EmployeesPage.module.css";
 import profilPicture from "../../images/profil.png";
 
-const TeamPage = () => {
+const EmployeesPage = () => {
     return (
         <>
             <TemplateGlobal />
@@ -35,4 +35,4 @@ const TeamPage = () => {
     );
 };
 
-export default TeamPage;
+export default EmployeesPage;

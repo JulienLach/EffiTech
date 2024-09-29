@@ -6,7 +6,7 @@ import CalendarPage from './pages/Calendar/CalendarPage';
 import InterventionForm from './components/InterventionForm/InterventionForm';
 import InterventionFormPage from './pages/InterventionForm/InterventionFormPage';
 import ReportPage from './pages/Report/ReportPage';
-import TeamPage from './pages/Team/TeamPage';
+import EmployeesPage from './pages/Employees/EmployeesPage';
 
 const App = () => {
     return (
@@ -17,7 +17,7 @@ const App = () => {
                 <Route path="/calendar" element={<CalendarPage />} />
                 <Route path="/intervention-form" element={<InterventionFormPage />} />
                 <Route path="/report" element={<ReportPage />} />
-                <Route path="/team" element={<TeamPage />} />
+                <Route path="/employees" element={<EmployeesPage />} />
             </Routes>
         </Router>
     );
