@@ -26,5 +26,6 @@ function getReportById(req, res) {
         }
     });
 }
+
 exports.getReportById = getReportById;
 exports.createReport = createReport;

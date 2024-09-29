@@ -1,4 +1,4 @@
-const Event = require('../data/event.data.js')
+const Event = require('../data/event.data.js');
 
 function getAllEvents(req, res) {
     Event.getAllEvents((error, events) => {
@@ -7,7 +7,7 @@ function getAllEvents(req, res) {
         }
         res.status(200).send(events); // Renvoyer tous les événements
     });
-};
+}
 
 function getEventById(req, res) {
     const idEvent = req.params.idEvent;
@@ -21,7 +21,7 @@ function getEventById(req, res) {
             res.status(404).send({ message: 'Événement non trouvé' });
         }
     });
-};
+}
 
 function createEvent(req, res) {
     const { title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee } = req.body;
@@ -31,7 +31,7 @@ function createEvent(req, res) {
         }
         res.status(201).send({ message: 'Événement créé avec succès' });
     });
-};
+}
 
 function updateEvent(req, res) {
     const { title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee, idEvent } = req.body;
@@ -41,7 +41,7 @@ function updateEvent(req, res) {
         }
         res.status(200).send({ message: 'Événement modifié avec succès' });
     });
-};
+}
 
 function submitInterventionForm(req, res) {
     const { idEvent, breakdown, workDone, reschedule, endingHour, duration, clientSignature, employeeSignature } = req.body;
@@ -51,7 +51,7 @@ function submitInterventionForm(req, res) {
         }
         res.status(200).send({ message: 'Rapport d\'intervention généré avec succès' });
     });
-};
+}
 
 function submitAppointmentForm(req, res) {
     const { idEvent, workToDo, planIntervention } = req.body;
@@ -61,9 +61,9 @@ function submitAppointmentForm(req, res) {
         }
         res.status(200).send({ message: 'Formulaire de rendez-vous validé avec succès' });
     });
-};
+}
 
-function deleteEvent(req, res) {};
+function deleteEvent(req, res) {}
 
 exports.getAllEvents = getAllEvents;
 exports.getEventById = getEventById;

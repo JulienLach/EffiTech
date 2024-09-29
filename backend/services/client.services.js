@@ -7,7 +7,7 @@ function getAllClients(req, res) {
         }
         res.status(200).send(clients); // Renvoyer les clients
     });
-};
+}
 
 function getClientById(req, res) {
     const idClient = req.params.idClient;
@@ -21,7 +21,7 @@ function getClientById(req, res) {
             res.status(404).send({ message: 'Client non trouvé' });
         }
     });
-};
+}
 
 
 function createClient(req, res) {
@@ -32,7 +32,7 @@ function createClient(req, res) {
         }
         res.status(201).send(createdClient);
     });
-};
+}
 
 function updateClient(req, res) {
     const idClient = req.params.idClient;
@@ -45,7 +45,7 @@ function updateClient(req, res) {
             res.status(200).send({message: 'Client modifié avec succès'});
         }
     });
-};
+}
 
 exports.getAllClients = getAllClients;
 exports.getClientById = getClientById;

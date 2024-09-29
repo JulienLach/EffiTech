@@ -1,4 +1,4 @@
-const Invoice = require('../data/invoice.data.js')
+const Invoice = require('../data/invoice.data.js');
 
 function getAllInvoices(req, res) {
     Invoice.getAllInvoices((error, invoices) => {

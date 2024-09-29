@@ -1,4 +1,4 @@
-const Address = require('../data/address.data.js')
+const Address = require('../data/address.data.js');
 
 function getAddressById(req, res) {
     const idAddress = req.params.idAddress;

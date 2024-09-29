@@ -7,7 +7,7 @@ function getAllEmployees(req, res) {
         }
         res.status(200).send(employees); // Renvoyer les employés
     });
-};
+}
 
 function getEmployeeById(req, res) {
     const idEmployee = req.params.idEmployee;
@@ -21,7 +21,7 @@ function getEmployeeById(req, res) {
             res.status(404).send({ message: 'Employé non trouvé' });
         }
     });
-};
+}
 
 function createEmployee(req, res) {
     const { firstname, lastname, job, phoneNumber, email, isAdmin, password, speciality } = req.body;
@@ -31,7 +31,7 @@ function createEmployee(req, res) {
         }
         res.status(201).send(createdEmployee);
     });
-};
+}
 
 function updateEmployee(req, res) {
     const idEmployee = req.params.idEmployee;
@@ -46,7 +46,7 @@ function updateEmployee(req, res) {
             res.status(404).send({ message: 'Employé non trouvé' });
         }
     });
-};
+}
 
 exports.getAllEmployees = getAllEmployees;
 exports.getEmployeeById = getEmployeeById;

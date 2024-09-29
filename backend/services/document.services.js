@@ -22,7 +22,7 @@ function downloadDocument(req, res) {
             res.status(404).send({ message: 'Document non trouvé' });
         }
     });
-};
+}
 
 exports.getAllDocuments = getAllDocuments;
 exports.getDocumentById = getDocumentById;

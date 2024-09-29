@@ -1,4 +1,4 @@
-const Event = require('../data/notification.data.js')
+const Event = require('../data/notification.data.js');
 
 function getAllNotifications(req, res) {
     Event.getAllNotifications((error, result) => {
