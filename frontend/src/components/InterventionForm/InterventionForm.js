@@ -2,7 +2,6 @@ import React from 'react';
 import { useNavigate } from "react-router-dom";
 import styles from './InterventionForm.module.css';
 
-
 const InterventionForm = ({ event, closeModal }) => {
     const navigate = useNavigate();
 

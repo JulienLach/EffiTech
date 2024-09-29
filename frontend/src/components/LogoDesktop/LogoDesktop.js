@@ -5,10 +5,10 @@ import styles from './LogoDesktop.module.css';
 
 const LogoDesktop = () => {
     return (
-      <div className={styles.logoEffitech}>
-        <img src={logoDesktop} alt="LogoDesktop"/>
-      </div>
-    )
+        <div className={styles.logoEffitech}>
+            <img src={logoDesktop} alt="LogoDesktop" />
+        </div>
+    );
 };
 
 export default LogoDesktop;
