@@ -18,7 +18,7 @@ const SidebarMenu = () => {
                         </li>
                         <li>
                             <i className="fa-solid fa-users"></i>
-                            <a href="/employees">Équipes</a>
+                            <a href="/employees">Employés</a>
                         </li>
                         <li>
                             <i className="fa-solid fa-building"></i>

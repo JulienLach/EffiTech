@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { Component } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import TemplateGlobal from "../Template/TemplateGlobal";
 import styles from "./CalendarPage.module.css";
 import GlobalStyles from "../../styles/GlobalStyles.module.css";
@@ -7,24 +8,39 @@ import FilterBar from "../../components/FilterBar/FilterBar";
 import InterventionForm from "../../components/InterventionForm/InterventionForm";
 import CreateEventForm from "../../components/CreateEventForm/CreateEventForm";
 
-const CalendarPage = function () {
-    const [events, setEvents] = useState([]);
-    const [error, setError] = useState(null);
-    const [isEventModalOpen, setIsModalOpen] = useState(false);
-    const [selectedEvent, setSelectedEvent] = useState(null);
-    const [isCreateEventModalOpen, setIsCreateEventModalOpen] = useState(false);
+// Composant wrapper pour utiliser les hooks
+function CalendarPageWrapper() {
+    const navigate = useNavigate();
+    const location = useLocation();
+    return <CalendarPage navigate={navigate} location={location} />;
+}
 
-    useEffect(function () {
-        getAllEvents(function (error, data) {
+class CalendarPage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            events: [],
+            error: null,
+            isEventModalOpen: false,
+            selectedEvent: null,
+            isCreateEventModalOpen: false,
+        };
+
+        this.toggleEventModal = this.toggleEventModal.bind(this);
+        this.toggleCreateEventModal = this.toggleCreateEventModal.bind(this);
+    }
+
+    componentDidMount() {
+        getAllEvents((error, data) => {
             if (error) {
-                setError(error.message);
+                this.setState({ error: error.message });
             } else {
-                setEvents(data);
+                this.setState({ events: data });
             }
         });
-    }, []);
+    }
 
-    const getStatusIndicator = (status) => {
+    getStatusIndicator(status) {
         const style = {
             padding: "2px 10px",
             borderRadius: "8px",
@@ -65,71 +81,79 @@ const CalendarPage = function () {
                     </span>
                 );
         }
-    };
-
-    function toggleEventModal(event = null) {
-        setSelectedEvent(event);
-        setIsModalOpen(event !== null);
     }
 
-    function toggleCreateEventModal() {
-        setIsCreateEventModalOpen(!isCreateEventModalOpen);
+    toggleEventModal(event = null) {
+        this.setState({
+            selectedEvent: event,
+            isEventModalOpen: event !== null,
+        });
     }
 
-    return (
-        <div>
-            <TemplateGlobal />
-            <div className={styles.container}>
-                <div className={styles.fixedTopSide}>
-                    <h1 className={styles.pageTitle}>Calendrier</h1>
-                    <div className={styles.filterBar}>
-                        <FilterBar toggleCreateEventModal={toggleCreateEventModal} />
+    toggleCreateEventModal() {
+        this.setState((prevState) => ({
+            isCreateEventModalOpen: !prevState.isCreateEventModalOpen,
+        }));
+    }
+
+    render() {
+        const { events, error, isEventModalOpen, selectedEvent, isCreateEventModalOpen } = this.state;
+
+        return (
+            <div>
+                <TemplateGlobal />
+                <div className={styles.container}>
+                    <div className={styles.fixedTopSide}>
+                        <h1 className={styles.pageTitle}>Calendrier</h1>
+                        <div className={styles.filterBar}>
+                            <FilterBar toggleCreateEventModal={this.toggleCreateEventModal} />
+                        </div>
+                        <h3>Événements</h3>
                     </div>
-                    <h3>Événements</h3>
-                </div>
-                <div>
-                    <table>
-                        <thead className={styles.stickyThead}>
-                            <tr>
-                                <th>Client</th>
-                                <th>Référence</th>
-                                <th>Type</th>
-                                <th>Titre</th>
-                                <th>Statut</th>
-                                <th>Date</th>
-                                <th>Intervenant</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {events.map((event) => (
-                                <tr key={event.idEvent}>
-                                    <td>
-                                        <a href="#">{event.client.firstname} {event.client.lastname}</a>
-                                    </td>
-                                    <td>INT-{event.idEvent}</td>
-                                    <td>{event.type}</td>
-                                    <td>
-                                        <a href="#" onClick={function () { toggleEventModal(event); }}>{event.title}</a>
-                                    </td>
-                                    <td>{getStatusIndicator(event.status)}</td>
-                                    <td>{new Date(event.startingDate).toLocaleDateString()}</td>
-                                    <td>
-                                        <a href="#">{event.employee.firstname} {event.employee.lastname}</a>
-                                    </td>
+                    <div>
+                        <table>
+                            <thead className={styles.stickyThead}>
+                                <tr>
+                                    <th>Client</th>
+                                    <th>Référence</th>
+                                    <th>Type</th>
+                                    <th>Titre</th>
+                                    <th>Statut</th>
+                                    <th>Date</th>
+                                    <th>Intervenant</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {events.map((event) => (
+                                    <tr key={event.idEvent}>
+                                        <td>
+                                            <a href="#">{event.client.firstname} {event.client.lastname}</a>
+                                        </td>
+                                        <td>INT-{event.idEvent}</td>
+                                        <td>{event.type}</td>
+                                        <td>
+                                            <a href="#" onClick={() => this.toggleEventModal(event)}>{event.title}</a>
+                                        </td>
+                                        <td>{this.getStatusIndicator(event.status)}</td>
+                                        <td>{new Date(event.startingDate).toLocaleDateString()}</td>
+                                        <td>
+                                            <a href="#">{event.employee.firstname} {event.employee.lastname}</a>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
+                {isEventModalOpen && (
+                    <InterventionForm event={selectedEvent} closeModal={() => this.toggleEventModal()} />
+                )}
+                {isCreateEventModalOpen && (
+                    <CreateEventForm closeModal={this.toggleCreateEventModal} />
+                )}
             </div>
-            {isEventModalOpen && (
-                <InterventionForm event={selectedEvent} closeModal={function () { toggleEventModal(); }} />
-            )}
-            {isCreateEventModalOpen && (
-                <CreateEventForm closeModal={toggleCreateEventModal} />
-            )}
-        </div>
-    );
-};
+        );
+    }
+}
 
-export default CalendarPage;
+export default CalendarPageWrapper;
