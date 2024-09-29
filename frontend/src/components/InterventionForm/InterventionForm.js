@@ -24,6 +24,7 @@ const InterventionForm = ({ event, closeModal }) => {
                     <div>Client: {event.client.firstname} {event.client.lastname}</div>
                     <div>Téléphone: {event.client.phoneNumber}</div>
                     <div>Adresse: {event.client.address.address}, {event.client.address.zipcode} {event.client.address.city}</div>
+                    <div>Description: {event.description}</div>
                     <div className={styles.separator}></div>
                     <h3>Planification</h3>
                     <div>Début de l'intervention: {new Date(event.startingDate).toLocaleDateString()}</div>
