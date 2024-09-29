@@ -1,116 +1,116 @@
-
 /* CSS for parent div with red and white background */
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background: linear-gradient(160deg, white 50%, #c93c2c 50%);
-  }
-  
-  /* CSS of the card for the login form */
-  .loginFormCard {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 20px;
-    border: #e7e7e7 1px solid;
-    background-color: white;
-    width: 455px;
-    height: auto;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 14px 28px,
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(160deg, white 50%, #c93c2c 50%);
+}
+
+/* CSS of the card for the login form */
+.loginFormCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+  border: #e7e7e7 1px solid;
+  background-color: white;
+  width: 455px;
+  height: auto;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 14px 28px,
       rgba(0, 0, 0, 0.22) 0px 10px 10px;
-  }
-  
-  /* CSS title style font */
-  .titleCard {
-    font-size: 30px;
-    font-weight: 500;
-  }
-  
-  /* CSS for input & label */
-  .labelInput {
-    font-size: 20px;
-    font-weight: 500;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-bottom: 10px;
-  }
-  
-  /* CSS for input comportement */
-  .labelInput input {
-    margin: 0px 30px;
-    padding: 10px;
-    border: 1px solid #cccccc;
-    border-radius: 10px;
-  }
+}
+
+/* CSS title style font */
+.titleCard {
+  font-size: 30px;
+  font-weight: 500;
+}
+
+/* CSS for input & label */
+.labelInput {
+  font-size: 20px;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+/* CSS for input comportement */
+.labelInput input {
+  margin: 0px 30px;
+  padding: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 10px;
+}
 
 /* CSS for the label comportement */
-  .labelInput label {
-      margin: 0px 30px;
-      padding: 5px 0px;
-  }
+.labelInput label {
+  margin: 0px 30px;
+  padding: 5px 0px;
+}
 
-  /* CSS for elements placement */
-  .formElements {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-  }
-  
-  /* CSS for button positioning */
-   .buttonPosition {
-    display: flex;
-    justify-content: space-between;
-    width: 450px;
-    margin-bottom: 20px;
-  } 
+/* CSS for elements placement */
+.formElements {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* CSS for button positioning */
+.buttonPosition {
+  display: flex;
+  justify-content: space-between;
+  width: 450px;
+  margin-bottom: 20px;
+}
 
 /* css for cancel button */
-  .cancelButton {
-    background-color: #ABABAB;
-    margin: auto;
-    padding: 10px;
-    border: none;
-    border-radius: 10px;
-    color: white;
-    font-size: 18px;
-    font-weight: 500;
-    cursor: pointer;
-  }
+.cancelButton {
+  background-color: #ABABAB;
+  margin: auto;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+}
 
-    /* CSS for create button, */
-  .submitButton {
-    background-color: #c93c2c;
-    margin: auto;
-    padding: 10px;
-    border: none;
-    border-radius: 10px;
-    color: white;
-    font-size: 18px;
-    font-weight: 500;
-    cursor: pointer;
-  }
-  
-  /* CSS for paragraph style */
-  .formElements p {
-    font-size: 15px;
-    font-weight: 300;
-    margin-top: 20px;
-  }
-  
-  /* CSS for link style */
-  .formElements a {
-    text-align: right;
-    font-size: 15px;
-    font-weight: 300;
-    margin-bottom: 20px;
-  }
+/* CSS for create button */
+.submitButton {
+  background-color: #c93c2c;
+  margin: auto;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+}
 
-  .buttonPosition {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
+/* CSS for paragraph style */
+.formElements p {
+  font-size: 15px;
+  font-weight: 300;
+  margin-top: 20px;
+}
+
+/* CSS for link style */
+.formElements a {
+  text-align: right;
+  font-size: 15px;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+/* CSS for button positioning */
+.buttonPosition {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}

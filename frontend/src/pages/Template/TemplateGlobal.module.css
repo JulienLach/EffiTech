@@ -1,163 +1,163 @@
-/* Margin du container pour que le contenue ne soit pas sous la header ou sous la sidebar */
+/* Margin du container pour que le contenu ne soit pas sous le header ou sous la sidebar */
 .container {
-  margin: 100px 20px 0 250px
+  margin: 100px 20px 0 250px;
 }
 
 /* HEADER */
 .header {
   height: 80px;
-    position: sticky;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    background-color: white;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Header.css */
-  .headerDiv {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 20px;
-    }
-  
-    .logo img {
-      height: 60px;
-    }
-    
-    .headerRight {
-      display: flex;
-      align-items: center;
-    }
-    
-    .planifierButton {
-      background-color: #c93c2c;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 10px;
-      color: white;
-      font-size: 18px;
-      font-weight: 500;
-      cursor: pointer;
-      margin: 0px 20px;
-    }
-  
-    .planifierButton i {
-      margin-right: 10px;
-    }
-    
-    .planifierButton:hover {
-      background-color: #9b2e22;
-    }
-    .notificationBell{
-      height: 30px;
-    }
-    .notificationIcon {
-      position: relative;
-      margin-right: 20px;
-    }
-      
-    .notificationCount {
-      display: flex;
-      position: absolute;
-      top: -10px;
-      right: -10px;
-      background-color: red;
-      color: white;
-      border-radius: 50%;
-      height: 20px;
-      width: 20px;
-      font-size: 12px;
-      min-width: 20px;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .profileBubble {
-      top: -10px;
-      right: -10px;
-      background-color: #007bff;
-      color: white;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      font-size: 20px;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
 
-    /* SIDEBAR */
+/* Header.css */
+.headerDiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
 
-    .sidebar {
-      margin-left: 20px;
-      border-top-right-radius: 10px;
-      border-bottom-right-radius: 10px;
-      height: auto;
-      margin-top: 20px;
-    }
-    
-    .sidebar ul {
-      list-style-type: none;
-      padding: 0;
-    }
-    
-    .sidebar li {
-      display: flex;
-      align-items: center;
-      margin: 10px;
-      padding: 5px;
-    }
-    
-    .sidebar li a {
-      margin-left: 15px;
-      text-decoration: none;
-      font-size: 20px;
-      font-weight: 450;
-      color: black;
-    }
-    
-    .sidebar li:hover a,
-    .sidebar li:hover i {
-      color: white;
-    }
-    
-    .sidebar li:hover {
-      padding: 5px;
-      background-color: #c93c2c;
-      border-radius: 5px;
-    }
-    
-    i {
-      width: 20px;
-    }
-    
-    /* placement des deux division sidebar entre elles */
-    .sidebarAndOrange {
-      display: flex;
-      position: fixed;
-      top: 90px;
-    }
-    
-    /* Couleur orange de la div pour le liseret de la sidebar */
-    .sideOrange {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #c93c2c;
-      height: auto;
-      width: 12px;
-      border-top-right-radius: 10px;
-      border-bottom-right-radius: 10px;
-      /* box-shadow: 5px 0 1px -2px rgba(0, 0, 0, 0.1); */
-      cursor: pointer;
-    }
-    
-    /*Rotation de l'icône de flèche*/
-    .sideOrange i {
-      transform: rotate(90deg);
-      color: white;
-    }
-    
+.logo img {
+  height: 55px;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+}
+
+.planifierButton {
+  background-color: #c93c2c;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  margin: 0px 20px;
+}
+
+.planifierButton i {
+  margin-right: 10px;
+}
+
+.planifierButton:hover {
+  background-color: #9b2e22;
+}
+
+.notificationBell {
+  height: 30px;
+}
+
+.notificationIcon {
+  position: relative;
+  margin-right: 20px;
+}
+
+.notificationCount {
+  display: flex;
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  font-size: 12px;
+  min-width: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+.profileBubble {
+  top: -10px;
+  right: -10px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* SIDEBAR */
+.sidebar {
+  margin-left: 20px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  height: auto;
+  margin-top: 20px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar li {
+  display: flex;
+  align-items: center;
+  margin: 10px;
+  padding: 5px;
+}
+
+.sidebar li a {
+  margin-left: 15px;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 450;
+  color: black;
+}
+
+.sidebar li:hover a,
+.sidebar li:hover i {
+  color: white;
+}
+
+.sidebar li:hover {
+  padding: 5px;
+  background-color: #c93c2c;
+  border-radius: 5px;
+}
+
+i {
+  width: 20px;
+}
+
+/* Placement des deux divisions sidebar entre elles */
+.sidebarAndOrange {
+  display: flex;
+  position: fixed;
+  top: 90px;
+}
+
+/* Couleur orange de la div pour le liseret de la sidebar */
+.sideOrange {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #c93c2c;
+  height: auto;
+  width: 12px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  /* box-shadow: 5px 0 1px -2px rgba(0, 0, 0, 0.1); */
+  cursor: pointer;
+}
+
+/* Rotation de l'icône de flèche */
+.sideOrange i {
+  transform: rotate(90deg);
+  color: white;
+}

@@ -29,7 +29,6 @@ h1 {
 .separation {
     height: 1px;
     background-color: #3E3E3E;
-    
     margin: 30px 20px 20px 20px;
 }
 
@@ -47,7 +46,6 @@ h1 {
     border: 1px solid #919191;
     cursor: pointer;
     font-weight: 600;
-    
 }
 
 .alignButton button:hover{
