@@ -12,13 +12,26 @@ class Notification {
     }
 
     static getAllNotifications(callback) {
-        const query = 'SELECT * FROM notifications';
+        const query = 
+            'SELECT * FROM notifications';
         pool.query(query, (error, result) => {
             if (error) {
                 return callback(error, null);
             }
-            const notifications = result.rows.map(row => new Notification(row.idNotification, row.idEmployee, row.action, row.type, row.title, row.creationDate, row.creationHour));
+            const notifications = result.rows.map(function(row) {
+                return new Notification(
+                    row.idNotification, 
+                    row.idEmployee, 
+                    row.action, 
+                    row.type, 
+                    row.title, 
+                    row.creationDate, 
+                    row.creationHour
+                );
+            });
             callback(null, notifications);
         });
     }
 }
+
+module.exports = Notification;
