@@ -19,7 +19,18 @@ class Employee {
             if (error) {
                 return callback(error, null);
             }
-            const employees = result.rows.map(row => new Employee(row.id_employee, row.firstname, row.lastname, row.job, row.phone_number, row.email, row.is_admin, row.password, row.speciality));
+            const employees = result.rows.map(function(row) {
+                return new Employee(
+                    row.id_employee,
+                    row.firstname,
+                    row.lastname,
+                    row.job,
+                    row.phone_number,
+                    row.email,
+                    row.is_admin,
+                    row.password,
+                    row.speciality);
+            });
             callback(null, employees);
         });
     }
@@ -32,7 +43,15 @@ class Employee {
                 return callback(error, null);
             }
             const row = result.rows[0];
-            let employee = new Employee(row.id_employee, row.firstname, row.lastname, row.job, row.phone_number, row.email, row.is_admin, row.password, row.speciality);
+            let employee = new Employee(
+                row.id_employee,
+                row.firstname,
+                row.lastname, row.job,
+                row.phone_number,
+                row.email,
+                row.is_admin,
+                row.password,
+                row.speciality);
             callback(null, employee);
         });
     }
@@ -49,7 +68,16 @@ class Employee {
                 return callback(error, null);
             }
             const row = result.rows[0];
-            const newEmployee = new Employee(row.id_employee, row.firstname, row.lastname, row.job, row.phone_number, row.email, row.is_admin, row.password, row.speciality);
+            const newEmployee = new Employee(
+                row.id_employee,
+                row.firstname, 
+                row.lastname,
+                row.job,
+                row.phone_number,
+                row.email,
+                row.is_admin,
+                row.password,
+                row.speciality);
             callback(null, newEmployee);
         });
     }
@@ -62,7 +90,16 @@ class Employee {
                 return callback(error, null);
             }
             const row = result.rows[0];
-            const updatedEmployee = new Employee(row.id_employee, row.firstname, row.lastname, row.job, row.phone_number, row.email, row.is_admin, row.password, row.speciality);
+            const updatedEmployee = new Employee(
+                row.id_employee,
+                row.firstname,
+                row.lastname,
+                row.job,
+                row.phone_number,
+                row.email,
+                row.is_admin,
+                row.password,
+                row.speciality);
             callback(null, updatedEmployee);
         });
     }

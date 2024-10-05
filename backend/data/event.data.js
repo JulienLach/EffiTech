@@ -227,16 +227,12 @@ class Event {
         });
     }
 
-    static sortEventsByClient(idClient, callback) {}
-
-    static sortEventsByStatus(status, callback) {}
-
-    static sortEventsByidEmployee(idEmployee, callback) {}
-
-    static sortEventsByType(type, callback) {}
-
+    // pour cette méthode utiliser les UNION pour récupérer les événements planifiés et non planifiés et les afficher dans l'ordre des UNION
+    static sortEventsByDate() {}
 }
 
+
+// Voir si ces classes sont nécessaires ou si on peut tout faire avec la classe Event
 class Appointment extends Event {
     constructor(idEvent, title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee, workToDo, planIntervention) {
         super(idEvent, title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee);
