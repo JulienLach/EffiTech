@@ -28,7 +28,8 @@ class Company {
                 row.vatNumber,
                 row.capital,
                 row.logo,
-                row.databaseVersion);
+                row.databaseVersion
+            );
             callback(null, company);
         });
     }

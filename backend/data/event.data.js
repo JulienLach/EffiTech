@@ -222,7 +222,20 @@ class Event {
                 return callback(error, null);
             }
             const row = result.rows[0];
-            const deletedEvent = new Event(row.idEvent, row.title, row.description, row.status, row.isPlanned, row.type, row.idClient, row.idAddress, row.startingDate, row.startingHour, row.endingHour, row.idEmployee);
+            const deletedEvent = new Event(
+                row.idEvent,
+                row.title,
+                row.description,
+                row.status,
+                row.isPlanned,
+                row.type,
+                row.idClient,
+                row.idAddress,
+                row.startingDate,
+                row.startingHour,
+                row.endingHour,
+                row.idEmployee
+            );
             callback(null, deletedEvent);
         });
     }
@@ -239,7 +252,8 @@ class Appointment extends Event {
         this.workToDo = workToDo;
         this.planIntervention = planIntervention;
     }
-    // méthode spécifique à la sous classe
+
+    // Méthode spécifique à la sous classe
     static submitAppointmentForm(idEvent, workToDo, planIntervention, callback) {
         const query = 'UPDATE events SET work_to_do = $1, plan_intervention = $2 WHERE idEvent = $3 RETURNING *';
         const values = [workToDo, planIntervention, idEvent];
@@ -248,7 +262,21 @@ class Appointment extends Event {
                 return callback(error, null);
             }
             const row = result.rows[0];
-            const updatedAppointment = new Appointment(row.idEvent, row.title, row.description, row.status, row.isPlanned, row.type, row.idClient, row.idAddress, row.startingDate, row.startingHour, row.endingHour, row.idEmployee, row.work_to_do, row.plan_intervention);
+            const updatedAppointment = new Appointment(
+                row.idEvent,
+                row.title,
+                row.description,
+                row.status,
+                row.isPlanned,
+                row.type,
+                row.idClient,
+                row.idAddress,
+                row.startingDate,
+                row.startingHour,
+                row.endingHour,
+                row.idEmployee,
+                row.work_to_do,
+                row.plan_intervention);
             callback(null, updatedAppointment);
         });
     }
@@ -270,7 +298,19 @@ class Intervention extends Event {
                 return callback(error, null);
             }
             const row = result.rows[0];
-            const updatedIntervention = new Intervention(row.idEvent, row.title, row.description, row.status, row.isPlanned, row.type, row.idClient, row.idAddress, row.startingDate, row.startingHour, row.endingHour, row.idEmployee, row.report, row.planIntervention);
+            const updatedIntervention = new Intervention(
+                row.idEvent,
+                row.title,
+                row.description,
+                row.status,
+                row.isPlanned,
+                row.type, row.idClient, row.idAddress,
+                row.startingDate,
+                row.startingHour,
+                row.endingHour,
+                row.idEmployee,
+                row.report,
+                row.planIntervention);
             callback(null, updatedIntervention);
             // ajouter la condition "planIntervention" si coché crée directement l'intervention, créer un nouvel event avec la méthode createEvent
         });

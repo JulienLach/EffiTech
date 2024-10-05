@@ -21,7 +21,8 @@ class Document {
                     row.title,
                     row.brand,
                     row.model,
-                    row.file);
+                    row.file
+                );
             });
             callback(null, documents);
         }); 
@@ -40,7 +41,8 @@ class Document {
                 row.title,
                 row.brand,
                 row.model,
-                row.file);
+                row.file
+            );
             callback(null, document);
         });
     }
@@ -58,7 +60,8 @@ class Document {
                 row.title,
                 row.brand,
                 row.model,
-                row.file);
+                row.file
+            );
             callback(null, document);
         });
     }
@@ -76,7 +79,8 @@ class Document {
                 row.title,
                 row.brand,
                 row.model,
-                row.file);
+                row.file
+            );
             callback(null, document);
         });
     }

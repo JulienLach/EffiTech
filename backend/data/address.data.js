@@ -20,7 +20,8 @@ class Address {
                 row.id_address,
                 row.address,
                 row.city,
-                row.zipcode);
+                row.zipcode
+            );
             callback(null, address);
         });
     }

@@ -43,7 +43,8 @@ class Invoice {
                 row.amountIncludingTax,
                 row.amountWithoutTax,
                 row.invoiceDate,
-                row.file);
+                row.file
+            );
             callback(null, invoice);
         });
     }
@@ -65,7 +66,8 @@ class Invoice {
                 row.amountIncludingTax,
                 row.amountWithoutTax,
                 row.invoiceDate,
-                row.file);
+                row.file
+            );
             callback(null, invoice);
         }); 
     }
