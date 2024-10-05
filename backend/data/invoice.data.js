@@ -16,7 +16,15 @@ class Invoice {
             if (error) {
                 return callback(error, null);
             }
-            const invoices = result.rows.map(row => new Invoice(row.idInvoice, row.idClient, row.amountIncludingTax, row.amountWithoutTax, row.invoiceDate, row.file));
+            const invoices = result.rows.map(function(row) {
+                return new Invoice(
+                    row.idInvoice,
+                    row.idClient,
+                    row.amountIncludingTax,
+                    row.amountWithoutTax,
+                    row.invoiceDate,
+                    row.file);
+            });
             callback(null, invoices);
         });
     }
@@ -29,7 +37,13 @@ class Invoice {
                 return callback(error, null);
             }
             const row = result.rows[0];
-            let invoice = new Invoice(row.idInvoice, row.idClient, row.amountIncludingTax, row.amountWithoutTax, row.invoiceDate, row.file);
+            let invoice = new Invoice(
+                row.idInvoice,
+                row.idClient,
+                row.amountIncludingTax,
+                row.amountWithoutTax,
+                row.invoiceDate,
+                row.file);
             callback(null, invoice);
         });
     }
@@ -45,7 +59,13 @@ class Invoice {
                 return callback(error, null);
             }
             const row = result.rows[0];
-            let invoice = new Invoice(row.idInvoice, row.idClient, row.amountIncludingTax, row.amountWithoutTax, row.invoiceDate, row.file);
+            let invoice = new Invoice(
+                row.idInvoice,
+                row.idClient,
+                row.amountIncludingTax,
+                row.amountWithoutTax,
+                row.invoiceDate,
+                row.file);
             callback(null, invoice);
         }); 
     }
