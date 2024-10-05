@@ -77,7 +77,15 @@ class InterventionFormPage extends Component {
 
     render() {
         const { event } = this.props.location.state;
-        const { breakdown, workDone, reschedule, startingDate, clientSignature, employeeSignature, duration } = this.state;
+        const { 
+            breakdown,
+            workDone,
+            reschedule,
+            startingDate,
+            clientSignature,
+            employeeSignature,
+            duration 
+        } = this.state;
 
         return (
             <>
