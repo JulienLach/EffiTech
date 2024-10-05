@@ -16,7 +16,11 @@ class Address {
                 return callback(error, null);
             }
             const row = result.rows[0];
-            let address = new Address(row.id_address, row.address, row.city, row.zipcode);
+            let address = new Address(
+                row.id_address,
+                row.address,
+                row.city,
+                row.zipcode);
             callback(null, address);
         });
     }
@@ -28,11 +32,15 @@ class Address {
             if (error) {
                 return callback(error, null);
             }
-            //récupérer la première ligne du résultat
+            // Récupérer la première ligne du résultat
             const row = newAddress.rows[0];
-            //créer un nouvel objet Address avec les données de la ligne SQL
-            newAddress = new Address(row.idAddress, row.address, row.city, row.zipcode);
-            //retourner l'objet Address avec ses données par le callback
+            // Créer un nouvel objet Address avec les données de la ligne SQL
+            let newAddress = new Address(
+                row.idAddress,
+                row.address,
+                row.city,
+                row.zipcode);
+            // Retourner l'objet Address avec ses données par le callback
             callback(null, newAddress);
         });
     }

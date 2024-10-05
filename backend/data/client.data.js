@@ -125,6 +125,7 @@ class Client {
         const clientQuery = 'UPDATE clients SET category = $1, firstname = $2, lastname = $3, email = $4, phone_number = $5 WHERE id_client = $6 RETURNING *';
         const clientValues = [category, firstname, lastname, email, phoneNumber, idClient];
     
+        // Première requête : mettre à jour le client
         pool.query(clientQuery, clientValues, function(error, clientResult) {
             if (error) {
                 return callback(error, null);
@@ -133,6 +134,7 @@ class Client {
             const addressQuery = 'UPDATE addresses SET address = $1, city = $2, zipcode = $3 WHERE id_client = $4 RETURNING *';
             const addressValues = [addressDetails.address, addressDetails.city, addressDetails.zipcode, idClient];
     
+            // Deuxième requête : mettre à jour l'adresse
             pool.query(addressQuery, addressValues, function(error, addressResult) {
                 if (error) {
                     return callback(error, null);
