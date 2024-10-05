@@ -15,7 +15,14 @@ class Document {
             if (error) {
                 return callback(error, null);
             }
-            const documents = result.rows.map(row => new Document(row.idDocument, row.title, row.brand, row.model, row.file));
+            const documents = result.rows.map(function(row) {
+                return new Document(
+                    row.idDocument,
+                    row.title,
+                    row.brand,
+                    row.model,
+                    row.file);
+            });
             callback(null, documents);
         }); 
     }
@@ -28,7 +35,12 @@ class Document {
                 return callback(error, null);
             }
             const row = result.rows[0];
-            let document = new Document(row.idDocument, row.title, row.brand, row.model, row.file);
+            let document = new Document(
+                row.idDocument,
+                row.title,
+                row.brand,
+                row.model,
+                row.file);
             callback(null, document);
         });
     }
@@ -41,7 +53,12 @@ class Document {
                 return callback(error);
             }
             const row = result.rows[0];
-            let document = new Document(row.idDocument, row.title, row.brand, row.model, row.file);
+            let document = new Document(
+                row.idDocument,
+                row.title,
+                row.brand,
+                row.model,
+                row.file);
             callback(null, document);
         });
     }
@@ -54,7 +71,12 @@ class Document {
                 return callback(error, null);
             }
             const row = result.rows[0];
-            let document = new Document(row.idDocument, row.title, row.brand, row.model, row.file);
+            let document = new Document(
+                row.idDocument,
+                row.title,
+                row.brand,
+                row.model,
+                row.file);
             callback(null, document);
         });
     }
