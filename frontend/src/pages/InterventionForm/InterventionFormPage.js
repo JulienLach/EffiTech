@@ -99,13 +99,13 @@ class InterventionFormPage extends Component {
                         <h3>Rapport d'intervention</h3>
                         <div>
                             <div className={styles.inputDisplay}>
-                                <label>Client *</label>
+                                <label>Client</label>
                                 <input type="text" value={`${event.client.firstname} ${event.client.lastname}`} readOnly />
                             </div>
                         </div>
                         <div>
                             <div className={styles.inputDisplay}>
-                                <label>Adresse *</label>
+                                <label>Adresse</label>
                                 <input type="text" value={`${event.client.address.address} ${event.client.address.zipcode} ${event.client.address.city}`} readOnly />
                             </div>
                         </div>
@@ -131,7 +131,7 @@ class InterventionFormPage extends Component {
                             </div>
                         </div>
                         <div>
-                            <h3>Date d'intervention *</h3>
+                            <h3>Date d'intervention</h3>
                             <div className={styles.labelInput}>
                                 <label>Date d'intervention</label>
                                 <input type="date" name="startingDate" value={startingDate} onChange={this.handleChange} />
