@@ -32,12 +32,10 @@ function createReport(req, res) {
                     "Erreur lors de l'insertion dans la base de données:",
                     error
                 ); // Log de l'erreur
-                return res
-                    .status(500)
-                    .send({
-                        message: "Erreur lors de la création du rapport",
-                        error: error.message,
-                    });
+                return res.status(500).send({
+                    message: "Erreur lors de la création du rapport",
+                    error: error.message,
+                });
             }
             res.status(201).send(report);
         }
@@ -48,12 +46,10 @@ function getReportById(req, res) {
     const idEvent = req.params.idEvent;
     Report.getReportById(idEvent, (error, report) => {
         if (error) {
-            return res
-                .status(500)
-                .send({
-                    message: "Erreur lors de la récupération du rapport",
-                    error: error.message,
-                });
+            return res.status(500).send({
+                message: "Erreur lors de la récupération du rapport",
+                error: error.message,
+            });
         }
         if (report) {
             res.status(200).send(report);

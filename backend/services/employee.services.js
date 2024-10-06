@@ -3,12 +3,10 @@ const Employee = require("../data/employee.data.js"); // Importer le modèle Emp
 function getAllEmployees(req, res) {
     Employee.getAllEmployees((error, employees) => {
         if (error) {
-            return res
-                .status(500)
-                .send({
-                    message: "Erreur lors de la récupération des employés",
-                    error: error.message,
-                });
+            return res.status(500).send({
+                message: "Erreur lors de la récupération des employés",
+                error: error.message,
+            });
         }
         res.status(200).send(employees); // Renvoyer les employés
     });
@@ -18,12 +16,10 @@ function getEmployeeById(req, res) {
     const idEmployee = req.params.idEmployee;
     Employee.getEmployeeById(idEmployee, (error, employee) => {
         if (error) {
-            return res
-                .status(500)
-                .send({
-                    message: "Erreur lors de la récupération de l'employé",
-                    error: error.message,
-                });
+            return res.status(500).send({
+                message: "Erreur lors de la récupération de l'employé",
+                error: error.message,
+            });
         }
         if (employee) {
             res.status(200).send(employee);
@@ -55,12 +51,10 @@ function createEmployee(req, res) {
         speciality,
         (error, createdEmployee) => {
             if (error) {
-                return res
-                    .status(500)
-                    .send({
-                        message: "Erreur lors de la création de l'employé",
-                        error: error.message,
-                    });
+                return res.status(500).send({
+                    message: "Erreur lors de la création de l'employé",
+                    error: error.message,
+                });
             }
             res.status(201).send(createdEmployee);
         }
@@ -91,12 +85,10 @@ function updateEmployee(req, res) {
         speciality,
         (error, success) => {
             if (error) {
-                return res
-                    .status(500)
-                    .send({
-                        message: "Erreur lors de la mise à jour de l'employé",
-                        error: error.message,
-                    });
+                return res.status(500).send({
+                    message: "Erreur lors de la mise à jour de l'employé",
+                    error: error.message,
+                });
             }
             if (success) {
                 res.status(200).send({ message: "Fiche Employé mise à jour" });

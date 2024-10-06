@@ -14,12 +14,10 @@ function downloadDocument(req, res) {
     const idDocument = req.params.id;
     Document.getDocumentById(idDocument, (error, document) => {
         if (error) {
-            return res
-                .status(500)
-                .send({
-                    message: "Erreur lors de la récupération du document",
-                    error: error.message,
-                });
+            return res.status(500).send({
+                message: "Erreur lors de la récupération du document",
+                error: error.message,
+            });
         }
         if (document) {
             res.download(document.path, document.name);

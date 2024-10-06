@@ -10,7 +10,7 @@ class Document {
     }
 
     static getAllDocuments(callback) {
-        query = "SELECT * FROM documents";
+        const query = "SELECT * FROM documents";
         pool.query(query, (error, result) => {
             if (error) {
                 return callback(error, null);

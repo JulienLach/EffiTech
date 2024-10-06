@@ -4,12 +4,10 @@ function getAddressById(req, res) {
     const idAddress = req.params.idAddress;
     Address.getAddressById(idAddress, function (error, address) {
         if (error) {
-            return res
-                .status(500)
-                .send({
-                    message: "Erreur lors de la récupération de l'adresse",
-                    error: error.message,
-                });
+            return res.status(500).send({
+                message: "Erreur lors de la récupération de l'adresse",
+                error: error.message,
+            });
         }
         res.status(200).send(address);
     });
@@ -24,12 +22,10 @@ function createAddress(req, res) {
         idClient,
         (error, newAddress) => {
             if (error) {
-                return res
-                    .status(500)
-                    .send({
-                        message: "Erreur lors de la création de l'adresse",
-                        error: error.message,
-                    });
+                return res.status(500).send({
+                    message: "Erreur lors de la création de l'adresse",
+                    error: error.message,
+                });
             }
             res.status(201).send(newAddress);
         }

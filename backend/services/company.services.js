@@ -4,12 +4,10 @@ function getCompanyById() {
     const idCompany = req.params.idCompany;
     Company.getCompanyById(idCompany, (error, company) => {
         if (error) {
-            return res
-                .status(500)
-                .send({
-                    message: "Erreur lors de la récupération de la société",
-                    error: error.message,
-                });
+            return res.status(500).send({
+                message: "Erreur lors de la récupération de la société",
+                error: error.message,
+            });
         }
         if (company) {
             res.status(200).send(company);
