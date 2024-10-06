@@ -1,14 +1,10 @@
 const Document = require("../data/document.data.js");
 
-function getAllDocuments(req, res) {}
+function getAllDocuments() {}
 
-function getDocumentById(req, res) {
-    const idDocument = req.params.id;
-}
+function getDocumentById() {}
 
-function importDocument(req, res) {
-    const { idDocument, title, brand, model, file } = req.body;
-}
+function importDocument() {}
 
 function downloadDocument(req, res) {
     const idDocument = req.params.id;

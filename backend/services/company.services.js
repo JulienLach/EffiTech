@@ -1,6 +1,6 @@
 const Company = require("../data/company.data.js"); // Importer le modèle Client
 
-function getCompanyById() {
+function getCompanyById(req, res) {
     const idCompany = req.params.idCompany;
     Company.getCompanyById(idCompany, (error, company) => {
         if (error) {

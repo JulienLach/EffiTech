@@ -1,4 +1,6 @@
 const Event = require("../data/event.data.js");
+const Intervention = require("../data/event.data.js");
+const Appointment = require("../data/event.data.js");
 
 function getAllEvents(req, res) {
     Event.getAllEvents((error, events) => {
@@ -163,12 +165,9 @@ function submitAppointmentForm(req, res) {
     );
 }
 
-function deleteEvent(req, res) {}
-
 exports.getAllEvents = getAllEvents;
 exports.getEventById = getEventById;
 exports.createEvent = createEvent;
 exports.updateEvent = updateEvent;
 exports.submitInterventionForm = submitInterventionForm;
 exports.submitAppointmentForm = submitAppointmentForm;
-exports.deleteEvent = deleteEvent;
