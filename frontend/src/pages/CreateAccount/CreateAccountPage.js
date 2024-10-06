@@ -33,7 +33,11 @@ class CreateAccountPage extends Component {
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="firstname">Prénom:</label>
-                            <input type="text" id="firstname" name="firstname" />
+                            <input
+                                type="text"
+                                id="firstname"
+                                name="firstname"
+                            />
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="email">Email:</label>
@@ -41,15 +45,35 @@ class CreateAccountPage extends Component {
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="phone_number">Téléphone:</label>
-                            <input type="number" id="phone_number" name="phone_number" />
+                            <input
+                                type="number"
+                                id="phone_number"
+                                name="phone_number"
+                            />
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="password">Mot de passe:</label>
-                            <input type="password" id="password" name="password" />
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                            />
                         </div>
                         <div className={styles.buttonPosition}>
-                            <button type="reset" onClick={this.handleCancel} className={styles.cancelButton}>Annuler</button>
-                            <button type="submit" onClick={this.handleSubmit} className={styles.submitButton}>Créer mon compte</button>
+                            <button
+                                type="reset"
+                                onClick={this.handleCancel}
+                                className={styles.cancelButton}
+                            >
+                                Annuler
+                            </button>
+                            <button
+                                type="submit"
+                                onClick={this.handleSubmit}
+                                className={styles.submitButton}
+                            >
+                                Créer mon compte
+                            </button>
                         </div>
                     </form>
                 </div>

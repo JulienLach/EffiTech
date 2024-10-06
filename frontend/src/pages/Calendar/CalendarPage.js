@@ -52,31 +52,61 @@ class CalendarPage extends Component {
         switch (status) {
             case 5:
                 return (
-                    <span style={{ ...style, backgroundColor: "#DCFFD6", color: "#48903C" }}>
+                    <span
+                        style={{
+                            ...style,
+                            backgroundColor: "#DCFFD6",
+                            color: "#48903C",
+                        }}
+                    >
                         Terminé
                     </span>
                 );
             case 4:
                 return (
-                    <span style={{ ...style, backgroundColor: "#D3F4FF", color: "#2C5BA1" }}>
+                    <span
+                        style={{
+                            ...style,
+                            backgroundColor: "#D3F4FF",
+                            color: "#2C5BA1",
+                        }}
+                    >
                         Aujourd'hui
                     </span>
                 );
             case 3:
                 return (
-                    <span style={{ ...style, backgroundColor: "#FFDEDE", color: "#923838" }}>
+                    <span
+                        style={{
+                            ...style,
+                            backgroundColor: "#FFDEDE",
+                            color: "#923838",
+                        }}
+                    >
                         En retard
                     </span>
                 );
             case 2:
                 return (
-                    <span style={{ ...style, backgroundColor: "#FFECCF", color: "#C35E00" }}>
+                    <span
+                        style={{
+                            ...style,
+                            backgroundColor: "#FFECCF",
+                            color: "#C35E00",
+                        }}
+                    >
                         À venir
                     </span>
                 );
             case 1:
                 return (
-                    <span style={{ ...style, backgroundColor: "#EBEBEB", color: "#505050" }}>
+                    <span
+                        style={{
+                            ...style,
+                            backgroundColor: "#EBEBEB",
+                            color: "#505050",
+                        }}
+                    >
                         À planifier
                     </span>
                 );
@@ -97,7 +127,13 @@ class CalendarPage extends Component {
     }
 
     render() {
-        const { events, error, isEventModalOpen, selectedEvent, isCreateEventModalOpen } = this.state;
+        const {
+            events,
+            error,
+            isEventModalOpen,
+            selectedEvent,
+            isCreateEventModalOpen,
+        } = this.state;
 
         return (
             <div>
@@ -106,7 +142,11 @@ class CalendarPage extends Component {
                     <div className={styles.fixedTopSide}>
                         <h1 className={styles.pageTitle}>Calendrier</h1>
                         <div className={styles.filterBar}>
-                            <FilterBar toggleCreateEventModal={this.toggleCreateEventModal} />
+                            <FilterBar
+                                toggleCreateEventModal={
+                                    this.toggleCreateEventModal
+                                }
+                            />
                         </div>
                         <h3>Événements</h3>
                     </div>
@@ -127,17 +167,38 @@ class CalendarPage extends Component {
                                 {events.map((event) => (
                                     <tr key={event.idEvent}>
                                         <td>
-                                            <a href="#">{event.client.firstname} {event.client.lastname}</a>
+                                            <a href="#">
+                                                {event.client.firstname}{" "}
+                                                {event.client.lastname}
+                                            </a>
                                         </td>
                                         <td>INT-{event.idEvent}</td>
                                         <td>{event.type}</td>
                                         <td>
-                                            <a href="#" onClick={() => this.toggleEventModal(event)}>{event.title}</a>
+                                            <a
+                                                href="#"
+                                                onClick={() =>
+                                                    this.toggleEventModal(event)
+                                                }
+                                            >
+                                                {event.title}
+                                            </a>
                                         </td>
-                                        <td>{this.getStatusIndicator(event.status)}</td>
-                                        <td>{new Date(event.startingDate).toLocaleDateString()}</td>
                                         <td>
-                                            <a href="#">{event.employee.firstname} {event.employee.lastname}</a>
+                                            {this.getStatusIndicator(
+                                                event.status
+                                            )}
+                                        </td>
+                                        <td>
+                                            {new Date(
+                                                event.startingDate
+                                            ).toLocaleDateString()}
+                                        </td>
+                                        <td>
+                                            <a href="#">
+                                                {event.employee.firstname}{" "}
+                                                {event.employee.lastname}
+                                            </a>
                                         </td>
                                     </tr>
                                 ))}
@@ -146,7 +207,10 @@ class CalendarPage extends Component {
                     </div>
                 </div>
                 {isEventModalOpen && (
-                    <InterventionForm event={selectedEvent} closeModal={() => this.toggleEventModal()} />
+                    <InterventionForm
+                        event={selectedEvent}
+                        closeModal={() => this.toggleEventModal()}
+                    />
                 )}
                 {isCreateEventModalOpen && (
                     <CreateEventForm closeModal={this.toggleCreateEventModal} />

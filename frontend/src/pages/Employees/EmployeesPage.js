@@ -14,7 +14,11 @@ class EmployeesPage extends Component {
                             <img src={profilPicture} alt="Profil picture" />
                         </div>
                         <div className={styles.profilInfo}>
-                            <p className={`${styles.lastname} ${styles.firstname}`}>Kylian Menuisier</p>
+                            <p
+                                className={`${styles.lastname} ${styles.firstname}`}
+                            >
+                                Kylian Menuisier
+                            </p>
                             <p className={styles.info}>06 63 63 63 63</p>
                             <p className={styles.info}>kiki@Dmail.gom</p>
                             <p className={styles.info}>Consulter la fiche</p>
@@ -25,7 +29,11 @@ class EmployeesPage extends Component {
                             <img src={profilPicture} alt="Profil picture" />
                         </div>
                         <div className={styles.profilInfo}>
-                            <p className={`${styles.lastname} ${styles.firstname}`}>William Leplombier</p>
+                            <p
+                                className={`${styles.lastname} ${styles.firstname}`}
+                            >
+                                William Leplombier
+                            </p>
                             <p className={styles.info}>06 63 63 63 63</p>
                             <p className={styles.info}>kiki@Dmail.gom</p>
                             <p className={styles.info}>Consulter la fiche</p>

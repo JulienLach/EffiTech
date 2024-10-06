@@ -8,7 +8,7 @@ class LoginPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            redirect: false
+            redirect: false,
         };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -28,14 +28,21 @@ class LoginPage extends Component {
                 <LogoDesktop />
                 <div className={styles.loginFormCard}>
                     <h1 className={styles.titleCard}>Se connecter</h1>
-                    <form onSubmit={this.handleSubmit} className={styles.formElements}>
+                    <form
+                        onSubmit={this.handleSubmit}
+                        className={styles.formElements}
+                    >
                         <div className={styles.labelInput}>
                             <label htmlFor="email">Email:</label>
                             <input type="text" id="email" name="email" />
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="password">Mot de passe:</label>
-                            <input type="password" id="password" name="password" />
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                            />
                         </div>
                         <a href="/forgot-password">Mot de passe oublié ?</a>
                         <button type="submit" className={styles.submitButton}>

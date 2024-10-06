@@ -18,7 +18,7 @@ class ReportPage extends Component {
 
         this.state = {
             reportData: report,
-            event: event
+            event: event,
         };
     }
 
@@ -27,7 +27,10 @@ class ReportPage extends Component {
         const idEvent = event.idEvent;
         getReportById(idEvent, (error, data) => {
             if (error) {
-                console.error("Erreur lors de la récupération du rapport", error);
+                console.error(
+                    "Erreur lors de la récupération du rapport",
+                    error
+                );
             } else {
                 this.setState({ reportData: data });
                 console.log("Donnée du rapport récupérée:", data);
@@ -38,19 +41,21 @@ class ReportPage extends Component {
     render() {
         const { event, reportData } = this.state;
 
-        const reportDetails = reportData ? {
-            idEvent: event.idEvent,
-            title: event.title,
-            breakdown: reportData.breakdown,
-            workDone: reportData.workDone,
-            startingDate: event.startingDate,
-            startingHour: event.startingHour,
-            endingHour: event.endingHour,
-            duration: event.duration,
-            client: event.client,
-            clientSignature: reportData.client_signature,
-            employeeSignature: reportData.employee_signature,
-        } : null;
+        const reportDetails = reportData
+            ? {
+                  idEvent: event.idEvent,
+                  title: event.title,
+                  breakdown: reportData.breakdown,
+                  workDone: reportData.workDone,
+                  startingDate: event.startingDate,
+                  startingHour: event.startingHour,
+                  endingHour: event.endingHour,
+                  duration: event.duration,
+                  client: event.client,
+                  clientSignature: reportData.client_signature,
+                  employeeSignature: reportData.employee_signature,
+              }
+            : null;
 
         console.log("Donnée du rapport avec évènement", reportData);
         console.log("donnée du rapport", reportDetails);
@@ -62,8 +67,14 @@ class ReportPage extends Component {
                     <div className={styles.card}>
                         <div className={styles.alignButton}>
                             <h2>Rapport d'intervention</h2>
-                            <button type="button" onClick={() => window.location.href='/calendar'}>
-                                <i className="fa-solid fa-arrow-right"></i>Retour
+                            <button
+                                type="button"
+                                onClick={() =>
+                                    (window.location.href = "/calendar")
+                                }
+                            >
+                                <i className="fa-solid fa-arrow-right"></i>
+                                Retour
                             </button>
                         </div>
                         <div className={styles.interventionInfo}>
@@ -73,15 +84,28 @@ class ReportPage extends Component {
                         </div>
                         <div className={styles.infoTitle}>
                             <h3>Client</h3>
-                            <p>{event.client.firstname} {event.client.lastname}</p>
+                            <p>
+                                {event.client.firstname} {event.client.lastname}
+                            </p>
                             <p>{event.client.phoneNumber}</p>
-                            <p>{event.client.address.address}, {event.client.address.zipcode}, {event.client.address.city}</p>
+                            <p>
+                                {event.client.address.address},{" "}
+                                {event.client.address.zipcode},{" "}
+                                {event.client.address.city}
+                            </p>
                         </div>
                         <div className={styles.infoTitle}>
                             <h3>Technicien</h3>
-                            <p>{event.employee.firstname} {event.employee.lastname}</p>
                             <p>
-                                Intervenu le: {new Date(event.startingDate).toLocaleDateString()} de {event.startingHour} à {event.endingHour}
+                                {event.employee.firstname}{" "}
+                                {event.employee.lastname}
+                            </p>
+                            <p>
+                                Intervenu le:{" "}
+                                {new Date(
+                                    event.startingDate
+                                ).toLocaleDateString()}{" "}
+                                de {event.startingHour} à {event.endingHour}
                             </p>
                         </div>
                         <div className={styles.separation}></div>
@@ -89,10 +113,15 @@ class ReportPage extends Component {
                             <h2>Document associé</h2>
                             <div className={styles.documentLink}>
                                 <i className="fa-regular fa-file-pdf"></i>
-                                <a href="#">INT{event.idEvent}-{event.client.firstname}-{event.client.lastname}-{event.title}</a>
+                                <a href="#">
+                                    INT{event.idEvent}-{event.client.firstname}-
+                                    {event.client.lastname}-{event.title}
+                                </a>
                             </div>
                         </div>
-                        {reportDetails && <PDFGenerator report={reportDetails} />}
+                        {reportDetails && (
+                            <PDFGenerator report={reportDetails} />
+                        )}
                     </div>
                 </div>
             </>

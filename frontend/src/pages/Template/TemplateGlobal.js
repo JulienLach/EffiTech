@@ -20,8 +20,13 @@ class TemplateGlobal extends Component {
                                 </button>
                             </div>
                             <div className={styles.notificationIcon}>
-                                <img src={bellIcon} className={styles.notificationBell}></img>
-                                <span className={styles.notificationCount}>2</span>
+                                <img
+                                    src={bellIcon}
+                                    className={styles.notificationBell}
+                                ></img>
+                                <span className={styles.notificationCount}>
+                                    2
+                                </span>
                             </div>
                             <div className={styles.profileBubble}>JL</div>
                         </div>
