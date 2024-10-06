@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { useNavigate } from 'react-router-dom';
-import styles from './InterventionForm.module.css';
+import React, { Component } from "react";
+import { useNavigate } from "react-router-dom";
+import styles from "./InterventionForm.module.css";
 
 // Composant wrapper pour utiliser les hooks
 function InterventionFormWrapper(props) {
@@ -32,31 +32,61 @@ class InterventionForm extends Component {
         switch (status) {
             case 5:
                 return (
-                    <span style={{ ...style, backgroundColor: "#DCFFD6", color: "#48903C" }}>
+                    <span
+                        style={{
+                            ...style,
+                            backgroundColor: "#DCFFD6",
+                            color: "#48903C",
+                        }}
+                    >
                         Terminé
                     </span>
                 );
             case 4:
                 return (
-                    <span style={{ ...style, backgroundColor: "#D3F4FF", color: "#2C5BA1" }}>
+                    <span
+                        style={{
+                            ...style,
+                            backgroundColor: "#D3F4FF",
+                            color: "#2C5BA1",
+                        }}
+                    >
                         Aujourd'hui
                     </span>
                 );
             case 3:
                 return (
-                    <span style={{ ...style, backgroundColor: "#FFDEDE", color: "#923838" }}>
+                    <span
+                        style={{
+                            ...style,
+                            backgroundColor: "#FFDEDE",
+                            color: "#923838",
+                        }}
+                    >
                         En retard
                     </span>
                 );
             case 2:
                 return (
-                    <span style={{ ...style, backgroundColor: "#FFECCF", color: "#C35E00" }}>
+                    <span
+                        style={{
+                            ...style,
+                            backgroundColor: "#FFECCF",
+                            color: "#C35E00",
+                        }}
+                    >
                         À venir
                     </span>
                 );
             case 1:
                 return (
-                    <span style={{ ...style, backgroundColor: "#EBEBEB", color: "#505050" }}>
+                    <span
+                        style={{
+                            ...style,
+                            backgroundColor: "#EBEBEB",
+                            color: "#505050",
+                        }}
+                    >
                         À planifier
                     </span>
                 );
@@ -67,7 +97,10 @@ class InterventionForm extends Component {
         const { event, closeModal } = this.props;
 
         return (
-            <form onSubmit={this.handleSubmit} className={`${styles.modal} ${styles.open}`}>
+            <form
+                onSubmit={this.handleSubmit}
+                className={`${styles.modal} ${styles.open}`}
+            >
                 <div className={styles.container}>
                     <div>
                         <h2>Intervention</h2>
@@ -79,15 +112,28 @@ class InterventionForm extends Component {
                             <h2>INT-{event.idEvent}</h2>
                         </div>
                         <div className={styles.separator}></div>
-                        <div>Client: {event.client.firstname} {event.client.lastname}</div>
+                        <div>
+                            Client: {event.client.firstname}{" "}
+                            {event.client.lastname}
+                        </div>
                         <div>Téléphone: {event.client.phoneNumber}</div>
-                        <div>Adresse: {event.client.address.address}, {event.client.address.zipcode} {event.client.address.city}</div>
+                        <div>
+                            Adresse: {event.client.address.address},{" "}
+                            {event.client.address.zipcode}{" "}
+                            {event.client.address.city}
+                        </div>
                         <div>Description: {event.description}</div>
                         <div className={styles.separator}></div>
                         <h3>Planification</h3>
-                        <div>Début de l'intervention: {new Date(event.startingDate).toLocaleDateString()}</div>
-                        <div>Fin de l'intervention: {event.endingHour}</div> {/* Affiche l'heure de fin */}
-                        <div>Technicien intervenant: {event.employee.firstname} {event.employee.lastname}</div>
+                        <div>
+                            Début de l'intervention:{" "}
+                            {new Date(event.startingDate).toLocaleDateString()}
+                        </div>
+                        <div>Fin de l'intervention: {event.endingHour}</div>{" "}
+                        <div>
+                            Technicien intervenant: {event.employee.firstname}{" "}
+                            {event.employee.lastname}
+                        </div>
                     </div>
                     <div className={styles.modalFooter}>
                         <button onClick={closeModal}>Retour</button>

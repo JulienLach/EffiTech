@@ -1,6 +1,10 @@
-import React, { Component } from 'react';
-import styles from './CreateEventForm.module.css';
-import { getAllClients, getAllEmployees, createEvent } from '../../services/api';
+import React, { Component } from "react";
+import styles from "./CreateEventForm.module.css";
+import {
+    getAllClients,
+    getAllEmployees,
+    createEvent,
+} from "../../services/api";
 
 // Composant wrapper pour utiliser les hooks
 function CreateEventFormWrapper(props) {
@@ -13,14 +17,14 @@ class CreateEventForm extends Component {
         this.state = {
             clients: [],
             employees: [],
-            address: '',
+            address: "",
             selectedClient: null,
-            selectedEmployee: '',
-            title: '',
-            startingDate: '',
-            startingHour: '',
-            endingHour: '',
-            description: '',
+            selectedEmployee: "",
+            title: "",
+            startingDate: "",
+            startingHour: "",
+            endingHour: "",
+            description: "",
             isPlanned: false,
         };
 
@@ -33,7 +37,10 @@ class CreateEventForm extends Component {
     componentDidMount() {
         getAllClients((error, data) => {
             if (error) {
-                console.error('Erreur lors de la récupération des clients', error);
+                console.error(
+                    "Erreur lors de la récupération des clients",
+                    error
+                );
             } else {
                 this.setState({ clients: data });
             }
@@ -41,7 +48,10 @@ class CreateEventForm extends Component {
 
         getAllEmployees((error, data) => {
             if (error) {
-                console.error('Erreur lors de la récupération des employés', error);
+                console.error(
+                    "Erreur lors de la récupération des employés",
+                    error
+                );
             } else {
                 this.setState({ employees: data });
             }
@@ -49,11 +59,14 @@ class CreateEventForm extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (prevState.selectedClient !== this.state.selectedClient && this.state.selectedClient) {
+        if (
+            prevState.selectedClient !== this.state.selectedClient &&
+            this.state.selectedClient
+        ) {
             const addressDetails = this.state.selectedClient.address;
             const fullAddress = `${addressDetails.idAddress} ${addressDetails.address}, ${addressDetails.city}, ${addressDetails.zipcode}`;
             this.setState({ address: fullAddress });
-            console.log('Adresse complète:', fullAddress);
+            console.log("Adresse complète:", fullAddress);
         }
 
         if (
@@ -62,14 +75,21 @@ class CreateEventForm extends Component {
             prevState.endingHour !== this.state.endingHour
         ) {
             this.setState({
-                isPlanned: this.state.startingDate && this.state.startingHour && this.state.endingHour ? true : false,
+                isPlanned:
+                    this.state.startingDate &&
+                    this.state.startingHour &&
+                    this.state.endingHour
+                        ? true
+                        : false,
             });
         }
     }
 
     handleClientChange(event) {
         const clientId = event.target.value;
-        const client = this.state.clients.find(client => client.idClient.toString() === clientId);
+        const client = this.state.clients.find(
+            (client) => client.idClient.toString() === clientId
+        );
         this.setState({ selectedClient: client });
     }
 
@@ -99,7 +119,7 @@ class CreateEventForm extends Component {
             description: description,
             status: 2, // à changer car plus utile
             isPlanned: isPlanned,
-            type: 'Intervention', // a changer avec ajout de RDV
+            type: "Intervention", // a changer avec ajout de RDV
             idClient: selectedClient.idClient,
             idAddress: selectedClient.address.idAddress,
             startingDate: startingDate,
@@ -110,9 +130,9 @@ class CreateEventForm extends Component {
 
         createEvent(eventData, (error, newEvent) => {
             if (error) {
-                console.error('Error creating event:', error);
+                console.error("Error creating event:", error);
             } else {
-                console.log('Event created successfully:', newEvent);
+                console.log("Event created successfully:", newEvent);
                 this.props.closeModal();
             }
             window.location.reload();
@@ -140,30 +160,57 @@ class CreateEventForm extends Component {
                 <div className={styles.form}>
                     <div>
                         <label>Titre *</label>
-                        <input type="text" name="title" value={title} onChange={this.handleChange} />
+                        <input
+                            type="text"
+                            name="title"
+                            value={title}
+                            onChange={this.handleChange}
+                        />
                     </div>
                     <div>
                         <label>Date d'intervention</label>
-                        <input type="date" name="startingDate" value={startingDate} onChange={this.handleChange} />
+                        <input
+                            type="date"
+                            name="startingDate"
+                            value={startingDate}
+                            onChange={this.handleChange}
+                        />
                     </div>
                     <div>
                         <label>Heure de début</label>
-                        <input type="time" name="startingHour" value={startingHour} onChange={this.handleChange} />
+                        <input
+                            type="time"
+                            name="startingHour"
+                            value={startingHour}
+                            onChange={this.handleChange}
+                        />
                     </div>
                     <div>
                         <label>Heure de fin</label>
-                        <input type="time" name="endingHour" value={endingHour} onChange={this.handleChange} />
+                        <input
+                            type="time"
+                            name="endingHour"
+                            value={endingHour}
+                            onChange={this.handleChange}
+                        />
                     </div>
                     <div>
                         <label>Description</label>
-                        <textarea name="description" value={description} onChange={this.handleChange} />
+                        <textarea
+                            name="description"
+                            value={description}
+                            onChange={this.handleChange}
+                        />
                     </div>
                     <div>
                         <label>Sélectionner un client *</label>
                         <select onChange={this.handleClientChange}>
                             <option value="">Sélectionner un client</option>
-                            {clients.map(client => (
-                                <option key={client.idClient} value={client.idClient}>
+                            {clients.map((client) => (
+                                <option
+                                    key={client.idClient}
+                                    value={client.idClient}
+                                >
                                     {client.firstname} {client.lastname}
                                 </option>
                             ))}
@@ -175,17 +222,26 @@ class CreateEventForm extends Component {
                     </div>
                     <div>
                         <label>Sélectionner un technicien *</label>
-                        <select value={selectedEmployee} onChange={this.handleEmployeeChange}>
+                        <select
+                            value={selectedEmployee}
+                            onChange={this.handleEmployeeChange}
+                        >
                             <option value="">Sélectionner un technicien</option>
-                            {employees.map(employee => (
-                                <option key={employee.idEmployee} value={employee.idEmployee}>
+                            {employees.map((employee) => (
+                                <option
+                                    key={employee.idEmployee}
+                                    value={employee.idEmployee}
+                                >
                                     {employee.firstname} {employee.lastname}
                                 </option>
                             ))}
                         </select>
                     </div>
                     <div>
-                        <input type="hidden" value={this.state.isPlanned ? 'true' : 'false'} />
+                        <input
+                            type="hidden"
+                            value={this.state.isPlanned ? "true" : "false"}
+                        />
                     </div>
                     <div className={styles.modalFooter}>
                         <button type="button" onClick={this.props.closeModal}>

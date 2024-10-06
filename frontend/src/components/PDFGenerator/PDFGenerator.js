@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Page, Text, View, Document, StyleSheet, pdf } from "@react-pdf/renderer";
+import {
+    Page,
+    Text,
+    View,
+    Document,
+    StyleSheet,
+    pdf,
+} from "@react-pdf/renderer";
 import logo from "../../images/logo.svg";
 
 const styles = StyleSheet.create({
@@ -70,9 +77,15 @@ const PDFGenerator = ({ report }) => {
                         <Text style={styles.logo}>[LOGO COMPANY]</Text>
                         <View style={styles.infoClientCompany}>
                             <View>
-                                <Text>{report.client.firstname} {report.client.lastname}</Text>
+                                <Text>
+                                    {report.client.firstname}{" "}
+                                    {report.client.lastname}
+                                </Text>
                                 <Text>{report.client.address.address}</Text>
-                                <Text>{report.client.address.zipcode} {report.client.address.city}</Text>
+                                <Text>
+                                    {report.client.address.zipcode}{" "}
+                                    {report.client.address.city}
+                                </Text>
                                 <Text>{report.client.phoneNumber}</Text>
                             </View>
                         </View>
@@ -80,15 +93,19 @@ const PDFGenerator = ({ report }) => {
                         <Text style={styles.interventionIdTitle}>
                             INT-{report.idEvent} - {report.title}
                         </Text>
-                        <Text style={styles.dateAndHour}>Panne constatée :</Text>
+                        <Text style={styles.dateAndHour}>
+                            Panne constatée :
+                        </Text>
                         <Text style={styles.breakdown}>{report.breakdown}</Text>
                         <Text style={styles.dateAndHour}>Réparation :</Text>
                         <Text style={styles.workDone}>{report.workDone}</Text>
                         <Text style={styles.dateAndHour}>
-                            Intervenu le: {new Date(report.startingDate).toLocaleDateString()}
+                            Intervenu le:{" "}
+                            {new Date(report.startingDate).toLocaleDateString()}
                         </Text>
                         <Text style={styles.dateAndHour}>
-                            Heure de l’intervention : de {report.startingHour} à {report.endingHour}
+                            Heure de l’intervention : de {report.startingHour} à{" "}
+                            {report.endingHour}
                         </Text>
                         <Text style={styles.dateAndHour}>
                             Durée de l’intervention : {report.duration} heures
