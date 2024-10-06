@@ -53,7 +53,7 @@ function createClient(req, res) {
                 });
             }
             res.status(201).send(createdClient);
-        },
+        }
     );
 }
 
@@ -85,7 +85,7 @@ function updateClient(req, res) {
             if (updatedClient) {
                 res.status(200).send({ message: "Client modifié avec succès" });
             }
-        },
+        }
     );
 }
 

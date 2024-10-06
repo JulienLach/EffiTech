@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Navigate } from "react-router-dom";
 import styles from "./Login.module.css";
-import GlobalStyles from "../../styles/GlobalStyles.module.css";
 import LogoDesktop from "../../components/LogoDesktop/LogoDesktop";
 
 class LoginPage extends Component {

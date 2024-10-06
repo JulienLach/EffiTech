@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import GlobalStyles from "../../styles/GlobalStyles.module.css";
 import styles from "./FilterBar.module.css";
 
 class FilterBar extends Component {

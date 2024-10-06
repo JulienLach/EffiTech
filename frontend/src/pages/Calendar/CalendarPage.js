@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import TemplateGlobal from "../Template/TemplateGlobal";
 import styles from "./CalendarPage.module.css";
-import GlobalStyles from "../../styles/GlobalStyles.module.css";
 import { getAllEvents } from "../../services/api";
 import FilterBar from "../../components/FilterBar/FilterBar";
 import InterventionForm from "../../components/InterventionForm/InterventionForm";
@@ -71,7 +70,7 @@ class CalendarPage extends Component {
                             color: "#2C5BA1",
                         }}
                     >
-                        Aujourd'hui
+                        Aujourd&apos;hui
                     </span>
                 );
             case 3:
@@ -129,7 +128,6 @@ class CalendarPage extends Component {
     render() {
         const {
             events,
-            error,
             isEventModalOpen,
             selectedEvent,
             isCreateEventModalOpen,
