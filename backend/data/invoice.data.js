@@ -1,7 +1,14 @@
-const pool = require('../config/db.config');
+const pool = require("../config/db.config");
 
 class Invoice {
-    constructor(idInvoice, idClient, amountIncludingTax, amountWithoutTax, invoiceDate, file) {
+    constructor(
+        idInvoice,
+        idClient,
+        amountIncludingTax,
+        amountWithoutTax,
+        invoiceDate,
+        file
+    ) {
         this.idInvoice = idInvoice;
         this.idClient = idClient;
         this.amountIncludingTax = amountIncludingTax;
@@ -11,26 +18,27 @@ class Invoice {
     }
 
     static getAllInvoices(callback) {
-        const query = 'SELECT * FROM invoices';
+        const query = "SELECT * FROM invoices";
         pool.query(query, (error, result) => {
             if (error) {
                 return callback(error, null);
             }
-            const invoices = result.rows.map(function(row) {
+            const invoices = result.rows.map(function (row) {
                 return new Invoice(
                     row.idInvoice,
                     row.idClient,
                     row.amountIncludingTax,
                     row.amountWithoutTax,
                     row.invoiceDate,
-                    row.file);
+                    row.file
+                );
             });
             callback(null, invoices);
         });
     }
 
     static getInvoiceById(idInvoice, callback) {
-        const query = 'SELECT * FROM invoices WHERE idInvoice = $1';
+        const query = "SELECT * FROM invoices WHERE idInvoice = $1";
         const values = [idInvoice];
         pool.query(query, values, (error, result) => {
             if (error) {
@@ -49,12 +57,25 @@ class Invoice {
         });
     }
 
-    static importInvoice(idClient, amountIncludingTax, amountWithoutTax, invoiceDate, file, callback) {
+    static importInvoice(
+        idClient,
+        amountIncludingTax,
+        amountWithoutTax,
+        invoiceDate,
+        file,
+        callback
+    ) {
         const query = `
             INSERT INTO invoices (idClient, amountIncludingTax, amountWithoutTax, invoiceDate, file) 
             VALUES ($1, $2, $3, $4, $5)
         `;
-        const values = [idClient, amountIncludingTax, amountWithoutTax, invoiceDate, file];
+        const values = [
+            idClient,
+            amountIncludingTax,
+            amountWithoutTax,
+            invoiceDate,
+            file,
+        ];
         pool.query(query, values, (error, result) => {
             if (error) {
                 return callback(error, null);
@@ -69,7 +90,7 @@ class Invoice {
                 row.file
             );
             callback(null, invoice);
-        }); 
+        });
     }
 }
 
