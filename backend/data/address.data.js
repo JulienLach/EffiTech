@@ -1,4 +1,4 @@
-const pool = require('../config/db.config'); // Importer la configuration de la base de données
+const pool = require("../config/db.config"); // Importer la configuration de la base de données
 
 class Address {
     constructor(idAddress, address, city, zipcode, idClient) {
@@ -10,7 +10,7 @@ class Address {
     }
 
     static getAddressById(idAddress, callback) {
-        const query = 'SELECT * FROM addresses WHERE id_address = $1';
+        const query = "SELECT * FROM addresses WHERE id_address = $1";
         const values = [idAddress];
         pool.query(query, values, (error, result) => {
             if (error) {
@@ -27,9 +27,10 @@ class Address {
             callback(null, address);
         });
     }
-    
+
     static createAddress(address, city, zipcode, idClient, callback) {
-        const query = 'INSERT INTO addresses (address, city, zipcode, id_client) VALUES ($1, $2, $3, $4) RETURNING *';
+        const query =
+            "INSERT INTO addresses (address, city, zipcode, id_client) VALUES ($1, $2, $3, $4) RETURNING *";
         const values = [address, city, zipcode, idClient];
         pool.query(query, values, (error, result) => {
             if (error) {
