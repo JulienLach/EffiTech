@@ -2,7 +2,7 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    margin: 100px 20px 0 250px;
+    margin: 50px 20px 0 250px;
 }
 
 a {
@@ -11,6 +11,7 @@ a {
 
 .card {
     display: flex;
+    justify-content: space-between;
     margin: 15px;
     width: 25%;
     padding: 20px;
@@ -20,9 +21,8 @@ a {
 }
 
 .profilPicture {
-    width: 70;
-    height: 70px;
-    margin-right: 20px;
+    width: 100px;
+    height: 100px;
 }
 
 .profilPicture img {
@@ -31,14 +31,46 @@ a {
     border-radius: 50%;
 }
 
+.job {
+    width: auto;
+    text-align: center;
+    border-radius: 50px;
+    background-color: #d9d9d9;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 10px 0;
+}
+
 .info {
+    text-align: right;
     margin: 5px;
     padding: 0;
     font-size: 18px;
-    font-weight: 400;
+    font-weight: 500;
+    color: #3e3e3e;
 }
 
-.lastname, .firstname {
+.moreInfo {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    font-size: 18px;
+    font-weight: 500;
+    color: #c93c2c;
+    margin: 0;
+}
+
+.moreInfo button {
+    color: #c93c2c;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 500;
+    background-color: white;
+}
+
+.lastname,
+.firstname {
     margin: 5px;
     padding: 0;
     font-size: 22px;

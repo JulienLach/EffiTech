@@ -11,6 +11,7 @@ import CalendarPage from "./pages/Calendar/CalendarPage";
 import InterventionFormPage from "./pages/InterventionForm/InterventionFormPage";
 import ReportPage from "./pages/Report/ReportPage";
 import EmployeesPage from "./pages/Employees/EmployeesPage";
+import EmployeeDetailsPage from "./pages/EmployeeDetails/EmployeeDetailsPage";
 import AppointmentFormPage from "./pages/AppointmentForm/AppointmentFormPage";
 
 const App = () => {
@@ -27,6 +28,10 @@ const App = () => {
                 />
                 <Route path="/report" element={<ReportPage />} />
                 <Route path="/employees" element={<EmployeesPage />} />
+                <Route
+                    path="/employee-details"
+                    element={<EmployeeDetailsPage />}
+                />
                 <Route
                     path="/appointment-form"
                     element={<AppointmentFormPage />}
