@@ -11,6 +11,7 @@ import CalendarPage from "./pages/Calendar/CalendarPage";
 import InterventionFormPage from "./pages/InterventionForm/InterventionFormPage";
 import ReportPage from "./pages/Report/ReportPage";
 import EmployeesPage from "./pages/Employees/EmployeesPage";
+import AppointmentFormPage from "./pages/AppointmentForm/AppointmentFormPage";
 
 const App = () => {
     return (
@@ -26,6 +27,10 @@ const App = () => {
                 />
                 <Route path="/report" element={<ReportPage />} />
                 <Route path="/employees" element={<EmployeesPage />} />
+                <Route
+                    path="/appointment-form"
+                    element={<AppointmentFormPage />}
+                />
             </Routes>
         </Router>
     );
