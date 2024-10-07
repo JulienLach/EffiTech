@@ -17,7 +17,11 @@ class InterventionForm extends Component {
     handleSubmit(e) {
         e.preventDefault();
         const { event, navigate } = this.props;
-        navigate("/intervention-form", { state: { event } });
+        if (event.type === "Intervention") {
+            navigate("/intervention-form", { state: { event } });
+        } else if (event.type === "Rendez-vous") {
+            navigate("/appointment-form", { state: { event } });
+        }
     }
 
     getStatusIndicator(status) {
@@ -160,7 +164,16 @@ class InterventionForm extends Component {
                         {event.status === 5 ? (
                             <button type="submit">Visualiser le rapport</button>
                         ) : (
-                            <button type="submit">Remplir le rapport</button>
+                            <button type="submit">
+                                Remplir le{" "}
+                                {(() => {
+                                    if (event.type === "Intervention") {
+                                        return "rapport";
+                                    } else {
+                                        return "questionnaire";
+                                    }
+                                })()}
+                            </button>
                         )}
                     </div>
                 </div>
