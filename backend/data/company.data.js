@@ -22,7 +22,7 @@ class Company {
     }
 
     static getCompanyById(idCompany, callback) {
-        const query = "SELECT * FROM companies WHERE idCompany = $1";
+        const query = "SELECT * FROM companies WHERE id_company = $1";
         const values = [idCompany];
         pool.query(query, values, (error, result) => {
             if (error) {
@@ -30,14 +30,14 @@ class Company {
             }
             const row = result.rows[0];
             let company = new Company(
-                row.idCompany,
-                row.phoneNumber,
-                row.idAddress,
+                row.id_company,
+                row.phone_number,
+                row.id_address,
                 row.siret,
-                row.vatNumber,
+                row.vat_number,
                 row.capital,
                 row.logo,
-                row.databaseVersion
+                row.database_version
             );
             callback(null, company);
         });

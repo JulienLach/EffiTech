@@ -25,11 +25,11 @@ class Invoice {
             }
             const invoices = result.rows.map(function (row) {
                 return new Invoice(
-                    row.idInvoice,
-                    row.idClient,
-                    row.amountIncludingTax,
-                    row.amountWithoutTax,
-                    row.invoiceDate,
+                    row.id_invoice,
+                    row.id_client,
+                    row.amount_including_tax,
+                    row.amount_without_tax,
+                    row.invoice_date,
                     row.file
                 );
             });
@@ -46,11 +46,11 @@ class Invoice {
             }
             const row = result.rows[0];
             let invoice = new Invoice(
-                row.idInvoice,
-                row.idClient,
-                row.amountIncludingTax,
-                row.amountWithoutTax,
-                row.invoiceDate,
+                row.id_invoice,
+                row.id_client,
+                row.amount_including_tax,
+                row.amount_without_tax,
+                row.invoice_date,
                 row.file
             );
             callback(null, invoice);
@@ -82,11 +82,11 @@ class Invoice {
             }
             const row = result.rows[0];
             let invoice = new Invoice(
-                row.idInvoice,
-                row.idClient,
-                row.amountIncludingTax,
-                row.amountWithoutTax,
-                row.invoiceDate,
+                row.id_invoice,
+                row.id_client,
+                row.amount_including_tax,
+                row.amount_without_tax,
+                row.invoice_date,
                 row.file
             );
             callback(null, invoice);

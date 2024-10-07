@@ -17,7 +17,7 @@ class Document {
             }
             const documents = result.rows.map(function (row) {
                 return new Document(
-                    row.idDocument,
+                    row.id_document,
                     row.title,
                     row.brand,
                     row.model,
@@ -37,7 +37,7 @@ class Document {
             }
             const row = result.rows[0];
             let document = new Document(
-                row.idDocument,
+                row.id_document,
                 row.title,
                 row.brand,
                 row.model,
@@ -57,7 +57,7 @@ class Document {
             }
             const row = result.rows[0];
             let document = new Document(
-                row.idDocument,
+                row.id_document,
                 row.title,
                 row.brand,
                 row.model,
@@ -76,7 +76,7 @@ class Document {
             }
             const row = result.rows[0];
             let document = new Document(
-                row.idDocument,
+                row.id_document,
                 row.title,
                 row.brand,
                 row.model,

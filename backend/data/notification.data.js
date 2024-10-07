@@ -27,13 +27,13 @@ class Notification {
             }
             const notifications = result.rows.map(function (row) {
                 return new Notification(
-                    row.idNotification,
-                    row.idEmployee,
+                    row.id_notification,
+                    row.id_employee,
                     row.action,
                     row.type,
                     row.title,
-                    row.creationDate,
-                    row.creationHour
+                    row.creation_date,
+                    row.creation_hour
                 );
             });
             callback(null, notifications);

@@ -290,18 +290,18 @@ class Event {
             }
             const row = result.rows[0];
             const deletedEvent = new Event(
-                row.idEvent,
+                row.id_event,
                 row.title,
                 row.description,
                 row.status,
-                row.isPlanned,
+                row.is_planned,
                 row.type,
-                row.idClient,
-                row.idAddress,
-                row.startingDate,
-                row.startingHour,
-                row.endingHour,
-                row.idEmployee
+                row.id_client,
+                row.id_client,
+                row.starting_date,
+                row.startin_hour,
+                row.ending_hour,
+                row.id_employee
             );
             callback(null, deletedEvent);
         });
@@ -363,18 +363,18 @@ class Appointment extends Event {
             }
             const row = result.rows[0];
             const updatedAppointment = new Appointment(
-                row.idEvent,
+                row.id_event,
                 row.title,
                 row.description,
                 row.status,
-                row.isPlanned,
+                row.is_planned,
                 row.type,
-                row.idClient,
-                row.idAddress,
-                row.startingDate,
-                row.startingHour,
-                row.endingHour,
-                row.idEmployee,
+                row.id_client,
+                row.id_address,
+                row.starting_date,
+                row.starting_hour,
+                row.ending_hour,
+                row.id_employee,
                 row.work_to_do,
                 row.plan_intervention
             );
@@ -448,20 +448,20 @@ class Intervention extends Event {
             }
             const row = result.rows[0];
             const updatedIntervention = new Intervention(
-                row.idEvent,
+                row.id_event,
                 row.title,
                 row.description,
                 row.status,
-                row.isPlanned,
+                row.is_planned,
                 row.type,
-                row.idClient,
-                row.idAddress,
-                row.startingDate,
-                row.startingHour,
-                row.endingHour,
-                row.idEmployee,
+                row.id_client,
+                row.id_address,
+                row.starting_date,
+                row.starting_hour,
+                row.ending_hour,
+                row.id_employee,
                 row.report,
-                row.planIntervention
+                row.plan_intervention
             );
             callback(null, updatedIntervention);
             // ajouter la condition "planIntervention" si coché crée directement l'intervention, créer un nouvel event avec la méthode createEvent
