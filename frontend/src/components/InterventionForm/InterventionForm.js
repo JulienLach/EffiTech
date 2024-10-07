@@ -103,13 +103,22 @@ class InterventionForm extends Component {
             >
                 <div className={styles.container}>
                     <div>
-                        <h2>Intervention</h2>
+                        <h2>
+                            {event.type === "Intervention"
+                                ? "Intervention"
+                                : "Rendez-vous"}
+                        </h2>
                         <p>{this.getStatusIndicator(event.status)}</p>
                     </div>
 
                     <div>
                         <div>
-                            <h2>INT-{event.idEvent}</h2>
+                            <h2>
+                                {event.type === "Intervention"
+                                    ? "INT-"
+                                    : "RDV-"}
+                                {event.idEvent}
+                            </h2>
                         </div>
                         <div className={styles.separator}></div>
                         <div>
@@ -126,10 +135,20 @@ class InterventionForm extends Component {
                         <div className={styles.separator}></div>
                         <h3>Planification</h3>
                         <div>
-                            Début de l'intervention:{" "}
+                            Début{" "}
+                            {event.type === "Intervention"
+                                ? "de l'intervention"
+                                : "du rendez-vous"}
+                            :{" "}
                             {new Date(event.startingDate).toLocaleDateString()}
                         </div>
-                        <div>Fin de l'intervention: {event.endingHour}</div>{" "}
+                        <div>
+                            Fin{" "}
+                            {event.type === "Intervention"
+                                ? "de l'intervention"
+                                : "du rendez-vous"}
+                            : {event.endingHour}
+                        </div>{" "}
                         <div>
                             Technicien intervenant: {event.employee.firstname}{" "}
                             {event.employee.lastname}

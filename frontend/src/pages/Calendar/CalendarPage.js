@@ -170,7 +170,12 @@ class CalendarPage extends Component {
                                                 {event.client.lastname}
                                             </a>
                                         </td>
-                                        <td>INT-{event.idEvent}</td>
+                                        <td>
+                                            {event.type === "Intervention"
+                                                ? "INT-"
+                                                : "RDV-"}
+                                            {event.idEvent}
+                                        </td>
                                         <td>{event.type}</td>
                                         <td>
                                             <a
