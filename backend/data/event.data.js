@@ -196,6 +196,7 @@ class Event {
     }
 
     static updateEvent(
+        idEvent,
         title,
         description,
         status,
@@ -207,20 +208,15 @@ class Event {
         startingHour,
         endingHour,
         idEmployee,
-        idEvent,
+        workToDo,
         callback
     ) {
-        // Extraire les identifiants du Json pour les utiliser dans la requête
-        const clientId = idClient.id;
-        const addressId = idAddress.id;
-        const employeeId = idEmployee.id;
-
         const updateQuery = `
             UPDATE events 
             SET title = $1, description = $2, status = $3, is_planned = $4, type = $5, 
                 id_client = $6, id_address = $7, starting_date = $8, starting_hour = $9, 
-                ending_hour = $10, id_employee = $11 
-            WHERE id_event = $12
+                ending_hour = $10, id_employee = $11, work_to_do = $12
+            WHERE id_event = $13
             RETURNING *;
         `;
         const updateValues = [
@@ -229,12 +225,13 @@ class Event {
             status,
             isPlanned,
             type,
-            clientId,
-            addressId,
+            idClient,
+            idAddress,
             startingDate,
             startingHour,
             endingHour,
-            employeeId,
+            idEmployee,
+            workToDo,
             idEvent,
         ];
 
@@ -269,6 +266,7 @@ class Event {
                 row.description,
                 row.status,
                 row.is_planned,
+                row.work_to_do,
                 row.type,
                 client,
                 address,

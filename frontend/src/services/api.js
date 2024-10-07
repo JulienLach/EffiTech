@@ -92,6 +92,25 @@ function getReportById(idEvent, callback) {
     xhr.send();
 }
 
+function updateEvent(eventData, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("PUT", `${API_URL}/events/${eventData.idEvent}`);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            console.log("Evénement mis à jour");
+            callback(null, JSON.parse(xhr.responseText));
+        } else {
+            console.error(
+                "Erreur de mise à jour de l'événement",
+                xhr.statusText
+            );
+            callback(new Error(xhr.statusText), null);
+        }
+    };
+    xhr.send(JSON.stringify(eventData));
+}
+
 export {
     getAllEvents,
     getAllClients,
@@ -99,4 +118,5 @@ export {
     createEvent,
     createReport,
     getReportById,
+    updateEvent,
 };

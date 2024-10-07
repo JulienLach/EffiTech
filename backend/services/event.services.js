@@ -70,21 +70,29 @@ function createEvent(req, res) {
 }
 
 function updateEvent(req, res) {
+    const idEvent = req.params.idEvent;
     const {
         title,
         description,
         status,
         isPlanned,
         type,
-        idClient,
-        idAddress,
+        client,
+        address,
         startingDate,
         startingHour,
         endingHour,
-        idEmployee,
-        idEvent,
+        employee,
+        workToDo,
     } = req.body;
+
+    // Extraire les identifiants des objets imbriqués
+    const idClient = client.idClient;
+    const idAddress = address.idAddress;
+    const idEmployee = employee.idEmployee;
+
     Event.updateEvent(
+        idEvent,
         title,
         description,
         status,
@@ -96,15 +104,23 @@ function updateEvent(req, res) {
         startingHour,
         endingHour,
         idEmployee,
-        idEvent,
-        (error) => {
+        workToDo,
+        (error, updatedEvent) => {
             if (error) {
+                console.error(
+                    "Erreur lors de la mise à jour de l'événement:",
+                    error
+                );
                 return res.status(500).send({
                     message: "Erreur lors de la modification de l'événement",
                     error: error.message,
                 });
             }
-            res.status(200).send({ message: "Événement modifié avec succès" });
+            if (updatedEvent) {
+                res.status(200).send({
+                    message: "Événement modifié avec succès",
+                });
+            }
         }
     );
 }

@@ -17,7 +17,11 @@ class InterventionForm extends Component {
     handleSubmit(e) {
         e.preventDefault();
         const { event, navigate } = this.props;
-        navigate("/intervention-form", { state: { event } });
+        if (event.type === "Intervention") {
+            navigate("/intervention-form", { state: { event } });
+        } else if (event.type === "Rendez-vous") {
+            navigate("/appointment-form", { state: { event } });
+        }
     }
 
     getStatusIndicator(status) {
@@ -103,13 +107,30 @@ class InterventionForm extends Component {
             >
                 <div className={styles.container}>
                     <div>
-                        <h2>Intervention</h2>
+                        <h2>
+                            {(() => {
+                                if (event.type === "Intervention") {
+                                    return "Intervention";
+                                } else {
+                                    return "Rendez-vous";
+                                }
+                            })()}
+                        </h2>
                         <p>{this.getStatusIndicator(event.status)}</p>
                     </div>
 
                     <div>
                         <div>
-                            <h2>INT-{event.idEvent}</h2>
+                            <h2>
+                                {(() => {
+                                    if (event.type === "Intervention") {
+                                        return "INT-";
+                                    } else {
+                                        return "RDV-";
+                                    }
+                                })()}
+                                {event.idEvent}
+                            </h2>
                         </div>
                         <div className={styles.separator}></div>
                         <div>
@@ -126,10 +147,28 @@ class InterventionForm extends Component {
                         <div className={styles.separator}></div>
                         <h3>Planification</h3>
                         <div>
-                            Début de l'intervention:{" "}
+                            Début{" "}
+                            {(() => {
+                                if (event.type === "Intervention") {
+                                    return "de l'intervention";
+                                } else {
+                                    return "du rendez-vous";
+                                }
+                            })()}
+                            :{" "}
                             {new Date(event.startingDate).toLocaleDateString()}
                         </div>
-                        <div>Fin de l'intervention: {event.endingHour}</div>{" "}
+                        <div>
+                            Fin{" "}
+                            {(() => {
+                                if (event.type === "Intervention") {
+                                    return "de l'intervention";
+                                } else {
+                                    return "du rendez-vous";
+                                }
+                            })()}
+                            : {event.endingHour}
+                        </div>
                         <div>
                             Technicien intervenant: {event.employee.firstname}{" "}
                             {event.employee.lastname}
@@ -141,7 +180,16 @@ class InterventionForm extends Component {
                         {event.status === 5 ? (
                             <button type="submit">Visualiser le rapport</button>
                         ) : (
-                            <button type="submit">Remplir le rapport</button>
+                            <button type="submit">
+                                Remplir le{" "}
+                                {(() => {
+                                    if (event.type === "Intervention") {
+                                        return "rapport";
+                                    } else {
+                                        return "questionnaire";
+                                    }
+                                })()}
+                            </button>
                         )}
                     </div>
                 </div>

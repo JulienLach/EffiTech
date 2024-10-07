@@ -26,12 +26,14 @@ class CreateEventForm extends Component {
             endingHour: "",
             description: "",
             isPlanned: false,
+            selectedTab: "Intervention", // Par défaut sur l'onglet Intervention
         };
 
         this.handleClientChange = this.handleClientChange.bind(this);
         this.handleEmployeeChange = this.handleEmployeeChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleTabChange = this.handleTabChange.bind(this);
     }
 
     componentDidMount() {
@@ -112,6 +114,7 @@ class CreateEventForm extends Component {
             startingHour,
             endingHour,
             selectedEmployee,
+            selectedTab,
         } = this.state;
 
         const eventData = {
@@ -119,7 +122,7 @@ class CreateEventForm extends Component {
             description: description,
             status: 2, // à changer car plus utile
             isPlanned: isPlanned,
-            type: "Intervention", // a changer avec ajout de RDV
+            type: selectedTab, // Utiliser l'onglet sélectionné pour le type
             idClient: selectedClient.idClient,
             idAddress: selectedClient.address.idAddress,
             startingDate: startingDate,
@@ -139,6 +142,10 @@ class CreateEventForm extends Component {
         });
     }
 
+    handleTabChange(tab) {
+        this.setState({ selectedTab: tab });
+    }
+
     render() {
         const {
             clients,
@@ -150,6 +157,7 @@ class CreateEventForm extends Component {
             endingHour,
             description,
             selectedEmployee,
+            selectedTab,
         } = this.state;
 
         return (
@@ -157,7 +165,46 @@ class CreateEventForm extends Component {
                 <div>
                     <h2>Plannifier un évènement</h2>
                 </div>
+                <div className={styles.tabs}>
+                    <button
+                        type="button"
+                        className={(() => {
+                            if (selectedTab === "Intervention") {
+                                return styles.activeTab;
+                            } else {
+                                return "";
+                            }
+                        })()}
+                        onClick={() => this.handleTabChange("Intervention")}
+                    >
+                        Intervention
+                    </button>
+                    <button
+                        type="button"
+                        className={(() => {
+                            if (selectedTab === "Rendez-vous") {
+                                return styles.activeTab;
+                            } else {
+                                return "";
+                            }
+                        })()}
+                        onClick={() => this.handleTabChange("Rendez-vous")}
+                    >
+                        Rendez-vous
+                    </button>
+                </div>
                 <div className={styles.form}>
+                    <div>
+                        <label>
+                            {(() => {
+                                if (selectedTab === "Intervention") {
+                                    return "Nouvelle intervention";
+                                } else {
+                                    return "Nouveau rendez-vous";
+                                }
+                            })()}
+                        </label>
+                    </div>
                     <div>
                         <label>Titre *</label>
                         <input
@@ -168,7 +215,16 @@ class CreateEventForm extends Component {
                         />
                     </div>
                     <div>
-                        <label>Date d'intervention</label>
+                        <label>
+                            Date{" "}
+                            {(() => {
+                                if (selectedTab === "Intervention") {
+                                    return "d'intervention";
+                                } else {
+                                    return "de rendez-vous";
+                                }
+                            })()}
+                        </label>
                         <input
                             type="date"
                             name="startingDate"
