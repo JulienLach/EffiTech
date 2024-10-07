@@ -108,9 +108,13 @@ class InterventionForm extends Component {
                 <div className={styles.container}>
                     <div>
                         <h2>
-                            {event.type === "Intervention"
-                                ? "Intervention"
-                                : "Rendez-vous"}
+                            {(() => {
+                                if (event.type === "Intervention") {
+                                    return "Intervention";
+                                } else {
+                                    return "Rendez-vous";
+                                }
+                            })()}
                         </h2>
                         <p>{this.getStatusIndicator(event.status)}</p>
                     </div>
@@ -118,9 +122,13 @@ class InterventionForm extends Component {
                     <div>
                         <div>
                             <h2>
-                                {event.type === "Intervention"
-                                    ? "INT-"
-                                    : "RDV-"}
+                                {(() => {
+                                    if (event.type === "Intervention") {
+                                        return "INT-";
+                                    } else {
+                                        return "RDV-";
+                                    }
+                                })()}
                                 {event.idEvent}
                             </h2>
                         </div>
@@ -140,19 +148,27 @@ class InterventionForm extends Component {
                         <h3>Planification</h3>
                         <div>
                             Début{" "}
-                            {event.type === "Intervention"
-                                ? "de l'intervention"
-                                : "du rendez-vous"}
+                            {(() => {
+                                if (event.type === "Intervention") {
+                                    return "de l'intervention";
+                                } else {
+                                    return "du rendez-vous";
+                                }
+                            })()}
                             :{" "}
                             {new Date(event.startingDate).toLocaleDateString()}
                         </div>
                         <div>
                             Fin{" "}
-                            {event.type === "Intervention"
-                                ? "de l'intervention"
-                                : "du rendez-vous"}
+                            {(() => {
+                                if (event.type === "Intervention") {
+                                    return "de l'intervention";
+                                } else {
+                                    return "du rendez-vous";
+                                }
+                            })()}
                             : {event.endingHour}
-                        </div>{" "}
+                        </div>
                         <div>
                             Technicien intervenant: {event.employee.firstname}{" "}
                             {event.employee.lastname}
