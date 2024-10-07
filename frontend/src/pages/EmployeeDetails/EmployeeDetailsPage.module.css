@@ -1,0 +1,88 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: start;
+    margin: 50px 20px 0 250px;
+}
+
+.backButton {
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 0.3em;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.alignButton {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.alignButton button {
+    height: auto;
+}
+
+.backButton i {
+    transform: rotate(180deg);
+}
+
+.alignBackButton {
+    display: flex;
+    justify-content: space-between;
+    width: 75%;
+    align-items: center;
+}
+
+.alignBackButton img {
+    width: 150px;
+    height: 150px;
+}
+
+.profilInfo {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.profilInfo p {
+    font-size: 20px;
+}
+
+.contactInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.separation {
+    background-color: black;
+    height: 1px;
+    width: 75%;
+    margin-top: 20px;
+}
+
+.eventInfo {
+    display: flex;
+}
+
+.eventInfo p {
+    margin: 0;
+}
+
+.contactInfo {
+    font-size: 20px;
+}
+
+.contactInfo p {
+    margin: 8px;
+}
+
+.button {
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 0.3em;
+    font-size: 1em;
+    cursor: pointer;
+    margin-top: 15px;
+}

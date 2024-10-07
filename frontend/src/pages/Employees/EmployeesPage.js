@@ -1,9 +1,25 @@
 import React, { Component } from "react";
+import { useNavigate } from "react-router-dom";
 import TemplateGlobal from "../Template/TemplateGlobal";
 import styles from "./EmployeesPage.module.css";
 import profilPicture from "../../images/profil.png";
 
+// Composant fonctionnel wrapper
+const EmployeesPageWrapper = () => {
+    const navigate = useNavigate();
+    return <EmployeesPage navigate={navigate} />;
+};
+
 class EmployeesPage extends Component {
+    constructor(props) {
+        super(props);
+        this.handleButtonClick = this.handleButtonClick.bind(this);
+    }
+
+    handleButtonClick() {
+        this.props.navigate("/employee-details");
+    }
+
     render() {
         return (
             <>
@@ -17,26 +33,20 @@ class EmployeesPage extends Component {
                             <p
                                 className={`${styles.lastname} ${styles.firstname}`}
                             >
-                                Kylian Menuisier
+                                [lastname][firstname]
                             </p>
-                            <p className={styles.info}>06 63 63 63 63</p>
-                            <p className={styles.info}>kiki@Dmail.gom</p>
-                            <p className={styles.info}>Consulter la fiche</p>
-                        </div>
-                    </div>
-                    <div className={styles.card}>
-                        <div className={styles.profilPicture}>
-                            <img src={profilPicture} alt="Profil picture" />
-                        </div>
-                        <div className={styles.profilInfo}>
-                            <p
-                                className={`${styles.lastname} ${styles.firstname}`}
-                            >
-                                William Leplombier
-                            </p>
-                            <p className={styles.info}>06 63 63 63 63</p>
-                            <p className={styles.info}>kiki@Dmail.gom</p>
-                            <p className={styles.info}>Consulter la fiche</p>
+                            <p className={styles.job}>[Menuisier]</p>
+                            <p className={styles.info}>[phone]</p>
+                            <p className={styles.info}>[mail]</p>
+                            <div className={styles.moreInfo}>
+                                <button
+                                    type="submit"
+                                    onClick={this.handleButtonClick}
+                                >
+                                    Consulter la fiche
+                                </button>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -45,4 +55,4 @@ class EmployeesPage extends Component {
     }
 }
 
-export default EmployeesPage;
+export default EmployeesPageWrapper;
