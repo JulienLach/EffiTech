@@ -171,9 +171,16 @@ class CalendarPage extends Component {
                                             </a>
                                         </td>
                                         <td>
-                                            {event.type === "Intervention"
-                                                ? "INT-"
-                                                : "RDV-"}
+                                            {(() => {
+                                                if (
+                                                    event.type ===
+                                                    "Intervention"
+                                                ) {
+                                                    return "INT-";
+                                                } else {
+                                                    return "RDV-";
+                                                }
+                                            })()}
                                             {event.idEvent}
                                         </td>
                                         <td>{event.type}</td>

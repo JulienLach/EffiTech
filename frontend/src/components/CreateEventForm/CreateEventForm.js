@@ -168,22 +168,26 @@ class CreateEventForm extends Component {
                 <div className={styles.tabs}>
                     <button
                         type="button"
-                        className={
-                            selectedTab === "Intervention"
-                                ? styles.activeTab
-                                : ""
-                        }
+                        className={(() => {
+                            if (selectedTab === "Intervention") {
+                                return styles.activeTab;
+                            } else {
+                                return "";
+                            }
+                        })()}
                         onClick={() => this.handleTabChange("Intervention")}
                     >
                         Intervention
                     </button>
                     <button
                         type="button"
-                        className={
-                            selectedTab === "Rendez-vous"
-                                ? styles.activeTab
-                                : ""
-                        }
+                        className={(() => {
+                            if (selectedTab === "Rendez-vous") {
+                                return styles.activeTab;
+                            } else {
+                                return "";
+                            }
+                        })()}
                         onClick={() => this.handleTabChange("Rendez-vous")}
                     >
                         Rendez-vous
@@ -192,10 +196,13 @@ class CreateEventForm extends Component {
                 <div className={styles.form}>
                     <div>
                         <label>
-                            {" "}
-                            {selectedTab === "Intervention"
-                                ? "Nouvelle intervention"
-                                : "Nouveau rendez-vous"}
+                            {(() => {
+                                if (selectedTab === "Intervention") {
+                                    return "Nouvelle intervention";
+                                } else {
+                                    return "Nouveau rendez-vous";
+                                }
+                            })()}
                         </label>
                     </div>
                     <div>
@@ -210,9 +217,13 @@ class CreateEventForm extends Component {
                     <div>
                         <label>
                             Date{" "}
-                            {selectedTab === "Intervention"
-                                ? "d'intervention"
-                                : "de rendez-vous"}
+                            {(() => {
+                                if (selectedTab === "Intervention") {
+                                    return "d'intervention";
+                                } else {
+                                    return "de rendez-vous";
+                                }
+                            })()}
                         </label>
                         <input
                             type="date"
