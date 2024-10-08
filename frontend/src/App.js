@@ -37,7 +37,7 @@ const App = () => {
                     path="/appointment-form"
                     element={<AppointmentFormPage />}
                 />
-                <Route path="/employees-form" element={<EmployeeFormPage />} />
+                <Route path="/employee-form" element={<EmployeeFormPage />} />
             </Routes>
         </Router>
     );
