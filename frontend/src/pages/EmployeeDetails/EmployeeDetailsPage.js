@@ -13,24 +13,17 @@ class EmployeeDetailsPage extends Component {
                         <h1>Employé</h1>
                         <div className={styles.alignBackButton}>
                             <img src={profilPicture} alt="Profil picture" />
-                            <button
-                                type="button"
-                                onClick={() =>
-                                    (window.location.href = "/employees")
-                                }
-                            >
+                            <div className={styles.names}>
+                                <p className={styles.lastname}>[lastname]</p>
+                                <p className={styles.firstname}>[firstname]</p>
+                            </div>
+                            <button className={styles.backButton}>
                                 <i className="fa-solid fa-arrow-right"></i>
                                 Retour
                             </button>
                         </div>
-
-                        <p>[lastname] [firstname]</p>
-                        <div className={styles.eventInfo}>
-                            <p>[eventId] - </p>
-                            <p>[clientType]</p>
-                        </div>
-                        <div className={styles.separation}></div>
                     </div>
+                    <div className={styles.separation}></div>
                     <h2>Coordonnées</h2>
                     <div className={styles.contactInfo}>
                         <p>[job]</p>

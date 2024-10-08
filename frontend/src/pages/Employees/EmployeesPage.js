@@ -25,27 +25,27 @@ class EmployeesPage extends Component {
             <>
                 <TemplateGlobal />
                 <div className={styles.container}>
-                    <div className={styles.card}>
-                        <div className={styles.profilPicture}>
-                            <img src={profilPicture} alt="Profil picture" />
-                        </div>
-                        <div className={styles.profilInfo}>
-                            <p
-                                className={`${styles.lastname} ${styles.firstname}`}
-                            >
-                                [lastname][firstname]
-                            </p>
-                            <p className={styles.job}>[Menuisier]</p>
-                            <p className={styles.info}>[phone]</p>
-                            <p className={styles.info}>[mail]</p>
-                            <div className={styles.moreInfo}>
-                                <button
-                                    type="submit"
-                                    onClick={this.handleButtonClick}
-                                >
-                                    Consulter la fiche
-                                </button>
-                                <i class="fa-solid fa-arrow-right"></i>
+                    <h1 className={styles.pageTitle}>Employés</h1>
+                    <div className={styles.cardContainer}>
+                        <div className={styles.card}>
+                            <div className={styles.profilPicture}>
+                                <img src={profilPicture} alt="Profil picture" />
+                            </div>
+                            <div className={styles.profilInfo}>
+                                <p className={styles.name}>[lastname]</p>
+                                <p className={styles.name}>[firstname]</p>
+                                <p className={styles.job}>[Menuisier]</p>
+                                <p className={styles.info}>[phone]</p>
+                                <p className={styles.info}>[mail]</p>
+                                <div className={styles.moreInfo}>
+                                    <button
+                                        type="submit"
+                                        onClick={this.handleButtonClick}
+                                    >
+                                        Consulter la fiche
+                                    </button>
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
