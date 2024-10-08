@@ -176,17 +176,12 @@ class Employee {
     }
 
     static loginEmployee(email, password, callback) {
-        console.log("Email:", email);
-        console.log("Password:", password);
-
         const query = "SELECT * FROM employees WHERE email = $1";
         const values = [email];
+
         pool.query(query, values, (error, result) => {
-            if (error) {
-                console.error("Erreur de requête SQL:", error);
-                return callback(error, null);
-            }
             const row = result.rows[0];
+
             if (!row) {
                 console.error("Compte employé non trouvé");
                 return callback(new Error("Compte employé non trouvé"), null);
@@ -194,7 +189,7 @@ class Employee {
             const hash = crypto.createHash("sha512");
             hash.update(password);
             const hashedPassword = hash.digest("hex");
-            console.log("Mot de passe haché:", hashedPassword);
+
             if (hashedPassword !== row.password) {
                 console.error("Mot de passe invalide");
                 return callback(new Error("Invalid password"), null);

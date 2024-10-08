@@ -1,7 +1,7 @@
 const dotenv = require("dotenv");
 const express = require("express");
 const cors = require("cors"); // Importer le middleware cors
-// const { authenticateToken } = require('./middleware/auth.middleware.js');
+const { authenticateToken } = require("./middleware/auth.middleware.js");
 const employeeRoutes = require("./routes/employee.routes.js"); // Importer les routes d'employés
 const clientRoutes = require("./routes/client.routes.js");
 const eventRoutes = require("./routes/event.routes.js");
