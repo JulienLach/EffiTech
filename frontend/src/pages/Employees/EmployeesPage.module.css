@@ -1,8 +1,30 @@
 .container {
     display: flex;
+    flex-direction: column;
+    margin: 0 20px 0 250px;
+}
+
+/* placement et style du titre de la pge  */
+.pageTitle {
+    font-size: 30px;
+    font-weight: 550;
+}
+
+.cardContainer {
+    display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    margin: 50px 20px 0 250px;
+}
+
+.addEmployee {
+    background-color: #c93c2c;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    margin: 10px 20px;
 }
 
 a {
@@ -13,7 +35,7 @@ a {
     display: flex;
     justify-content: space-between;
     margin: 15px;
-    width: 25%;
+    width: 20%;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -69,10 +91,110 @@ a {
     background-color: white;
 }
 
-.lastname,
-.firstname {
+.name {
     margin: 5px;
     padding: 0;
     font-size: 22px;
     font-weight: 600;
+}
+
+.profilInfo {
+    text-align: end;
+}
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 30%; /* Ajustez la largeur selon vos besoins */
+    height: 100%;
+    border-top-left-radius: 20px;
+    background-color: rgba(
+        0,
+        0,
+        0,
+        0.5
+    ); /* Optionnel : pour un fond semi-transparent */
+    display: flex;
+    align-items: flex-start; /* Aligne le contenu en haut */
+    justify-content: flex-end; /* Aligne le contenu à droite */
+    z-index: 1000; /* Assurez-vous que la modale est au-dessus des autres éléments */
+}
+
+.modalContent {
+    background-color: white;
+    width: 100%;
+    height: 100%; /* Ajustez la hauteur pour ne pas se superposer au header */
+    border-top-left-radius: 20px;
+    overflow-y: auto; /* Ajoute un défilement si le contenu dépasse la hauteur */
+    padding: 20px; /* Optionnel : pour ajouter du padding à l'intérieur de la modale */
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5); /* Optionnel : pour ajouter une ombre */
+}
+
+.closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* CSS for input & label */
+.labelInput {
+    font-size: 20px;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    width: 30vw;
+    margin-bottom: 10px;
+}
+
+/* CSS for input comportement */
+.labelInput input {
+    margin: 0px 30px;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+}
+
+/* CSS for the label comportement */
+.labelInput label {
+    margin: 0px 30px;
+    padding: 5px 0px;
+}
+
+/* CSS for button positioning */
+.buttonPosition {
+    display: flex;
+    width: 30vw;
+    margin-bottom: 20px;
+    margin-top: 1.2em;
+}
+
+/* css for cancel button */
+.cancelButton {
+    background-color: #ababab;
+    margin: auto;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+/* CSS for create button */
+.submitButton {
+    background-color: #c93c2c;
+    margin: auto;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
 }

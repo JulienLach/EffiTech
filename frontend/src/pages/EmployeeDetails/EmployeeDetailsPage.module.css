@@ -12,16 +12,7 @@
     border-radius: 0.3em;
     font-size: 1em;
     cursor: pointer;
-}
-
-.alignButton {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.alignButton button {
-    height: auto;
+    margin-left: auto;
 }
 
 .backButton i {
@@ -30,7 +21,6 @@
 
 .alignBackButton {
     display: flex;
-    justify-content: space-between;
     width: 75%;
     align-items: center;
 }
@@ -40,14 +30,30 @@
     height: 150px;
 }
 
+.names {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.lastname,
+.firstname {
+    margin: 10px 0 0 50px;
+    font-size: 40px;
+    font-weight: 550;
+    text-transform: capitalize;
+}
+
+.lastname {
+    text-transform: uppercase;
+    font-size: 60px;
+    font-weight: 550;
+}
+
 .profilInfo {
     display: flex;
     flex-direction: column;
     width: 100%;
-}
-
-.profilInfo p {
-    font-size: 20px;
 }
 
 .contactInfo {
