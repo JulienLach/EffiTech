@@ -8,10 +8,10 @@ form {
     margin-bottom: 30px;
 }
 
-img {
+/* img { A changer ça écrase l'image du logo de la page login et createaccount
     width: 150px;
     height: 150px;
-}
+} */
 
 .separation {
     background-color: black;
