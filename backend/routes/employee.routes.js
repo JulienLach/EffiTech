@@ -10,4 +10,7 @@ router.post("/", employeeServices.createEmployee);
 
 router.put("/:idEmployee", employeeServices.updateEmployee);
 
+// Test connexion employé
+router.post("/login", employeeServices.loginEmployee);
+
 module.exports = router;

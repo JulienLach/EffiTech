@@ -127,6 +127,22 @@ function createAccount(employeeData, callback) {
     xhr.send(JSON.stringify(employeeData));
 }
 
+function loginEmployee(credentials, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", `${API_URL}/employees/login`);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            console.log("Connexion réussie");
+            callback(null, JSON.parse(xhr.responseText));
+        } else {
+            console.error("Erreur de connexion", xhr.statusText);
+            callback(new Error(xhr.statusText), null);
+        }
+    };
+    xhr.send(JSON.stringify(credentials));
+}
+
 export {
     getAllEvents,
     getAllClients,
@@ -136,4 +152,5 @@ export {
     getReportById,
     updateEvent,
     createAccount,
+    loginEmployee,
 };

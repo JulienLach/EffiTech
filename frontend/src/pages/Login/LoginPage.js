@@ -2,19 +2,37 @@ import React, { Component } from "react";
 import { Navigate } from "react-router-dom";
 import styles from "./Login.module.css";
 import LogoDesktop from "../../components/LogoDesktop/LogoDesktop";
+import { loginEmployee } from "../../services/api";
 
 class LoginPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            email: "",
+            password: "",
             redirect: false,
+            error: null,
         };
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(event) {
+        const { name, value } = event.target;
+        this.setState({ [name]: value });
     }
 
     handleSubmit(event) {
         event.preventDefault();
-        this.setState({ redirect: true });
+        const { email, password } = this.state;
+
+        loginEmployee({ email, password }, (error, result) => {
+            if (error) {
+                this.setState({ error: error.message });
+            } else {
+                this.setState({ redirect: true });
+            }
+        });
     }
 
     render() {
@@ -33,7 +51,13 @@ class LoginPage extends Component {
                     >
                         <div className={styles.labelInput}>
                             <label htmlFor="email">Email:</label>
-                            <input type="text" id="email" name="email" />
+                            <input
+                                type="text"
+                                id="email"
+                                name="email"
+                                value={this.state.email}
+                                onChange={this.handleChange}
+                            />
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="password">Mot de passe:</label>
@@ -41,8 +65,13 @@ class LoginPage extends Component {
                                 type="password"
                                 id="password"
                                 name="password"
+                                value={this.state.password}
+                                onChange={this.handleChange}
                             />
                         </div>
+                        {this.state.error && (
+                            <p className={styles.error}>{this.state.error}</p>
+                        )}
                         <a href="/forgot-password">Mot de passe oublié ?</a>
                         <button type="submit" className={styles.submitButton}>
                             Se connecter

@@ -82,7 +82,7 @@ class Employee {
         speciality,
         callback
     ) {
-        const hash = crypto.createHash("sha256");
+        const hash = crypto.createHash("sha512");
         hash.update(password);
         const hashedPassword = hash.digest("hex");
 
@@ -120,7 +120,7 @@ class Employee {
 
             // Générer un token JWT
             const token = jwt.sign(
-                { id: newEmployee.id_employee, email: newEmployee.email },
+                { id: newEmployee.idEmployee, email: newEmployee.email },
                 process.env.ACCESS_TOKEN_SECRET,
                 { expiresIn: "1h" }
             );
@@ -172,6 +172,50 @@ class Employee {
                 row.speciality
             );
             callback(null, updatedEmployee);
+        });
+    }
+
+    static loginEmployee(email, password, callback) {
+        console.log("Email:", email);
+        console.log("Password:", password);
+
+        const query = "SELECT * FROM employees WHERE email = $1";
+        const values = [email];
+        pool.query(query, values, (error, result) => {
+            if (error) {
+                console.error("Erreur de requête SQL:", error);
+                return callback(error, null);
+            }
+            const row = result.rows[0];
+            if (!row) {
+                console.error("Compte employé non trouvé");
+                return callback(new Error("Compte employé non trouvé"), null);
+            }
+            const hash = crypto.createHash("sha512");
+            hash.update(password);
+            const hashedPassword = hash.digest("hex");
+            console.log("Mot de passe haché:", hashedPassword);
+            if (hashedPassword !== row.password) {
+                console.error("Mot de passe invalide");
+                return callback(new Error("Invalid password"), null);
+            }
+            const employee = new Employee(
+                row.id_employee,
+                row.firstname,
+                row.lastname,
+                row.job,
+                row.phone_number,
+                row.email,
+                row.is_admin,
+                row.password,
+                row.speciality
+            );
+            const token = jwt.sign(
+                { id: employee.idEmployee, email: employee.email },
+                process.env.ACCESS_TOKEN_SECRET,
+                { expiresIn: "1h" }
+            );
+            callback(null, { employee, token });
         });
     }
 }
