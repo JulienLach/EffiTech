@@ -13,7 +13,12 @@ class EmployeeDetailsPage extends Component {
                         <h1>Employé</h1>
                         <div className={styles.alignBackButton}>
                             <img src={profilPicture} alt="Profil picture" />
-                            <button className={styles.backButton}>
+                            <button
+                                type="button"
+                                onClick={() =>
+                                    (window.location.href = "/employees")
+                                }
+                            >
                                 <i className="fa-solid fa-arrow-right"></i>
                                 Retour
                             </button>
