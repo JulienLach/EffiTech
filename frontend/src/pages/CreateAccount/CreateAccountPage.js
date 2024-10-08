@@ -1,13 +1,36 @@
 import React, { Component } from "react";
 import GlobalStyles from "../../styles/GlobalStyles.module.css";
 import styles from "./CreateAccount.module.css";
+import { useNavigate } from "react-router-dom";
 import LogoDesktop from "../../components/LogoDesktop/LogoDesktop";
+import { createAccount } from "../../services/api";
+
+// Composant fonctionnel pour passer la fonction navigate
+function CreateAccountPageWrapper(props) {
+    const navigate = useNavigate();
+    return <CreateAccountPage {...props} navigate={navigate} />;
+}
 
 class CreateAccountPage extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            lastname: "",
+            firstname: "",
+            email: "",
+            phoneNumber: "",
+            password: "",
+        };
         this.handleCancel = this.handleCancel.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(event) {
+        const { name, value } = event.target;
+        this.setState({
+            [name]: value,
+        });
     }
 
     handleCancel(event) {
@@ -17,7 +40,28 @@ class CreateAccountPage extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        window.location.href = "/calendar";
+        const { firstname, lastname, email, phoneNumber, password } =
+            this.state;
+
+        const employeeData = {
+            firstname,
+            lastname,
+            email,
+            phoneNumber,
+            password,
+            job: "Plombier",
+            isAdmin: true,
+            speciality: "Tuyaux",
+        };
+
+        createAccount(employeeData, (error, newAccount) => {
+            if (error) {
+                console.error("Erreur lors de la création du compte", error);
+            } else {
+                console.log("Compte créé avec succès, ID:", newAccount.id);
+                this.props.navigate("/calendar");
+            }
+        });
     }
 
     render() {
@@ -26,37 +70,53 @@ class CreateAccountPage extends Component {
                 <LogoDesktop />
                 <div className={styles.loginFormCard}>
                     <h1 className={styles.titleCard}>Créer mon compte</h1>
-                    <form className={styles.formElements}>
+                    <form
+                        className={styles.formElements}
+                        onSubmit={this.handleSubmit}
+                    >
                         <div className={styles.labelInput}>
                             <label htmlFor="lastname">Nom:</label>
-                            <input type="text" id="lastname" name="lastname" />
+                            <input
+                                type="text"
+                                name="lastname"
+                                value={this.state.lastname}
+                                onChange={this.handleChange}
+                            />
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="firstname">Prénom:</label>
                             <input
                                 type="text"
-                                id="firstname"
                                 name="firstname"
+                                value={this.state.firstname}
+                                onChange={this.handleChange}
                             />
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="email">Email:</label>
-                            <input type="text" id="email" name="email" />
+                            <input
+                                type="text"
+                                name="email"
+                                value={this.state.email}
+                                onChange={this.handleChange}
+                            />
                         </div>
                         <div className={styles.labelInput}>
-                            <label htmlFor="phone_number">Téléphone:</label>
+                            <label htmlFor="phoneNumber">Téléphone:</label>
                             <input
                                 type="number"
-                                id="phone_number"
-                                name="phone_number"
+                                name="phoneNumber"
+                                value={this.state.phoneNumber}
+                                onChange={this.handleChange}
                             />
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="password">Mot de passe:</label>
                             <input
                                 type="password"
-                                id="password"
                                 name="password"
+                                value={this.state.password}
+                                onChange={this.handleChange}
                             />
                         </div>
                         <div className={styles.buttonPosition}>
@@ -69,7 +129,6 @@ class CreateAccountPage extends Component {
                             </button>
                             <button
                                 type="submit"
-                                onClick={this.handleSubmit}
                                 className={styles.submitButton}
                             >
                                 Créer mon compte
@@ -82,4 +141,4 @@ class CreateAccountPage extends Component {
     }
 }
 
-export default CreateAccountPage;
+export default CreateAccountPageWrapper;

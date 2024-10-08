@@ -111,6 +111,22 @@ function updateEvent(eventData, callback) {
     xhr.send(JSON.stringify(eventData));
 }
 
+function createAccount(employeeData, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", `${API_URL}/employees`);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onload = function () {
+        if (xhr.status === 200 || xhr.status === 201) {
+            console.log("Compte employée créé");
+            callback(null, JSON.parse(xhr.responseText));
+        } else {
+            console.error("Erreur de création du compte", xhr.statusText);
+            callback(new Error(xhr.statusText), null);
+        }
+    };
+    xhr.send(JSON.stringify(employeeData));
+}
+
 export {
     getAllEvents,
     getAllClients,
@@ -119,4 +135,5 @@ export {
     createReport,
     getReportById,
     updateEvent,
+    createAccount,
 };

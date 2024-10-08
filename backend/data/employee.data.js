@@ -1,4 +1,6 @@
 const pool = require("../config/db.config"); // Importer la configuration de la base de données
+const crypto = require("crypto");
+const jwt = require("jsonwebtoken");
 
 class Employee {
     constructor(
@@ -80,6 +82,10 @@ class Employee {
         speciality,
         callback
     ) {
+        const hash = crypto.createHash("sha256");
+        hash.update(password);
+        const hashedPassword = hash.digest("hex");
+
         const query = `
             INSERT INTO employees (firstname, lastname, job, phone_number, email, is_admin, password, speciality) 
             VALUES ($1, $2, $3, $4, $5, $6, $7, $8) 
@@ -92,7 +98,7 @@ class Employee {
             phoneNumber,
             email,
             isAdmin,
-            password,
+            hashedPassword,
             speciality,
         ];
         pool.query(query, values, (error, result) => {
@@ -111,6 +117,15 @@ class Employee {
                 row.password,
                 row.speciality
             );
+
+            // Générer un token JWT
+            const token = jwt.sign(
+                { id: newEmployee.id_employee, email: newEmployee.email },
+                process.env.ACCESS_TOKEN_SECRET,
+                { expiresIn: "1h" }
+            );
+
+            // Retourner le nouvel employé et le token
             callback(null, newEmployee);
         });
     }
