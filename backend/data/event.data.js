@@ -16,7 +16,8 @@ class Event {
         startingDate,
         startingHour,
         endingHour,
-        employee
+        employee,
+        workToDo
     ) {
         this.idEvent = idEvent;
         this.title = title;
@@ -30,6 +31,7 @@ class Event {
         this.startingHour = startingHour;
         this.endingHour = endingHour;
         this.employee = employee;
+        this.workToDo = workToDo;
     }
 
     static getAllEvents(callback) {
@@ -47,7 +49,7 @@ class Event {
                     SELECT 
                         events.id_event, events.title, events.description, events.status, 
                         events.is_planned, events.type, events.starting_date, events.starting_hour, 
-                        events.ending_hour, events.id_client, events.id_employee
+                        events.ending_hour, events.id_client, events.id_employee, events.work_to_do
                     FROM events
                 `;
 
@@ -77,7 +79,8 @@ class Event {
                             row.starting_date,
                             row.starting_hour,
                             row.ending_hour,
-                            employee
+                            employee,
+                            row.work_to_do
                         );
                     });
 

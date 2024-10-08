@@ -173,6 +173,13 @@ class InterventionForm extends Component {
                             Technicien intervenant: {event.employee.firstname}{" "}
                             {event.employee.lastname}
                         </div>
+                        <div className={styles.separator}></div>
+                        <div>
+                            {event.type === "Rendez-vous" && (
+                                <h3>Travaux à effectuer</h3>
+                            )}
+                            <div>{event.workToDo}</div>
+                        </div>
                     </div>
                     <div className={styles.modalFooter}>
                         <button onClick={closeModal}>Retour</button>

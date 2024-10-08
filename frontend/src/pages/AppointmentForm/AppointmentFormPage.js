@@ -68,7 +68,7 @@ class AppointmentFormPage extends Component {
             idEvent: eventDetails.idEvent,
             title: eventDetails.title,
             description: eventDetails.description,
-            status: eventDetails.status,
+            status: 5,
             isPlanned: eventDetails.isPlanned,
             type: eventDetails.type,
             client,
