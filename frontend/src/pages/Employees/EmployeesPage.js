@@ -4,6 +4,7 @@ import TemplateGlobal from "../Template/TemplateGlobal";
 import styles from "./EmployeesPage.module.css";
 import profilPicture from "../../images/profil.png";
 import { getAllEmployees } from "../../services/api";
+import EmployeeForm from "../../components/EmployeeForm/EmployeeForm";
 
 // Composant fonctionnel wrapper
 const EmployeesPageWrapper = () => {
@@ -55,7 +56,7 @@ class EmployeesPage extends Component {
     }
 
     render() {
-        const { employees } = this.state;
+        const { employees, isModalOpen } = this.state;
 
         return (
             <>
@@ -103,15 +104,34 @@ class EmployeesPage extends Component {
                                         >
                                             Voir détails
                                         </button>
+                                        <i className="fa-solid fa-arrow-right"></i>
                                     </div>
                                 </div>
                             </div>
                         ))}
                     </div>
                 </div>
+                {isModalOpen && (
+                    <Modal onClose={this.closeModal}>
+                        <EmployeeForm />
+                    </Modal>
+                )}
             </>
         );
     }
 }
+
+const Modal = ({ onClose, children }) => {
+    return (
+        <div className={styles.modalOverlay}>
+            <div className={styles.modalContent}>
+                <button className={styles.closeButton} onClick={onClose}>
+                    &times;
+                </button>
+                {children}
+            </div>
+        </div>
+    );
+};
 
 export default EmployeesPageWrapper;
