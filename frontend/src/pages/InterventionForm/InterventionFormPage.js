@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./InterventionFormPage.module.css";
 import TemplateGlobal from "../Template/TemplateGlobal";
 import { createReport } from "../../services/api";
+import Canvas from "../../components/Canvas/Canvas";
 
 // Composant wrapper pour utiliser les hooks
 function InterventionFormPageWrapper() {
@@ -91,6 +92,16 @@ class InterventionFormPage extends Component {
             }
         });
     }
+
+    handleSignatureChange = (signature) => {
+        this.setState({
+            clientSignature: signature,
+            employeeSignature: signature,
+        });
+        console.log(employeeSignature);
+        console.log(clientSignature);
+        console.log(signature);
+    };
 
     render() {
         const { event } = this.props.location.state;
@@ -228,23 +239,13 @@ class InterventionFormPage extends Component {
                         <div>
                             <div className={styles.textArea}>
                                 <label>Signature du technicien</label>
-                                <textarea
-                                    rows="4"
-                                    name="employeeSignature"
-                                    value={employeeSignature}
-                                    onChange={this.handleChange}
-                                ></textarea>
+                                <Canvas />
                             </div>
                         </div>
                         <div>
                             <div className={styles.textArea}>
                                 <label>Signature du client:</label>
-                                <textarea
-                                    rows="4"
-                                    name="clientSignature"
-                                    value={clientSignature}
-                                    onChange={this.handleChange}
-                                ></textarea>
+                                <Canvas />
                             </div>
                         </div>
                         <div className={styles.modalFooter}>
