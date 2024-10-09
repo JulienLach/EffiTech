@@ -1,0 +1,89 @@
+body {
+    box-sizing: border-box;
+    margin: 0;
+}
+/* placement du container */
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: 0 20px 0 250px;
+}
+
+.pageTitle {
+    font-size: 30px;
+    font-weight: 550;
+}
+
+.filterBar {
+    display: flex;
+
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.rightPart {
+    margin-left: auto;
+}
+
+.addClient {
+    background-color: #c93c2c;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    margin: 10px 20px;
+}
+
+/* Style barre de recherche et filtre  */
+/* style for each filter button */
+.typeFilter {
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 10px;
+    height: 35px;
+    border: 1px solid #c0c0c0;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 20px;
+    margin-right: 10px;
+}
+
+/* style when you hover over the filter button */
+.typeFilter:hover {
+    color: white;
+    cursor: pointer;
+    background-color: #c93c2c;
+}
+
+/* icon position */
+.typeFilter i {
+    margin-right: 10px;
+}
+
+/* Search input container style */
+.searchInput {
+    position: relative;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+/* icon position inside the input */
+.searchInput i {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #999;
+    pointer-events: none;
+}
+
+/* Search input style */
+.searchInput input {
+    padding: 10px 10px 10px 35px;
+    border: 1px solid #c0c0c0;
+    border-radius: 50px;
+}
