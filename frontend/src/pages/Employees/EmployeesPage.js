@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import TemplateGlobal from "../Template/TemplateGlobal";
 import styles from "./EmployeesPage.module.css";
 import profilPicture from "../../images/profil.png";
+import { getAllEmployees } from "../../services/api";
 
 // Composant fonctionnel wrapper
 const EmployeesPageWrapper = () => {
@@ -14,11 +15,22 @@ class EmployeesPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            employees: [],
             isModalOpen: false,
         };
         this.handleButtonClick = this.handleButtonClick.bind(this);
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
+    }
+
+    componentDidMount() {
+        getAllEmployees((error, data) => {
+            if (error) {
+                this.setState({ error: error.message });
+            } else {
+                this.setState({ employees: data });
+            }
+        });
     }
 
     handleButtonClick() {
@@ -34,6 +46,8 @@ class EmployeesPage extends Component {
     }
 
     render() {
+        const { employees } = this.state;
+
         return (
             <>
                 <TemplateGlobal />
@@ -49,27 +63,37 @@ class EmployeesPage extends Component {
                         </button>
                     </div>
                     <div className={styles.cardContainer}>
-                        <div className={styles.card}>
-                            <div className={styles.profilPicture}>
-                                <img src={profilPicture} alt="Profil picture" />
-                            </div>
-                            <div className={styles.profilInfo}>
-                                <p className={styles.name}>[lastname]</p>
-                                <p className={styles.name}>[firstname]</p>
-                                <p className={styles.job}>[Menuisier]</p>
-                                <p className={styles.info}>[phone]</p>
-                                <p className={styles.info}>[mail]</p>
-                                <div className={styles.moreInfo}>
-                                    <button
-                                        type="submit"
-                                        onClick={this.handleButtonClick}
-                                    >
-                                        Consulter la fiche
-                                    </button>
-                                    <i className="fa-solid fa-arrow-right"></i>
+                        {employees.map((employee) => (
+                            <div key={employee.id} className={styles.card}>
+                                <div className={styles.profilPicture}>
+                                    <img
+                                        src={profilPicture}
+                                        alt="Profil picture"
+                                    />
+                                </div>
+                                <div className={styles.profilInfo}>
+                                    <p className={styles.name}>
+                                        {employee.firstname} {employee.lastname}
+                                    </p>
+                                    <p className={styles.job}>{employee.job}</p>
+                                    <p className={styles.info}>
+                                        {employee.phoneNumber}
+                                    </p>
+                                    <p className={styles.info}>
+                                        {employee.email}
+                                    </p>
+                                    <div className={styles.moreInfo}>
+                                        <button
+                                            type="button"
+                                            onClick={this.handleButtonClick}
+                                        >
+                                            Consulter la fiche
+                                        </button>
+                                        <i className="fa-solid fa-arrow-right"></i>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
                 {this.state.isModalOpen && (
@@ -138,7 +162,12 @@ class EmployeesPage extends Component {
 const Modal = ({ onClose, children }) => {
     return (
         <div className={styles.modalOverlay}>
-            <div className={styles.modalContent}>{children}</div>
+            <div className={styles.modalContent}>
+                <button className={styles.closeButton} onClick={onClose}>
+                    &times;
+                </button>
+                {children}
+            </div>
         </div>
     );
 };
