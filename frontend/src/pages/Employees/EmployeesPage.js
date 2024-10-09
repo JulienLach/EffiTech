@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import TemplateGlobal from "../Template/TemplateGlobal";
 import styles from "./EmployeesPage.module.css";
 import profilPicture from "../../images/profil.png";
@@ -8,7 +8,8 @@ import { getAllEmployees } from "../../services/api";
 // Composant fonctionnel wrapper
 const EmployeesPageWrapper = () => {
     const navigate = useNavigate();
-    return <EmployeesPage navigate={navigate} />;
+    const location = useLocation();
+    return <EmployeesPage navigate={navigate} location={location} />;
 };
 
 class EmployeesPage extends Component {
@@ -17,6 +18,7 @@ class EmployeesPage extends Component {
         this.state = {
             employees: [],
             isModalOpen: false,
+            employee: {},
         };
         this.handleButtonClick = this.handleButtonClick.bind(this);
         this.openModal = this.openModal.bind(this);
@@ -28,13 +30,20 @@ class EmployeesPage extends Component {
             if (error) {
                 this.setState({ error: error.message });
             } else {
+                // console.log("Données des employés récupérées:", data);
                 this.setState({ employees: data });
             }
         });
     }
 
-    handleButtonClick() {
-        this.props.navigate("/employee-details");
+    handleButtonClick(employee) {
+        if (employee && employee.idEmployee) {
+            this.props.navigate(`/employee-details/`, {
+                state: { employee },
+            });
+        } else {
+            console.error("Données de l'employé non définies");
+        }
     }
 
     openModal() {
@@ -64,7 +73,10 @@ class EmployeesPage extends Component {
                     </div>
                     <div className={styles.cardContainer}>
                         {employees.map((employee) => (
-                            <div key={employee.id} className={styles.card}>
+                            <div
+                                key={employee.idEmployee}
+                                className={styles.card}
+                            >
                                 <div className={styles.profilPicture}>
                                     <img
                                         src={profilPicture}
@@ -85,91 +97,21 @@ class EmployeesPage extends Component {
                                     <div className={styles.moreInfo}>
                                         <button
                                             type="button"
-                                            onClick={this.handleButtonClick}
+                                            onClick={() =>
+                                                this.handleButtonClick(employee)
+                                            }
                                         >
-                                            Consulter la fiche
+                                            Voir détails
                                         </button>
-                                        <i className="fa-solid fa-arrow-right"></i>
                                     </div>
                                 </div>
                             </div>
                         ))}
                     </div>
                 </div>
-                {this.state.isModalOpen && (
-                    <Modal onClose={this.closeModal}>
-                        <h2>Ajouter un nouvel employé</h2>
-                        <form className={styles.formElements}>
-                            <div className={styles.labelInput}>
-                                <label htmlFor="lastname">Nom:</label>
-                                <input
-                                    type="text"
-                                    id="lastname"
-                                    name="lastname"
-                                />
-                            </div>
-                            <div className={styles.labelInput}>
-                                <label htmlFor="firstname">Prénom:</label>
-                                <input
-                                    type="text"
-                                    id="firstname"
-                                    name="firstname"
-                                />
-                            </div>
-                            <div className={styles.labelInput}>
-                                <label htmlFor="job">Métier:</label>
-                                <input type="text" id="job" name="job" />
-                            </div>
-                            <div className={styles.labelInput}>
-                                <label htmlFor="speciality">Spécialité:</label>
-                                <input
-                                    type="text"
-                                    id="speciality"
-                                    name="speciality"
-                                />
-                            </div>
-                            <div className={styles.labelInput}>
-                                <label htmlFor="mail">Adresse mail:</label>
-                                <input type="email" id="mail" name="mail" />
-                            </div>
-                            <div className={styles.labelInput}>
-                                <label htmlFor="phone">Téléphone:</label>
-                                <input type="text" id="phone" name="phone" />
-                            </div>
-                        </form>
-                        <div className={styles.buttonPosition}>
-                            <button
-                                type="reset"
-                                className={styles.cancelButton}
-                                onClick={this.closeModal}
-                            >
-                                Annuler
-                            </button>
-                            <button
-                                type="submit"
-                                className={styles.submitButton}
-                            >
-                                Enregistrer
-                            </button>
-                        </div>
-                    </Modal>
-                )}
             </>
         );
     }
 }
-
-const Modal = ({ onClose, children }) => {
-    return (
-        <div className={styles.modalOverlay}>
-            <div className={styles.modalContent}>
-                <button className={styles.closeButton} onClick={onClose}>
-                    &times;
-                </button>
-                {children}
-            </div>
-        </div>
-    );
-};
 
 export default EmployeesPageWrapper;

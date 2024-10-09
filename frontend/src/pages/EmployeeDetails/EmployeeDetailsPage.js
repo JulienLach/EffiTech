@@ -1,10 +1,50 @@
 import React, { Component } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import TemplateGlobal from "../Template/TemplateGlobal";
 import styles from "./EmployeeDetailsPage.module.css";
 import profilPicture from "../../images/profil.png";
+import { getEmployeeById } from "../../services/api";
+
+// Composant wrapper pour utiliser les hooks
+function EmployeeDetailsPageWrapper() {
+    const navigate = useNavigate();
+    const location = useLocation();
+    return <EmployeeDetailsPage navigate={navigate} location={location} />;
+}
 
 class EmployeeDetailsPage extends Component {
+    constructor(props) {
+        super(props);
+        const { employee } = this.props.location.state;
+        this.state = {
+            employee: employee,
+            idEmployee: employee.idEmployee,
+        };
+    }
+
+    componentDidMount() {
+        const { idEmployee } = this.state;
+        getEmployeeById(idEmployee, (error, data) => {
+            if (error) {
+                console.error(
+                    "Erreur lors de la récupération de l'employé",
+                    error
+                );
+                this.setState({ error: error.message });
+            } else {
+                this.setState({ employee: data });
+                console.log("Données de l'employé récupérées:", data);
+            }
+        });
+    }
+
     render() {
+        const { employee, error } = this.state;
+
+        if (!employee) {
+            return <div>Chargement...</div>;
+        }
+
         return (
             <>
                 <TemplateGlobal />
@@ -14,14 +54,18 @@ class EmployeeDetailsPage extends Component {
                         <div className={styles.alignBackButton}>
                             <img src={profilPicture} alt="Profil picture" />
                             <div className={styles.names}>
-                                <p className={styles.lastname}>[lastname]</p>
-                                <p className={styles.firstname}>[firstname]</p>
+                                <p className={styles.lastname}>
+                                    {employee.lastname}
+                                </p>
+                                <p className={styles.firstname}>
+                                    {employee.firstname}
+                                </p>
                             </div>
                             <button
                                 type="button"
                                 className={styles.backButton}
                                 onClick={() =>
-                                    (window.location.href = "/employees")
+                                    this.props.navigate("/employees")
                                 }
                             >
                                 <i className="fa-solid fa-arrow-right"></i>
@@ -32,18 +76,15 @@ class EmployeeDetailsPage extends Component {
                     <div className={styles.separation}></div>
                     <h2>Coordonnées</h2>
                     <div className={styles.contactInfo}>
-                        <p>[job]</p>
-                        <p>[speciality]</p>
-                        <p>[mail]</p>
-                        <p>[phone]</p>
+                        <p>{employee.job}</p>
+                        <p>{employee.speciality}</p>
+                        <p>{employee.email}</p>
+                        <p>{employee.phoneNumber}</p>
                     </div>
-                    <button className={styles.button}>
-                        <i className="fa-solid fa-pen"></i>Modifier
-                    </button>
                 </div>
             </>
         );
     }
 }
 
-export default EmployeeDetailsPage;
+export default EmployeeDetailsPageWrapper;
