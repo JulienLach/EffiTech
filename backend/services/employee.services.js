@@ -109,6 +109,9 @@ function loginEmployee(req, res) {
             });
         }
         if (employee) {
+            res.cookie("token", employee.token, {
+                httpOnly: true,
+            });
             res.status(200).send(employee);
         } else {
             res.status(404).send({ message: "Compte employé non trouvé" });

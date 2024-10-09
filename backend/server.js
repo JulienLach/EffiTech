@@ -14,7 +14,12 @@ dotenv.config({ path: ".env.development.local" });
 const PORT = process.env.PORT || 3000;
 const app = express();
 
-app.use(cors());
+const corsOptions = {
+    origin: "http://localhost:3000",
+    credentials: true,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json()); // passer le corps de la demande en JSON
 
 app.get("/", (req, res) => {

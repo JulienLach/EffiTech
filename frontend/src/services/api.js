@@ -131,6 +131,7 @@ function loginEmployee(credentials, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", `${API_URL}/employees/login`);
     xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.withCredentials = true; //les cookies sont envoyés avec la requête http
     xhr.onload = function () {
         if (xhr.status === 200) {
             console.log("Connexion réussie");
