@@ -7,10 +7,6 @@ class Canvas extends Component {
         this.isDrawing = false;
         this.lastX = 0;
         this.lastY = 0;
-        this.state = {
-            clientSignature: props.clientSignature,
-            employeeSignature: props.employeeSignature,
-        };
     }
 
     componentDidMount() {
@@ -51,13 +47,6 @@ class Canvas extends Component {
     stopDrawing() {
         this.isDrawing = false;
     }
-
-    handleSignatureChange = (signature) => {
-        this.setState({
-            clientSignature: signature,
-            employeeSignature: signature,
-        });
-    };
 
     render() {
         return (

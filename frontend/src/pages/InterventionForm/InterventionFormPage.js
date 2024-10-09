@@ -27,6 +27,7 @@ class InterventionFormPage extends Component {
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleSignatureChange = this.handleSignatureChange.bind(this);
     }
 
     componentDidMount() {
@@ -49,6 +50,12 @@ class InterventionFormPage extends Component {
         const { name, value, type, checked } = event.target;
         this.setState({
             [name]: type === "checkbox" ? checked : value,
+        });
+    }
+
+    handleSignatureChange(name, signature) {
+        this.setState({
+            [name]: signature,
         });
     }
 
@@ -92,16 +99,6 @@ class InterventionFormPage extends Component {
             }
         });
     }
-
-    handleSignatureChange = (signature) => {
-        this.setState({
-            clientSignature: signature,
-            employeeSignature: signature,
-        });
-        console.log(employeeSignature);
-        console.log(clientSignature);
-        console.log(signature);
-    };
 
     render() {
         const { event } = this.props.location.state;
@@ -239,13 +236,29 @@ class InterventionFormPage extends Component {
                         <div>
                             <div className={styles.textArea}>
                                 <label>Signature du technicien</label>
-                                <Canvas />
+                                <Canvas
+                                    signature={employeeSignature}
+                                    onSignatureChange={(signature) =>
+                                        this.handleSignatureChange(
+                                            "employeeSignature",
+                                            signature
+                                        )
+                                    }
+                                />
                             </div>
                         </div>
                         <div>
                             <div className={styles.textArea}>
                                 <label>Signature du client:</label>
-                                <Canvas />
+                                <Canvas
+                                    signature={clientSignature}
+                                    onSignatureChange={(signature) =>
+                                        this.handleSignatureChange(
+                                            "clientSignature",
+                                            signature
+                                        )
+                                    }
+                                />
                             </div>
                         </div>
                         <div className={styles.modalFooter}>
