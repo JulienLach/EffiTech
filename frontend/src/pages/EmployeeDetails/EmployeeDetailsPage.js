@@ -17,7 +17,13 @@ class EmployeeDetailsPage extends Component {
                                 <p className={styles.lastname}>[lastname]</p>
                                 <p className={styles.firstname}>[firstname]</p>
                             </div>
-                            <button className={styles.backButton}>
+                            <button
+                                type="button"
+                                className={styles.backButton}
+                                onClick={() =>
+                                    (window.location.href = "/employees")
+                                }
+                            >
                                 <i className="fa-solid fa-arrow-right"></i>
                                 Retour
                             </button>
@@ -32,7 +38,7 @@ class EmployeeDetailsPage extends Component {
                         <p>[phone]</p>
                     </div>
                     <button className={styles.button}>
-                        <i class="fa-solid fa-pen"></i>Modifier
+                        <i className="fa-solid fa-pen"></i>Modifier
                     </button>
                 </div>
             </>

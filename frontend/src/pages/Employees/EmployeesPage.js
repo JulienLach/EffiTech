@@ -45,7 +45,7 @@ class EmployeesPage extends Component {
                             onClick={this.openModal}
                         >
                             <i className="fa-solid fa-plus"></i>Ajouter un
-                            équipier
+                            employé
                         </button>
                     </div>
                     <div className={styles.cardContainer}>
@@ -66,7 +66,7 @@ class EmployeesPage extends Component {
                                     >
                                         Consulter la fiche
                                     </button>
-                                    <i class="fa-solid fa-arrow-right"></i>
+                                    <i className="fa-solid fa-arrow-right"></i>
                                 </div>
                             </div>
                         </div>
@@ -74,7 +74,7 @@ class EmployeesPage extends Component {
                 </div>
                 {this.state.isModalOpen && (
                     <Modal onClose={this.closeModal}>
-                        <h2>Ajouter un nouvel équipier</h2>
+                        <h2>Ajouter un nouvel employé</h2>
                         <form className={styles.formElements}>
                             <div className={styles.labelInput}>
                                 <label htmlFor="lastname">Nom:</label>
