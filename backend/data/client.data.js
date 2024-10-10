@@ -9,7 +9,8 @@ class Client {
         lastname,
         email,
         address,
-        phoneNumber
+        phoneNumber,
+        company
     ) {
         this.idClient = idClient;
         this.category = category;
@@ -18,6 +19,7 @@ class Client {
         this.email = email;
         this.address = address;
         this.phoneNumber = phoneNumber;
+        this.company = company;
     }
 
     static getAllClients(callback) {
@@ -41,7 +43,8 @@ class Client {
                     row.lastname,
                     row.email,
                     address,
-                    row.phone_number
+                    row.phone_number,
+                    row.company
                 );
             });
             callback(null, clients);
