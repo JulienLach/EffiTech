@@ -1,16 +1,15 @@
 import React, { Component } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import TemplateGlobal from "../Template/TemplateGlobal";
-import { getAllClients } from "../../services/api";
 import styles from "./ClientsPage.module.css";
-import FilterBar from "../../components/FilterBar/FilterBar";
+import { getAllClients } from "../../services/api";
 
 // Composant wrapper pour utiliser les hooks
-function ClientsPageWrapper() {
+const ClientsPageWrapper = () => {
     const navigate = useNavigate();
     const location = useLocation();
     return <ClientsPage navigate={navigate} location={location} />;
-}
+};
 
 class ClientsPage extends Component {
     constructor(props) {
@@ -19,10 +18,13 @@ class ClientsPage extends Component {
             clients: [],
             error: null,
             isModalOpen: false,
+            category: "Particulier",
+            company: "",
         };
         this.handleButtonClick = this.handleButtonClick.bind(this);
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
+        this.handleCategoryChange = this.handleCategoryChange.bind(this);
     }
 
     componentDidMount() {
@@ -72,8 +74,14 @@ class ClientsPage extends Component {
         }
     }
 
-    handleButtonClick() {
-        this.props.navigate("/client-details");
+    handleButtonClick(client) {
+        if (client && client.idClient) {
+            this.props.navigate(`/client-details/`, {
+                state: { client },
+            });
+        } else {
+            console.error("Données ddu client non définies");
+        }
     }
 
     openModal() {
@@ -82,6 +90,10 @@ class ClientsPage extends Component {
 
     closeModal() {
         this.setState({ isModalOpen: false });
+    }
+
+    handleCategoryChange(event) {
+        this.setState({ category: event.target.value });
     }
 
     render() {
@@ -124,7 +136,7 @@ class ClientsPage extends Component {
                                 <tr>
                                     <th>Référence</th>
                                     <th>Type</th>
-                                    <th>Nom</th>
+                                    <th>Nom/Entreprise</th>
                                     <th>Adresse</th>
                                     <th>Email</th>
                                     <th>Téléphone</th>
@@ -139,26 +151,30 @@ class ClientsPage extends Component {
                                                 client.category
                                             )}
                                         </td>
-                                        <td>
-                                            <a
-                                                href="#"
-                                                onClick={this.handleButtonClick}
-                                            >
-                                                {(() => {
-                                                    if (
-                                                        client.category ===
-                                                        "Professionnel"
-                                                    ) {
-                                                        return client.company;
-                                                    } else {
-                                                        return (
-                                                            client.lastname +
-                                                            " " +
-                                                            client.firstname
-                                                        );
+                                        <td
+                                            onClick={() =>
+                                                this.handleButtonClick(client)
+                                            }
+                                        >
+                                            {client.category ===
+                                            "Professionnel" ? (
+                                                <span
+                                                    className={
+                                                        styles.professionnel
                                                     }
-                                                })()}
-                                            </a>
+                                                >
+                                                    {client.company}
+                                                </span>
+                                            ) : (
+                                                <span
+                                                    className={
+                                                        styles.particulier
+                                                    }
+                                                >
+                                                    {client.lastname}{" "}
+                                                    {client.firstname}
+                                                </span>
+                                            )}
                                         </td>
                                         <td>
                                             {client.address.address}, <br />
@@ -173,9 +189,134 @@ class ClientsPage extends Component {
                         </table>
                     </div>
                 </div>
+                {this.state.isModalOpen && (
+                    <Modal onClose={this.closeModal}>
+                        <h2>Nouveau client</h2>
+                        <form className={styles.formElements}>
+                            <div className={styles.selectedCategory}>
+                                <label className={styles.labelRadio}>
+                                    Type de client:
+                                </label>
+                                <div>
+                                    <label className={styles.radioParticulier}>
+                                        <input
+                                            type="radio"
+                                            name="category"
+                                            value="Particulier"
+                                            checked={
+                                                this.state.category ===
+                                                "Particulier"
+                                            }
+                                            onChange={this.handleCategoryChange}
+                                        />
+                                        Particulier
+                                    </label>
+                                </div>
+                                <div>
+                                    <label
+                                        className={styles.radioProfessionnel}
+                                    >
+                                        <input
+                                            type="radio"
+                                            name="category"
+                                            value="Professionnel"
+                                            checked={
+                                                this.state.category ===
+                                                "Professionnel"
+                                            }
+                                            onChange={this.handleCategoryChange}
+                                        />
+                                        Professionnel
+                                    </label>
+                                </div>
+                            </div>
+                            {this.state.category === "Professionnel" && (
+                                <div className={styles.labelInput}>
+                                    <label htmlFor="company">Entreprise:</label>
+                                    <input
+                                        type="text"
+                                        id="company"
+                                        name="company"
+                                        value={this.state.company}
+                                        onChange={(e) =>
+                                            this.setState({
+                                                company: e.target.value,
+                                            })
+                                        }
+                                    />
+                                </div>
+                            )}
+
+                            <div className={styles.labelInput}>
+                                <label htmlFor="lastname">Nom:</label>
+                                <input
+                                    type="text"
+                                    id="lastname"
+                                    name="lastname"
+                                />
+                            </div>
+                            <div className={styles.labelInput}>
+                                <label htmlFor="firstname">Prénom:</label>
+                                <input
+                                    type="text"
+                                    id="firstname"
+                                    name="firstname"
+                                />
+                            </div>
+                            <div className={styles.labelInput}>
+                                <label htmlFor="job">Métier:</label>
+                                <input type="text" id="job" name="job" />
+                            </div>
+                            <div className={styles.labelInput}>
+                                <label htmlFor="speciality">Spécialité:</label>
+                                <input
+                                    type="text"
+                                    id="speciality"
+                                    name="speciality"
+                                />
+                            </div>
+                            <div className={styles.labelInput}>
+                                <label htmlFor="mail">Adresse mail:</label>
+                                <input type="email" id="mail" name="mail" />
+                            </div>
+                            <div className={styles.labelInput}>
+                                <label htmlFor="phone">Téléphone:</label>
+                                <input type="text" id="phone" name="phone" />
+                            </div>
+                        </form>
+                        <div className={styles.buttonPosition}>
+                            <button
+                                type="reset"
+                                className={styles.cancelButton}
+                                onClick={this.closeModal}
+                            >
+                                Annuler
+                            </button>
+                            <button
+                                type="submit"
+                                className={styles.submitButton}
+                            >
+                                Enregistrer
+                            </button>
+                        </div>
+                    </Modal>
+                )}
             </>
         );
     }
 }
+
+const Modal = ({ onClose, children }) => {
+    return (
+        <div className={styles.modalOverlay}>
+            <div className={styles.modalContent}>
+                <button className={styles.closeButton} onClick={onClose}>
+                    &times;
+                </button>
+                {children}
+            </div>
+        </div>
+    );
+};
 
 export default ClientsPageWrapper;

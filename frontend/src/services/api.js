@@ -158,6 +158,20 @@ function getEmployeeById(idEmployee, callback) {
     xhr.send();
 }
 
+function getClientById(idClient, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", `${API_URL}/clients/${idClient}`);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            callback(null, JSON.parse(xhr.responseText));
+        } else {
+            callback(new Error(xhr.statusText), null);
+        }
+    };
+    xhr.send();
+}
+
 export {
     getAllEvents,
     getAllClients,
@@ -169,4 +183,5 @@ export {
     createAccount,
     loginEmployee,
     getEmployeeById,
+    getClientById,
 };

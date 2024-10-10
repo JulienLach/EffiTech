@@ -18,7 +18,7 @@
 .addEmployee {
     background-color: #c93c2c;
     padding: 10px 15px;
-    border: none;
+    border: none; /* Supprime le cadre */
     border-radius: 10px;
     color: white;
     font-size: 18px;
@@ -96,6 +96,7 @@ a {
     text-align: end;
 }
 
+/* style de la modal */
 .modalOverlay {
     position: fixed;
     top: 0;

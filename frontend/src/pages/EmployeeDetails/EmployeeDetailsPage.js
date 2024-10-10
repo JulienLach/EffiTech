@@ -41,10 +41,6 @@ class EmployeeDetailsPage extends Component {
     render() {
         const { employee, error } = this.state;
 
-        if (!employee) {
-            return <div>Chargement...</div>;
-        }
-
         return (
             <>
                 <TemplateGlobal />

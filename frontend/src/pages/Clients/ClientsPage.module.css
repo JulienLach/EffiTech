@@ -22,8 +22,41 @@ body {
     margin-bottom: 20px;
 }
 
+.selectedCategory {
+    display: flex;
+    align-items: center;
+    margin: 0 0 15px 25px;
+}
+
 .rightPart {
     margin-left: auto;
+}
+
+.particulier {
+    color: #c93c2c;
+    font-weight: 550;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.professionnel {
+    color: #2c5ba1;
+    font-weight: 550;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.radioParticulier {
+    color: #c93c2c;
+}
+
+.radioProfessionnel {
+    color: #2c5ba1;
+}
+
+.labelRadio {
+    font-size: 20px;
+    font-weight: 500;
 }
 
 .addClient {
@@ -86,4 +119,102 @@ body {
     padding: 10px 10px 10px 35px;
     border: 1px solid #c0c0c0;
     border-radius: 50px;
+}
+
+/* style de la modal */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 30%; /* Ajustez la largeur selon vos besoins */
+    height: 100%;
+    border-top-left-radius: 20px;
+    background-color: rgba(
+        0,
+        0,
+        0,
+        0.5
+    ); /* Optionnel : pour un fond semi-transparent */
+    display: flex;
+    align-items: flex-start; /* Aligne le contenu en haut */
+    justify-content: flex-end; /* Aligne le contenu à droite */
+    z-index: 1000; /* Assurez-vous que la modale est au-dessus des autres éléments */
+}
+
+.modalContent {
+    background-color: white;
+    width: 100%;
+    height: 100%; /* Ajustez la hauteur pour ne pas se superposer au header */
+    border-top-left-radius: 20px;
+    overflow-y: auto; /* Ajoute un défilement si le contenu dépasse la hauteur */
+    padding: 20px; /* Optionnel : pour ajouter du padding à l'intérieur de la modale */
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5); /* Optionnel : pour ajouter une ombre */
+}
+
+.closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* CSS for input & label */
+.labelInput {
+    font-size: 20px;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    width: 30vw;
+    margin-bottom: 10px;
+}
+
+/* CSS for input comportement */
+.labelInput input {
+    margin: 0px 30px;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+}
+
+/* CSS for the label comportement */
+.labelInput label {
+    margin: 0px 30px;
+    padding: 5px 0px;
+}
+
+/* CSS for button positioning */
+.buttonPosition {
+    display: flex;
+    width: 30vw;
+    margin-bottom: 20px;
+    margin-top: 1.2em;
+}
+
+/* css for cancel button */
+.cancelButton {
+    background-color: #ababab;
+    margin: auto;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+/* CSS for create button */
+.submitButton {
+    background-color: #c93c2c;
+    margin: auto;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
 }
