@@ -144,9 +144,20 @@ class ClientsPage extends Component {
                                                 href="#"
                                                 onClick={this.handleButtonClick}
                                             >
-                                                {client.lastname +
-                                                    " " +
-                                                    client.firstname}
+                                                {(() => {
+                                                    if (
+                                                        client.category ===
+                                                        "Professionnel"
+                                                    ) {
+                                                        return client.company;
+                                                    } else {
+                                                        return (
+                                                            client.lastname +
+                                                            " " +
+                                                            client.firstname
+                                                        );
+                                                    }
+                                                })()}
                                             </a>
                                         </td>
                                         <td>
