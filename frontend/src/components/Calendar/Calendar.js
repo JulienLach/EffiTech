@@ -9,6 +9,19 @@ moment.tz.setDefault("Europe/Paris");
 moment.locale("fr"); // Définir la locale française
 const localizer = momentLocalizer(moment);
 
+function eventStyleGetter() {
+    const style = {
+        backgroundColor: "#C93C2C",
+        borderRadius: "5px",
+        opacity: 0.9,
+        color: "white",
+        border: "0px",
+    };
+    return {
+        style,
+    };
+}
+
 class Calendar extends Component {
     render() {
         return (
@@ -48,6 +61,7 @@ class Calendar extends Component {
                         time: "Heure",
                         event: "Événement",
                     }}
+                    eventPropGetter={eventStyleGetter}
                 />
             </div>
         );

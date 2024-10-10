@@ -25,6 +25,7 @@ class CalendarPage extends Component {
             selectedEvent: null,
             isCreateEventModalOpen: false,
             view: "list",
+            calendarEvents: [],
         };
 
         this.toggleEventModal = this.toggleEventModal.bind(this);
@@ -37,8 +38,31 @@ class CalendarPage extends Component {
             if (error) {
                 this.setState({ error: error.message });
             } else {
-                this.setState({ events: data });
+                const formattedEvents = this.formatEvents(data);
+                this.setState({
+                    events: data,
+                    calendarEvents: formattedEvents,
+                });
             }
+        });
+    }
+
+    formatEvents(events) {
+        return events.map((event) => {
+            const startDateTime = new Date(event.startingDate);
+            startDateTime.setHours(
+                ...event.startingHour.split(":").map(Number)
+            );
+
+            const endDateTime = new Date(event.startingDate);
+            endDateTime.setHours(...event.endingHour.split(":").map(Number));
+
+            return {
+                title: event.title,
+                start: startDateTime,
+                end: endDateTime,
+                allDay: false,
+            };
         });
     }
 
@@ -138,6 +162,7 @@ class CalendarPage extends Component {
             isEventModalOpen,
             selectedEvent,
             isCreateEventModalOpen,
+            calendarEvents,
             view,
         } = this.state;
 
@@ -172,7 +197,7 @@ class CalendarPage extends Component {
                             </button>
                         </div>
                         {view === "calendar" ? (
-                            <Calendar />
+                            <Calendar events={calendarEvents} />
                         ) : (
                             <table>
                                 <thead className={styles.stickyThead}>
