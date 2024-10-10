@@ -1,8 +1,7 @@
 const Company = require("../data/company.data.js"); // Importer le modèle Client
 
-function getCompanyById(req, res) {
-    const idCompany = req.params.idCompany;
-    Company.getCompanyById(idCompany, (error, company) => {
+function getCompany(req, res) {
+    Company.getCompany((error, company) => {
         if (error) {
             return res.status(500).send({
                 message: "Erreur lors de la récupération de la société",
@@ -17,4 +16,4 @@ function getCompanyById(req, res) {
     });
 }
 
-exports.getCompanyById = getCompanyById;
+exports.getCompany = getCompany;

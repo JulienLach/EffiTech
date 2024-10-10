@@ -172,6 +172,23 @@ function getClientById(idClient, callback) {
     xhr.send();
 }
 
+function getCompany(callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", `${API_URL}/company`);
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            callback(null, JSON.parse(xhr.responseText));
+        } else {
+            console.error(
+                "Erreur de récupération des informations de la société",
+                xhr.statusText
+            );
+            callback(new Error(xhr.statusText), null);
+        }
+    };
+    xhr.send();
+}
+
 export {
     getAllEvents,
     getAllClients,
@@ -184,4 +201,5 @@ export {
     loginEmployee,
     getEmployeeById,
     getClientById,
+    getCompany,
 };

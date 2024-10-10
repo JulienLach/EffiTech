@@ -1,4 +1,5 @@
-const pool = require("../config/db.config"); // Importer la configuration de la base de données
+const pool = require("../config/db.config");
+const Address = require("./address.data");
 
 class Company {
     constructor(
@@ -21,25 +22,32 @@ class Company {
         this.databaseVersion = databaseVersion;
     }
 
-    static getCompanyById(idCompany, callback) {
-        const query = "SELECT * FROM companies WHERE id_company = $1";
-        const values = [idCompany];
-        pool.query(query, values, (error, result) => {
+    static getCompany(callback) {
+        const query = "SELECT * FROM companies";
+        pool.query(query, (error, result) => {
             if (error) {
                 return callback(error);
             }
+
             const row = result.rows[0];
-            let company = new Company(
-                row.id_company,
-                row.phone_number,
-                row.id_address,
-                row.siret,
-                row.vat_number,
-                row.capital,
-                row.logo,
-                row.database_version
-            );
-            callback(null, company);
+
+            Address.getAddressById(row.id_address, function (error, address) {
+                if (error) {
+                    return callback(error, null);
+                }
+
+                let company = new Company(
+                    row.id_company,
+                    row.phone_number,
+                    address,
+                    row.siret,
+                    row.vat_number,
+                    row.capital,
+                    row.logo,
+                    row.database_version
+                );
+                callback(null, company);
+            });
         });
     }
 }

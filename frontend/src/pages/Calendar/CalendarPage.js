@@ -6,6 +6,7 @@ import { getAllEvents } from "../../services/api";
 import FilterBar from "../../components/FilterBar/FilterBar";
 import InterventionForm from "../../components/InterventionForm/InterventionForm";
 import CreateEventForm from "../../components/CreateEventForm/CreateEventForm";
+import Calendar from "../../components/Calendar/Calendar";
 
 // Composant wrapper pour utiliser les hooks
 function CalendarPageWrapper() {
@@ -23,10 +24,13 @@ class CalendarPage extends Component {
             isEventModalOpen: false,
             selectedEvent: null,
             isCreateEventModalOpen: false,
+            view: "list",
+            calendarEvents: [],
         };
 
         this.toggleEventModal = this.toggleEventModal.bind(this);
         this.toggleCreateEventModal = this.toggleCreateEventModal.bind(this);
+        this.toggleView = this.toggleView.bind(this);
     }
 
     componentDidMount() {
@@ -34,8 +38,31 @@ class CalendarPage extends Component {
             if (error) {
                 this.setState({ error: error.message });
             } else {
-                this.setState({ events: data });
+                const formattedEvents = this.formatEvents(data);
+                this.setState({
+                    events: data,
+                    calendarEvents: formattedEvents,
+                });
             }
+        });
+    }
+
+    formatEvents(events) {
+        return events.map((event) => {
+            const startDateTime = new Date(event.startingDate);
+            startDateTime.setHours(
+                ...event.startingHour.split(":").map(Number)
+            );
+
+            const endDateTime = new Date(event.startingDate);
+            endDateTime.setHours(...event.endingHour.split(":").map(Number));
+
+            return {
+                title: event.title,
+                start: startDateTime,
+                end: endDateTime,
+                allDay: false,
+            };
         });
     }
 
@@ -125,12 +152,18 @@ class CalendarPage extends Component {
         }));
     }
 
+    toggleView(view) {
+        this.setState({ view });
+    }
+
     render() {
         const {
             events,
             isEventModalOpen,
             selectedEvent,
             isCreateEventModalOpen,
+            calendarEvents,
+            view,
         } = this.state;
 
         return (
@@ -148,72 +181,92 @@ class CalendarPage extends Component {
                         </div>
                         <h3>Événements</h3>
                     </div>
-                    <div>
-                        <table>
-                            <thead className={styles.stickyThead}>
-                                <tr>
-                                    <th>Client</th>
-                                    <th>Référence</th>
-                                    <th>Type</th>
-                                    <th>Titre</th>
-                                    <th>Statut</th>
-                                    <th>Date</th>
-                                    <th>Intervenant</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {events.map((event) => (
-                                    <tr key={event.idEvent}>
-                                        <td>
-                                            <a href="#">
-                                                {event.client.firstname}{" "}
-                                                {event.client.lastname}
-                                            </a>
-                                        </td>
-                                        <td>
-                                            {(() => {
-                                                if (
-                                                    event.type ===
-                                                    "Intervention"
-                                                ) {
-                                                    return "INT-";
-                                                } else {
-                                                    return "RDV-";
-                                                }
-                                            })()}
-                                            {event.idEvent}
-                                        </td>
-                                        <td>{event.type}</td>
-                                        <td>
-                                            <a
-                                                href="#"
-                                                onClick={() =>
-                                                    this.toggleEventModal(event)
-                                                }
-                                            >
-                                                {event.title}
-                                            </a>
-                                        </td>
-                                        <td>
-                                            {this.getStatusIndicator(
-                                                event.status
-                                            )}
-                                        </td>
-                                        <td>
-                                            {new Date(
-                                                event.startingDate
-                                            ).toLocaleDateString()}
-                                        </td>
-                                        <td>
-                                            <a href="#">
-                                                {event.employee.firstname}{" "}
-                                                {event.employee.lastname}
-                                            </a>
-                                        </td>
+                    <div className={styles.listView}>
+                        <div>
+                            <button
+                                className={styles.viewButton}
+                                onClick={() => this.toggleView("calendar")}
+                            >
+                                Calendrier
+                            </button>
+                            <button
+                                className={styles.viewButton}
+                                onClick={() => this.toggleView("list")}
+                            >
+                                Liste
+                            </button>
+                        </div>
+                        {view === "calendar" ? (
+                            <Calendar events={calendarEvents} />
+                        ) : (
+                            <table>
+                                <thead className={styles.stickyThead}>
+                                    <tr>
+                                        <th>Client</th>
+                                        <th>Référence</th>
+                                        <th>Type</th>
+                                        <th>Titre</th>
+                                        <th>Statut</th>
+                                        <th>Date</th>
+                                        <th>Intervenant</th>
                                     </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    {events.map((event) => (
+                                        <tr key={event.idEvent}>
+                                            <td>
+                                                <a href="#">
+                                                    {event.client.firstname}{" "}
+                                                    {event.client.lastname}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                {(() => {
+                                                    if (
+                                                        event.type ===
+                                                        "Intervention"
+                                                    ) {
+                                                        return "INT-";
+                                                    } else {
+                                                        return "RDV-";
+                                                    }
+                                                })()}
+                                                {event.idEvent}
+                                            </td>
+                                            <td>{event.type}</td>
+                                            <td>
+                                                <a
+                                                    href="#"
+                                                    onClick={() =>
+                                                        this.toggleEventModal(
+                                                            event
+                                                        )
+                                                    }
+                                                >
+                                                    {event.title}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                {this.getStatusIndicator(
+                                                    event.status
+                                                )}
+                                            </td>
+                                            <td>
+                                                {new Date(
+                                                    event.startingDate
+                                                ).toLocaleDateString()}
+                                            </td>
+                                            <td>
+                                                <a href="#">
+                                                    {event.employee.firstname}{" "}
+                                                    {event.employee.lastname}
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        )}
                     </div>
                 </div>
                 {isEventModalOpen && (

@@ -1,0 +1,32 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 20px 0 250px;
+}
+
+/* placement et style du titre de la pge  */
+.pageTitle {
+    font-size: 30px;
+    font-weight: 550;
+}
+
+.cardContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.addEmployee {
+    background-color: #c93c2c;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    margin: 10px 20px;
+}
+
+a {
+    text-decoration: none;
+}
