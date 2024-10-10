@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import { Calendar as BigCalendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment-timezone";
 import "react-big-calendar/lib/css/react-big-calendar.css";
+import "moment/locale/fr"; // Importer la locale française
 
 // Setup the localizer by providing the moment Object to the correct localizer.
 moment.tz.setDefault("Europe/Paris");
+moment.locale("fr"); // Définir la locale française
 const localizer = momentLocalizer(moment);
 
 class Calendar extends Component {
@@ -31,6 +33,8 @@ class Calendar extends Component {
                             localizer.format(start, "HH:mm", culture) +
                             " - " +
                             localizer.format(end, "HH:mm", culture),
+                        dayFormat: "dddd DD/MM", // Format des jours
+                        monthHeaderFormat: "MMMM YYYY", // Format des mois
                     }}
                     messages={{
                         today: "Aujourd'hui",
