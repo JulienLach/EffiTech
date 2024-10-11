@@ -54,7 +54,10 @@ class Canvas extends Component {
                 ref={this.canvasRef}
                 width={340}
                 height={80}
-                style={{ border: "1px solid grey" }}
+                style={{
+                    border: "1px solid grey",
+                    margin: "0 auto",
+                }}
             />
         );
     }
