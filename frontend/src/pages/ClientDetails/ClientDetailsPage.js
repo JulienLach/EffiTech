@@ -82,7 +82,118 @@ class ClientDetailsPage extends Component {
             <>
                 <TemplateGlobal />
                 <div className={styles.container}>
-                    <div className={styles.profilInfo}>
+                    {client.category === "Professionnel" ? (
+                        <div className={styles.pro}>
+                            {/* code pour le professionnel ici */}
+                            <div className={styles.profilInfo}>
+                                <h1>Client</h1>
+                                <div className={styles.alignBackButton}>
+                                    <img
+                                        src={profilPicture}
+                                        alt="Profil picture"
+                                    />
+
+                                    <p className={styles.company}>
+                                        Sojet
+                                        {client.company}
+                                    </p>
+                                    <div className={styles.names}>
+                                        <p className={styles.lastnamePro}>
+                                            {client.lastname}
+                                        </p>
+                                        <p className={styles.firstnamePro}>
+                                            {client.firstname}
+                                        </p>
+                                    </div>
+                                    <div className={styles.idAndCategory}>
+                                        <p className={styles.id}>
+                                            C-{client.idClient}
+                                        </p>
+                                        <p>
+                                            {this.getCategoryIndicator(
+                                                client.category
+                                            )}
+                                        </p>
+                                    </div>
+                                    <button
+                                        type="button"
+                                        className={styles.backButton}
+                                        onClick={() =>
+                                            this.props.navigate("/clients")
+                                        }
+                                    >
+                                        <i className="fa-solid fa-arrow-right"></i>
+                                        Retour
+                                    </button>
+                                </div>
+                            </div>
+                            <div className={styles.separation}></div>
+                            <h2>Coordonnées</h2>
+                            <div className={styles.contactInfo}>
+                                <p>{client.phoneNumber}</p>
+                                <p>
+                                    {client.address.address},{" "}
+                                    {client.address.zipcode},{" "}
+                                    {client.address.city}
+                                </p>
+                            </div>
+                        </div>
+                    ) : (
+                        <div className={styles.part}>
+                            {/* code pour le particulier ici */}
+
+                            <div className={styles.profilInfo}>
+                                <h1>Client</h1>
+                                <div className={styles.alignBackButton}>
+                                    <img
+                                        src={profilPicture}
+                                        alt="Profil picture"
+                                    />
+                                    <div className={styles.names}>
+                                        <p className={styles.lastname}>
+                                            {client.lastname}
+                                        </p>
+                                        <p className={styles.firstname}>
+                                            {client.firstname}
+                                        </p>
+                                        <div className={styles.idAndCategory}>
+                                            <p className={styles.id}>
+                                                C-{client.idClient}
+                                            </p>
+                                            <p>
+                                                {this.getCategoryIndicator(
+                                                    client.category
+                                                )}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <button
+                                        type="button"
+                                        className={styles.backButton}
+                                        onClick={() =>
+                                            this.props.navigate("/clients")
+                                        }
+                                    >
+                                        <i className="fa-solid fa-arrow-right"></i>
+                                        Retour
+                                    </button>
+                                </div>
+                            </div>
+                            <div className={styles.separation}></div>
+                            <h2>Coordonnées</h2>
+                            <div className={styles.contactInfo}>
+                                <p>{client.email}</p>
+                                <p>
+                                    {client.address.address},{" "}
+                                    {client.address.zipcode},{" "}
+                                    {client.address.city}
+                                </p>
+                                <p>{client.phoneNumber}</p>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* <div className={styles.profilInfo}>
                         <h1>Client</h1>
                         <div className={styles.alignBackButton}>
                             <img src={profilPicture} alt="Profil picture" />
@@ -123,7 +234,7 @@ class ClientDetailsPage extends Component {
                             {client.address.address}, {client.address.zipcode},{" "}
                             {client.address.city}
                         </p>
-                    </div>
+                    </div> */}
                 </div>
             </>
         );

@@ -1,163 +1,158 @@
-/* Margin du container pour que le contenu ne soit pas sous le header ou sous la sidebar */
-.container {
-  margin: 100px 20px 0 250px;
-}
-
 /* HEADER */
 .header {
-  height: 80px;
-  position: sticky;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
-  background-color: white;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    height: 5em;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: white;
+    box-shadow: 0 0.18em 0.2em rgba(0, 0, 0, 0.1);
 }
 
 /* Header.css */
 .headerDiv {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.625em 1.25em;
 }
 
 .logo img {
-  height: 55px;
+    height: 3.5em;
 }
 
 .headerRight {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .planifierButton {
-  background-color: #c93c2c;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 10px;
-  color: white;
-  font-size: 18px;
-  font-weight: 500;
-  cursor: pointer;
-  margin: 0px 20px;
+    background-color: #c93c2c;
+    padding: 0.625em 0.9em;
+    border: none;
+    border-radius: 0.625em;
+    color: white;
+    font-size: 1.1em;
+    font-weight: 500;
+    cursor: pointer;
+    margin: 0 1.25em;
 }
 
 .planifierButton i {
-  margin-right: 10px;
+    margin-right: 0.625em;
 }
 
 .planifierButton:hover {
-  background-color: #9b2e22;
+    background-color: #9b2e22;
 }
 
 .notificationBell {
-  height: 30px;
+    height: 1.8em;
 }
 
 .notificationIcon {
-  position: relative;
-  margin-right: 20px;
+    position: relative;
+    margin-right: 1.25em;
 }
 
 .notificationCount {
-  display: flex;
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  background-color: red;
-  color: white;
-  border-radius: 50%;
-  height: 20px;
-  width: 20px;
-  font-size: 12px;
-  min-width: 20px;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    position: absolute;
+    top: -0.625em;
+    right: -0.625em;
+    background-color: red;
+    color: white;
+    border-radius: 1em;
+    height: 1.25em;
+    width: 1.25em;
+    font-size: 0.75em;
+    min-width: 1.25em;
+    align-items: center;
+    justify-content: center;
 }
 
 .profileBubble {
-  top: -10px;
-  right: -10px;
-  background-color: #007bff;
-  color: white;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 20px;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    top: -0.625em;
+    right: -0.625em;
+    background-color: #007bff;
+    color: white;
+    border-radius: 2em;
+    width: 2.5em;
+    height: 2.5em;
+    font-size: 1.25em;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* SIDEBAR */
 .sidebar {
-  margin-left: 20px;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  height: auto;
-  margin-top: 20px;
+    margin-left: 1.25em;
+    border-top-right-radius: 0.625em;
+    border-bottom-right-radius: 0.625em;
+    height: auto;
+    margin-top: 0.7em;
 }
 
 .sidebar ul {
-  list-style-type: none;
-  padding: 0;
+    list-style-type: none;
+    padding: 0;
 }
 
 .sidebar li {
-  display: flex;
-  align-items: center;
-  margin: 10px;
-  padding: 5px;
+    display: flex;
+    align-items: center;
+    margin: 0.625em;
+    padding: 0.3em;
 }
 
 .sidebar li a {
-  margin-left: 15px;
-  text-decoration: none;
-  font-size: 20px;
-  font-weight: 450;
-  color: black;
+    margin-left: 0.9em;
+    text-decoration: none;
+    font-size: 1.25em;
+    font-weight: 450;
+    color: black;
 }
 
 .sidebar li:hover a,
 .sidebar li:hover i {
-  color: white;
+    color: white;
 }
 
 .sidebar li:hover {
-  padding: 5px;
-  background-color: #c93c2c;
-  border-radius: 5px;
+    padding: 0.3em;
+    background-color: #c93c2c;
+    border-radius: 0.3em;
 }
 
 i {
-  width: 20px;
+    width: 1.25em;
 }
 
 /* Placement des deux divisions sidebar entre elles */
 .sidebarAndOrange {
-  display: flex;
-  position: fixed;
-  top: 90px;
+    display: flex;
+    position: fixed;
+    top: 5.6em;
 }
 
 /* Couleur orange de la div pour le liseret de la sidebar */
 .sideOrange {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #c93c2c;
-  height: auto;
-  width: 12px;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  /* box-shadow: 5px 0 1px -2px rgba(0, 0, 0, 0.1); */
-  cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #c93c2c;
+    height: auto;
+    width: 0.75em;
+    border-top-right-radius: 0.625em;
+    border-bottom-right-radius: 0.625em;
+    /* box-shadow: 5px 0 1px -2px rgba(0, 0, 0, 0.1); */
+    cursor: pointer;
 }
 
 /* Rotation de l'icône de flèche */
 .sideOrange i {
-  transform: rotate(90deg);
-  color: white;
+    transform: rotate(90deg);
+    color: white;
 }
