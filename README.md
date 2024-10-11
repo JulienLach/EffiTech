@@ -20,7 +20,13 @@
 
 -   PostgreSQL, Node.js, JavaScript.
 
-#### Testing
+### Testing
 
 -   JEST for test script
--   ESLint and Prettier for code quality and formating
+-   ESLint and Prettier for code quality and formatting
+
+-   Run `npx eslint path/to/your/file` to check for errors
+
+#### Main usage loop
+
+// Define the full functional test
