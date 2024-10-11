@@ -156,7 +156,11 @@ class InterventionForm extends Component {
                                 }
                             })()}
                             :{" "}
-                            {new Date(event.startingDate).toLocaleDateString()}
+                            {event.startingDate
+                                ? new Date(
+                                      event.startingDate
+                                  ).toLocaleDateString()
+                                : ""}
                         </div>
                         <div>
                             Fin{" "}
