@@ -6,9 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-# [0.0.2] (2024-10-11)
+## [0.0.2] (2024-10-11)
 
-## Added
+### Added
 
 -   Added appointment alongside intervention object
     -   Create an appointment
@@ -18,12 +18,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -   Added create account function
 -   Added company, employees and clients main views and all details views
 -   Added react-big-calendar npm package to add a calendar view to calendar page
--   Added ESLint and Prettier configs for code quality and formating
+-   Added ESLint and Prettier configs for code quality and formatting
 -   Refactored all functional components to Class components
 
-# [0.0.1] (2024-09-06)
+## [0.0.1] (2024-09-06)
 
-## Added
+### Added
 
 -   Create an event
 -   Fill intervention form
