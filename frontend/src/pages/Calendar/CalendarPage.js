@@ -252,9 +252,11 @@ class CalendarPage extends Component {
                                                 )}
                                             </td>
                                             <td>
-                                                {new Date(
-                                                    event.startingDate
-                                                ).toLocaleDateString()}
+                                                {event.startingDate
+                                                    ? new Date(
+                                                          event.startingDate
+                                                      ).toLocaleDateString()
+                                                    : ""}
                                             </td>
                                             <td>
                                                 <a href="#">
