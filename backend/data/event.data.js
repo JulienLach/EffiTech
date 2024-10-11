@@ -45,47 +45,92 @@ class Event {
                     return callback(error, null);
                 }
 
-                const query = `
-                    SELECT 
+                const queries = [
+                    `(SELECT 
                         events.id_event, events.title, events.description, events.status, 
                         events.is_planned, events.type, events.starting_date, events.starting_hour, 
                         events.ending_hour, events.id_client, events.id_employee, events.work_to_do
                     FROM events
-                `;
+                    WHERE events.status = 1 AND events.is_planned = false
+                    ORDER BY events.starting_date DESC)`,
+                    `(SELECT 
+                        events.id_event, events.title, events.description, events.status, 
+                        events.is_planned, events.type, events.starting_date, events.starting_hour, 
+                        events.ending_hour, events.id_client, events.id_employee, events.work_to_do
+                    FROM events
+                    WHERE events.status = 3
+                    ORDER BY events.starting_date DESC)`,
+                    `(SELECT 
+                        events.id_event, events.title, events.description, events.status, 
+                        events.is_planned, events.type, events.starting_date, events.starting_hour, 
+                        events.ending_hour, events.id_client, events.id_employee, events.work_to_do
+                    FROM events
+                    WHERE events.status = 4 AND events.starting_date = CURRENT_DATE
+                    ORDER BY events.starting_date DESC)`,
+                    `(SELECT 
+                        events.id_event, events.title, events.description, events.status, 
+                        events.is_planned, events.type, events.starting_date, events.starting_hour, 
+                        events.ending_hour, events.id_client, events.id_employee, events.work_to_do
+                    FROM events
+                    WHERE events.status = 2 AND events.starting_date > CURRENT_DATE
+                    ORDER BY events.starting_date DESC)`,
+                    `(SELECT 
+                        events.id_event, events.title, events.description, events.status, 
+                        events.is_planned, events.type, events.starting_date, events.starting_hour, 
+                        events.ending_hour, events.id_client, events.id_employee, events.work_to_do
+                    FROM events
+                    WHERE events.status = 5
+                    ORDER BY events.starting_date DESC)`,
+                ];
 
-                pool.query(query, function (error, result) {
-                    if (error) {
-                        return callback(error, null);
+                const allEvents = [];
+
+                function executeQuery(index) {
+                    if (index >= queries.length) {
+                        const events = allEvents.map(function (row) {
+                            const client = clients.find(function (client) {
+                                return client.idClient === row.id_client;
+                            });
+
+                            const employee = employees.find(
+                                function (employee) {
+                                    return (
+                                        employee.idEmployee === row.id_employee
+                                    );
+                                }
+                            );
+
+                            return new Event(
+                                row.id_event,
+                                row.title,
+                                row.description,
+                                row.status,
+                                row.is_planned,
+                                row.type,
+                                client,
+                                client.address, // Adresse du client récupéré avec Client.getAllClients
+                                row.starting_date,
+                                row.starting_hour,
+                                row.ending_hour,
+                                employee,
+                                row.work_to_do
+                            );
+                        });
+
+                        return callback(null, events);
                     }
 
-                    const events = result.rows.map(function (row) {
-                        const client = clients.find(function (client) {
-                            return client.idClient === row.id_client;
-                        });
+                    pool.query(queries[index], function (error, result) {
+                        if (error) {
+                            return callback(error, null);
+                        }
 
-                        const employee = employees.find(function (employee) {
-                            return employee.idEmployee === row.id_employee;
-                        });
-
-                        return new Event(
-                            row.id_event,
-                            row.title,
-                            row.description,
-                            row.status,
-                            row.is_planned,
-                            row.type,
-                            client,
-                            client.address, // Adresse du client récupéré avec Client.getAllClients
-                            row.starting_date,
-                            row.starting_hour,
-                            row.ending_hour,
-                            employee,
-                            row.work_to_do
-                        );
+                        allEvents.push(...result.rows);
+                        executeQuery(index + 1);
                     });
+                }
 
-                    callback(null, events);
-                });
+                executeQuery(0);
             });
         });
     }
