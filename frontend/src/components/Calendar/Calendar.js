@@ -32,6 +32,7 @@ class Calendar extends Component {
                     startAccessor="start"
                     endAccessor="end"
                     defaultView="week"
+                    views={["week", "day"]}
                     min={new Date(1970, 1, 1, 8, 0, 0)}
                     max={new Date(1970, 1, 1, 20, 0, 0)}
                     timeslots={2}
@@ -53,10 +54,8 @@ class Calendar extends Component {
                         today: "Aujourd'hui",
                         previous: "Précédent",
                         next: "Suivant",
-                        month: "Mois",
                         week: "Semaine",
                         day: "Jour",
-                        agenda: "Agenda",
                         date: "Date",
                         time: "Heure",
                         event: "Événement",
