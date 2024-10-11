@@ -1,15 +1,26 @@
-### Plateforme de gestion d'interventions
+### Intervention Management Platform
 
-#### Objectif
-- Améliorer la gestion et la planification des interventions pour artisans, techniciens industriels et chauffagistes.
+#### Objective
 
-#### Fonctionnalités
-- **Planification** : Gestion individuelle des techniciens en déplacement.
-- **Information pré-intervention** : Accès aux données techniques nécessaires avant l'intervention.
-- **Rapports** : Création de rapports détaillés avec texte, photos, et signature électronique du client.
-- **Saisie d'informations** : Enregistrement des informations clients et équipement dès le premier rendez-vous.
-- **Gestion des techniciens** : Affectation des techniciens qualifiés par les superviseurs.
-- **Documentation technique** : Accès facile à la documentation et informations à jour pour chaque intervention.
+-   Improve the management and scheduling of interventions for craftsmen, industrial technicians, and heating engineers.
 
-#### Technologies utilisées
-- PostgreSQL, Node.js, JavaScript.
+#### Features
+
+**Scheduling** : Individual management of technicians on the move.
+
+**Pre-intervention information** : Access to necessary technical data before the intervention.
+
+**Reports** : Creation of detailed reports with text, photos, and electronic client signature.
+
+**Information entry** : Recording of client and equipment information from the first appointment.
+
+**Technician management** : Assignment of qualified technicians by supervisors.
+
+#### Stack
+
+-   PostgreSQL, Node.js, JavaScript.
+
+#### Testing
+
+-   JEST for test script
+-   ESLint and Prettier for code quality and formating
