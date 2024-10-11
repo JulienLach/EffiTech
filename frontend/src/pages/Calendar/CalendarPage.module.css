@@ -6,20 +6,20 @@ body {
 .container {
     display: flex;
     flex-direction: column;
-    margin: 0 20px 0 250px;
+    margin: 0 1.25em 0 15.6em;
 }
 
 /* placement et style du titre de la pge  */
 .pageTitle {
-    font-size: 30px;
+    font-size: 1.9em;
     font-weight: 550;
 }
 
 /* fixation du top side (titre, filter bar et evenement) */
 .fixedTopSide {
-    height: 185px;
+    height: 11.5em;
     position: sticky;
-    top: 80px;
+    top: 5em;
     width: 100%;
     background-color: white;
     z-index: 1;
@@ -27,24 +27,24 @@ body {
 
 .stickyThead {
     position: sticky;
-    top: 265px;
+    top: 16.56em;
     background-color: white;
     z-index: 1;
 }
 
 /* placement du titre 'evennement' */
 h3 {
-    font-size: 20px;
+    font-size: 1.25em;
     font-weight: 600;
-    margin-top: 20px;
+    margin-top: 1.25em;
 }
 
 th,
 td {
     text-align: start;
     width: 100vw; /* Définit une largeur fixe pour les cellules */
-    padding: 10px; /* Augmente l'espace à l'intérieur des cellules */
-    border-bottom: 1px solid #d3d3d3;
+    padding: 0.625em; /* Augmente l'espace à l'intérieur des cellules */
+    border-bottom: 0.06em solid #d3d3d3;
 }
 
 a {

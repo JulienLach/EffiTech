@@ -1,12 +1,12 @@
 .container {
     display: flex;
     flex-direction: column;
-    margin: 0 20px 0 250px;
+    margin: 0 1.25em 0 15.6em;
 }
 
 /* placement et style du titre de la pge  */
 .pageTitle {
-    font-size: 30px;
+    font-size: 1.9em;
     font-weight: 550;
 }
 
@@ -17,14 +17,14 @@
 
 .addEmployee {
     background-color: #c93c2c;
-    padding: 10px 15px;
+    padding: 0.625em 0.938em;
     border: none;
-    border-radius: 10px;
+    border-radius: 0.625em;
     color: white;
-    font-size: 18px;
+    font-size: 1.125em;
     font-weight: 500;
     cursor: pointer;
-    margin: 10px 20px;
+    margin: 0.625em 1.25em;
 }
 
 a {
