@@ -1,10 +1,14 @@
 .container {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
-    align-items: start;
-    margin: 50px 20px 0 250px;
+    margin: 0 1.25em 0 15.6em;
 }
+
+.pageTitle {
+    font-size: 1.9em;
+    font-weight: 550;
+}
+
 .pro,
 .part {
     width: 100%;
@@ -28,19 +32,42 @@
     transform: rotate(180deg);
 }
 
-.alignBackButton {
+.profilCompanyBack {
     display: flex;
     width: 75%;
     align-items: center;
 }
 
-.alignBackButton img {
-    width: 150px;
-    height: 150px;
+.profilNamesBack {
+    display: flex;
+    width: 75%;
+    align-items: center;
+}
+
+.profilCompanyBack img,
+.profilNamesBack img {
+    width: 9.3em;
+    height: 9.3em;
+}
+
+.idAndCategory {
+    display: flex;
+    align-items: center;
+}
+
+.id {
+    margin-right: 1em;
+    font-size: 1.2em;
+    font-weight: 600;
 }
 
 .names {
     display: flex;
+}
+.nameColumn {
+    display: flex;
+    flex-direction: column;
+    margin-left: 1em;
 }
 
 .lastname,
@@ -49,6 +76,7 @@
     font-size: 40px;
     font-weight: 550;
     text-transform: capitalize;
+    text-align: right;
 }
 
 .lastnamePro,
@@ -56,6 +84,8 @@
     font-size: 1.25em;
     font-weight: 550;
     text-transform: capitalize;
+    margin: 0 0.5em 0 0;
+    font-weight: 400;
 }
 
 .lastname,

@@ -86,8 +86,8 @@ class ClientDetailsPage extends Component {
                         <div className={styles.pro}>
                             {/* code pour le professionnel ici */}
                             <div className={styles.profilInfo}>
-                                <h1>Client</h1>
-                                <div className={styles.alignBackButton}>
+                                <h1 className={styles.pageTitle}>Client</h1>
+                                <div className={styles.profilCompanyBack}>
                                     <img
                                         src={profilPicture}
                                         alt="Profil picture"
@@ -97,24 +97,7 @@ class ClientDetailsPage extends Component {
                                         Sojet
                                         {client.company}
                                     </p>
-                                    <div className={styles.names}>
-                                        <p className={styles.lastnamePro}>
-                                            {client.lastname}
-                                        </p>
-                                        <p className={styles.firstnamePro}>
-                                            {client.firstname}
-                                        </p>
-                                    </div>
-                                    <div className={styles.idAndCategory}>
-                                        <p className={styles.id}>
-                                            C-{client.idClient}
-                                        </p>
-                                        <p>
-                                            {this.getCategoryIndicator(
-                                                client.category
-                                            )}
-                                        </p>
-                                    </div>
+
                                     <button
                                         type="button"
                                         className={styles.backButton}
@@ -126,12 +109,34 @@ class ClientDetailsPage extends Component {
                                         Retour
                                     </button>
                                 </div>
+                                <div className={styles.idAndCategory}>
+                                    <p className={styles.id}>
+                                        C-{client.idClient}
+                                    </p>
+                                    <p>
+                                        {this.getCategoryIndicator(
+                                            client.category
+                                        )}
+                                    </p>
+                                </div>
+                                <div className={styles.names}>
+                                    <p className={styles.firstnamePro}>
+                                        {client.firstname}
+                                    </p>
+                                    <p className={styles.lastnamePro}>
+                                        {client.lastname}
+                                    </p>
+                                </div>
                             </div>
                             <div className={styles.separation}></div>
                             <h2>Coordonnées</h2>
                             <div className={styles.contactInfo}>
-                                <p>{client.phoneNumber}</p>
                                 <p>
+                                    <i class="fa-solid fa-phone"></i>
+                                    {client.phoneNumber}
+                                </p>
+                                <p>
+                                    <i class="fa-solid fa-location-dot"></i>
                                     {client.address.address},{" "}
                                     {client.address.zipcode},{" "}
                                     {client.address.city}
@@ -141,31 +146,20 @@ class ClientDetailsPage extends Component {
                     ) : (
                         <div className={styles.part}>
                             {/* code pour le particulier ici */}
-
                             <div className={styles.profilInfo}>
-                                <h1>Client</h1>
-                                <div className={styles.alignBackButton}>
+                                <h1 className={styles.pageTitle}>Client</h1>
+                                <div className={styles.profilNamesBack}>
                                     <img
                                         src={profilPicture}
                                         alt="Profil picture"
                                     />
-                                    <div className={styles.names}>
+                                    <div className={styles.nameColumn}>
                                         <p className={styles.lastname}>
                                             {client.lastname}
                                         </p>
                                         <p className={styles.firstname}>
                                             {client.firstname}
                                         </p>
-                                        <div className={styles.idAndCategory}>
-                                            <p className={styles.id}>
-                                                C-{client.idClient}
-                                            </p>
-                                            <p>
-                                                {this.getCategoryIndicator(
-                                                    client.category
-                                                )}
-                                            </p>
-                                        </div>
                                     </div>
                                     <button
                                         type="button"
@@ -178,17 +172,30 @@ class ClientDetailsPage extends Component {
                                         Retour
                                     </button>
                                 </div>
+                                <div className={styles.idAndCategory}>
+                                    <p className={styles.id}>
+                                        C-{client.idClient}
+                                    </p>
+                                    <p>
+                                        {this.getCategoryIndicator(
+                                            client.category
+                                        )}
+                                    </p>
+                                </div>
                             </div>
                             <div className={styles.separation}></div>
                             <h2>Coordonnées</h2>
                             <div className={styles.contactInfo}>
-                                <p>{client.email}</p>
                                 <p>
+                                    <i class="fa-solid fa-phone"></i>
+                                    {client.phoneNumber}
+                                </p>
+                                <p>
+                                    <i class="fa-solid fa-location-dot"></i>
                                     {client.address.address},{" "}
                                     {client.address.zipcode},{" "}
                                     {client.address.city}
                                 </p>
-                                <p>{client.phoneNumber}</p>
                             </div>
                         </div>
                     )}
