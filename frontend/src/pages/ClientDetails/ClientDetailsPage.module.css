@@ -3,10 +3,19 @@
     flex-direction: column;
     flex-wrap: wrap;
     align-items: start;
-    margin: 10px 20px 0 250px;
+    margin: 50px 20px 0 250px;
+}
+.pro,
+.part {
+    width: 100%;
+}
+
+.company {
+    margin-left: 1em;
 }
 
 .backButton {
+    display: flex;
     padding: 0.5em;
     border: 1px solid #ccc;
     border-radius: 0.3em;
@@ -19,13 +28,13 @@
     transform: rotate(180deg);
 }
 
-.profilTitleBack {
+.alignBackButton {
     display: flex;
     width: 75%;
     align-items: center;
 }
 
-.profilTitleBack img {
+.alignBackButton img {
     width: 150px;
     height: 150px;
 }
@@ -36,29 +45,27 @@
 
 .lastname,
 .firstname {
-    margin: 10px 5px 0 0;
-    font-size: 20px;
-    font-weight: 450;
+    margin: 10px 0 0 50px;
+    font-size: 40px;
+    font-weight: 550;
+    text-transform: capitalize;
 }
 
+.lastnamePro,
+.firstnamePro {
+    font-size: 1.25em;
+    font-weight: 550;
+    text-transform: capitalize;
+}
+
+.lastname,
 .company {
     text-transform: uppercase;
     font-size: 60px;
     font-weight: 550;
-    margin-left: 50px;
 }
 
-.idAndCategory {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-}
-.id {
-    font-size: 20px;
-    font-weight: 450;
-    margin-right: 20px;
-}
-.profilInfoPro {
+.profilInfo {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -85,7 +92,7 @@
 }
 
 .contactInfo {
-    font-size: 20px;
+    font-size: 1.25em;
 }
 
 .contactInfo p {
@@ -99,8 +106,4 @@
     font-size: 1em;
     cursor: pointer;
     margin-top: 15px;
-}
-
-iframe {
-    margin: 20px 0 20px 0;
 }
