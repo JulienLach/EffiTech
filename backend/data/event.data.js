@@ -34,6 +34,30 @@ class Event {
         this.workToDo = workToDo;
     }
 
+    static updateEventStatuses(callback) {
+        const today = new Date().toISOString().split("T")[0]; // Obtenir la date du jour au format YYYY-MM-DD
+
+        const updateQuery = `
+            UPDATE events
+            SET status = CASE
+                WHEN status = 5 THEN 5
+                WHEN starting_date < $1 THEN 2
+                WHEN starting_date = $1 THEN 3
+                WHEN starting_date > $1 THEN 4
+                ELSE status
+            END
+        `;
+        const values = [today];
+
+        pool.query(updateQuery, values, function (error, result) {
+            if (error) {
+                return callback(error);
+            }
+            callback(null);
+        });
+    }
+
+    // Fonction pour récupérer tous les événements
     static getAllEvents(callback) {
         Client.getAllClients(function (error, clients) {
             if (error) {
@@ -45,47 +69,58 @@ class Event {
                     return callback(error, null);
                 }
 
-                const query = `
-                    SELECT 
-                        events.id_event, events.title, events.description, events.status, 
-                        events.is_planned, events.type, events.starting_date, events.starting_hour, 
-                        events.ending_hour, events.id_client, events.id_employee, events.work_to_do
-                    FROM events
-                    ORDER BY events.status ASC, events.starting_date DESC
-                `;
-
-                pool.query(query, function (error, result) {
+                // Mettre à jour les statuts des événements avant de les récupérer
+                Event.updateEventStatuses(function (error) {
                     if (error) {
                         return callback(error, null);
                     }
 
-                    const events = result.rows.map(function (row) {
-                        const client = clients.find(function (client) {
-                            return client.idClient === row.id_client;
+                    const query = `
+                        SELECT 
+                            events.id_event, events.title, events.description, events.status, 
+                            events.is_planned, events.type, events.starting_date, events.starting_hour, 
+                            events.ending_hour, events.id_client, events.id_employee, events.work_to_do
+                        FROM events
+                        ORDER BY events.status ASC, events.starting_date ASC
+                    `;
+
+                    pool.query(query, function (error, result) {
+                        if (error) {
+                            return callback(error, null);
+                        }
+
+                        const events = result.rows.map(function (row) {
+                            const client = clients.find(function (client) {
+                                return client.idClient === row.id_client;
+                            });
+
+                            const employee = employees.find(
+                                function (employee) {
+                                    return (
+                                        employee.idEmployee === row.id_employee
+                                    );
+                                }
+                            );
+
+                            return new Event(
+                                row.id_event,
+                                row.title,
+                                row.description,
+                                row.status,
+                                row.is_planned,
+                                row.type,
+                                client,
+                                client.address, // Adresse du client récupéré avec Client.getAllClients
+                                row.starting_date,
+                                row.starting_hour,
+                                row.ending_hour,
+                                employee,
+                                row.work_to_do
+                            );
                         });
 
-                        const employee = employees.find(function (employee) {
-                            return employee.idEmployee === row.id_employee;
-                        });
-
-                        return new Event(
-                            row.id_event,
-                            row.title,
-                            row.description,
-                            row.status,
-                            row.is_planned,
-                            row.type,
-                            client,
-                            client.address, // Adresse du client récupéré avec Client.getAllClients
-                            row.starting_date,
-                            row.starting_hour,
-                            row.ending_hour,
-                            employee,
-                            row.work_to_do
-                        );
+                        callback(null, events);
                     });
-
-                    callback(null, events);
                 });
             });
         });
