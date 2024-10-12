@@ -117,12 +117,26 @@ class CreateEventForm extends Component {
             selectedTab,
         } = this.state;
 
+        // Calculer le statut dynamiquement
+        let status;
+        const today = new Date().toISOString().split("T")[0]; // Obtenir la date du jour au format YYYY-MM-DD
+
+        if (!startingDate) {
+            status = 1;
+        } else if (startingDate < today) {
+            status = 2;
+        } else if (startingDate === today) {
+            status = 3;
+        } else if (startingDate > today) {
+            status = 4;
+        }
+
         const eventData = {
             title: title,
             description: description,
-            status: 2, // à changer car plus utile
+            status: status,
             isPlanned: isPlanned,
-            type: selectedTab, // Utiliser l'onglet sélectionné pour le type
+            type: selectedTab, // Utiliser l'onglet sélectionné pour le type Intervention ou Rendez-vous
             idClient: selectedClient.idClient,
             idAddress: selectedClient.address.idAddress,
             startingDate: startingDate,
