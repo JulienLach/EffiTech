@@ -34,31 +34,19 @@ class InterventionForm extends Component {
         };
 
         switch (status) {
-            case 5:
+            case 1:
                 return (
                     <span
                         style={{
                             ...style,
-                            backgroundColor: "#DCFFD6",
-                            color: "#48903C",
+                            backgroundColor: "#EBEBEB",
+                            color: "#505050",
                         }}
                     >
-                        Terminé
+                        À planifier
                     </span>
                 );
-            case 4:
-                return (
-                    <span
-                        style={{
-                            ...style,
-                            backgroundColor: "#D3F4FF",
-                            color: "#2C5BA1",
-                        }}
-                    >
-                        Aujourd'hui
-                    </span>
-                );
-            case 3:
+            case 2:
                 return (
                     <span
                         style={{
@@ -70,7 +58,19 @@ class InterventionForm extends Component {
                         En retard
                     </span>
                 );
-            case 2:
+            case 3:
+                return (
+                    <span
+                        style={{
+                            ...style,
+                            backgroundColor: "#D3F4FF",
+                            color: "#2C5BA1",
+                        }}
+                    >
+                        Aujourd&apos;hui
+                    </span>
+                );
+            case 4:
                 return (
                     <span
                         style={{
@@ -82,16 +82,16 @@ class InterventionForm extends Component {
                         À venir
                     </span>
                 );
-            case 1:
+            case 5:
                 return (
                     <span
                         style={{
                             ...style,
-                            backgroundColor: "#EBEBEB",
-                            color: "#505050",
+                            backgroundColor: "#DCFFD6",
+                            color: "#48903C",
                         }}
                     >
-                        À planifier
+                        Terminé
                     </span>
                 );
         }
