@@ -104,9 +104,12 @@ class UpdateInterventionForm extends Component {
                 className={`${styles.modal} ${styles.open}`}
             >
                 <div className={styles.container}>
-                    <div>
-                        <h2>Modifier Intervention</h2>
-                    </div>
+                    <h2>
+                        {type === "Intervention"
+                            ? "Modifier l'intervention"
+                            : "Modifier le rendez-vous"}
+                    </h2>
+                    <div className={styles.separator}></div>
                     <div>
                         <div>
                             <label>
@@ -210,6 +213,7 @@ class UpdateInterventionForm extends Component {
                             </label>
                         </div>
                     </div>
+                    <div className={styles.separator}></div>
                     <div className={styles.modalFooter}>
                         <button type="button" onClick={this.handleCancel}>
                             Annuler

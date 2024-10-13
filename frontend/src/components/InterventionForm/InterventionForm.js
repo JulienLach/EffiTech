@@ -166,7 +166,8 @@ class InterventionForm extends Component {
                                 ? new Date(
                                       event.startingDate
                                   ).toLocaleDateString()
-                                : ""}
+                                : ""}{" "}
+                            - {event.startingHour}
                         </div>
                         <div>
                             Fin{" "}
@@ -195,6 +196,7 @@ class InterventionForm extends Component {
                         </div>
                     </div>
                     <div className={styles.modalFooter}>
+                        <button>Supprimer</button>
                         <button onClick={closeModal}>Retour</button>
                         <button type="button" onClick={this.handleEdit}>
                             Modifier
