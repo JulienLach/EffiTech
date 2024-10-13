@@ -123,6 +123,25 @@ function updateEvent(req, res) {
     );
 }
 
+function deleteEvent(req, res) {
+    const idEvent = req.params.idEvent;
+    Event.deleteEvent(idEvent, (error, deletedEvent) => {
+        if (error) {
+            return res.status(500).send({
+                message: "Erreur lors de la suppression de l'événement",
+                error: error.message,
+            });
+        }
+        if (deletedEvent) {
+            res.status(200).send({
+                message: "Événement supprimé avec succès",
+            });
+        } else {
+            res.status(404).send({ message: "Événement non trouvé" });
+        }
+    });
+}
+
 function submitInterventionForm(req, res) {
     const {
         idEvent,
@@ -183,5 +202,6 @@ exports.getAllEvents = getAllEvents;
 exports.getEventById = getEventById;
 exports.createEvent = createEvent;
 exports.updateEvent = updateEvent;
+exports.deleteEvent = deleteEvent;
 exports.submitInterventionForm = submitInterventionForm;
 exports.submitAppointmentForm = submitAppointmentForm;
