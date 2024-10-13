@@ -30,3 +30,8 @@
 a {
     text-decoration: none;
 }
+
+.separator {
+    margin: 1em 0;
+    border-bottom: 1px solid #ccc;
+}
