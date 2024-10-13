@@ -92,12 +92,9 @@ class ClientDetailsPage extends Component {
                                         src={profilPicture}
                                         alt="Profil picture"
                                     />
-
                                     <p className={styles.company}>
-                                        Sojet
                                         {client.company}
                                     </p>
-
                                     <button
                                         type="button"
                                         className={styles.backButton}
