@@ -77,19 +77,16 @@ function updateEvent(req, res) {
         status,
         isPlanned,
         type,
-        client,
-        address,
+        idClient,
+        idAddress,
         startingDate,
         startingHour,
         endingHour,
-        employee,
+        idEmployee,
         workToDo,
     } = req.body;
 
-    // Extraire les identifiants des objets imbriqués
-    const idClient = client.idClient;
-    const idAddress = address.idAddress;
-    const idEmployee = employee.idEmployee;
+    console.log("Données reçues pour la mise à jour:", req.body); // Log des données reçues
 
     Event.updateEvent(
         idEvent,
@@ -117,6 +114,7 @@ function updateEvent(req, res) {
                 });
             }
             if (updatedEvent) {
+                console.log("Événement mis à jour avec succès:", updatedEvent); // Log de la mise à jour réussie
                 res.status(200).send({
                     message: "Événement modifié avec succès",
                 });

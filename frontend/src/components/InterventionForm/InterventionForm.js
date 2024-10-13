@@ -12,6 +12,7 @@ class InterventionForm extends Component {
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleEdit = this.handleEdit.bind(this);
     }
 
     handleSubmit(e) {
@@ -22,6 +23,11 @@ class InterventionForm extends Component {
         } else if (event.type === "Rendez-vous") {
             navigate("/appointment-form", { state: { event } });
         }
+    }
+
+    handleEdit() {
+        const { openUpdateForm } = this.props;
+        openUpdateForm();
     }
 
     getStatusIndicator(status) {
@@ -190,7 +196,9 @@ class InterventionForm extends Component {
                     </div>
                     <div className={styles.modalFooter}>
                         <button onClick={closeModal}>Retour</button>
-                        <button>Modifier</button>
+                        <button type="button" onClick={this.handleEdit}>
+                            Modifier
+                        </button>
                         {event.status === 5 ? (
                             <button type="submit">Visualiser le rapport</button>
                         ) : (

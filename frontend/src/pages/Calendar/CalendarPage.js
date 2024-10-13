@@ -5,6 +5,7 @@ import styles from "./CalendarPage.module.css";
 import { getAllEvents } from "../../services/api";
 import FilterBar from "../../components/FilterBar/FilterBar";
 import InterventionForm from "../../components/InterventionForm/InterventionForm";
+import UpdateInterventionForm from "../../components/UpdateInterventionForm/UpdateInterventionForm";
 import CreateEventForm from "../../components/CreateEventForm/CreateEventForm";
 import Calendar from "../../components/Calendar/Calendar";
 
@@ -26,11 +27,14 @@ class CalendarPage extends Component {
             isCreateEventModalOpen: false,
             view: "list",
             calendarEvents: [],
+            isUpdateFormOpen: false,
         };
 
         this.toggleEventModal = this.toggleEventModal.bind(this);
         this.toggleCreateEventModal = this.toggleCreateEventModal.bind(this);
         this.toggleView = this.toggleView.bind(this);
+        this.openUpdateForm = this.openUpdateForm.bind(this);
+        this.closeUpdateForm = this.closeUpdateForm.bind(this);
     }
 
     componentDidMount() {
@@ -143,6 +147,7 @@ class CalendarPage extends Component {
         this.setState({
             selectedEvent: event,
             isEventModalOpen: event !== null,
+            isUpdateFormOpen: false, // Fermer le formulaire de mise à jour si un autre événement est sélectionné
         });
     }
 
@@ -156,6 +161,14 @@ class CalendarPage extends Component {
         this.setState({ view });
     }
 
+    openUpdateForm() {
+        this.setState({ isUpdateFormOpen: true });
+    }
+
+    closeUpdateForm() {
+        this.setState({ isUpdateFormOpen: false });
+    }
+
     render() {
         const {
             events,
@@ -164,6 +177,7 @@ class CalendarPage extends Component {
             isCreateEventModalOpen,
             calendarEvents,
             view,
+            isUpdateFormOpen,
         } = this.state;
 
         return (
@@ -271,10 +285,17 @@ class CalendarPage extends Component {
                         )}
                     </div>
                 </div>
-                {isEventModalOpen && (
+                {isEventModalOpen && !isUpdateFormOpen && (
                     <InterventionForm
                         event={selectedEvent}
                         closeModal={() => this.toggleEventModal()}
+                        openUpdateForm={this.openUpdateForm}
+                    />
+                )}
+                {isUpdateFormOpen && (
+                    <UpdateInterventionForm
+                        event={selectedEvent}
+                        closeModal={this.closeUpdateForm}
                     />
                 )}
                 {isCreateEventModalOpen && (
