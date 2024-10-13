@@ -74,7 +74,8 @@ class Client {
                 row.lastname,
                 row.email,
                 address,
-                row.phone_number
+                row.phone_number,
+                row.company
             );
             callback(null, client);
         });
