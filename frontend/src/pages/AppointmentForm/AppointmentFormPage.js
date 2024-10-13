@@ -71,12 +71,12 @@ class AppointmentFormPage extends Component {
             status: 5,
             isPlanned: eventDetails.isPlanned,
             type: eventDetails.type,
-            client,
-            address,
+            idClient: client.idClient,
+            idAddress: address.idAddress,
             startingDate,
             startingHour: eventDetails.startingHour,
             endingHour: eventDetails.endingHour,
-            employee,
+            idEmployee: employee.idEmployee,
             workToDo,
         };
 
