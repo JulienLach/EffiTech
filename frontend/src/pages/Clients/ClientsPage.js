@@ -264,19 +264,27 @@ class ClientsPage extends Component {
                                 />
                             </div>
                             <div className={styles.labelInput}>
-                                <label htmlFor="job">Métier:</label>
-                                <input type="text" id="job" name="job" />
-                            </div>
-                            <div className={styles.labelInput}>
-                                <label htmlFor="speciality">Spécialité:</label>
+                                <label htmlFor="address">Adresse:</label>
                                 <input
                                     type="text"
-                                    id="speciality"
-                                    name="speciality"
+                                    id="address"
+                                    name="address"
                                 />
                             </div>
                             <div className={styles.labelInput}>
-                                <label htmlFor="mail">Adresse mail:</label>
+                                <label htmlFor="zipcode">Code postal:</label>
+                                <input
+                                    type="text"
+                                    id="zipcode"
+                                    name="zipcode"
+                                />
+                            </div>
+                            <div className={styles.labelInput}>
+                                <label htmlFor="city">Ville:</label>
+                                <input type="text" id="city" name="city" />
+                            </div>
+                            <div className={styles.labelInput}>
+                                <label htmlFor="mail">Email:</label>
                                 <input type="email" id="mail" name="mail" />
                             </div>
                             <div className={styles.labelInput}>
@@ -296,7 +304,7 @@ class ClientsPage extends Component {
                                 type="submit"
                                 className={styles.submitButton}
                             >
-                                Enregistrer
+                                Créer le client
                             </button>
                         </div>
                     </Modal>
