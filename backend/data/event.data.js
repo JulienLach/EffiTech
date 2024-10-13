@@ -319,7 +319,7 @@ class Event {
     }
 
     static deleteEvent(idEvent, callback) {
-        const query = "DELETE FROM events WHERE idEvent = $1 RETURNING *";
+        const query = "DELETE FROM events WHERE id_event = $1 RETURNING *";
         const values = [idEvent];
         pool.query(query, values, (error, result) => {
             if (error) {
@@ -334,18 +334,15 @@ class Event {
                 row.is_planned,
                 row.type,
                 row.id_client,
-                row.id_client,
+                row.id_address,
                 row.starting_date,
-                row.startin_hour,
+                row.starting_hour,
                 row.ending_hour,
                 row.id_employee
             );
             callback(null, deletedEvent);
         });
     }
-
-    // pour cette méthode utiliser les UNION pour récupérer les événements planifiés et non planifiés et les afficher dans l'ordre des UNION
-    static sortEventsByDate() {}
 }
 
 // Voir si ces classes sont nécessaires ou si on peut tout faire avec la classe Event

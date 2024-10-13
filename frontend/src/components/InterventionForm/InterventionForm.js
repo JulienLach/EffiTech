@@ -1,11 +1,18 @@
 import React, { Component } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./InterventionForm.module.css";
+import { deleteEvent } from "../../services/api";
 
 // Composant wrapper pour utiliser les hooks
 function InterventionFormWrapper(props) {
     const navigate = useNavigate();
-    return <InterventionForm {...props} navigate={navigate} />;
+    return (
+        <InterventionForm
+            {...props}
+            navigate={navigate}
+            deleteEvent={deleteEvent}
+        />
+    );
 }
 
 class InterventionForm extends Component {
@@ -13,6 +20,7 @@ class InterventionForm extends Component {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleEdit = this.handleEdit.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     handleSubmit(e) {
@@ -28,6 +36,21 @@ class InterventionForm extends Component {
     handleEdit() {
         const { openUpdateForm } = this.props;
         openUpdateForm();
+    }
+
+    handleDelete() {
+        const { event, deleteEvent } = this.props;
+        deleteEvent(event.idEvent, (error, response) => {
+            if (error) {
+                console.error(
+                    "Erreur lors de la suppression de l'événement",
+                    error
+                );
+                return;
+            }
+            console.log("Événement supprimé avec succès", response);
+        });
+        window.location.href = "/calendar";
     }
 
     getStatusIndicator(status) {
@@ -196,8 +219,12 @@ class InterventionForm extends Component {
                         </div>
                     </div>
                     <div className={styles.modalFooter}>
-                        <button>Supprimer</button>
-                        <button onClick={closeModal}>Retour</button>
+                        <button type="button" onClick={this.handleDelete}>
+                            Supprimer
+                        </button>
+                        <button type="button" onClick={closeModal}>
+                            Retour
+                        </button>
                         <button type="button" onClick={this.handleEdit}>
                             Modifier
                         </button>

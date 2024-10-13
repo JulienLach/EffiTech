@@ -189,6 +189,23 @@ function getCompany(callback) {
     xhr.send();
 }
 
+function deleteEvent(idEvent, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("DELETE", `${API_URL}/events/${idEvent}`);
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            callback(null, JSON.parse(xhr.responseText));
+        } else {
+            console.error(
+                "Erreur de suppression de l'événement",
+                xhr.statusText
+            );
+            callback(new Error(xhr.statusText), null);
+        }
+    };
+    xhr.send();
+}
+
 export {
     getAllEvents,
     getAllClients,
@@ -202,4 +219,5 @@ export {
     getEmployeeById,
     getClientById,
     getCompany,
+    deleteEvent,
 };
