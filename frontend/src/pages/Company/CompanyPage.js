@@ -1,8 +1,16 @@
 import React, { Component } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import TemplateGlobal from "../Template/TemplateGlobal";
 import styles from "./CompanyPage.module.css";
 import logoCompany from "../../images/logoCompany.png";
 import { getCompany } from "../../services/api";
+
+// Composant fonctionnel wrapper
+const CompanyPageWrapper = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    return <CompanyPage navigate={navigate} location={location} />;
+};
 
 class CompanyPage extends Component {
     constructor(props) {
@@ -10,6 +18,7 @@ class CompanyPage extends Component {
         this.state = {
             company: {},
         };
+        this.handleButtonClick = this.handleButtonClick.bind(this);
     }
 
     componentDidMount() {
@@ -20,6 +29,12 @@ class CompanyPage extends Component {
                 this.setState({ company: data });
                 console.log(data);
             }
+        });
+    }
+
+    handleButtonClick() {
+        this.props.navigate(`/company-form`, {
+            state: { company: this.state.company },
         });
     }
 
@@ -60,7 +75,7 @@ class CompanyPage extends Component {
                         </div>
                         <button
                             className={styles.editCompany}
-                            onClick={this.openModal}
+                            onClick={this.handleButtonClick}
                         >
                             <i className="fa-solid fa-pen"></i>Modifier
                         </button>
@@ -71,4 +86,4 @@ class CompanyPage extends Component {
     }
 }
 
-export default CompanyPage;
+export default CompanyPageWrapper;
