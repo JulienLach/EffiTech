@@ -85,7 +85,7 @@ class CompanyFormPage extends Component {
                             <img src={logoCompany} alt="Logo de la société" />
                         </div>
                         <div className={styles.separator}></div>
-                        <div>
+                        <div className={styles.companyData}>
                             <h3>Coordonnées</h3>
                             <label>
                                 Téléphone :
@@ -125,7 +125,7 @@ class CompanyFormPage extends Component {
                             </label>
                         </div>
                         <div className={styles.separator}></div>
-                        <div>
+                        <div className={styles.companyData}>
                             <h3>Informations</h3>
                             <label>
                                 SIRET :
