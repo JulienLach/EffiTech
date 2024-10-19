@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import TemplateGlobal from "../Template/TemplateGlobal";
 import styles from "./CompanyFormPage.module.css";
-import logoCompany from "../../images/logoCompany.png";
 import { getCompany, updateCompany } from "../../services/api";
 
 class CompanyFormPage extends Component {
@@ -18,12 +17,14 @@ class CompanyFormPage extends Component {
                 siret: "",
                 vatNumber: "",
                 capital: "",
+                logo: null,
             },
             error: null,
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleFileChange = this.handleFileChange.bind(this);
     }
 
     componentDidMount() {
@@ -59,13 +60,28 @@ class CompanyFormPage extends Component {
         }
     }
 
+    handleFileChange(event) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            this.setState((prevState) => ({
+                company: {
+                    ...prevState.company,
+                    logo: reader.result,
+                },
+            }));
+        };
+        reader.readAsDataURL(file);
+    }
+
     handleSubmit(event) {
         event.preventDefault();
         updateCompany(this.state.company, (error, data) => {
             if (error) {
                 this.setState({ error: error.message });
             } else {
-                window.location.href = "/company";
+                console.log("Company updated successfully", data);
+                // Rediriger ou afficher un message de succès
             }
         });
     }
@@ -81,7 +97,12 @@ class CompanyFormPage extends Component {
                     {error && <p className={styles.error}>{error}</p>}
                     <form onSubmit={this.handleSubmit}>
                         <div className={styles.logoCompany}>
-                            <img src={logoCompany} alt="Logo de la société" />
+                            <img src={company.logo} alt="Logo de la société" />
+                            <input
+                                type="file"
+                                accept="image/*"
+                                onChange={this.handleFileChange}
+                            />
                         </div>
                         <div className={styles.separator}></div>
                         <div className={styles.companyData}>
