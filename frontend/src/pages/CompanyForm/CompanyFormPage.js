@@ -76,6 +76,8 @@ class CompanyFormPage extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        console.log("Données envoyées :", this.state.company);
+
         updateCompany(this.state.company, (error, data) => {
             if (error) {
                 this.setState({ error: error.message });

@@ -62,7 +62,7 @@ class Company {
             "UPDATE companies SET phone_number = $1, id_address = $2, siret = $3, vat_number = $4, capital = $5, logo = $6, database_version = $7 WHERE id_company = $8 RETURNING *";
         const values = [
             company.phoneNumber,
-            company.idAddress.idAddress, // Assurez-vous d'envoyer l'ID de l'adresse
+            company.idAddress.idAddress,
             company.siret,
             company.vatNumber,
             company.capital,
