@@ -96,7 +96,10 @@ class CompanyFormPage extends Component {
                     {error && <p className={styles.error}>{error}</p>}
                     <form onSubmit={this.handleSubmit}>
                         <div className={styles.logoCompany}>
-                            <img src={company.logo} alt="Logo de la société" />
+                            <img
+                                src={`data:image/jpeg;base64,${company.logo}`}
+                                alt="Logo de la société"
+                            />
                             <input
                                 type="file"
                                 accept="image/*"
