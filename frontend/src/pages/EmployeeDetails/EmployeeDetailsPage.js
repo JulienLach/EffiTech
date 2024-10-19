@@ -20,6 +20,7 @@ class EmployeeDetailsPage extends Component {
             employee: employee,
             idEmployee: employee.idEmployee,
         };
+        this.handleButtonClick = this.handleButtonClick.bind(this);
     }
 
     componentDidMount() {
@@ -37,6 +38,12 @@ class EmployeeDetailsPage extends Component {
             }
         });
     }
+
+    handleButtonClick = () => {
+        this.props.navigate("/employee-form", {
+            state: { employee: this.state.employee },
+        });
+    };
 
     render() {
         const { employee, error } = this.state;
@@ -66,6 +73,13 @@ class EmployeeDetailsPage extends Component {
                             >
                                 <i className="fa-solid fa-arrow-right"></i>
                                 Retour
+                            </button>
+                            <button
+                                className={styles.editButton}
+                                onClick={this.handleButtonClick}
+                            >
+                                <i className="fa-solid fa-pen"></i>
+                                Modifier
                             </button>
                         </div>
                     </div>
