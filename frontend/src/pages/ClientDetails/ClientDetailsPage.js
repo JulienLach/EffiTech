@@ -129,11 +129,11 @@ class ClientDetailsPage extends Component {
                             <h2>Coordonnées</h2>
                             <div className={styles.contactInfo}>
                                 <p>
-                                    <i class="fa-solid fa-phone"></i>
+                                    <i className="fa-solid fa-phone"></i>
                                     {client.phoneNumber}
                                 </p>
                                 <p>
-                                    <i class="fa-solid fa-location-dot"></i>
+                                    <i className="fa-solid fa-location-dot"></i>
                                     {client.address.address},{" "}
                                     {client.address.zipcode},{" "}
                                     {client.address.city}
@@ -184,11 +184,11 @@ class ClientDetailsPage extends Component {
                             <h2>Coordonnées</h2>
                             <div className={styles.contactInfo}>
                                 <p>
-                                    <i class="fa-solid fa-phone"></i>
+                                    <i className="fa-solid fa-phone"></i>
                                     {client.phoneNumber}
                                 </p>
                                 <p>
-                                    <i class="fa-solid fa-location-dot"></i>
+                                    <i className="fa-solid fa-location-dot"></i>
                                     {client.address.address},{" "}
                                     {client.address.zipcode},{" "}
                                     {client.address.city}
