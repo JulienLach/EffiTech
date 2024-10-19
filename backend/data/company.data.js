@@ -36,6 +36,12 @@ class Company {
                     return callback(error, null);
                 }
 
+                // Convertir l'image en base64
+                let logoBase64 = null;
+                if (row.logo) {
+                    logoBase64 = row.logo.toString("base64");
+                }
+
                 let company = new Company(
                     row.id_company,
                     row.phone_number,
@@ -43,7 +49,7 @@ class Company {
                     row.siret,
                     row.vat_number,
                     row.capital,
-                    row.logo,
+                    logoBase64,
                     row.database_version
                 );
                 callback(null, company);
@@ -60,7 +66,9 @@ class Company {
             company.siret,
             company.vatNumber,
             company.capital,
-            company.logo,
+            company.logo
+                ? Buffer.from(company.logo.split(",")[1], "base64")
+                : null, // Convertir l'image en buffer avant de l'envoyer à la base de données
             company.databaseVersion,
             company.idCompany,
         ];
@@ -77,6 +85,12 @@ class Company {
                     return callback(error, null);
                 }
 
+                // Convertir l'image en base64
+                let logoBase64 = null;
+                if (row.logo) {
+                    logoBase64 = row.logo.toString("base64");
+                }
+
                 let company = new Company(
                     row.id_company,
                     row.phone_number,
@@ -84,7 +98,7 @@ class Company {
                     row.siret,
                     row.vat_number,
                     row.capital,
-                    row.logo,
+                    logoBase64,
                     row.database_version
                 );
                 callback(null, company);

@@ -80,8 +80,7 @@ class CompanyFormPage extends Component {
             if (error) {
                 this.setState({ error: error.message });
             } else {
-                console.log("Company updated successfully", data);
-                // Rediriger ou afficher un message de succès
+                window.location.href = "/company";
             }
         });
     }

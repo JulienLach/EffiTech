@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import TemplateGlobal from "../Template/TemplateGlobal";
 import styles from "./CompanyPage.module.css";
-import logoCompany from "../../images/logoCompany.png";
 import { getCompany } from "../../services/api";
 
 // Composant fonctionnel wrapper
@@ -26,8 +25,8 @@ class CompanyPage extends Component {
             if (error) {
                 this.setState({ error: error.message });
             } else {
+                console.log("Données de la société :", data);
                 this.setState({ company: data });
-                console.log(data);
             }
         });
     }
@@ -48,7 +47,14 @@ class CompanyPage extends Component {
                     <h1 className={styles.pageTitle}>Société</h1>
                     <div>
                         <div className={styles.logoCompany}>
-                            <img src={logoCompany} alt="Logo de la société" />
+                            {company.logo ? (
+                                <img
+                                    src={`data:image/jpeg;base64,${company.logo}`}
+                                    alt="Logo de la société"
+                                />
+                            ) : (
+                                <p>Aucun logo</p>
+                            )}
                         </div>
                         <div className={styles.separator}></div>
                         <div>
