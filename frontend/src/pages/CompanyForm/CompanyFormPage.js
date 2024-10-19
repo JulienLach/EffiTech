@@ -17,7 +17,7 @@ class CompanyFormPage extends Component {
                 siret: "",
                 vatNumber: "",
                 capital: "",
-                logo: null,
+                logo: "",
             },
             error: null,
         };
@@ -64,10 +64,11 @@ class CompanyFormPage extends Component {
         const file = event.target.files[0];
         const reader = new FileReader();
         reader.onloadend = () => {
+            const base64String = reader.result.split(",")[1]; // Extraire la partie base64
             this.setState((prevState) => ({
                 company: {
                     ...prevState.company,
-                    logo: reader.result,
+                    logo: base64String,
                 },
             }));
         };

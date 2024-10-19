@@ -66,9 +66,7 @@ class Company {
             company.siret,
             company.vatNumber,
             company.capital,
-            company.logo
-                ? Buffer.from(company.logo.split(",")[1], "base64")
-                : null, // Convertir l'image en buffer avant de l'envoyer à la base de données
+            company.logo,
             company.databaseVersion,
             company.idCompany,
         ];
