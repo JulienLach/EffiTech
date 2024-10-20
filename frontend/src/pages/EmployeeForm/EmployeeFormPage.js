@@ -20,6 +20,7 @@ class EmployeeFormPage extends Component {
             idEmployee: employee.idEmployee,
             error: null,
         };
+        this.handleCancel = this.handleCancel.bind(this);
     }
 
     componentDidMount() {
@@ -33,6 +34,10 @@ class EmployeeFormPage extends Component {
         });
     }
 
+    handleCancel() {
+        window.history.back();
+    }
+
     render() {
         const { employee } = this.state;
 
@@ -41,7 +46,7 @@ class EmployeeFormPage extends Component {
                 <TemplateGlobal />
                 <div className={styles.container}>
                     <h1 className={styles.pageTitle}>Employé</h1>
-                    <img src={profilPicture} alt="Profil picture" />
+                    {/* <img src={profilPicture} alt="Profil picture" /> */}
                     <div className={styles.separation}></div>
                     <h2>Coordonnées</h2>
                     <form className={styles.formElements}>
@@ -72,8 +77,7 @@ class EmployeeFormPage extends Component {
                     </form>
                     <div className={styles.buttonPosition}>
                         <button
-                            type="reset"
-                            // onClick={this.handleCancel}
+                            onClick={this.handleCancel}
                             className={styles.cancelButton}
                         >
                             Annuler
