@@ -43,12 +43,26 @@ class ClientFormPage extends Component {
 
     handleChange(event) {
         const { name, value } = event.target;
-        this.setState((prevState) => ({
-            client: {
-                ...prevState.client,
-                [name]: value,
-            },
-        }));
+        this.setState((prevState) => {
+            if (["address", "city", "zipcode"].includes(name)) {
+                return {
+                    client: {
+                        ...prevState.client,
+                        address: {
+                            ...prevState.client.address,
+                            [name]: value,
+                        },
+                    },
+                };
+            } else {
+                return {
+                    client: {
+                        ...prevState.client,
+                        [name]: value,
+                    },
+                };
+            }
+        });
     }
 
     handleSubmit(event) {
