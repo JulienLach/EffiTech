@@ -244,6 +244,24 @@ function updateEmployee(employeeData, callback) {
     xhr.send(JSON.stringify(employeeData));
 }
 
+function updateClient(clientData, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("PUT", `${API_URL}/clients/${clientData.idClient}`);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            callback(null, JSON.parse(xhr.responseText));
+        } else {
+            console.error(
+                "Erreur de mise à jour des informations du client",
+                xhr.statusText
+            );
+            callback(new Error(xhr.statusText), null);
+        }
+    };
+    xhr.send(JSON.stringify(clientData));
+}
+
 export {
     getAllEvents,
     getAllClients,
@@ -260,4 +278,5 @@ export {
     deleteEvent,
     updateCompany,
     updateEmployee,
+    updateClient,
 };

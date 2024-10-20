@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import TemplateGlobal from "../Template/TemplateGlobal";
 import styles from "./ClientFormPage.module.css";
 import profilPicture from "../../images/profil.png";
-import { getClientById } from "../../services/api";
+import { getClientById, updateClient } from "../../services/api";
 
 // Composant wrapper pour utiliser les hooks
 function ClientFormPageWrapper() {
@@ -53,8 +53,42 @@ class ClientFormPage extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        // Logique pour soumettre les données du formulaire
-        console.log("Données du formulaire soumises:", this.state.client);
+        const { client } = this.state;
+        const {
+            idClient,
+            category,
+            firstname,
+            lastname,
+            email,
+            phoneNumber,
+            address,
+        } = client;
+        const addressDetails = {
+            address: address.address,
+            city: address.city,
+            zipcode: address.zipcode,
+        };
+
+        const clientData = {
+            idClient,
+            category,
+            firstname,
+            lastname,
+            email,
+            phoneNumber,
+            addressDetails,
+        };
+
+        console.log("Données du formulaire soumises:", clientData);
+
+        updateClient(clientData, (error, data) => {
+            if (error) {
+                this.setState({ error: error.message });
+            } else {
+                console.log("Client mis à jour:", data);
+                window.history.back();
+            }
+        });
     }
 
     render() {
