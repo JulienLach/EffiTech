@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import TemplateGlobal from "../Template/TemplateGlobal";
 import styles from "./EmployeeFormPage.module.css";
 import profilPicture from "../../images/profil.png";
-import { getEmployeeById } from "../../services/api";
+import { getEmployeeById, updateEmployee } from "../../services/api";
 
 // Composant wrapper pour utiliser les hooks
 function EmployeeFormPageWrapper() {
@@ -21,6 +21,8 @@ class EmployeeFormPage extends Component {
             error: null,
         };
         this.handleCancel = this.handleCancel.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount() {
@@ -38,6 +40,29 @@ class EmployeeFormPage extends Component {
         window.history.back();
     }
 
+    handleChange(event) {
+        const { name, value } = event.target;
+        this.setState((prevState) => ({
+            employee: {
+                ...prevState.employee,
+                [name]: value,
+            },
+        }));
+    }
+
+    handleSubmit(event) {
+        event.preventDefault();
+        const { employee } = this.state;
+        updateEmployee(employee, (error, data) => {
+            if (error) {
+                this.setState({ error: error.message });
+            } else {
+                console.log("Employé mis à jour:", data);
+                window.history.back();
+            }
+        });
+    }
+
     render() {
         const { employee } = this.state;
 
@@ -52,27 +77,57 @@ class EmployeeFormPage extends Component {
                     <form className={styles.formElements}>
                         <div className={styles.labelInput}>
                             <label htmlFor="lastname">Nom:</label>
-                            <input type="text" value={employee.lastname} />
+                            <input
+                                type="text"
+                                name="lastname"
+                                value={employee.lastname}
+                                onChange={this.handleChange}
+                            />
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="firstname">Prénom:</label>
-                            <input type="text" value={employee.firstname} />
+                            <input
+                                type="text"
+                                name="firstname"
+                                value={employee.firstname}
+                                onChange={this.handleChange}
+                            />
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="job">Métier:</label>
-                            <input type="text" value={employee.job} />
+                            <input
+                                type="text"
+                                name="job"
+                                value={employee.job}
+                                onChange={this.handleChange}
+                            />
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="speciality">Spécialité:</label>
-                            <input type="text" value={employee.speciality} />
+                            <input
+                                type="text"
+                                name="speciality"
+                                value={employee.speciality}
+                                onChange={this.handleChange}
+                            />
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="mail">Adresse mail:</label>
-                            <input type="email" value={employee.email} />
+                            <input
+                                type="email"
+                                name="email"
+                                value={employee.email}
+                                onChange={this.handleChange}
+                            />
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="phone">Téléphone:</label>
-                            <input type="text" value={employee.phoneNumber} />
+                            <input
+                                type="text"
+                                name="phoneNumber"
+                                value={employee.phoneNumber}
+                                onChange={this.handleChange}
+                            />
                         </div>
                     </form>
                     <div className={styles.buttonPosition}>
@@ -84,7 +139,7 @@ class EmployeeFormPage extends Component {
                         </button>
                         <button
                             type="submit"
-                            // onClick={this.handleSubmit}
+                            onClick={this.handleSubmit}
                             className={styles.submitButton}
                         >
                             Enregistrer
