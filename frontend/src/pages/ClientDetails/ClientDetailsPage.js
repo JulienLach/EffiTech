@@ -112,6 +112,13 @@ class ClientDetailsPage extends Component {
                                         <i className="fa-solid fa-arrow-right"></i>
                                         Retour
                                     </button>
+                                    <button
+                                        className={styles.editButton}
+                                        onClick={this.handleButtonClick}
+                                    >
+                                        <i className="fa-solid fa-pen"></i>
+                                        Modifier
+                                    </button>
                                 </div>
                                 <div className={styles.idAndCategory}>
                                     <p className={styles.id}>
