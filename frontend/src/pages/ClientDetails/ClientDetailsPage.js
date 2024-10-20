@@ -20,6 +20,7 @@ class ClientDetailsPage extends Component {
             client: client,
             idClient: client.idClient,
         };
+        this.handleButtonClick = this.handleButtonClick.bind(this);
     }
 
     componentDidMount() {
@@ -37,6 +38,12 @@ class ClientDetailsPage extends Component {
             }
         });
     }
+
+    handleButtonClick = () => {
+        this.props.navigate("/client-form", {
+            state: { client: this.state.client },
+        });
+    };
 
     getCategoryIndicator(category) {
         const style = {
@@ -168,6 +175,13 @@ class ClientDetailsPage extends Component {
                                         <i className="fa-solid fa-arrow-right"></i>
                                         Retour
                                     </button>
+                                    <button
+                                        className={styles.editButton}
+                                        onClick={this.handleButtonClick}
+                                    >
+                                        <i className="fa-solid fa-pen"></i>
+                                        Modifier
+                                    </button>
                                 </div>
                                 <div className={styles.idAndCategory}>
                                     <p className={styles.id}>
@@ -196,49 +210,6 @@ class ClientDetailsPage extends Component {
                             </div>
                         </div>
                     )}
-
-                    {/* <div className={styles.profilInfo}>
-                        <h1>Client</h1>
-                        <div className={styles.alignBackButton}>
-                            <img src={profilPicture} alt="Profil picture" />
-                            <div className={styles.names}>
-                                <p className={styles.company}>
-                                    {client.company}
-                                </p>
-                                <p className={styles.lastname}>
-                                    {client.lastname}
-                                </p>
-                                <p className={styles.firstname}>
-                                    {client.firstname}
-                                </p>
-                            </div>
-                            <div className={styles.idAndCategory}>
-                                <p className={styles.id}>C-{client.idClient}</p>
-                                <p>
-                                    {this.getCategoryIndicator(client.category)}
-                                    <a
-                                        type="button"
-                                        className={styles.backButton}
-                                        onClick={() =>
-                                            this.props.navigate("/clients")
-                                        }
-                                    >
-                                        <i className="fa-solid fa-arrow-right"></i>
-                                        Retour
-                                    </a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className={styles.separation}></div>
-                    <h2>Coordonnées</h2>
-                    <div className={styles.contactInfo}>
-                        <p>{client.phoneNumber}</p>
-                        <p>
-                            {client.address.address}, {client.address.zipcode},{" "}
-                            {client.address.city}
-                        </p>
-                    </div> */}
                 </div>
             </>
         );
