@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import TemplateGlobal from "../Template/TemplateGlobal";
 import styles from "./ClientsPage.module.css";
-import { getAllClients } from "../../services/api";
+import { getAllClients, createClient } from "../../services/api";
 
 // Composant wrapper pour utiliser les hooks
 const ClientsPageWrapper = () => {
@@ -99,13 +99,13 @@ class ClientsPage extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const form = event.target.form;
+        const form = event.target;
         const data = {
             category: this.state.category,
             company: this.state.company,
             lastname: form.lastname.value,
             firstname: form.firstname.value,
-            address: {
+            addressDetails: {
                 address: form.address.value,
                 zipcode: form.zipcode.value,
                 city: form.city.value,
@@ -113,8 +113,18 @@ class ClientsPage extends Component {
             email: form.mail.value,
             phoneNumber: form.phone.value,
         };
-        console.log(data);
-        this.closeModal();
+        console.log("Données du formulaire soumises:", data);
+
+        createClient(data, (error, newClient) => {
+            if (error) {
+                this.setState({ error: error.message });
+            } else {
+                this.setState((prevState) => ({
+                    clients: [...prevState.clients, newClient],
+                    isModalOpen: false,
+                }));
+            }
+        });
     }
 
     render() {
@@ -213,7 +223,10 @@ class ClientsPage extends Component {
                 {this.state.isModalOpen && (
                     <Modal onClose={this.closeModal}>
                         <h2>Nouveau client</h2>
-                        <form className={styles.formElements}>
+                        <form
+                            className={styles.formElements}
+                            onSubmit={this.handleSubmit}
+                        >
                             <div className={styles.selectedCategory}>
                                 <label className={styles.labelRadio}>
                                     Type de client:
@@ -267,7 +280,6 @@ class ClientsPage extends Component {
                                     />
                                 </div>
                             )}
-
                             <div className={styles.labelInput}>
                                 <label htmlFor="lastname">Nom:</label>
                                 <input
@@ -312,23 +324,22 @@ class ClientsPage extends Component {
                                 <label htmlFor="phone">Téléphone:</label>
                                 <input type="text" id="phone" name="phone" />
                             </div>
+                            <div className={styles.buttonPosition}>
+                                <button
+                                    type="reset"
+                                    className={styles.cancelButton}
+                                    onClick={this.closeModal}
+                                >
+                                    Annuler
+                                </button>
+                                <button
+                                    type="submit"
+                                    className={styles.submitButton}
+                                >
+                                    Créer le client
+                                </button>
+                            </div>
                         </form>
-                        <div className={styles.buttonPosition}>
-                            <button
-                                type="reset"
-                                className={styles.cancelButton}
-                                onClick={this.closeModal}
-                            >
-                                Annuler
-                            </button>
-                            <button
-                                type="submit"
-                                className={styles.submitButton}
-                                onClick={this.handleSubmit}
-                            >
-                                Créer le client
-                            </button>
-                        </div>
                     </Modal>
                 )}
             </>
