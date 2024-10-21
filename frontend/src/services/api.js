@@ -262,6 +262,22 @@ function updateClient(clientData, callback) {
     xhr.send(JSON.stringify(clientData));
 }
 
+function createClient(clientData, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", `${API_URL}/clients`);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onload = function () {
+        if (xhr.status === 200 || xhr.status === 201) {
+            console.log("Client créé");
+            callback(null, JSON.parse(xhr.responseText));
+        } else {
+            console.error("Erreur de création du client", xhr.statusText);
+            callback(new Error(xhr.statusText), null);
+        }
+    };
+    xhr.send(JSON.stringify(clientData));
+}
+
 export {
     getAllEvents,
     getAllClients,
@@ -279,4 +295,5 @@ export {
     updateCompany,
     updateEmployee,
     updateClient,
+    createClient,
 };
