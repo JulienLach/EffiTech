@@ -25,6 +25,7 @@ class ClientsPage extends Component {
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.handleCategoryChange = this.handleCategoryChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount() {
@@ -94,6 +95,26 @@ class ClientsPage extends Component {
 
     handleCategoryChange(event) {
         this.setState({ category: event.target.value });
+    }
+
+    handleSubmit(event) {
+        event.preventDefault();
+        const form = event.target.form;
+        const data = {
+            category: this.state.category,
+            company: this.state.company,
+            lastname: form.lastname.value,
+            firstname: form.firstname.value,
+            address: {
+                address: form.address.value,
+                zipcode: form.zipcode.value,
+                city: form.city.value,
+            },
+            email: form.mail.value,
+            phoneNumber: form.phone.value,
+        };
+        console.log(data);
+        this.closeModal();
     }
 
     render() {
@@ -303,6 +324,7 @@ class ClientsPage extends Component {
                             <button
                                 type="submit"
                                 className={styles.submitButton}
+                                onClick={this.handleSubmit}
                             >
                                 Créer le client
                             </button>
