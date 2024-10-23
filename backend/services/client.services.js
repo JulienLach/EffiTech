@@ -32,6 +32,7 @@ function getClientById(req, res) {
 function createClient(req, res) {
     const {
         category,
+        company,
         firstname,
         lastname,
         email,
@@ -40,6 +41,7 @@ function createClient(req, res) {
     } = req.body;
     Client.createClient(
         category,
+        company,
         firstname,
         lastname,
         email,

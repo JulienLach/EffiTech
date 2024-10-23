@@ -83,6 +83,7 @@ class Client {
 
     static createClient(
         category,
+        company,
         firstname,
         lastname,
         email,
@@ -110,9 +111,10 @@ class Client {
 
                 // Deuxième requête : insérer le client
                 const createClientQuery =
-                    "INSERT INTO clients (category, firstname, lastname, email, phone_number) VALUES ($1, $2, $3, $4, $5) RETURNING id_client, category, firstname, lastname, email, phone_number";
+                    "INSERT INTO clients (category, company, firstname, lastname, email, phone_number) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id_client, category, company, firstname, lastname, email, phone_number";
                 const clientValues = [
                     category,
+                    company,
                     firstname,
                     lastname,
                     email,
@@ -155,7 +157,8 @@ class Client {
                                     row.lastname,
                                     row.email,
                                     address,
-                                    row.phone_number
+                                    row.phone_number,
+                                    row.company
                                 );
                                 callback(null, newClient);
                             }
@@ -177,13 +180,14 @@ class Client {
         callback
     ) {
         const clientQuery =
-            "UPDATE clients SET category = $1, firstname = $2, lastname = $3, email = $4, phone_number = $5 WHERE id_client = $6 RETURNING *";
+            "UPDATE clients SET category = $1, firstname = $2, lastname = $3, email = $4, phone_number = $5, company = $6 WHERE id_client = $7 RETURNING *";
         const clientValues = [
             category,
             firstname,
             lastname,
             email,
             phoneNumber,
+            company,
             idClient,
         ];
 
@@ -224,7 +228,8 @@ class Client {
                         updatedClientRow.lastname,
                         updatedClientRow.email,
                         address,
-                        updatedClientRow.phone_number
+                        updatedClientRow.phone_number,
+                        updatedClientRow.company
                     );
                     callback(null, { updatedClient, updatedAddress });
                 }
