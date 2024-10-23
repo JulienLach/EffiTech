@@ -67,16 +67,20 @@ function updateClient(req, res) {
         lastname,
         email,
         phoneNumber,
+        company,
         addressDetails,
     } = req.body;
     Client.updateClient(
-        idClient,
-        category,
-        firstname,
-        lastname,
-        email,
-        phoneNumber,
-        addressDetails,
+        {
+            idClient,
+            category,
+            firstname,
+            lastname,
+            email,
+            phoneNumber,
+            company,
+            addressDetails,
+        },
         (error, updatedClient) => {
             if (error) {
                 return res.status(500).send({

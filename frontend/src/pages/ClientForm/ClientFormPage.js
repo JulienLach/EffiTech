@@ -75,6 +75,7 @@ class ClientFormPage extends Component {
             lastname,
             email,
             phoneNumber,
+            company,
             address,
         } = client;
         const addressDetails = {
@@ -90,6 +91,7 @@ class ClientFormPage extends Component {
             lastname,
             email,
             phoneNumber,
+            company,
             addressDetails,
         };
 

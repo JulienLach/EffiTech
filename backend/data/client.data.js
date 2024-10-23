@@ -169,24 +169,27 @@ class Client {
         );
     }
 
-    static updateClient(
-        idClient,
-        category,
-        firstname,
-        lastname,
-        email,
-        phoneNumber,
-        addressDetails,
-        callback
-    ) {
+    static updateClient(clientData, callback) {
+        const {
+            idClient,
+            category,
+            firstname,
+            lastname,
+            email,
+            phoneNumber,
+            company,
+            addressDetails,
+        } = clientData;
+
         const clientQuery =
-            "UPDATE clients SET category = $1, firstname = $2, lastname = $3, email = $4, phone_number = $5 WHERE id_client = $6 RETURNING *";
+            "UPDATE clients SET category = $1, firstname = $2, lastname = $3, email = $4, phone_number = $5, company = $6 WHERE id_client = $7 RETURNING *";
         const clientValues = [
             category,
             firstname,
             lastname,
             email,
             phoneNumber,
+            company,
             idClient,
         ];
 
@@ -227,7 +230,8 @@ class Client {
                         updatedClientRow.lastname,
                         updatedClientRow.email,
                         address,
-                        updatedClientRow.phone_number
+                        updatedClientRow.phone_number,
+                        updatedClientRow.company
                     );
                     callback(null, { updatedClient, updatedAddress });
                 }
