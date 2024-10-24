@@ -56,7 +56,7 @@ class Employee {
                 return callback(error, null);
             }
             const row = result.rows[0];
-            let employee = new Employee(
+            const employee = new Employee(
                 row.id_employee,
                 row.firstname,
                 row.lastname,

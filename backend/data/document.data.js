@@ -36,7 +36,7 @@ class Document {
                 return callback(error, null);
             }
             const row = result.rows[0];
-            let document = new Document(
+            const document = new Document(
                 row.id_document,
                 row.title,
                 row.brand,
@@ -56,7 +56,7 @@ class Document {
                 return callback(error);
             }
             const row = result.rows[0];
-            let document = new Document(
+            const document = new Document(
                 row.id_document,
                 row.title,
                 row.brand,
@@ -75,7 +75,7 @@ class Document {
                 return callback(error, null);
             }
             const row = result.rows[0];
-            let document = new Document(
+            const document = new Document(
                 row.id_document,
                 row.title,
                 row.brand,

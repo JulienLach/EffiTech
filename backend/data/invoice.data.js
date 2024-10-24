@@ -45,7 +45,7 @@ class Invoice {
                 return callback(error, null);
             }
             const row = result.rows[0];
-            let invoice = new Invoice(
+            const invoice = new Invoice(
                 row.id_invoice,
                 row.id_client,
                 row.amount_including_tax,
@@ -81,7 +81,7 @@ class Invoice {
                 return callback(error, null);
             }
             const row = result.rows[0];
-            let invoice = new Invoice(
+            const invoice = new Invoice(
                 row.id_invoice,
                 row.id_client,
                 row.amount_including_tax,

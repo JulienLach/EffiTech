@@ -85,7 +85,7 @@ class Report {
                 return callback(error, null);
             }
             const row = result.rows[0];
-            let report = new Report(
+            const report = new Report(
                 row.id_report,
                 row.breakdown,
                 row.work_done,

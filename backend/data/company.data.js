@@ -42,7 +42,7 @@ class Company {
                     logoBase64 = row.logo.toString("base64");
                 }
 
-                let company = new Company(
+                const company = new Company(
                     row.id_company,
                     row.phone_number,
                     address,
@@ -89,7 +89,7 @@ class Company {
                     logoBase64 = row.logo.toString("base64");
                 }
 
-                let company = new Company(
+                const company = new Company(
                     row.id_company,
                     row.phone_number,
                     address,
