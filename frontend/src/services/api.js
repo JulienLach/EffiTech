@@ -278,6 +278,22 @@ function createClient(clientData, callback) {
     xhr.send(JSON.stringify(clientData));
 }
 
+function createEmployee(employeeData, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", `${API_URL}/employees`);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onload = function () {
+        if (xhr.status === 200 || xhr.status === 201) {
+            console.log("Employé créé");
+            callback(null, JSON.parse(xhr.responseText));
+        } else {
+            console.error("Erreur de création de l'employé", xhr.statusText);
+            callback(new Error(xhr.statusText), null);
+        }
+    };
+    xhr.send(JSON.stringify(employeeData));
+}
+
 export {
     getAllEvents,
     getAllClients,
@@ -296,4 +312,5 @@ export {
     updateEmployee,
     updateClient,
     createClient,
+    createEmployee,
 };

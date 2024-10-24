@@ -77,14 +77,17 @@ class Employee {
         job,
         phoneNumber,
         email,
-        isAdmin,
-        password,
+        isAdmin = false, // Par défaut, l'employé n'est pas un admin
+        password = "",
         speciality,
         callback
     ) {
-        const hash = crypto.createHash("sha512");
-        hash.update(password);
-        const hashedPassword = hash.digest("hex");
+        let hashedPassword = null; // Initialiser le mot de passe haché à null pour tester
+        if (password) {
+            const hash = crypto.createHash("sha512");
+            hash.update(password);
+            hashedPassword = hash.digest("hex");
+        }
 
         const query = `
             INSERT INTO employees (firstname, lastname, job, phone_number, email, is_admin, password, speciality) 

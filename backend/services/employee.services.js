@@ -36,8 +36,8 @@ function createEmployee(req, res) {
         job,
         phoneNumber,
         email,
-        isAdmin,
-        password,
+        isAdmin = false,
+        password = "",
         speciality,
     } = req.body;
     Employee.createEmployee(
