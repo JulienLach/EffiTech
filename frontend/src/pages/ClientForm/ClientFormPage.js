@@ -140,15 +140,17 @@ class ClientFormPage extends Component {
                                 onChange={this.handleChange}
                             />
                         </div>
-                        <div className={styles.labelInput}>
-                            <label htmlFor="company">Entreprise:</label>
-                            <input
-                                type="text"
-                                name="company"
-                                value={client.company}
-                                onChange={this.handleChange}
-                            />
-                        </div>
+                        {client.category !== "Particulier" && (
+                            <div className={styles.labelInput}>
+                                <label htmlFor="company">Entreprise:</label>
+                                <input
+                                    type="text"
+                                    name="company"
+                                    value={client.company}
+                                    onChange={this.handleChange}
+                                />
+                            </div>
+                        )}
                         <div className={styles.labelInput}>
                             <label htmlFor="phoneNumber">Téléphone:</label>
                             <input
