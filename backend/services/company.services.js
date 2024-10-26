@@ -32,5 +32,36 @@ function updateCompany(req, res) {
     });
 }
 
+function createCompany(req, res) {
+    const {
+        phoneNumber,
+        idAddress: { address, zipcode, city },
+        siret,
+        vatNumber,
+        capital,
+        logo,
+    } = req.body;
+
+    const companyData = {
+        phoneNumber,
+        idAddress: { address, zipcode, city },
+        siret,
+        vatNumber,
+        capital,
+        logo,
+    };
+
+    Company.createCompany(companyData, (error, company) => {
+        if (error) {
+            return res.status(500).send({
+                message: "Erreur lors de la création de la société",
+                error: error.message,
+            });
+        }
+        res.status(201).send(company);
+    });
+}
+
 exports.getCompany = getCompany;
 exports.updateCompany = updateCompany;
+exports.createCompany = createCompany;

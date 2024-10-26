@@ -22,6 +22,91 @@ class Company {
         this.databaseVersion = databaseVersion;
     }
 
+    static createCompany(company, callback) {
+        console.log("Données reçues pour la création de la société :", company);
+
+        // Première requête : insérer l'adresse
+        const createAddressQuery =
+            "INSERT INTO addresses (address, city, zipcode) VALUES ($1, $2, $3) RETURNING id_address";
+        const addressValues = [
+            company.idAddress.address,
+            company.idAddress.city,
+            company.idAddress.zipcode,
+        ];
+
+        pool.query(
+            createAddressQuery,
+            addressValues,
+            function (error, addressResult) {
+                if (error) {
+                    console.error(
+                        "Erreur lors de l'insertion de l'adresse :",
+                        error
+                    );
+                    return callback(error, null);
+                }
+                const addressId = addressResult.rows[0].id_address;
+                console.log("Adresse insérée avec succès, ID :", addressId);
+
+                // Deuxième requête : insérer la société
+                const createCompanyQuery =
+                    "INSERT INTO companies (phone_number, id_address, siret, vat_number, capital, logo, database_version) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *";
+                const companyValues = [
+                    company.phoneNumber,
+                    addressId, // Utiliser l'ID de la nouvelle adresse
+                    company.siret,
+                    company.vatNumber,
+                    company.capital,
+                    Buffer.from(company.logo, "base64"), // Convertir la chaîne base64 en Buffer
+                    company.databaseVersion,
+                ];
+
+                pool.query(
+                    createCompanyQuery,
+                    companyValues,
+                    function (error, companyResult) {
+                        if (error) {
+                            console.error(
+                                "Erreur lors de l'insertion de la société :",
+                                error
+                            );
+                            return callback(error, null);
+                        }
+
+                        const row = companyResult.rows[0];
+                        console.log(
+                            "Société insérée avec succès, données :",
+                            row
+                        );
+
+                        // Convertir l'image en base64
+                        let logoBase64 = null;
+                        if (row.logo) {
+                            logoBase64 = row.logo.toString("base64");
+                        }
+
+                        const newCompany = new Company(
+                            row.id_company,
+                            row.phone_number,
+                            {
+                                id_address: addressId,
+                                address: company.idAddress.address,
+                                city: company.idAddress.city,
+                                zipcode: company.idAddress.zipcode,
+                            }, // Utiliser l'objet adresse créé
+                            row.siret,
+                            row.vat_number,
+                            row.capital,
+                            logoBase64,
+                            row.database_version
+                        );
+                        callback(null, newCompany);
+                    }
+                );
+            }
+        );
+    }
+
     static getCompany(callback) {
         const query = "SELECT * FROM companies";
         pool.query(query, (error, result) => {
@@ -30,6 +115,10 @@ class Company {
             }
 
             const row = result.rows[0];
+
+            if (!row) {
+                return callback(null, null);
+            }
 
             Address.getAddressById(row.id_address, function (error, address) {
                 if (error) {

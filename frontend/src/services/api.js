@@ -294,6 +294,22 @@ function createEmployee(employeeData, callback) {
     xhr.send(JSON.stringify(employeeData));
 }
 
+function createCompany(companyData, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", `${API_URL}/company`);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onload = function () {
+        if (xhr.status === 200 || xhr.status === 201) {
+            console.log("Société créée");
+            callback(null, JSON.parse(xhr.responseText));
+        } else {
+            console.error("Erreur de création de la société", xhr.statusText);
+            callback(new Error(xhr.statusText), null);
+        }
+    };
+    xhr.send(JSON.stringify(companyData));
+}
+
 export {
     getAllEvents,
     getAllClients,
@@ -313,4 +329,5 @@ export {
     updateClient,
     createClient,
     createEmployee,
+    createCompany,
 };

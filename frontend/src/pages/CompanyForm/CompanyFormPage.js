@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import TemplateGlobal from "../Template/TemplateGlobal";
 import styles from "./CompanyFormPage.module.css";
-import { getCompany, updateCompany } from "../../services/api";
+import { createCompany } from "../../services/api";
 
 class CompanyFormPage extends Component {
     constructor(props) {
@@ -25,16 +25,6 @@ class CompanyFormPage extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleFileChange = this.handleFileChange.bind(this);
-    }
-
-    componentDidMount() {
-        getCompany((error, data) => {
-            if (error) {
-                this.setState({ error: error.message });
-            } else {
-                this.setState({ company: data });
-            }
-        });
     }
 
     handleChange(event) {
@@ -79,10 +69,15 @@ class CompanyFormPage extends Component {
         event.preventDefault();
         console.log("Données envoyées :", this.state.company);
 
-        updateCompany(this.state.company, (error, data) => {
+        createCompany(this.state.company, (error, data) => {
             if (error) {
+                console.error(
+                    "Erreur lors de la création de la société :",
+                    error
+                );
                 this.setState({ error: error.message });
             } else {
+                console.log("Société créée :", data);
                 window.location.href = "/company";
             }
         });
@@ -95,14 +90,16 @@ class CompanyFormPage extends Component {
             <>
                 <TemplateGlobal />
                 <div className={styles.container}>
-                    <h1 className={styles.pageTitle}>Modifier Société</h1>
+                    <h1 className={styles.pageTitle}>Créer Société</h1>
                     {error && <p className={styles.error}>{error}</p>}
                     <form onSubmit={this.handleSubmit}>
                         <div className={styles.logoCompany}>
-                            <img
-                                src={`data:image/jpeg;base64,${company.logo}`}
-                                alt="Logo de la société"
-                            />
+                            {company.logo && (
+                                <img
+                                    src={`data:image/jpeg;base64,${company.logo}`}
+                                    alt="Logo de la société"
+                                />
+                            )}
                             <input
                                 type="file"
                                 accept="image/*"
