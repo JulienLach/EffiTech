@@ -66,7 +66,7 @@ class Company {
             company.siret,
             company.vatNumber,
             company.capital,
-            company.logo,
+            Buffer.from(company.logo, "base64"), // Convertir la chaîne base64 en Buffer
             company.databaseVersion,
             company.idCompany,
         ];
