@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import TemplateGlobal from "../Template/TemplateGlobal";
-import styles from "./CompanyPage.module.css";
+import styles from "./CompanyDetails.module.css";
 import { getCompany } from "../../services/api";
 
 // Composant fonctionnel wrapper
