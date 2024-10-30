@@ -53,17 +53,29 @@ class CompanyPage extends Component {
                             </div>
                             <div className={styles.separator}></div>
                             <div>
-                                <p>Raison sociale: {company.name}</p>
-                                <p>SIRET: {company.siret}</p>
-                                <p>TVA: {company.vatNumber}</p>
-                                <p>Capital: {company.capital}€</p>
-                                <p>Adresse: {company.address}</p>
-                                <p>Téléphone: {company.phoneNumber}</p>
+                                <h3>Coordonnées</h3>
+                                <p>
+                                    Adresse : {company.idAddress.address},{" "}
+                                    {company.idAddress.zipcode} ,
+                                    {company.idAddress.city}
+                                </p>{" "}
+                                <p>Téléphone : {company.phoneNumber}</p>
+                            </div>
+                            <div className={styles.separator}></div>
+                            <div>
+                                <h3>Informations</h3>
+                                <p>SIRET : {company.siret}</p>
+                                <p>
+                                    N°TVA Intracommunautaire :{" "}
+                                    {company.vatNumber}
+                                </p>
+                                <p>Capital : {company.capital} €</p>
                             </div>
                             <button
                                 className={styles.editButton}
                                 onClick={this.handleButtonClick}
                             >
+                                <i className="fa-solid fa-pen"></i>
                                 Modifier
                             </button>
                         </div>

@@ -17,7 +17,6 @@ import EmployeeFormPage from "./pages/EmployeeForm/EmployeeFormPage";
 import ClientsPage from "./pages/Clients/ClientsPage";
 import ClientDetailsPage from "./pages/ClientDetails/ClientDetailsPage";
 import ClientFormPage from "./pages/ClientForm/ClientFormPage";
-import CompanyDetails from "./pages/CompanyDetails/CompanyDetails";
 import CompanyFormPage from "./pages/CompanyForm/CompanyFormPage";
 import CompanyPage from "./pages/Company/CompanyPage";
 
@@ -48,7 +47,6 @@ const App = () => {
                 <Route path="/client-details" element={<ClientDetailsPage />} />
                 <Route path="/client-form" element={<ClientFormPage />} />
                 <Route path="/company" element={<CompanyPage />} />
-                <Route path="/company-details" element={<CompanyDetails />} />
                 <Route path="/company-form" element={<CompanyFormPage />} />
             </Routes>
         </Router>
