@@ -73,7 +73,16 @@ class Report {
                 row.employee_signature,
                 row.id_event
             );
-            callback(null, newReport);
+
+            // Mettre à jour le statut de l'événement à 5 (Terminé)
+            const updateEventQuery =
+                "UPDATE events SET status = 5 WHERE id_event = $1";
+            pool.query(updateEventQuery, [idEvent], (updateError) => {
+                if (updateError) {
+                    return callback(updateError, null);
+                }
+                callback(null, newReport);
+            });
         });
     }
 

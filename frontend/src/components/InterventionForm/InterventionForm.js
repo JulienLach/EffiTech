@@ -21,6 +21,7 @@ class InterventionForm extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleEdit = this.handleEdit.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
+        this.handleViewReport = this.handleViewReport.bind(this);
     }
 
     handleSubmit(e) {
@@ -51,6 +52,11 @@ class InterventionForm extends Component {
             console.log("Événement supprimé avec succès", response);
         });
         window.location.href = "/calendar";
+    }
+
+    handleViewReport() {
+        const { event, navigate } = this.props;
+        navigate("/report", { state: { event, report: event.report } });
     }
 
     getStatusIndicator(status) {
