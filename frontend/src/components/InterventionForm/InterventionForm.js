@@ -219,29 +219,48 @@ class InterventionForm extends Component {
                         </div>
                     </div>
                     <div className={styles.modalFooter}>
-                        <button type="button" onClick={this.handleDelete}>
-                            Supprimer
-                        </button>
+                        {event.status !== 5 && (
+                            <button type="button" onClick={this.handleDelete}>
+                                Supprimer
+                            </button>
+                        )}
                         <button type="button" onClick={closeModal}>
                             Retour
                         </button>
-                        <button type="button" onClick={this.handleEdit}>
-                            Modifier
-                        </button>
-                        {event.status === 5 ? (
-                            <button type="submit">Visualiser le rapport</button>
-                        ) : (
-                            <button type="submit">
-                                Remplir le{" "}
-                                {(() => {
-                                    if (event.type === "Intervention") {
-                                        return "rapport";
-                                    } else {
-                                        return "questionnaire";
-                                    }
-                                })()}
+                        {event.status !== 5 && (
+                            <button type="button" onClick={this.handleEdit}>
+                                Modifier
                             </button>
                         )}
+                        {(() => {
+                            if (event.type === "Intervention") {
+                                if (event.status === 5) {
+                                    return (
+                                        <button
+                                            type="button"
+                                            onClick={this.handleViewReport}
+                                        >
+                                            Voir le rapport validé
+                                        </button>
+                                    );
+                                } else if (event.isPlanned === false) {
+                                    return (
+                                        <button type="submit">
+                                            Remplir le rapport
+                                        </button>
+                                    );
+                                }
+                            } else if (event.type === "Rendez-vous") {
+                                if (event.status !== 5) {
+                                    return (
+                                        <button type="submit">
+                                            Remplir le questionnaire
+                                        </button>
+                                    );
+                                }
+                            }
+                            return null;
+                        })()}
                     </div>
                 </div>
             </form>
