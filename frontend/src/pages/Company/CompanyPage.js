@@ -32,7 +32,13 @@ class CompanyPage extends Component {
     }
 
     handleButtonClick() {
-        this.props.navigate(`/company-form`);
+        if (this.state.company) {
+            this.props.navigate(`/company-details`, {
+                state: { company: this.state.company },
+            });
+        } else {
+            this.props.navigate(`/company-form`);
+        }
     }
 
     render() {

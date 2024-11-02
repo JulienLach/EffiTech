@@ -19,6 +19,7 @@ import ClientDetailsPage from "./pages/ClientDetails/ClientDetailsPage";
 import ClientFormPage from "./pages/ClientForm/ClientFormPage";
 import CompanyFormPage from "./pages/CompanyForm/CompanyFormPage";
 import CompanyPage from "./pages/Company/CompanyPage";
+import CompanyDetails from "./pages/CompanyDetails/CompanyDetails";
 
 const App = () => {
     return (
@@ -48,6 +49,7 @@ const App = () => {
                 <Route path="/client-form" element={<ClientFormPage />} />
                 <Route path="/company" element={<CompanyPage />} />
                 <Route path="/company-form" element={<CompanyFormPage />} />
+                <Route path="/company-details" element={<CompanyDetails />} />
             </Routes>
         </Router>
     );
