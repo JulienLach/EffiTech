@@ -53,13 +53,22 @@ class CalendarPage extends Component {
 
     formatEvents(events) {
         return events.map((event) => {
-            const startDateTime = new Date(event.startingDate);
-            startDateTime.setHours(
-                ...event.startingHour.split(":").map(Number)
-            );
+            let startDateTime = null;
+            let endDateTime = null;
 
-            const endDateTime = new Date(event.startingDate);
-            endDateTime.setHours(...event.endingHour.split(":").map(Number));
+            if (event.startingDate && event.startingHour) {
+                startDateTime = new Date(event.startingDate);
+                startDateTime.setHours(
+                    ...event.startingHour.split(":").map(Number)
+                );
+            }
+
+            if (event.startingDate && event.endingHour) {
+                endDateTime = new Date(event.startingDate);
+                endDateTime.setHours(
+                    ...event.endingHour.split(":").map(Number)
+                );
+            }
 
             return {
                 title: event.title,

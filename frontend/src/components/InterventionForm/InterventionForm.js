@@ -243,12 +243,15 @@ class InterventionForm extends Component {
                                             Voir le rapport validé
                                         </button>
                                     );
-                                } else if (event.isPlanned === false) {
-                                    return (
-                                        <button type="submit">
-                                            Remplir le rapport
-                                        </button>
-                                    );
+                                } else {
+                                    if (event.status !== 1) {
+                                        return (
+                                            <button type="submit">
+                                                Remplir le rapport
+                                            </button>
+                                        );
+                                    }
+                                    return null;
                                 }
                             } else if (event.type === "Rendez-vous") {
                                 if (event.status !== 5) {

@@ -139,9 +139,9 @@ class CreateEventForm extends Component {
             type: selectedTab, // Utiliser l'onglet sélectionné pour le type Intervention ou Rendez-vous
             idClient: selectedClient.idClient,
             idAddress: selectedClient.address.idAddress,
-            startingDate: startingDate,
-            startingHour: startingHour,
-            endingHour: endingHour,
+            startingDate: startingDate || null,
+            startingHour: startingHour || null,
+            endingHour: endingHour || null,
             idEmployee: selectedEmployee,
         };
 
