@@ -2,94 +2,167 @@ import React, { Component } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import TemplateGlobal from "../Template/TemplateGlobal";
 import styles from "./CompanyDetails.module.css";
-import { getCompany } from "../../services/api";
+import { updateCompany } from "../../services/api";
 
 // Composant fonctionnel wrapper
-const CompanyPageWrapper = () => {
+const CompanyDetailsWrapper = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    return <CompanyPage navigate={navigate} location={location} />;
+    return <CompanyDetails navigate={navigate} location={location} />;
 };
 
-class CompanyPage extends Component {
+class CompanyDetails extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            company: {},
+            company: props.location.state.company || {},
+            error: null,
         };
-        this.handleButtonClick = this.handleButtonClick.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleFileChange = this.handleFileChange.bind(this);
     }
 
-    componentDidMount() {
-        getCompany((error, data) => {
+    handleChange(event) {
+        const { name, value } = event.target;
+        this.setState((prevState) => ({
+            company: {
+                ...prevState.company,
+                idAddress: {
+                    ...prevState.company.idAddress,
+                    [name]: value,
+                },
+                [name]: value,
+            },
+        }));
+    }
+
+    handleFileChange(event) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            const base64String = reader.result.split(",")[1]; // Extraire la partie base64
+            this.setState((prevState) => ({
+                company: {
+                    ...prevState.company,
+                    logo: base64String,
+                },
+            }));
+        };
+        reader.readAsDataURL(file);
+    }
+
+    handleSubmit(event) {
+        event.preventDefault();
+        updateCompany(this.state.company, (error, data) => {
             if (error) {
                 this.setState({ error: error.message });
             } else {
-                console.log("Données de la société :", data);
-                this.setState({ company: data });
+                this.props.navigate(`/company`);
             }
         });
     }
 
-    handleButtonClick() {
-        this.props.navigate(`/company-form`, {
-            state: { company: this.state.company },
-        });
-    }
-
     render() {
-        const { company } = this.state;
+        const { company, error } = this.state;
 
         return (
             <>
                 <TemplateGlobal />
                 <div className={styles.container}>
-                    <h1 className={styles.pageTitle}>Société</h1>
-                    <div>
+                    <h1 className={styles.pageTitle}>Modifier Société</h1>
+                    {error && <p className={styles.error}>{error}</p>}
+                    <form onSubmit={this.handleSubmit}>
                         <div className={styles.logoCompany}>
-                            {company.logo ? (
-                                <img
-                                    src={`data:image/jpeg;base64,${company.logo}`}
-                                    alt="Logo de la société"
-                                />
-                            ) : (
-                                <p>Aucun logo</p>
-                            )}
+                            <img
+                                src={`data:image/jpeg;base64,${company.logo}`}
+                                alt="Logo de la société"
+                            />
+                            <input
+                                type="file"
+                                accept="image/*"
+                                onChange={this.handleFileChange}
+                            />
                         </div>
                         <div className={styles.separator}></div>
-                        <div>
+                        <div className={styles.companyData}>
                             <h3>Coordonnées</h3>
-                            <p>Téléphone : {company.phoneNumber}</p>
-                            {company.idAddress && ( // vérifier si l'adresse est définie
-                                <>
-                                    <p>
-                                        Adresse : {company.idAddress.address},{" "}
-                                        {company.idAddress.zipcode} ,
-                                        {company.idAddress.city}
-                                    </p>
-                                </>
-                            )}
+                            <label>
+                                Téléphone :
+                                <input
+                                    type="text"
+                                    name="phoneNumber"
+                                    value={company.phoneNumber}
+                                    onChange={this.handleChange}
+                                />
+                            </label>
+                            <label>
+                                Adresse :
+                                <input
+                                    type="text"
+                                    name="address"
+                                    value={company.idAddress.address}
+                                    onChange={this.handleChange}
+                                />
+                            </label>
+                            <label>
+                                Code Postal :
+                                <input
+                                    type="text"
+                                    name="zipcode"
+                                    value={company.idAddress.zipcode}
+                                    onChange={this.handleChange}
+                                />
+                            </label>
+                            <label>
+                                Ville :
+                                <input
+                                    type="text"
+                                    name="city"
+                                    value={company.idAddress.city}
+                                    onChange={this.handleChange}
+                                />
+                            </label>
                         </div>
                         <div className={styles.separator}></div>
-                        <div>
+                        <div className={styles.companyData}>
                             <h3>Informations</h3>
-                            <p>SIRET : {company.siret}</p>
-                            <p>
-                                N°TVA Intracommunautaire : {company.vatNumber}
-                            </p>
-                            <p>Capital : {company.capital} €</p>
+                            <label>
+                                SIRET :
+                                <input
+                                    type="text"
+                                    name="siret"
+                                    value={company.siret}
+                                    onChange={this.handleChange}
+                                />
+                            </label>
+                            <label>
+                                N°TVA Intracommunautaire :
+                                <input
+                                    type="text"
+                                    name="vatNumber"
+                                    value={company.vatNumber}
+                                    onChange={this.handleChange}
+                                />
+                            </label>
+                            <label>
+                                Capital :
+                                <input
+                                    type="text"
+                                    name="capital"
+                                    value={company.capital}
+                                    onChange={this.handleChange}
+                                />
+                            </label>
                         </div>
-                        <button
-                            className={styles.editCompany}
-                            onClick={this.handleButtonClick}
-                        >
-                            <i className="fa-solid fa-pen"></i>Modifier
+                        <button type="submit" className={styles.saveButton}>
+                            <i className="fa-solid fa-save"></i> Enregistrer
                         </button>
-                    </div>
+                    </form>
                 </div>
             </>
         );
     }
 }
 
-export default CompanyPageWrapper;
+export default CompanyDetailsWrapper;
