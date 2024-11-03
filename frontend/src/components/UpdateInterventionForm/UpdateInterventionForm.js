@@ -5,19 +5,25 @@ import { updateEvent } from "../../services/api.js";
 class UpdateInterventionForm extends Component {
     constructor(props) {
         super(props);
+
+        // Convertir la date pour afficahge dans le champs
+        const startingDate = props.event.startingDate
+            ? new Date(props.event.startingDate).toLocaleDateString("en-CA")
+            : "";
+
         this.state = {
-            title: props.event.title,
-            description: props.event.description,
-            status: props.event.status,
-            isPlanned: props.event.isPlanned,
+            title: props.event.title || "",
+            description: props.event.description || "",
+            status: props.event.status || 1,
+            isPlanned: props.event.isPlanned || false,
             type: props.event.type,
-            idClient: props.event.client.idClient,
-            idAddress: props.event.address.idAddress,
-            startingDate: props.event.startingDate,
+            idClient: props.event.client.idClient || "",
+            idAddress: props.event.address.idAddress || "",
+            startingDate: startingDate,
             startingHour: props.event.startingHour,
             endingHour: props.event.endingHour,
-            idEmployee: props.event.employee.idEmployee,
-            workToDo: props.event.workToDo,
+            idEmployee: props.event.employee.idEmployee || "",
+            workToDo: props.event.workToDo || "",
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleCancel = this.handleCancel.bind(this);
