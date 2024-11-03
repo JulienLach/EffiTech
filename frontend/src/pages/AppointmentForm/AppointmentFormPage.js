@@ -34,16 +34,16 @@ class AppointmentFormPage extends Component {
 
     componentDidMount() {
         const { event } = this.props.location.state;
-        const startingHour = new Date(`1970-01-01T${event.startingHour}Z`);
-        const endingHour = new Date(`1970-01-01T${event.endingHour}Z`);
+        const startingHour = new Date(`1970-01-01T${event.startingHour}`);
+        const endingHour = new Date(`1970-01-01T${event.endingHour}`);
         const duration = new Date(endingHour - startingHour)
-            .toISOString()
+            .toLocaleDateString()
             .substring(11, 16);
 
         this.setState({
-            startingDate: new Date(event.startingDate)
-                .toISOString()
-                .split("T")[0],
+            startingDate: new Date(event.startingDate).toLocaleDateString(
+                "en-CA"
+            ),
             duration,
             client: event.client,
             address: event.address,
