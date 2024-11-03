@@ -1,10 +1,24 @@
-const pool = require('../config/db.config'); // Importer la configuration de la base de données
-const Client = require('./client.data');
-const Address = require('./address.data');
-const Employee = require('./employee.data');
+const pool = require("../config/db.config"); // Importer la configuration de la base de données
+const Client = require("./client.data");
+const Address = require("./address.data");
+const Employee = require("./employee.data");
 
 class Event {
-    constructor(idEvent, title, description, status, isPlanned, type, client, address, startingDate, startingHour, endingHour, employee) {
+    constructor(
+        idEvent,
+        title,
+        description,
+        status,
+        isPlanned,
+        type,
+        client,
+        address,
+        startingDate,
+        startingHour,
+        endingHour,
+        employee,
+        workToDo
+    ) {
         this.idEvent = idEvent;
         this.title = title;
         this.description = description;
@@ -17,60 +31,101 @@ class Event {
         this.startingHour = startingHour;
         this.endingHour = endingHour;
         this.employee = employee;
+        this.workToDo = workToDo;
     }
 
-    static getAllEvents(callback) {
+    static updateEventStatuses(callback) {
+        const today = new Date().toISOString().split("T")[0]; // Obtenir la date du jour au format YYYY-MM-DD
 
-        Client.getAllClients(function(error, clients) {
+        const updateQuery = `
+            UPDATE events
+            SET status = CASE
+                WHEN status = 5 THEN 5
+                WHEN starting_date < $1 THEN 2
+                WHEN starting_date = $1 THEN 3
+                WHEN starting_date > $1 THEN 4
+                ELSE status
+            END
+        `;
+        const values = [today];
+
+        pool.query(updateQuery, values, function (error, result) {
+            if (error) {
+                return callback(error);
+            }
+            callback(null);
+        });
+    }
+
+    // Fonction pour récupérer tous les événements
+    static getAllEvents(callback) {
+        Client.getAllClients(function (error, clients) {
             if (error) {
                 return callback(error, null);
             }
-    
-            Employee.getAllEmployees(function(error, employees) {
+
+            Employee.getAllEmployees(function (error, employees) {
                 if (error) {
                     return callback(error, null);
                 }
-    
-                const query = `
-                    SELECT 
-                        events.id_event, events.title, events.description, events.status, 
-                        events.is_planned, events.type, events.starting_date, events.starting_hour, 
-                        events.ending_hour, events.id_client, events.id_employee
-                    FROM events
-                `;
-    
-                pool.query(query, function(error, result) {
+
+                // Mettre à jour les statuts des événements avant de les récupérer
+                Event.updateEventStatuses(function (error) {
                     if (error) {
                         return callback(error, null);
                     }
-    
-                    const events = result.rows.map(function(row) {
-                        
-                        const client = clients.find(function(client) {
-                            return client.idClient === row.id_client;
+
+                    const query = `
+                        SELECT 
+                            events.id_event, events.title, events.description, events.status, 
+                            events.is_planned, events.type, events.starting_date, events.starting_hour, 
+                            events.ending_hour, events.id_client, events.id_employee, events.work_to_do
+                        FROM events
+                        ORDER BY 
+                            events.status ASC, 
+                            CASE 
+                                WHEN events.status = 5 THEN events.starting_date
+                            END DESC,
+                            events.starting_date ASC
+                    `;
+
+                    pool.query(query, function (error, result) {
+                        if (error) {
+                            return callback(error, null);
+                        }
+
+                        const events = result.rows.map(function (row) {
+                            const client = clients.find(function (client) {
+                                return client.idClient === row.id_client;
+                            });
+
+                            const employee = employees.find(
+                                function (employee) {
+                                    return (
+                                        employee.idEmployee === row.id_employee
+                                    );
+                                }
+                            );
+
+                            return new Event(
+                                row.id_event,
+                                row.title,
+                                row.description,
+                                row.status,
+                                row.is_planned,
+                                row.type,
+                                client,
+                                client.address, // Adresse du client récupéré avec Client.getAllClients
+                                row.starting_date,
+                                row.starting_hour,
+                                row.ending_hour,
+                                employee,
+                                row.work_to_do
+                            );
                         });
-    
-                        const employee = employees.find(function(employee) {
-                            return employee.idEmployee === row.id_employee;
-                        });
-  
-                        return new Event(
-                            row.id_event,
-                            row.title,
-                            row.description,
-                            row.status,
-                            row.is_planned,
-                            row.type,
-                            client,
-                            client.address, // Adresse du client récupéré avec Client.getAllClients
-                            row.starting_date,
-                            row.starting_hour,
-                            row.ending_hour,
-                            employee
-                        );
-                    })
-    
-                    callback(null, events);
+
+                        callback(null, events);
+                    });
                 });
             });
         });
@@ -86,55 +141,84 @@ class Event {
             WHERE events.id_event = $1
         `;
         const values = [idEvent];
-    
+
         pool.query(query, values, (error, result) => {
             if (error) {
                 return callback(error, null);
             }
-    
+
             const row = result.rows[0];
-    
-            Client.getClientById(row.id_client, function(error, client) {
+
+            Client.getClientById(row.id_client, function (error, client) {
                 if (error) {
                     return callback(error, null);
                 }
-    
-                Employee.getEmployeeById(row.id_employee, function(error, employee) {
-                    if (error) {
-                        return callback(error, null);
+
+                Employee.getEmployeeById(
+                    row.id_employee,
+                    function (error, employee) {
+                        if (error) {
+                            return callback(error, null);
+                        }
+
+                        const event = new Event(
+                            row.id_event,
+                            row.title,
+                            row.description,
+                            row.status,
+                            row.is_planned,
+                            row.type,
+                            client,
+                            client.address, // Adresse du client récupéré avec Client.getClientById
+                            row.starting_date,
+                            row.starting_hour,
+                            row.ending_hour,
+                            employee // Employé récupéré avec Employee.getEmployeeById
+                        );
+
+                        callback(null, event);
                     }
-    
-                    const event = new Event(
-                        row.id_event,
-                        row.title,
-                        row.description,
-                        row.status,
-                        row.is_planned,
-                        row.type,
-                        client,
-                        client.address, // Adresse du client récupéré avec Client.getClientById
-                        row.starting_date,
-                        row.starting_hour,
-                        row.ending_hour,
-                        employee // Employé récupéré avec Employee.getEmployeeById
-                    );
-    
-                    callback(null, event);
-                });
+                );
             });
         });
     }
 
     // appeler les données pour adresse, client et employé directement dans le formulaire de création d'événement au clique du bouton dans le front
-    static createEvent(title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee, callback) {
-        const query = 'INSERT INTO events (title, description, status, is_planned, type, id_client, id_address, starting_date, starting_hour, ending_hour, id_employee) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *';
-        const values = [title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee];
-        
+    static createEvent(
+        title,
+        description,
+        status,
+        isPlanned,
+        type,
+        idClient,
+        idAddress,
+        startingDate,
+        startingHour,
+        endingHour,
+        idEmployee,
+        callback
+    ) {
+        const query =
+            "INSERT INTO events (title, description, status, is_planned, type, id_client, id_address, starting_date, starting_hour, ending_hour, id_employee) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *";
+        const values = [
+            title,
+            description,
+            status,
+            isPlanned,
+            type,
+            idClient,
+            idAddress,
+            startingDate,
+            startingHour,
+            endingHour,
+            idEmployee,
+        ];
+
         pool.query(query, values, (error, result) => {
             if (error) {
                 return callback(error, null);
             }
-            
+
             const row = result.rows[0];
             const newEvent = new Event(
                 row.id_event,
@@ -150,27 +234,51 @@ class Event {
                 row.ending_hour,
                 row.id_employee
             );
-            
+
             callback(null, newEvent);
         });
     }
 
-    static updateEvent(title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee, idEvent, callback) {
-        // Extraire les identifiants du Json pour les utiliser dans la requête
-        const clientId = idClient.id;
-        const addressId = idAddress.id;
-        const employeeId = idEmployee.id;
-    
+    static updateEvent(
+        idEvent,
+        title,
+        description,
+        status,
+        isPlanned,
+        type,
+        idClient,
+        idAddress,
+        startingDate,
+        startingHour,
+        endingHour,
+        idEmployee,
+        workToDo,
+        callback
+    ) {
         const updateQuery = `
             UPDATE events 
             SET title = $1, description = $2, status = $3, is_planned = $4, type = $5, 
                 id_client = $6, id_address = $7, starting_date = $8, starting_hour = $9, 
-                ending_hour = $10, id_employee = $11 
-            WHERE id_event = $12
+                ending_hour = $10, id_employee = $11, work_to_do = $12
+            WHERE id_event = $13
             RETURNING *;
         `;
-        const updateValues = [title, description, status, isPlanned, type, clientId, addressId, startingDate, startingHour, endingHour, employeeId, idEvent];
-        
+        const updateValues = [
+            title,
+            description,
+            status,
+            isPlanned,
+            type,
+            idClient,
+            idAddress,
+            startingDate,
+            startingHour,
+            endingHour,
+            idEmployee,
+            workToDo,
+            idEvent,
+        ];
+
         pool.query(updateQuery, updateValues, (error, result) => {
             if (error) {
                 return callback(error, null);
@@ -202,6 +310,7 @@ class Event {
                 row.description,
                 row.status,
                 row.is_planned,
+                row.work_to_do,
                 row.type,
                 client,
                 address,
@@ -215,66 +324,184 @@ class Event {
     }
 
     static deleteEvent(idEvent, callback) {
-        const query = 'DELETE FROM events WHERE idEvent = $1 RETURNING *';
+        const query = "DELETE FROM events WHERE id_event = $1 RETURNING *";
         const values = [idEvent];
         pool.query(query, values, (error, result) => {
             if (error) {
                 return callback(error, null);
             }
             const row = result.rows[0];
-            const deletedEvent = new Event(row.idEvent, row.title, row.description, row.status, row.isPlanned, row.type, row.idClient, row.idAddress, row.startingDate, row.startingHour, row.endingHour, row.idEmployee);
+            const deletedEvent = new Event(
+                row.id_event,
+                row.title,
+                row.description,
+                row.status,
+                row.is_planned,
+                row.type,
+                row.id_client,
+                row.id_address,
+                row.starting_date,
+                row.starting_hour,
+                row.ending_hour,
+                row.id_employee
+            );
             callback(null, deletedEvent);
         });
     }
-
-    static sortEventsByClient(idClient, callback) {}
-
-    static sortEventsByStatus(status, callback) {}
-
-    static sortEventsByidEmployee(idEmployee, callback) {}
-
-    static sortEventsByType(type, callback) {}
-
 }
 
+// Voir si ces classes sont nécessaires ou si on peut tout faire avec la classe Event
 class Appointment extends Event {
-    constructor(idEvent, title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee, workToDo, planIntervention) {
-        super(idEvent, title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee);
+    constructor(
+        idEvent,
+        title,
+        description,
+        status,
+        isPlanned,
+        type,
+        idClient,
+        idAddress,
+        startingDate,
+        startingHour,
+        endingHour,
+        idEmployee,
+        workToDo,
+        planIntervention
+    ) {
+        super(
+            idEvent,
+            title,
+            description,
+            status,
+            isPlanned,
+            type,
+            idClient,
+            idAddress,
+            startingDate,
+            startingHour,
+            endingHour,
+            idEmployee
+        );
         this.workToDo = workToDo;
         this.planIntervention = planIntervention;
     }
-    // méthode spécifique à la sous classe
-    static submitAppointmentForm(idEvent, workToDo, planIntervention, callback) {
-        const query = 'UPDATE events SET work_to_do = $1, plan_intervention = $2 WHERE idEvent = $3 RETURNING *';
+
+    // Méthode spécifique à la sous classe
+    static submitAppointmentForm(
+        idEvent,
+        workToDo,
+        planIntervention,
+        callback
+    ) {
+        const query =
+            "UPDATE events SET work_to_do = $1, plan_intervention = $2 WHERE idEvent = $3 RETURNING *";
         const values = [workToDo, planIntervention, idEvent];
         pool.query(query, values, (error, result) => {
             if (error) {
                 return callback(error, null);
             }
             const row = result.rows[0];
-            const updatedAppointment = new Appointment(row.idEvent, row.title, row.description, row.status, row.isPlanned, row.type, row.idClient, row.idAddress, row.startingDate, row.startingHour, row.endingHour, row.idEmployee, row.work_to_do, row.plan_intervention);
+            const updatedAppointment = new Appointment(
+                row.id_event,
+                row.title,
+                row.description,
+                row.status,
+                row.is_planned,
+                row.type,
+                row.id_client,
+                row.id_address,
+                row.starting_date,
+                row.starting_hour,
+                row.ending_hour,
+                row.id_employee,
+                row.work_to_do,
+                row.plan_intervention
+            );
             callback(null, updatedAppointment);
         });
     }
 }
 
 class Intervention extends Event {
-    constructor(idEvent, title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee, report, planIntervention) {
-        super(idEvent, title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee);
+    constructor(
+        idEvent,
+        title,
+        description,
+        status,
+        isPlanned,
+        type,
+        idClient,
+        idAddress,
+        startingDate,
+        startingHour,
+        endingHour,
+        idEmployee,
+        report,
+        planIntervention
+    ) {
+        super(
+            idEvent,
+            title,
+            description,
+            status,
+            isPlanned,
+            type,
+            idClient,
+            idAddress,
+            startingDate,
+            startingHour,
+            endingHour,
+            idEmployee
+        );
         this.report = report; // Voir la dépendence à la classe report
         this.planIntervention = planIntervention;
     }
 
     // méthode spécifique à la sous classe
-    static submitInterventionForm(idEvent, breakdown, workDone, reschedule, endingHour, duration, clientSignature, employeeSignature, callback) {
-        const query = 'INSERT INTO reports (breakdown, work_done, reschedule, ending_hour, duration, client_signature, employee_signature, id_event) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)';
-        const values = [breakdown, workDone, reschedule, endingHour, duration, clientSignature, employeeSignature, idEvent];
+    static submitInterventionForm(
+        idEvent,
+        breakdown,
+        workDone,
+        reschedule,
+        endingHour,
+        duration,
+        clientSignature,
+        employeeSignature,
+        callback
+    ) {
+        const query =
+            "INSERT INTO reports (breakdown, work_done, reschedule, ending_hour, duration, client_signature, employee_signature, id_event) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)";
+        const values = [
+            breakdown,
+            workDone,
+            reschedule,
+            endingHour,
+            duration,
+            clientSignature,
+            employeeSignature,
+            idEvent,
+        ];
         pool.query(query, values, (error, result) => {
             if (error) {
                 return callback(error, null);
             }
             const row = result.rows[0];
-            const updatedIntervention = new Intervention(row.idEvent, row.title, row.description, row.status, row.isPlanned, row.type, row.idClient, row.idAddress, row.startingDate, row.startingHour, row.endingHour, row.idEmployee, row.report, row.planIntervention);
+            const updatedIntervention = new Intervention(
+                row.id_event,
+                row.title,
+                row.description,
+                row.status,
+                row.is_planned,
+                row.type,
+                row.id_client,
+                row.id_address,
+                row.starting_date,
+                row.starting_hour,
+                row.ending_hour,
+                row.id_employee,
+                row.report,
+                row.plan_intervention
+            );
             callback(null, updatedIntervention);
             // ajouter la condition "planIntervention" si coché crée directement l'intervention, créer un nouvel event avec la méthode createEvent
         });
@@ -284,4 +511,3 @@ class Intervention extends Event {
 module.exports = Event;
 module.exports = Appointment;
 module.exports = Intervention;
-

@@ -1,28 +1,27 @@
-const Document = require('../data/document.data.js');
+const Document = require("../data/document.data.js");
 
-function getAllDocuments(req, res) {}
+function getAllDocuments() {}
 
-function getDocumentById(req, res) {
-    const idDocument = req.params.id;
-}
+function getDocumentById() {}
 
-function importDocument(req, res) {
-    const { idDocument, title, brand, model, file } = req.body
-}
+function importDocument() {}
 
 function downloadDocument(req, res) {
     const idDocument = req.params.id;
     Document.getDocumentById(idDocument, (error, document) => {
         if (error) {
-            return res.status(500).send({ message: 'Erreur lors de la récupération du document', error: error.message });
+            return res.status(500).send({
+                message: "Erreur lors de la récupération du document",
+                error: error.message,
+            });
         }
-                if (document) {
+        if (document) {
             res.download(document.path, document.name);
         } else {
-            res.status(404).send({ message: 'Document non trouvé' });
+            res.status(404).send({ message: "Document non trouvé" });
         }
     });
-};
+}
 
 exports.getAllDocuments = getAllDocuments;
 exports.getDocumentById = getDocumentById;

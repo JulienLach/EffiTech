@@ -1,0 +1,113 @@
+/* AppointmentFormPage.module.css */
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    margin: 0.625em;
+    width: 60%;
+    padding: 1.25em;
+    border-radius: 0.625em;
+    box-shadow: 0 0 0.625em rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+
+.appointmentId {
+    display: flex;
+    justify-content: start;
+    margin-bottom: 1.25em;
+    color: #3e3e3e;
+    font-weight: 600;
+}
+
+.separation {
+    height: 0.06em;
+    background-color: #3e3e3e;
+}
+
+.alignButton {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.alignButton button {
+    height: 1.9em;
+    background-color: white;
+    border-radius: 0.3em;
+    border: 0.06em solid #919191;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.alignButton button:hover {
+    height: 1.9em;
+    background-color: rgb(163, 163, 163);
+    border-radius: 0.3em;
+    border: 0.06em solid #a5a4a4;
+    cursor: pointer;
+}
+
+.alignButton button i {
+    transform: rotate(180deg);
+}
+
+.inputDisplay {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.25em;
+}
+
+.inputDisplay label {
+    font-weight: 600;
+    margin-bottom: 0.3em;
+}
+
+.inputDisplay input {
+    width: 50%;
+    height: 2.5em;
+    border-radius: 0.3em;
+    border: 0.06em solid #919191;
+    background-color: #c5c5c5;
+}
+
+.textArea {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.25em;
+}
+
+.labelInput {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.labelInput input {
+    width: 20%;
+    height: 2.5em;
+    border-radius: 0.3em;
+    border: 0.06em solid #919191;
+    background-color: #c5c5c5;
+}
+
+.modalFooter {
+    margin-top: 1em;
+    display: flex;
+    flex-direction: row;
+    gap: 3em;
+}
+
+.modalFooter button {
+    padding: 0.5em;
+    border: 0.06em solid #ccc;
+    border-radius: 0.3em;
+    font-size: 1em;
+}
+
+.modalFooter button:hover {
+    background-color: #c93c2c;
+    color: white;
+}

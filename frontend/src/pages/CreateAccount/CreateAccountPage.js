@@ -1,43 +1,144 @@
-import React from "react";
+import React, { Component } from "react";
 import GlobalStyles from "../../styles/GlobalStyles.module.css";
 import styles from "./CreateAccount.module.css";
+import { useNavigate } from "react-router-dom";
 import LogoDesktop from "../../components/LogoDesktop/LogoDesktop";
+import { createAccount } from "../../services/api";
 
-const createAccountPage = () => {
-  return (
-    <div className={styles.container}>
-      <LogoDesktop />
-      <div className={styles.loginFormCard}>
-        <h1 className={styles.titleCard}>Créer mon compte</h1>
-        <form className={styles.formElements}>
-          <div className={styles.labelInput}>
-            <label htmlFor="lastname">Nom:</label>
-            <input type="text" id="lastname" name="lastname" />
-          </div>
-          <div className={styles.labelInput}>
-            <label htmlFor="firstname">Prénom:</label>
-            <input type="text" id="firstname" name="firstname" />
-          </div>
-          <div className={styles.labelInput}>
-            <label htmlFor="email">Email:</label>
-            <input type="text" id="email" name="email" />
-          </div>
-          <div className={styles.labelInput}>
-            <label htmlFor="phone_number">Téléphone:</label>
-            <input type="number" id="phone_number" name="phone_number" />
-          </div>
-          <div className={styles.labelInput}>
-            <label htmlFor="phone_number">Mot de passe:</label>
-            <input type="number" id="phone_number" name="phone_number" />
-          </div>
-          <div className={styles.buttonPosition}>
-            <button type="reset" onClick={() => (window.location.href = "/login")} className={styles.cancelButton}>Annuler</button>
-            <button type="submit" onClick={() => (window.location.href = "/dashboard")} className={styles.submitButton}>Créer mon compte</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  );
-};
+// Composant fonctionnel pour passer la fonction navigate
+function CreateAccountPageWrapper(props) {
+    const navigate = useNavigate();
+    return <CreateAccountPage {...props} navigate={navigate} />;
+}
 
-export default createAccountPage;
+class CreateAccountPage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            lastname: "",
+            firstname: "",
+            email: "",
+            phoneNumber: "",
+            password: "",
+        };
+        this.handleCancel = this.handleCancel.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(event) {
+        const { name, value } = event.target;
+        this.setState({
+            [name]: value,
+        });
+    }
+
+    handleCancel(event) {
+        event.preventDefault();
+        window.location.href = "/login";
+    }
+
+    handleSubmit(event) {
+        event.preventDefault();
+        const { firstname, lastname, email, phoneNumber, password } =
+            this.state;
+
+        const employeeData = {
+            firstname,
+            lastname,
+            email,
+            phoneNumber,
+            password,
+            job: "Plombier",
+            isAdmin: true,
+            speciality: "Tuyaux",
+        };
+
+        createAccount(employeeData, (error, newAccount) => {
+            if (error) {
+                console.error("Erreur lors de la création du compte", error);
+            } else {
+                console.log("Compte créé avec succès, ID:", newAccount.id);
+                this.props.navigate("/calendar");
+            }
+        });
+    }
+
+    render() {
+        return (
+            <div className={styles.container}>
+                <LogoDesktop />
+                <div className={styles.loginFormCard}>
+                    <h1 className={styles.titleCard}>Créer mon compte</h1>
+                    <form
+                        className={styles.formElements}
+                        onSubmit={this.handleSubmit}
+                    >
+                        <div className={styles.labelInput}>
+                            <label htmlFor="lastname">Nom:</label>
+                            <input
+                                type="text"
+                                name="lastname"
+                                value={this.state.lastname}
+                                onChange={this.handleChange}
+                            />
+                        </div>
+                        <div className={styles.labelInput}>
+                            <label htmlFor="firstname">Prénom:</label>
+                            <input
+                                type="text"
+                                name="firstname"
+                                value={this.state.firstname}
+                                onChange={this.handleChange}
+                            />
+                        </div>
+                        <div className={styles.labelInput}>
+                            <label htmlFor="email">Email:</label>
+                            <input
+                                type="text"
+                                name="email"
+                                value={this.state.email}
+                                onChange={this.handleChange}
+                            />
+                        </div>
+                        <div className={styles.labelInput}>
+                            <label htmlFor="phoneNumber">Téléphone:</label>
+                            <input
+                                type="number"
+                                name="phoneNumber"
+                                value={this.state.phoneNumber}
+                                onChange={this.handleChange}
+                            />
+                        </div>
+                        <div className={styles.labelInput}>
+                            <label htmlFor="password">Mot de passe:</label>
+                            <input
+                                type="password"
+                                name="password"
+                                value={this.state.password}
+                                onChange={this.handleChange}
+                            />
+                        </div>
+                        <div className={styles.buttonPosition}>
+                            <button
+                                type="reset"
+                                onClick={this.handleCancel}
+                                className={styles.cancelButton}
+                            >
+                                Annuler
+                            </button>
+                            <button
+                                type="submit"
+                                className={styles.submitButton}
+                            >
+                                Créer mon compte
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        );
+    }
+}
+
+export default CreateAccountPageWrapper;

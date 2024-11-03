@@ -1,7 +1,19 @@
-const pool = require('../config/db.config'); // Importer la configuration de la base de données
+const pool = require("../config/db.config"); // Importer la configuration de la base de données
 
 class Report {
-    constructor(idReport, breakdown, workDone, reschedule, startingDate, startingHour, endingHour, duration, clientSignature, employeeSignature, idEvent) {
+    constructor(
+        idReport,
+        breakdown,
+        workDone,
+        reschedule,
+        startingDate,
+        startingHour,
+        endingHour,
+        duration,
+        clientSignature,
+        employeeSignature,
+        idEvent
+    ) {
         this.idReport = idReport;
         this.breakdown = breakdown;
         this.workDone = workDone;
@@ -15,10 +27,34 @@ class Report {
         this.idEvent = idEvent;
     }
 
-    static createReport(breakdown, workDone, reschedule, startingDate, startingHour, endingHour, duration, clientSignature, employeeSignature, idEvent, callback) {
-        const query = 'INSERT INTO reports (breakdown, work_done, reschedule, starting_date, starting_hour, ending_hour, duration, client_signature, employee_signature, id_event) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *';
-        const values = [breakdown, workDone, reschedule, startingDate, startingHour, endingHour, duration, clientSignature, employeeSignature, idEvent];
-        
+    static createReport(
+        breakdown,
+        workDone,
+        reschedule,
+        startingDate,
+        startingHour,
+        endingHour,
+        duration,
+        clientSignature,
+        employeeSignature,
+        idEvent,
+        callback
+    ) {
+        const query =
+            "INSERT INTO reports (breakdown, work_done, reschedule, starting_date, starting_hour, ending_hour, duration, client_signature, employee_signature, id_event) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *";
+        const values = [
+            breakdown,
+            workDone,
+            reschedule,
+            startingDate,
+            startingHour,
+            endingHour,
+            duration,
+            clientSignature,
+            employeeSignature,
+            idEvent,
+        ];
+
         pool.query(query, values, (error, result) => {
             if (error) {
                 return callback(error, null);
@@ -37,27 +73,38 @@ class Report {
                 row.employee_signature,
                 row.id_event
             );
-            callback(null, newReport);
+
+            // Mettre à jour le statut de l'événement à 5 (Terminé)
+            const updateEventQuery =
+                "UPDATE events SET status = 5 WHERE id_event = $1";
+            pool.query(updateEventQuery, [idEvent], (updateError) => {
+                if (updateError) {
+                    return callback(updateError, null);
+                }
+                callback(null, newReport);
+            });
         });
     }
 
     static getReportById(idEvent, callback) {
-        const query = 'SELECT * FROM reports WHERE id_event = $1';
+        const query = "SELECT * FROM reports WHERE id_event = $1";
         const values = [idEvent];
         pool.query(query, values, (error, result) => {
             if (error) {
                 return callback(error, null);
             }
             const row = result.rows[0];
-            let report = new Report(
-                row.id_report, 
-                row.breakdown, 
-                row.work_done, 
-                row.reschedule, 
-                row.ending_hour, 
-                row.duration, 
-                row.client_signature, 
-                row.employee_signature, 
+            const report = new Report(
+                row.id_report,
+                row.breakdown,
+                row.work_done,
+                row.reschedule,
+                row.starting_date,
+                row.starting_hour,
+                row.ending_hour,
+                row.duration,
+                row.client_signature,
+                row.employee_signature,
                 row.id_event
             );
             callback(null, report);

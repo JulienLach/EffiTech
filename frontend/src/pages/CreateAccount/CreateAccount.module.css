@@ -1,116 +1,94 @@
-
 /* CSS for parent div with red and white background */
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 1.5em;
     height: 100vh;
     background: linear-gradient(160deg, white 50%, #c93c2c 50%);
-  }
-  
-  /* CSS of the card for the login form */
-  .loginFormCard {
+}
+
+/* CSS of the card for the login form */
+.loginFormCard {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-radius: 20px;
-    border: #e7e7e7 1px solid;
+    border-radius: 1.25em;
+    border: #e7e7e7 0.06em solid;
     background-color: white;
-    width: 455px;
+    width: 28.438em;
     height: auto;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 14px 28px,
-      rgba(0, 0, 0, 0.22) 0px 10px 10px;
-  }
-  
-  /* CSS title style font */
-  .titleCard {
-    font-size: 30px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 0.875em 1.75em,
+        rgba(0, 0, 0, 0.22) 0 0.625em 0.625em;
+}
+
+/* CSS title style font */
+.titleCard {
+    font-size: 1.9em;
     font-weight: 500;
-  }
-  
-  /* CSS for input & label */
-  .labelInput {
-    font-size: 20px;
+}
+
+/* CSS for input & label */
+.labelInput {
+    font-size: 1.25em;
     font-weight: 500;
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin-bottom: 10px;
-  }
-  
-  /* CSS for input comportement */
-  .labelInput input {
-    margin: 0px 30px;
-    padding: 10px;
-    border: 1px solid #cccccc;
-    border-radius: 10px;
-  }
+    margin-bottom: 0.625em;
+}
+
+/* CSS for input comportement */
+.labelInput input {
+    margin: 0 1.9em;
+    padding: 0.625em;
+    border: 0.06em solid #cccccc;
+    border-radius: 0.625em;
+}
 
 /* CSS for the label comportement */
-  .labelInput label {
-      margin: 0px 30px;
-      padding: 5px 0px;
-  }
+.labelInput label {
+    margin: 0 1.9em;
+    padding: 0.313em 0;
+}
 
-  /* CSS for elements placement */
-  .formElements {
+/* CSS for elements placement */
+.formElements {
     display: flex;
     flex-direction: column;
     width: 100%;
-  }
-  
-  /* CSS for button positioning */
-   .buttonPosition {
+}
+
+/* CSS for button positioning */
+.buttonPosition {
     display: flex;
-    justify-content: space-between;
-    width: 450px;
-    margin-bottom: 20px;
-  } 
+    margin-bottom: 1.25em;
+    margin-top: 1.2em;
+}
 
 /* css for cancel button */
-  .cancelButton {
-    background-color: #ABABAB;
+.cancelButton {
+    background-color: #ababab;
     margin: auto;
-    padding: 10px;
+    padding: 0.625em;
     border: none;
-    border-radius: 10px;
+    border-radius: 0.625em;
     color: white;
-    font-size: 18px;
+    font-size: 1.125em;
     font-weight: 500;
     cursor: pointer;
-  }
+}
 
-    /* CSS for create button, */
-  .submitButton {
+/* CSS for create button */
+.submitButton {
     background-color: #c93c2c;
     margin: auto;
-    padding: 10px;
+    padding: 0.625em;
     border: none;
-    border-radius: 10px;
+    border-radius: 0.625em;
     color: white;
-    font-size: 18px;
+    font-size: 1.125em;
     font-weight: 500;
     cursor: pointer;
-  }
-  
-  /* CSS for paragraph style */
-  .formElements p {
-    font-size: 15px;
-    font-weight: 300;
-    margin-top: 20px;
-  }
-  
-  /* CSS for link style */
-  .formElements a {
-    text-align: right;
-    font-size: 15px;
-    font-weight: 300;
-    margin-bottom: 20px;
-  }
-
-  .buttonPosition {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
+}

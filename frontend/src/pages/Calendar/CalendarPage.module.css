@@ -1,0 +1,53 @@
+body {
+    box-sizing: border-box;
+    margin: 0;
+}
+/* placement du container */
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 1.25em 0 15.6em;
+}
+
+/* placement et style du titre de la pge  */
+.pageTitle {
+    font-size: 1.9em;
+    font-weight: 550;
+}
+
+/* fixation du top side (titre, filter bar et evenement) */
+.fixedTopSide {
+    height: 11.5em;
+    position: sticky;
+    top: 5em;
+    width: 100%;
+    background-color: white;
+    z-index: 1;
+}
+
+.stickyThead {
+    position: sticky;
+    top: 16.56em;
+    background-color: white;
+    z-index: 1;
+}
+
+/* placement du titre 'evennement' */
+h3 {
+    font-size: 1.25em;
+    font-weight: 600;
+    margin-top: 1.25em;
+}
+
+th,
+td {
+    text-align: start;
+    width: 100vw; /* Définit une largeur fixe pour les cellules */
+    padding: 0.625em; /* Augmente l'espace à l'intérieur des cellules */
+    border-bottom: 0.06em solid #d3d3d3;
+}
+
+a {
+    color: #c93c2c;
+    text-decoration: underline #c93c2c;
+}

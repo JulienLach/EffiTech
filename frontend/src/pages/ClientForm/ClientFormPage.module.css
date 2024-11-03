@@ -1,0 +1,139 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 1.25em 0 15.6em;
+}
+
+.pageTitle {
+    font-size: 1.9em;
+    font-weight: 550;
+}
+
+.pro,
+.part {
+    width: 100%;
+}
+
+.company {
+    margin-left: 1em;
+}
+
+.backButton {
+    display: flex;
+    padding: 0.5em;
+    border: 0.06em solid #ccc;
+    border-radius: 0.3em;
+    font-size: 1em;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+.backButton i {
+    transform: rotate(180deg);
+}
+
+.profilCompanyBack {
+    display: flex;
+    width: 75%;
+    align-items: center;
+}
+
+.profilNamesBack {
+    display: flex;
+    width: 75%;
+    align-items: center;
+}
+
+.profilCompanyBack img,
+.profilNamesBack img {
+    width: 9.3em;
+    height: 9.3em;
+}
+
+.idAndCategory {
+    display: flex;
+    align-items: center;
+}
+
+.id {
+    margin-right: 1em;
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.names {
+    display: flex;
+}
+.nameColumn {
+    display: flex;
+    flex-direction: column;
+    margin-left: 1em;
+}
+
+.lastname,
+.firstname {
+    margin: 0.625em 0 0 3.125em;
+    font-size: 2.5em;
+    font-weight: 550;
+    text-transform: capitalize;
+    text-align: right;
+}
+
+.lastnamePro,
+.firstnamePro {
+    font-size: 1.25em;
+    font-weight: 550;
+    text-transform: capitalize;
+    margin: 0 0.5em 0 0;
+    font-weight: 400;
+}
+
+.lastname,
+.company {
+    text-transform: uppercase;
+    font-size: 3.7em;
+    font-weight: 550;
+}
+
+.profilInfo {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.contactInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.separation {
+    background-color: black;
+    height: 0.06em;
+    width: 75%;
+    margin-top: 1.25em;
+}
+
+.eventInfo {
+    display: flex;
+}
+
+.eventInfo p {
+    margin: 0;
+}
+
+.contactInfo {
+    font-size: 1.25em;
+}
+
+.contactInfo p {
+    margin: 0.5em;
+}
+
+.button {
+    padding: 0.5em;
+    border: 0.06em solid #ccc;
+    border-radius: 0.3em;
+    font-size: 1em;
+    cursor: pointer;
+    margin-top: 0.9em;
+}

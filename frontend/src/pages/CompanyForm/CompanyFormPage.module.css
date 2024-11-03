@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 1.25em 0 15.6em;
+}
+
+/* placement et style du titre de la pge  */
+.pageTitle {
+    font-size: 1.9em;
+    font-weight: 550;
+}
+
+.separator {
+    margin: 1em 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.companyData {
+    display: flex;
+    flex-direction: column;
+}

@@ -1,13 +1,16 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const employeeServices = require('../services/employee.services.js');
+const employeeServices = require("../services/employee.services.js");
 
-router.get('/', employeeServices.getAllEmployees);
+router.get("/", employeeServices.getAllEmployees);
 
-router.get('/:idEmployee', employeeServices.getEmployeeById);
+router.get("/:idEmployee", employeeServices.getEmployeeById);
 
-router.post('/', employeeServices.createEmployee);
+router.post("/", employeeServices.createEmployee);
 
-router.put('/:idEmployee', employeeServices.updateEmployee);
+router.put("/:idEmployee", employeeServices.updateEmployee);
+
+// Test connexion employé
+router.post("/login", employeeServices.loginEmployee);
 
 module.exports = router;

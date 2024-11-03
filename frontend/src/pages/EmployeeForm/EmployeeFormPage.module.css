@@ -1,0 +1,79 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 20px 0 250px;
+}
+
+form {
+    margin-bottom: 30px;
+}
+
+/* img { A changer ça écrase l'image du logo de la page login et createaccount
+    width: 150px;
+    height: 150px;
+} */
+
+.separation {
+    background-color: black;
+    height: 1px;
+    width: 75%;
+    margin-top: 20px;
+}
+
+/* CSS for input & label */
+.labelInput {
+    font-size: 20px;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    width: 30vw;
+    margin-bottom: 10px;
+}
+
+/* CSS for input comportement */
+.labelInput input {
+    margin: 0px 30px;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+}
+
+/* CSS for the label comportement */
+.labelInput label {
+    margin: 0px 30px;
+    padding: 5px 0px;
+}
+
+/* CSS for button positioning */
+.buttonPosition {
+    display: flex;
+    width: 30vw;
+    margin-bottom: 20px;
+    margin-top: 1.2em;
+}
+
+/* css for cancel button */
+.cancelButton {
+    background-color: #ababab;
+    margin: auto;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+/* CSS for create button */
+.submitButton {
+    background-color: #c93c2c;
+    margin: auto;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+}
