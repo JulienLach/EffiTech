@@ -39,9 +39,9 @@ class InterventionFormPage extends Component {
             .substring(11, 16);
 
         this.setState({
-            startingDate: new Date(event.startingDate)
-                .toISOString()
-                .split("T")[0],
+            startingDate: new Date(event.startingDate).toLocaleDateString(
+                "en-CA"
+            ),
             duration,
         });
     }
