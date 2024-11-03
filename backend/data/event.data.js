@@ -81,7 +81,12 @@ class Event {
                             events.is_planned, events.type, events.starting_date, events.starting_hour, 
                             events.ending_hour, events.id_client, events.id_employee, events.work_to_do
                         FROM events
-                        ORDER BY events.status ASC, events.starting_date ASC
+                        ORDER BY 
+                            events.status ASC, 
+                            CASE 
+                                WHEN events.status = 5 THEN events.starting_date
+                            END DESC,
+                            events.starting_date ASC
                     `;
 
                     pool.query(query, function (error, result) {
