@@ -7,7 +7,6 @@ import {
     StyleSheet,
     pdf,
 } from "@react-pdf/renderer";
-import logo from "../../images/logo.svg";
 
 const styles = StyleSheet.create({
     page: {

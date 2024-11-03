@@ -50,7 +50,7 @@ class ReportPage extends Component {
                   startingDate: event.startingDate,
                   startingHour: event.startingHour,
                   endingHour: event.endingHour,
-                  duration: event.duration,
+                  duration: reportData.duration,
                   client: event.client,
                   clientSignature: reportData.client_signature,
                   employeeSignature: reportData.employee_signature,

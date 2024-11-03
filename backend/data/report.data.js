@@ -99,6 +99,8 @@ class Report {
                 row.breakdown,
                 row.work_done,
                 row.reschedule,
+                row.starting_date,
+                row.starting_hour,
                 row.ending_hour,
                 row.duration,
                 row.client_signature,
