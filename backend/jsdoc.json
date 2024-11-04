@@ -1,0 +1,10 @@
+{
+    "source": {
+        "include": ["./data/company.data.js"],
+        "includePattern": ".+\\.js(doc|x)?$",
+        "excludePattern": "(^|\\/|\\\\)_"
+    },
+    "opts": {
+        "destination": "./docs"
+    }
+}
