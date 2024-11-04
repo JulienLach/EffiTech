@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Address</title>
+    <title>JSDoc: Class: Notification</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Address</h1>
+    <h1 class="page-title">Class: Notification</h1>
 
     
 
@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Address<span class="signature">(idAddress, address, city, zipcode, idClient)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>Notification<span class="signature">(idNotification, idEmployee, action, type, title, creationDate, creationHour)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">Classe représentant une adresse.</div>
+            <div class="class-description">Classe représentant une notification.</div>
         
     
 </header>
@@ -45,7 +45,7 @@
     
 
     
-    <h4 class="name" id="Address"><span class="type-signature"></span>new Address<span class="signature">(idAddress, address, city, zipcode, idClient)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Notification"><span class="type-signature"></span>new Notification<span class="signature">(idNotification, idEmployee, action, type, title, creationDate, creationHour)</span><span class="type-signature"></span></h4>
     
 
     
@@ -53,7 +53,7 @@
 
 
 <div class="description">
-    Crée une instance de Address.
+    Crée une instance de Notification.
 </div>
 
 
@@ -89,7 +89,7 @@
 
         <tr>
             
-                <td class="name"><code>idAddress</code></td>
+                <td class="name"><code>idNotification</code></td>
             
 
             <td class="type">
@@ -105,83 +105,14 @@
 
             
 
-            <td class="description last">L'ID de l'adresse.</td>
+            <td class="description last">L'identifiant de la notification.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>address</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">L'adresse postale.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>city</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">La ville.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>zipcode</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Le code postal.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>idClient</code></td>
+                <td class="name"><code>idEmployee</code></td>
             
 
             <td class="type">
@@ -197,7 +128,122 @@
 
             
 
-            <td class="description last">L'ID du client associé.</td>
+            <td class="description last">L'identifiant de l'employé associé à la notification.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>action</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">L'action de la notification.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Le type de la notification.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>title</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Le titre de la notification.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>creationDate</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">La date de création de la notification.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>creationHour</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">L'heure de création de la notification.</td>
         </tr>
 
     
@@ -238,7 +284,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="address.data.js.html">address.data.js</a>, <a href="address.data.js.html#line6">line 6</a>
+        <a href="notification.data.js.html">notification.data.js</a>, <a href="notification.data.js.html#line6">line 6</a>
     </li></ul></dd>
     
 
@@ -294,7 +340,7 @@
     
 
     
-    <h4 class="name" id=".createAddress"><span class="type-signature">(static) </span>createAddress<span class="signature">(address, city, zipcode, idClient, callback)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".getAllNotifications"><span class="type-signature">(static) </span>getAllNotifications<span class="signature">(callback)</span><span class="type-signature"></span></h4>
     
 
     
@@ -302,7 +348,7 @@
 
 
 <div class="description">
-    Crée une nouvelle adresse.
+    Récupère toutes les notifications.
 </div>
 
 
@@ -338,98 +384,6 @@
 
         <tr>
             
-                <td class="name"><code>address</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">L'adresse.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>city</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">La ville.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>zipcode</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Le code postal.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>idClient</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">L'ID du client associé.</td>
-        </tr>
-
-    
-
-        <tr>
-            
                 <td class="name"><code>callback</code></td>
             
 
@@ -446,7 +400,7 @@
 
             
 
-            <td class="description last">La fonction de rappel.</td>
+            <td class="description last">La fonction de rappel à exécuter après la récupération des notifications.</td>
         </tr>
 
     
@@ -487,167 +441,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="address.data.js.html">address.data.js</a>, <a href="address.data.js.html#line55">line 55</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".getAddressById"><span class="type-signature">(static) </span>getAddressById<span class="signature">(idAddress, callback)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Récupère une adresse par son ID.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>idAddress</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">L'ID de l'adresse.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>callback</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">La fonction de rappel.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="address.data.js.html">address.data.js</a>, <a href="address.data.js.html#line28">line 28</a>
+        <a href="notification.data.js.html">notification.data.js</a>, <a href="notification.data.js.html#line39">line 39</a>
     </li></ul></dd>
     
 

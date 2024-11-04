@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Document</title>
+    <title>JSDoc: Class: Invoice</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Document</h1>
+    <h1 class="page-title">Class: Invoice</h1>
 
     
 
@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Document<span class="signature">(idDocument, title, brand, model, file)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>Invoice<span class="signature">(idInvoice, idClient, amountIncludingTax, amountWithoutTax, invoiceDate, file)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">Classe représentant un guide d'utilisation d'un équipement.</div>
+            <div class="class-description">Classe représentant une facture.</div>
         
     
 </header>
@@ -45,7 +45,7 @@
     
 
     
-    <h4 class="name" id="Document"><span class="type-signature"></span>new Document<span class="signature">(idDocument, title, brand, model, file)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Invoice"><span class="type-signature"></span>new Invoice<span class="signature">(idInvoice, idClient, amountIncludingTax, amountWithoutTax, invoiceDate, file)</span><span class="type-signature"></span></h4>
     
 
     
@@ -53,7 +53,7 @@
 
 
 <div class="description">
-    Crée une instance de Document.
+    Crée une instance d'Invoice.
 </div>
 
 
@@ -89,7 +89,7 @@
 
         <tr>
             
-                <td class="name"><code>idDocument</code></td>
+                <td class="name"><code>idInvoice</code></td>
             
 
             <td class="type">
@@ -105,14 +105,83 @@
 
             
 
-            <td class="description last">L'ID du document.</td>
+            <td class="description last">L'identifiant de la facture.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>title</code></td>
+                <td class="name"><code>idClient</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">L'identifiant du client associé à la facture.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>amountIncludingTax</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Le montant TTC de la facture.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>amountWithoutTax</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Le montant HT de la facture.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>invoiceDate</code></td>
             
 
             <td class="type">
@@ -128,53 +197,7 @@
 
             
 
-            <td class="description last">Le titre du document.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>brand</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">La marque du document.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>model</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Le modèle du document.</td>
+            <td class="description last">La date de la facture.</td>
         </tr>
 
     
@@ -187,7 +210,7 @@
             <td class="type">
             
                 
-<span class="param-type">Buffer</span>
+<span class="param-type">string</span>
 
 
             
@@ -197,7 +220,7 @@
 
             
 
-            <td class="description last">Le fichier du document.</td>
+            <td class="description last">Le fichier de la facture.</td>
         </tr>
 
     
@@ -238,7 +261,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="document.data.js.html">document.data.js</a>, <a href="document.data.js.html#line6">line 6</a>
+        <a href="invoice.data.js.html">invoice.data.js</a>, <a href="invoice.data.js.html#line6">line 6</a>
     </li></ul></dd>
     
 
@@ -294,7 +317,7 @@
     
 
     
-    <h4 class="name" id=".downloadDocument"><span class="type-signature">(static) </span>downloadDocument<span class="signature">(idDocument, callback)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".getAllInvoices"><span class="type-signature">(static) </span>getAllInvoices<span class="signature">(callback)</span><span class="type-signature"></span></h4>
     
 
     
@@ -302,167 +325,7 @@
 
 
 <div class="description">
-    Télécharge un document par son ID.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>idDocument</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">L'ID du document.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>callback</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">La fonction de rappel.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="document.data.js.html">document.data.js</a>, <a href="document.data.js.html#line104">line 104</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".getAllDocuments"><span class="type-signature">(static) </span>getAllDocuments<span class="signature">(callback)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Récupère tous les documents.
+    Récupère toutes les factures.
 </div>
 
 
@@ -514,7 +377,7 @@
 
             
 
-            <td class="description last">La fonction de rappel.</td>
+            <td class="description last">La fonction de rappel à exécuter après la récupération des factures.</td>
         </tr>
 
     
@@ -555,7 +418,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="document.data.js.html">document.data.js</a>, <a href="document.data.js.html#line27">line 27</a>
+        <a href="invoice.data.js.html">invoice.data.js</a>, <a href="invoice.data.js.html#line36">line 36</a>
     </li></ul></dd>
     
 
@@ -591,7 +454,7 @@
     
 
     
-    <h4 class="name" id=".getDocumentById"><span class="type-signature">(static) </span>getDocumentById<span class="signature">(idDocument, callback)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".getInvoiceById"><span class="type-signature">(static) </span>getInvoiceById<span class="signature">(idInvoice, callback)</span><span class="type-signature"></span></h4>
     
 
     
@@ -599,7 +462,7 @@
 
 
 <div class="description">
-    Récupère un document par son ID.
+    Récupère une facture par son identifiant.
 </div>
 
 
@@ -635,7 +498,7 @@
 
         <tr>
             
-                <td class="name"><code>idDocument</code></td>
+                <td class="name"><code>idInvoice</code></td>
             
 
             <td class="type">
@@ -651,7 +514,7 @@
 
             
 
-            <td class="description last">L'ID du document.</td>
+            <td class="description last">L'identifiant de la facture.</td>
         </tr>
 
     
@@ -674,7 +537,7 @@
 
             
 
-            <td class="description last">La fonction de rappel.</td>
+            <td class="description last">La fonction de rappel à exécuter après la récupération de la facture.</td>
         </tr>
 
     
@@ -715,7 +578,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="document.data.js.html">document.data.js</a>, <a href="document.data.js.html#line51">line 51</a>
+        <a href="invoice.data.js.html">invoice.data.js</a>, <a href="invoice.data.js.html#line61">line 61</a>
     </li></ul></dd>
     
 
@@ -751,7 +614,7 @@
     
 
     
-    <h4 class="name" id=".importDocument"><span class="type-signature">(static) </span>importDocument<span class="signature">(idDocument, title, brand, model, file, callback)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".importInvoice"><span class="type-signature">(static) </span>importInvoice<span class="signature">(idClient, amountIncludingTax, amountWithoutTax, invoiceDate, file, callback)</span><span class="type-signature"></span></h4>
     
 
     
@@ -759,7 +622,7 @@
 
 
 <div class="description">
-    Importe un nouveau document.
+    Importe une nouvelle facture.
 </div>
 
 
@@ -795,7 +658,7 @@
 
         <tr>
             
-                <td class="name"><code>idDocument</code></td>
+                <td class="name"><code>idClient</code></td>
             
 
             <td class="type">
@@ -811,14 +674,60 @@
 
             
 
-            <td class="description last">L'ID du document.</td>
+            <td class="description last">L'identifiant du client associé à la facture.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>title</code></td>
+                <td class="name"><code>amountIncludingTax</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Le montant TTC de la facture.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>amountWithoutTax</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Le montant HT de la facture.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>invoiceDate</code></td>
             
 
             <td class="type">
@@ -834,53 +743,7 @@
 
             
 
-            <td class="description last">Le titre du document.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>brand</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">La marque du document.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>model</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Le modèle du document.</td>
+            <td class="description last">La date de la facture.</td>
         </tr>
 
     
@@ -893,7 +756,7 @@
             <td class="type">
             
                 
-<span class="param-type">Buffer</span>
+<span class="param-type">string</span>
 
 
             
@@ -903,7 +766,7 @@
 
             
 
-            <td class="description last">Le fichier du document.</td>
+            <td class="description last">Le fichier de la facture.</td>
         </tr>
 
     
@@ -926,7 +789,7 @@
 
             
 
-            <td class="description last">La fonction de rappel.</td>
+            <td class="description last">La fonction de rappel à exécuter après l'importation de la facture.</td>
         </tr>
 
     
@@ -967,7 +830,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="document.data.js.html">document.data.js</a>, <a href="document.data.js.html#line79">line 79</a>
+        <a href="invoice.data.js.html">invoice.data.js</a>, <a href="invoice.data.js.html#line90">line 90</a>
     </li></ul></dd>
     
 

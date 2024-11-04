@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: report.data.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: report.data.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const pool = require("../config/db.config"); // Importer la configuration de la base de données
+
+/**
+ * Classe représentant un rapport d'intervention.
+ */
+class Report {
+    /**
+     * Crée une instance de Report.
+     * @param {number} idReport - L'identifiant du rapport.
+     * @param {string} breakdown - La panne signalée.
+     * @param {string} workDone - Le travail effectué.
+     * @param {boolean} reschedule - Indique si une reprogrammation est nécessaire.
+     * @param {string} startingDate - La date de début de l'intervention.
+     * @param {string} startingHour - L'heure de début de l'intervention.
+     * @param {string} endingHour - L'heure de fin de l'intervention.
+     * @param {number} duration - La durée de l'intervention.
+     * @param {string} clientSignature - La signature du client.
+     * @param {string} employeeSignature - La signature de l'employé.
+     * @param {number} idEvent - L'identifiant de l'événement associé.
+     */
+    constructor(
+        idReport,
+        breakdown,
+        workDone,
+        reschedule,
+        startingDate,
+        startingHour,
+        endingHour,
+        duration,
+        clientSignature,
+        employeeSignature,
+        idEvent
+    ) {
+        this.idReport = idReport;
+        this.breakdown = breakdown;
+        this.workDone = workDone;
+        this.reschedule = reschedule;
+        this.startingDate = startingDate;
+        this.startingHour = startingHour;
+        this.endingHour = endingHour;
+        this.duration = duration;
+        this.clientSignature = clientSignature;
+        this.employeeSignature = employeeSignature;
+        this.idEvent = idEvent;
+    }
+
+    /**
+     * Crée un nouveau rapport.
+     * @param {string} breakdown - La panne signalée.
+     * @param {string} workDone - Le travail effectué.
+     * @param {boolean} reschedule - Indique si une reprogrammation est nécessaire.
+     * @param {string} startingDate - La date de début de l'intervention.
+     * @param {string} startingHour - L'heure de début de l'intervention.
+     * @param {string} endingHour - L'heure de fin de l'intervention.
+     * @param {number} duration - La durée de l'intervention.
+     * @param {string} clientSignature - La signature du client.
+     * @param {string} employeeSignature - La signature de l'employé.
+     * @param {number} idEvent - L'identifiant de l'événement associé.
+     * @param {function(Error, Report):void} callback - La fonction de rappel à exécuter après la création du rapport.
+     */
+    static createReport(
+        breakdown,
+        workDone,
+        reschedule,
+        startingDate,
+        startingHour,
+        endingHour,
+        duration,
+        clientSignature,
+        employeeSignature,
+        idEvent,
+        callback
+    ) {
+        const query =
+            "INSERT INTO reports (breakdown, work_done, reschedule, starting_date, starting_hour, ending_hour, duration, client_signature, employee_signature, id_event) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *";
+        const values = [
+            breakdown,
+            workDone,
+            reschedule,
+            startingDate,
+            startingHour,
+            endingHour,
+            duration,
+            Buffer.from(clientSignature.split(",")[1], "base64"),
+            Buffer.from(employeeSignature.split(",")[1], "base64"),
+            idEvent,
+        ];
+
+        pool.query(query, values, (error, result) => {
+            if (error) {
+                return callback(error, null);
+            }
+            const row = result.rows[0];
+            const newReport = new Report(
+                row.id_report,
+                row.breakdown,
+                row.work_done,
+                row.reschedule,
+                row.starting_date,
+                row.starting_hour,
+                row.ending_hour,
+                row.duration,
+                row.client_signature,
+                row.employee_signature,
+                row.id_event
+            );
+
+            // Mettre à jour le statut de l'événement à 5 (Terminé)
+            const updateEventQuery =
+                "UPDATE events SET status = 5 WHERE id_event = $1";
+            pool.query(updateEventQuery, [idEvent], (updateError) => {
+                if (updateError) {
+                    return callback(updateError, null);
+                }
+                callback(null, newReport);
+            });
+        });
+    }
+
+    /**
+     * Récupère un rapport par l'identifiant de l'événement associé.
+     * @param {number} idEvent - L'identifiant de l'événement associé.
+     * @param {function(Error, Report):void} callback - La fonction de rappel à exécuter après la récupération du rapport.
+     */
+    static getReportById(idEvent, callback) {
+        const query = "SELECT * FROM reports WHERE id_event = $1";
+        const values = [idEvent];
+        pool.query(query, values, (error, result) => {
+            if (error) {
+                return callback(error, null);
+            }
+            const row = result.rows[0];
+            // Convertir les signatures en base64
+            let clientSignatureBase64 = null;
+            let employeeSignatureBase64 = null;
+            if (row.client_signature) {
+                clientSignatureBase64 = row.client_signature.toString("base64");
+            }
+            if (row.employee_signature) {
+                employeeSignatureBase64 =
+                    row.employee_signature.toString("base64");
+            }
+
+            const report = new Report(
+                row.id_report,
+                row.breakdown,
+                row.work_done,
+                row.reschedule,
+                row.starting_date,
+                row.starting_hour,
+                row.ending_hour,
+                row.duration,
+                clientSignatureBase64,
+                employeeSignatureBase64,
+                row.id_event
+            );
+            callback(null, report);
+        });
+    }
+}
+
+module.exports = Report;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Address.html">Address</a></li><li><a href="Appointment.html">Appointment</a></li><li><a href="Client.html">Client</a></li><li><a href="Company.html">Company</a></li><li><a href="Document.html">Document</a></li><li><a href="Employee.html">Employee</a></li><li><a href="Event.html">Event</a></li><li><a href="Intervention.html">Intervention</a></li><li><a href="Invoice.html">Invoice</a></li><li><a href="Notification.html">Notification</a></li><li><a href="Report.html">Report</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Mon Nov 04 2024 16:01:23 GMT+0100 (heure normale d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: event.data.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: event.data.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const pool = require("../config/db.config"); // Importer la configuration de la base de données
+const Client = require("./client.data");
+const Address = require("./address.data");
+const Employee = require("./employee.data");
+
+/**
+ * Classe représentant un événement.
+ */
+class Event {
+    /**
+     * Crée une instance d'Event.
+     * @param {number} idEvent - L'identifiant de l'événement.
+     * @param {string} title - Le titre de l'événement.
+     * @param {string} description - La description de l'événement.
+     * @param {number} status - Le statut de l'événement.
+     * @param {boolean} isPlanned - Indique si l'événement est planifié.
+     * @param {string} type - Le type de l'événement.
+     * @param {Object} client - Le client associé à l'événement.
+     * @param {string} address - L'adresse de l'événement.
+     * @param {string} startingDate - La date de début de l'événement.
+     * @param {string} startingHour - L'heure de début de l'événement.
+     * @param {string} endingHour - L'heure de fin de l'événement.
+     * @param {Object} employee - L'employé associé à l'événement.
+     * @param {string} workToDo - Le travail à effectuer lors de l'événement.
+     */
+    constructor(
+        idEvent,
+        title,
+        description,
+        status,
+        isPlanned,
+        type,
+        client,
+        address,
+        startingDate,
+        startingHour,
+        endingHour,
+        employee,
+        workToDo
+    ) {
+        this.idEvent = idEvent;
+        this.title = title;
+        this.description = description;
+        this.status = status;
+        this.isPlanned = isPlanned;
+        this.type = type;
+        this.client = client;
+        this.address = address;
+        this.startingDate = startingDate;
+        this.startingHour = startingHour;
+        this.endingHour = endingHour;
+        this.employee = employee;
+        this.workToDo = workToDo;
+    }
+
+    /**
+     * Met à jour les statuts des événements en fonction de la date actuelle.
+     * @param {function(Error):void} callback - La fonction de rappel à exécuter après la mise à jour.
+     */
+    static updateEventStatuses(callback) {
+        const today = new Date().toISOString().split("T")[0]; // Obtenir la date du jour au format YYYY-MM-DD
+
+        const updateQuery = `
+            UPDATE events
+            SET status = CASE
+                WHEN status = 5 THEN 5
+                WHEN starting_date &lt; $1 THEN 2
+                WHEN starting_date = $1 THEN 3
+                WHEN starting_date > $1 THEN 4
+                ELSE status
+            END
+        `;
+        const values = [today];
+
+        pool.query(updateQuery, values, function (error, result) {
+            if (error) {
+                return callback(error);
+            }
+            callback(null);
+        });
+    }
+
+    /**
+     * Récupère tous les événements.
+     * @param {function(Error, Event[]):void} callback - La fonction de rappel à exécuter après la récupération des événements.
+     */
+    static getAllEvents(callback) {
+        Client.getAllClients(function (error, clients) {
+            if (error) {
+                return callback(error, null);
+            }
+
+            Employee.getAllEmployees(function (error, employees) {
+                if (error) {
+                    return callback(error, null);
+                }
+
+                // Mettre à jour les statuts des événements avant de les récupérer
+                Event.updateEventStatuses(function (error) {
+                    if (error) {
+                        return callback(error, null);
+                    }
+
+                    const query = `
+                        SELECT 
+                            events.id_event, events.title, events.description, events.status, 
+                            events.is_planned, events.type, events.starting_date, events.starting_hour, 
+                            events.ending_hour, events.id_client, events.id_employee, events.work_to_do
+                        FROM events
+                        ORDER BY 
+                            events.status ASC, 
+                            CASE 
+                                WHEN events.status = 5 THEN events.starting_date
+                            END DESC,
+                            events.starting_date ASC
+                    `;
+
+                    pool.query(query, function (error, result) {
+                        if (error) {
+                            return callback(error, null);
+                        }
+
+                        const events = result.rows.map(function (row) {
+                            const client = clients.find(function (client) {
+                                return client.idClient === row.id_client;
+                            });
+
+                            const employee = employees.find(
+                                function (employee) {
+                                    return (
+                                        employee.idEmployee === row.id_employee
+                                    );
+                                }
+                            );
+
+                            return new Event(
+                                row.id_event,
+                                row.title,
+                                row.description,
+                                row.status,
+                                row.is_planned,
+                                row.type,
+                                client,
+                                client.address, // Adresse du client récupéré avec Client.getAllClients
+                                row.starting_date,
+                                row.starting_hour,
+                                row.ending_hour,
+                                employee,
+                                row.work_to_do
+                            );
+                        });
+
+                        callback(null, events);
+                    });
+                });
+            });
+        });
+    }
+
+    /**
+     * Récupère un événement par son identifiant.
+     * @param {number} idEvent - L'identifiant de l'événement.
+     * @param {function(Error, Event):void} callback - La fonction de rappel à exécuter après la récupération de l'événement.
+     */
+    static getEventById(idEvent, callback) {
+        const query = `
+            SELECT 
+                events.id_event, events.title, events.description, events.status, 
+                events.is_planned, events.type, events.starting_date, events.starting_hour, 
+                events.ending_hour, events.id_client, events.id_address, events.id_employee
+            FROM events 
+            WHERE events.id_event = $1
+        `;
+        const values = [idEvent];
+
+        pool.query(query, values, (error, result) => {
+            if (error) {
+                return callback(error, null);
+            }
+
+            const row = result.rows[0];
+
+            Client.getClientById(row.id_client, function (error, client) {
+                if (error) {
+                    return callback(error, null);
+                }
+
+                Employee.getEmployeeById(
+                    row.id_employee,
+                    function (error, employee) {
+                        if (error) {
+                            return callback(error, null);
+                        }
+
+                        const event = new Event(
+                            row.id_event,
+                            row.title,
+                            row.description,
+                            row.status,
+                            row.is_planned,
+                            row.type,
+                            client,
+                            client.address, // Adresse du client récupéré avec Client.getClientById
+                            row.starting_date,
+                            row.starting_hour,
+                            row.ending_hour,
+                            employee // Employé récupéré avec Employee.getEmployeeById
+                        );
+
+                        callback(null, event);
+                    }
+                );
+            });
+        });
+    }
+
+    /**
+     * Crée un nouvel événement.
+     * @param {string} title - Le titre de l'événement.
+     * @param {string} description - La description de l'événement.
+     * @param {number} status - Le statut de l'événement.
+     * @param {boolean} isPlanned - Indique si l'événement est planifié.
+     * @param {string} type - Le type de l'événement.
+     * @param {number} idClient - L'identifiant du client associé à l'événement.
+     * @param {number} idAddress - L'identifiant de l'adresse de l'événement.
+     * @param {string} startingDate - La date de début de l'événement.
+     * @param {string} startingHour - L'heure de début de l'événement.
+     * @param {string} endingHour - L'heure de fin de l'événement.
+     * @param {number} idEmployee - L'identifiant de l'employé associé à l'événement.
+     * @param {function(Error, Event):void} callback - La fonction de rappel à exécuter après la création de l'événement.
+     */
+    static createEvent(
+        title,
+        description,
+        status,
+        isPlanned,
+        type,
+        idClient,
+        idAddress,
+        startingDate,
+        startingHour,
+        endingHour,
+        idEmployee,
+        callback
+    ) {
+        const query =
+            "INSERT INTO events (title, description, status, is_planned, type, id_client, id_address, starting_date, starting_hour, ending_hour, id_employee) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *";
+        const values = [
+            title,
+            description,
+            status,
+            isPlanned,
+            type,
+            idClient,
+            idAddress,
+            startingDate,
+            startingHour,
+            endingHour,
+            idEmployee,
+        ];
+
+        pool.query(query, values, (error, result) => {
+            if (error) {
+                return callback(error, null);
+            }
+
+            const row = result.rows[0];
+            const newEvent = new Event(
+                row.id_event,
+                row.title,
+                row.description,
+                row.status,
+                row.is_planned,
+                row.type,
+                row.id_client,
+                row.id_address,
+                row.starting_date,
+                row.starting_hour,
+                row.ending_hour,
+                row.id_employee
+            );
+
+            callback(null, newEvent);
+        });
+    }
+
+    /**
+     * Met à jour un événement existant.
+     * @param {number} idEvent - L'identifiant de l'événement.
+     * @param {string} title - Le titre de l'événement.
+     * @param {string} description - La description de l'événement.
+     * @param {number} status - Le statut de l'événement.
+     * @param {boolean} isPlanned - Indique si l'événement est planifié.
+     * @param {string} type - Le type de l'événement.
+     * @param {number} idClient - L'identifiant du client associé à l'événement.
+     * @param {number} idAddress - L'identifiant de l'adresse de l'événement.
+     * @param {string} startingDate - La date de début de l'événement.
+     * @param {string} startingHour - L'heure de début de l'événement.
+     * @param {string} endingHour - L'heure de fin de l'événement.
+     * @param {number} idEmployee - L'identifiant de l'employé associé à l'événement.
+     * @param {string} workToDo - Le travail à effectuer lors de l'événement.
+     * @param {function(Error, Event):void} callback - La fonction de rappel à exécuter après la mise à jour de l'événement.
+     */
+    static updateEvent(
+        idEvent,
+        title,
+        description,
+        status,
+        isPlanned,
+        type,
+        idClient,
+        idAddress,
+        startingDate,
+        startingHour,
+        endingHour,
+        idEmployee,
+        workToDo,
+        callback
+    ) {
+        const updateQuery = `
+            UPDATE events 
+            SET title = $1, description = $2, status = $3, is_planned = $4, type = $5, 
+                id_client = $6, id_address = $7, starting_date = $8, starting_hour = $9, 
+                ending_hour = $10, id_employee = $11, work_to_do = $12
+            WHERE id_event = $13
+            RETURNING *;
+        `;
+        const updateValues = [
+            title,
+            description,
+            status,
+            isPlanned,
+            type,
+            idClient,
+            idAddress,
+            startingDate,
+            startingHour,
+            endingHour,
+            idEmployee,
+            workToDo,
+            idEvent,
+        ];
+
+        pool.query(updateQuery, updateValues, (error, result) => {
+            if (error) {
+                return callback(error, null);
+            }
+            const row = result.rows[0];
+            const address = new Address(
+                row.id_address,
+                row.address,
+                row.zipcode,
+                row.city
+            );
+            const client = new Client(
+                row.id_client,
+                row.client_category,
+                row.client_firstname,
+                row.client_lastname,
+                row.email,
+                address,
+                row.phone_number
+            );
+            const employee = new Employee(
+                row.id_employee,
+                row.employee_firstname,
+                row.employee_lastname
+            );
+            const updatedEvent = new Event(
+                row.id_event,
+                row.title,
+                row.description,
+                row.status,
+                row.is_planned,
+                row.work_to_do,
+                row.type,
+                client,
+                address,
+                row.starting_date,
+                row.starting_hour,
+                row.ending_hour,
+                employee
+            );
+            callback(null, updatedEvent);
+        });
+    }
+
+    /**
+     * Supprime un événement par son identifiant.
+     * @param {number} idEvent - L'identifiant de l'événement.
+     * @param {function(Error, Event):void} callback - La fonction de rappel à exécuter après la suppression de l'événement.
+     */
+    static deleteEvent(idEvent, callback) {
+        const query = "DELETE FROM events WHERE id_event = $1 RETURNING *";
+        const values = [idEvent];
+        pool.query(query, values, (error, result) => {
+            if (error) {
+                return callback(error, null);
+            }
+            const row = result.rows[0];
+            const deletedEvent = new Event(
+                row.id_event,
+                row.title,
+                row.description,
+                row.status,
+                row.is_planned,
+                row.type,
+                row.id_client,
+                row.id_address,
+                row.starting_date,
+                row.starting_hour,
+                row.ending_hour,
+                row.id_employee
+            );
+            callback(null, deletedEvent);
+        });
+    }
+}
+
+// Voir si ces classes sont nécessaires ou si on peut tout faire avec la classe Event
+class Appointment extends Event {
+    /**
+     * Crée une instance d'Appointment.
+     * @param {number} idEvent - L'identifiant de l'événement.
+     * @param {string} title - Le titre de l'événement.
+     * @param {string} description - La description de l'événement.
+     * @param {number} status - Le statut de l'événement.
+     * @param {boolean} isPlanned - Indique si l'événement est planifié.
+     * @param {string} type - Le type de l'événement.
+     * @param {number} idClient - L'identifiant du client associé à l'événement.
+     * @param {number} idAddress - L'identifiant de l'adresse de l'événement.
+     * @param {string} startingDate - La date de début de l'événement.
+     * @param {string} startingHour - L'heure de début de l'événement.
+     * @param {string} endingHour - L'heure de fin de l'événement.
+     * @param {number} idEmployee - L'identifiant de l'employé associé à l'événement.
+     * @param {string} workToDo - Le travail à effectuer lors de l'événement.
+     * @param {boolean} planIntervention - Indique si une intervention est planifiée.
+     */
+    constructor(
+        idEvent,
+        title,
+        description,
+        status,
+        isPlanned,
+        type,
+        idClient,
+        idAddress,
+        startingDate,
+        startingHour,
+        endingHour,
+        idEmployee,
+        workToDo,
+        planIntervention
+    ) {
+        super(
+            idEvent,
+            title,
+            description,
+            status,
+            isPlanned,
+            type,
+            idClient,
+            idAddress,
+            startingDate,
+            startingHour,
+            endingHour,
+            idEmployee
+        );
+        this.workToDo = workToDo;
+        this.planIntervention = planIntervention;
+    }
+
+    /**
+     * Soumet le formulaire de rendez-vous.
+     * @param {number} idEvent - L'identifiant de l'événement.
+     * @param {string} workToDo - Le travail à effectuer lors de l'événement.
+     * @param {boolean} planIntervention - Indique si une intervention est planifiée.
+     * @param {function(Error, Appointment):void} callback - La fonction de rappel à exécuter après la soumission du formulaire.
+     */
+    static submitAppointmentForm(
+        idEvent,
+        workToDo,
+        planIntervention,
+        callback
+    ) {
+        const query =
+            "UPDATE events SET work_to_do = $1, plan_intervention = $2 WHERE idEvent = $3 RETURNING *";
+        const values = [workToDo, planIntervention, idEvent];
+        pool.query(query, values, (error, result) => {
+            if (error) {
+                return callback(error, null);
+            }
+            const row = result.rows[0];
+            const updatedAppointment = new Appointment(
+                row.id_event,
+                row.title,
+                row.description,
+                row.status,
+                row.is_planned,
+                row.type,
+                row.id_client,
+                row.id_address,
+                row.starting_date,
+                row.starting_hour,
+                row.ending_hour,
+                row.id_employee,
+                row.work_to_do,
+                row.plan_intervention
+            );
+            callback(null, updatedAppointment);
+        });
+    }
+}
+
+class Intervention extends Event {
+    /**
+     * Crée une instance d'Intervention.
+     * @param {number} idEvent - L'identifiant de l'événement.
+     * @param {string} title - Le titre de l'événement.
+     * @param {string} description - La description de l'événement.
+     * @param {number} status - Le statut de l'événement.
+     * @param {boolean} isPlanned - Indique si l'événement est planifié.
+     * @param {string} type - Le type de l'événement.
+     * @param {number} idClient - L'identifiant du client associé à l'événement.
+     * @param {number} idAddress - L'identifiant de l'adresse de l'événement.
+     * @param {string} startingDate - La date de début de l'événement.
+     * @param {string} startingHour - L'heure de début de l'événement.
+     * @param {string} endingHour - L'heure de fin de l'événement.
+     * @param {number} idEmployee - L'identifiant de l'employé associé à l'événement.
+     * @param {string} report - Le rapport de l'intervention.
+     * @param {boolean} planIntervention - Indique si une intervention est planifiée.
+     */
+    constructor(
+        idEvent,
+        title,
+        description,
+        status,
+        isPlanned,
+        type,
+        idClient,
+        idAddress,
+        startingDate,
+        startingHour,
+        endingHour,
+        idEmployee,
+        report,
+        planIntervention
+    ) {
+        super(
+            idEvent,
+            title,
+            description,
+            status,
+            isPlanned,
+            type,
+            idClient,
+            idAddress,
+            startingDate,
+            startingHour,
+            endingHour,
+            idEmployee
+        );
+        this.report = report; // Voir la dépendence à la classe report
+        this.planIntervention = planIntervention;
+    }
+
+    /**
+     * Soumet le formulaire d'intervention.
+     * @param {number} idEvent - L'identifiant de l'événement.
+     * @param {string} breakdown - La panne signalée.
+     * @param {string} workDone - Le travail effectué.
+     * @param {boolean} reschedule - Indique si une reprogrammation est nécessaire.
+     * @param {string} endingHour - L'heure de fin de l'intervention.
+     * @param {number} duration - La durée de l'intervention.
+     * @param {string} clientSignature - La signature du client.
+     * @param {string} employeeSignature - La signature de l'employé.
+     * @param {function(Error, Intervention):void} callback - La fonction de rappel à exécuter après la soumission du formulaire.
+     */
+    static submitInterventionForm(
+        idEvent,
+        breakdown,
+        workDone,
+        reschedule,
+        endingHour,
+        duration,
+        clientSignature,
+        employeeSignature,
+        callback
+    ) {
+        const query =
+            "INSERT INTO reports (breakdown, work_done, reschedule, ending_hour, duration, client_signature, employee_signature, id_event) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)";
+        const values = [
+            breakdown,
+            workDone,
+            reschedule,
+            endingHour,
+            duration,
+            clientSignature,
+            employeeSignature,
+            idEvent,
+        ];
+        pool.query(query, values, (error, result) => {
+            if (error) {
+                return callback(error, null);
+            }
+            const row = result.rows[0];
+            const updatedIntervention = new Intervention(
+                row.id_event,
+                row.title,
+                row.description,
+                row.status,
+                row.is_planned,
+                row.type,
+                row.id_client,
+                row.id_address,
+                row.starting_date,
+                row.starting_hour,
+                row.ending_hour,
+                row.id_employee,
+                row.report,
+                row.plan_intervention
+            );
+            callback(null, updatedIntervention);
+            // ajouter la condition "planIntervention" si coché crée directement l'intervention, créer un nouvel event avec la méthode createEvent
+        });
+    }
+}
+
+module.exports = Event;
+module.exports = Appointment;
+module.exports = Intervention;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Address.html">Address</a></li><li><a href="Appointment.html">Appointment</a></li><li><a href="Client.html">Client</a></li><li><a href="Company.html">Company</a></li><li><a href="Document.html">Document</a></li><li><a href="Employee.html">Employee</a></li><li><a href="Event.html">Event</a></li><li><a href="Intervention.html">Intervention</a></li><li><a href="Invoice.html">Invoice</a></li><li><a href="Notification.html">Notification</a></li><li><a href="Report.html">Report</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Mon Nov 04 2024 16:01:23 GMT+0100 (heure normale d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

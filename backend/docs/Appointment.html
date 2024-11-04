@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Company</title>
+    <title>JSDoc: Class: Appointment</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Company</h1>
+    <h1 class="page-title">Class: Appointment</h1>
 
     
 
@@ -28,9 +28,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Company<span class="signature">(idCompany, phoneNumber, idAddress, siret, vatNumber, capital, logo, databaseVersion)</span><span class="type-signature"></span></h2>
-        
-            <div class="class-description">Classe représentant une société.</div>
+        <h2><span class="attribs"><span class="type-signature"></span></span>Appointment<span class="signature">(idEvent, title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee, workToDo, planIntervention)</span><span class="type-signature"></span></h2>
         
     
 </header>
@@ -41,11 +39,9 @@
         
 
     
-    <h2>Constructor</h2>
-    
 
     
-    <h4 class="name" id="Company"><span class="type-signature"></span>new Company<span class="signature">(idCompany, phoneNumber, idAddress, siret, vatNumber, capital, logo, databaseVersion)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Appointment"><span class="type-signature"></span>new Appointment<span class="signature">(idEvent, title, description, status, isPlanned, type, idClient, idAddress, startingDate, startingHour, endingHour, idEmployee, workToDo, planIntervention)</span><span class="type-signature"></span></h4>
     
 
     
@@ -53,7 +49,7 @@
 
 
 <div class="description">
-    Crée une instance de Company.
+    Crée une instance d'Appointment.
 </div>
 
 
@@ -89,7 +85,7 @@
 
         <tr>
             
-                <td class="name"><code>idCompany</code></td>
+                <td class="name"><code>idEvent</code></td>
             
 
             <td class="type">
@@ -105,14 +101,14 @@
 
             
 
-            <td class="description last">L'ID de la société.</td>
+            <td class="description last">L'identifiant de l'événement.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>phoneNumber</code></td>
+                <td class="name"><code>title</code></td>
             
 
             <td class="type">
@@ -128,7 +124,122 @@
 
             
 
-            <td class="description last">Le numéro de téléphone de la société.</td>
+            <td class="description last">Le titre de l'événement.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>description</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">La description de l'événement.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>status</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Le statut de l'événement.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>isPlanned</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Indique si l'événement est planifié.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Le type de l'événement.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>idClient</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">L'identifiant du client associé à l'événement.</td>
         </tr>
 
     
@@ -141,7 +252,7 @@
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">number</span>
 
 
             
@@ -151,14 +262,14 @@
 
             
 
-            <td class="description last">L'adresse de la société.</td>
+            <td class="description last">L'identifiant de l'adresse de l'événement.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>siret</code></td>
+                <td class="name"><code>startingDate</code></td>
             
 
             <td class="type">
@@ -174,14 +285,14 @@
 
             
 
-            <td class="description last">Le numéro SIRET de la société.</td>
+            <td class="description last">La date de début de l'événement.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>vatNumber</code></td>
+                <td class="name"><code>startingHour</code></td>
             
 
             <td class="type">
@@ -197,14 +308,37 @@
 
             
 
-            <td class="description last">Le numéro de TVA de la société.</td>
+            <td class="description last">L'heure de début de l'événement.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>capital</code></td>
+                <td class="name"><code>endingHour</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">L'heure de fin de l'événement.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>idEmployee</code></td>
             
 
             <td class="type">
@@ -220,14 +354,14 @@
 
             
 
-            <td class="description last">Le capital de la société.</td>
+            <td class="description last">L'identifiant de l'employé associé à l'événement.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>logo</code></td>
+                <td class="name"><code>workToDo</code></td>
             
 
             <td class="type">
@@ -243,20 +377,20 @@
 
             
 
-            <td class="description last">Le logo de la société en base64.</td>
+            <td class="description last">Le travail à effectuer lors de l'événement.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>databaseVersion</code></td>
+                <td class="name"><code>planIntervention</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">boolean</span>
 
 
             
@@ -266,7 +400,7 @@
 
             
 
-            <td class="description last">La version de la base de données.</td>
+            <td class="description last">Indique si une intervention est planifiée.</td>
         </tr>
 
     
@@ -307,7 +441,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="company.data.js.html">company.data.js</a>, <a href="company.data.js.html#line7">line 7</a>
+        <a href="event.data.js.html">event.data.js</a>, <a href="event.data.js.html#line439">line 439</a>
     </li></ul></dd>
     
 
@@ -363,7 +497,7 @@
     
 
     
-    <h4 class="name" id=".createCompany"><span class="type-signature">(static) </span>createCompany<span class="signature">(company, callback)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".submitAppointmentForm"><span class="type-signature">(static) </span>submitAppointmentForm<span class="signature">(idEvent, workToDo, planIntervention, callback)</span><span class="type-signature"></span></h4>
     
 
     
@@ -371,7 +505,7 @@
 
 
 <div class="description">
-    Crée une nouvelle société.
+    Soumet le formulaire de rendez-vous.
 </div>
 
 
@@ -407,13 +541,13 @@
 
         <tr>
             
-                <td class="name"><code>company</code></td>
+                <td class="name"><code>idEvent</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">number</span>
 
 
             
@@ -423,7 +557,53 @@
 
             
 
-            <td class="description last">Les détails de la société.</td>
+            <td class="description last">L'identifiant de l'événement.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>workToDo</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Le travail à effectuer lors de l'événement.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>planIntervention</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Indique si une intervention est planifiée.</td>
         </tr>
 
     
@@ -446,7 +626,7 @@
 
             
 
-            <td class="description last">La fonction de rappel.</td>
+            <td class="description last">La fonction de rappel à exécuter après la soumission du formulaire.</td>
         </tr>
 
     
@@ -487,304 +667,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="company.data.js.html">company.data.js</a>, <a href="company.data.js.html#line44">line 44</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".getCompany"><span class="type-signature">(static) </span>getCompany<span class="signature">(callback)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Récupère les informations de la société.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>callback</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">La fonction de rappel.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="company.data.js.html">company.data.js</a>, <a href="company.data.js.html#line133">line 133</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".updateCompany"><span class="type-signature">(static) </span>updateCompany<span class="signature">(company, callback)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Met à jour les informations de la société.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>company</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Les détails de la société.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>callback</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">La fonction de rappel.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="company.data.js.html">company.data.js</a>, <a href="company.data.js.html#line177">line 177</a>
+        <a href="event.data.js.html">event.data.js</a>, <a href="event.data.js.html#line480">line 480</a>
     </li></ul></dd>
     
 
