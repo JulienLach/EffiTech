@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Company</title>
+    <title>JSDoc: Class: Address</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Company</h1>
+    <h1 class="page-title">Class: Address</h1>
 
     
 
@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Company<span class="signature">(idCompany, phoneNumber, idAddress, siret, vatNumber, capital, logo, databaseVersion)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>Address<span class="signature">(idAddress, address, city, zipcode, idClient)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">Classe représentant une société.</div>
+            <div class="class-description">Classe représentant une adresse.</div>
         
     
 </header>
@@ -45,7 +45,7 @@
     
 
     
-    <h4 class="name" id="Company"><span class="type-signature"></span>new Company<span class="signature">(idCompany, phoneNumber, idAddress, siret, vatNumber, capital, logo, databaseVersion)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Address"><span class="type-signature"></span>new Address<span class="signature">(idAddress, address, city, zipcode, idClient)</span><span class="type-signature"></span></h4>
     
 
     
@@ -53,7 +53,7 @@
 
 
 <div class="description">
-    Crée une instance de Company.
+    Crée une instance de Address.
 </div>
 
 
@@ -89,59 +89,13 @@
 
         <tr>
             
-                <td class="name"><code>idCompany</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">L'ID de la société.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>phoneNumber</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Le numéro de téléphone de la société.</td>
-        </tr>
-
-    
-
-        <tr>
-            
                 <td class="name"><code>idAddress</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">number</span>
 
 
             
@@ -151,14 +105,14 @@
 
             
 
-            <td class="description last">L'adresse de la société.</td>
+            <td class="description last">L'ID de l'adresse.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>siret</code></td>
+                <td class="name"><code>address</code></td>
             
 
             <td class="type">
@@ -174,14 +128,14 @@
 
             
 
-            <td class="description last">Le numéro SIRET de la société.</td>
+            <td class="description last">L'adresse postale.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>vatNumber</code></td>
+                <td class="name"><code>city</code></td>
             
 
             <td class="type">
@@ -197,14 +151,37 @@
 
             
 
-            <td class="description last">Le numéro de TVA de la société.</td>
+            <td class="description last">La ville.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>capital</code></td>
+                <td class="name"><code>zipcode</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Le code postal.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>idClient</code></td>
             
 
             <td class="type">
@@ -220,53 +197,7 @@
 
             
 
-            <td class="description last">Le capital de la société.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>logo</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Le logo de la société en base64.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>databaseVersion</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">La version de la base de données.</td>
+            <td class="description last">L'ID du client associé.</td>
         </tr>
 
     
@@ -307,7 +238,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="company.data.js.html">company.data.js</a>, <a href="company.data.js.html#line7">line 7</a>
+        <a href="address.data.js.html">address.data.js</a>, <a href="address.data.js.html#line6">line 6</a>
     </li></ul></dd>
     
 
@@ -363,7 +294,7 @@
     
 
     
-    <h4 class="name" id=".createCompany"><span class="type-signature">(static) </span>createCompany<span class="signature">(company, callback)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".createAddress"><span class="type-signature">(static) </span>createAddress<span class="signature">(address, city, zipcode, idClient, callback)</span><span class="type-signature"></span></h4>
     
 
     
@@ -371,7 +302,7 @@
 
 
 <div class="description">
-    Crée une nouvelle société.
+    Crée une nouvelle adresse.
 </div>
 
 
@@ -407,13 +338,13 @@
 
         <tr>
             
-                <td class="name"><code>company</code></td>
+                <td class="name"><code>address</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">string</span>
 
 
             
@@ -423,7 +354,76 @@
 
             
 
-            <td class="description last">Les détails de la société.</td>
+            <td class="description last">L'adresse.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>city</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">La ville.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>zipcode</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Le code postal.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>idClient</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">L'ID du client associé.</td>
         </tr>
 
     
@@ -487,7 +487,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="company.data.js.html">company.data.js</a>, <a href="company.data.js.html#line44">line 44</a>
+        <a href="address.data.js.html">address.data.js</a>, <a href="address.data.js.html#line55">line 55</a>
     </li></ul></dd>
     
 
@@ -523,7 +523,7 @@
     
 
     
-    <h4 class="name" id=".getCompany"><span class="type-signature">(static) </span>getCompany<span class="signature">(callback)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".getAddressById"><span class="type-signature">(static) </span>getAddressById<span class="signature">(idAddress, callback)</span><span class="type-signature"></span></h4>
     
 
     
@@ -531,7 +531,7 @@
 
 
 <div class="description">
-    Récupère les informations de la société.
+    Récupère une adresse par son ID.
 </div>
 
 
@@ -567,13 +567,13 @@
 
         <tr>
             
-                <td class="name"><code>callback</code></td>
+                <td class="name"><code>idAddress</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">function</span>
+<span class="param-type">number</span>
 
 
             
@@ -583,144 +583,7 @@
 
             
 
-            <td class="description last">La fonction de rappel.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="company.data.js.html">company.data.js</a>, <a href="company.data.js.html#line133">line 133</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".updateCompany"><span class="type-signature">(static) </span>updateCompany<span class="signature">(company, callback)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Met à jour les informations de la société.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>company</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Les détails de la société.</td>
+            <td class="description last">L'ID de l'adresse.</td>
         </tr>
 
     
@@ -784,7 +647,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="company.data.js.html">company.data.js</a>, <a href="company.data.js.html#line177">line 177</a>
+        <a href="address.data.js.html">address.data.js</a>, <a href="address.data.js.html#line28">line 28</a>
     </li></ul></dd>
     
 
