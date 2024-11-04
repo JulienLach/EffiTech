@@ -27,6 +27,7 @@ class CreateEventForm extends Component {
             description: "",
             isPlanned: false,
             selectedTab: "Intervention", // Par défaut sur l'onglet Intervention
+            searchQuery: "",
         };
 
         this.handleClientChange = this.handleClientChange.bind(this);
@@ -34,6 +35,7 @@ class CreateEventForm extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleTabChange = this.handleTabChange.bind(this);
+        this.handleSearchChange = this.handleSearchChange.bind(this);
     }
 
     componentDidMount() {
@@ -160,6 +162,10 @@ class CreateEventForm extends Component {
         this.setState({ selectedTab: tab });
     }
 
+    handleSearchChange(event) {
+        this.setState({ searchQuery: event.target.value });
+    }
+
     render() {
         const {
             clients,
@@ -172,7 +178,15 @@ class CreateEventForm extends Component {
             description,
             selectedEmployee,
             selectedTab,
+            searchQuery,
         } = this.state;
+
+        // Filtrer les clients en fonction de la recherche
+        const filteredClients = clients.filter((client) =>
+            `${client.firstname} ${client.lastname}`
+                .toLowerCase()
+                .includes(searchQuery.toLowerCase())
+        );
 
         return (
             <form className={`${styles.modal} ${styles.open}`}>
@@ -274,9 +288,15 @@ class CreateEventForm extends Component {
                     </div>
                     <div>
                         <label>Sélectionner un client *</label>
+                        <input
+                            type="text"
+                            placeholder="Rechercher un client"
+                            value={searchQuery}
+                            onChange={this.handleSearchChange}
+                        />
                         <select onChange={this.handleClientChange}>
                             <option value="">Sélectionner un client</option>
-                            {clients.map((client) => (
+                            {filteredClients.map((client) => (
                                 <option
                                     key={client.idClient}
                                     value={client.idClient}
