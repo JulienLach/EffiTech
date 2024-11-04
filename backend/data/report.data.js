@@ -50,8 +50,8 @@ class Report {
             startingHour,
             endingHour,
             duration,
-            clientSignature,
-            employeeSignature,
+            Buffer.from(clientSignature.split(",")[1], "base64"),
+            Buffer.from(employeeSignature.split(",")[1], "base64"),
             idEvent,
         ];
 
@@ -94,6 +94,17 @@ class Report {
                 return callback(error, null);
             }
             const row = result.rows[0];
+            // Convertir les signatures en base64
+            let clientSignatureBase64 = null;
+            let employeeSignatureBase64 = null;
+            if (row.client_signature) {
+                clientSignatureBase64 = row.client_signature.toString("base64");
+            }
+            if (row.employee_signature) {
+                employeeSignatureBase64 =
+                    row.employee_signature.toString("base64");
+            }
+
             const report = new Report(
                 row.id_report,
                 row.breakdown,
@@ -103,8 +114,8 @@ class Report {
                 row.starting_hour,
                 row.ending_hour,
                 row.duration,
-                row.client_signature,
-                row.employee_signature,
+                clientSignatureBase64,
+                employeeSignatureBase64,
                 row.id_event
             );
             callback(null, report);

@@ -46,6 +46,8 @@ class Canvas extends Component {
 
     stopDrawing() {
         this.isDrawing = false;
+        const signatureDataURL = this.canvasRef.current.toDataURL();
+        this.props.onSignatureChange(signatureDataURL);
     }
 
     render() {
