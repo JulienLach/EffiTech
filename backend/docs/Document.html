@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Company</title>
+    <title>JSDoc: Class: Document</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Company</h1>
+    <h1 class="page-title">Class: Document</h1>
 
     
 
@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Company<span class="signature">(idCompany, phoneNumber, idAddress, siret, vatNumber, capital, logo, databaseVersion)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>Document<span class="signature">(idDocument, title, brand, model, file)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">Classe représentant une société.</div>
+            <div class="class-description">Classe représentant un guide d'utilisation d'un équipement.</div>
         
     
 </header>
@@ -45,7 +45,7 @@
     
 
     
-    <h4 class="name" id="Company"><span class="type-signature"></span>new Company<span class="signature">(idCompany, phoneNumber, idAddress, siret, vatNumber, capital, logo, databaseVersion)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Document"><span class="type-signature"></span>new Document<span class="signature">(idDocument, title, brand, model, file)</span><span class="type-signature"></span></h4>
     
 
     
@@ -53,7 +53,7 @@
 
 
 <div class="description">
-    Crée une instance de Company.
+    Crée une instance de Document.
 </div>
 
 
@@ -89,7 +89,7 @@
 
         <tr>
             
-                <td class="name"><code>idCompany</code></td>
+                <td class="name"><code>idDocument</code></td>
             
 
             <td class="type">
@@ -105,14 +105,14 @@
 
             
 
-            <td class="description last">L'ID de la société.</td>
+            <td class="description last">L'ID du document.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>phoneNumber</code></td>
+                <td class="name"><code>title</code></td>
             
 
             <td class="type">
@@ -128,37 +128,14 @@
 
             
 
-            <td class="description last">Le numéro de téléphone de la société.</td>
+            <td class="description last">Le titre du document.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>idAddress</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">L'adresse de la société.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>siret</code></td>
+                <td class="name"><code>brand</code></td>
             
 
             <td class="type">
@@ -174,14 +151,14 @@
 
             
 
-            <td class="description last">Le numéro SIRET de la société.</td>
+            <td class="description last">La marque du document.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>vatNumber</code></td>
+                <td class="name"><code>model</code></td>
             
 
             <td class="type">
@@ -197,20 +174,20 @@
 
             
 
-            <td class="description last">Le numéro de TVA de la société.</td>
+            <td class="description last">Le modèle du document.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>capital</code></td>
+                <td class="name"><code>file</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">number</span>
+<span class="param-type">Buffer</span>
 
 
             
@@ -220,53 +197,7 @@
 
             
 
-            <td class="description last">Le capital de la société.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>logo</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Le logo de la société en base64.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>databaseVersion</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">La version de la base de données.</td>
+            <td class="description last">Le fichier du document.</td>
         </tr>
 
     
@@ -307,7 +238,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="company.data.js.html">company.data.js</a>, <a href="company.data.js.html#line7">line 7</a>
+        <a href="document.data.js.html">document.data.js</a>, <a href="document.data.js.html#line6">line 6</a>
     </li></ul></dd>
     
 
@@ -363,7 +294,7 @@
     
 
     
-    <h4 class="name" id=".createCompany"><span class="type-signature">(static) </span>createCompany<span class="signature">(company, callback)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".downloadDocument"><span class="type-signature">(static) </span>downloadDocument<span class="signature">(idDocument, callback)</span><span class="type-signature"></span></h4>
     
 
     
@@ -371,7 +302,7 @@
 
 
 <div class="description">
-    Crée une nouvelle société.
+    Télécharge un document par son ID.
 </div>
 
 
@@ -407,13 +338,13 @@
 
         <tr>
             
-                <td class="name"><code>company</code></td>
+                <td class="name"><code>idDocument</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">number</span>
 
 
             
@@ -423,7 +354,7 @@
 
             
 
-            <td class="description last">Les détails de la société.</td>
+            <td class="description last">L'ID du document.</td>
         </tr>
 
     
@@ -487,7 +418,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="company.data.js.html">company.data.js</a>, <a href="company.data.js.html#line44">line 44</a>
+        <a href="document.data.js.html">document.data.js</a>, <a href="document.data.js.html#line104">line 104</a>
     </li></ul></dd>
     
 
@@ -523,7 +454,7 @@
     
 
     
-    <h4 class="name" id=".getCompany"><span class="type-signature">(static) </span>getCompany<span class="signature">(callback)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".getAllDocuments"><span class="type-signature">(static) </span>getAllDocuments<span class="signature">(callback)</span><span class="type-signature"></span></h4>
     
 
     
@@ -531,7 +462,7 @@
 
 
 <div class="description">
-    Récupère les informations de la société.
+    Récupère tous les documents.
 </div>
 
 
@@ -624,7 +555,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="company.data.js.html">company.data.js</a>, <a href="company.data.js.html#line133">line 133</a>
+        <a href="document.data.js.html">document.data.js</a>, <a href="document.data.js.html#line27">line 27</a>
     </li></ul></dd>
     
 
@@ -660,7 +591,7 @@
     
 
     
-    <h4 class="name" id=".updateCompany"><span class="type-signature">(static) </span>updateCompany<span class="signature">(company, callback)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".getDocumentById"><span class="type-signature">(static) </span>getDocumentById<span class="signature">(idDocument, callback)</span><span class="type-signature"></span></h4>
     
 
     
@@ -668,7 +599,7 @@
 
 
 <div class="description">
-    Met à jour les informations de la société.
+    Récupère un document par son ID.
 </div>
 
 
@@ -704,13 +635,13 @@
 
         <tr>
             
-                <td class="name"><code>company</code></td>
+                <td class="name"><code>idDocument</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">number</span>
 
 
             
@@ -720,7 +651,7 @@
 
             
 
-            <td class="description last">Les détails de la société.</td>
+            <td class="description last">L'ID du document.</td>
         </tr>
 
     
@@ -784,7 +715,259 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="company.data.js.html">company.data.js</a>, <a href="company.data.js.html#line177">line 177</a>
+        <a href="document.data.js.html">document.data.js</a>, <a href="document.data.js.html#line51">line 51</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".importDocument"><span class="type-signature">(static) </span>importDocument<span class="signature">(idDocument, title, brand, model, file, callback)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Importe un nouveau document.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>idDocument</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">L'ID du document.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>title</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Le titre du document.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>brand</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">La marque du document.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>model</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Le modèle du document.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>file</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Buffer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Le fichier du document.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">La fonction de rappel.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="document.data.js.html">document.data.js</a>, <a href="document.data.js.html#line79">line 79</a>
     </li></ul></dd>
     
 

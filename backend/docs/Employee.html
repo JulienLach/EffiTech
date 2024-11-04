@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Client</title>
+    <title>JSDoc: Class: Employee</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Client</h1>
+    <h1 class="page-title">Class: Employee</h1>
 
     
 
@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Client<span class="signature">(idClient, category, firstname, lastname, email, address, phoneNumber, company)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>Employee<span class="signature">(idEmployee, firstname, lastname, job, phoneNumber, email, isAdmin, password, speciality)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">Classe représentant un client.</div>
+            <div class="class-description">Classe représentant un employé.</div>
         
     
 </header>
@@ -45,7 +45,7 @@
     
 
     
-    <h4 class="name" id="Client"><span class="type-signature"></span>new Client<span class="signature">(idClient, category, firstname, lastname, email, address, phoneNumber, company)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Employee"><span class="type-signature"></span>new Employee<span class="signature">(idEmployee, firstname, lastname, job, phoneNumber, email, isAdmin, password, speciality)</span><span class="type-signature"></span></h4>
     
 
     
@@ -53,7 +53,7 @@
 
 
 <div class="description">
-    Crée une instance de Client.
+    Crée une instance de Employee.
 </div>
 
 
@@ -89,7 +89,7 @@
 
         <tr>
             
-                <td class="name"><code>idClient</code></td>
+                <td class="name"><code>idEmployee</code></td>
             
 
             <td class="type">
@@ -105,30 +105,7 @@
 
             
 
-            <td class="description last">L'ID du client.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>category</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">La catégorie du client.</td>
+            <td class="description last">L'ID de l'employé.</td>
         </tr>
 
     
@@ -151,7 +128,7 @@
 
             
 
-            <td class="description last">Le prénom du client.</td>
+            <td class="description last">Le prénom de l'employé.</td>
         </tr>
 
     
@@ -174,14 +151,14 @@
 
             
 
-            <td class="description last">Le nom de famille du client.</td>
+            <td class="description last">Le nom de famille de l'employé.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>email</code></td>
+                <td class="name"><code>job</code></td>
             
 
             <td class="type">
@@ -197,30 +174,7 @@
 
             
 
-            <td class="description last">L'email du client.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>address</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">L'adresse du client.</td>
+            <td class="description last">Le poste de l'employé.</td>
         </tr>
 
     
@@ -243,14 +197,14 @@
 
             
 
-            <td class="description last">Le numéro de téléphone du client.</td>
+            <td class="description last">Le numéro de téléphone de l'employé.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>company</code></td>
+                <td class="name"><code>email</code></td>
             
 
             <td class="type">
@@ -266,7 +220,76 @@
 
             
 
-            <td class="description last">La société du client.</td>
+            <td class="description last">L'email de l'employé.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>isAdmin</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Indique si l'employé est administrateur.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>password</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Le mot de passe de l'employé.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>speciality</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">La spécialité de l'employé.</td>
         </tr>
 
     
@@ -307,7 +330,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.data.js.html">client.data.js</a>, <a href="client.data.js.html#line7">line 7</a>
+        <a href="employee.data.js.html">employee.data.js</a>, <a href="employee.data.js.html#line8">line 8</a>
     </li></ul></dd>
     
 
@@ -363,7 +386,7 @@
     
 
     
-    <h4 class="name" id=".createClient"><span class="type-signature">(static) </span>createClient<span class="signature">(category, company, firstname, lastname, email, addressDetails, phoneNumber, callback)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".createEmployee"><span class="type-signature">(static) </span>createEmployee<span class="signature">(firstname, lastname, job, phoneNumber, email, isAdmin<span class="signature-attributes">opt</span>, password<span class="signature-attributes">opt</span>, speciality, callback)</span><span class="type-signature"></span></h4>
     
 
     
@@ -371,7 +394,448 @@
 
 
 <div class="description">
-    Crée un nouveau client.
+    Crée un nouvel employé.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>firstname</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Le prénom de l'employé.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>lastname</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Le nom de famille de l'employé.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>job</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Le poste de l'employé.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>phoneNumber</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Le numéro de téléphone de l'employé.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>email</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">L'email de l'employé.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>isAdmin</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last">Indique si l'employé est administrateur.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>password</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    ""
+                
+                </td>
+            
+
+            <td class="description last">Le mot de passe de l'employé.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>speciality</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">La spécialité de l'employé.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">La fonction de rappel.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="employee.data.js.html">employee.data.js</a>, <a href="employee.data.js.html#line110">line 110</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".getAllEmployees"><span class="type-signature">(static) </span>getAllEmployees<span class="signature">(callback)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Récupère tous les employés.
 </div>
 
 
@@ -407,13 +871,13 @@
 
         <tr>
             
-                <td class="name"><code>category</code></td>
+                <td class="name"><code>callback</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">function</span>
 
 
             
@@ -423,14 +887,288 @@
 
             
 
-            <td class="description last">La catégorie du client.</td>
+            <td class="description last">La fonction de rappel.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="employee.data.js.html">employee.data.js</a>, <a href="employee.data.js.html#line47">line 47</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".getEmployeeById"><span class="type-signature">(static) </span>getEmployeeById<span class="signature">(idEmployee, callback)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Récupère un employé par son ID.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>idEmployee</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">L'ID de l'employé.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>company</code></td>
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">La fonction de rappel.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="employee.data.js.html">employee.data.js</a>, <a href="employee.data.js.html#line75">line 75</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".loginEmployee"><span class="type-signature">(static) </span>loginEmployee<span class="signature">(email, password, callback)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Connecte un employé.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>email</code></td>
             
 
             <td class="type">
@@ -446,7 +1184,190 @@
 
             
 
-            <td class="description last">La société du client.</td>
+            <td class="description last">L'email de l'employé.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>password</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Le mot de passe de l'employé.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">La fonction de rappel.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="employee.data.js.html">employee.data.js</a>, <a href="employee.data.js.html#line236">line 236</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".updateEmployee"><span class="type-signature">(static) </span>updateEmployee<span class="signature">(idEmployee, firstname, lastname, job, phoneNumber, email, isAdmin, password, speciality, callback)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Met à jour un employé.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>idEmployee</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">L'ID de l'employé.</td>
         </tr>
 
     
@@ -469,7 +1390,7 @@
 
             
 
-            <td class="description last">Le prénom du client.</td>
+            <td class="description last">Le prénom de l'employé.</td>
         </tr>
 
     
@@ -492,14 +1413,14 @@
 
             
 
-            <td class="description last">Le nom de famille du client.</td>
+            <td class="description last">Le nom de famille de l'employé.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>email</code></td>
+                <td class="name"><code>job</code></td>
             
 
             <td class="type">
@@ -515,30 +1436,7 @@
 
             
 
-            <td class="description last">L'email du client.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>addressDetails</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Les détails de l'adresse du client.</td>
+            <td class="description last">Le poste de l'employé.</td>
         </tr>
 
     
@@ -561,575 +1459,7 @@
 
             
 
-            <td class="description last">Le numéro de téléphone du client.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>callback</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">La fonction de rappel.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.data.js.html">client.data.js</a>, <a href="client.data.js.html#line118">line 118</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".getAllClients"><span class="type-signature">(static) </span>getAllClients<span class="signature">(callback)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Récupère tous les clients.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>callback</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">La fonction de rappel.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.data.js.html">client.data.js</a>, <a href="client.data.js.html#line43">line 43</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".getClientById"><span class="type-signature">(static) </span>getClientById<span class="signature">(idClient, callback)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Récupère un client par son ID.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>idClient</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">L'ID du client.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>callback</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">La fonction de rappel.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.data.js.html">client.data.js</a>, <a href="client.data.js.html#line77">line 77</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".updateClient"><span class="type-signature">(static) </span>updateClient<span class="signature">(clientData, callback)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Met à jour un client.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>clientData</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Les données du client.
-                <h6>Properties</h6>
-                
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>idClient</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">L'ID du client.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>category</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">La catégorie du client.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>firstname</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Le prénom du client.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>lastname</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Le nom de famille du client.</td>
+            <td class="description last">Le numéro de téléphone de l'employé.</td>
         </tr>
 
     
@@ -1152,14 +1482,37 @@
 
             
 
-            <td class="description last">L'email du client.</td>
+            <td class="description last">L'email de l'employé.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>phoneNumber</code></td>
+                <td class="name"><code>isAdmin</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Indique si l'employé est administrateur.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>password</code></td>
             
 
             <td class="type">
@@ -1175,14 +1528,14 @@
 
             
 
-            <td class="description last">Le numéro de téléphone du client.</td>
+            <td class="description last">Le mot de passe de l'employé.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>company</code></td>
+                <td class="name"><code>speciality</code></td>
             
 
             <td class="type">
@@ -1198,37 +1551,7 @@
 
             
 
-            <td class="description last">La société du client.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>addressDetails</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Les détails de l'adresse du client.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
+            <td class="description last">La spécialité de l'employé.</td>
         </tr>
 
     
@@ -1292,7 +1615,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.data.js.html">client.data.js</a>, <a href="client.data.js.html#line219">line 219</a>
+        <a href="employee.data.js.html">employee.data.js</a>, <a href="employee.data.js.html#line185">line 185</a>
     </li></ul></dd>
     
 
