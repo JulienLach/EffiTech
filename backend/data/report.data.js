@@ -1,6 +1,23 @@
 const pool = require("../config/db.config"); // Importer la configuration de la base de données
 
+/**
+ * Classe représentant un rapport d'intervention.
+ */
 class Report {
+    /**
+     * Crée une instance de Report.
+     * @param {number} idReport - L'identifiant du rapport.
+     * @param {string} breakdown - La panne signalée.
+     * @param {string} workDone - Le travail effectué.
+     * @param {boolean} reschedule - Indique si une reprogrammation est nécessaire.
+     * @param {string} startingDate - La date de début de l'intervention.
+     * @param {string} startingHour - L'heure de début de l'intervention.
+     * @param {string} endingHour - L'heure de fin de l'intervention.
+     * @param {number} duration - La durée de l'intervention.
+     * @param {string} clientSignature - La signature du client.
+     * @param {string} employeeSignature - La signature de l'employé.
+     * @param {number} idEvent - L'identifiant de l'événement associé.
+     */
     constructor(
         idReport,
         breakdown,
@@ -27,6 +44,20 @@ class Report {
         this.idEvent = idEvent;
     }
 
+    /**
+     * Crée un nouveau rapport.
+     * @param {string} breakdown - La panne signalée.
+     * @param {string} workDone - Le travail effectué.
+     * @param {boolean} reschedule - Indique si une reprogrammation est nécessaire.
+     * @param {string} startingDate - La date de début de l'intervention.
+     * @param {string} startingHour - L'heure de début de l'intervention.
+     * @param {string} endingHour - L'heure de fin de l'intervention.
+     * @param {number} duration - La durée de l'intervention.
+     * @param {string} clientSignature - La signature du client.
+     * @param {string} employeeSignature - La signature de l'employé.
+     * @param {number} idEvent - L'identifiant de l'événement associé.
+     * @param {function(Error, Report):void} callback - La fonction de rappel à exécuter après la création du rapport.
+     */
     static createReport(
         breakdown,
         workDone,
@@ -86,6 +117,11 @@ class Report {
         });
     }
 
+    /**
+     * Récupère un rapport par l'identifiant de l'événement associé.
+     * @param {number} idEvent - L'identifiant de l'événement associé.
+     * @param {function(Error, Report):void} callback - La fonction de rappel à exécuter après la récupération du rapport.
+     */
     static getReportById(idEvent, callback) {
         const query = "SELECT * FROM reports WHERE id_event = $1";
         const values = [idEvent];

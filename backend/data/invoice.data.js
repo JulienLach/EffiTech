@@ -1,6 +1,18 @@
 const pool = require("../config/db.config");
 
+/**
+ * Classe représentant une facture.
+ */
 class Invoice {
+    /**
+     * Crée une instance d'Invoice.
+     * @param {number} idInvoice - L'identifiant de la facture.
+     * @param {number} idClient - L'identifiant du client associé à la facture.
+     * @param {number} amountIncludingTax - Le montant TTC de la facture.
+     * @param {number} amountWithoutTax - Le montant HT de la facture.
+     * @param {string} invoiceDate - La date de la facture.
+     * @param {string} file - Le fichier de la facture.
+     */
     constructor(
         idInvoice,
         idClient,
@@ -17,6 +29,10 @@ class Invoice {
         this.file = file;
     }
 
+    /**
+     * Récupère toutes les factures.
+     * @param {function(Error, Invoice[]):void} callback - La fonction de rappel à exécuter après la récupération des factures.
+     */
     static getAllInvoices(callback) {
         const query = "SELECT * FROM invoices";
         pool.query(query, (error, result) => {
@@ -37,6 +53,11 @@ class Invoice {
         });
     }
 
+    /**
+     * Récupère une facture par son identifiant.
+     * @param {number} idInvoice - L'identifiant de la facture.
+     * @param {function(Error, Invoice):void} callback - La fonction de rappel à exécuter après la récupération de la facture.
+     */
     static getInvoiceById(idInvoice, callback) {
         const query = "SELECT * FROM invoices WHERE idInvoice = $1";
         const values = [idInvoice];
@@ -57,6 +78,15 @@ class Invoice {
         });
     }
 
+    /**
+     * Importe une nouvelle facture.
+     * @param {number} idClient - L'identifiant du client associé à la facture.
+     * @param {number} amountIncludingTax - Le montant TTC de la facture.
+     * @param {number} amountWithoutTax - Le montant HT de la facture.
+     * @param {string} invoiceDate - La date de la facture.
+     * @param {string} file - Le fichier de la facture.
+     * @param {function(Error, Invoice):void} callback - La fonction de rappel à exécuter après l'importation de la facture.
+     */
     static importInvoice(
         idClient,
         amountIncludingTax,

@@ -3,7 +3,26 @@ const Client = require("./client.data");
 const Address = require("./address.data");
 const Employee = require("./employee.data");
 
+/**
+ * Classe représentant un événement.
+ */
 class Event {
+    /**
+     * Crée une instance d'Event.
+     * @param {number} idEvent - L'identifiant de l'événement.
+     * @param {string} title - Le titre de l'événement.
+     * @param {string} description - La description de l'événement.
+     * @param {number} status - Le statut de l'événement.
+     * @param {boolean} isPlanned - Indique si l'événement est planifié.
+     * @param {string} type - Le type de l'événement.
+     * @param {Object} client - Le client associé à l'événement.
+     * @param {string} address - L'adresse de l'événement.
+     * @param {string} startingDate - La date de début de l'événement.
+     * @param {string} startingHour - L'heure de début de l'événement.
+     * @param {string} endingHour - L'heure de fin de l'événement.
+     * @param {Object} employee - L'employé associé à l'événement.
+     * @param {string} workToDo - Le travail à effectuer lors de l'événement.
+     */
     constructor(
         idEvent,
         title,
@@ -34,6 +53,10 @@ class Event {
         this.workToDo = workToDo;
     }
 
+    /**
+     * Met à jour les statuts des événements en fonction de la date actuelle.
+     * @param {function(Error):void} callback - La fonction de rappel à exécuter après la mise à jour.
+     */
     static updateEventStatuses(callback) {
         const today = new Date().toISOString().split("T")[0]; // Obtenir la date du jour au format YYYY-MM-DD
 
@@ -57,7 +80,10 @@ class Event {
         });
     }
 
-    // Fonction pour récupérer tous les événements
+    /**
+     * Récupère tous les événements.
+     * @param {function(Error, Event[]):void} callback - La fonction de rappel à exécuter après la récupération des événements.
+     */
     static getAllEvents(callback) {
         Client.getAllClients(function (error, clients) {
             if (error) {
@@ -131,6 +157,11 @@ class Event {
         });
     }
 
+    /**
+     * Récupère un événement par son identifiant.
+     * @param {number} idEvent - L'identifiant de l'événement.
+     * @param {function(Error, Event):void} callback - La fonction de rappel à exécuter après la récupération de l'événement.
+     */
     static getEventById(idEvent, callback) {
         const query = `
             SELECT 
@@ -183,7 +214,21 @@ class Event {
         });
     }
 
-    // appeler les données pour adresse, client et employé directement dans le formulaire de création d'événement au clique du bouton dans le front
+    /**
+     * Crée un nouvel événement.
+     * @param {string} title - Le titre de l'événement.
+     * @param {string} description - La description de l'événement.
+     * @param {number} status - Le statut de l'événement.
+     * @param {boolean} isPlanned - Indique si l'événement est planifié.
+     * @param {string} type - Le type de l'événement.
+     * @param {number} idClient - L'identifiant du client associé à l'événement.
+     * @param {number} idAddress - L'identifiant de l'adresse de l'événement.
+     * @param {string} startingDate - La date de début de l'événement.
+     * @param {string} startingHour - L'heure de début de l'événement.
+     * @param {string} endingHour - L'heure de fin de l'événement.
+     * @param {number} idEmployee - L'identifiant de l'employé associé à l'événement.
+     * @param {function(Error, Event):void} callback - La fonction de rappel à exécuter après la création de l'événement.
+     */
     static createEvent(
         title,
         description,
@@ -239,6 +284,23 @@ class Event {
         });
     }
 
+    /**
+     * Met à jour un événement existant.
+     * @param {number} idEvent - L'identifiant de l'événement.
+     * @param {string} title - Le titre de l'événement.
+     * @param {string} description - La description de l'événement.
+     * @param {number} status - Le statut de l'événement.
+     * @param {boolean} isPlanned - Indique si l'événement est planifié.
+     * @param {string} type - Le type de l'événement.
+     * @param {number} idClient - L'identifiant du client associé à l'événement.
+     * @param {number} idAddress - L'identifiant de l'adresse de l'événement.
+     * @param {string} startingDate - La date de début de l'événement.
+     * @param {string} startingHour - L'heure de début de l'événement.
+     * @param {string} endingHour - L'heure de fin de l'événement.
+     * @param {number} idEmployee - L'identifiant de l'employé associé à l'événement.
+     * @param {string} workToDo - Le travail à effectuer lors de l'événement.
+     * @param {function(Error, Event):void} callback - La fonction de rappel à exécuter après la mise à jour de l'événement.
+     */
     static updateEvent(
         idEvent,
         title,
@@ -323,6 +385,11 @@ class Event {
         });
     }
 
+    /**
+     * Supprime un événement par son identifiant.
+     * @param {number} idEvent - L'identifiant de l'événement.
+     * @param {function(Error, Event):void} callback - La fonction de rappel à exécuter après la suppression de l'événement.
+     */
     static deleteEvent(idEvent, callback) {
         const query = "DELETE FROM events WHERE id_event = $1 RETURNING *";
         const values = [idEvent];
@@ -352,6 +419,23 @@ class Event {
 
 // Voir si ces classes sont nécessaires ou si on peut tout faire avec la classe Event
 class Appointment extends Event {
+    /**
+     * Crée une instance d'Appointment.
+     * @param {number} idEvent - L'identifiant de l'événement.
+     * @param {string} title - Le titre de l'événement.
+     * @param {string} description - La description de l'événement.
+     * @param {number} status - Le statut de l'événement.
+     * @param {boolean} isPlanned - Indique si l'événement est planifié.
+     * @param {string} type - Le type de l'événement.
+     * @param {number} idClient - L'identifiant du client associé à l'événement.
+     * @param {number} idAddress - L'identifiant de l'adresse de l'événement.
+     * @param {string} startingDate - La date de début de l'événement.
+     * @param {string} startingHour - L'heure de début de l'événement.
+     * @param {string} endingHour - L'heure de fin de l'événement.
+     * @param {number} idEmployee - L'identifiant de l'employé associé à l'événement.
+     * @param {string} workToDo - Le travail à effectuer lors de l'événement.
+     * @param {boolean} planIntervention - Indique si une intervention est planifiée.
+     */
     constructor(
         idEvent,
         title,
@@ -386,7 +470,13 @@ class Appointment extends Event {
         this.planIntervention = planIntervention;
     }
 
-    // Méthode spécifique à la sous classe
+    /**
+     * Soumet le formulaire de rendez-vous.
+     * @param {number} idEvent - L'identifiant de l'événement.
+     * @param {string} workToDo - Le travail à effectuer lors de l'événement.
+     * @param {boolean} planIntervention - Indique si une intervention est planifiée.
+     * @param {function(Error, Appointment):void} callback - La fonction de rappel à exécuter après la soumission du formulaire.
+     */
     static submitAppointmentForm(
         idEvent,
         workToDo,
@@ -423,6 +513,23 @@ class Appointment extends Event {
 }
 
 class Intervention extends Event {
+    /**
+     * Crée une instance d'Intervention.
+     * @param {number} idEvent - L'identifiant de l'événement.
+     * @param {string} title - Le titre de l'événement.
+     * @param {string} description - La description de l'événement.
+     * @param {number} status - Le statut de l'événement.
+     * @param {boolean} isPlanned - Indique si l'événement est planifié.
+     * @param {string} type - Le type de l'événement.
+     * @param {number} idClient - L'identifiant du client associé à l'événement.
+     * @param {number} idAddress - L'identifiant de l'adresse de l'événement.
+     * @param {string} startingDate - La date de début de l'événement.
+     * @param {string} startingHour - L'heure de début de l'événement.
+     * @param {string} endingHour - L'heure de fin de l'événement.
+     * @param {number} idEmployee - L'identifiant de l'employé associé à l'événement.
+     * @param {string} report - Le rapport de l'intervention.
+     * @param {boolean} planIntervention - Indique si une intervention est planifiée.
+     */
     constructor(
         idEvent,
         title,
@@ -457,7 +564,18 @@ class Intervention extends Event {
         this.planIntervention = planIntervention;
     }
 
-    // méthode spécifique à la sous classe
+    /**
+     * Soumet le formulaire d'intervention.
+     * @param {number} idEvent - L'identifiant de l'événement.
+     * @param {string} breakdown - La panne signalée.
+     * @param {string} workDone - Le travail effectué.
+     * @param {boolean} reschedule - Indique si une reprogrammation est nécessaire.
+     * @param {string} endingHour - L'heure de fin de l'intervention.
+     * @param {number} duration - La durée de l'intervention.
+     * @param {string} clientSignature - La signature du client.
+     * @param {string} employeeSignature - La signature de l'employé.
+     * @param {function(Error, Intervention):void} callback - La fonction de rappel à exécuter après la soumission du formulaire.
+     */
     static submitInterventionForm(
         idEvent,
         breakdown,
