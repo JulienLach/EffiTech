@@ -5,31 +5,31 @@
 }
 
 .card {
-    margin: 20px;
+    margin: 1.25em;
     width: 50%;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 1.25em;
+    border-radius: 0.625em;
+    box-shadow: 0 0 0.625em rgba(0, 0, 0, 0.1);
     background-color: white;
 }
 
 h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
+    font-size: 1.5em;
+    margin-bottom: 1.25em;
 }
 
 .interventionInfo {
     display: flex;
     justify-content: start;
-    margin-bottom: 20px;
-    color: #3E3E3E;
+    margin-bottom: 1.25em;
+    color: #3e3e3e;
     font-weight: 600;
 }
 
 .separation {
-    height: 1px;
-    background-color: #3E3E3E;
-    margin: 30px 20px 20px 20px;
+    height: 0.063em;
+    background-color: #3e3e3e;
+    margin: 1.875em 1.25em 1.25em 1.25em;
 }
 
 .alignButton {
@@ -38,22 +38,22 @@ h1 {
     align-items: center;
 }
 
-.alignButton button{
+.alignButton button {
     width: auto;
-    height: 30px;
+    height: 1.875em;
     background-color: white;
-    border-radius: 5px;
-    border: 1px solid #919191;
+    border-radius: 0.313em;
+    border: 0.063em solid #919191;
     cursor: pointer;
     font-weight: 600;
 }
 
-.alignButton button:hover{
+.alignButton button:hover {
     width: auto;
-    height: 30px;
+    height: 1.875em;
     background-color: rgb(163, 163, 163);
-    border-radius: 5px;
-    border: 1px solid #a5a4a4;
+    border-radius: 0.313em;
+    border: 0.063em solid #a5a4a4;
     cursor: pointer;
 }
 
@@ -63,9 +63,9 @@ h1 {
 
 .pdf {
     width: 50%;
-    height: 300px;
+    height: 18.75em;
 }
 
 .documentLink {
-    margin-bottom: 20px;
+    margin-bottom: 1.25em;
 }

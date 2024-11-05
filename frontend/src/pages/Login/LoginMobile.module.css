@@ -4,48 +4,39 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 1.5em;
-    height: 100vh;
-    background: linear-gradient(160deg, white 50%, #c93c2c 50%);
+    height: 100%;
 }
 
-/* CSS of the card for the login form */
-.loginFormCard {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 1.25em;
-    border: #e7e7e7 0.063em solid;
-    background-color: white;
-    width: 28.438em;
-    height: auto;
-    box-shadow: rgba(0, 0, 0, 0.1) 0 0.625em 1.75em,
-        rgba(0, 0, 0, 0.22) 0 0.625em 0.625em;
-    padding: 1em;
+.logoMobile {
+    text-align: center;
+    height: 18em;
+    width: 18em;
 }
 
 /* CSS title style font */
-.titleCard {
-    font-size: 1.875em;
+.title {
+    text-align: center;
+    font-size: 2em;
     font-weight: 500;
 }
 
 /* CSS for input & label */
 .labelInput {
-    font-size: 1.25em;
+    font-size: 1.4em;
     font-weight: 500;
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin-bottom: 0.938em;
+    margin: 0.9em auto;
 }
 
 /* CSS for input comportement */
 .labelInput input {
     margin: 0 1.875em;
-    padding: 0.625em;
+    padding: 0.7em;
     border: 0.063em solid #cccccc;
     border-radius: 0.625em;
+    font-size: 0.7em;
 }
 
 /* CSS for the label comportement */
@@ -72,6 +63,7 @@
     font-size: 1.25em;
     font-weight: 500;
     cursor: pointer;
+    margin-top: 5em;
 }
 
 /* CSS for paragraph style */
@@ -84,22 +76,6 @@
 /* CSS for link style */
 .formElements a {
     text-align: center;
-    font-size: 1.125em;
+    font-size: 1em;
     margin-bottom: 1.25em;
-}
-
-/* CSS */
-/* Version */
-/* Mobile */
-
-.containerMobile {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
-}
-
-.logoMobile {
-    height: 20em;
-    width: 20em;
 }

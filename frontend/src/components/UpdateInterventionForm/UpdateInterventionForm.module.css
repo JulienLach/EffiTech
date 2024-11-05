@@ -5,7 +5,7 @@
     width: 30vw;
     height: 100vh;
     background-color: white;
-    box-shadow: -3px 0 3px rgba(0, 0, 0, 0.2);
+    box-shadow: -0.188em 0 0.188em rgba(0, 0, 0, 0.2);
     z-index: 1000;
     padding: 1.5em;
     border-radius: 1em;
@@ -30,7 +30,7 @@
 
 .modalFooter button {
     padding: 0.4em;
-    border: 1px solid #ccc;
+    border: 0.063em solid #ccc;
     border-radius: 0.3em;
     width: 30%;
     font-size: 1em;
@@ -43,5 +43,5 @@
 
 .separator {
     margin: 1em 0;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 0.063em solid #ccc;
 }
