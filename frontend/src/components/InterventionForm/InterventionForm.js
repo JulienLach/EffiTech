@@ -61,8 +61,8 @@ class InterventionForm extends Component {
 
     getStatusIndicator(status) {
         const style = {
-            padding: "2px 10px",
-            borderRadius: "8px",
+            padding: ".125em .625em",
+            borderRadius: ".5em",
             color: "white",
             fontSize: "0.8em",
             fontWeight: "500",

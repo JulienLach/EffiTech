@@ -55,7 +55,7 @@ class Canvas extends Component {
                 width={340}
                 height={80}
                 style={{
-                    border: "1px solid grey",
+                    border: ".063em solid grey",
                     margin: "0 auto",
                 }}
             />

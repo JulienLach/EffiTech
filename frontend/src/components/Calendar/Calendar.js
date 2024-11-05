@@ -12,10 +12,10 @@ const localizer = momentLocalizer(moment);
 function eventStyleGetter() {
     const style = {
         backgroundColor: "#C93C2C",
-        borderRadius: "5px",
+        borderRadius: "0.313em",
         opacity: 0.9,
         color: "white",
-        border: "0px",
+        border: "0em",
     };
     return {
         style,

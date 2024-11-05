@@ -36,7 +36,7 @@ class FilterBar extends Component {
                 >
                     <i
                         className="fa-solid fa-plus"
-                        style={{ marginRight: "8px" }}
+                        style={{ marginRight: "0.5em" }}
                     ></i>
                     Créer un évènement
                 </button>
