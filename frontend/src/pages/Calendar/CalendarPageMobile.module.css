@@ -6,6 +6,7 @@ body {
 .container {
     display: flex;
     flex-direction: column;
+    width: 100vw;
 }
 
 /* placement et style du titre de la pge  */
@@ -14,7 +15,6 @@ body {
     font-weight: 550;
     margin: 1em 0 1em 0.5em;
     background-color: red;
-    width: auto;
 }
 
 /* fixation du top side (titre, filter bar et evenement) */
@@ -26,29 +26,33 @@ body {
     z-index: 1;
 }
 
-.stickyThead {
-    position: sticky;
-    top: 16.56em;
-    background-color: white;
-    z-index: 1;
+/*CSS event cards*/
+.eventCard {
+    display: flex;
+    margin: 1em;
+    box-shadow: 0 0.3em 0.3em rgba(0, 0, 0, 0.247);
+    border-radius: 1em;
 }
 
-/* placement du titre 'evennement' */
-h3 {
-    font-size: 1.25em;
-    font-weight: 600;
-    margin-top: 1.25em;
+.sideColor {
+    width: 1em;
+    background-color: #91cb94;
+    margin: 0;
+    border-radius: 1em 0 0 1em;
 }
 
-th,
-td {
-    text-align: start;
-    width: 100vw; /* Définit une largeur fixe pour les cellules */
-    padding: 0.625em; /* Augmente l'espace à l'intérieur des cellules */
-    border-bottom: 0.06em solid #d3d3d3;
+.leftSide {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0.5em;
+    margin-right: auto;
 }
 
-a {
-    color: #c93c2c;
-    text-decoration: underline #c93c2c;
+.intStatus {
+}
+
+.type {
+    font-size: 1.2em;
+    font-weight: 700;
 }

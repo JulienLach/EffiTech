@@ -11,14 +11,9 @@ class TemplateGlobalMobile extends Component {
                 <div className={styles.header}>
                     <div className={styles.headerDiv}>
                         <div className={styles.logo}>
-                            <img src={logo} alt="Effitech Logo" />
+                            <h1>Calendrier</h1>
                         </div>
                         <div className={styles.headerRight}>
-                            <div>
-                                <button className={styles.planifierButton}>
-                                    <i className="fa-solid fa-plus"></i>Créer
-                                </button>
-                            </div>
                             <div className={styles.notificationIcon}>
                                 <img
                                     src={bellIcon}
@@ -33,44 +28,7 @@ class TemplateGlobalMobile extends Component {
                     </div>
                 </div>
 
-                {/* Partie sidebar */}
-                <div className={styles.sidebarAndOrange}>
-                    <div className={styles.sidebar}>
-                        <ul>
-                            <li>
-                                <i className="fa-solid fa-calendar"></i>
-                                <a href="/calendar">Calendrier</a>
-                            </li>
-                            <li>
-                                <i className="fa-solid fa-user"></i>
-                                <a href="/clients">Clients</a>
-                            </li>
-                            <li>
-                                <i className="fa-solid fa-users"></i>
-                                <a href="/employees">Employés</a>
-                            </li>
-                            <li>
-                                <i className="fa-solid fa-building"></i>
-                                <a href="/company">Société</a>
-                            </li>
-                            <li>
-                                <i className="fa-solid fa-file-lines"></i>
-                                <a href="/invoices">Facture/Devis</a>
-                            </li>
-                            <li>
-                                <i className="fa-solid fa-folder"></i>
-                                <a href="/documents">Documents</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div className={styles.sideOrange}>
-                        <i className="fa-solid fa-caret-down"></i>
-                    </div>
-                </div>
-
-                {/* partie container à copier pour les nouvelles pages */}
-                {/* <div className={styles.container}>
-                </div> */}
+                {/* Partie bar navigation bottom */}
             </>
         );
     }
