@@ -51,7 +51,9 @@ class TemplateGlobal extends Component {
                             </li>
                             <li
                                 className={
-                                    currentPath === "/clients"
+                                    currentPath === "/clients" ||
+                                    currentPath === "/client-details/" ||
+                                    currentPath === "/client-form"
                                         ? styles.active
                                         : ""
                                 }
@@ -61,7 +63,9 @@ class TemplateGlobal extends Component {
                             </li>
                             <li
                                 className={
-                                    currentPath === "/employees"
+                                    currentPath === "/employees" ||
+                                    currentPath === "/employee-details/" ||
+                                    currentPath === "/employee-form"
                                         ? styles.active
                                         : ""
                                 }
@@ -71,7 +75,8 @@ class TemplateGlobal extends Component {
                             </li>
                             <li
                                 className={
-                                    currentPath === "/company"
+                                    currentPath === "/company" ||
+                                    currentPath === "/company-details"
                                         ? styles.active
                                         : ""
                                 }
