@@ -156,3 +156,14 @@ i {
     transform: rotate(90deg);
     color: white;
 }
+
+.active {
+    padding: 0.3em;
+    background-color: #c93c2c;
+    border-radius: 0.3em;
+    color: #fff;
+}
+
+.active a {
+    color: white !important;
+}
