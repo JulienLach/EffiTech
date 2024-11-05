@@ -218,3 +218,10 @@ body {
     font-weight: 500;
     cursor: pointer;
 }
+
+.modalFilter {
+    display: flex;
+    align-items: start;
+    margin: 1em 4em;
+    border: 1px solid red;
+}

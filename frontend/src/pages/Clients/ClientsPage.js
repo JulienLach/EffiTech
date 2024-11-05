@@ -20,6 +20,7 @@ class ClientsPage extends Component {
             isModalOpen: false,
             category: "Particulier",
             company: "",
+            isTypeModalOpen: false,
         };
         this.handleButtonClick = this.handleButtonClick.bind(this);
         this.openModal = this.openModal.bind(this);
@@ -85,6 +86,14 @@ class ClientsPage extends Component {
         }
     }
 
+    openTypeModal = () => {
+        this.setState({ isTypeModalOpen: true });
+    };
+
+    closeTypeModal = () => {
+        this.setState({ isTypeModalOpen: false });
+    };
+
     openModal() {
         this.setState({ isModalOpen: true });
     }
@@ -128,7 +137,7 @@ class ClientsPage extends Component {
     }
 
     render() {
-        const { clients, isModalOpen } = this.state;
+        const { clients, isModalOpen, isTypeModalOpen } = this.state;
 
         return (
             <>
@@ -146,10 +155,45 @@ class ClientsPage extends Component {
                                     placeholder="Recherche"
                                 />
                             </div>
-                            <div className={styles.typeFilter}>
+                            <div
+                                className={styles.typeFilter}
+                                onClick={this.openTypeModal}
+                            >
                                 <i className="fa-solid fa-filter"></i>
                                 <p>Type</p>
                             </div>
+                            {isTypeModalOpen && (
+                                <div className={styles.modal}>
+                                    <div className={styles.filter}>
+                                        <div>
+                                            <input
+                                                type="radio"
+                                                id="particuliers"
+                                                name="clientType"
+                                                value="Particuliers"
+                                            />
+                                            <label htmlFor="particuliers">
+                                                Particuliers
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <input
+                                                type="radio"
+                                                id="professionnels"
+                                                name="clientType"
+                                                value="Professionnels"
+                                            />
+                                            <label htmlFor="professionnels">
+                                                Professionnels
+                                            </label>
+                                        </div>
+                                        <button onClick={this.closeTypeModal}>
+                                            Annuler
+                                        </button>
+                                        <button>Filter</button>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                         <div className={styles.rightPart}>
                             <button
