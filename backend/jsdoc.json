@@ -1,0 +1,20 @@
+{
+    "source": {
+        "include": [
+            "./data/address.data.js",
+            "./data/client.data.js",
+            "./data/company.data.js",
+            "./data/document.data.js",
+            "./data/employee.data.js",
+            "./data/event.data.js",
+            "./data/invoice.data.js",
+            "./data/notification.data.js",
+            "./data/report.data.js"
+        ],
+        "includePattern": ".+\\.js(doc|x)?$",
+        "excludePattern": "(^|\\/|\\\\)_"
+    },
+    "opts": {
+        "destination": "./docs"
+    }
+}

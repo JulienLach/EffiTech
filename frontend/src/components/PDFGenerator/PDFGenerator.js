@@ -6,6 +6,7 @@ import {
     Document,
     StyleSheet,
     pdf,
+    Image,
 } from "@react-pdf/renderer";
 
 const styles = StyleSheet.create({
@@ -65,7 +66,7 @@ const styles = StyleSheet.create({
     },
 });
 
-const PDFGenerator = ({ report }) => {
+const PDFGenerator = ({ report, reportData }) => {
     const [pdfBlob, setPdfBlob] = useState(null);
 
     useEffect(() => {
@@ -110,8 +111,18 @@ const PDFGenerator = ({ report }) => {
                             Durée de l’intervention : {report.duration} heures
                         </Text>
                         <View style={styles.signature}>
-                            <Text>{report.clientSignature}</Text>
-                            <Text>{report.employeeSignature}</Text>
+                            <Text style={styles.dateAndHour}>
+                                Signature du client :
+                            </Text>
+                            <Image
+                                src={`data:image/png;base64,${reportData.clientSignature}`}
+                            />
+                            <Text style={styles.dateAndHour}>
+                                Signature du technicien :
+                            </Text>
+                            <Image
+                                src={`data:image/png;base64,${reportData.employeeSignature}`}
+                            />
                         </View>
                     </Page>
                 </Document>
@@ -124,7 +135,7 @@ const PDFGenerator = ({ report }) => {
         };
 
         generatePdf();
-    }, [report]);
+    }, [report, reportData]);
 
     return (
         <div>

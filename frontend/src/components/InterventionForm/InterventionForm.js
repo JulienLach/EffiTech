@@ -260,7 +260,7 @@ class InterventionForm extends Component {
                                     return null;
                                 }
                             } else if (event.type === "Rendez-vous") {
-                                if (event.status !== 5) {
+                                if (event.status !== 5 && event.status !== 1) {
                                     return (
                                         <button type="submit">
                                             Remplir le questionnaire

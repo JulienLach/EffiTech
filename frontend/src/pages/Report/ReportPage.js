@@ -120,7 +120,10 @@ class ReportPage extends Component {
                             </div>
                         </div>
                         {reportDetails && (
-                            <PDFGenerator report={reportDetails} />
+                            <PDFGenerator
+                                report={reportDetails}
+                                reportData={reportData}
+                            />
                         )}
                     </div>
                 </div>
