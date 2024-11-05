@@ -5,6 +5,8 @@ import bellIcon from "../../images/notificationBell.svg";
 
 class TemplateGlobal extends Component {
     render() {
+        const currentPath = window.location.pathname;
+
         return (
             <>
                 {/* Partie header */}
@@ -37,27 +39,68 @@ class TemplateGlobal extends Component {
                 <div className={styles.sidebarAndOrange}>
                     <div className={styles.sidebar}>
                         <ul>
-                            <li>
+                            <li
+                                className={
+                                    currentPath === "/calendar"
+                                        ? styles.active
+                                        : ""
+                                }
+                            >
                                 <i className="fa-solid fa-calendar"></i>
                                 <a href="/calendar">Calendrier</a>
                             </li>
-                            <li>
+                            <li
+                                className={
+                                    currentPath === "/clients" ||
+                                    currentPath === "/client-details/" ||
+                                    currentPath === "/client-form"
+                                        ? styles.active
+                                        : ""
+                                }
+                            >
                                 <i className="fa-solid fa-user"></i>
                                 <a href="/clients">Clients</a>
                             </li>
-                            <li>
+                            <li
+                                className={
+                                    currentPath === "/employees" ||
+                                    currentPath === "/employee-details/" ||
+                                    currentPath === "/employee-form"
+                                        ? styles.active
+                                        : ""
+                                }
+                            >
                                 <i className="fa-solid fa-users"></i>
                                 <a href="/employees">Employés</a>
                             </li>
-                            <li>
+                            <li
+                                className={
+                                    currentPath === "/company" ||
+                                    currentPath === "/company-details"
+                                        ? styles.active
+                                        : ""
+                                }
+                            >
                                 <i className="fa-solid fa-building"></i>
                                 <a href="/company">Société</a>
                             </li>
-                            <li>
+                            <li
+                                className={
+                                    currentPath === "/invoices"
+                                        ? styles.active
+                                        : ""
+                                }
+                            >
                                 <i className="fa-solid fa-file-lines"></i>
                                 <a href="/invoices">Facture/Devis</a>
                             </li>
-                            <li>
+                            <li
+                                className={
+                                    currentPath === "/documents"
+                                        ? styles.active
+                                        : ""
+                                }
+                            >
                                 <i className="fa-solid fa-folder"></i>
                                 <a href="/documents">Documents</a>
                             </li>

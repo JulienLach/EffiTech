@@ -1,54 +1,54 @@
 .container {
     display: flex;
     flex-direction: column;
-    margin: 0 20px 0 250px;
+    margin: 0 1.25em 0 15.625em;
 }
 
 form {
-    margin-bottom: 30px;
+    margin-bottom: 1.875em;
 }
 
 /* img { A changer ça écrase l'image du logo de la page login et createaccount
-    width: 150px;
-    height: 150px;
+    width: 9.375em;
+    height: 9.375em;
 } */
 
 .separation {
     background-color: black;
-    height: 1px;
+    height: 0;
     width: 75%;
-    margin-top: 20px;
+    margin-top: 1.25em;
 }
 
 /* CSS for input & label */
 .labelInput {
-    font-size: 20px;
+    font-size: 1.25em;
     font-weight: 500;
     display: flex;
     flex-direction: column;
     width: 30vw;
-    margin-bottom: 10px;
+    margin-bottom: 0.625em;
 }
 
 /* CSS for input comportement */
 .labelInput input {
-    margin: 0px 30px;
-    padding: 10px;
-    border: 1px solid #cccccc;
-    border-radius: 10px;
+    margin: 0 1.875em;
+    padding: 0.625em;
+    border: 0.0625em solid #cccccc;
+    border-radius: 0.625em;
 }
 
 /* CSS for the label comportement */
 .labelInput label {
-    margin: 0px 30px;
-    padding: 5px 0px;
+    margin: 0 1.875em;
+    padding: 0.313em 0;
 }
 
 /* CSS for button positioning */
 .buttonPosition {
     display: flex;
     width: 30vw;
-    margin-bottom: 20px;
+    margin-bottom: 1.25em;
     margin-top: 1.2em;
 }
 
@@ -56,11 +56,11 @@ form {
 .cancelButton {
     background-color: #ababab;
     margin: auto;
-    padding: 10px;
+    padding: 0.625em;
     border: none;
-    border-radius: 10px;
+    border-radius: 0.625em;
     color: white;
-    font-size: 18px;
+    font-size: 1.125em;
     font-weight: 500;
     cursor: pointer;
 }
@@ -69,11 +69,11 @@ form {
 .submitButton {
     background-color: #c93c2c;
     margin: auto;
-    padding: 10px;
+    padding: 0.625em;
     border: none;
-    border-radius: 10px;
+    border-radius: 0.625em;
     color: white;
-    font-size: 18px;
+    font-size: 1.125em;
     font-weight: 500;
     cursor: pointer;
 }

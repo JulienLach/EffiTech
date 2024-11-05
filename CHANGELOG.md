@@ -6,24 +6,56 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-## [0.0.2] (2024-10-11)
+# [0.1.1] (2024-11-05)
 
-### Added
+## Changes
 
--   Added appointment alongside intervention object
+-   Add client and employee signatures to report
+-   Add search bar to find client on create event form
+-   Add API documentation generated with JSDOC intalled with npm
+-   Add JEST installed with npm
+
+## Fixes
+
+-   Hide fill form button for unplaned appointment
+
+# [0.1.0] (2024-11-03)
+
+## Changes
+
+-   Full events CRUD done both with appointments and interventions
+    -   A completed intervention links directly to a validated report
+-   Add default sorting by dates for events on calendar page
+-   Add a new company
+-   Full employees CRUD done
+-   Full clients CRUD done
+-   Add calendar paging
+
+## Fixes
+
+-   Various wrongly formatted dates and time in intervention, appointment, and report pages leading to wrong dates on CRUDs
+-   Displayed buttons based on conditions in the intervention form
+-   Company logo was not converted to base64 string
+-   Various data methods missing properties for CRUDs
+
+# [0.0.2] (2024-10-11)
+
+## Changes
+
+-   Add appointment alongside intervention object
     -   Create an appointment
     -   Fill appointment form
     -   Submit appointment form to add "work to do" to event object
--   Added JWT authentication to login page with token stored in cookie
--   Added create account function
--   Added company, employees and clients main views and all details views
--   Added react-big-calendar npm package to add a calendar view to calendar page
--   Added ESLint and Prettier configs for code quality and formatting
--   Refactored all functional components to Class components
+-   Add JWT authentication to login page with token stored in cookie
+-   Add create account function
+-   Add company, employees and clients main views and all details views
+-   Add react-big-calendar npm package to add a calendar view to calendar page
+-   Add ESLint and Prettier configs for code quality and formatting
+-   Refactor all functional components to Class components
 
-## [0.0.1] (2024-09-06)
+# [0.0.1] (2024-09-06)
 
-### Added
+## Changes
 
 -   Create an event
 -   Fill intervention form

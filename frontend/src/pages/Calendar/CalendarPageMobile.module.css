@@ -1,0 +1,58 @@
+body {
+    box-sizing: border-box;
+    margin: 0;
+}
+/* placement du container */
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+}
+
+/* placement et style du titre de la pge  */
+.pageTitle {
+    font-size: 1.3em;
+    font-weight: 550;
+    margin: 1em 0 1em 0.5em;
+    background-color: red;
+}
+
+/* fixation du top side (titre, filter bar et evenement) */
+.fixedTopSide {
+    height: 11.5em;
+    position: sticky;
+    width: 100%;
+    background-color: white;
+    z-index: 1;
+}
+
+/*CSS event cards*/
+.eventCard {
+    display: flex;
+    margin: 1em;
+    box-shadow: 0 0.3em 0.3em rgba(0, 0, 0, 0.247);
+    border-radius: 1em;
+}
+
+.sideColor {
+    width: 1em;
+    background-color: #91cb94;
+    margin: 0;
+    border-radius: 1em 0 0 1em;
+}
+
+.leftSide {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0.5em;
+    margin-right: auto;
+}
+
+.intStatus {
+}
+
+.type {
+    font-size: 1.2em;
+    font-weight: 700;
+}

@@ -1,0 +1,69 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* HEADER */
+.header {
+    height: 5em;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 0.25em 0.25em rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 1em 1em;
+    width: 100vw;
+}
+
+/* Header.css */
+.headerDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.625em 1.25em;
+}
+
+.headerRight {
+    display: flex;
+    align-items: center;
+}
+
+.notificationBell {
+    height: 1.2em;
+}
+
+.notificationIcon {
+    position: relative;
+    margin-right: 1.25em;
+}
+
+.notificationCount {
+    display: flex;
+    position: absolute;
+    top: -0.625em;
+    right: -0.625em;
+    background-color: red;
+    color: white;
+    border-radius: 1em;
+    height: 1.25em;
+    width: 1.25em;
+    font-size: 0.75em;
+    min-width: 1.25em;
+    align-items: center;
+    justify-content: center;
+}
+
+.profileBubble {
+    top: -0.625em;
+    right: -0.625em;
+    background-color: #007bff;
+    color: white;
+    border-radius: 2em;
+    width: 2em;
+    height: 2em;
+    font-size: 1.2em;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

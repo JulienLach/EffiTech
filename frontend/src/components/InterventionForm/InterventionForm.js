@@ -61,8 +61,8 @@ class InterventionForm extends Component {
 
     getStatusIndicator(status) {
         const style = {
-            padding: "2px 10px",
-            borderRadius: "8px",
+            padding: ".125em .625em",
+            borderRadius: ".5em",
             color: "white",
             fontSize: "0.8em",
             fontWeight: "500",
@@ -250,7 +250,11 @@ class InterventionForm extends Component {
                                         </button>
                                     );
                                 } else {
-                                    if (event.status !== 1) {
+                                    if (
+                                        event.status !== 1 &&
+                                        event.startingHour !== null &&
+                                        event.endingHour !== null
+                                    ) {
                                         return (
                                             <button type="submit">
                                                 Remplir le rapport
@@ -260,7 +264,12 @@ class InterventionForm extends Component {
                                     return null;
                                 }
                             } else if (event.type === "Rendez-vous") {
-                                if (event.status !== 5 && event.status !== 1) {
+                                if (
+                                    event.status !== 5 &&
+                                    event.status !== 1 &&
+                                    event.startingHour !== null &&
+                                    event.endingHour !== null
+                                ) {
                                     return (
                                         <button type="submit">
                                             Remplir le questionnaire

@@ -57,60 +57,73 @@ class EmployeesPage extends Component {
 
     render() {
         const { employees, isModalOpen } = this.state;
-
+        const screenType = window.navigator.userAgentData;
         return (
             <>
-                <TemplateGlobal />
-                <div className={styles.container}>
-                    <h1 className={styles.pageTitle}>Employés</h1>
-                    <div>
-                        <button
-                            className={styles.addEmployee}
-                            onClick={this.openModal}
-                        >
-                            <i className="fa-solid fa-plus"></i>Ajouter un
-                            employé
-                        </button>
-                    </div>
-                    <div className={styles.cardContainer}>
-                        {employees.map((employee) => (
-                            <div
-                                key={employee.idEmployee}
-                                className={styles.card}
-                            >
-                                <div className={styles.profilPicture}>
-                                    <img
-                                        src={profilPicture}
-                                        alt="Profil picture"
-                                    />
-                                </div>
-                                <div className={styles.profilInfo}>
-                                    <p className={styles.name}>
-                                        {employee.firstname} {employee.lastname}
-                                    </p>
-                                    <p className={styles.job}>{employee.job}</p>
-                                    <p className={styles.info}>
-                                        {employee.phoneNumber}
-                                    </p>
-                                    <p className={styles.info}>
-                                        {employee.email}
-                                    </p>
-                                    <div className={styles.moreInfo}>
-                                        <button
-                                            type="button"
-                                            onClick={() =>
-                                                this.handleButtonClick(employee)
-                                            }
-                                        >
-                                            Voir détails
-                                        </button>
-                                        <i className="fa-solid fa-arrow-right"></i>
-                                    </div>
-                                </div>
+                {screenType.mobile ? (
+                    <>
+                        <h1>Mobile</h1>
+                    </>
+                ) : (
+                    <>
+                        <TemplateGlobal />
+                        <div className={styles.container}>
+                            <h1 className={styles.pageTitle}>Employés</h1>
+                            <div>
+                                <button
+                                    className={styles.addEmployee}
+                                    onClick={this.openModal}
+                                >
+                                    <i className="fa-solid fa-plus"></i>Ajouter
+                                    un employé
+                                </button>
                             </div>
-                        ))}
-                    </div>
-                </div>
+                            <div className={styles.cardContainer}>
+                                {employees.map((employee) => (
+                                    <div
+                                        key={employee.idEmployee}
+                                        className={styles.card}
+                                    >
+                                        <div className={styles.profilPicture}>
+                                            <img
+                                                src={profilPicture}
+                                                alt="Profil picture"
+                                            />
+                                        </div>
+                                        <div className={styles.profilInfo}>
+                                            <p className={styles.name}>
+                                                {employee.firstname}{" "}
+                                                {employee.lastname}
+                                            </p>
+                                            <p className={styles.job}>
+                                                {employee.job}
+                                            </p>
+                                            <p className={styles.info}>
+                                                {employee.phoneNumber}
+                                            </p>
+                                            <p className={styles.info}>
+                                                {employee.email}
+                                            </p>
+                                            <div className={styles.moreInfo}>
+                                                <button
+                                                    type="button"
+                                                    onClick={() =>
+                                                        this.handleButtonClick(
+                                                            employee
+                                                        )
+                                                    }
+                                                >
+                                                    Voir détails
+                                                </button>
+                                                <i className="fa-solid fa-arrow-right"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </>
+                )}
                 {isModalOpen && (
                     <Modal onClose={this.closeModal}>
                         <EmployeeForm />

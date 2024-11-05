@@ -147,7 +147,7 @@ i {
     width: 0.75em;
     border-top-right-radius: 0.625em;
     border-bottom-right-radius: 0.625em;
-    /* box-shadow: 5px 0 1px -2px rgba(0, 0, 0, 0.1); */
+    /* box-shadow: .313em 0 .063em -.125em rgba(0, 0, 0, 0.1); */
     cursor: pointer;
 }
 
@@ -155,4 +155,15 @@ i {
 .sideOrange i {
     transform: rotate(90deg);
     color: white;
+}
+
+.active {
+    padding: 0.3em;
+    background-color: #c93c2c;
+    border-radius: 0.3em;
+    color: #fff;
+}
+
+.active a {
+    color: white !important;
 }

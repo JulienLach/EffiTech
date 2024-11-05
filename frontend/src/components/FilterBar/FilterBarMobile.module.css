@@ -1,3 +1,9 @@
+.filterDiv {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
 /* style for each filter button */
 .typeFilter {
     font-size: 1em;
@@ -8,14 +14,7 @@
     display: inline-flex;
     align-items: center;
     padding: 0 1.25em;
-    margin-right: 0.625em;
-}
-
-/* style when you hover over the filter button */
-.typeFilter:hover {
-    color: white;
-    cursor: pointer;
-    background-color: #c93c2c;
+    margin: 1.2em auto;
 }
 
 /* icon position */
