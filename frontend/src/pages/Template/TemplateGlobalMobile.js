@@ -23,9 +23,9 @@ class TemplateGlobalMobile extends Component {
                 {/* Partie bar navigation bottom */}
                 <div className={styles.navbarBottom}>
                     <i className={`fas fa-home ${styles.navbarIcon}`}></i>
-                    <i className={`fas fa-search ${styles.navbarIcon}`}></i>
-                    <i className={`fas fa-bell ${styles.navbarIcon}`}></i>
-                    <i className={`fas fa-user ${styles.navbarIcon}`}></i>
+                    <i className={`fas fa-calendar ${styles.navbarIcon}`}></i>
+                    <i className={`fas fa-wallet ${styles.navbarIcon}`}></i>
+                    <i className={`fas fa-users ${styles.navbarIcon}`}></i>
                 </div>
             </>
         );
