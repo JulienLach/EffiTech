@@ -245,7 +245,12 @@ class CalendarPage extends Component {
                                 {currentEvents.map((event) => (
                                     <div className={stylesMobile.eventCard}>
                                         <div
-                                            className={stylesMobile.sideColor}
+                                            className={
+                                                event.client.category ===
+                                                "Professionnel"
+                                                    ? stylesMobile.sideColorPro
+                                                    : stylesMobile.sideColorPart
+                                            }
                                         ></div>
                                         <div className={stylesMobile.leftSide}>
                                             <div>
@@ -273,7 +278,6 @@ class CalendarPage extends Component {
                                                 </div>
                                                 <p>{event.client.category}</p>
                                                 <p>
-                                                    {event.client.category} -{" "}
                                                     {event.client.firstname}{" "}
                                                     {event.client.lastname}
                                                 </p>
