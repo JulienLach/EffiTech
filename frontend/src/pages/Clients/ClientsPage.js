@@ -20,7 +20,8 @@ class ClientsPage extends Component {
             isModalOpen: false,
             category: "Particulier",
             company: "",
-            isTypeModalOpen: false,
+            isCategeoryModalOpen: false,
+            selectedCategory: "All",
         };
         this.handleButtonClick = this.handleButtonClick.bind(this);
         this.openModal = this.openModal.bind(this);
@@ -87,11 +88,11 @@ class ClientsPage extends Component {
     }
 
     openTypeModal = () => {
-        this.setState({ isTypeModalOpen: true });
+        this.setState({ isCategeoryModalOpen: true });
     };
 
     closeTypeModal = () => {
-        this.setState({ isTypeModalOpen: false });
+        this.setState({ isCategeoryModalOpen: false });
     };
 
     openModal() {
@@ -103,7 +104,7 @@ class ClientsPage extends Component {
     }
 
     handleCategoryChange(event) {
-        this.setState({ category: event.target.value });
+        this.setState({ selectedCategory: event.target.value });
     }
 
     handleSubmit(event) {
@@ -137,7 +138,16 @@ class ClientsPage extends Component {
     }
 
     render() {
-        const { clients, isModalOpen, isTypeModalOpen } = this.state;
+        const { clients, isModalOpen, isCategeoryModalOpen, selectedCategory } =
+            this.state;
+
+        // Filtrer les clients en fonction de la catégorie sélectionnée
+        const filteredClients =
+            selectedCategory === "All"
+                ? clients
+                : clients.filter(
+                      (client) => client.category === selectedCategory
+                  );
 
         return (
             <>
@@ -162,15 +172,39 @@ class ClientsPage extends Component {
                                 <i className="fa-solid fa-filter"></i>
                                 <p>Type</p>
                             </div>
-                            {isTypeModalOpen && (
-                                <div className={styles.modal}>
-                                    <div className={styles.filter}>
+                            {isCategeoryModalOpen && (
+                                <div className={styles.modalFilter}>
+                                    <div>
                                         <div>
                                             <input
                                                 type="radio"
-                                                id="particuliers"
+                                                id="all"
                                                 name="clientType"
-                                                value="Particuliers"
+                                                value="All"
+                                                checked={
+                                                    this.state
+                                                        .selectedCategory ===
+                                                    "All"
+                                                }
+                                                onChange={
+                                                    this.handleCategoryChange
+                                                }
+                                            />
+                                            <label htmlFor="all">Tous</label>
+                                        </div>
+                                        <div>
+                                            <input
+                                                type="radio"
+                                                name="clientType"
+                                                value="Particulier"
+                                                checked={
+                                                    this.state
+                                                        .selectedCategory ===
+                                                    "Particulier"
+                                                }
+                                                onChange={
+                                                    this.handleCategoryChange
+                                                }
                                             />
                                             <label htmlFor="particuliers">
                                                 Particuliers
@@ -179,9 +213,16 @@ class ClientsPage extends Component {
                                         <div>
                                             <input
                                                 type="radio"
-                                                id="professionnels"
                                                 name="clientType"
-                                                value="Professionnels"
+                                                value="Professionnel"
+                                                checked={
+                                                    this.state
+                                                        .selectedCategory ===
+                                                    "Professionnel"
+                                                }
+                                                onChange={
+                                                    this.handleCategoryChange
+                                                }
                                             />
                                             <label htmlFor="professionnels">
                                                 Professionnels
@@ -190,7 +231,9 @@ class ClientsPage extends Component {
                                         <button onClick={this.closeTypeModal}>
                                             Annuler
                                         </button>
-                                        <button>Filter</button>
+                                        <button onClick={this.closeTypeModal}>
+                                            Filter
+                                        </button>
                                     </div>
                                 </div>
                             )}
@@ -218,7 +261,7 @@ class ClientsPage extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {clients.map((client) => (
+                                {filteredClients.map((client) => (
                                     <tr key={client.idClient}>
                                         <td>C-{client.idClient}</td>
                                         <td>
@@ -264,7 +307,7 @@ class ClientsPage extends Component {
                         </table>
                     </div>
                 </div>
-                {this.state.isModalOpen && (
+                {isModalOpen && (
                     <Modal onClose={this.closeModal}>
                         <h2>Nouveau client</h2>
                         <form
