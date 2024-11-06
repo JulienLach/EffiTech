@@ -232,185 +232,50 @@ class CalendarPage extends Component {
                         <div>
                             <TemplateGlobalMobile />
                             <div className={stylesMobile.container}>
-                                <div className={stylesMobile.fixedTopSide}>
-                                    <div className={stylesMobile.filterBar}>
-                                        <FilterBar />
-                                    </div>
+                                <div className={stylesMobile.filterBar}>
+                                    <FilterBar />
                                 </div>
-                                <div className={stylesMobile.eventCard}>
-                                    <div className={stylesMobile.sideColor}></div>
-
-                                    <div className={stylesMobile.leftSide}>
-                                        <div>
-                                            <div className={stylesMobile.intStatus}>
-                                                <p className={stylesMobile.type}>Intervention</p>
-                                                <p>Status</p>
-                                            </div>
-                                            <p>Type - Name</p>
-                                        </div>
-                                    </div>
-                                    <div className={stylesMobile.rightSide}>
-                                        <p>Date & Hour</p>
-                                        <div className={stylesMobile.idInter}>
-                                            <p>Id</p>
-                                            <p className={stylesMobile.initiale}>Intervenants</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                {/* <div className={stylesMobile.listView}>
-                                    <div>
-                                        <button
-                                            className={stylesMobile.viewButton}
-                                            onClick={() =>
-                                                this.toggleView("calendar")
-                                            }
-                                        >
-                                            Calendrier
-                                        </button>
-                                        <button
-                                            className={stylesMobile.viewButton}
-                                            onClick={() =>
-                                                this.toggleView("list")
-                                            }
-                                        >
-                                            Liste
-                                        </button>
-                                    </div>
-                                    {view === "calendar" ? (
-                                        <Calendar events={calendarEvents} />
-                                    ) : (
-                                        <div>
-                                            <table>
-                                                <thead
-                                                    className={
-                                                        stylesMobile.stickyThead
-                                                    }
-                                                >
-                                                    <tr>
-                                                        <th>Client</th>
-                                                        <th>Référence</th>
-                                                        <th>Type</th>
-                                                        <th>Titre</th>
-                                                        <th>Statut</th>
-                                                        <th>Date</th>
-                                                        <th>Intervenant</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {currentEvents.map(
-                                                        (event) => (
-                                                            <tr
-                                                                key={
-                                                                    event.idEvent
-                                                                }
-                                                            >
-                                                                <td>
-                                                                    <a href="#">
-                                                                        {
-                                                                            event
-                                                                                .client
-                                                                                .firstname
-                                                                        }{" "}
-                                                                        {
-                                                                            event
-                                                                                .client
-                                                                                .lastname
-                                                                        }
-                                                                    </a>
-                                                                </td>
-                                                                <td>
-                                                                    {(() => {
-                                                                        if (
-                                                                            event.type ===
-                                                                            "Intervention"
-                                                                        ) {
-                                                                            return "INT-";
-                                                                        } else {
-                                                                            return "RDV-";
-                                                                        }
-                                                                    })()}
-                                                                    {
-                                                                        event.idEvent
-                                                                    }
-                                                                </td>
-                                                                <td>
-                                                                    {event.type}
-                                                                </td>
-                                                                <td>
-                                                                    <a
-                                                                        href="#"
-                                                                        onClick={() =>
-                                                                            this.toggleEventModal(
-                                                                                event
-                                                                            )
-                                                                        }
-                                                                    >
-                                                                        {
-                                                                            event.title
-                                                                        }
-                                                                    </a>
-                                                                </td>
-                                                                <td>
-                                                                    {this.getStatusIndicator(
-                                                                        event.status
-                                                                    )}
-                                                                </td>
-                                                                <td>
-                                                                    {event.startingDate
-                                                                        ? new Date(
-                                                                              event.startingDate
-                                                                          ).toLocaleDateString()
-                                                                        : ""}
-                                                                </td>
-                                                                <td>
-                                                                    <a href="#">
-                                                                        {
-                                                                            event
-                                                                                .employee
-                                                                                .firstname
-                                                                        }{" "}
-                                                                        {
-                                                                            event
-                                                                                .employee
-                                                                                .lastname
-                                                                        }
-                                                                    </a>
-                                                                </td>
-                                                            </tr>
-                                                        )
-                                                    )}
-                                                </tbody>
-                                            </table>
-                                            <div
-                                                className={
-                                                    stylesMobile.pagination
-                                                }
-                                            >
-                                                <button
-                                                    onClick={(e) =>
-                                                        this.handlePreviousPage(
-                                                            e
-                                                        )
-                                                    }
-                                                    disabled={currentPage === 1}
-                                                >
-                                                    {"<"}
-                                                </button>
-                                                <button
-                                                    onClick={(e) =>
-                                                        this.handleNextPage(e)
-                                                    }
-                                                    disabled={
-                                                        currentPage ===
-                                                        totalPages
-                                                    }
-                                                >
-                                                    {">"}
-                                                </button>
+                                {currentEvents.map((event) => (
+                                    <div className={stylesMobile.eventCard}>
+                                        <div className={stylesMobile.sideColor}></div>
+                                        <div className={stylesMobile.leftSide}>
+                                            <div>
+                                                <div className={stylesMobile.intStatus}>
+                                                    <p className={stylesMobile.type}>{event.type}</p>
+                                                    <p className={stylesMobile.status}>{this.getStatusIndicator(event.status)}</p>
+                                                </div>
+                                                <p>
+                                                    {event.client.category} - {event.client.firstname} {event.client.lastname}
+                                                </p>
                                             </div>
                                         </div>
-                                    )}
-                                </div> */}
+                                        <div className={stylesMobile.rightSide}>
+                                            <p className={stylesMobile.dateHour}>
+                                                {event.startingDate ? new Date(event.startingDate).toLocaleDateString() : ""} à{" "}
+                                                {new Date(`1970-01-01T${event.startingHour}`).toLocaleTimeString([], {
+                                                    hour: "2-digit",
+                                                    minute: "2-digit",
+                                                })}
+                                            </p>
+                                            <div className={stylesMobile.idInter}>
+                                                <p>
+                                                    {(() => {
+                                                        if (event.type === "Intervention") {
+                                                            return "INT-";
+                                                        } else {
+                                                            return "RDV-";
+                                                        }
+                                                    })()}
+                                                    {event.idEvent}
+                                                </p>
+                                                <p className={stylesMobile.initiale}>
+                                                    {event.employee.lastname.charAt(0)}
+                                                    {event.employee.firstname.charAt(0)}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
                             {isEventModalOpen && !isUpdateFormOpen && (
                                 <InterventionForm
