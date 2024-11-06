@@ -238,14 +238,13 @@ class CalendarPage extends Component {
                     <>
                         <div>
                             <TemplateGlobalMobile />
+                            <div className={stylesMobile.filterBar}>
+                                <FilterBar />
+                            </div>
                             <div className={stylesMobile.container}>
-                                <div className={stylesMobile.filterBar}>
-                                    <FilterBar />
-                                </div>
                                 {currentEvents.map((event) => (
                                     <div className={stylesMobile.eventCard}>
-                                        <div
-                                            className={stylesMobile.sideColor}
+                                        <div className={stylesMobile.sideColor}
                                         ></div>
                                         <div className={stylesMobile.leftSide}>
                                             <div>
@@ -271,6 +270,7 @@ class CalendarPage extends Component {
                                                         )}
                                                     </p>
                                                 </div>
+                                                <p>{event.client.category}</p>
                                                 <p>
                                                     {event.client.category} -{" "}
                                                     {event.client.firstname}{" "}
