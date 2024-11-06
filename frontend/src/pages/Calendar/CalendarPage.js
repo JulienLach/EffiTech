@@ -244,7 +244,8 @@ class CalendarPage extends Component {
                             <div className={stylesMobile.container}>
                                 {currentEvents.map((event) => (
                                     <div className={stylesMobile.eventCard}>
-                                        <div className={stylesMobile.sideColor}
+                                        <div
+                                            className={stylesMobile.sideColor}
                                         ></div>
                                         <div className={stylesMobile.leftSide}>
                                             <div>
