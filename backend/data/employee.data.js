@@ -1,6 +1,5 @@
 const pool = require("../config/db.config"); // Importer la configuration de la base de données
 const crypto = require("crypto");
-const jwt = require("jsonwebtoken");
 
 /**
  * Classe représentant un employé.
@@ -157,14 +156,7 @@ class Employee {
                 row.speciality
             );
 
-            // Générer un token JWT
-            const token = jwt.sign(
-                { id: newEmployee.idEmployee, email: newEmployee.email },
-                process.env.ACCESS_TOKEN_SECRET,
-                { expiresIn: "1h" }
-            );
-
-            // Retourner le nouvel employé et le token
+            // Retourner le nouvel employé
             callback(null, newEmployee);
         });
     }
@@ -263,12 +255,7 @@ class Employee {
                 row.password,
                 row.speciality
             );
-            const token = jwt.sign(
-                { id: employee.idEmployee, email: employee.email },
-                process.env.ACCESS_TOKEN_SECRET,
-                { expiresIn: "1h" }
-            );
-            callback(null, { employee, token });
+            callback(null, employee);
         });
     }
 }
