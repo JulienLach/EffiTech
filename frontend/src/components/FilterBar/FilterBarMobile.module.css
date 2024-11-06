@@ -1,7 +1,13 @@
 .filterDiv {
+    position: fixed;
     display: flex;
+    margin-top: 5em;
     justify-content: space-between;
+    background-color: rgb(255, 255, 255);
+    z-index: 900;
     width: 100%;
+    height: 5em;
+    top: 0;
 }
 
 /* style for each filter button */
@@ -20,49 +26,4 @@
 /* icon position */
 .typeFilter i {
     margin-right: 0.625em;
-}
-
-/* Search input container style */
-.searchInput {
-    position: relative;
-    display: inline-block;
-    margin-right: 0.625em;
-}
-
-/* icon position inside the input */
-.searchInput i {
-    position: absolute;
-    top: 50%;
-    left: 0.625em;
-    transform: translateY(-50%);
-    color: #999;
-    pointer-events: none;
-}
-
-/* Search input style */
-.searchInput input {
-    padding: 0.625em 0.625em 0.625em 2.188em;
-    border: 0.063em solid #c0c0c0;
-    border-radius: 3.125em;
-}
-
-/* page title style */
-.pageTitle {
-    font-size: 1.875em;
-    font-weight: 500;
-}
-
-.createEventbutton {
-    background-color: #e0e0e0;
-    border: 0.063em solid #c0c0c0;
-    border-radius: 0.625em;
-    padding: 0.5em 0.5em;
-    font-size: 1em;
-    font-weight: 500;
-    cursor: pointer;
-}
-
-.createEventbutton:hover {
-    background-color: #c93c2c;
-    color: white;
 }

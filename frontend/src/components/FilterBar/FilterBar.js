@@ -27,12 +27,7 @@ class FilterBar extends Component {
                     <div>
                         <div className={styles.searchInput}>
                             <i className="fa-solid fa-magnifying-glass"></i>
-                            <input
-                                type="text"
-                                id="search"
-                                name="search"
-                                placeholder="Recherche"
-                            />
+                            <input type="text" id="search" name="search" placeholder="Recherche" />
                         </div>
                         <div className={styles.typeFilter}>
                             <i className="fa-solid fa-users"></i>
@@ -50,14 +45,8 @@ class FilterBar extends Component {
                             <i className="fa-solid fa-filter"></i>
                             <p>Type</p>
                         </div>
-                        <button
-                            className={styles.createEventbutton}
-                            onClick={this.props.toggleCreateEventModal}
-                        >
-                            <i
-                                className="fa-solid fa-plus"
-                                style={{ marginRight: "0.5em" }}
-                            ></i>
+                        <button className={styles.createEventbutton} onClick={this.props.toggleCreateEventModal}>
+                            <i className="fa-solid fa-plus" style={{ marginRight: "0.5em" }}></i>
                             Créer un évènement
                         </button>
                     </div>

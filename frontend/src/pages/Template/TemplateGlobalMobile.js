@@ -8,27 +8,25 @@ class TemplateGlobalMobile extends Component {
         return (
             <>
                 {/* Partie header */}
-                <div className={styles.header}>
-                    <div className={styles.headerDiv}>
-                        <div className={styles.logo}>
-                            <h1>Calendrier</h1>
+                <div className={styles.headerDiv}>
+                    <h1 className={styles.title}>Calendrier</h1>
+
+                    <div className={styles.headerRight}>
+                        <div className={styles.notificationIcon}>
+                            <img src={bellIcon} className={styles.notificationBell}></img>
+                            <span className={styles.notificationCount}>2</span>
                         </div>
-                        <div className={styles.headerRight}>
-                            <div className={styles.notificationIcon}>
-                                <img
-                                    src={bellIcon}
-                                    className={styles.notificationBell}
-                                ></img>
-                                <span className={styles.notificationCount}>
-                                    2
-                                </span>
-                            </div>
-                            <div className={styles.profileBubble}>JL</div>
-                        </div>
+                        <div className={styles.profileBubble}>JL</div>
                     </div>
                 </div>
 
                 {/* Partie bar navigation bottom */}
+                <div className={styles.navbarBottom}>
+                    <i className={`fas fa-home ${styles.navbarIcon}`}></i>
+                    <i className={`fas fa-search ${styles.navbarIcon}`}></i>
+                    <i className={`fas fa-bell ${styles.navbarIcon}`}></i>
+                    <i className={`fas fa-user ${styles.navbarIcon}`}></i>
+                </div>
             </>
         );
     }
