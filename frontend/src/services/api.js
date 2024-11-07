@@ -85,6 +85,7 @@ function getAllClients(callback) {
 function getAllEmployees(callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", `${API_URL}/employees`);
+    xhr.withCredentials = true; // Assurez-vous que les cookies sont envoyés avec la requête
     xhr.onload = function () {
         if (xhr.status === 200) {
             callback(null, JSON.parse(xhr.responseText));

@@ -7,6 +7,7 @@ const eventRoutes = require("./routes/event.routes.js");
 const companyRoutes = require("./routes/company.routes.js");
 const addressRoutes = require("./routes/address.routes.js");
 const reportRoutes = require("./routes/report.routes.js");
+const authenticateToken = require("./middlewares/auth.middleware"); // Importer le middleware d'authentification
 
 dotenv.config({ path: ".env.development.local" });
 
@@ -26,7 +27,7 @@ app.get("/", (req, res) => {
 });
 
 // Routes d'employés
-app.use("/employees", employeeRoutes);
+app.use("/employees", authenticateToken, employeeRoutes);
 
 // Routes des clients
 app.use("/clients", clientRoutes);
