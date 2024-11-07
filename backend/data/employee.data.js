@@ -260,8 +260,8 @@ class Employee {
                     email: row.email,
                     isAdmin: row.is_admin,
                 },
-                "votre_clé_secrète",
-                { expiresIn: "1h" }
+                process.env.JWT_SECRET,
+                { expiresIn: "24h" }
             );
 
             // Stocker le token dans les cookies manuellement

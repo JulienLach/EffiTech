@@ -99,21 +99,7 @@ function updateEmployee(req, res) {
     );
 }
 
-function loginEmployee(req, res) {
-    const { email, password } = req.body;
-    Employee.loginEmployee(email, password, res, (error, employee) => {
-        if (error) {
-            return res.status(500).json({
-                message: "Erreur mauvais identifiants",
-                error: error.message,
-            });
-        }
-        res.status(200).json(employee);
-    });
-}
-
 exports.getAllEmployees = getAllEmployees;
 exports.getEmployeeById = getEmployeeById;
 exports.createEmployee = createEmployee;
 exports.updateEmployee = updateEmployee;
-exports.loginEmployee = loginEmployee;
