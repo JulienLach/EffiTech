@@ -1,13 +1,14 @@
 const dotenv = require("dotenv");
 const express = require("express");
-const cors = require("cors"); // Importer le middleware cors
-const employeeRoutes = require("./routes/employee.routes.js"); // Importer les routes d'employés
+const cors = require("cors");
+const employeeRoutes = require("./routes/employee.routes.js");
 const clientRoutes = require("./routes/client.routes.js");
 const eventRoutes = require("./routes/event.routes.js");
 const companyRoutes = require("./routes/company.routes.js");
 const addressRoutes = require("./routes/address.routes.js");
 const reportRoutes = require("./routes/report.routes.js");
-const authenticateToken = require("./middlewares/auth.middleware"); // Importer le middleware d'authentification
+const authRoutes = require("./routes/auth.routes");
+const authenticateToken = require("./middlewares/auth.middleware");
 
 dotenv.config({ path: ".env.development.local" });
 
@@ -17,25 +18,31 @@ const app = express();
 const corsOptions = {
     origin: "http://localhost:3000",
     credentials: true,
+    methods: "GET, POST, PUT, DELETE, OPTIONS",
+    allowedHeaders: "Content-Type, Authorization",
 };
 
 app.use(cors(corsOptions));
-app.use(express.json()); // passer le corps de la demande en JSON
+app.options("*", cors(corsOptions));
+app.use(express.json());
 
 app.get("/", (req, res) => {
     res.send("Test!");
 });
 
+// Route de connexion (publique)
+app.use("/auth", authRoutes);
+
 // Routes d'employés
 app.use("/employees", authenticateToken, employeeRoutes);
 
 // Routes des clients
-app.use("/clients", clientRoutes);
+app.use("/clients", authenticateToken, clientRoutes);
 
 // Routes des événements
 app.use("/events", eventRoutes);
 
-// // Routes des adresses
+// Routes des adresses
 app.use("/addresses", addressRoutes);
 
 // Routes company

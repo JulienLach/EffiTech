@@ -16,16 +16,10 @@ function authenticateToken(req, res, next) {
     }
 
     if (!token) {
-        token = req.headers["authorization"]?.split(" ")[1];
+        // return res.redirect("http://localhost:3000/login");
     }
 
-    if (!token) {
-        return res
-            .status(401)
-            .json({ message: "Accès refusé. Aucun token fourni." });
-    }
-
-    jwt.verify(token, "votre_clé_secrète", (err, user) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
         if (err) {
             return res.status(403).json({ message: "Token invalide." });
         }
