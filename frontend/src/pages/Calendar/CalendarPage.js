@@ -236,7 +236,7 @@ class CalendarPage extends Component {
                             </div>
                             <div className={stylesMobile.container}>
                                 {currentEvents.map((event) => (
-                                    <div className={stylesMobile.eventCard}>
+                                    <div className={stylesMobile.eventCard} onClick={() => this.toggleEventModal(event)}>
                                         <div
                                             className={
                                                 event.client.category === "Professionnel" ? stylesMobile.sideColorPro : stylesMobile.sideColorPart

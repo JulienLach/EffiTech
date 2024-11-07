@@ -1,0 +1,153 @@
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    overflow-y: auto; /* Permet le défilement vertical */
+    max-height: 100vh;
+    background-color: white;
+    z-index: 900;
+    display: none;
+}
+
+.modal.open {
+    display: block;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 5em;
+}
+
+.modalFooter {
+    display: flex;
+    flex: row;
+    justify-content: space-around;
+}
+
+.modalFooter button:hover {
+    background-color: #c93c2c;
+    color: white;
+}
+
+.separator {
+    margin: 1em 0;
+    border-bottom: 0.063em solid #ccc;
+}
+
+/* HEADER */
+/* Header.css */
+.headerDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.25em;
+    height: 5em;
+    border-radius: 0 0 1em 1em;
+    background-color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 0.25em 0.25em rgba(0, 0, 0, 0.1);
+    width: 100vw;
+}
+
+.title {
+    margin: 0;
+}
+
+.headerRight {
+    display: flex;
+    align-items: center;
+}
+
+.notificationBell {
+    height: 1.2em;
+}
+
+.notificationIcon {
+    position: relative;
+    margin-right: 1.25em;
+}
+
+.notificationCount {
+    display: flex;
+    position: absolute;
+    top: -0.625em;
+    right: -0.625em;
+    background-color: red;
+    color: white;
+    border-radius: 1em;
+    height: 1.25em;
+    width: 1.25em;
+    font-size: 0.75em;
+    min-width: 1.25em;
+    align-items: center;
+    justify-content: center;
+}
+
+.profileBubble {
+    top: -0.625em;
+    right: -0.625em;
+    background-color: #007bff;
+    color: white;
+    border-radius: 2em;
+    width: 2em;
+    height: 2em;
+    font-size: 1.2em;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.backButton {
+    font-size: 1.1em;
+    margin: 1.2em 0 0 1.2em;
+    background-color: none;
+    border: none;
+    color: #c93c2c;
+}
+
+.titleCard,
+.detailsCard,
+.planCard {
+    display: flex;
+    flex-direction: column;
+    margin: 0.3em 1em;
+    padding: 0.5em;
+    background-color: white;
+    box-shadow: 0 0.3em 0.3em rgba(0, 0, 0, 0.247);
+    border-radius: 1em;
+}
+
+.intStatus {
+    display: flex;
+}
+.eventId,
+.boldElement {
+    font-weight: 600;
+    margin-right: 1em;
+}
+
+.titleCard h3,
+.titleCard p,
+.detailsCard h3,
+.detailsCard p,
+.planCard h3,
+.planCard p {
+    margin-bottom: 0.3em;
+}
+
+.fillButton {
+    background-color: #c93c2c;
+    width: auto;
+    color: white;
+    border: none;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    font-size: 1.2em;
+    margin: 1em 0 1em 0;
+    text-align: center;
+}
