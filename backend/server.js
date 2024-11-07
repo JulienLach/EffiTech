@@ -12,18 +12,16 @@ const authenticateToken = require("./middlewares/auth.middleware");
 
 dotenv.config({ path: ".env.development.local" });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 const app = express();
 
 const corsOptions = {
     origin: "http://localhost:3000",
     credentials: true,
     methods: "GET, POST, PUT, DELETE, OPTIONS",
-    allowedHeaders: "Content-Type, Authorization",
 };
 
 app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
 app.use(express.json());
 
 app.get("/", (req, res) => {
