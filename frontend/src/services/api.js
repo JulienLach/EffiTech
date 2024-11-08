@@ -448,12 +448,20 @@ function getClientById(idClient, callback) {
 function getCompany(callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", `${API_URL}/company`);
-    xhr.withCredentials = true; //les cookies sont envoyés avec la requête http
+    xhr.withCredentials = true; // les cookies sont envoyés avec la requête http
     xhr.onload = function () {
         if (xhr.status === 200) {
             callback(null, JSON.parse(xhr.responseText));
-        } else {
+        } else if (xhr.status === 404 && xhr.withCredentials === false) {
+            console.error(
+                "Erreur de récupération des informations de la société",
+                xhr.statusText
+            );
+            callback(new Error(xhr.statusText), null);
+        } else if (xhr.status === 403) {
+            // Rediriger vers la page d'erreur 403 si l'utilisateur n'est pas autorisé
             window.location.href = "http://localhost:3000/login";
+        } else {
             console.error(
                 "Erreur de récupération des informations de la société",
                 xhr.statusText
@@ -738,6 +746,7 @@ function createEmployee(employeeData, callback) {
 function createCompany(companyData, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", `${API_URL}/company`);
+    xhr.withCredentials = true;
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onload = function () {
         if (xhr.status === 200 || xhr.status === 201) {
