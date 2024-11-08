@@ -44,7 +44,7 @@ app.use("/events", authenticateToken, eventRoutes);
 app.use("/addresses", addressRoutes);
 
 // Routes company
-app.use("/company", companyRoutes);
+app.use("/company", authenticateToken, companyRoutes);
 
 // Route des reports
 app.use("/reports", reportRoutes);

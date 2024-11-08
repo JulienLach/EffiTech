@@ -446,10 +446,12 @@ function getClientById(idClient, callback) {
 function getCompany(callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", `${API_URL}/company`);
+    xhr.withCredentials = true; //les cookies sont envoyés avec la requête http
     xhr.onload = function () {
         if (xhr.status === 200) {
             callback(null, JSON.parse(xhr.responseText));
         } else {
+            window.location.href = "http://localhost:3000/login";
             console.error(
                 "Erreur de récupération des informations de la société",
                 xhr.statusText
