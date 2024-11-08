@@ -7,7 +7,7 @@ router.get("/", authenticateToken, eventServices.getAllEvents);
 
 router.get("/:idEvent", eventServices.getEventById);
 
-router.post("/", eventServices.createEvent);
+router.post("/", authenticateToken, eventServices.createEvent);
 
 router.put("/:idEvent", eventServices.updateEvent);
 

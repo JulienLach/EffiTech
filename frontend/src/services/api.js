@@ -142,6 +142,7 @@ function getAllEmployees(callback) {
 function createEvent(eventData, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", `${API_URL}/events`);
+    xhr.withCredentials = true; //les cookies sont envoyés avec la requête http
     xhr.setRequestHeader("Content-Type", "application/json"); // définir le contenu de la requête est en JSON
     xhr.onload = function () {
         if (xhr.status === 200 || xhr.status === 201) {
