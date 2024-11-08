@@ -4,15 +4,27 @@
     margin: 0 1.25em 0 15.6em;
 }
 
-/* placement et style du titre de la pge  */
+/* placement et style du titre de la page */
 .pageTitle {
     font-size: 1.875em;
     font-weight: 550;
 }
 
 .cardContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(370px, 1fr));
+    gap: 1em;
+}
+
+.card {
+    /* border: 1px solid red; */
     display: flex;
-    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0.938em;
+    padding: 1.25em;
+    border-radius: 0.625em;
+    box-shadow: 0 0 0.625em rgba(0, 0, 0, 0.1);
+    background-color: white;
 }
 
 .addEmployee {
@@ -29,17 +41,6 @@
 
 a {
     text-decoration: none;
-}
-
-.card {
-    display: flex;
-    justify-content: space-between;
-    margin: 0.938em;
-    width: 20%;
-    padding: 1.25em;
-    border-radius: 0.625em;
-    box-shadow: 0 0 0.625em rgba(0, 0, 0, 0.1);
-    background-color: white;
 }
 
 .profilPicture {
