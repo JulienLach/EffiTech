@@ -13,7 +13,10 @@ class TemplateGlobalMobile extends Component {
 
                     <div className={styles.headerRight}>
                         <div className={styles.notificationIcon}>
-                            <img src={bellIcon} className={styles.notificationBell}></img>
+                            <img
+                                src={bellIcon}
+                                className={styles.notificationBell}
+                            ></img>
                             <span className={styles.notificationCount}>2</span>
                         </div>
                         <div className={styles.profileBubble}>JL</div>

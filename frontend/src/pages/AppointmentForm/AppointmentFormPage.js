@@ -38,10 +38,14 @@ class AppointmentFormPage extends Component {
         const { event } = this.props.location.state;
         const startingHour = new Date(`1970-01-01T${event.startingHour}`);
         const endingHour = new Date(`1970-01-01T${event.endingHour}`);
-        const duration = new Date(endingHour - startingHour).toLocaleDateString().substring(11, 16);
+        const duration = new Date(endingHour - startingHour)
+            .toLocaleDateString()
+            .substring(11, 16);
 
         this.setState({
-            startingDate: new Date(event.startingDate).toLocaleDateString("en-CA"),
+            startingDate: new Date(event.startingDate).toLocaleDateString(
+                "en-CA"
+            ),
             duration,
             client: event.client,
             address: event.address,
@@ -59,7 +63,8 @@ class AppointmentFormPage extends Component {
     handleSubmit(event) {
         event.preventDefault();
         const { event: eventDetails } = this.props.location.state;
-        const { startingDate, workToDo, client, address, employee } = this.state;
+        const { startingDate, workToDo, client, address, employee } =
+            this.state;
 
         const eventData = {
             idEvent: eventDetails.idEvent,
@@ -102,7 +107,10 @@ class AppointmentFormPage extends Component {
                 {isMobile.mobile ? (
                     <>
                         <TemplateGlobalMobile />
-                        <form onSubmit={this.handleSubmit} className={stylesMobile.container}>
+                        <form
+                            onSubmit={this.handleSubmit}
+                            className={stylesMobile.container}
+                        >
                             <div className={stylesMobile.idAndTitle}>
                                 <h2 className={stylesMobile.eventId}>
                                     {(() => {
@@ -119,7 +127,11 @@ class AppointmentFormPage extends Component {
                             <div>
                                 <div className={stylesMobile.inputDisplay}>
                                     <label>Client</label>
-                                    <input type="text" value={`${event.client.firstname} ${event.client.lastname}`} readOnly />
+                                    <input
+                                        type="text"
+                                        value={`${event.client.firstname} ${event.client.lastname}`}
+                                        readOnly
+                                    />
                                 </div>
                             </div>
                             <div>
@@ -135,49 +147,88 @@ class AppointmentFormPage extends Component {
                             <div>
                                 <div className={stylesMobile.textArea}>
                                     <label>Travaux à effectuer</label>
-                                    <textarea rows="5" name="workToDo" value={workToDo} onChange={this.handleChange}></textarea>
+                                    <textarea
+                                        rows="5"
+                                        name="workToDo"
+                                        value={workToDo}
+                                        onChange={this.handleChange}
+                                    ></textarea>
                                 </div>
                             </div>
                             <div>
                                 <h3>Date de rendez-vous</h3>
                                 <div className={stylesMobile.labelInput}>
                                     <label>Date de rendez-vous</label>
-                                    <input type="date" name="startingDate" value={startingDate} onChange={this.handleChange} />
+                                    <input
+                                        type="date"
+                                        name="startingDate"
+                                        value={startingDate}
+                                        onChange={this.handleChange}
+                                    />
                                 </div>
                             </div>
                             <div>
                                 <h3>Heure de début</h3>
                                 <div className={stylesMobile.labelInput}>
                                     <label>Heure de début</label>
-                                    <input type="time" value={event.startingHour} readOnly />
+                                    <input
+                                        type="time"
+                                        value={event.startingHour}
+                                        readOnly
+                                    />
                                 </div>
                             </div>
                             <div>
                                 <h3>Heure de fin</h3>
                                 <div className={stylesMobile.labelInput}>
                                     <label>Heure de fin</label>
-                                    <input type="time" value={event.endingHour} readOnly />
+                                    <input
+                                        type="time"
+                                        value={event.endingHour}
+                                        readOnly
+                                    />
                                 </div>
                             </div>
                             <div>
                                 <h3>Durée du rendez-vous</h3>
                                 <div className={stylesMobile.labelInput}>
                                     <label>Durée</label>
-                                    <input type="time" value={duration} readOnly />
+                                    <input
+                                        type="time"
+                                        value={duration}
+                                        readOnly
+                                    />
                                 </div>
                             </div>
                             <div>
                                 <h3>Planification</h3>
                                 <div className={stylesMobile.checkbox}>
-                                    <label>Créer directement l'intervention à planifier</label>
-                                    <input type="checkbox" name="reschedule" checked={reschedule} onChange={this.handleChange}></input>
+                                    <label>
+                                        Créer directement l'intervention à
+                                        planifier
+                                    </label>
+                                    <input
+                                        type="checkbox"
+                                        name="reschedule"
+                                        checked={reschedule}
+                                        onChange={this.handleChange}
+                                    ></input>
                                 </div>
                             </div>
                             <div className={stylesMobile.modalFooter}>
-                                <button className={stylesMobile.cancelButton} type="reset" onClick={() => (window.location.href = "/calendar#")}>
+                                <button
+                                    className={stylesMobile.cancelButton}
+                                    type="reset"
+                                    onClick={() =>
+                                        (window.location.href = "/calendar#")
+                                    }
+                                >
                                     Annuler
                                 </button>
-                                <button className={stylesMobile.validateButton} type="submit">
+                                <button
+                                    className={stylesMobile.validateButton}
+                                    type="submit"
+                                >
                                     Terminer le rendez-vous
                                 </button>
                             </div>
@@ -186,11 +237,19 @@ class AppointmentFormPage extends Component {
                 ) : (
                     <>
                         <TemplateGlobal />
-                        <form onSubmit={this.handleSubmit} className={styles.container}>
+                        <form
+                            onSubmit={this.handleSubmit}
+                            className={styles.container}
+                        >
                             <div className={styles.card}>
                                 <div className={styles.alignButton}>
                                     <h2>Rendez-vous</h2>
-                                    <button type="button" onClick={() => (window.location.href = "/calendar")}>
+                                    <button
+                                        type="button"
+                                        onClick={() =>
+                                            (window.location.href = "/calendar")
+                                        }
+                                    >
                                         <i className="fa-solid fa-arrow-right"></i>
                                         Retour
                                     </button>
@@ -205,7 +264,11 @@ class AppointmentFormPage extends Component {
                                 <div>
                                     <div className={styles.inputDisplay}>
                                         <label>Client</label>
-                                        <input type="text" value={`${event.client.firstname} ${event.client.lastname}`} readOnly />
+                                        <input
+                                            type="text"
+                                            value={`${event.client.firstname} ${event.client.lastname}`}
+                                            readOnly
+                                        />
                                     </div>
                                 </div>
                                 <div>
@@ -221,47 +284,79 @@ class AppointmentFormPage extends Component {
                                 <div>
                                     <div className={styles.textArea}>
                                         <label>Travaux à effectuer</label>
-                                        <textarea rows="5" name="workToDo" value={workToDo} onChange={this.handleChange}></textarea>
+                                        <textarea
+                                            rows="5"
+                                            name="workToDo"
+                                            value={workToDo}
+                                            onChange={this.handleChange}
+                                        ></textarea>
                                     </div>
                                 </div>
                                 <div>
                                     <h3>Date de rendez-vous</h3>
                                     <div className={styles.labelInput}>
                                         <label>Date de rendez-vous</label>
-                                        <input type="date" name="startingDate" value={startingDate} onChange={this.handleChange} />
+                                        <input
+                                            type="date"
+                                            name="startingDate"
+                                            value={startingDate}
+                                            onChange={this.handleChange}
+                                        />
                                     </div>
                                 </div>
                                 <div>
                                     <h3>Heure de début</h3>
                                     <div className={styles.labelInput}>
                                         <label>Heure de début</label>
-                                        <input type="time" value={event.startingHour} readOnly />
+                                        <input
+                                            type="time"
+                                            value={event.startingHour}
+                                            readOnly
+                                        />
                                     </div>
                                 </div>
                                 <div>
                                     <h3>Heure de fin</h3>
                                     <div className={styles.labelInput}>
                                         <label>Heure de fin</label>
-                                        <input type="time" value={event.endingHour} readOnly />
+                                        <input
+                                            type="time"
+                                            value={event.endingHour}
+                                            readOnly
+                                        />
                                     </div>
                                 </div>
                                 <div>
                                     <h3>Durée du rendez-vous</h3>
                                     <div className={styles.labelInput}>
                                         <label>Durée</label>
-                                        <input type="time" value={duration} readOnly />
+                                        <input
+                                            type="time"
+                                            value={duration}
+                                            readOnly
+                                        />
                                     </div>
                                 </div>
                                 <div>
                                     <h3>Planification</h3>
                                     <div className={styles.checkbox}>
-                                        <label>Créer directement l'intervention à planifier</label>
-                                        <input type="checkbox" name="reschedule" checked={reschedule} onChange={this.handleChange}></input>
+                                        <label>
+                                            Créer directement l'intervention à
+                                            planifier
+                                        </label>
+                                        <input
+                                            type="checkbox"
+                                            name="reschedule"
+                                            checked={reschedule}
+                                            onChange={this.handleChange}
+                                        ></input>
                                     </div>
                                 </div>
                                 <div className={styles.modalFooter}>
                                     <button type="reset">Annuler</button>
-                                    <button type="submit">Terminer le rendez-vous</button>
+                                    <button type="submit">
+                                        Terminer le rendez-vous
+                                    </button>
                                 </div>
                             </div>
                         </form>
