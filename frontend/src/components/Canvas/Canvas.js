@@ -15,13 +15,19 @@ class Canvas extends Component {
         canvas.addEventListener("mousemove", this.draw.bind(this));
         canvas.addEventListener("mouseup", this.stopDrawing.bind(this));
         canvas.addEventListener("mouseleave", this.stopDrawing.bind(this));
+        canvas.addEventListener("touchstart", this.startDrawing.bind(this));
+        canvas.addEventListener("touchmove", this.draw.bind(this));
+        canvas.addEventListener("touchend", this.stopDrawing.bind(this));
+        canvas.addEventListener("touchcancel", this.stopDrawing.bind(this));
     }
 
     startDrawing(event) {
         this.isDrawing = true;
         const rect = this.canvasRef.current.getBoundingClientRect();
-        this.lastX = event.clientX - rect.left;
-        this.lastY = event.clientY - rect.top;
+        const clientX = event.clientX || event.touches[0].clientX;
+        const clientY = event.clientY || event.touches[0].clientY;
+        this.lastX = clientX - rect.left;
+        this.lastY = clientY - rect.top;
     }
 
     draw(event) {
@@ -30,8 +36,10 @@ class Canvas extends Component {
         const canvas = this.canvasRef.current;
         const context = canvas.getContext("2d");
         const rect = canvas.getBoundingClientRect();
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
+        const clientX = event.clientX || event.touches[0].clientX;
+        const clientY = event.clientY || event.touches[0].clientY;
+        const x = clientX - rect.left;
+        const y = clientY - rect.top;
 
         context.beginPath();
         context.moveTo(this.lastX, this.lastY);

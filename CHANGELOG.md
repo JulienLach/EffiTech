@@ -16,10 +16,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -   Add jwt auth to displayed events for connected employees
     -   Display only events assigned to the connected employee
 -   Add default coverage option to JEST test script
+-   Add expenses page for technician on mobile
+-   Add signature canva on mobile
 
 ## Fixes
 
 -   Refactor jwt auth server side in client login method
+-   Fix redirect on company page with 404 error with employee connected
 
 # [0.1.2] (2024-11-05)
 

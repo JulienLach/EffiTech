@@ -277,7 +277,7 @@ class InterventionFormPage extends Component {
                                     className={stylesMobile.validateButton}
                                     type="submit"
                                 >
-                                    Terminer le rendez-vous
+                                    Valider le rapport
                                 </button>
                             </div>
                         </form>
