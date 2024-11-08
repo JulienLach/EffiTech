@@ -38,7 +38,7 @@ app.use("/employees", authenticateToken, employeeRoutes);
 app.use("/clients", authenticateToken, clientRoutes);
 
 // Routes des événements
-app.use("/events", eventRoutes);
+app.use("/events", authenticateToken, eventRoutes);
 
 // Routes des adresses
 app.use("/addresses", addressRoutes);

@@ -24,10 +24,12 @@ const API_URL = "http://localhost:3001";
 function getAllEvents(callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", `${API_URL}/events`);
+    xhr.withCredentials = true; //les cookies sont envoyés avec la requête http
     xhr.onload = function () {
         if (xhr.status === 200) {
             callback(null, JSON.parse(xhr.responseText));
         } else {
+            window.location.href = "http://localhost:3000/login";
             console.error("Erreur de récupération des events", xhr.statusText);
             callback(new Error(xhr.statusText), null);
         }
@@ -92,6 +94,7 @@ function getAllEmployees(callback) {
         if (xhr.status === 200) {
             callback(null, JSON.parse(xhr.responseText));
         } else {
+            window.location.href = "http://localhost:3000/login";
             console.error(
                 "Erreur de récupération des employés",
                 xhr.statusText
