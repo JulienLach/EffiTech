@@ -1,0 +1,90 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    padding: 1em 1em 5em 1em;
+}
+
+.inputDisplay {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.25em;
+}
+
+.inputDisplay label {
+    font-weight: 600;
+    margin-bottom: 0.3em;
+}
+
+.inputDisplay input {
+    width: 100%;
+    border-radius: 0.8em;
+    border: 0.06em solid #bdbdbd;
+    color: #000000;
+    padding: 0.8em;
+    font-size: 0.9em;
+}
+
+.modalFooter {
+    margin-top: 1em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1em;
+}
+
+.validateButton {
+    background-color: #c93c2c;
+    width: auto;
+    color: white;
+    border: none;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    font-size: 1.2em;
+    margin: 1em 0 1em 0;
+    text-align: center;
+}
+.cancelButton {
+    background-color: #ababab;
+    width: auto;
+    color: white;
+    border: none;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    font-size: 1.2em;
+    margin: 1em 0 1em 0;
+    text-align: center;
+}
+
+.download {
+    background-color: #c93c2c;
+    width: 12em;
+    color: white;
+    border: none;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    font-size: 1.2em;
+    margin: 1em 0 1em 0;
+    text-align: center;
+}
+
+.textArea {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+}
+
+.textArea label {
+    font-weight: 600;
+    margin-bottom: 0.3em;
+}
+
+.textArea textarea {
+    border-radius: 0.8em;
+    border: 0.06em solid #bdbdbd;
+    color: #000000;
+    padding: 0.8em;
+    font-size: 0.9em;
+}

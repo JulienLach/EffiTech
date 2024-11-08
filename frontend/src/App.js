@@ -21,6 +21,7 @@ import CompanyFormPage from "./pages/CompanyForm/CompanyFormPage";
 import CompanyPage from "./pages/Company/CompanyPage";
 import CompanyDetails from "./pages/CompanyDetails/CompanyDetails";
 import TestPage from "./pages/Test/TestPage";
+import ExpensePage from "./pages/Expense/ExpenseFormPage";
 
 const App = () => {
     return (
@@ -51,7 +52,7 @@ const App = () => {
                 <Route path="/company" element={<CompanyPage />} />
                 <Route path="/company-form" element={<CompanyFormPage />} />
                 <Route path="/company-details" element={<CompanyDetails />} />
-
+                <Route path="/expense" element={<ExpensePage />} />
                 <Route path="/test" element={<TestPage />} />
             </Routes>
         </Router>
