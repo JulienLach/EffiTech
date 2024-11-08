@@ -24,10 +24,12 @@ const API_URL = "http://localhost:3001";
 function getAllEvents(callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", `${API_URL}/events`);
+    xhr.withCredentials = true; //les cookies sont envoyés avec la requête http
     xhr.onload = function () {
         if (xhr.status === 200) {
             callback(null, JSON.parse(xhr.responseText));
         } else {
+            window.location.href = "http://localhost:3000/login";
             console.error("Erreur de récupération des events", xhr.statusText);
             callback(new Error(xhr.statusText), null);
         }
@@ -54,10 +56,12 @@ function getAllEvents(callback) {
 function getAllClients(callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", `${API_URL}/clients`);
+    xhr.withCredentials = true; //les cookies sont envoyés avec la requête http
     xhr.onload = function () {
         if (xhr.status === 200) {
             callback(null, JSON.parse(xhr.responseText));
         } else {
+            window.location.href = "http://localhost:3000/login";
             console.error("Erreur de récupération des clients", xhr.statusText);
             callback(new Error(xhr.statusText), null);
         }
@@ -85,10 +89,12 @@ function getAllClients(callback) {
 function getAllEmployees(callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", `${API_URL}/employees`);
+    xhr.withCredentials = true; // Assurez-vous que les cookies sont envoyés avec la requête
     xhr.onload = function () {
         if (xhr.status === 200) {
             callback(null, JSON.parse(xhr.responseText));
         } else {
+            window.location.href = "http://localhost:3000/login";
             console.error(
                 "Erreur de récupération des employés",
                 xhr.statusText
@@ -344,7 +350,7 @@ function createAccount(employeeData, callback) {
  */
 function loginEmployee(credentials, callback) {
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", `${API_URL}/employees/login`);
+    xhr.open("POST", `${API_URL}/auth/login`);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.withCredentials = true; //les cookies sont envoyés avec la requête http
     xhr.onload = function () {
@@ -440,10 +446,12 @@ function getClientById(idClient, callback) {
 function getCompany(callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", `${API_URL}/company`);
+    xhr.withCredentials = true; //les cookies sont envoyés avec la requête http
     xhr.onload = function () {
         if (xhr.status === 200) {
             callback(null, JSON.parse(xhr.responseText));
         } else {
+            window.location.href = "http://localhost:3000/login";
             console.error(
                 "Erreur de récupération des informations de la société",
                 xhr.statusText

@@ -1,5 +1,14 @@
 const pool = require("../config/db.config"); // Importer la configuration de la base de données
 const crypto = require("crypto");
+const jwt = require("jsonwebtoken");
+
+function generateToken(employee) {
+    const payload = {
+        idEmployee: employee.idEmployee,
+        isAdmin: employee.isAdmin,
+    };
+    return jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "24h" });
+}
 
 /**
  * Classe représentant un employé.
@@ -223,27 +232,36 @@ class Employee {
      * Connecte un employé.
      * @param {string} email - L'email de l'employé.
      * @param {string} password - Le mot de passe de l'employé.
+     * @param {object} res - L'objet réponse HTTP avec le token stocké dans les cookies.
      * @param {function} callback - La fonction de rappel.
      */
-    static loginEmployee(email, password, callback) {
+    static loginEmployee(email, password, res, callback) {
         const query = "SELECT * FROM employees WHERE email = $1";
         const values = [email];
 
         pool.query(query, values, (error, result) => {
+            if (error) {
+                console.error(error);
+                return callback(error, null);
+            }
+
             const row = result.rows[0];
 
             if (!row) {
                 console.error("Compte employé non trouvé");
                 return callback(new Error("Compte employé non trouvé"), null);
             }
-            const hash = crypto.createHash("sha512");
-            hash.update(password);
-            const hashedPassword = hash.digest("hex");
+
+            const hashedPassword = crypto
+                .createHash("sha512")
+                .update(password)
+                .digest("hex");
 
             if (hashedPassword !== row.password) {
                 console.error("Mot de passe invalide");
-                return callback(new Error("Invalid password"), null);
+                return callback(new Error("Mot de passe invalide"), null);
             }
+
             const employee = new Employee(
                 row.id_employee,
                 row.firstname,
@@ -255,6 +273,15 @@ class Employee {
                 row.password,
                 row.speciality
             );
+
+            const token = generateToken(employee);
+
+            // Stocker le token dans les cookies
+            res.setHeader(
+                "Set-Cookie",
+                `token=${token}; HttpOnly; Max-Age=3600; Path=/`
+            );
+
             callback(null, employee);
         });
     }
