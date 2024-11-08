@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-## Changes
+## Changes
 
 -   Add apidoc package and documented api.js file
 -   Add sorting by client category button on client page
@@ -14,8 +14,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -   Add jwt auth and redirections to access client side pages
 -   Add jwt auth to displayed events for connected employees
     -   Display only events assigned to the connected employee
+-   Add default coverage option to JEST test script
 
-## Fixes
+## Fixes
 
 -   Refactor jwt auth server side in client login method
 
