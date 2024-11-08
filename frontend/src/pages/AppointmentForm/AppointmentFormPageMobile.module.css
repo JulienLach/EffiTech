@@ -1,0 +1,113 @@
+/* AppointmentFormPage.module.css */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    padding: 1em 1em 5em 1em;
+}
+
+.separation {
+    height: 0.06em;
+    background-color: #3e3e3e;
+}
+
+.alignButton {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.inputDisplay {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.25em;
+}
+
+.inputDisplay label {
+    font-weight: 600;
+    margin-bottom: 0.3em;
+}
+
+.inputDisplay input {
+    width: 100%;
+    border-radius: 0.8em;
+    border: 0.06em solid #bdbdbd;
+    color: #747474;
+    padding: 0.8em;
+    font-size: 0.9em;
+}
+
+.textArea {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.textArea textarea {
+    border-radius: 0.8em;
+    border: 0.06em solid #bdbdbd;
+    color: #000000;
+    padding: 0.8em;
+    font-size: 0.9em;
+}
+
+.labelInput {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.labelInput input {
+    width: 100%;
+    border-radius: 0.8em;
+    border: 0.06em solid #bdbdbd;
+    color: #747474;
+    padding: 0.8em;
+    font-size: 0.9em;
+}
+
+.modalFooter {
+    margin-top: 1em;
+    display: flex;
+    flex-direction: row;
+    gap: 3em;
+}
+
+.validateButton {
+    background-color: #c93c2c;
+    width: auto;
+    color: white;
+    border: none;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    font-size: 1.2em;
+    margin: 1em 0 1em 0;
+    text-align: center;
+}
+.cancelButton {
+    background-color: #ababab;
+    width: auto;
+    color: white;
+    border: none;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    font-size: 1.2em;
+    margin: 1em 0 1em 0;
+    text-align: center;
+}
+
+.modalFooter button:hover {
+    background-color: #c93c2c;
+    color: white;
+}
+
+.backButton {
+    font-size: 1.1em;
+    margin: 1.2em 0 0 1.2em;
+    background-color: none;
+    border: none;
+    color: #c93c2c;
+}
+.idAndTitle {
+    margin-bottom: 1em;
+}
