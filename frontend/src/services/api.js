@@ -386,6 +386,7 @@ function loginEmployee(credentials, callback) {
 function getEmployeeById(idEmployee, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", `${API_URL}/employees/${idEmployee}`);
+    xhr.withCredentials = true;
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onload = function () {
         if (xhr.status === 200) {
@@ -516,6 +517,7 @@ function deleteEvent(idEvent, callback) {
 function updateCompany(companyData, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("PUT", `${API_URL}/company`);
+    xhr.withCredentials = true;
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onload = function () {
         if (xhr.status === 200) {
@@ -561,6 +563,7 @@ function updateCompany(companyData, callback) {
 function updateEmployee(employeeData, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("PUT", `${API_URL}/employees/${employeeData.idEmployee}`);
+    xhr.withCredentials = true;
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onload = function () {
         if (xhr.status === 200) {
