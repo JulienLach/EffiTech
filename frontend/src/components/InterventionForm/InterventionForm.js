@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./InterventionForm.module.css";
+import stylesMobile from "./InterventionFormMobile.module.css";
 import { deleteEvent } from "../../services/api";
+import bellIcon from "../../images/notificationBell.svg";
 
 // Composant wrapper pour utiliser les hooks
 function InterventionFormWrapper(props) {
@@ -135,153 +137,425 @@ class InterventionForm extends Component {
     render() {
         const { event, closeModal } = this.props;
 
-        return (
-            <form
-                onSubmit={this.handleSubmit}
-                className={`${styles.modal} ${styles.open}`}
-            >
-                <div className={styles.container}>
-                    <div>
-                        <h2>
-                            {(() => {
-                                if (event.type === "Intervention") {
-                                    return "Intervention";
-                                } else {
-                                    return "Rendez-vous";
-                                }
-                            })()}
-                        </h2>
-                        <p>{this.getStatusIndicator(event.status)}</p>
-                    </div>
+        //Variable pour savoir si c'est mobile ou desktop
+        const isMobile = window.navigator.userAgentData;
 
-                    <div>
-                        <div>
-                            <h2>
+        return (
+            <>
+                {isMobile.mobile ? (
+                    <>
+                        <form
+                            onSubmit={this.handleSubmit}
+                            className={`${stylesMobile.modal} ${stylesMobile.open}`}
+                        >
+                            <div className={stylesMobile.headerDiv}>
+                                <h1 className={stylesMobile.title}>
+                                    {(() => {
+                                        if (event.type === "Intervention") {
+                                            return "Intervention";
+                                        } else {
+                                            return "Rendez-vous";
+                                        }
+                                    })()}
+                                </h1>
+
+                                <div className={stylesMobile.headerRight}>
+                                    <div
+                                        className={
+                                            stylesMobile.notificationIcon
+                                        }
+                                    >
+                                        <img
+                                            src={bellIcon}
+                                            className={
+                                                stylesMobile.notificationBell
+                                            }
+                                        ></img>
+                                        <span
+                                            className={
+                                                stylesMobile.notificationCount
+                                            }
+                                        >
+                                            2
+                                        </span>
+                                    </div>
+                                    <div className={stylesMobile.profileBubble}>
+                                        JL
+                                    </div>
+                                </div>
+                            </div>
+                            <div className={stylesMobile.container}>
+                                <div>
+                                    <button
+                                        className={stylesMobile.backButton}
+                                        type="button"
+                                        onClick={closeModal}
+                                    >
+                                        <i
+                                            className={`fas fa-arrow-left ${styles.navbarIcon}`}
+                                        ></i>{" "}
+                                        Retour
+                                    </button>
+                                </div>
+                                <div className={stylesMobile.titleCard}>
+                                    <h3 className={stylesMobile.title}>
+                                        {(() => {
+                                            if (event.type === "Intervention") {
+                                                return "Intervention";
+                                            } else {
+                                                return "Rendez-vous";
+                                            }
+                                        })()}
+                                    </h3>
+                                    <div className={stylesMobile.intStatus}>
+                                        <p className={stylesMobile.eventId}>
+                                            {(() => {
+                                                if (
+                                                    event.type ===
+                                                    "Intervention"
+                                                ) {
+                                                    return "INT-";
+                                                } else {
+                                                    return "RDV-";
+                                                }
+                                            })()}
+                                            {event.idEvent}
+                                        </p>
+                                        <p>
+                                            {this.getStatusIndicator(
+                                                event.status
+                                            )}
+                                        </p>
+                                    </div>
+                                    <p>{event.title}</p>
+                                </div>
+                                <div className={stylesMobile.detailsCard}>
+                                    <h3 className={stylesMobile.title}>
+                                        Détails
+                                    </h3>
+                                    <p className={stylesMobile.boldElement}>
+                                        Client
+                                    </p>
+                                    <p className={stylesMobile.dataElement}>
+                                        {event.client.firstname}{" "}
+                                        {event.client.lastname}
+                                    </p>
+                                    <p className={stylesMobile.boldElement}>
+                                        Téléphone
+                                    </p>
+                                    <p className={stylesMobile.dataElement}>
+                                        {event.client.phoneNumber}
+                                    </p>
+                                    <p className={stylesMobile.boldElement}>
+                                        Adresse
+                                    </p>
+                                    <p className={stylesMobile.dataElement}>
+                                        {event.client.address.address},{" "}
+                                        {event.client.address.zipcode},{" "}
+                                        {event.client.address.city}
+                                    </p>
+                                    <p className={stylesMobile.boldElement}>
+                                        Description
+                                    </p>
+                                    <p className={stylesMobile.dataElement}>
+                                        {event.description}
+                                    </p>
+                                </div>
+
+                                <div className={stylesMobile.planCard}>
+                                    <h3 className={stylesMobile.title}>
+                                        Plannification
+                                    </h3>
+                                    <p className={stylesMobile.boldElement}>
+                                        Technicien intervenant
+                                    </p>
+                                    <p className={stylesMobile.dataElement}>
+                                        {event.employee.firstname}{" "}
+                                        {event.employee.lastname}
+                                    </p>
+                                    <p className={stylesMobile.boldElement}>
+                                        Début{" "}
+                                        {(() => {
+                                            if (event.type === "Intervention") {
+                                                return "de l'intervention";
+                                            } else {
+                                                return "du rendez-vous";
+                                            }
+                                        })()}
+                                    </p>
+                                    <p className={stylesMobile.dataElement}>
+                                        {event.startingDate
+                                            ? new Date(
+                                                  event.startingDate
+                                              ).toLocaleDateString()
+                                            : ""}{" "}
+                                        -{" "}
+                                        {new Date(
+                                            `1970-01-01T${event.startingHour}`
+                                        ).toLocaleTimeString([], {
+                                            hour: "2-digit",
+                                            minute: "2-digit",
+                                        })}
+                                    </p>
+                                    <p className={stylesMobile.boldElement}>
+                                        Fin{" "}
+                                        {(() => {
+                                            if (event.type === "Intervention") {
+                                                return "de l'intervention";
+                                            } else {
+                                                return "du rendez-vous";
+                                            }
+                                        })()}
+                                    </p>
+                                    <p className={stylesMobile.dataElement}>
+                                        {event.startingDate
+                                            ? new Date(
+                                                  event.startingDate
+                                              ).toLocaleDateString()
+                                            : ""}{" "}
+                                        -{" "}
+                                        {new Date(
+                                            `1970-01-01T${event.endingHour}`
+                                        ).toLocaleTimeString([], {
+                                            hour: "2-digit",
+                                            minute: "2-digit",
+                                        })}
+                                    </p>
+                                </div>
+
+                                {/* <div>
+                                    <div>
+                                        {event.type === "Rendez-vous" && event.status === 5 && (
+                                            <>
+                                                <h3>Travaux à effectuer</h3>
+                                                <div>{event.workToDo}</div>
+                                            </>
+                                        )}
+                                    </div>
+                                </div> */}
+                                <div className={stylesMobile.modalFooter}>
+                                    {(() => {
+                                        if (event.type === "Intervention") {
+                                            if (event.status === 5) {
+                                                return (
+                                                    <button
+                                                        className={
+                                                            stylesMobile.fillButton
+                                                        }
+                                                        type="button"
+                                                        onClick={
+                                                            this
+                                                                .handleViewReport
+                                                        }
+                                                    >
+                                                        Voir le rapport validé
+                                                    </button>
+                                                );
+                                            } else {
+                                                if (
+                                                    event.status !== 1 &&
+                                                    event.startingHour !==
+                                                        null &&
+                                                    event.endingHour !== null
+                                                ) {
+                                                    return (
+                                                        <button
+                                                            className={
+                                                                stylesMobile.fillButton
+                                                            }
+                                                            type="submit"
+                                                        >
+                                                            Remplir le rapport
+                                                        </button>
+                                                    );
+                                                }
+                                                return null;
+                                            }
+                                        } else if (
+                                            event.type === "Rendez-vous"
+                                        ) {
+                                            if (
+                                                event.status !== 5 &&
+                                                event.status !== 1 &&
+                                                event.startingHour !== null &&
+                                                event.endingHour !== null
+                                            ) {
+                                                return (
+                                                    <button
+                                                        className={
+                                                            stylesMobile.fillButton
+                                                        }
+                                                        type="submit"
+                                                    >
+                                                        Remplir le questionnaire
+                                                    </button>
+                                                );
+                                            }
+                                        }
+                                        return null;
+                                    })()}
+                                </div>
+                            </div>
+                        </form>
+                    </>
+                ) : (
+                    <form
+                        onSubmit={this.handleSubmit}
+                        className={`${styles.modal} ${styles.open}`}
+                    >
+                        <div className={styles.container}>
+                            <div>
+                                <h2>
+                                    {(() => {
+                                        if (event.type === "Intervention") {
+                                            return "Intervention";
+                                        } else {
+                                            return "Rendez-vous";
+                                        }
+                                    })()}
+                                </h2>
+                                <p>{this.getStatusIndicator(event.status)}</p>
+                            </div>
+
+                            <div>
+                                <div>
+                                    <h2>
+                                        {(() => {
+                                            if (event.type === "Intervention") {
+                                                return "INT-";
+                                            } else {
+                                                return "RDV-";
+                                            }
+                                        })()}
+                                        {event.idEvent}
+                                    </h2>
+                                </div>
+                                <div className={styles.separator}></div>
+                                <div>
+                                    Client: {event.client.firstname}{" "}
+                                    {event.client.lastname}
+                                </div>
+                                <div>Téléphone: {event.client.phoneNumber}</div>
+                                <div>
+                                    Adresse: {event.client.address.address},{" "}
+                                    {event.client.address.zipcode}{" "}
+                                    {event.client.address.city}
+                                </div>
+                                <div>Description: {event.description}</div>
+                                <div className={styles.separator}></div>
+                                <h3>Planification</h3>
+                                <div>
+                                    Début{" "}
+                                    {(() => {
+                                        if (event.type === "Intervention") {
+                                            return "de l'intervention";
+                                        } else {
+                                            return "du rendez-vous";
+                                        }
+                                    })()}
+                                    :{" "}
+                                    {event.startingDate
+                                        ? new Date(
+                                              event.startingDate
+                                          ).toLocaleDateString()
+                                        : ""}{" "}
+                                    - {event.startingHour}
+                                </div>
+                                <div>
+                                    Fin{" "}
+                                    {(() => {
+                                        if (event.type === "Intervention") {
+                                            return "de l'intervention";
+                                        } else {
+                                            return "du rendez-vous";
+                                        }
+                                    })()}
+                                    : {event.endingHour}
+                                </div>
+                                <div>
+                                    Technicien intervenant:{" "}
+                                    {event.employee.firstname}{" "}
+                                    {event.employee.lastname}
+                                </div>
+                                <div className={styles.separator}></div>
+                                <div>
+                                    {event.type === "Rendez-vous" &&
+                                        event.status === 5 && (
+                                            <>
+                                                <h3>Travaux à effectuer</h3>
+                                                <div>{event.workToDo}</div>
+                                            </>
+                                        )}
+                                </div>
+                            </div>
+                            <div className={styles.modalFooter}>
+                                {event.status !== 5 && (
+                                    <button
+                                        type="button"
+                                        onClick={this.handleDelete}
+                                    >
+                                        Supprimer
+                                    </button>
+                                )}
+                                <button type="button" onClick={closeModal}>
+                                    Retour
+                                </button>
+                                {event.status !== 5 && (
+                                    <button
+                                        type="button"
+                                        onClick={this.handleEdit}
+                                    >
+                                        Modifier
+                                    </button>
+                                )}
                                 {(() => {
                                     if (event.type === "Intervention") {
-                                        return "INT-";
-                                    } else {
-                                        return "RDV-";
-                                    }
-                                })()}
-                                {event.idEvent}
-                            </h2>
-                        </div>
-                        <div className={styles.separator}></div>
-                        <div>
-                            Client: {event.client.firstname}{" "}
-                            {event.client.lastname}
-                        </div>
-                        <div>Téléphone: {event.client.phoneNumber}</div>
-                        <div>
-                            Adresse: {event.client.address.address},{" "}
-                            {event.client.address.zipcode}{" "}
-                            {event.client.address.city}
-                        </div>
-                        <div>Description: {event.description}</div>
-                        <div className={styles.separator}></div>
-                        <h3>Planification</h3>
-                        <div>
-                            Début{" "}
-                            {(() => {
-                                if (event.type === "Intervention") {
-                                    return "de l'intervention";
-                                } else {
-                                    return "du rendez-vous";
-                                }
-                            })()}
-                            :{" "}
-                            {event.startingDate
-                                ? new Date(
-                                      event.startingDate
-                                  ).toLocaleDateString()
-                                : ""}{" "}
-                            - {event.startingHour}
-                        </div>
-                        <div>
-                            Fin{" "}
-                            {(() => {
-                                if (event.type === "Intervention") {
-                                    return "de l'intervention";
-                                } else {
-                                    return "du rendez-vous";
-                                }
-                            })()}
-                            : {event.endingHour}
-                        </div>
-                        <div>
-                            Technicien intervenant: {event.employee.firstname}{" "}
-                            {event.employee.lastname}
-                        </div>
-                        <div className={styles.separator}></div>
-                        <div>
-                            {event.type === "Rendez-vous" &&
-                                event.status === 5 && (
-                                    <>
-                                        <h3>Travaux à effectuer</h3>
-                                        <div>{event.workToDo}</div>
-                                    </>
-                                )}
-                        </div>
-                    </div>
-                    <div className={styles.modalFooter}>
-                        {event.status !== 5 && (
-                            <button type="button" onClick={this.handleDelete}>
-                                Supprimer
-                            </button>
-                        )}
-                        <button type="button" onClick={closeModal}>
-                            Retour
-                        </button>
-                        {event.status !== 5 && (
-                            <button type="button" onClick={this.handleEdit}>
-                                Modifier
-                            </button>
-                        )}
-                        {(() => {
-                            if (event.type === "Intervention") {
-                                if (event.status === 5) {
-                                    return (
-                                        <button
-                                            type="button"
-                                            onClick={this.handleViewReport}
-                                        >
-                                            Voir le rapport validé
-                                        </button>
-                                    );
-                                } else {
-                                    if (
-                                        event.status !== 1 &&
-                                        event.startingHour !== null &&
-                                        event.endingHour !== null
-                                    ) {
-                                        return (
-                                            <button type="submit">
-                                                Remplir le rapport
-                                            </button>
-                                        );
+                                        if (event.status === 5) {
+                                            return (
+                                                <button
+                                                    type="button"
+                                                    onClick={
+                                                        this.handleViewReport
+                                                    }
+                                                >
+                                                    Voir le rapport validé
+                                                </button>
+                                            );
+                                        } else {
+                                            if (
+                                                event.status !== 1 &&
+                                                event.startingHour !== null &&
+                                                event.endingHour !== null
+                                            ) {
+                                                return (
+                                                    <button type="submit">
+                                                        Remplir le rapport
+                                                    </button>
+                                                );
+                                            }
+                                            return null;
+                                        }
+                                    } else if (event.type === "Rendez-vous") {
+                                        if (
+                                            event.status !== 5 &&
+                                            event.status !== 1 &&
+                                            event.startingHour !== null &&
+                                            event.endingHour !== null
+                                        ) {
+                                            return (
+                                                <button type="submit">
+                                                    Remplir le questionnaire
+                                                </button>
+                                            );
+                                        }
                                     }
                                     return null;
-                                }
-                            } else if (event.type === "Rendez-vous") {
-                                if (
-                                    event.status !== 5 &&
-                                    event.status !== 1 &&
-                                    event.startingHour !== null &&
-                                    event.endingHour !== null
-                                ) {
-                                    return (
-                                        <button type="submit">
-                                            Remplir le questionnaire
-                                        </button>
-                                    );
-                                }
-                            }
-                            return null;
-                        })()}
-                    </div>
-                </div>
-            </form>
+                                })()}
+                            </div>
+                        </div>
+                    </form>
+                )}
+            </>
         );
     }
 }

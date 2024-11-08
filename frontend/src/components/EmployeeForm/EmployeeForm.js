@@ -110,8 +110,8 @@ class EmployeeForm extends Component {
                             <label htmlFor="phone">Téléphone:</label>
                             <input
                                 type="text"
-                                id="phone"
-                                name="phone"
+                                id="phoneNumber"
+                                name="phoneNumber"
                                 value={this.state.phoneNumber}
                                 onChange={this.handleChange}
                             />

@@ -7,38 +7,30 @@ body {
     display: flex;
     flex-direction: column;
     width: 100vw;
-}
-
-/* placement et style du titre de la pge  */
-.pageTitle {
-    font-size: 1.3em;
-    font-weight: 550;
-    margin: 1em 0 1em 0.5em;
-    background-color: red;
-}
-
-/* fixation du top side (titre, filter bar et evenement) */
-.fixedTopSide {
-    height: 11.5em;
-    position: sticky;
-    width: 100%;
-    background-color: white;
-    z-index: 1;
+    padding-top: 4em;
+    margin-bottom: 5em;
 }
 
 /*CSS event cards*/
 .eventCard {
     display: flex;
     margin: 1em;
+    background-color: white;
     box-shadow: 0 0.3em 0.3em rgba(0, 0, 0, 0.247);
     border-radius: 1em;
+    position: sticky;
 }
 
-.sideColor {
+.sideColorPro {
     width: 1em;
-    background-color: #91cb94;
-    margin: 0;
     border-radius: 1em 0 0 1em;
+    background-color: #55abdb;
+}
+
+.sideColorPart {
+    width: 1em;
+    border-radius: 1em 0 0 1em;
+    background-color: #91cb94;
 }
 
 .leftSide {
@@ -49,10 +41,43 @@ body {
     margin-right: auto;
 }
 
-.intStatus {
+.rightSide {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0.5em;
+    margin-left: auto;
 }
 
 .type {
     font-size: 1.2em;
     font-weight: 700;
+}
+
+.intStatus {
+    margin-bottom: 1em;
+}
+
+.status {
+    font-size: 0.9em;
+    font-weight: 500;
+    color: #c93c2c;
+}
+
+.idInter {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.initiale {
+    background-color: blue;
+    color: white;
+    padding: 0.5em;
+    border-radius: 10em;
+    margin-left: 0.5em;
+}
+
+.dateHour {
+    font-size: 0.8em;
 }

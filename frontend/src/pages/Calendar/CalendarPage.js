@@ -65,12 +65,16 @@ class CalendarPage extends Component {
 
             if (event.startingDate && event.startingHour) {
                 startDateTime = new Date(event.startingDate);
-                startDateTime.setHours(...event.startingHour.split(":").map(Number));
+                startDateTime.setHours(
+                    ...event.startingHour.split(":").map(Number)
+                );
             }
 
             if (event.startingDate && event.endingHour) {
                 endDateTime = new Date(event.startingDate);
-                endDateTime.setHours(...event.endingHour.split(":").map(Number));
+                endDateTime.setHours(
+                    ...event.endingHour.split(":").map(Number)
+                );
             }
 
             return {
@@ -90,7 +94,10 @@ class CalendarPage extends Component {
     handleNextPage(event) {
         event.preventDefault();
         this.setState((prevState) => ({
-            currentPage: Math.min(prevState.currentPage + 1, Math.ceil(prevState.events.length / prevState.eventsPerPage)),
+            currentPage: Math.min(
+                prevState.currentPage + 1,
+                Math.ceil(prevState.events.length / prevState.eventsPerPage)
+            ),
         }));
     }
 
@@ -231,36 +238,151 @@ class CalendarPage extends Component {
                     <>
                         <div>
                             <TemplateGlobalMobile />
+                            <div className={stylesMobile.filterBar}>
+                                <FilterBar />
+                            </div>
                             <div className={stylesMobile.container}>
-                                <div className={stylesMobile.fixedTopSide}>
-                                    <div className={stylesMobile.filterBar}>
-                                        <FilterBar />
-                                    </div>
-                                </div>
-                                <div className={stylesMobile.eventCard}>
-                                    <div className={stylesMobile.sideColor}></div>
-
-                                    <div className={stylesMobile.leftSide}>
-                                        <div>
-                                            <div className={stylesMobile.intStatus}>
-                                                <p className={stylesMobile.type}>Intervention</p>
-                                                <p>Status</p>
+                                {currentEvents.map((event) => (
+                                    <div
+                                        className={stylesMobile.eventCard}
+                                        onClick={() =>
+                                            this.toggleEventModal(event)
+                                        }
+                                    >
+                                        <div
+                                            className={
+                                                event.client.category ===
+                                                "Professionnel"
+                                                    ? stylesMobile.sideColorPro
+                                                    : stylesMobile.sideColorPart
+                                            }
+                                        ></div>
+                                        <div className={stylesMobile.leftSide}>
+                                            <div>
+                                                <div
+                                                    className={
+                                                        stylesMobile.intStatus
+                                                    }
+                                                >
+                                                    <p
+                                                        className={
+                                                            stylesMobile.type
+                                                        }
+                                                    >
+                                                        {event.type}
+                                                    </p>
+                                                    <p
+                                                        className={
+                                                            stylesMobile.status
+                                                        }
+                                                    >
+                                                        {this.getStatusIndicator(
+                                                            event.status
+                                                        )}
+                                                    </p>
+                                                </div>
+                                                <p>{event.client.category}</p>
+                                                <p>
+                                                    {event.client.category} -{" "}
+                                                    {event.client.firstname}{" "}
+                                                    {event.client.lastname}
+                                                </p>
                                             </div>
-                                            <p>Type - Name</p>
+                                        </div>
+                                        <div className={stylesMobile.rightSide}>
+                                            <p
+                                                className={
+                                                    stylesMobile.dateHour
+                                                }
+                                            >
+                                                {event.startingDate
+                                                    ? new Date(
+                                                          event.startingDate
+                                                      ).toLocaleDateString()
+                                                    : ""}{" "}
+                                                à{" "}
+                                                {new Date(
+                                                    `1970-01-01T${event.startingHour}`
+                                                ).toLocaleTimeString([], {
+                                                    hour: "2-digit",
+                                                    minute: "2-digit",
+                                                })}
+                                            </p>
+                                            <div
+                                                className={stylesMobile.idInter}
+                                            >
+                                                <p>
+                                                    {(() => {
+                                                        if (
+                                                            event.type ===
+                                                            "Intervention"
+                                                        ) {
+                                                            return "INT-";
+                                                        } else {
+                                                            return "RDV-";
+                                                        }
+                                                    })()}
+                                                    {event.idEvent}
+                                                </p>
+                                                <p
+                                                    className={
+                                                        stylesMobile.initiale
+                                                    }
+                                                >
+                                                    {event.employee.lastname.charAt(
+                                                        0
+                                                    )}
+                                                    {event.employee.firstname.charAt(
+                                                        0
+                                                    )}
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div className={stylesMobile.rightSide}>
-                                        <p>Date & Hour</p>
-                                        <div className={stylesMobile.idInter}>
-                                            <p>Id</p>
-                                            <p className={stylesMobile.initiale}>Intervenants</p>
-                                        </div>
+                                ))}
+                            </div>
+                            {isEventModalOpen && !isUpdateFormOpen && (
+                                <InterventionForm
+                                    event={selectedEvent}
+                                    closeModal={() => this.toggleEventModal()}
+                                    openUpdateForm={this.openUpdateForm}
+                                />
+                            )}
+                            {isUpdateFormOpen && (
+                                <UpdateInterventionForm
+                                    event={selectedEvent}
+                                    closeModal={this.closeUpdateForm}
+                                />
+                            )}
+                            {isCreateEventModalOpen && (
+                                <CreateEventForm
+                                    closeModal={this.toggleCreateEventModal}
+                                />
+                            )}
+                        </div>
+                    </>
+                ) : (
+                    <>
+                        <div>
+                            <TemplateGlobal />
+                            <div className={styles.container}>
+                                <div className={styles.fixedTopSide}>
+                                    <h1 className={styles.pageTitle}>
+                                        Calendrier
+                                    </h1>
+                                    <div className={styles.filterBar}>
+                                        <FilterBar
+                                            toggleCreateEventModal={
+                                                this.toggleCreateEventModal
+                                            }
+                                        />
                                     </div>
+                                    <h3>Événements</h3>
                                 </div>
-                                {/* <div className={stylesMobile.listView}>
+                                <div className={styles.listView}>
                                     <div>
                                         <button
-                                            className={stylesMobile.viewButton}
+                                            className={styles.viewButton}
                                             onClick={() =>
                                                 this.toggleView("calendar")
                                             }
@@ -268,7 +390,7 @@ class CalendarPage extends Component {
                                             Calendrier
                                         </button>
                                         <button
-                                            className={stylesMobile.viewButton}
+                                            className={styles.viewButton}
                                             onClick={() =>
                                                 this.toggleView("list")
                                             }
@@ -283,7 +405,7 @@ class CalendarPage extends Component {
                                             <table>
                                                 <thead
                                                     className={
-                                                        stylesMobile.stickyThead
+                                                        styles.stickyThead
                                                     }
                                                 >
                                                     <tr>
@@ -381,11 +503,7 @@ class CalendarPage extends Component {
                                                     )}
                                                 </tbody>
                                             </table>
-                                            <div
-                                                className={
-                                                    stylesMobile.pagination
-                                                }
-                                            >
+                                            <div className={styles.pagination}>
                                                 <button
                                                     onClick={(e) =>
                                                         this.handlePreviousPage(
@@ -410,101 +528,6 @@ class CalendarPage extends Component {
                                             </div>
                                         </div>
                                     )}
-                                </div> */}
-                            </div>
-                            {isEventModalOpen && !isUpdateFormOpen && (
-                                <InterventionForm
-                                    event={selectedEvent}
-                                    closeModal={() => this.toggleEventModal()}
-                                    openUpdateForm={this.openUpdateForm}
-                                />
-                            )}
-                            {isUpdateFormOpen && <UpdateInterventionForm event={selectedEvent} closeModal={this.closeUpdateForm} />}
-                            {isCreateEventModalOpen && <CreateEventForm closeModal={this.toggleCreateEventModal} />}
-                        </div>
-                    </>
-                ) : (
-                    <>
-                        <div>
-                            <TemplateGlobal />
-                            <div className={styles.container}>
-                                <div className={styles.fixedTopSide}>
-                                    <h1 className={styles.pageTitle}>Calendrier</h1>
-                                    <div className={styles.filterBar}>
-                                        <FilterBar toggleCreateEventModal={this.toggleCreateEventModal} />
-                                    </div>
-                                    <h3>Événements</h3>
-                                </div>
-                                <div className={styles.listView}>
-                                    <div>
-                                        <button className={styles.viewButton} onClick={() => this.toggleView("calendar")}>
-                                            Calendrier
-                                        </button>
-                                        <button className={styles.viewButton} onClick={() => this.toggleView("list")}>
-                                            Liste
-                                        </button>
-                                    </div>
-                                    {view === "calendar" ? (
-                                        <Calendar events={calendarEvents} />
-                                    ) : (
-                                        <div>
-                                            <table>
-                                                <thead className={styles.stickyThead}>
-                                                    <tr>
-                                                        <th>Client</th>
-                                                        <th>Référence</th>
-                                                        <th>Type</th>
-                                                        <th>Titre</th>
-                                                        <th>Statut</th>
-                                                        <th>Date</th>
-                                                        <th>Intervenant</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {currentEvents.map((event) => (
-                                                        <tr key={event.idEvent}>
-                                                            <td>
-                                                                <a href="#">
-                                                                    {event.client.firstname} {event.client.lastname}
-                                                                </a>
-                                                            </td>
-                                                            <td>
-                                                                {(() => {
-                                                                    if (event.type === "Intervention") {
-                                                                        return "INT-";
-                                                                    } else {
-                                                                        return "RDV-";
-                                                                    }
-                                                                })()}
-                                                                {event.idEvent}
-                                                            </td>
-                                                            <td>{event.type}</td>
-                                                            <td>
-                                                                <a href="#" onClick={() => this.toggleEventModal(event)}>
-                                                                    {event.title}
-                                                                </a>
-                                                            </td>
-                                                            <td>{this.getStatusIndicator(event.status)}</td>
-                                                            <td>{event.startingDate ? new Date(event.startingDate).toLocaleDateString() : ""}</td>
-                                                            <td>
-                                                                <a href="#">
-                                                                    {event.employee.firstname} {event.employee.lastname}
-                                                                </a>
-                                                            </td>
-                                                        </tr>
-                                                    ))}
-                                                </tbody>
-                                            </table>
-                                            <div className={styles.pagination}>
-                                                <button onClick={(e) => this.handlePreviousPage(e)} disabled={currentPage === 1}>
-                                                    {"<"}
-                                                </button>
-                                                <button onClick={(e) => this.handleNextPage(e)} disabled={currentPage === totalPages}>
-                                                    {">"}
-                                                </button>
-                                            </div>
-                                        </div>
-                                    )}
                                 </div>
                             </div>
                             {isEventModalOpen && !isUpdateFormOpen && (
@@ -514,8 +537,17 @@ class CalendarPage extends Component {
                                     openUpdateForm={this.openUpdateForm}
                                 />
                             )}
-                            {isUpdateFormOpen && <UpdateInterventionForm event={selectedEvent} closeModal={this.closeUpdateForm} />}
-                            {isCreateEventModalOpen && <CreateEventForm closeModal={this.toggleCreateEventModal} />}
+                            {isUpdateFormOpen && (
+                                <UpdateInterventionForm
+                                    event={selectedEvent}
+                                    closeModal={this.closeUpdateForm}
+                                />
+                            )}
+                            {isCreateEventModalOpen && (
+                                <CreateEventForm
+                                    closeModal={this.toggleCreateEventModal}
+                                />
+                            )}
                         </div>
                     </>
                 )}

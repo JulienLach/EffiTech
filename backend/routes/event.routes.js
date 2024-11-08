@@ -1,12 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const eventServices = require("../services/event.services.js");
+const authenticateToken = require("../middlewares/auth.middleware.js");
 
-router.get("/", eventServices.getAllEvents);
+router.get("/", authenticateToken, eventServices.getAllEvents);
 
 router.get("/:idEvent", eventServices.getEventById);
 
-router.post("/", eventServices.createEvent);
+router.post("/", authenticateToken, eventServices.createEvent);
 
 router.put("/:idEvent", eventServices.updateEvent);
 

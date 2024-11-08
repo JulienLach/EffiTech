@@ -99,28 +99,7 @@ function updateEmployee(req, res) {
     );
 }
 
-function loginEmployee(req, res) {
-    const { email, password } = req.body;
-    Employee.loginEmployee(email, password, (error, employee) => {
-        if (error) {
-            return res.status(500).send({
-                message: "Erreur mauvais identifiants",
-                error: error.message,
-            });
-        }
-        if (employee) {
-            res.cookie("token", employee.token, {
-                httpOnly: true,
-            });
-            res.status(200).send(employee);
-        } else {
-            res.status(404).send({ message: "Compte employé non trouvé" });
-        }
-    });
-}
-
 exports.getAllEmployees = getAllEmployees;
 exports.getEmployeeById = getEmployeeById;
 exports.createEmployee = createEmployee;
 exports.updateEmployee = updateEmployee;
-exports.loginEmployee = loginEmployee;

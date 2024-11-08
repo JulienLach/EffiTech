@@ -6,6 +6,42 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+# [0.2.0] (2024-11-08)
+
+## Changes
+
+-   Add apidoc package and documented api.js file
+-   Add sorting by client category button on client page
+-   Add mobile calendar view with event cards displayed for technicians
+-   Add Intervention form view for technician
+-   Add jwt auth and redirections to access client side pages
+-   Add jwt auth to displayed events for connected employees
+    -   Display only events assigned to the connected employee
+-   Add default coverage option to JEST test script
+-   Add expenses page for technician on mobile
+
+## Fixes
+
+-   Refactor jwt auth server side in client login method
+-   Fix redirect on company page with 404 error with employee connected
+-   Fix JavaScript methods for touch handling on mobile in the signature canva component
+
+# [0.1.2] (2024-11-05)
+
+## Changes
+
+-   Add highlighted sidebar menu for current page
+-   Add first mobile view for technician
+    -   Login page
+    -   Calendar page on progress
+-   Add JEST package for unit test purposes
+    -   Add test files
+-   Defined end to end test documented on readme.md
+
+## Fixes
+
+-   Hide fill intervention form button for event with no defined starting hour and ending hour
+
 # [0.1.1] (2024-11-05)
 
 ## Changes

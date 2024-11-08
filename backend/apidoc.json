@@ -1,0 +1,13 @@
+{
+    "name": "EffiTech API",
+    "version": "1.0.0",
+    "description": "API documentation for EffiTech",
+    "title": "EffiTech API Documentation",
+    "url": "http://localhost:3001",
+    "template": {
+        "withCompare": true,
+        "withGenerator": true,
+        "showRequiredLabels": true,
+        "forceLanguage": "en"
+    }
+}
