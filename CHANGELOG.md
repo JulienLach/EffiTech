@@ -6,6 +6,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## Changes
+
+-   Add apidoc package and documented api with api.js file
+
+# [0.1.2] (2024-11-05)
+
+## Changes
+
+-   Add highlighted sidebar menu for current page
+-   Add first mobile view for technician
+    -   Login page
+    -   Calendar page on progress
+-   Add JEST package for unit test purposes
+    -   Add test files
+-   Defined end to end test documented on readme.md
+
+## Fixes
+
+-   Hide fill intervention form button for event with no defined starting hour and ending hour
+
 # [0.1.1] (2024-11-05)
 
 ## Changes

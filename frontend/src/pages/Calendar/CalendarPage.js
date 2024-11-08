@@ -250,7 +250,7 @@ class CalendarPage extends Component {
                                                 </div>
                                                 <p>{event.client.category}</p>
                                                 <p>
-                                                    {event.client.firstname} {event.client.lastname}
+                                                    {event.client.category} - {event.client.firstname} {event.client.lastname}
                                                 </p>
                                             </div>
                                         </div>
