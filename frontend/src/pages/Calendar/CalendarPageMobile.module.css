@@ -8,6 +8,7 @@ body {
     flex-direction: column;
     width: 100vw;
     padding-top: 4em;
+    margin-bottom: 5em;
 }
 
 /*CSS event cards*/
