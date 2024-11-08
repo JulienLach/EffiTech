@@ -8,7 +8,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Changes
 
--   Add apidoc package and documented api with api.js file
+-   Add apidoc package and documented api.js file
+-   Add sorting by client category button on client page
+-   Add mobile calendar view with event cards displayed for technicians
+-   Add jwt auth and redirections to access client side pages
+-   Add jwt auth to displayed events for connected employees
+    -   Display only events assigned to the connected employee
+
+## Fixes
+
+-   Refactor jwt auth server side in client login method
 
 # [0.1.2] (2024-11-05)
 
