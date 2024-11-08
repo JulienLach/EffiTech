@@ -10,6 +10,14 @@ function getAllEvents(req, res) {
                 error: error.message,
             });
         }
+
+        // Filtrer les événements en fonction de l'utilisateur connecté en vérifiant si l'utilisateur est un administrateur, infos récupéré dans le payload de la requête HTTP
+        if (req.employee.isAdmin === false) {
+            events = events.filter(
+                (event) => event.employee.idEmployee === req.employee.idEmployee
+            );
+        }
+
         res.status(200).send(events); // Renvoyer tous les événements
     });
 }
