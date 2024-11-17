@@ -273,6 +273,7 @@ function getReportById(idEvent, callback) {
 function updateEvent(eventData, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("PUT", `${API_URL}/events/${eventData.idEvent}`);
+    xhr.withCredentials = true;
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onload = function () {
         if (xhr.status === 200) {
@@ -485,6 +486,7 @@ function getCompany(callback) {
 function deleteEvent(idEvent, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("DELETE", `${API_URL}/events/${idEvent}`);
+    xhr.withCredentials = true;
     xhr.onload = function () {
         if (xhr.status === 200) {
             callback(null, JSON.parse(xhr.responseText));
