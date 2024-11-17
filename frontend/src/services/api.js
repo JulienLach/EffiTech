@@ -89,7 +89,7 @@ function getAllClients(callback) {
 function getAllEmployees(callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", `${API_URL}/employees`);
-    xhr.withCredentials = true; // Assurez-vous que les cookies sont envoyés avec la requête
+    xhr.withCredentials = true;
     xhr.onload = function () {
         if (xhr.status === 200) {
             callback(null, JSON.parse(xhr.responseText));
@@ -188,6 +188,7 @@ function createEvent(eventData, callback) {
 function createReport(newReport, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", `${API_URL}/reports`);
+    xhr.withCredentials = true;
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onload = function () {
         if (xhr.status === 200 || xhr.status === 201) {
@@ -225,6 +226,7 @@ function createReport(newReport, callback) {
 function getReportById(idEvent, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", `${API_URL}/reports/${idEvent}`);
+    xhr.withCredentials = true;
     xhr.onload = function () {
         if (xhr.status === 200) {
             callback(null, JSON.parse(xhr.responseText));
