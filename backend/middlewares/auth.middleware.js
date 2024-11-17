@@ -15,10 +15,6 @@ function authenticateToken(req, res, next) {
         }
     }
 
-    if (!token) {
-        // return res.redirect("http://localhost:3000/login");
-    }
-
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
         if (err) {
             console.log("Erreur de vérification du token:", err);
