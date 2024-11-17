@@ -18,7 +18,7 @@ class ClientsPage extends Component {
             clients: [],
             error: null,
             isModalOpen: false,
-            category: "Particulier",
+            category: "",
             company: "",
             isCategeoryModalOpen: false,
             selectedCategory: "All",
@@ -87,11 +87,11 @@ class ClientsPage extends Component {
         }
     }
 
-    openTypeModal = () => {
+    openCategoryModal = () => {
         this.setState({ isCategeoryModalOpen: true });
     };
 
-    closeTypeModal = () => {
+    closeCategoryModal = () => {
         this.setState({ isCategeoryModalOpen: false });
     };
 
@@ -167,7 +167,7 @@ class ClientsPage extends Component {
                             </div>
                             <div
                                 className={styles.typeFilter}
-                                onClick={this.openTypeModal}
+                                onClick={this.openCategoryModal}
                             >
                                 <i className="fa-solid fa-filter"></i>
                                 <p>Type</p>
@@ -228,10 +228,14 @@ class ClientsPage extends Component {
                                                 Professionnels
                                             </label>
                                         </div>
-                                        <button onClick={this.closeTypeModal}>
+                                        <button
+                                            onClick={this.closeCategoryModal}
+                                        >
                                             Annuler
                                         </button>
-                                        <button onClick={this.closeTypeModal}>
+                                        <button
+                                            onClick={this.closeCategoryModal}
+                                        >
                                             Filter
                                         </button>
                                     </div>
