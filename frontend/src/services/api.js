@@ -418,6 +418,7 @@ function getEmployeeById(idEmployee, callback) {
 function getClientById(idClient, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", `${API_URL}/clients/${idClient}`);
+    xhr.withCredentials = true;
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onload = function () {
         if (xhr.status === 200) {
@@ -618,6 +619,7 @@ function updateEmployee(employeeData, callback) {
 function updateClient(clientData, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("PUT", `${API_URL}/clients/${clientData.idClient}`);
+    xhr.withCredentials = true;
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onload = function () {
         if (xhr.status === 200) {
