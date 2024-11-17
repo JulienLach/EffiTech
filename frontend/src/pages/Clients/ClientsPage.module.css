@@ -220,8 +220,30 @@ body {
 }
 
 .modalFilter {
-    display: flex;
-    align-items: start;
-    margin: 1em 4em;
-    border: 1px solid red;
+    padding: 1em;
+}
+
+.modalFilter input {
+    margin: 0.325em;
+    padding: 0.325em;
+    border: none;
+    border-radius: 0.625em;
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.modalFilter button {
+    margin: 0.325em;
+    padding: 0.325em;
+    border: none;
+    border-radius: 0.625em;
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.modalFilter button:hover {
+    background-color: #c93c2c;
+    color: white;
 }
