@@ -4,8 +4,27 @@ import logo from "../../images/logo.svg";
 import bellIcon from "../../images/notificationBell.svg";
 
 class TemplateGlobal extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            currentPath: window.location.pathname,
+            showProfileMenu: false,
+        };
+        this.toggleProfileMenu = this.toggleProfileMenu.bind(this);
+        this.logout = this.logout.bind(this);
+    }
+
+    toggleProfileMenu() {
+        this.setState((prevState) => ({
+            showProfileMenu: !prevState.showProfileMenu,
+        }));
+    }
+    logout() {
+        window.location.href = "/login";
+    }
+
     render() {
-        const currentPath = window.location.pathname;
+        const { currentPath, showProfileMenu } = this.state;
 
         return (
             <>
@@ -30,7 +49,30 @@ class TemplateGlobal extends Component {
                                     2
                                 </span>
                             </div>
-                            <div className={styles.profileBubble}>JL</div>
+                            <div
+                                className={styles.profileBubble}
+                                onClick={this.toggleProfileMenu}
+                            >
+                                JL
+                            </div>
+                            {showProfileMenu && (
+                                <div className={styles.profileMenu}>
+                                    <ul>
+                                        <li>
+                                            <a onClick={this.logout} href="#">
+                                                Se déconnecter{" "}
+                                                <i className="fa-solid fa-sign-out-alt"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="">
+                                                Mon profil{" "}
+                                                <i className="fa-solid fa-user"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
