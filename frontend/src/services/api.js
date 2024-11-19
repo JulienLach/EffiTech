@@ -668,6 +668,7 @@ function updateClient(clientData, callback) {
 function createClient(clientData, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", `${API_URL}/clients`);
+    xhr.withCredentials = true;
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onload = function () {
         if (xhr.status === 200 || xhr.status === 201) {

@@ -27,6 +27,8 @@ class ClientsPage extends Component {
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.handleCategoryChange = this.handleCategoryChange.bind(this);
+        this.handleModalCategoryChange =
+            this.handleModalCategoryChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -105,6 +107,10 @@ class ClientsPage extends Component {
 
     handleCategoryChange(event) {
         this.setState({ selectedCategory: event.target.value });
+    }
+
+    handleModalCategoryChange(event) {
+        this.setState({ category: event.target.value });
     }
 
     handleSubmit(event) {
@@ -332,7 +338,9 @@ class ClientsPage extends Component {
                                                 this.state.category ===
                                                 "Particulier"
                                             }
-                                            onChange={this.handleCategoryChange}
+                                            onChange={this.handleModalCategoryChange.bind(
+                                                this
+                                            )}
                                         />
                                         Particulier
                                     </label>
@@ -349,7 +357,9 @@ class ClientsPage extends Component {
                                                 this.state.category ===
                                                 "Professionnel"
                                             }
-                                            onChange={this.handleCategoryChange}
+                                            onChange={this.handleModalCategoryChange.bind(
+                                                this
+                                            )}
                                         />
                                         Professionnel
                                     </label>
