@@ -31,7 +31,7 @@ class CalendarPage extends Component {
             calendarEvents: [],
             isUpdateFormOpen: false,
             currentPage: 1,
-            eventsPerPage: 10,
+            eventsPerPage: 20,
         };
 
         this.toggleEventModal = this.toggleEventModal.bind(this);
