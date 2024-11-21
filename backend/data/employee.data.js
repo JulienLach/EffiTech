@@ -6,6 +6,8 @@ function generateToken(employee) {
     const payload = {
         idEmployee: employee.idEmployee,
         isAdmin: employee.isAdmin,
+        firstname: employee.firstname,
+        lastname: employee.lastname,
     };
     return jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "24h" });
 }

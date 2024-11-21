@@ -25,6 +25,8 @@ function authenticateToken(req, res, next) {
         req.employee = {
             idEmployee: decoded.idEmployee,
             isAdmin: decoded.isAdmin,
+            firstname: decoded.firstname,
+            lastname: decoded.lastname,
         };
         console.log(
             "Informations de l'employé ajoutées à req.employee:",
