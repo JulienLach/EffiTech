@@ -32,6 +32,9 @@ function authenticateToken(req, res, next) {
             "Informations de l'employé ajoutées à req.employee:",
             req.employee
         );
+
+        res.cookie("employee", JSON.stringify(req.employee));
+
         next();
     });
 }

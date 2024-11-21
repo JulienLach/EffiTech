@@ -6,12 +6,32 @@ import bellIcon from "../../images/notificationBell.svg";
 class TemplateGlobal extends Component {
     constructor(props) {
         super(props);
+        const employee = this.getEmployeeFromCookies();
+        console.log("Employee data from cookies:", employee); // Log pour vérifier les données de l'employé
+
         this.state = {
             currentPath: window.location.pathname,
             showProfileMenu: false,
+            initials: employee
+                ? `${employee.firstname[0]}${employee.lastname[0]}`
+                : "",
         };
         this.toggleProfileMenu = this.toggleProfileMenu.bind(this);
         this.logout = this.logout.bind(this);
+    }
+
+    getEmployeeFromCookies() {
+        const cookies = document.cookie.split("; ");
+        const employeeCookie = cookies.find((cookie) =>
+            cookie.startsWith("employee=")
+        );
+        if (employeeCookie) {
+            const employeeData = JSON.parse(
+                decodeURIComponent(employeeCookie.split("=")[1])
+            );
+            return employeeData;
+        }
+        return null;
     }
 
     toggleProfileMenu() {
@@ -19,12 +39,16 @@ class TemplateGlobal extends Component {
             showProfileMenu: !prevState.showProfileMenu,
         }));
     }
+
     logout() {
+        // Supprimer le cookie employee
+        document.cookie =
+            "employee=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         window.location.href = "/login";
     }
 
     render() {
-        const { currentPath, showProfileMenu } = this.state;
+        const { currentPath, showProfileMenu, initials } = this.state;
 
         return (
             <>
@@ -53,7 +77,7 @@ class TemplateGlobal extends Component {
                                 className={styles.profileBubble}
                                 onClick={this.toggleProfileMenu}
                             >
-                                JL
+                                {initials}
                             </div>
                             {showProfileMenu && (
                                 <div className={styles.profileMenu}>
