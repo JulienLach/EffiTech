@@ -356,13 +356,19 @@ function loginEmployee(credentials, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", `${API_URL}/auth/login`);
     xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.withCredentials = true; //les cookies sont envoyés avec la requête http
+    xhr.withCredentials = true;
     xhr.onload = function () {
         if (xhr.status === 200) {
-            console.log("Connexion réussie");
-            callback(null, JSON.parse(xhr.responseText));
+            const response = JSON.parse(xhr.responseText);
+
+            // Stocker le firstname et lastname dans le localStorage
+            if (response.firstname && response.lastname) {
+                localStorage.setItem("firstname", response.firstname);
+                localStorage.setItem("lastname", response.lastname);
+            }
+
+            callback(null, response);
         } else {
-            console.error("Erreur de connexion", xhr.statusText);
             callback(new Error(xhr.statusText), null);
         }
     };

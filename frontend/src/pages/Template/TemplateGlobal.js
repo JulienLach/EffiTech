@@ -6,32 +6,29 @@ import bellIcon from "../../images/notificationBell.svg";
 class TemplateGlobal extends Component {
     constructor(props) {
         super(props);
-        const employee = this.getEmployeeFromCookies();
-        console.log("Employee data from cookies:", employee); // Log pour vérifier les données de l'employé
-
         this.state = {
             currentPath: window.location.pathname,
             showProfileMenu: false,
-            initials: employee
-                ? `${employee.firstname[0]}${employee.lastname[0]}`
-                : "",
+            initials: "",
         };
         this.toggleProfileMenu = this.toggleProfileMenu.bind(this);
         this.logout = this.logout.bind(this);
     }
 
-    getEmployeeFromCookies() {
-        const cookies = document.cookie.split("; ");
-        const employeeCookie = cookies.find((cookie) =>
-            cookie.startsWith("employee=")
-        );
-        if (employeeCookie) {
-            const employeeData = JSON.parse(
-                decodeURIComponent(employeeCookie.split("=")[1])
-            );
-            return employeeData;
+    componentDidMount() {
+        this.setInitials();
+    }
+
+    setInitials() {
+        const firstname = localStorage.getItem("firstname");
+        const lastname = localStorage.getItem("lastname");
+
+        if (firstname && lastname) {
+            const initials = `${firstname.charAt(0)}${lastname.charAt(
+                0
+            )}`.toUpperCase();
+            this.setState({ initials });
         }
-        return null;
     }
 
     toggleProfileMenu() {

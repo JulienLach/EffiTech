@@ -33,7 +33,10 @@ function authenticateToken(req, res, next) {
             req.employee
         );
 
-        res.cookie("employee", JSON.stringify(req.employee));
+        res.cookie("employee", JSON.stringify(req.employee), {
+            httpOnly: true,
+            sameSite: "Strict",
+        });
 
         next();
     });
