@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## Fixes
+
+-   Fix create account page by adding createAccount api call to auth route and and missing parameters
+
 # [0.2.1] (2024-11-24)
 
 ## Changes

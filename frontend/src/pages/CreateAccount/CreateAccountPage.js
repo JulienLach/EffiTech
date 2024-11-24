@@ -20,6 +20,8 @@ class CreateAccountPage extends Component {
             email: "",
             phoneNumber: "",
             password: "",
+            job: "",
+            speciality: "",
         };
         this.handleCancel = this.handleCancel.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -40,8 +42,15 @@ class CreateAccountPage extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const { firstname, lastname, email, phoneNumber, password } =
-            this.state;
+        const {
+            firstname,
+            lastname,
+            email,
+            phoneNumber,
+            password,
+            job,
+            speciality,
+        } = this.state;
 
         const employeeData = {
             firstname,
@@ -49,9 +58,9 @@ class CreateAccountPage extends Component {
             email,
             phoneNumber,
             password,
-            job: "Plombier",
-            isAdmin: true,
-            speciality: "Tuyaux",
+            job: "",
+            isAdmin: false,
+            speciality: "",
         };
 
         createAccount(employeeData, (error, newAccount) => {
@@ -59,7 +68,7 @@ class CreateAccountPage extends Component {
                 console.error("Erreur lors de la création du compte", error);
             } else {
                 console.log("Compte créé avec succès, ID:", newAccount.id);
-                this.props.navigate("/calendar");
+                this.props.navigate("/login");
             }
         });
     }

@@ -13,4 +13,38 @@ function loginEmployee(req, res) {
     });
 }
 
+function createAccount(req, res) {
+    const {
+        firstname,
+        lastname,
+        job,
+        phoneNumber,
+        email,
+        isAdmin = false,
+        password = "",
+        speciality,
+    } = req.body;
+
+    Employee.createEmployee(
+        firstname,
+        lastname,
+        job,
+        phoneNumber,
+        email,
+        isAdmin,
+        password,
+        speciality,
+        (error, createdEmployee) => {
+            if (error) {
+                return res.status(500).send({
+                    message: "Erreur lors de la création de l'employé",
+                    error: error.message,
+                });
+            }
+            res.status(201).send(createdEmployee);
+        }
+    );
+}
+
 exports.loginEmployee = loginEmployee;
+exports.createAccount = createAccount;
