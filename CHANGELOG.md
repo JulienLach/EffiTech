@@ -6,6 +6,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+# [0.2.1] (2024-11-24)
+
+## Changes
+
+-   Change default number of events displayed on calendar to 20
+-   Add logout button
+-   Add employee initials displayed on profile top right
+
+## Fixes
+
+-   Change default react-big-calendar component height
+-   Various CSS fixes
+
 # [0.2.0] (2024-11-08)
 
 ## Changes

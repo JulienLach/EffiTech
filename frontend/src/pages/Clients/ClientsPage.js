@@ -18,7 +18,7 @@ class ClientsPage extends Component {
             clients: [],
             error: null,
             isModalOpen: false,
-            category: "Particulier",
+            category: "",
             company: "",
             isCategeoryModalOpen: false,
             selectedCategory: "All",
@@ -27,6 +27,8 @@ class ClientsPage extends Component {
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.handleCategoryChange = this.handleCategoryChange.bind(this);
+        this.handleModalCategoryChange =
+            this.handleModalCategoryChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -87,11 +89,11 @@ class ClientsPage extends Component {
         }
     }
 
-    openTypeModal = () => {
+    openCategoryModal = () => {
         this.setState({ isCategeoryModalOpen: true });
     };
 
-    closeTypeModal = () => {
+    closeCategoryModal = () => {
         this.setState({ isCategeoryModalOpen: false });
     };
 
@@ -105,6 +107,10 @@ class ClientsPage extends Component {
 
     handleCategoryChange(event) {
         this.setState({ selectedCategory: event.target.value });
+    }
+
+    handleModalCategoryChange(event) {
+        this.setState({ category: event.target.value });
     }
 
     handleSubmit(event) {
@@ -167,7 +173,7 @@ class ClientsPage extends Component {
                             </div>
                             <div
                                 className={styles.typeFilter}
-                                onClick={this.openTypeModal}
+                                onClick={this.openCategoryModal}
                             >
                                 <i className="fa-solid fa-filter"></i>
                                 <p>Type</p>
@@ -228,10 +234,14 @@ class ClientsPage extends Component {
                                                 Professionnels
                                             </label>
                                         </div>
-                                        <button onClick={this.closeTypeModal}>
+                                        <button
+                                            onClick={this.closeCategoryModal}
+                                        >
                                             Annuler
                                         </button>
-                                        <button onClick={this.closeTypeModal}>
+                                        <button
+                                            onClick={this.closeCategoryModal}
+                                        >
                                             Filter
                                         </button>
                                     </div>
@@ -328,7 +338,9 @@ class ClientsPage extends Component {
                                                 this.state.category ===
                                                 "Particulier"
                                             }
-                                            onChange={this.handleCategoryChange}
+                                            onChange={this.handleModalCategoryChange.bind(
+                                                this
+                                            )}
                                         />
                                         Particulier
                                     </label>
@@ -345,7 +357,9 @@ class ClientsPage extends Component {
                                                 this.state.category ===
                                                 "Professionnel"
                                             }
-                                            onChange={this.handleCategoryChange}
+                                            onChange={this.handleModalCategoryChange.bind(
+                                                this
+                                            )}
                                         />
                                         Professionnel
                                     </label>

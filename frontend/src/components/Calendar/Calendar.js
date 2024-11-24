@@ -12,10 +12,10 @@ const localizer = momentLocalizer(moment);
 function eventStyleGetter() {
     const style = {
         backgroundColor: "#C93C2C",
-        borderRadius: "0.313em",
-        opacity: 0.9,
+        borderRadius: "0.5em",
+        opacity: 0.85,
         color: "white",
-        border: "0em",
+        border: "0.15em solid lightgrey",
     };
     return {
         style,
@@ -25,7 +25,7 @@ function eventStyleGetter() {
 class Calendar extends Component {
     render() {
         return (
-            <div className="myCustomHeight">
+            <div className="height" style={{ height: "80vh" }}>
                 <BigCalendar
                     localizer={localizer}
                     events={this.props.events}

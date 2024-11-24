@@ -6,6 +6,8 @@ function generateToken(employee) {
     const payload = {
         idEmployee: employee.idEmployee,
         isAdmin: employee.isAdmin,
+        firstname: employee.firstname,
+        lastname: employee.lastname,
     };
     return jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "24h" });
 }
@@ -283,6 +285,27 @@ class Employee {
             );
 
             callback(null, employee);
+        });
+    }
+
+    /**
+     * Récupère les initiales d'un employé par son ID.
+     * @param {number} idEmployee - L'ID de l'employé.
+     * @param {function} callback - La fonction de rappel.
+     */
+    static getInitials(idEmployee, callback) {
+        const query =
+            "SELECT firstname, lastname FROM employees WHERE id_employee = $1";
+        const values = [idEmployee];
+        pool.query(query, values, (error, result) => {
+            if (error) {
+                return callback(error, null);
+            }
+            const row = result.rows[0];
+            const initials = {
+                initials: (row.firstname[0] + row.lastname[0]).toUpperCase(),
+            };
+            callback(null, initials);
         });
     }
 }

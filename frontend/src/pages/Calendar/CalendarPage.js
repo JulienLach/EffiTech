@@ -31,7 +31,7 @@ class CalendarPage extends Component {
             calendarEvents: [],
             isUpdateFormOpen: false,
             currentPage: 1,
-            eventsPerPage: 10,
+            eventsPerPage: 20,
         };
 
         this.toggleEventModal = this.toggleEventModal.bind(this);
@@ -380,15 +380,7 @@ class CalendarPage extends Component {
                                     <h3>Événements</h3>
                                 </div>
                                 <div className={styles.listView}>
-                                    <div>
-                                        <button
-                                            className={styles.viewButton}
-                                            onClick={() =>
-                                                this.toggleView("calendar")
-                                            }
-                                        >
-                                            Calendrier
-                                        </button>
+                                    <div className={styles.tabs}>
                                         <button
                                             className={styles.viewButton}
                                             onClick={() =>
@@ -397,6 +389,15 @@ class CalendarPage extends Component {
                                         >
                                             Liste
                                         </button>
+                                        <button
+                                            className={styles.viewButton}
+                                            onClick={() =>
+                                                this.toggleView("calendar")
+                                            }
+                                        >
+                                            Calendrier
+                                        </button>
+                                        <div className={styles.divider}></div>
                                     </div>
                                     {view === "calendar" ? (
                                         <Calendar events={calendarEvents} />

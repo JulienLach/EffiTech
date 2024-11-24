@@ -4,8 +4,48 @@ import logo from "../../images/logo.svg";
 import bellIcon from "../../images/notificationBell.svg";
 
 class TemplateGlobal extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            currentPath: window.location.pathname,
+            showProfileMenu: false,
+            initials: "",
+        };
+        this.toggleProfileMenu = this.toggleProfileMenu.bind(this);
+        this.logout = this.logout.bind(this);
+    }
+
+    componentDidMount() {
+        this.setInitials();
+    }
+
+    setInitials() {
+        const firstname = localStorage.getItem("firstname");
+        const lastname = localStorage.getItem("lastname");
+
+        if (firstname && lastname) {
+            const initials = `${firstname.charAt(0)}${lastname.charAt(
+                0
+            )}`.toUpperCase();
+            this.setState({ initials });
+        }
+    }
+
+    toggleProfileMenu() {
+        this.setState((prevState) => ({
+            showProfileMenu: !prevState.showProfileMenu,
+        }));
+    }
+
+    logout() {
+        // Supprimer le cookie employee
+        document.cookie =
+            "employee=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        window.location.href = "/login";
+    }
+
     render() {
-        const currentPath = window.location.pathname;
+        const { currentPath, showProfileMenu, initials } = this.state;
 
         return (
             <>
@@ -30,7 +70,30 @@ class TemplateGlobal extends Component {
                                     2
                                 </span>
                             </div>
-                            <div className={styles.profileBubble}>JL</div>
+                            <div
+                                className={styles.profileBubble}
+                                onClick={this.toggleProfileMenu}
+                            >
+                                {initials}
+                            </div>
+                            {showProfileMenu && (
+                                <div className={styles.profileMenu}>
+                                    <ul>
+                                        <li>
+                                            <a onClick={this.logout} href="#">
+                                                Se déconnecter{" "}
+                                                <i className="fa-solid fa-sign-out-alt"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="">
+                                                Mon profil{" "}
+                                                <i className="fa-solid fa-user"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

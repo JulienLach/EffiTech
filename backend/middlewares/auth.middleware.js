@@ -15,10 +15,6 @@ function authenticateToken(req, res, next) {
         }
     }
 
-    if (!token) {
-        // return res.redirect("http://localhost:3000/login");
-    }
-
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
         if (err) {
             console.log("Erreur de vérification du token:", err);
@@ -29,11 +25,19 @@ function authenticateToken(req, res, next) {
         req.employee = {
             idEmployee: decoded.idEmployee,
             isAdmin: decoded.isAdmin,
+            firstname: decoded.firstname,
+            lastname: decoded.lastname,
         };
         console.log(
             "Informations de l'employé ajoutées à req.employee:",
             req.employee
         );
+
+        res.cookie("employee", JSON.stringify(req.employee), {
+            httpOnly: true,
+            sameSite: "Strict",
+        });
+
         next();
     });
 }

@@ -41,13 +41,13 @@ app.use("/clients", authenticateToken, clientRoutes);
 app.use("/events", authenticateToken, eventRoutes);
 
 // Routes des adresses
-app.use("/addresses", addressRoutes);
+app.use("/addresses", authenticateToken, addressRoutes);
 
 // Routes company
 app.use("/company", authenticateToken, companyRoutes);
 
 // Route des reports
-app.use("/reports", reportRoutes);
+app.use("/reports", authenticateToken, reportRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);

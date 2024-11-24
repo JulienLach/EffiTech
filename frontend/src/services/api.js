@@ -89,7 +89,7 @@ function getAllClients(callback) {
 function getAllEmployees(callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", `${API_URL}/employees`);
-    xhr.withCredentials = true; // Assurez-vous que les cookies sont envoyés avec la requête
+    xhr.withCredentials = true;
     xhr.onload = function () {
         if (xhr.status === 200) {
             callback(null, JSON.parse(xhr.responseText));
@@ -188,6 +188,7 @@ function createEvent(eventData, callback) {
 function createReport(newReport, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", `${API_URL}/reports`);
+    xhr.withCredentials = true;
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onload = function () {
         if (xhr.status === 200 || xhr.status === 201) {
@@ -225,6 +226,7 @@ function createReport(newReport, callback) {
 function getReportById(idEvent, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", `${API_URL}/reports/${idEvent}`);
+    xhr.withCredentials = true;
     xhr.onload = function () {
         if (xhr.status === 200) {
             callback(null, JSON.parse(xhr.responseText));
@@ -273,6 +275,7 @@ function getReportById(idEvent, callback) {
 function updateEvent(eventData, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("PUT", `${API_URL}/events/${eventData.idEvent}`);
+    xhr.withCredentials = true;
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onload = function () {
         if (xhr.status === 200) {
@@ -353,13 +356,19 @@ function loginEmployee(credentials, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", `${API_URL}/auth/login`);
     xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.withCredentials = true; //les cookies sont envoyés avec la requête http
+    xhr.withCredentials = true;
     xhr.onload = function () {
         if (xhr.status === 200) {
-            console.log("Connexion réussie");
-            callback(null, JSON.parse(xhr.responseText));
+            const response = JSON.parse(xhr.responseText);
+
+            // Stocker le firstname et lastname dans le localStorage
+            if (response.firstname && response.lastname) {
+                localStorage.setItem("firstname", response.firstname);
+                localStorage.setItem("lastname", response.lastname);
+            }
+
+            callback(null, response);
         } else {
-            console.error("Erreur de connexion", xhr.statusText);
             callback(new Error(xhr.statusText), null);
         }
     };
@@ -418,6 +427,7 @@ function getEmployeeById(idEmployee, callback) {
 function getClientById(idClient, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", `${API_URL}/clients/${idClient}`);
+    xhr.withCredentials = true;
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onload = function () {
         if (xhr.status === 200) {
@@ -484,6 +494,7 @@ function getCompany(callback) {
 function deleteEvent(idEvent, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("DELETE", `${API_URL}/events/${idEvent}`);
+    xhr.withCredentials = true;
     xhr.onload = function () {
         if (xhr.status === 200) {
             callback(null, JSON.parse(xhr.responseText));
@@ -618,6 +629,7 @@ function updateEmployee(employeeData, callback) {
 function updateClient(clientData, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("PUT", `${API_URL}/clients/${clientData.idClient}`);
+    xhr.withCredentials = true;
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onload = function () {
         if (xhr.status === 200) {
@@ -662,6 +674,7 @@ function updateClient(clientData, callback) {
 function createClient(clientData, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", `${API_URL}/clients`);
+    xhr.withCredentials = true;
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onload = function () {
         if (xhr.status === 200 || xhr.status === 201) {
