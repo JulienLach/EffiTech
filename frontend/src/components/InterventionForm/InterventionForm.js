@@ -432,16 +432,18 @@ class InterventionForm extends Component {
                                 </div>
                                 <div className={styles.separator}></div>
                                 <div>
-                                    Client: {event.client.firstname}{" "}
+                                    Client : {event.client.firstname}{" "}
                                     {event.client.lastname}
                                 </div>
-                                <div>Téléphone: {event.client.phoneNumber}</div>
                                 <div>
-                                    Adresse: {event.client.address.address},{" "}
+                                    Téléphone : {event.client.phoneNumber}
+                                </div>
+                                <div>
+                                    Adresse : {event.client.address.address},{" "}
                                     {event.client.address.zipcode}{" "}
                                     {event.client.address.city}
                                 </div>
-                                <div>Description: {event.description}</div>
+                                <div>Description : {event.description}</div>
                                 <div className={styles.separator}></div>
                                 <h3>Planification</h3>
                                 <div>
@@ -473,7 +475,7 @@ class InterventionForm extends Component {
                                     : {event.endingHour}
                                 </div>
                                 <div>
-                                    Technicien intervenant:{" "}
+                                    Technicien intervenant :{" "}
                                     {event.employee.firstname}{" "}
                                     {event.employee.lastname}
                                 </div>

@@ -94,3 +94,22 @@
 .modalFooter button:hover {
     opacity: 0.8;
 }
+
+.eventFormTitle {
+    font-size: 1.2em;
+    font-weight: 500;
+    margin-top: 0;
+}
+
+.createEventTextarea {
+    max-width: 25vw;
+    min-width: 25vw;
+    min-height: 8vh;
+    max-height: 25vh;
+    height: 10vh;
+}
+
+.required {
+    color: #c93c2c;
+    font-weight: bold;
+}
