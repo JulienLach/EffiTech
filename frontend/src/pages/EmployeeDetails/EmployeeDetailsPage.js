@@ -53,7 +53,7 @@ class EmployeeDetailsPage extends Component {
                 <TemplateGlobal />
                 <div className={styles.container}>
                     <div className={styles.profilInfo}>
-                        <h1>Employé</h1>
+                        <h1 className={styles.pageTitle}>Employé</h1>
                         <div className={styles.alignBackButton}>
                             <img src={profilPicture} alt="Profil picture" />
                             <div className={styles.names}>

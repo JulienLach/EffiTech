@@ -112,13 +112,6 @@ class ClientDetailsPage extends Component {
                                         <i className="fa-solid fa-arrow-right"></i>
                                         Retour
                                     </button>
-                                    <button
-                                        className={styles.editButton}
-                                        onClick={this.handleButtonClick}
-                                    >
-                                        <i className="fa-solid fa-pen"></i>
-                                        Modifier
-                                    </button>
                                 </div>
                                 <div className={styles.idAndCategory}>
                                     <p className={styles.id}>
@@ -130,29 +123,28 @@ class ClientDetailsPage extends Component {
                                         )}
                                     </p>
                                 </div>
-                                <div className={styles.names}>
-                                    <p className={styles.firstnamePro}>
-                                        {client.firstname}
-                                    </p>
-                                    <p className={styles.lastnamePro}>
-                                        {client.lastname}
-                                    </p>
-                                </div>
                             </div>
                             <div className={styles.separation}></div>
                             <h2>Coordonnées</h2>
                             <div className={styles.contactInfo}>
-                                <p>
-                                    <i className="fa-solid fa-phone"></i>
-                                    {client.phoneNumber}
+                                <p className={styles.firstnamePro}>
+                                    Contact client : {client.firstname}{" "}
+                                    {client.lastname}
                                 </p>
+                                <p>Téléphone : {client.phoneNumber}</p>
                                 <p>
-                                    <i className="fa-solid fa-location-dot"></i>
-                                    {client.address.address},{" "}
+                                    Adresse :{client.address.address},{" "}
                                     {client.address.zipcode},{" "}
                                     {client.address.city}
                                 </p>
                             </div>
+                            <button
+                                className={styles.editButton}
+                                onClick={this.handleButtonClick}
+                            >
+                                <i className="fa-solid fa-pen"></i>
+                                Modifier
+                            </button>
                         </div>
                     ) : (
                         <div className={styles.part}>
@@ -166,11 +158,8 @@ class ClientDetailsPage extends Component {
                                     />
                                     <div className={styles.nameColumn}>
                                         <p className={styles.lastname}>
-                                            {client.lastname}
-                                        </p>
-                                        <p className={styles.firstname}>
-                                            {client.firstname}
-                                        </p>
+                                            {client.lastname} {client.firstname}
+                                        </p>{" "}
                                     </div>
                                     <button
                                         type="button"
@@ -181,13 +170,6 @@ class ClientDetailsPage extends Component {
                                     >
                                         <i className="fa-solid fa-arrow-right"></i>
                                         Retour
-                                    </button>
-                                    <button
-                                        className={styles.editButton}
-                                        onClick={this.handleButtonClick}
-                                    >
-                                        <i className="fa-solid fa-pen"></i>
-                                        Modifier
                                     </button>
                                 </div>
                                 <div className={styles.idAndCategory}>
@@ -204,17 +186,20 @@ class ClientDetailsPage extends Component {
                             <div className={styles.separation}></div>
                             <h2>Coordonnées</h2>
                             <div className={styles.contactInfo}>
+                                <p>Téléphone : {client.phoneNumber}</p>
                                 <p>
-                                    <i className="fa-solid fa-phone"></i>
-                                    {client.phoneNumber}
-                                </p>
-                                <p>
-                                    <i className="fa-solid fa-location-dot"></i>
-                                    {client.address.address},{" "}
+                                    Adresse :{client.address.address},{" "}
                                     {client.address.zipcode},{" "}
                                     {client.address.city}
                                 </p>
                             </div>
+                            <button
+                                className={styles.editButton}
+                                onClick={this.handleButtonClick}
+                            >
+                                <i className="fa-solid fa-pen"></i>
+                                Modifier
+                            </button>
                         </div>
                     )}
                 </div>

@@ -6,6 +6,11 @@
     margin: 2.125em 1.25em 0 15.625em;
 }
 
+.pageTitle {
+    font-size: 1.9em;
+    font-weight: 550;
+}
+
 .backButton {
     padding: 0.5em;
     background-color: #ccc;

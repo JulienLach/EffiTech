@@ -1,13 +1,8 @@
-body {
-    box-sizing: border-box;
-    margin: 0;
-}
-/* placement du container */
 .container {
     display: flex;
     flex-direction: column;
     width: 80%;
-    margin: 0 1.25em 0 15.6em;
+    margin: 2em 1.25em 0 15.6em;
 }
 
 .pageTitle {
@@ -33,7 +28,7 @@ body {
 }
 
 .particulier {
-    color: #c93c2c;
+    color: #c35e00;
     font-weight: 550;
     text-decoration: underline;
     cursor: pointer;
@@ -61,14 +56,18 @@ body {
 
 .addClient {
     background-color: #c93c2c;
-    padding: 0.625em 0.94em;
+    padding: 0.6em 0.94em;
     border: none;
-    border-radius: 0.625em;
+    border-radius: 0.6em;
     color: white;
-    font-size: 1.125em;
+    font-size: 1.1em;
     font-weight: 500;
     cursor: pointer;
     margin: 0.625em 1.25em;
+}
+
+.addClient i {
+    margin-right: 0.625em;
 }
 
 /* Style barre de recherche et filtre  */
@@ -95,6 +94,7 @@ body {
 /* icon position */
 .typeFilter i {
     margin-right: 0.625em;
+    color: #424242;
 }
 
 /* Search input container style */
