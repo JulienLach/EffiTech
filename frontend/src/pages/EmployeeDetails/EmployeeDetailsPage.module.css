@@ -3,20 +3,23 @@
     flex-direction: column;
     flex-wrap: wrap;
     align-items: start;
-    margin: 3.125em 1.25em 0 15.625em;
+    margin: 2.125em 1.25em 0 15.625em;
 }
 
 .backButton {
     padding: 0.5em;
-    border: 0.06em solid #ccc;
+    background-color: #ccc;
+    border: none;
     border-radius: 0.3em;
     font-size: 1em;
+    font-weight: 500;
     cursor: pointer;
     margin-left: auto;
 }
 
 .backButton i {
     transform: rotate(180deg);
+    margin-right: 0.5em;
 }
 
 .alignBackButton {
@@ -31,22 +34,14 @@
 }
 
 .names {
+    margin-left: 1.5em;
     display: flex;
     flex-direction: column;
-    align-items: end;
 }
 
 .lastname,
 .firstname {
-    margin: 0.625em 0 0 3.125;
-    font-size: 2.5em;
-    font-weight: 550;
-    text-transform: capitalize;
-}
-
-.lastname {
-    text-transform: uppercase;
-    font-size: 3.75em;
+    font-size: 2em;
     font-weight: 550;
 }
 
@@ -62,10 +57,10 @@
 }
 
 .separation {
-    background-color: black;
+    margin: 2em 0;
+    border-bottom: 0.063em solid #ccc;
     height: 0.06em;
     width: 75%;
-    margin-top: 1.25em;
 }
 
 .eventInfo {
@@ -81,14 +76,27 @@
 }
 
 .contactInfo p {
-    margin: 0.5em;
+    margin: 0.4em 0;
 }
 
-.button {
-    padding: 0.5em;
-    border: 0.06em solid #ccc;
+.editButton {
+    background-color: #ccc;
+    padding: 0.5em 0.8em;
+    border: none;
     border-radius: 0.3em;
     font-size: 1em;
+    font-weight: 500;
     cursor: pointer;
-    margin-top: 0.938em;
+    margin: 1em 0em;
+    transition: 0.1s;
+}
+
+.editButton:hover {
+    background-color: #c93c2c;
+    color: white;
+}
+
+.editButton i {
+    margin-right: 0.5em;
+    font-size: 0.8em;
 }
