@@ -17,6 +17,18 @@
 
 -   PostgreSQL, Node.js, JavaScript.
 
+## Environment variables configuration
+
+You need to create a `.env.development.local` file at the root of the project with the following :
+
+-   DB_USER=
+-   DB_HOST=
+-   DB_NAME=
+-   DB_PASSWORD=
+-   DB_PORT=
+-   PORT=
+-   JWT_SECRET=
+
 ## Testing
 
 -   **JEST** for test scripts
@@ -26,7 +38,8 @@
 
 ## End-to-End Functional Test
 
-### Scenario 1: Plan and Assign Initial Intervention
+<details>
+<summary>Scenario 1: Plan and Assign Initial Intervention</summary>
 
 #### User Story: Planification des premières interventions de constatation de la panne
 
@@ -46,9 +59,12 @@
     - Obtains the client’s electronic signature on the report.
     - Submits the report to the supervisor.
 
+</details>
+
 ## Other Functionalities
 
-### Enter Company Data
+<details>
+<summary>Enter Company Data</summary>
 
 1. **Admin logs into the EffiTech app.**
     - Navigates to the company settings section.
@@ -59,7 +75,10 @@
         - Various company informations
     - Confirms that the entered information is displayed correctly in the company page.
 
-### Create Employee Profiles
+</details>
+
+<details>
+<summary>Create Employee Profiles</summary>
 
 1. **Admin logs into the EffiTech app.**
     - Navigates to the employee management section.
@@ -71,3 +90,5 @@
         - Credentials (e.g., email, password)
     - Saves the new employee profile.
     - Verifies that the new employee can log in and access the app according to their role.
+
+</details>
