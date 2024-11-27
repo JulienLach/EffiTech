@@ -27,6 +27,7 @@
     padding: 0.6em;
     border: 0.06em solid #cccccc;
     border-radius: 0.5em;
+    width: 100%;
 }
 
 /* Specific styles for cancel button */
@@ -88,4 +89,16 @@
 .separator {
     margin: 1em 0;
     border-bottom: 0.063em solid #ccc;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4em;
+}
+
+.labelInput select {
+    padding: 0.5em;
+    border: 0.06em solid #cccccc;
+    border-radius: 0.4em;
 }

@@ -24,8 +24,7 @@
 
 .modalFooter {
     display: flex;
-    flex: row;
-    justify-content: space-around;
+    gap: 1em;
 }
 
 .modalFooter button {

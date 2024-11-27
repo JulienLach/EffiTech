@@ -140,39 +140,19 @@ class UpdateInterventionForm extends Component {
                         </div>
                         <div className={styles.labelInput}>
                             <label>
-                                Statut :
-                                <input
-                                    type="number"
-                                    name="status"
-                                    value={status}
-                                    onChange={this.handleChange}
-                                />
-                            </label>
-                        </div>
-                        <div className={styles.labelInput}>
-                            <label>
-                                Planifié :
-                                <input
-                                    type="checkbox"
-                                    name="isPlanned"
-                                    checked={isPlanned}
-                                    onChange={(e) =>
-                                        this.setState({
-                                            isPlanned: e.target.checked,
-                                        })
-                                    }
-                                />
-                            </label>
-                        </div>
-                        <div className={styles.labelInput}>
-                            <label>
                                 Type :
-                                <input
-                                    type="text"
+                                <select
                                     name="type"
                                     value={type}
                                     onChange={this.handleChange}
-                                />
+                                >
+                                    <option value="Intervention">
+                                        Intervention
+                                    </option>
+                                    <option value="Rendez-vous">
+                                        Rendez-vous
+                                    </option>
+                                </select>
                             </label>
                         </div>
                         <div className={styles.labelInput}>
