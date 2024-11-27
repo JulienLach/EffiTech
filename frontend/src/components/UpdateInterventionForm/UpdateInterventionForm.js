@@ -117,9 +117,9 @@ class UpdateInterventionForm extends Component {
                     </h2>
                     <div className={styles.separator}></div>
                     <div>
-                        <div>
+                        <div className={styles.labelInput}>
                             <label>
-                                Titre:
+                                Titre :
                                 <input
                                     type="text"
                                     name="title"
@@ -128,9 +128,9 @@ class UpdateInterventionForm extends Component {
                                 />
                             </label>
                         </div>
-                        <div>
+                        <div className={styles.labelInput}>
                             <label>
-                                Description:
+                                Description :
                                 <textarea
                                     name="description"
                                     value={description}
@@ -138,9 +138,9 @@ class UpdateInterventionForm extends Component {
                                 />
                             </label>
                         </div>
-                        <div>
+                        <div className={styles.labelInput}>
                             <label>
-                                Statut:
+                                Statut :
                                 <input
                                     type="number"
                                     name="status"
@@ -149,9 +149,9 @@ class UpdateInterventionForm extends Component {
                                 />
                             </label>
                         </div>
-                        <div>
+                        <div className={styles.labelInput}>
                             <label>
-                                Planifié:
+                                Planifié :
                                 <input
                                     type="checkbox"
                                     name="isPlanned"
@@ -164,9 +164,9 @@ class UpdateInterventionForm extends Component {
                                 />
                             </label>
                         </div>
-                        <div>
+                        <div className={styles.labelInput}>
                             <label>
-                                Type:
+                                Type :
                                 <input
                                     type="text"
                                     name="type"
@@ -175,9 +175,9 @@ class UpdateInterventionForm extends Component {
                                 />
                             </label>
                         </div>
-                        <div>
+                        <div className={styles.labelInput}>
                             <label>
-                                Date de début:
+                                Date de début :
                                 <input
                                     type="date"
                                     name="startingDate"
@@ -186,9 +186,9 @@ class UpdateInterventionForm extends Component {
                                 />
                             </label>
                         </div>
-                        <div>
+                        <div className={styles.labelInput}>
                             <label>
-                                Heure de début:
+                                Heure de début :
                                 <input
                                     type="time"
                                     name="startingHour"
@@ -197,7 +197,7 @@ class UpdateInterventionForm extends Component {
                                 />
                             </label>
                         </div>
-                        <div>
+                        <div className={styles.labelInput}>
                             <label>
                                 Heure de fin:
                                 <input
@@ -208,9 +208,9 @@ class UpdateInterventionForm extends Component {
                                 />
                             </label>
                         </div>
-                        <div>
+                        <div className={styles.labelInput}>
                             <label>
-                                Travaux à effectuer:
+                                Travaux à effectuer :
                                 <textarea
                                     name="workToDo"
                                     value={workToDo}
@@ -221,10 +221,16 @@ class UpdateInterventionForm extends Component {
                     </div>
                     <div className={styles.separator}></div>
                     <div className={styles.modalFooter}>
-                        <button type="button" onClick={this.handleCancel}>
+                        <button
+                            type="button"
+                            onClick={this.handleCancel}
+                            className={styles.cancelButton}
+                        >
                             Annuler
                         </button>
-                        <button type="submit">Valider Modification</button>
+                        <button type="submit" className={styles.submitButton}>
+                            Enregistrer
+                        </button>
                     </div>
                 </div>
             </form>
