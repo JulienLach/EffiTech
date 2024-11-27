@@ -513,7 +513,7 @@ class CalendarPage extends Component {
                                                     }
                                                     disabled={currentPage === 1}
                                                 >
-                                                    {"<"}
+                                                    <i className="fa fa-arrow-left"></i>
                                                 </button>
                                                 <button
                                                     onClick={(e) =>
@@ -524,7 +524,7 @@ class CalendarPage extends Component {
                                                         totalPages
                                                     }
                                                 >
-                                                    {">"}
+                                                    <i className="fa fa-arrow-right"></i>
                                                 </button>
                                             </div>
                                         </div>
