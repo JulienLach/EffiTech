@@ -437,7 +437,7 @@ class ClientsPage extends Component {
                                     type="submit"
                                     className={styles.submitButton}
                                 >
-                                    Créer le client
+                                    Enregister
                                 </button>
                             </div>
                         </form>

@@ -1,0 +1,69 @@
+body {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.pageTitle {
+    font-size: 1.9em;
+    font-weight: 550;
+}
+
+.separation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1em 0;
+    border: 0.1em solid #ccc;
+}
+
+/* CSS for input & label */
+.labelInput {
+    font-size: 1em;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.625em;
+}
+
+/* CSS for input comportement */
+.labelInput input {
+    margin: 0 1em;
+    padding: 0.6em;
+    border: 0.06em solid #cccccc;
+    border-radius: 0.5em;
+}
+
+/* CSS for the label comportement */
+.labelInput label {
+    margin: 0 1em;
+    padding: 0.15em;
+}
+
+/* CSS for button positioning */
+.buttonPosition {
+    display: flex;
+    justify-content: start;
+    gap: 1em;
+    margin-left: 1em;
+}
+
+/* Common styles for buttons */
+.buttonPosition button {
+    padding: 0.625em;
+    border: none;
+    border-radius: 0.625em;
+    color: white;
+    font-size: 1.125em;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+/* Specific styles for cancel button */
+.cancelButton {
+    background-color: #ababab;
+}
+
+/* Specific styles for submit button */
+.submitButton {
+    background-color: #c93c2c;
+}

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import styles from "./EmployeeForm.module.css";
-import profilPicture from "../../images/profil.png";
 import { createEmployee } from "../../services/api";
 
 class EmployeeForm extends Component {
@@ -48,8 +47,7 @@ class EmployeeForm extends Component {
         return (
             <>
                 <div className={styles.container}>
-                    <h1 className={styles.pageTitle}>Employé</h1>
-                    <img src={profilPicture} alt="Profil picture" />
+                    <h1 className={styles.pageTitle}>Ajouter un employé</h1>
                     <div className={styles.separation}></div>
                     <h2>Coordonnées</h2>
                     <form
@@ -140,6 +138,7 @@ class EmployeeForm extends Component {
                             <button
                                 type="reset"
                                 className={styles.cancelButton}
+                                onClick={this.props.onClose}
                             >
                                 Annuler
                             </button>
