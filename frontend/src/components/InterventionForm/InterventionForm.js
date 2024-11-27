@@ -404,7 +404,7 @@ class InterventionForm extends Component {
                         className={`${styles.modal} ${styles.open}`}
                     >
                         <div className={styles.container}>
-                            <div>
+                            <div className={styles.formHeader}>
                                 <h2>
                                     {(() => {
                                         if (event.type === "Intervention") {
@@ -417,7 +417,7 @@ class InterventionForm extends Component {
                                 <p>{this.getStatusIndicator(event.status)}</p>
                             </div>
 
-                            <div>
+                            <div className={styles.eventData}>
                                 <div>
                                     <h2>
                                         {(() => {
@@ -431,6 +431,12 @@ class InterventionForm extends Component {
                                     </h2>
                                 </div>
                                 <div className={styles.separator}></div>
+                                {event.client.company &&
+                                    event.client.company !== "N/A" && (
+                                        <div>
+                                            Entreprise : {event.client.company}
+                                        </div>
+                                    )}
                                 <div>
                                     Client : {event.client.firstname}{" "}
                                     {event.client.lastname}
