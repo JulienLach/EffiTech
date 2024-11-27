@@ -196,26 +196,22 @@ class CreateEventForm extends Component {
                 <div className={styles.tabs}>
                     <button
                         type="button"
-                        className={(() => {
-                            if (selectedTab === "Intervention") {
-                                return styles.activeTab;
-                            } else {
-                                return "";
-                            }
-                        })()}
+                        className={`${styles.tabButton} ${
+                            selectedTab === "Intervention"
+                                ? styles.activeTab
+                                : ""
+                        }`}
                         onClick={() => this.handleTabChange("Intervention")}
                     >
                         Intervention
                     </button>
                     <button
                         type="button"
-                        className={(() => {
-                            if (selectedTab === "Rendez-vous") {
-                                return styles.activeTab;
-                            } else {
-                                return "";
-                            }
-                        })()}
+                        className={`${styles.tabButton} ${
+                            selectedTab === "Rendez-vous"
+                                ? styles.activeTab
+                                : ""
+                        }`}
                         onClick={() => this.handleTabChange("Rendez-vous")}
                     >
                         Rendez-vous
@@ -224,13 +220,9 @@ class CreateEventForm extends Component {
                 <div className={styles.form}>
                     <div>
                         <label>
-                            {(() => {
-                                if (selectedTab === "Intervention") {
-                                    return "Nouvelle intervention";
-                                } else {
-                                    return "Nouveau rendez-vous";
-                                }
-                            })()}
+                            {selectedTab === "Intervention"
+                                ? "Nouvelle intervention"
+                                : "Nouveau rendez-vous"}
                         </label>
                     </div>
                     <div>
@@ -245,13 +237,9 @@ class CreateEventForm extends Component {
                     <div>
                         <label>
                             Date{" "}
-                            {(() => {
-                                if (selectedTab === "Intervention") {
-                                    return "d'intervention";
-                                } else {
-                                    return "de rendez-vous";
-                                }
-                            })()}
+                            {selectedTab === "Intervention"
+                                ? "d'intervention"
+                                : "de rendez-vous"}
                         </label>
                         <input
                             type="date"
@@ -334,10 +322,18 @@ class CreateEventForm extends Component {
                         />
                     </div>
                     <div className={styles.modalFooter}>
-                        <button type="button" onClick={this.props.closeModal}>
+                        <button
+                            type="button"
+                            className={styles.cancelButton}
+                            onClick={this.props.closeModal}
+                        >
                             Annuler
                         </button>
-                        <button type="button" onClick={this.handleSubmit}>
+                        <button
+                            type="button"
+                            className={styles.submitButton}
+                            onClick={this.handleSubmit}
+                        >
                             Créer
                         </button>
                     </div>

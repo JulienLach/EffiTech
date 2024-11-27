@@ -19,6 +19,34 @@
     box-sizing: border-box;
 }
 
+.tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1em;
+}
+
+.tabs button {
+    padding: 0.4em 1.25em;
+    border: none;
+    border-radius: 0.625em;
+    font-size: 1.125em;
+    font-weight: 500;
+    cursor: pointer;
+    margin: 1em 0.5em;
+    background-color: #f0f0f0;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.tabs button:hover {
+    background-color: #c93c2c;
+    color: white;
+}
+
+.tabs .activeTab {
+    background-color: #c93c2c;
+    color: white;
+}
+
 .form {
     display: flex;
     align-items: center;
@@ -26,22 +54,8 @@
     gap: 0.7em;
 }
 
-.form input {
-    display: flex;
-    padding: 0.5em;
-    width: 25vw;
-    border: 0.063em solid #ccc;
-    border-radius: 0.3em;
-}
-
-.form select {
-    display: flex;
-    padding: 0.5em;
-    width: 25vw;
-    border: 0.063em solid #ccc;
-    border-radius: 0.3em;
-}
-
+.form input,
+.form select,
 .form textarea {
     display: flex;
     padding: 0.5em;
@@ -53,17 +67,30 @@
 .modalFooter {
     display: flex;
     flex-direction: row;
-    gap: 3em;
+    gap: 1em;
+    justify-content: flex-end;
+    margin-top: 1em;
 }
 
 .modalFooter button {
-    padding: 0.5em;
-    border: 0.063em solid #ccc;
-    border-radius: 0.3em;
-    font-size: 1em;
+    padding: 0.625em 1.25em;
+    border: none;
+    border-radius: 0.625em;
+    font-size: 1.125em;
+    font-weight: 500;
+    cursor: pointer;
+    color: #fff;
+}
+
+.modalFooter .cancelButton {
+    background-color: #ababab;
+}
+
+.modalFooter .submitButton {
+    background-color: #c93c2c;
+    color: white;
 }
 
 .modalFooter button:hover {
-    background-color: #c93c2c;
-    color: white;
+    opacity: 0.8;
 }
