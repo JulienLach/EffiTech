@@ -319,7 +319,7 @@ class ClientsPage extends Component {
                 </div>
                 {isModalOpen && (
                     <Modal onClose={this.closeModal}>
-                        <h2>Nouveau client</h2>
+                        <h1>Nouveau client</h1>
                         <form
                             className={styles.formElements}
                             onSubmit={this.handleSubmit}
@@ -451,12 +451,7 @@ class ClientsPage extends Component {
 const Modal = ({ onClose, children }) => {
     return (
         <div className={styles.modalOverlay}>
-            <div className={styles.modalContent}>
-                <button className={styles.closeButton} onClick={onClose}>
-                    &times;
-                </button>
-                {children}
-            </div>
+            <div className={styles.modalContent}>{children}</div>
         </div>
     );
 };
