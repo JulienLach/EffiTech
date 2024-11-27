@@ -58,10 +58,7 @@ class EmployeeDetailsPage extends Component {
                             <img src={profilPicture} alt="Profil picture" />
                             <div className={styles.names}>
                                 <p className={styles.firstname}>
-                                    {employee.firstname}
-                                </p>
-                                <p className={styles.lastname}>
-                                    {employee.lastname}
+                                    {employee.firstname} {employee.lastname}
                                 </p>
                             </div>
                             <button

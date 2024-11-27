@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { useLocation } from "react-router-dom";
 import TemplateGlobal from "../Template/TemplateGlobal";
 import styles from "./EmployeeFormPage.module.css";
-import profilPicture from "../../images/profil.png";
 import { getEmployeeById, updateEmployee } from "../../services/api";
 
 // Composant wrapper pour utiliser les hooks
@@ -112,7 +111,7 @@ class EmployeeFormPage extends Component {
                             />
                         </div>
                         <div className={styles.labelInput}>
-                            <label htmlFor="mail">Adresse mail:</label>
+                            <label htmlFor="mail">Mail:</label>
                             <input
                                 type="email"
                                 name="email"
@@ -142,6 +141,7 @@ class EmployeeFormPage extends Component {
                             onClick={this.handleSubmit}
                             className={styles.submitButton}
                         >
+                            <i className="fa-solid fa-save"></i>
                             Enregistrer
                         </button>
                     </div>

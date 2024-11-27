@@ -29,14 +29,14 @@
 }
 
 .alignBackButton img {
-    width: 9.375em;
-    height: 9.375em;
+    height: 7em;
 }
 
 .names {
     margin-left: 1.5em;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    gap: 1em;
 }
 
 .lastname,
@@ -54,6 +54,7 @@
 .contactInfo {
     display: flex;
     flex-direction: column;
+    gap: 0.4em;
 }
 
 .separation {
@@ -63,16 +64,9 @@
     width: 75%;
 }
 
-.eventInfo {
-    display: flex;
-}
-
-.eventInfo p {
-    margin: 0;
-}
-
 .contactInfo {
-    font-size: 1.25em;
+    margin-top: 1em;
+    font-size: 1em;
 }
 
 .contactInfo p {
