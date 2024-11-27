@@ -12,6 +12,7 @@ class UpdateInterventionForm extends Component {
             : "";
 
         this.state = {
+            idEvent: props.event.idEvent,
             title: props.event.title || "",
             description: props.event.description || "",
             status: props.event.status || 1,
@@ -53,7 +54,7 @@ class UpdateInterventionForm extends Component {
         } = this.state;
 
         const eventData = {
-            idEvent: event.idEvent, // Assurez-vous que idEvent est inclus
+            idEvent: event.idEvent,
             title,
             description,
             status,
@@ -91,6 +92,7 @@ class UpdateInterventionForm extends Component {
 
     render() {
         const {
+            idEvent,
             title,
             description,
             status,
@@ -117,8 +119,20 @@ class UpdateInterventionForm extends Component {
                     </h2>
                     <div className={styles.separator}></div>
                     <div>
+                        <h2>
+                            {(() => {
+                                if (type === "Intervention") {
+                                    return "INT-";
+                                } else {
+                                    return "RDV-";
+                                }
+                            })()}
+                            {idEvent}
+                        </h2>
+                    </div>
+                    <div>
                         <div className={styles.labelInput}>
-                            <label>
+                            <label className={styles.eventLabels}>
                                 Titre :
                                 <input
                                     type="text"
@@ -129,7 +143,7 @@ class UpdateInterventionForm extends Component {
                             </label>
                         </div>
                         <div className={styles.labelInput}>
-                            <label>
+                            <label className={styles.eventLabels}>
                                 Description :
                                 <textarea
                                     name="description"
@@ -139,7 +153,7 @@ class UpdateInterventionForm extends Component {
                             </label>
                         </div>
                         <div className={styles.labelInput}>
-                            <label>
+                            <label className={styles.eventLabels}>
                                 Type :
                                 <select
                                     name="type"
@@ -156,7 +170,7 @@ class UpdateInterventionForm extends Component {
                             </label>
                         </div>
                         <div className={styles.labelInput}>
-                            <label>
+                            <label className={styles.eventLabels}>
                                 Date de début :
                                 <input
                                     type="date"
@@ -167,7 +181,7 @@ class UpdateInterventionForm extends Component {
                             </label>
                         </div>
                         <div className={styles.labelInput}>
-                            <label>
+                            <label className={styles.eventLabels}>
                                 Heure de début :
                                 <input
                                     type="time"
@@ -178,7 +192,7 @@ class UpdateInterventionForm extends Component {
                             </label>
                         </div>
                         <div className={styles.labelInput}>
-                            <label>
+                            <label className={styles.eventLabels}>
                                 Heure de fin:
                                 <input
                                     type="time"
@@ -189,7 +203,7 @@ class UpdateInterventionForm extends Component {
                             </label>
                         </div>
                         <div className={styles.labelInput}>
-                            <label>
+                            <label className={styles.eventLabels}>
                                 Travaux à effectuer :
                                 <textarea
                                     name="workToDo"

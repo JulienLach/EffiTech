@@ -91,7 +91,7 @@
     border-bottom: 0.063em solid #ccc;
 }
 
-label {
+.eventLabels {
     display: flex;
     flex-direction: column;
     gap: 0.4em;
