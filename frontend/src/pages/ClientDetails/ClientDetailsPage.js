@@ -133,10 +133,11 @@ class ClientDetailsPage extends Component {
                                 </p>
                                 <p>Téléphone : {client.phoneNumber}</p>
                                 <p>
-                                    Adresse :{client.address.address},{" "}
+                                    Adresse : {client.address.address},{" "}
                                     {client.address.zipcode},{" "}
                                     {client.address.city}
                                 </p>
+                                <p>Mail : {client.email}</p>
                             </div>
                             <button
                                 className={styles.editButton}
@@ -191,6 +192,9 @@ class ClientDetailsPage extends Component {
                                     Adresse :{client.address.address},{" "}
                                     {client.address.zipcode},{" "}
                                     {client.address.city}
+                                </p>
+                                <p>
+                                    <p>Mail : {client.email}</p>
                                 </p>
                             </div>
                             <button
