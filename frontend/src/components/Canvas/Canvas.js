@@ -65,8 +65,9 @@ class Canvas extends Component {
                 width={340}
                 height={80}
                 style={{
-                    border: ".063em solid grey",
-                    margin: "0 auto",
+                    border: "0.06em solid #cecece",
+                    borderRadius: "0.4em",
+                    marginRight: "auto",
                 }}
             />
         );

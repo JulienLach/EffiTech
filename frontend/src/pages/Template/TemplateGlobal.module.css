@@ -164,7 +164,7 @@ i {
 .sidebarAndOrange {
     display: flex;
     position: fixed;
-    top: 5.6em;
+    top: 6em;
 }
 
 /* Couleur orange de la div pour le liseret de la sidebar */
@@ -175,6 +175,7 @@ i {
     background-color: #c93c2c;
     height: auto;
     width: 0.7em;
+    margin: 0.2em 0;
     border-top-right-radius: 0.6em;
     border-bottom-right-radius: 0.6em;
     cursor: pointer;
