@@ -141,7 +141,7 @@ class InterventionFormPage extends Component {
                             </div>
                             <div>
                                 <div className={stylesMobile.inputDisplay}>
-                                    <label>Client</label>
+                                    <label>Client :</label>
                                     <input
                                         type="text"
                                         value={`${event.client.firstname} ${event.client.lastname}`}
@@ -151,7 +151,7 @@ class InterventionFormPage extends Component {
                             </div>
                             <div>
                                 <div className={stylesMobile.inputDisplay}>
-                                    <label>Adresse</label>
+                                    <label>Adresse :</label>
                                     <input
                                         type="text"
                                         value={`${event.client.address.address} ${event.client.address.zipcode} ${event.client.address.city}`}
@@ -161,7 +161,13 @@ class InterventionFormPage extends Component {
                             </div>
                             <div>
                                 <div className={stylesMobile.textArea}>
-                                    <label>Panne constatée : *</label>
+                                    <label>
+                                        Panne constatée{" "}
+                                        <span className={styles.required}>
+                                            *
+                                        </span>{" "}
+                                        :
+                                    </label>
                                     <textarea
                                         rows="5"
                                         name="breakdown"
@@ -172,7 +178,13 @@ class InterventionFormPage extends Component {
                             </div>
                             <div>
                                 <div className={stylesMobile.textArea}>
-                                    <label>Travaux efféctués: *</label>
+                                    <label>
+                                        Travaux efféctués{" "}
+                                        <span className={styles.required}>
+                                            *
+                                        </span>{" "}
+                                        :
+                                    </label>
                                     <textarea
                                         rows="5"
                                         name="workDone"
@@ -183,7 +195,7 @@ class InterventionFormPage extends Component {
                             </div>
                             <div>
                                 <div className={stylesMobile.inputDisplay}>
-                                    <label>Date de l'intervention</label>
+                                    <label>Date de l'intervention :</label>
                                     <input
                                         type="date"
                                         name="startingDate"
@@ -194,7 +206,7 @@ class InterventionFormPage extends Component {
                             </div>
                             <div>
                                 <div className={stylesMobile.inputDisplay}>
-                                    <label>Heure de début</label>
+                                    <label>Heure de début :</label>
                                     <input
                                         type="time"
                                         value={event.startingHour}
@@ -204,7 +216,7 @@ class InterventionFormPage extends Component {
                             </div>
                             <div>
                                 <div className={stylesMobile.inputDisplay}>
-                                    <label>Heure de fin</label>
+                                    <label>Heure de fin :</label>
                                     <input
                                         type="time"
                                         value={event.endingHour}
@@ -214,7 +226,7 @@ class InterventionFormPage extends Component {
                             </div>
                             <div>
                                 <div className={stylesMobile.inputDisplay}>
-                                    <label>Durée de l'intervention</label>
+                                    <label>Durée de l'intervention :</label>
                                     <input
                                         type="time"
                                         value={duration}
@@ -224,7 +236,13 @@ class InterventionFormPage extends Component {
                             </div>
                             <div>
                                 <div className={stylesMobile.textArea}>
-                                    <label>Signature du technicien</label>
+                                    <label>
+                                        Signature du technicien{" "}
+                                        <span className={styles.required}>
+                                            *
+                                        </span>{" "}
+                                        :
+                                    </label>
                                     <Canvas
                                         signature={employeeSignature}
                                         onSignatureChange={(signature) =>
@@ -238,7 +256,13 @@ class InterventionFormPage extends Component {
                             </div>
                             <div>
                                 <div className={stylesMobile.textArea}>
-                                    <label>Signature du client:</label>
+                                    <label>
+                                        Signature du client{" "}
+                                        <span className={styles.required}>
+                                            *
+                                        </span>{" "}
+                                        :
+                                    </label>
                                     <Canvas
                                         signature={clientSignature}
                                         onSignatureChange={(signature) =>
@@ -252,15 +276,15 @@ class InterventionFormPage extends Component {
                             </div>
                             <div>
                                 <div className={stylesMobile.checkbox}>
+                                    <label>
+                                        Créer une nouvelle intervention :
+                                    </label>
                                     <input
                                         type="checkbox"
                                         name="reschedule"
                                         checked={reschedule}
                                         onChange={this.handleChange}
                                     ></input>
-                                    <label>
-                                        Créer une nouvelle intervention
-                                    </label>
                                 </div>
                             </div>
                             <div className={stylesMobile.modalFooter}>
@@ -277,6 +301,7 @@ class InterventionFormPage extends Component {
                                     className={stylesMobile.validateButton}
                                     type="submit"
                                 >
+                                    <i class="fa-solid fa-check"></i>
                                     Valider le rapport
                                 </button>
                             </div>

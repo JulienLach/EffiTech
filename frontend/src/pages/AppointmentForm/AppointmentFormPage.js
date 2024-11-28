@@ -126,7 +126,7 @@ class AppointmentFormPage extends Component {
                             </div>
                             <div>
                                 <div className={stylesMobile.inputDisplay}>
-                                    <label>Client</label>
+                                    <label>Client :</label>
                                     <input
                                         type="text"
                                         value={`${event.client.firstname} ${event.client.lastname}`}
@@ -136,7 +136,7 @@ class AppointmentFormPage extends Component {
                             </div>
                             <div>
                                 <div className={stylesMobile.inputDisplay}>
-                                    <label>Adresse</label>
+                                    <label>Adresse :</label>
                                     <input
                                         type="text"
                                         value={`${event.client.address.address} ${event.client.address.zipcode} ${event.client.address.city}`}
@@ -146,7 +146,7 @@ class AppointmentFormPage extends Component {
                             </div>
                             <div>
                                 <div className={stylesMobile.textArea}>
-                                    <label>Travaux à effectuer</label>
+                                    <label>Travaux à effectuer :</label>
                                     <textarea
                                         rows="5"
                                         name="workToDo"
@@ -155,21 +155,21 @@ class AppointmentFormPage extends Component {
                                     ></textarea>
                                 </div>
                             </div>
-                            <div>
+                            <div className={stylesMobile.inputDisplay}>
                                 <div className={stylesMobile.labelInput}>
-                                    <label>Date de rendez-vous</label>
+                                    <label>Date de rendez-vous :</label>
                                     <input
                                         type="date"
                                         name="startingDate"
                                         value={startingDate}
                                         onChange={this.handleChange}
+                                        readOnly
                                     />
                                 </div>
                             </div>
-                            <div>
-                                <h3>Heure de début</h3>
+                            <div className={stylesMobile.inputDisplay}>
                                 <div className={stylesMobile.labelInput}>
-                                    <label>Heure de début</label>
+                                    <label>Heure de début :</label>
                                     <input
                                         type="time"
                                         value={event.startingHour}
@@ -177,10 +177,9 @@ class AppointmentFormPage extends Component {
                                     />
                                 </div>
                             </div>
-                            <div>
-                                <h3>Heure de fin</h3>
+                            <div className={stylesMobile.inputDisplay}>
                                 <div className={stylesMobile.labelInput}>
-                                    <label>Heure de fin</label>
+                                    <label>Heure de fin :</label>
                                     <input
                                         type="time"
                                         value={event.endingHour}
@@ -188,10 +187,9 @@ class AppointmentFormPage extends Component {
                                     />
                                 </div>
                             </div>
-                            <div>
-                                <h3>Durée du rendez-vous</h3>
+                            <div className={stylesMobile.inputDisplay}>
                                 <div className={stylesMobile.labelInput}>
-                                    <label>Durée</label>
+                                    <label>Durée du rendez-vous :</label>
                                     <input
                                         type="time"
                                         value={duration}
@@ -200,7 +198,7 @@ class AppointmentFormPage extends Component {
                                 </div>
                             </div>
                             <div>
-                                <h3>Planification</h3>
+                                <h4>Planification :</h4>
                                 <div className={stylesMobile.checkbox}>
                                     <label>
                                         Créer directement l'intervention à
@@ -228,7 +226,8 @@ class AppointmentFormPage extends Component {
                                     className={stylesMobile.validateButton}
                                     type="submit"
                                 >
-                                    Terminer le rendez-vous
+                                    <i class="fa-solid fa-check"></i>
+                                    Terminer le RDV
                                 </button>
                             </div>
                         </form>
