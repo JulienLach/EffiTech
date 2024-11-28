@@ -38,6 +38,7 @@
 
 .profilCompanyBack,
 .profilNamesBack {
+    margin-top: 2em;
     display: flex;
     width: 75%;
     align-items: center;

@@ -13,6 +13,26 @@
     z-index: 1000; /* Assurez-vous que la modale est au-dessus des autres éléments */
 }
 
+/* Harmonized modal styles */
+.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 30vw;
+    height: 100vh;
+    background-color: white;
+    box-shadow: -0.125em 0 0.313em rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    padding: 1.25em;
+    border-top-left-radius: 1.25em;
+    display: none;
+    overflow-y: auto; /* Ajoute une barre de défilement verticale */
+}
+
+.modal.open {
+    display: block;
+}
+
 /* CSS for input & label */
 .labelInput {
     font-size: 1em;
@@ -40,25 +60,6 @@
     background-color: #c93c2c;
 }
 
-/* Harmonized modal styles */
-.modal {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 30vw;
-    height: 100vh;
-    background-color: white;
-    box-shadow: -0.125em 0 0.313em rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    padding: 1.25em;
-    border-top-left-radius: 1.25em;
-    display: none;
-}
-
-.modal.open {
-    display: block;
-}
-
 .container {
     display: flex;
     flex-direction: column;
@@ -75,7 +76,7 @@
     border: none;
     color: #fff;
     border-radius: 0.4em;
-    font-size: 1.1em;
+    font-size: 1em;
     font-weight: 500;
     cursor: pointer;
     transition: background-color 0.2s ease, color 0.2s ease;

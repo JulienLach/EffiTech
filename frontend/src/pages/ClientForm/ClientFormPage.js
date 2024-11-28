@@ -115,8 +115,12 @@ class ClientFormPage extends Component {
                 <TemplateGlobal />
                 <div className={styles.container}>
                     <h1 className={styles.pageTitle}>Client</h1>
-                    <div>
-                        <img src={profilPicture} alt="Profil picture" />
+                    <div class>
+                        <img
+                            src={profilPicture}
+                            className={styles.profilPic}
+                            alt="Profil picture"
+                        />
                     </div>
                     <div className={styles.separation}></div>
                     <h2 className={styles.header}>Coordonnées</h2>
@@ -210,6 +214,8 @@ class ClientFormPage extends Component {
                                 type="submit"
                                 className={styles.submitButton}
                             >
+                                {" "}
+                                <i class="fa-solid fa-floppy-disk"></i>{" "}
                                 Enregistrer
                             </button>
                         </div>

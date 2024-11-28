@@ -1,6 +1,5 @@
 /* HEADER */
 .header {
-    height: 5em;
     position: sticky;
     top: 0;
     width: 100%;
@@ -18,7 +17,7 @@
 }
 
 .logo img {
-    height: 3.5em;
+    height: 3.2em;
 }
 
 .headerRight {

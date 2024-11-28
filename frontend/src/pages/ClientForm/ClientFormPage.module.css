@@ -1,7 +1,7 @@
 .container {
     display: flex;
     flex-direction: column;
-    margin: 0 1.25em 0 15.6em;
+    margin: 2em 1.25em 0 15.6em;
 }
 
 .pageTitle {
@@ -46,16 +46,15 @@
     display: flex;
     justify-content: start;
     gap: 1em;
-    margin-left: 1em;
 }
 
 /* Common styles for buttons */
 .buttonPosition button {
     padding: 0.625em;
     border: none;
-    border-radius: 0.625em;
+    border-radius: 0.4em;
     color: white;
-    font-size: 1.125em;
+    font-size: 1em;
     font-weight: 500;
     cursor: pointer;
 }
@@ -72,4 +71,9 @@
 
 .header {
     margin-bottom: 1em;
+}
+
+.profilPic {
+    margin-top: 1em;
+    height: 7em;
 }
