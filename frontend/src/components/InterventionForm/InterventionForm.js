@@ -185,7 +185,7 @@ class InterventionForm extends Component {
                                 </div>
                             </div>
                             <div className={stylesMobile.container}>
-                                <div>
+                                <div className={stylesMobile.buttonContainer}>
                                     <button
                                         className={stylesMobile.backButton}
                                         type="button"
@@ -233,29 +233,27 @@ class InterventionForm extends Component {
                                     <h3 className={stylesMobile.title}>
                                         Détails
                                     </h3>
-                                    <p className={stylesMobile.boldElement}>
-                                        Client
-                                    </p>
+                                    <p className={stylesMobile.boldElement}></p>
                                     <p className={stylesMobile.dataElement}>
-                                        {event.client.firstname}{" "}
+                                        Client : {event.client.firstname}{" "}
                                         {event.client.lastname}
                                     </p>
-                                    <p className={stylesMobile.boldElement}>
-                                        Téléphone
-                                    </p>
+                                    <p className={stylesMobile.boldElement}></p>
                                     <p className={stylesMobile.dataElement}>
-                                        {event.client.phoneNumber}
+                                        Téléphone : {event.client.phoneNumber}
                                     </p>
-                                    <p className={stylesMobile.boldElement}>
-                                        Adresse
-                                    </p>
+                                    <p className={stylesMobile.boldElement}></p>
                                     <p className={stylesMobile.dataElement}>
-                                        {event.client.address.address},{" "}
-                                        {event.client.address.zipcode},{" "}
+                                        Adresse : {event.client.address.address}
+                                        , {event.client.address.zipcode},{" "}
                                         {event.client.address.city}
                                     </p>
+                                    <div
+                                        className={stylesMobile.separation}
+                                    ></div>
+
                                     <p className={stylesMobile.boldElement}>
-                                        Description
+                                        Description :
                                     </p>
                                     <p className={stylesMobile.dataElement}>
                                         {event.description}
@@ -266,20 +264,18 @@ class InterventionForm extends Component {
                                     <h3 className={stylesMobile.title}>
                                         Plannification
                                     </h3>
-                                    <p className={stylesMobile.boldElement}>
-                                        Technicien intervenant
-                                    </p>
+                                    <p className={stylesMobile.boldElement}></p>
                                     <p className={stylesMobile.dataElement}>
-                                        {event.employee.firstname}{" "}
+                                        Technicien : {event.employee.firstname}{" "}
                                         {event.employee.lastname}
                                     </p>
                                     <p className={stylesMobile.boldElement}>
                                         Début{" "}
                                         {(() => {
                                             if (event.type === "Intervention") {
-                                                return "de l'intervention";
+                                                return "de l'intervention :";
                                             } else {
-                                                return "du rendez-vous";
+                                                return "du rendez-vous :";
                                             }
                                         })()}
                                     </p>
@@ -301,9 +297,9 @@ class InterventionForm extends Component {
                                         Fin{" "}
                                         {(() => {
                                             if (event.type === "Intervention") {
-                                                return "de l'intervention";
+                                                return "de l'intervention :";
                                             } else {
-                                                return "du rendez-vous";
+                                                return "du rendez-vous :";
                                             }
                                         })()}
                                     </p>
@@ -365,6 +361,7 @@ class InterventionForm extends Component {
                                                             }
                                                             type="submit"
                                                         >
+                                                            <i class="fa-regular fa-pen-to-square"></i>{" "}
                                                             Remplir le rapport
                                                         </button>
                                                     );
@@ -387,6 +384,7 @@ class InterventionForm extends Component {
                                                         }
                                                         type="submit"
                                                     >
+                                                        <i class="fa-regular fa-pen-to-square"></i>{" "}
                                                         Remplir le questionnaire
                                                     </button>
                                                 );
