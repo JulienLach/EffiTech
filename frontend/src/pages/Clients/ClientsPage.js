@@ -319,7 +319,9 @@ class ClientsPage extends Component {
                 </div>
                 {isModalOpen && (
                     <Modal onClose={this.closeModal}>
-                        <h1>Nouveau client</h1>
+                        <h1 className={styles.modalHeader}>Nouveau client</h1>
+                        <div className={styles.separation}></div>
+
                         <form
                             className={styles.formElements}
                             onSubmit={this.handleSubmit}
@@ -365,6 +367,7 @@ class ClientsPage extends Component {
                                     </label>
                                 </div>
                             </div>
+
                             {this.state.category === "Professionnel" && (
                                 <div className={styles.labelInput}>
                                     <label htmlFor="company">

@@ -49,13 +49,13 @@ class EmployeeForm extends Component {
                 <div className={styles.container}>
                     <h1 className={styles.pageTitle}>Ajouter un employé</h1>
                     <div className={styles.separation}></div>
-                    <h2>Coordonnées</h2>
+                    <h2 className={styles.modalHeader}>Coordonnées :</h2>
                     <form
                         className={styles.formElements}
                         onSubmit={this.handleSubmit}
                     >
                         <div className={styles.labelInput}>
-                            <label htmlFor="lastname">Nom:</label>
+                            <label htmlFor="lastname">Nom : </label>
                             <input
                                 type="text"
                                 id="lastname"
@@ -65,7 +65,7 @@ class EmployeeForm extends Component {
                             />
                         </div>
                         <div className={styles.labelInput}>
-                            <label htmlFor="firstname">Prénom:</label>
+                            <label htmlFor="firstname">Prénom : </label>
                             <input
                                 type="text"
                                 id="firstname"
@@ -75,7 +75,7 @@ class EmployeeForm extends Component {
                             />
                         </div>
                         <div className={styles.labelInput}>
-                            <label htmlFor="job">Métier:</label>
+                            <label htmlFor="job">Métier : </label>
                             <input
                                 type="text"
                                 id="job"
@@ -85,7 +85,7 @@ class EmployeeForm extends Component {
                             />
                         </div>
                         <div className={styles.labelInput}>
-                            <label htmlFor="speciality">Spécialité:</label>
+                            <label htmlFor="speciality">Spécialité : </label>
                             <input
                                 type="text"
                                 id="speciality"
@@ -95,7 +95,7 @@ class EmployeeForm extends Component {
                             />
                         </div>
                         <div className={styles.labelInput}>
-                            <label htmlFor="email">Adresse email:</label>
+                            <label htmlFor="email">Adresse email : </label>
                             <input
                                 type="email"
                                 id="email"
@@ -105,7 +105,7 @@ class EmployeeForm extends Component {
                             />
                         </div>
                         <div className={styles.labelInput}>
-                            <label htmlFor="phone">Téléphone:</label>
+                            <label htmlFor="phone">Téléphone : </label>
                             <input
                                 type="text"
                                 id="phoneNumber"
@@ -115,7 +115,7 @@ class EmployeeForm extends Component {
                             />
                         </div>
                         <div className={styles.labelInput}>
-                            <label htmlFor="password">Mot de passe:</label>
+                            <label htmlFor="password">Mot de passe : </label>
                             <input
                                 type="password"
                                 id="password"
@@ -125,7 +125,7 @@ class EmployeeForm extends Component {
                             />
                         </div>
                         <div className={styles.labelInput}>
-                            <label htmlFor="isAdmin">Admin:</label>
+                            <label htmlFor="isAdmin">Admin : </label>
                             <input
                                 type="checkbox"
                                 id="isAdmin"

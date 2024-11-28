@@ -149,11 +149,22 @@
 .modalContent {
     background-color: white;
     width: 100%;
-    height: 100%; /* Ajustez la hauteur pour ne pas se superposer au header */
-    border-top-left-radius: 1.25em;
-    overflow-y: auto; /* Ajoute un défilement si le contenu dépasse la hauteur */
-    padding: 1.25em; /* Optionnel : pour ajouter du padding à l'intérieur de la modale */
-    box-shadow: -0.125em 0 0.313em rgba(0, 0, 0, 0.5); /* Optionnel : pour ajouter une ombre */
+    height: 100%;
+    border-top-left-radius: 1em;
+    overflow-y: auto;
+    padding: 1.25em;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.modalHeader {
+    font-size: 2em;
+    font-weight: 550;
+}
+
+.separation {
+    margin: 1.5em 0;
+    height: 0.1em;
+    background-color: #ccc;
 }
 
 .closeButton {

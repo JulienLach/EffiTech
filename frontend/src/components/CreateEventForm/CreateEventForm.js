@@ -240,8 +240,8 @@ class CreateEventForm extends Component {
                         <label>
                             Date{" "}
                             {selectedTab === "Intervention"
-                                ? "d'intervention"
-                                : "de rendez-vous"}
+                                ? "d'intervention :"
+                                : "de rendez-vous :"}
                         </label>
                         <input
                             type="date"
@@ -309,7 +309,7 @@ class CreateEventForm extends Component {
                     <div>
                         <label>
                             Sélectionner un technicien{" "}
-                            <span className={styles.required}>*</span>
+                            <span className={styles.required}>*</span> :
                         </label>
                         <select
                             value={selectedEmployee}

@@ -120,7 +120,7 @@ a {
     border-top-left-radius: 1.25em;
     overflow-y: auto; /* Ajoute un défilement si le contenu dépasse la hauteur */
     padding: 1.25em; /* Optionnel : pour ajouter du padding à l'intérieur de la modale */
-    box-shadow: -0.125em 0 0.313em rgba(0, 0, 0, 0.5); /* Optionnel : pour ajouter une ombre */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .closeButton {
