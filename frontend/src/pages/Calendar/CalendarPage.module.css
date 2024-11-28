@@ -97,3 +97,7 @@ a {
     height: 0.05em;
     background-color: #d3d3d3;
 }
+
+.eventLink a:hover {
+    text-decoration: underline;
+}

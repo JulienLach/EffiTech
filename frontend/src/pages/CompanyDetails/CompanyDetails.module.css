@@ -1,7 +1,7 @@
 .container {
     display: flex;
     flex-direction: column;
-    margin: 0 1.25em 0 15.6em;
+    margin: 2em 1.25em 0 15.6em;
 }
 
 /* placement et style du titre de la pge  */

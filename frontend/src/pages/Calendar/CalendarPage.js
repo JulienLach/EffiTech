@@ -416,7 +416,7 @@ class CalendarPage extends Component {
                                                         <th>Titre</th>
                                                         <th>Statut</th>
                                                         <th>Date</th>
-                                                        <th>Intervenant</th>
+                                                        <th>Employé</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -427,7 +427,11 @@ class CalendarPage extends Component {
                                                                     event.idEvent
                                                                 }
                                                             >
-                                                                <td>
+                                                                <td
+                                                                    className={
+                                                                        styles.eventLink
+                                                                    }
+                                                                >
                                                                     <a href="#">
                                                                         {
                                                                             event
@@ -459,7 +463,11 @@ class CalendarPage extends Component {
                                                                 <td>
                                                                     {event.type}
                                                                 </td>
-                                                                <td>
+                                                                <td
+                                                                    className={
+                                                                        styles.eventLink
+                                                                    }
+                                                                >
                                                                     <a
                                                                         href="#"
                                                                         onClick={() =>
@@ -485,7 +493,11 @@ class CalendarPage extends Component {
                                                                           ).toLocaleDateString()
                                                                         : ""}
                                                                 </td>
-                                                                <td>
+                                                                <td
+                                                                    className={
+                                                                        styles.eventLink
+                                                                    }
+                                                                >
                                                                     <a href="#">
                                                                         {
                                                                             event
