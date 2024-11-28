@@ -161,7 +161,7 @@ class InterventionFormPage extends Component {
                             </div>
                             <div>
                                 <div className={stylesMobile.textArea}>
-                                    <label>Panne constatée: *</label>
+                                    <label>Panne constatée : *</label>
                                     <textarea
                                         rows="5"
                                         name="breakdown"
@@ -335,7 +335,13 @@ class InterventionFormPage extends Component {
                                 </div>
                                 <div>
                                     <div className={styles.textArea}>
-                                        <label>Panne constatée: * :</label>
+                                        <label>
+                                            Panne constatée:{" "}
+                                            <span className={styles.required}>
+                                                *
+                                            </span>{" "}
+                                            :
+                                        </label>
                                         <textarea
                                             rows="5"
                                             name="breakdown"
@@ -346,7 +352,13 @@ class InterventionFormPage extends Component {
                                 </div>
                                 <div>
                                     <div className={styles.textArea}>
-                                        <label>Travaux efféctués: * :</label>
+                                        <label>
+                                            Travaux efféctués:{" "}
+                                            <span className={styles.required}>
+                                                *
+                                            </span>{" "}
+                                            :
+                                        </label>
                                         <textarea
                                             rows="5"
                                             name="workDone"
@@ -398,7 +410,13 @@ class InterventionFormPage extends Component {
                                 </div>
                                 <div>
                                     <div className={styles.textArea}>
-                                        <label>Signature du technicien :</label>
+                                        <label>
+                                            Signature du technicien{" "}
+                                            <span className={styles.required}>
+                                                *
+                                            </span>{" "}
+                                            :
+                                        </label>
                                         <Canvas
                                             signature={employeeSignature}
                                             onSignatureChange={(signature) =>
@@ -412,7 +430,13 @@ class InterventionFormPage extends Component {
                                 </div>
                                 <div>
                                     <div className={styles.textArea}>
-                                        <label>Signature du client :</label>
+                                        <label>
+                                            Signature du client{" "}
+                                            <span className={styles.required}>
+                                                *
+                                            </span>{" "}
+                                            :
+                                        </label>
                                         <Canvas
                                             signature={clientSignature}
                                             onSignatureChange={(signature) =>

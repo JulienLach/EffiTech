@@ -30,17 +30,22 @@
 .particulier {
     color: #c35e00;
     font-weight: 550;
-    text-decoration: underline;
     cursor: pointer;
+}
+
+.particulier:hover {
+    text-decoration: underline;
 }
 
 .professionnel {
     color: #2c5ba1;
     font-weight: 550;
-    text-decoration: underline;
     cursor: pointer;
 }
 
+.professionnel:hover {
+    text-decoration: underline;
+}
 .radioParticulier {
     color: #c35e00;
 }

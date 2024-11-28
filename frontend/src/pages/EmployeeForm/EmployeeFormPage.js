@@ -75,7 +75,7 @@ class EmployeeFormPage extends Component {
                     <h2>Coordonnées</h2>
                     <form className={styles.formElements}>
                         <div className={styles.labelInput}>
-                            <label htmlFor="lastname">Nom:</label>
+                            <label htmlFor="lastname">Nom : </label>
                             <input
                                 type="text"
                                 name="lastname"
@@ -84,7 +84,7 @@ class EmployeeFormPage extends Component {
                             />
                         </div>
                         <div className={styles.labelInput}>
-                            <label htmlFor="firstname">Prénom:</label>
+                            <label htmlFor="firstname">Prénom : </label>
                             <input
                                 type="text"
                                 name="firstname"
@@ -93,7 +93,7 @@ class EmployeeFormPage extends Component {
                             />
                         </div>
                         <div className={styles.labelInput}>
-                            <label htmlFor="job">Métier:</label>
+                            <label htmlFor="job">Métier : </label>
                             <input
                                 type="text"
                                 name="job"
@@ -102,7 +102,7 @@ class EmployeeFormPage extends Component {
                             />
                         </div>
                         <div className={styles.labelInput}>
-                            <label htmlFor="speciality">Spécialité:</label>
+                            <label htmlFor="speciality">Spécialité : </label>
                             <input
                                 type="text"
                                 name="speciality"
@@ -111,7 +111,7 @@ class EmployeeFormPage extends Component {
                             />
                         </div>
                         <div className={styles.labelInput}>
-                            <label htmlFor="mail">Mail:</label>
+                            <label htmlFor="mail">Mail : </label>
                             <input
                                 type="email"
                                 name="email"
@@ -120,7 +120,7 @@ class EmployeeFormPage extends Component {
                             />
                         </div>
                         <div className={styles.labelInput}>
-                            <label htmlFor="phone">Téléphone:</label>
+                            <label htmlFor="phone">Téléphone : </label>
                             <input
                                 type="text"
                                 name="phoneNumber"

@@ -460,7 +460,7 @@ class InterventionForm extends Component {
                                         } else {
                                             return "du rendez-vous";
                                         }
-                                    })()}
+                                    })()}{" "}
                                     :{" "}
                                     {event.startingDate
                                         ? new Date(
@@ -477,7 +477,7 @@ class InterventionForm extends Component {
                                         } else {
                                             return "du rendez-vous";
                                         }
-                                    })()}
+                                    })()}{" "}
                                     : {event.endingHour}
                                 </div>
                                 <div>

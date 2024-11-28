@@ -119,8 +119,8 @@ class ReportPage extends Component {
                             <div className={styles.documentLink}>
                                 <i class="fa-solid fa-file"></i>{" "}
                                 <a href="#">
-                                    INT{event.idEvent}-{event.client.firstname}-
-                                    {event.client.lastname}-{event.title}
+                                    INT-{event.idEvent}-{event.client.firstname}
+                                    -{event.client.lastname}-{event.title}
                                 </a>
                             </div>
                         </div>

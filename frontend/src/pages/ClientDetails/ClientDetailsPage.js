@@ -189,7 +189,7 @@ class ClientDetailsPage extends Component {
                             <div className={styles.contactInfo}>
                                 <p>Téléphone : {client.phoneNumber}</p>
                                 <p>
-                                    Adresse :{client.address.address},{" "}
+                                    Adresse : {client.address.address},{" "}
                                     {client.address.zipcode},{" "}
                                     {client.address.city}
                                 </p>

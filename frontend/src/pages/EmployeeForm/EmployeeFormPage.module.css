@@ -66,6 +66,10 @@
     align-items: center;
 }
 
+.submitButton i {
+    margin-right: 0.5em;
+}
+
 .formElements {
     margin-top: 1.5em;
     display: flex;

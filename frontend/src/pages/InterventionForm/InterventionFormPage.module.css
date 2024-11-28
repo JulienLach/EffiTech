@@ -54,8 +54,8 @@
 
 .alignButton button:hover {
     background-color: rgb(163, 163, 163);
-    border-radius: 0.625em;
-    border: 0.06em solid #a5a4a4;
+    border-radius: 0.4em;
+    border: none;
     cursor: pointer;
 }
 
@@ -172,4 +172,9 @@
 
 .validateButton i {
     margin-right: 0.5em;
+}
+
+.required {
+    color: #c93c2c;
+    font-weight: bold;
 }

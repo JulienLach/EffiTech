@@ -176,7 +176,7 @@ class ClientFormPage extends Component {
                             />
                         </div>
                         <div className={styles.labelInput}>
-                            <label htmlFor="zipcode">Code postal :</label>
+                            <label htmlFor="zipcode">Code postal : </label>
                             <input
                                 type="text"
                                 name="zipcode"
