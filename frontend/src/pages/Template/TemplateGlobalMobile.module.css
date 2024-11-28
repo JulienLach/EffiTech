@@ -11,7 +11,7 @@
     align-items: center;
     padding: 0 1.25em;
     height: 5em;
-    border-radius: 0 0 1em 1em;
+    border-radius: 0 0 0.6em 0.6em;
     background-color: white;
     position: sticky;
     top: 0;
@@ -43,7 +43,7 @@
     position: absolute;
     top: -0.625em;
     right: -0.625em;
-    background-color: red;
+    background-color: #df3623;
     color: white;
     border-radius: 1em;
     height: 1.25em;
@@ -82,7 +82,7 @@
     justify-content: space-around;
     align-items: center;
     background-color: rgb(255, 255, 255);
-    border-radius: 1em 1em 0 0;
+    border-radius: 0.6em 0.6em 0 0;
     padding: 0.8em 0;
     z-index: 1000; /* Assurez-vous que l'élément est au-dessus des autres */
     box-shadow: 0 -0.25em 0.25em rgba(0, 0, 0, 0.1);

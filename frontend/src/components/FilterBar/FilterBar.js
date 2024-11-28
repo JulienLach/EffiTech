@@ -11,7 +11,7 @@ class FilterBar extends Component {
                 {isMobile.mobile ? (
                     <div className={stylesMobile.filterDiv}>
                         <div className={stylesMobile.typeFilter}>
-                            <i className="fa-solid fa-check"></i>
+                            <i className="fa-solid fa-tag"></i>
                             <p>Status</p>
                         </div>
                         <div className={stylesMobile.typeFilter}>

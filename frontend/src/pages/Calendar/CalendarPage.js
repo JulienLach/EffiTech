@@ -281,14 +281,32 @@ class CalendarPage extends Component {
                                                         )}
                                                     </p>
                                                 </div>
-                                                <p>{event.client.category}</p>
+                                                <p
+                                                    className={
+                                                        event.client
+                                                            .category ===
+                                                        "Particulier"
+                                                            ? stylesMobile.partTag
+                                                            : stylesMobile.proTag
+                                                    }
+                                                >
+                                                    {event.client.category}
+                                                </p>
                                                 {event.client.category ===
                                                 "Professionnel" ? (
-                                                    <p>
+                                                    <p
+                                                        className={
+                                                            stylesMobile.clientName
+                                                        }
+                                                    >
                                                         {event.client.company}
                                                     </p>
                                                 ) : (
-                                                    <p>
+                                                    <p
+                                                        className={
+                                                            stylesMobile.clientName
+                                                        }
+                                                    >
                                                         {event.client.firstname}{" "}
                                                         {event.client.lastname}
                                                     </p>
@@ -335,12 +353,12 @@ class CalendarPage extends Component {
                                                         stylesMobile.initiale
                                                     }
                                                 >
-                                                    {event.employee.lastname.charAt(
-                                                        0
-                                                    )}
-                                                    {event.employee.firstname.charAt(
-                                                        0
-                                                    )}
+                                                    {event.employee.lastname
+                                                        .charAt(0)
+                                                        .toUpperCase()}
+                                                    {event.employee.firstname
+                                                        .charAt(0)
+                                                        .toUpperCase()}
                                                 </p>
                                             </div>
                                         </div>

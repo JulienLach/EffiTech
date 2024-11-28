@@ -14,23 +14,24 @@ body {
 /*CSS event cards*/
 .eventCard {
     display: flex;
-    margin: 1em;
+    margin: 0.9em;
     background-color: white;
-    box-shadow: 0 0.3em 0.3em rgba(0, 0, 0, 0.247);
+    box-shadow: 0 0.2em 0.2em rgba(0, 0, 0, 0.2);
     border-radius: 1em;
     position: sticky;
+    border-top: 1px solid #cccccc89;
 }
 
 .sideColorPro {
-    width: 1em;
+    width: 0.6em;
     border-radius: 1em 0 0 1em;
-    background-color: #55abdb;
+    background-color: #87c2f9;
 }
 
 .sideColorPart {
-    width: 1em;
+    width: 0.6em;
     border-radius: 1em 0 0 1em;
-    background-color: #91cb94;
+    background-color: #fccd86;
 }
 
 .leftSide {
@@ -39,6 +40,12 @@ body {
     justify-content: space-between;
     padding: 0.5em;
     margin-right: auto;
+}
+
+.clientName {
+    font-size: 1em;
+    font-weight: 400;
+    margin: 0.3em 0.3em;
 }
 
 .rightSide {
@@ -50,8 +57,31 @@ body {
 }
 
 .type {
-    font-size: 1.2em;
-    font-weight: 700;
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-bottom: 0.3em;
+}
+
+.partTag {
+    font-weight: 500;
+    font-size: 0.75em;
+    color: #c35e00;
+    background-color: #ffe4bc;
+    border-radius: 0.6em;
+    text-align: center;
+    margin-bottom: 0.4em;
+    width: 7em;
+}
+
+.proTag {
+    font-weight: 500;
+    font-size: 0.75em;
+    color: #2c5ba1;
+    background-color: #c1f0ff;
+    border-radius: 0.6em;
+    text-align: center;
+    margin-bottom: 0.4em;
+    width: 7em;
 }
 
 .intStatus {
@@ -71,7 +101,7 @@ body {
 }
 
 .initiale {
-    background-color: blue;
+    background-color: #1c8aff;
     color: white;
     padding: 0.5em;
     border-radius: 10em;
