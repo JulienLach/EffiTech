@@ -230,10 +230,10 @@
 }
 
 .modalFilter button {
-    margin: 0.325em;
-    padding: 0.325em;
+    margin: 0.3em;
+    padding: 0.2em 0.5em;
     border: none;
-    border-radius: 0.625em;
+    border-radius: 0.4em;
     font-size: 1em;
     font-weight: 500;
     cursor: pointer;
