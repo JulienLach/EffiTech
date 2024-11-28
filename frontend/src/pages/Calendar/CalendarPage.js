@@ -282,11 +282,17 @@ class CalendarPage extends Component {
                                                     </p>
                                                 </div>
                                                 <p>{event.client.category}</p>
-                                                <p>
-                                                    {event.client.category} -{" "}
-                                                    {event.client.firstname}{" "}
-                                                    {event.client.lastname}
-                                                </p>
+                                                {event.client.category ===
+                                                "Professionnel" ? (
+                                                    <p>
+                                                        {event.client.company}
+                                                    </p>
+                                                ) : (
+                                                    <p>
+                                                        {event.client.firstname}{" "}
+                                                        {event.client.lastname}
+                                                    </p>
+                                                )}
                                             </div>
                                         </div>
                                         <div className={stylesMobile.rightSide}>
