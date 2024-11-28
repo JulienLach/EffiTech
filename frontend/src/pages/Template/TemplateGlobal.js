@@ -163,7 +163,7 @@ class TemplateGlobal extends Component {
                             >
                                 <a href="/invoices">
                                     <i className="fa-solid fa-file"></i>
-                                    Facture/Devis
+                                    Factures
                                 </a>
                             </li>
                             <li
