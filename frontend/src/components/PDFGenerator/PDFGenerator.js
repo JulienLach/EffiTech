@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
         alignItems: "flex-end",
     },
     title: {
-        fontSize: 20,
+        fontSize: 17,
         textAlign: "center",
         marginTop: 40,
     },
@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
         paddingRight: 10,
         paddingBottom: 70,
         border: 0.8,
+        borderRadius: 3,
     },
     workDone: {
         fontSize: 14,
@@ -52,6 +53,7 @@ const styles = StyleSheet.create({
         paddingRight: 10,
         paddingBottom: 70,
         border: 0.8,
+        borderRadius: 3,
     },
     dateAndHour: {
         fontSize: 14,
@@ -74,19 +76,29 @@ const PDFGenerator = ({ report, reportData }) => {
             const doc = (
                 <Document>
                     <Page size="A4" style={styles.page}>
-                        <Text style={styles.logo}>[LOGO COMPANY]</Text>
+                        <Text style={styles.logo}>[company.logo]</Text>
+
                         <View style={styles.infoClientCompany}>
+                            <Text>
+                                Date d'édition du rapport :{" "}
+                                {new Date(
+                                    report.startingDate
+                                ).toLocaleDateString()}
+                            </Text>
                             <View>
+                                <Text style={styles.title}>Client:</Text>
                                 <Text>
-                                    {report.client.firstname}{" "}
+                                    Nom : {report.client.firstname}{" "}
                                     {report.client.lastname}
                                 </Text>
-                                <Text>{report.client.address.address}</Text>
                                 <Text>
+                                    Adresse : {report.client.address.address}{" "}
                                     {report.client.address.zipcode}{" "}
                                     {report.client.address.city}
                                 </Text>
-                                <Text>{report.client.phoneNumber}</Text>
+                                <Text>
+                                    Téléphone : {report.client.phoneNumber}
+                                </Text>
                             </View>
                         </View>
                         <Text style={styles.title}>Rapport d'intervention</Text>
@@ -100,7 +112,7 @@ const PDFGenerator = ({ report, reportData }) => {
                         <Text style={styles.dateAndHour}>Réparation :</Text>
                         <Text style={styles.workDone}>{report.workDone}</Text>
                         <Text style={styles.dateAndHour}>
-                            Intervenu le:{" "}
+                            Intervenu le :{" "}
                             {new Date(report.startingDate).toLocaleDateString()}
                         </Text>
                         <Text style={styles.dateAndHour}>
