@@ -109,8 +109,10 @@ class TemplateGlobal extends Component {
                                         : ""
                                 }
                             >
-                                <i className="fa-solid fa-calendar"></i>
-                                <a href="/calendar">Calendrier</a>
+                                <a href="/calendar">
+                                    <i className="fa-solid fa-calendar"></i>
+                                    Calendrier
+                                </a>
                             </li>
                             <li
                                 className={
@@ -121,8 +123,9 @@ class TemplateGlobal extends Component {
                                         : ""
                                 }
                             >
-                                <i className="fa-solid fa-user"></i>
-                                <a href="/clients">Clients</a>
+                                <a href="/clients">
+                                    <i className="fa-solid fa-user"></i>Clients
+                                </a>
                             </li>
                             <li
                                 className={
@@ -133,8 +136,10 @@ class TemplateGlobal extends Component {
                                         : ""
                                 }
                             >
-                                <i className="fa-solid fa-users"></i>
-                                <a href="/employees">Employés</a>
+                                <a href="/employees">
+                                    <i className="fa-solid fa-user-group"></i>
+                                    Employés
+                                </a>
                             </li>
                             <li
                                 className={
@@ -144,8 +149,10 @@ class TemplateGlobal extends Component {
                                         : ""
                                 }
                             >
-                                <i className="fa-solid fa-building"></i>
-                                <a href="/company">Société</a>
+                                <a href="/company">
+                                    <i className="fa-solid fa-landmark"></i>
+                                    Société
+                                </a>
                             </li>
                             <li
                                 className={
@@ -154,8 +161,10 @@ class TemplateGlobal extends Component {
                                         : ""
                                 }
                             >
-                                <i className="fa-solid fa-file-lines"></i>
-                                <a href="/invoices">Facture/Devis</a>
+                                <a href="/invoices">
+                                    <i className="fa-solid fa-file"></i>
+                                    Facture/Devis
+                                </a>
                             </li>
                             <li
                                 className={
@@ -164,8 +173,10 @@ class TemplateGlobal extends Component {
                                         : ""
                                 }
                             >
-                                <i className="fa-solid fa-folder"></i>
-                                <a href="/documents">Documents</a>
+                                <a href="/documents">
+                                    <i className="fa-solid fa-folder"></i>
+                                    Documents
+                                </a>
                             </li>
                         </ul>
                     </div>
