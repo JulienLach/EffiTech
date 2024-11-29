@@ -134,6 +134,7 @@ class EmployeeForm extends Component {
                                 onChange={this.handleChange}
                             />
                         </div>
+                        <div className={styles.separation}></div>
                         <div className={styles.buttonPosition}>
                             <button
                                 type="reset"
@@ -144,7 +145,7 @@ class EmployeeForm extends Component {
                             </button>
                             <button
                                 type="submit"
-                                className={styles.submitButton}
+                                className={styles.employeeSubmitButton}
                             >
                                 Enregistrer
                             </button>

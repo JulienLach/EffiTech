@@ -162,9 +162,9 @@
 }
 
 .separation {
-    margin: 1.5em 0;
-    height: 0.1em;
+    height: 0.05em;
     background-color: #ccc;
+    margin: 1.5em 0;
 }
 
 .closeButton {
