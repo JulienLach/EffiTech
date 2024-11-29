@@ -11,7 +11,7 @@
 
 .cardContainer {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(370px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 1em;
 }
 
@@ -48,26 +48,32 @@ a {
     height: 6.25em;
 }
 
-.job {
-    /* width: auto; */
+.profilInfo {
+    text-align: end;
+}
+
+.profilInfo .job {
     text-align: center;
-    border-radius: 3.125em;
+    border-radius: 3.5em;
     background-color: #d9d9d9;
-    font-size: 1.125em;
-    font-weight: 600;
-    margin: 0.625em 0;
+    font-size: 1em;
+    font-weight: 500;
+    margin: 0.8em 0;
+    padding: 0.1em 0em;
+    color: #3e3e3e;
 }
 
 .info {
     text-align: right;
-    margin: 0.313em;
+    margin: 0.35em 0;
     padding: 0;
-    font-size: 1.125em;
+    font-size: 1.1em;
     font-weight: 500;
     color: #3e3e3e;
 }
 
 .moreInfo {
+    margin-top: 0.5em;
     font-size: 1em;
     font-weight: 500;
     color: #c93c2c;
@@ -82,15 +88,19 @@ a {
     background-color: white;
 }
 
-.name {
-    margin: 0.313em;
-    padding: 0;
-    font-size: 1.375em;
-    font-weight: 600;
+.moreInfo button:hover {
+    text-decoration: underline;
 }
 
-.profilInfo {
-    text-align: end;
+.moreInfo button i {
+    margin-left: 0.2em;
+}
+
+.name {
+    margin: 0.3em;
+    padding: 0;
+    font-size: 1.4em;
+    font-weight: 600;
 }
 
 /* style de la modal */
