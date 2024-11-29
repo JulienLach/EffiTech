@@ -24,7 +24,7 @@ class ClientsPage extends Component {
             selectedCategory: "All",
             currentPage: 1,
             clientsPerPage: 10,
-            searchItem: "", // Utilisation de searchItem
+            searchItem: "",
         };
         this.handleButtonClick = this.handleButtonClick.bind(this);
         this.openModal = this.openModal.bind(this);
@@ -186,7 +186,7 @@ class ClientsPage extends Component {
             selectedCategory,
             currentPage,
             clientsPerPage,
-            searchItem, // Utilisation de searchItem
+            searchItem,
         } = this.state;
 
         // Filtrer les clients en fonction de la catégorie sélectionnée et de la recherche
