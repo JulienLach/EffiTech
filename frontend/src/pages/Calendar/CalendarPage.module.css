@@ -1,25 +1,19 @@
-body {
-    box-sizing: border-box;
-    margin: 0;
-}
 /* placement du container */
 .container {
     display: flex;
     flex-direction: column;
-    margin: 0 1.25em 0 15.6em;
+    margin: 2em 1.25em 0 15.6em;
 }
 
-/* placement et style du titre de la pge  */
 .pageTitle {
     font-size: 1.9em;
     font-weight: 550;
+    margin-bottom: 0.4em;
 }
 
-/* fixation du top side (titre, filter bar et evenement) */
 .fixedTopSide {
-    height: 11.5em;
     position: sticky;
-    top: 5em;
+    top: 0;
     width: 100%;
     background-color: white;
     z-index: 1;
@@ -27,7 +21,7 @@ body {
 
 .stickyThead {
     position: sticky;
-    top: 16.56em;
+    top: 5em;
     background-color: white;
     z-index: 1;
 }
@@ -43,8 +37,12 @@ th,
 td {
     text-align: start;
     width: 100vw; /* Définit une largeur fixe pour les cellules */
-    padding: 0.625em; /* Augmente l'espace à l'intérieur des cellules */
+    padding: 0.6em; /* Augmente l'espace à l'intérieur des cellules */
     border-bottom: 0.06em solid #d3d3d3;
+}
+
+th {
+    font-weight: 550;
 }
 
 a {
@@ -59,11 +57,17 @@ a {
 
 .pagination button {
     background-color: #e9e9e9;
-    border: 0.06em solid #a4a4a4;
-    border-radius: 0.2em;
-    padding: 0.625em 1.25em;
+    border: none;
+    border-radius: 0.4em;
+    padding: 0.4em 1em;
     margin: 3vh 0vh;
     font-size: 1em;
+    transition: 0.05s;
+}
+
+.pagination button:hover {
+    background-color: #c93c2c;
+    color: white;
 }
 
 .viewButton {
@@ -90,4 +94,8 @@ a {
     width: 100%;
     height: 0.05em;
     background-color: #d3d3d3;
+}
+
+.eventLink a:hover {
+    text-decoration: underline;
 }

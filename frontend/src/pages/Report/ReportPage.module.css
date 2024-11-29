@@ -1,21 +1,16 @@
+/* ReportPage.module.css */
 .container {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    margin: 0 1.25em 0 15.6em;
 }
 
 .card {
-    margin: 1.25em;
-    width: 50%;
-    padding: 1.25em;
-    border-radius: 0.625em;
+    margin: 2em 0em;
+    width: 80%;
+    padding: 2em;
+    border-radius: 0.4em;
     box-shadow: 0 0 0.625em rgba(0, 0, 0, 0.1);
-    background-color: white;
-}
-
-h1 {
-    font-size: 1.5em;
-    margin-bottom: 1.25em;
 }
 
 .interventionInfo {
@@ -26,10 +21,16 @@ h1 {
     font-weight: 600;
 }
 
+.pageTitle {
+    font-size: 1.9em;
+    font-weight: 550;
+    margin-bottom: 0.4em;
+}
+
 .separation {
-    height: 0.063em;
-    background-color: #3e3e3e;
-    margin: 1.875em 1.25em 1.25em 1.25em;
+    height: 0.05em;
+    background-color: #ccc;
+    margin: 1em 0;
 }
 
 .alignButton {
@@ -39,26 +40,53 @@ h1 {
 }
 
 .alignButton button {
-    width: auto;
-    height: 1.875em;
-    background-color: white;
-    border-radius: 0.313em;
-    border: 0.063em solid #919191;
+    padding: 0.6em;
+    border: none;
+    border-radius: 0.4em;
+    font-size: 1em;
+    font-weight: 500;
     cursor: pointer;
-    font-weight: 600;
 }
 
 .alignButton button:hover {
-    width: auto;
-    height: 1.875em;
     background-color: rgb(163, 163, 163);
-    border-radius: 0.313em;
-    border: 0.063em solid #a5a4a4;
+    border-radius: 0.4em;
+    border: none;
     cursor: pointer;
 }
 
 .alignButton button i {
     transform: rotate(180deg);
+    margin-right: 0.6em;
+}
+
+.infoTitle {
+    margin-bottom: 1.25em;
+}
+
+.infoTitle h3 {
+    font-size: 1.5em;
+    font-weight: 600;
+    margin-bottom: 0.5em;
+}
+
+.infoTitle p {
+    margin: 0.3em 0;
+}
+
+.documentInfo {
+    margin-top: 1.5em;
+}
+
+.documentLink {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.25em;
+}
+
+.documentLink i {
+    margin: 0 0.3em;
+    color: #424242;
 }
 
 .pdf {
@@ -66,6 +94,8 @@ h1 {
     height: 18.75em;
 }
 
-.documentLink {
-    margin-bottom: 1.25em;
+.documentTitle {
+    font-size: 1.5em;
+    font-weight: 600;
+    margin-bottom: 0.5em;
 }

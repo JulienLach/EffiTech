@@ -115,17 +115,21 @@ class ClientFormPage extends Component {
                 <TemplateGlobal />
                 <div className={styles.container}>
                     <h1 className={styles.pageTitle}>Client</h1>
-                    <div>
-                        <img src={profilPicture} alt="Profil picture" />
+                    <div class>
+                        <img
+                            src={profilPicture}
+                            className={styles.profilPic}
+                            alt="Profil picture"
+                        />
                     </div>
                     <div className={styles.separation}></div>
-                    <h2>Coordonnées</h2>
+                    <h2 className={styles.header}>Coordonnées</h2>
                     <form
                         className={styles.formElements}
                         onSubmit={this.handleSubmit}
                     >
                         <div className={styles.labelInput}>
-                            <label htmlFor="lastname">Nom:</label>
+                            <label htmlFor="lastname">Nom :</label>
                             <input
                                 type="text"
                                 name="lastname"
@@ -134,7 +138,7 @@ class ClientFormPage extends Component {
                             />
                         </div>
                         <div className={styles.labelInput}>
-                            <label htmlFor="firstname">Prénom:</label>
+                            <label htmlFor="firstname">Prénom :</label>
                             <input
                                 type="text"
                                 name="firstname"
@@ -144,7 +148,7 @@ class ClientFormPage extends Component {
                         </div>
                         {client.category !== "Particulier" && (
                             <div className={styles.labelInput}>
-                                <label htmlFor="company">Entreprise:</label>
+                                <label htmlFor="company">Entreprise :</label>
                                 <input
                                     type="text"
                                     name="company"
@@ -154,7 +158,7 @@ class ClientFormPage extends Component {
                             </div>
                         )}
                         <div className={styles.labelInput}>
-                            <label htmlFor="phoneNumber">Téléphone:</label>
+                            <label htmlFor="phoneNumber">Téléphone :</label>
                             <input
                                 type="text"
                                 name="phoneNumber"
@@ -163,7 +167,7 @@ class ClientFormPage extends Component {
                             />
                         </div>
                         <div className={styles.labelInput}>
-                            <label htmlFor="address">Adresse:</label>
+                            <label htmlFor="address">Adresse :</label>
                             <input
                                 type="text"
                                 name="address"
@@ -172,7 +176,7 @@ class ClientFormPage extends Component {
                             />
                         </div>
                         <div className={styles.labelInput}>
-                            <label htmlFor="zipcode">Code postal:</label>
+                            <label htmlFor="zipcode">Code postal : </label>
                             <input
                                 type="text"
                                 name="zipcode"
@@ -181,11 +185,20 @@ class ClientFormPage extends Component {
                             />
                         </div>
                         <div className={styles.labelInput}>
-                            <label htmlFor="city">Ville:</label>
+                            <label htmlFor="city">Ville :</label>
                             <input
                                 type="text"
                                 name="city"
                                 value={client.address.city}
+                                onChange={this.handleChange}
+                            />
+                        </div>
+                        <div className={styles.labelInput}>
+                            <label htmlFor="email">Mail :</label>
+                            <input
+                                type="text"
+                                name="email"
+                                value={client.email}
                                 onChange={this.handleChange}
                             />
                         </div>
@@ -201,6 +214,8 @@ class ClientFormPage extends Component {
                                 type="submit"
                                 className={styles.submitButton}
                             >
+                                {" "}
+                                <i class="fa-solid fa-floppy-disk"></i>{" "}
                                 Enregistrer
                             </button>
                         </div>

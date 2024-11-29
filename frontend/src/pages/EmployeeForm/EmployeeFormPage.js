@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { useLocation } from "react-router-dom";
 import TemplateGlobal from "../Template/TemplateGlobal";
 import styles from "./EmployeeFormPage.module.css";
-import profilPicture from "../../images/profil.png";
 import { getEmployeeById, updateEmployee } from "../../services/api";
 
 // Composant wrapper pour utiliser les hooks
@@ -76,7 +75,7 @@ class EmployeeFormPage extends Component {
                     <h2>Coordonnées</h2>
                     <form className={styles.formElements}>
                         <div className={styles.labelInput}>
-                            <label htmlFor="lastname">Nom:</label>
+                            <label htmlFor="lastname">Nom : </label>
                             <input
                                 type="text"
                                 name="lastname"
@@ -85,7 +84,7 @@ class EmployeeFormPage extends Component {
                             />
                         </div>
                         <div className={styles.labelInput}>
-                            <label htmlFor="firstname">Prénom:</label>
+                            <label htmlFor="firstname">Prénom : </label>
                             <input
                                 type="text"
                                 name="firstname"
@@ -94,7 +93,7 @@ class EmployeeFormPage extends Component {
                             />
                         </div>
                         <div className={styles.labelInput}>
-                            <label htmlFor="job">Métier:</label>
+                            <label htmlFor="job">Métier : </label>
                             <input
                                 type="text"
                                 name="job"
@@ -103,7 +102,7 @@ class EmployeeFormPage extends Component {
                             />
                         </div>
                         <div className={styles.labelInput}>
-                            <label htmlFor="speciality">Spécialité:</label>
+                            <label htmlFor="speciality">Spécialité : </label>
                             <input
                                 type="text"
                                 name="speciality"
@@ -112,7 +111,7 @@ class EmployeeFormPage extends Component {
                             />
                         </div>
                         <div className={styles.labelInput}>
-                            <label htmlFor="mail">Adresse mail:</label>
+                            <label htmlFor="mail">Mail : </label>
                             <input
                                 type="email"
                                 name="email"
@@ -121,7 +120,7 @@ class EmployeeFormPage extends Component {
                             />
                         </div>
                         <div className={styles.labelInput}>
-                            <label htmlFor="phone">Téléphone:</label>
+                            <label htmlFor="phone">Téléphone : </label>
                             <input
                                 type="text"
                                 name="phoneNumber"
@@ -142,6 +141,7 @@ class EmployeeFormPage extends Component {
                             onClick={this.handleSubmit}
                             className={styles.submitButton}
                         >
+                            <i className="fa-solid fa-save"></i>
                             Enregistrer
                         </button>
                     </div>

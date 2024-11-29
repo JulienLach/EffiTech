@@ -319,7 +319,9 @@ class ClientsPage extends Component {
                 </div>
                 {isModalOpen && (
                     <Modal onClose={this.closeModal}>
-                        <h2>Nouveau client</h2>
+                        <h1 className={styles.modalHeader}>Nouveau client</h1>
+                        <div className={styles.separation}></div>
+
                         <form
                             className={styles.formElements}
                             onSubmit={this.handleSubmit}
@@ -365,9 +367,12 @@ class ClientsPage extends Component {
                                     </label>
                                 </div>
                             </div>
+
                             {this.state.category === "Professionnel" && (
                                 <div className={styles.labelInput}>
-                                    <label htmlFor="company">Entreprise:</label>
+                                    <label htmlFor="company">
+                                        Nom de l'entreprise :{" "}
+                                    </label>
                                     <input
                                         type="text"
                                         id="company"
@@ -382,7 +387,7 @@ class ClientsPage extends Component {
                                 </div>
                             )}
                             <div className={styles.labelInput}>
-                                <label htmlFor="lastname">Nom:</label>
+                                <label htmlFor="lastname">Nom :</label>
                                 <input
                                     type="text"
                                     id="lastname"
@@ -390,7 +395,7 @@ class ClientsPage extends Component {
                                 />
                             </div>
                             <div className={styles.labelInput}>
-                                <label htmlFor="firstname">Prénom:</label>
+                                <label htmlFor="firstname">Prénom :</label>
                                 <input
                                     type="text"
                                     id="firstname"
@@ -398,7 +403,7 @@ class ClientsPage extends Component {
                                 />
                             </div>
                             <div className={styles.labelInput}>
-                                <label htmlFor="address">Adresse:</label>
+                                <label htmlFor="address">Adresse :</label>
                                 <input
                                     type="text"
                                     id="address"
@@ -406,7 +411,7 @@ class ClientsPage extends Component {
                                 />
                             </div>
                             <div className={styles.labelInput}>
-                                <label htmlFor="zipcode">Code postal:</label>
+                                <label htmlFor="zipcode">Code postal :</label>
                                 <input
                                     type="text"
                                     id="zipcode"
@@ -414,15 +419,15 @@ class ClientsPage extends Component {
                                 />
                             </div>
                             <div className={styles.labelInput}>
-                                <label htmlFor="city">Ville:</label>
+                                <label htmlFor="city">Ville :</label>
                                 <input type="text" id="city" name="city" />
                             </div>
                             <div className={styles.labelInput}>
-                                <label htmlFor="mail">Email:</label>
+                                <label htmlFor="mail">Email :</label>
                                 <input type="email" id="mail" name="mail" />
                             </div>
                             <div className={styles.labelInput}>
-                                <label htmlFor="phone">Téléphone:</label>
+                                <label htmlFor="phone">Téléphone :</label>
                                 <input type="text" id="phone" name="phone" />
                             </div>
                             <div className={styles.buttonPosition}>
@@ -437,7 +442,7 @@ class ClientsPage extends Component {
                                     type="submit"
                                     className={styles.submitButton}
                                 >
-                                    Créer le client
+                                    Enregister
                                 </button>
                             </div>
                         </form>
@@ -451,12 +456,7 @@ class ClientsPage extends Component {
 const Modal = ({ onClose, children }) => {
     return (
         <div className={styles.modalOverlay}>
-            <div className={styles.modalContent}>
-                <button className={styles.closeButton} onClick={onClose}>
-                    &times;
-                </button>
-                {children}
-            </div>
+            <div className={styles.modalContent}>{children}</div>
         </div>
     );
 };

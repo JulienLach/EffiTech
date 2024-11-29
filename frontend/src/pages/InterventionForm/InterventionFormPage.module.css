@@ -1,16 +1,16 @@
-/* TechInterventionForm.module.css */
+/* InterventionFormPage.module.css */
 .container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    margin: 0 1.25em 0 15.6em;
 }
 
 .card {
-    margin: 0.625em;
-    width: 60%;
-    padding: 1.25em;
-    border-radius: 0.625em;
+    margin: 2em 0em;
+    width: 80%;
+    padding: 2em;
+    border-radius: 0.4em;
     box-shadow: 0 0 0.625em rgba(0, 0, 0, 0.1);
-    background-color: white;
 }
 
 .interventionId {
@@ -21,9 +21,16 @@
     font-weight: 600;
 }
 
+.pageTitle {
+    font-size: 1.9em;
+    font-weight: 550;
+    margin-bottom: 0.4em;
+}
+
 .separation {
-    height: 0.063em;
-    background-color: #3e3e3e;
+    height: 0.05em;
+    background-color: #ccc;
+    margin: 1em 0;
 }
 
 .alignButton {
@@ -33,19 +40,22 @@
 }
 
 .alignButton button {
-    height: 1.875em;
-    background-color: white;
-    border-radius: 0.313em;
-    border: 0.063em solid #919191;
+    padding: 0.6em;
+    border: none;
+    border-radius: 0.4em;
+    font-size: 1em;
+    font-weight: 500;
     cursor: pointer;
-    font-weight: 600;
+}
+
+.alignButton button i {
+    margin-right: 0.6em;
 }
 
 .alignButton button:hover {
-    height: 1.875em;
     background-color: rgb(163, 163, 163);
-    border-radius: 0.313em;
-    border: 0.063em solid #a5a4a4;
+    border-radius: 0.4em;
+    border: none;
     cursor: pointer;
 }
 
@@ -60,16 +70,17 @@
 }
 
 .inputDisplay label {
-    font-weight: 600;
-    margin-bottom: 0.313em;
+    font-weight: 500;
+    margin-bottom: 0.3em;
 }
 
 .inputDisplay input {
     width: 50%;
     height: 2.5em;
-    border-radius: 0.313em;
-    border: 0.063em solid #919191;
-    background-color: #c5c5c5;
+    border-radius: 0.5em;
+    border: none;
+    background-color: #e0e0e0;
+    padding: 1em;
 }
 
 .textArea {
@@ -79,34 +90,91 @@
     margin-bottom: 1.25em;
 }
 
+.textArea textarea {
+    margin-top: 0.8em;
+    width: 100%;
+    padding: 1em;
+    border-radius: 0.5em; /* Ajoute un border-radius */
+    border: 0.06em solid #ccc; /* Ajoute une bordure de couleur #ccc */
+    resize: vertical; /* Permet de redimensionner verticalement */
+}
+
 .labelInput {
     display: flex;
     flex-direction: column;
     align-items: start;
+    margin-bottom: 0.625em;
+    gap: 0.7em;
 }
 
 .labelInput input {
-    width: 20%;
+    width: 50%;
     height: 2.5em;
-    border-radius: 0.313em;
-    border: 0.063em solid #919191;
-    background-color: #c5c5c5;
+    border-radius: 0.5em;
+    padding: 1em;
+    border: none;
+    background-color: #e0e0e0;
 }
 
 .modalFooter {
+    margin-top: 1em;
     display: flex;
     flex-direction: row;
-    gap: 3em;
+    gap: 1em;
+    justify-content: flex-end;
 }
 
 .modalFooter button {
-    padding: 0.5em;
-    border: 0.063em solid #ccc;
-    border-radius: 0.3em;
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 0.4em;
     font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.modalFooter .cancelButton {
+    background-color: #ababab;
+}
+
+.modalFooter .submitButton {
+    background-color: #c93c2c;
+    color: white;
 }
 
 .modalFooter button:hover {
+    opacity: 0.8;
+}
+
+.validateButton {
     background-color: #c93c2c;
+    border: none;
+    border-radius: 0.4em;
     color: white;
+}
+
+.validateButton:hover {
+    background-color: #b73c2e;
+}
+
+.pageTitle {
+    font-size: 2em;
+    font-weight: 550;
+    margin-bottom: 0.4em;
+}
+
+.formTitle {
+    margin-bottom: 1em;
+    font-size: 1.4em;
+    font-weight: 500;
+}
+
+.validateButton i {
+    margin-right: 0.5em;
+}
+
+.required {
+    color: #c93c2c;
+    font-weight: bold;
 }

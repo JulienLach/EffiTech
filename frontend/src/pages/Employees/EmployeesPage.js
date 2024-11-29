@@ -126,7 +126,7 @@ class EmployeesPage extends Component {
                 )}
                 {isModalOpen && (
                     <Modal onClose={this.closeModal}>
-                        <EmployeeForm />
+                        <EmployeeForm onClose={this.closeModal} />
                     </Modal>
                 )}
             </>
@@ -136,11 +136,11 @@ class EmployeesPage extends Component {
 
 const Modal = ({ onClose, children }) => {
     return (
-        <div className={styles.modalOverlay}>
-            <div className={styles.modalContent}>
-                <button className={styles.closeButton} onClick={onClose}>
-                    &times;
-                </button>
+        <div className={styles.modalOverlay} onClick={onClose}>
+            <div
+                className={styles.modalContent}
+                onClick={(e) => e.stopPropagation()}
+            >
                 {children}
             </div>
         </div>

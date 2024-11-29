@@ -66,7 +66,9 @@ class ReportPage extends Component {
                 <div className={styles.container}>
                     <div className={styles.card}>
                         <div className={styles.alignButton}>
-                            <h2>Rapport d'intervention</h2>
+                            <h2 className={styles.pageTitle}>
+                                Rapport d'intervention
+                            </h2>
                             <button
                                 type="button"
                                 onClick={() =>
@@ -79,43 +81,46 @@ class ReportPage extends Component {
                         </div>
                         <div className={styles.interventionInfo}>
                             <div>
-                                <p>INT{event.idEvent}</p>
+                                <h3>INT-{event.idEvent}</h3>
                             </div>
                         </div>
+                        <div className={styles.separation}></div>
+
                         <div className={styles.infoTitle}>
-                            <h3>Client</h3>
+                            <h3>Client :</h3>
                             <p>
-                                {event.client.firstname} {event.client.lastname}
+                                Nom : {event.client.firstname}{" "}
+                                {event.client.lastname}
                             </p>
-                            <p>{event.client.phoneNumber}</p>
+                            <p>Téléphone : {event.client.phoneNumber}</p>
                             <p>
-                                {event.client.address.address},{" "}
+                                Adresse : {event.client.address.address},{" "}
                                 {event.client.address.zipcode},{" "}
                                 {event.client.address.city}
                             </p>
                         </div>
                         <div className={styles.infoTitle}>
-                            <h3>Technicien</h3>
+                            <h3>Technicien :</h3>
                             <p>
-                                {event.employee.firstname}{" "}
+                                Nom : {event.employee.firstname}{" "}
                                 {event.employee.lastname}
                             </p>
                             <p>
-                                Intervenu le:{" "}
+                                Intervenu le :{" "}
                                 {new Date(
                                     event.startingDate
                                 ).toLocaleDateString()}{" "}
-                                de {event.startingHour} à {event.endingHour}
+                                de {event.startingHour} à {event.endingHour}{" "}
                             </p>
                         </div>
                         <div className={styles.separation}></div>
                         <div className={styles.documentInfo}>
-                            <h2>Document associé</h2>
+                            <h2 className={styles.documentTitle}>Document :</h2>
                             <div className={styles.documentLink}>
-                                <i className="fa-regular fa-file-pdf"></i>
+                                <i class="fa-solid fa-file"></i>{" "}
                                 <a href="#">
-                                    INT{event.idEvent}-{event.client.firstname}-
-                                    {event.client.lastname}-{event.title}
+                                    INT-{event.idEvent}-{event.client.firstname}
+                                    -{event.client.lastname}-{event.title}
                                 </a>
                             </div>
                         </div>

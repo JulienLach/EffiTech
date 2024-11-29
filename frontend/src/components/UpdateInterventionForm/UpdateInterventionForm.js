@@ -12,6 +12,7 @@ class UpdateInterventionForm extends Component {
             : "";
 
         this.state = {
+            idEvent: props.event.idEvent,
             title: props.event.title || "",
             description: props.event.description || "",
             status: props.event.status || 1,
@@ -53,7 +54,7 @@ class UpdateInterventionForm extends Component {
         } = this.state;
 
         const eventData = {
-            idEvent: event.idEvent, // Assurez-vous que idEvent est inclus
+            idEvent: event.idEvent,
             title,
             description,
             status,
@@ -91,6 +92,7 @@ class UpdateInterventionForm extends Component {
 
     render() {
         const {
+            idEvent,
             title,
             description,
             status,
@@ -117,9 +119,21 @@ class UpdateInterventionForm extends Component {
                     </h2>
                     <div className={styles.separator}></div>
                     <div>
-                        <div>
-                            <label>
-                                Titre:
+                        <h2>
+                            {(() => {
+                                if (type === "Intervention") {
+                                    return "INT-";
+                                } else {
+                                    return "RDV-";
+                                }
+                            })()}
+                            {idEvent}
+                        </h2>
+                    </div>
+                    <div>
+                        <div className={styles.labelInput}>
+                            <label className={styles.eventLabels}>
+                                Titre :
                                 <input
                                     type="text"
                                     name="title"
@@ -128,9 +142,9 @@ class UpdateInterventionForm extends Component {
                                 />
                             </label>
                         </div>
-                        <div>
-                            <label>
-                                Description:
+                        <div className={styles.labelInput}>
+                            <label className={styles.eventLabels}>
+                                Description :
                                 <textarea
                                     name="description"
                                     value={description}
@@ -138,46 +152,26 @@ class UpdateInterventionForm extends Component {
                                 />
                             </label>
                         </div>
-                        <div>
-                            <label>
-                                Statut:
-                                <input
-                                    type="number"
-                                    name="status"
-                                    value={status}
-                                    onChange={this.handleChange}
-                                />
-                            </label>
-                        </div>
-                        <div>
-                            <label>
-                                Planifié:
-                                <input
-                                    type="checkbox"
-                                    name="isPlanned"
-                                    checked={isPlanned}
-                                    onChange={(e) =>
-                                        this.setState({
-                                            isPlanned: e.target.checked,
-                                        })
-                                    }
-                                />
-                            </label>
-                        </div>
-                        <div>
-                            <label>
-                                Type:
-                                <input
-                                    type="text"
+                        <div className={styles.labelInput}>
+                            <label className={styles.eventLabels}>
+                                Type :
+                                <select
                                     name="type"
                                     value={type}
                                     onChange={this.handleChange}
-                                />
+                                >
+                                    <option value="Intervention">
+                                        Intervention
+                                    </option>
+                                    <option value="Rendez-vous">
+                                        Rendez-vous
+                                    </option>
+                                </select>
                             </label>
                         </div>
-                        <div>
-                            <label>
-                                Date de début:
+                        <div className={styles.labelInput}>
+                            <label className={styles.eventLabels}>
+                                Date de début :
                                 <input
                                     type="date"
                                     name="startingDate"
@@ -186,9 +180,9 @@ class UpdateInterventionForm extends Component {
                                 />
                             </label>
                         </div>
-                        <div>
-                            <label>
-                                Heure de début:
+                        <div className={styles.labelInput}>
+                            <label className={styles.eventLabels}>
+                                Heure de début :
                                 <input
                                     type="time"
                                     name="startingHour"
@@ -197,8 +191,8 @@ class UpdateInterventionForm extends Component {
                                 />
                             </label>
                         </div>
-                        <div>
-                            <label>
+                        <div className={styles.labelInput}>
+                            <label className={styles.eventLabels}>
                                 Heure de fin:
                                 <input
                                     type="time"
@@ -208,9 +202,9 @@ class UpdateInterventionForm extends Component {
                                 />
                             </label>
                         </div>
-                        <div>
-                            <label>
-                                Travaux à effectuer:
+                        <div className={styles.labelInput}>
+                            <label className={styles.eventLabels}>
+                                Travaux à effectuer :
                                 <textarea
                                     name="workToDo"
                                     value={workToDo}
@@ -221,10 +215,16 @@ class UpdateInterventionForm extends Component {
                     </div>
                     <div className={styles.separator}></div>
                     <div className={styles.modalFooter}>
-                        <button type="button" onClick={this.handleCancel}>
+                        <button
+                            type="button"
+                            onClick={this.handleCancel}
+                            className={styles.cancelButton}
+                        >
                             Annuler
                         </button>
-                        <button type="submit">Valider Modification</button>
+                        <button type="submit" className={styles.submitButton}>
+                            Enregistrer
+                        </button>
                     </div>
                 </div>
             </form>

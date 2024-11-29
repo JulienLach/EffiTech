@@ -1,6 +1,5 @@
 /* HEADER */
 .header {
-    height: 5em;
     position: sticky;
     top: 0;
     width: 100%;
@@ -18,7 +17,7 @@
 }
 
 .logo img {
-    height: 3.5em;
+    height: 3em;
 }
 
 .headerRight {
@@ -28,26 +27,27 @@
 
 .planifierButton {
     background-color: #c93c2c;
-    padding: 0.625em 0.9em;
+    padding: 0.4em 0.7em;
     border: none;
-    border-radius: 0.625em;
+    border-radius: 0.4em;
     color: white;
-    font-size: 1.1em;
+    font-size: 1.05em;
     font-weight: 500;
     cursor: pointer;
-    margin: 0 1.25em;
+    margin: 0 1em;
 }
 
 .planifierButton i {
-    margin-right: 0.625em;
+    margin-right: 0.6em;
+    font-size: 0.9em;
 }
 
 .planifierButton:hover {
-    background-color: #9b2e22;
+    background-color: #b73c2e;
 }
 
 .notificationBell {
-    height: 1.8em;
+    height: 1.3em;
 }
 
 .notificationIcon {
@@ -60,7 +60,7 @@
     position: absolute;
     top: -0.625em;
     right: -0.625em;
-    background-color: red;
+    background-color: #e0240f;
     color: white;
     border-radius: 1em;
     height: 1.25em;
@@ -74,16 +74,17 @@
 .profileBubble {
     top: -0.625em;
     right: -0.625em;
-    background-color: #007bff;
+    background-color: #1c8aff;
     color: white;
     border-radius: 2em;
-    width: 2.5em;
-    height: 2.5em;
+    width: 2.4em;
+    height: 2.4em;
     font-size: 1.25em;
     font-weight: 500;
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 
 .profileBubble:hover {
@@ -92,13 +93,13 @@
 
 .profileMenu {
     position: fixed;
-    top: 5em;
-    right: 0;
+    top: 4.5em;
+    right: 1.3em;
     z-index: 1000;
     height: 90px;
     padding: 1em;
     border: 0.15em solid #d5d5d5;
-    border-radius: 1em;
+    border-radius: 0.5em;
     background-color: #fff;
     box-shadow: 0 0.18em 0.2em rgba(0, 0, 0, 0.1);
 }
@@ -106,6 +107,10 @@
 ul li {
     list-style: none;
     padding: 0.3em 0;
+}
+
+.profileMenu ul li a i {
+    margin-left: 0.3em;
 }
 
 /* SIDEBAR */
@@ -125,16 +130,23 @@ ul li {
 .sidebar li {
     display: flex;
     align-items: center;
-    margin: 0.625em;
+    margin: 0.6em;
     padding: 0.3em;
 }
 
 .sidebar li a {
-    margin-left: 0.9em;
+    display: flex;
+    align-items: center;
+    margin-left: 0.6em;
     text-decoration: none;
     font-size: 1.25em;
     font-weight: 450;
     color: black;
+}
+
+.sidebar li i {
+    margin: 0em 0.4em 0em 0em;
+    font-size: 0.8em;
 }
 
 .sidebar li:hover a,
@@ -156,7 +168,7 @@ i {
 .sidebarAndOrange {
     display: flex;
     position: fixed;
-    top: 5.6em;
+    top: 6em;
 }
 
 /* Couleur orange de la div pour le liseret de la sidebar */
@@ -166,10 +178,10 @@ i {
     align-items: center;
     background-color: #c93c2c;
     height: auto;
-    width: 0.75em;
-    border-top-right-radius: 0.625em;
-    border-bottom-right-radius: 0.625em;
-    /* box-shadow: .313em 0 .063em -.125em rgba(0, 0, 0, 0.1); */
+    width: 0.7em;
+    margin: 0.2em 0;
+    border-top-right-radius: 0.6em;
+    border-bottom-right-radius: 0.6em;
     cursor: pointer;
 }
 

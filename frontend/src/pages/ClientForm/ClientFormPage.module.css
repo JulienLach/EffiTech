@@ -1,7 +1,7 @@
 .container {
     display: flex;
     flex-direction: column;
-    margin: 0 1.25em 0 15.6em;
+    margin: 2em 1.25em 0 15.6em;
 }
 
 .pageTitle {
@@ -9,131 +9,73 @@
     font-weight: 550;
 }
 
-.pro,
-.part {
-    width: 100%;
-}
-
-.company {
-    margin-left: 1em;
-}
-
-.backButton {
-    display: flex;
-    padding: 0.5em;
-    border: 0.06em solid #ccc;
-    border-radius: 0.3em;
-    font-size: 1em;
-    cursor: pointer;
-    margin-left: auto;
-}
-
-.backButton i {
-    transform: rotate(180deg);
-}
-
-.profilCompanyBack {
-    display: flex;
-    width: 75%;
-    align-items: center;
-}
-
-.profilNamesBack {
-    display: flex;
-    width: 75%;
-    align-items: center;
-}
-
-.profilCompanyBack img,
-.profilNamesBack img {
-    width: 9.3em;
-    height: 9.3em;
-}
-
-.idAndCategory {
-    display: flex;
-    align-items: center;
-}
-
-.id {
-    margin-right: 1em;
-    font-size: 1.2em;
-    font-weight: 600;
-}
-
-.names {
-    display: flex;
-}
-.nameColumn {
-    display: flex;
-    flex-direction: column;
-    margin-left: 1em;
-}
-
-.lastname,
-.firstname {
-    margin: 0.625em 0 0 3.125em;
-    font-size: 2.5em;
-    font-weight: 550;
-    text-transform: capitalize;
-    text-align: right;
-}
-
-.lastnamePro,
-.firstnamePro {
-    font-size: 1.25em;
-    font-weight: 550;
-    text-transform: capitalize;
-    margin: 0 0.5em 0 0;
-    font-weight: 400;
-}
-
-.lastname,
-.company {
-    text-transform: uppercase;
-    font-size: 3.7em;
-    font-weight: 550;
-}
-
-.profilInfo {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-
-.contactInfo {
-    display: flex;
-    flex-direction: column;
-}
-
 .separation {
-    background-color: black;
-    height: 0.06em;
-    width: 75%;
-    margin-top: 1.25em;
-}
-
-.eventInfo {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1em 0;
+    border: 0.1em solid #ccc;
 }
 
-.eventInfo p {
-    margin: 0;
-}
-
-.contactInfo {
-    font-size: 1.25em;
-}
-
-.contactInfo p {
-    margin: 0.5em;
-}
-
-.button {
-    padding: 0.5em;
-    border: 0.06em solid #ccc;
-    border-radius: 0.3em;
+/* CSS for input & label */
+.labelInput {
     font-size: 1em;
+    font-weight: 500;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.3em;
+    margin-bottom: 0.625em;
+    width: fit-content;
+}
+
+/* CSS for input comportement */
+.labelInput input {
+    padding: 0.6em;
+    border: 0.06em solid #cccccc;
+    border-radius: 0.5em;
+}
+
+/* CSS for the label comportement */
+.labelInput label {
+    /* margin: 0 1em; */
+    padding: 0.15em;
+}
+
+/* CSS for button positioning */
+.buttonPosition {
+    display: flex;
+    justify-content: start;
+    gap: 1em;
+    margin-top: 1.5em;
+}
+
+/* Common styles for buttons */
+.buttonPosition button {
+    padding: 0.625em;
+    border: none;
+    border-radius: 0.4em;
+    color: white;
+    font-size: 1em;
+    font-weight: 500;
     cursor: pointer;
-    margin-top: 0.9em;
+}
+
+/* Specific styles for cancel button */
+.cancelButton {
+    background-color: #ababab;
+}
+
+/* Specific styles for submit button */
+.submitButton {
+    background-color: #c93c2c;
+}
+
+.header {
+    margin-bottom: 1em;
+}
+
+.profilPic {
+    margin-top: 1em;
+    height: 7em;
 }

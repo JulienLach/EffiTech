@@ -20,6 +20,8 @@ class CreateAccountPage extends Component {
             email: "",
             phoneNumber: "",
             password: "",
+            job: "",
+            speciality: "",
         };
         this.handleCancel = this.handleCancel.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -40,8 +42,15 @@ class CreateAccountPage extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const { firstname, lastname, email, phoneNumber, password } =
-            this.state;
+        const {
+            firstname,
+            lastname,
+            email,
+            phoneNumber,
+            password,
+            job,
+            speciality,
+        } = this.state;
 
         const employeeData = {
             firstname,
@@ -49,9 +58,9 @@ class CreateAccountPage extends Component {
             email,
             phoneNumber,
             password,
-            job: "Plombier",
-            isAdmin: true,
-            speciality: "Tuyaux",
+            job: "",
+            isAdmin: false,
+            speciality: "",
         };
 
         createAccount(employeeData, (error, newAccount) => {
@@ -59,7 +68,7 @@ class CreateAccountPage extends Component {
                 console.error("Erreur lors de la création du compte", error);
             } else {
                 console.log("Compte créé avec succès, ID:", newAccount.id);
-                this.props.navigate("/calendar");
+                this.props.navigate("/login");
             }
         });
     }
@@ -69,13 +78,13 @@ class CreateAccountPage extends Component {
             <div className={styles.container}>
                 <LogoDesktop />
                 <div className={styles.loginFormCard}>
-                    <h1 className={styles.titleCard}>Créer mon compte</h1>
+                    <h2 className={styles.titleCard}>Créer mon compte</h2>
                     <form
                         className={styles.formElements}
                         onSubmit={this.handleSubmit}
                     >
                         <div className={styles.labelInput}>
-                            <label htmlFor="lastname">Nom:</label>
+                            <label htmlFor="lastname">Nom :</label>
                             <input
                                 type="text"
                                 name="lastname"
@@ -84,7 +93,7 @@ class CreateAccountPage extends Component {
                             />
                         </div>
                         <div className={styles.labelInput}>
-                            <label htmlFor="firstname">Prénom:</label>
+                            <label htmlFor="firstname">Prénom :</label>
                             <input
                                 type="text"
                                 name="firstname"
@@ -93,7 +102,7 @@ class CreateAccountPage extends Component {
                             />
                         </div>
                         <div className={styles.labelInput}>
-                            <label htmlFor="email">Email:</label>
+                            <label htmlFor="email">Email :</label>
                             <input
                                 type="text"
                                 name="email"
@@ -102,7 +111,7 @@ class CreateAccountPage extends Component {
                             />
                         </div>
                         <div className={styles.labelInput}>
-                            <label htmlFor="phoneNumber">Téléphone:</label>
+                            <label htmlFor="phoneNumber">Téléphone :</label>
                             <input
                                 type="number"
                                 name="phoneNumber"
@@ -111,7 +120,7 @@ class CreateAccountPage extends Component {
                             />
                         </div>
                         <div className={styles.labelInput}>
-                            <label htmlFor="password">Mot de passe:</label>
+                            <label htmlFor="password">Mot de passe :</label>
                             <input
                                 type="password"
                                 name="password"

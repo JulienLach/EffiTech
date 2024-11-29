@@ -1,13 +1,8 @@
-body {
-    box-sizing: border-box;
-    margin: 0;
-}
-/* placement du container */
 .container {
     display: flex;
     flex-direction: column;
     width: 80%;
-    margin: 0 1.25em 0 15.6em;
+    margin: 2em 1.25em 0 15.6em;
 }
 
 .pageTitle {
@@ -17,15 +12,15 @@ body {
 
 .filterBar {
     display: flex;
-
     align-items: center;
-    margin-bottom: 1.25em;
+    margin-bottom: 1em;
 }
 
 .selectedCategory {
     display: flex;
     align-items: center;
-    margin: 0 0 0.94em 1.56em;
+    gap: 1em;
+    margin: 1em 0em;
 }
 
 .rightPart {
@@ -33,19 +28,24 @@ body {
 }
 
 .particulier {
-    color: #c93c2c;
+    color: #c35e00;
     font-weight: 550;
-    text-decoration: underline;
     cursor: pointer;
+}
+
+.particulier:hover {
+    text-decoration: underline;
 }
 
 .professionnel {
     color: #2c5ba1;
     font-weight: 550;
-    text-decoration: underline;
     cursor: pointer;
 }
 
+.professionnel:hover {
+    text-decoration: underline;
+}
 .radioParticulier {
     color: #c35e00;
 }
@@ -61,14 +61,18 @@ body {
 
 .addClient {
     background-color: #c93c2c;
-    padding: 0.625em 0.94em;
+    padding: 0.6em 0.94em;
     border: none;
-    border-radius: 0.625em;
+    border-radius: 0.4em;
     color: white;
-    font-size: 1.125em;
+    font-size: 1.1em;
     font-weight: 500;
     cursor: pointer;
     margin: 0.625em 1.25em;
+}
+
+.addClient i {
+    margin-right: 0.625em;
 }
 
 /* Style barre de recherche et filtre  */
@@ -76,7 +80,7 @@ body {
 .typeFilter {
     font-size: 1em;
     font-weight: 500;
-    border-radius: 0.625em;
+    border-radius: 0.4em;
     height: 2.18em;
     border: 0.06em solid #c0c0c0;
     display: inline-flex;
@@ -95,6 +99,7 @@ body {
 /* icon position */
 .typeFilter i {
     margin-right: 0.625em;
+    color: #424242;
 }
 
 /* Search input container style */
@@ -118,7 +123,7 @@ body {
 .searchInput input {
     padding: 0.625em 0.625em 0.625em 2.19em;
     border: 0.06em solid #c0c0c0;
-    border-radius: 3.125em;
+    border-radius: 0.4em;
 }
 
 /* style de la modal */
@@ -144,11 +149,22 @@ body {
 .modalContent {
     background-color: white;
     width: 100%;
-    height: 100%; /* Ajustez la hauteur pour ne pas se superposer au header */
-    border-top-left-radius: 1.25em;
-    overflow-y: auto; /* Ajoute un défilement si le contenu dépasse la hauteur */
-    padding: 1.25em; /* Optionnel : pour ajouter du padding à l'intérieur de la modale */
-    box-shadow: -0.125em 0 0.313em rgba(0, 0, 0, 0.5); /* Optionnel : pour ajouter une ombre */
+    height: 100%;
+    border-top-left-radius: 1em;
+    overflow-y: auto;
+    padding: 1.25em;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.modalHeader {
+    font-size: 2em;
+    font-weight: 550;
+}
+
+.separation {
+    margin: 1.5em 0;
+    height: 0.1em;
+    background-color: #ccc;
 }
 
 .closeButton {
@@ -163,60 +179,56 @@ body {
 
 /* CSS for input & label */
 .labelInput {
-    font-size: 1.25em;
+    font-size: 1em;
     font-weight: 500;
     display: flex;
     flex-direction: column;
-    width: 30vw;
+    width: 20vw;
     margin-bottom: 0.625em;
 }
 
 /* CSS for input comportement */
 .labelInput input {
-    margin: 0 1.875em;
-    padding: 0.625em;
+    margin: 0 1em;
+    padding: 0.6em;
     border: 0.06em solid #cccccc;
-    border-radius: 0.625em;
+    border-radius: 0.5em;
 }
 
 /* CSS for the label comportement */
 .labelInput label {
-    margin: 0 1.9em;
-    padding: 0.313em 0;
+    margin: 0 1em;
+    padding: 0.15em;
 }
 
 /* CSS for button positioning */
 .buttonPosition {
     display: flex;
-    width: 30vw;
-    margin-bottom: 1.25em;
-    margin-top: 1.2em;
+    justify-content: start;
+    gap: 1em;
+    margin-left: 1em;
 }
 
-/* css for cancel button */
+/* Common styles for buttons */
+.buttonPosition button {
+    /* margin: 0; */
+    padding: 0.625em;
+    border: none;
+    border-radius: 0.4em;
+    color: white;
+    font-size: 1.125em;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+/* Specific styles for cancel button */
 .cancelButton {
     background-color: #ababab;
-    margin: auto;
-    padding: 0.625em;
-    border: none;
-    border-radius: 0.625em;
-    color: white;
-    font-size: 1.125em;
-    font-weight: 500;
-    cursor: pointer;
 }
 
-/* CSS for create button */
+/* Specific styles for submit button */
 .submitButton {
     background-color: #c93c2c;
-    margin: auto;
-    padding: 0.625em;
-    border: none;
-    border-radius: 0.625em;
-    color: white;
-    font-size: 1.125em;
-    font-weight: 500;
-    cursor: pointer;
 }
 
 .modalFilter {
@@ -227,19 +239,19 @@ body {
     margin: 0.325em;
     padding: 0.325em;
     border: none;
-    border-radius: 0.625em;
+    border-radius: 0.4em;
     font-size: 1em;
     font-weight: 500;
     cursor: pointer;
 }
 
 .modalFilter button {
-    margin: 0.325em;
-    padding: 0.325em;
+    margin: 0.3em;
+    padding: 0.2em 0.5em;
     border: none;
-    border-radius: 0.625em;
+    border-radius: 0.3em;
     font-size: 1em;
-    font-weight: 500;
+    font-weight: 400;
     cursor: pointer;
 }
 

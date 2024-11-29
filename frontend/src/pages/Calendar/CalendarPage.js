@@ -281,12 +281,36 @@ class CalendarPage extends Component {
                                                         )}
                                                     </p>
                                                 </div>
-                                                <p>{event.client.category}</p>
-                                                <p>
-                                                    {event.client.category} -{" "}
-                                                    {event.client.firstname}{" "}
-                                                    {event.client.lastname}
+                                                <p
+                                                    className={
+                                                        event.client
+                                                            .category ===
+                                                        "Particulier"
+                                                            ? stylesMobile.partTag
+                                                            : stylesMobile.proTag
+                                                    }
+                                                >
+                                                    {event.client.category}
                                                 </p>
+                                                {event.client.category ===
+                                                "Professionnel" ? (
+                                                    <p
+                                                        className={
+                                                            stylesMobile.clientName
+                                                        }
+                                                    >
+                                                        {event.client.company}
+                                                    </p>
+                                                ) : (
+                                                    <p
+                                                        className={
+                                                            stylesMobile.clientName
+                                                        }
+                                                    >
+                                                        {event.client.firstname}{" "}
+                                                        {event.client.lastname}
+                                                    </p>
+                                                )}
                                             </div>
                                         </div>
                                         <div className={stylesMobile.rightSide}>
@@ -329,12 +353,12 @@ class CalendarPage extends Component {
                                                         stylesMobile.initiale
                                                     }
                                                 >
-                                                    {event.employee.lastname.charAt(
-                                                        0
-                                                    )}
-                                                    {event.employee.firstname.charAt(
-                                                        0
-                                                    )}
+                                                    {event.employee.lastname
+                                                        .charAt(0)
+                                                        .toUpperCase()}
+                                                    {event.employee.firstname
+                                                        .charAt(0)
+                                                        .toUpperCase()}
                                                 </p>
                                             </div>
                                         </div>
@@ -416,7 +440,7 @@ class CalendarPage extends Component {
                                                         <th>Titre</th>
                                                         <th>Statut</th>
                                                         <th>Date</th>
-                                                        <th>Intervenant</th>
+                                                        <th>Employé</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -427,7 +451,11 @@ class CalendarPage extends Component {
                                                                     event.idEvent
                                                                 }
                                                             >
-                                                                <td>
+                                                                <td
+                                                                    className={
+                                                                        styles.eventLink
+                                                                    }
+                                                                >
                                                                     <a href="#">
                                                                         {
                                                                             event
@@ -459,7 +487,11 @@ class CalendarPage extends Component {
                                                                 <td>
                                                                     {event.type}
                                                                 </td>
-                                                                <td>
+                                                                <td
+                                                                    className={
+                                                                        styles.eventLink
+                                                                    }
+                                                                >
                                                                     <a
                                                                         href="#"
                                                                         onClick={() =>
@@ -485,7 +517,11 @@ class CalendarPage extends Component {
                                                                           ).toLocaleDateString()
                                                                         : ""}
                                                                 </td>
-                                                                <td>
+                                                                <td
+                                                                    className={
+                                                                        styles.eventLink
+                                                                    }
+                                                                >
                                                                     <a href="#">
                                                                         {
                                                                             event
@@ -513,7 +549,7 @@ class CalendarPage extends Component {
                                                     }
                                                     disabled={currentPage === 1}
                                                 >
-                                                    {"<"}
+                                                    <i className="fa fa-arrow-left"></i>
                                                 </button>
                                                 <button
                                                     onClick={(e) =>
@@ -524,7 +560,7 @@ class CalendarPage extends Component {
                                                         totalPages
                                                     }
                                                 >
-                                                    {">"}
+                                                    <i className="fa fa-arrow-right"></i>
                                                 </button>
                                             </div>
                                         </div>

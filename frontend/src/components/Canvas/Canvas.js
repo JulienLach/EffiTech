@@ -59,14 +59,19 @@ class Canvas extends Component {
     }
 
     render() {
+        const isDesktop = navigator.userAgentData
+            ? !navigator.userAgentData.mobile
+            : !/Mobi|Android/i.test(navigator.userAgent);
+
         return (
             <canvas
                 ref={this.canvasRef}
                 width={340}
-                height={80}
+                height={100}
                 style={{
-                    border: ".063em solid grey",
-                    margin: "0 auto",
+                    border: "0.06em solid #cecece",
+                    borderRadius: "0.4em",
+                    marginRight: isDesktop ? "auto" : "initial",
                 }}
             />
         );

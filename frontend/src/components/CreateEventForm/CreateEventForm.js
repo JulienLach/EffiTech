@@ -68,7 +68,7 @@ class CreateEventForm extends Component {
             this.state.selectedClient
         ) {
             const addressDetails = this.state.selectedClient.address;
-            const fullAddress = `${addressDetails.idAddress} ${addressDetails.address}, ${addressDetails.city}, ${addressDetails.zipcode}`;
+            const fullAddress = `${addressDetails.address}, ${addressDetails.city}, ${addressDetails.zipcode}`;
             this.setState({ address: fullAddress });
             console.log("Adresse complète:", fullAddress);
         }
@@ -196,26 +196,22 @@ class CreateEventForm extends Component {
                 <div className={styles.tabs}>
                     <button
                         type="button"
-                        className={(() => {
-                            if (selectedTab === "Intervention") {
-                                return styles.activeTab;
-                            } else {
-                                return "";
-                            }
-                        })()}
+                        className={`${styles.tabButton} ${
+                            selectedTab === "Intervention"
+                                ? styles.activeTab
+                                : ""
+                        }`}
                         onClick={() => this.handleTabChange("Intervention")}
                     >
                         Intervention
                     </button>
                     <button
                         type="button"
-                        className={(() => {
-                            if (selectedTab === "Rendez-vous") {
-                                return styles.activeTab;
-                            } else {
-                                return "";
-                            }
-                        })()}
+                        className={`${styles.tabButton} ${
+                            selectedTab === "Rendez-vous"
+                                ? styles.activeTab
+                                : ""
+                        }`}
                         onClick={() => this.handleTabChange("Rendez-vous")}
                     >
                         Rendez-vous
@@ -223,18 +219,16 @@ class CreateEventForm extends Component {
                 </div>
                 <div className={styles.form}>
                     <div>
-                        <label>
-                            {(() => {
-                                if (selectedTab === "Intervention") {
-                                    return "Nouvelle intervention";
-                                } else {
-                                    return "Nouveau rendez-vous";
-                                }
-                            })()}
-                        </label>
+                        <h3 className={styles.eventFormTitle}>
+                            {selectedTab === "Intervention"
+                                ? "Nouvelle intervention"
+                                : "Nouveau rendez-vous"}
+                        </h3>
                     </div>
                     <div>
-                        <label>Titre *</label>
+                        <label>
+                            Titre <span className={styles.required}>*</span> :
+                        </label>
                         <input
                             type="text"
                             name="title"
@@ -245,13 +239,9 @@ class CreateEventForm extends Component {
                     <div>
                         <label>
                             Date{" "}
-                            {(() => {
-                                if (selectedTab === "Intervention") {
-                                    return "d'intervention";
-                                } else {
-                                    return "de rendez-vous";
-                                }
-                            })()}
+                            {selectedTab === "Intervention"
+                                ? "d'intervention :"
+                                : "de rendez-vous :"}
                         </label>
                         <input
                             type="date"
@@ -261,7 +251,7 @@ class CreateEventForm extends Component {
                         />
                     </div>
                     <div>
-                        <label>Heure de début</label>
+                        <label>Heure de début :</label>
                         <input
                             type="time"
                             name="startingHour"
@@ -270,7 +260,7 @@ class CreateEventForm extends Component {
                         />
                     </div>
                     <div>
-                        <label>Heure de fin</label>
+                        <label>Heure de fin :</label>
                         <input
                             type="time"
                             name="endingHour"
@@ -279,15 +269,19 @@ class CreateEventForm extends Component {
                         />
                     </div>
                     <div>
-                        <label>Description</label>
+                        <label>Description :</label>
                         <textarea
+                            className={styles.createEventTextarea}
                             name="description"
                             value={description}
                             onChange={this.handleChange}
                         />
                     </div>
                     <div>
-                        <label>Sélectionner un client *</label>
+                        <label>
+                            Sélectionner un client{" "}
+                            <span className={styles.required}>*</span> :
+                        </label>
                         <input
                             type="text"
                             placeholder="Rechercher un client"
@@ -307,11 +301,16 @@ class CreateEventForm extends Component {
                         </select>
                     </div>
                     <div>
-                        <label>Adresse *</label>
+                        <label>
+                            Adresse <span className={styles.required}>*</span> :
+                        </label>
                         <input type="text" value={address} readOnly />
                     </div>
                     <div>
-                        <label>Sélectionner un technicien *</label>
+                        <label>
+                            Sélectionner un technicien{" "}
+                            <span className={styles.required}>*</span> :
+                        </label>
                         <select
                             value={selectedEmployee}
                             onChange={this.handleEmployeeChange}
@@ -334,10 +333,18 @@ class CreateEventForm extends Component {
                         />
                     </div>
                     <div className={styles.modalFooter}>
-                        <button type="button" onClick={this.props.closeModal}>
+                        <button
+                            type="button"
+                            className={styles.cancelButton}
+                            onClick={this.props.closeModal}
+                        >
                             Annuler
                         </button>
-                        <button type="button" onClick={this.handleSubmit}>
+                        <button
+                            type="button"
+                            className={styles.submitButton}
+                            onClick={this.handleSubmit}
+                        >
                             Créer
                         </button>
                     </div>

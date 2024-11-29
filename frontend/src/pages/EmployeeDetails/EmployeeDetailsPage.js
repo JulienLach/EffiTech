@@ -53,15 +53,12 @@ class EmployeeDetailsPage extends Component {
                 <TemplateGlobal />
                 <div className={styles.container}>
                     <div className={styles.profilInfo}>
-                        <h1>Employé</h1>
+                        <h1 className={styles.pageTitle}>Employé</h1>
                         <div className={styles.alignBackButton}>
                             <img src={profilPicture} alt="Profil picture" />
                             <div className={styles.names}>
-                                <p className={styles.lastname}>
-                                    {employee.lastname}
-                                </p>
                                 <p className={styles.firstname}>
-                                    {employee.firstname}
+                                    {employee.firstname} {employee.lastname}
                                 </p>
                             </div>
                             <button
@@ -74,23 +71,23 @@ class EmployeeDetailsPage extends Component {
                                 <i className="fa-solid fa-arrow-right"></i>
                                 Retour
                             </button>
-                            <button
-                                className={styles.editButton}
-                                onClick={this.handleButtonClick}
-                            >
-                                <i className="fa-solid fa-pen"></i>
-                                Modifier
-                            </button>
                         </div>
                     </div>
                     <div className={styles.separation}></div>
                     <h2>Coordonnées</h2>
                     <div className={styles.contactInfo}>
-                        <p>{employee.job}</p>
-                        <p>{employee.speciality}</p>
-                        <p>{employee.email}</p>
-                        <p>{employee.phoneNumber}</p>
+                        <p>Métier : {employee.job}</p>
+                        <p>Spécialité : {employee.speciality}</p>
+                        <p>Email : {employee.email}</p>
+                        <p>Téléphone : {employee.phoneNumber}</p>
                     </div>
+                    <button
+                        className={styles.editButton}
+                        onClick={this.handleButtonClick}
+                    >
+                        <i className="fa-solid fa-pen"></i>
+                        Modifier
+                    </button>
                 </div>
             </>
         );

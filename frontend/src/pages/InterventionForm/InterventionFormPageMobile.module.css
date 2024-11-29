@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: column;
     justify-content: start;
-    padding: 1em 1em 5em 1em;
+    padding: 1.5em 2em 5em 2em;
 }
 
 .separation {
@@ -24,7 +24,7 @@
 }
 
 .inputDisplay label {
-    font-weight: 600;
+    font-weight: 500;
     margin-bottom: 0.3em;
 }
 
@@ -41,11 +41,11 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    margin-bottom: 1em;
+    margin-bottom: 0.7em;
 }
 
 .textArea label {
-    font-weight: 600;
+    font-weight: 500;
     margin-bottom: 0.3em;
 }
 
@@ -55,6 +55,7 @@
     color: #000000;
     padding: 0.8em;
     font-size: 0.9em;
+    margin-bottom: 1.3em;
 }
 
 .labelInput {
@@ -73,10 +74,10 @@
 }
 
 .modalFooter {
-    margin-top: 1em;
+    margin-top: 0.8em;
     display: flex;
     flex-direction: row;
-    gap: 3em;
+    gap: 1em;
 }
 
 .validateButton {
@@ -84,22 +85,25 @@
     width: auto;
     color: white;
     border: none;
-    border-radius: 0.5em;
-    padding: 0.5em;
-    font-size: 1.2em;
+    border-radius: 0.4em;
+    padding: 0.3em 0.8em;
+    font-size: 1em;
     margin: 1em 0 1em 0;
-    text-align: center;
 }
+
+.validateButton i {
+    margin-right: 0.5em;
+}
+
 .cancelButton {
     background-color: #ababab;
     width: auto;
     color: white;
     border: none;
-    border-radius: 0.5em;
-    padding: 0.5em;
-    font-size: 1.2em;
+    border-radius: 0.4em;
+    padding: 0.4em 0.8em;
+    font-size: 1em;
     margin: 1em 0 1em 0;
-    text-align: center;
 }
 
 .modalFooter button:hover {
@@ -114,6 +118,7 @@
     border: none;
     color: #c93c2c;
 }
+
 .idAndTitle {
     margin-bottom: 1em;
 }

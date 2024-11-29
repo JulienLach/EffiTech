@@ -88,15 +88,6 @@ class CompanyDetails extends Component {
                         <div className={styles.companyData}>
                             <h3>Coordonnées</h3>
                             <label>
-                                Téléphone :
-                                <input
-                                    type="text"
-                                    name="phoneNumber"
-                                    value={company.phoneNumber}
-                                    onChange={this.handleChange}
-                                />
-                            </label>
-                            <label>
                                 Adresse :
                                 <input
                                     type="text"
@@ -120,6 +111,15 @@ class CompanyDetails extends Component {
                                     type="text"
                                     name="city"
                                     value={company.idAddress.city}
+                                    onChange={this.handleChange}
+                                />
+                            </label>
+                            <label>
+                                Téléphone :
+                                <input
+                                    type="text"
+                                    name="phoneNumber"
+                                    value={company.phoneNumber}
                                     onChange={this.handleChange}
                                 />
                             </label>
@@ -150,14 +150,24 @@ class CompanyDetails extends Component {
                                 <input
                                     type="text"
                                     name="capital"
+                                    placeholder=" €"
                                     value={company.capital}
                                     onChange={this.handleChange}
                                 />
                             </label>
                         </div>
-                        <button type="submit" className={styles.saveButton}>
-                            <i className="fa-solid fa-save"></i> Enregistrer
-                        </button>
+                        <div className={styles.buttons}>
+                            <button
+                                type="button"
+                                className={styles.cancelButton}
+                                onClick={() => this.props.navigate(`/company`)}
+                            >
+                                Annuler
+                            </button>
+                            <button type="submit" className={styles.saveButton}>
+                                <i className="fa-solid fa-save"></i> Enregistrer
+                            </button>
+                        </div>
                     </form>
                 </div>
             </>

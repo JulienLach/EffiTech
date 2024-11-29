@@ -59,7 +59,7 @@ class LoginPage extends Component {
                                 className={stylesMobile.formElements}
                             >
                                 <div className={stylesMobile.labelInput}>
-                                    <label htmlFor="email">Email:</label>
+                                    <label htmlFor="email">Email :</label>
                                     <input
                                         type="text"
                                         id="email"
@@ -70,7 +70,7 @@ class LoginPage extends Component {
                                 </div>
                                 <div className={stylesMobile.labelInput}>
                                     <label htmlFor="password">
-                                        Mot de passe:
+                                        Mot de passe :
                                     </label>
                                     <input
                                         type="password"
@@ -110,7 +110,7 @@ class LoginPage extends Component {
                                     className={styles.formElements}
                                 >
                                     <div className={styles.labelInput}>
-                                        <label htmlFor="email">Email:</label>
+                                        <label htmlFor="email">Email :</label>
                                         <input
                                             type="text"
                                             id="email"
@@ -121,7 +121,7 @@ class LoginPage extends Component {
                                     </div>
                                     <div className={styles.labelInput}>
                                         <label htmlFor="password">
-                                            Mot de passe:
+                                            Mot de passe :
                                         </label>
                                         <input
                                             type="password"

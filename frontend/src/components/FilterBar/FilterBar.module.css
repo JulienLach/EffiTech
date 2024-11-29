@@ -2,8 +2,8 @@
 .typeFilter {
     font-size: 1em;
     font-weight: 500;
-    border-radius: 0.625em;
-    height: 2.188em;
+    border-radius: 0.4em;
+    height: 2.2em;
     border: 0.063em solid #c0c0c0;
     display: inline-flex;
     align-items: center;
@@ -44,7 +44,7 @@
 .searchInput input {
     padding: 0.625em 0.625em 0.625em 2.188em;
     border: 0.063em solid #c0c0c0;
-    border-radius: 3.125em;
+    border-radius: 0.4em;
 }
 
 /* page title style */
@@ -55,12 +55,13 @@
 
 .createEventbutton {
     background-color: #e0e0e0;
-    border: 0.063em solid #c0c0c0;
-    border-radius: 0.625em;
+    border: none;
+    border-radius: 0.4em;
     padding: 0.5em 0.5em;
     font-size: 1em;
     font-weight: 500;
     cursor: pointer;
+    transition: 0.05s;
 }
 
 .createEventbutton:hover {

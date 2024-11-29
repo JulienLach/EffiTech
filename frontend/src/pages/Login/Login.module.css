@@ -14,7 +14,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-radius: 1.25em;
+    border-radius: 1em;
     border: #e7e7e7 0.063em solid;
     background-color: white;
     width: 28.438em;
@@ -26,66 +26,72 @@
 
 /* CSS title style font */
 .titleCard {
-    font-size: 1.875em;
+    font-size: 1.6em;
     font-weight: 500;
 }
 
 /* CSS for input & label */
 .labelInput {
-    font-size: 1.25em;
-    font-weight: 500;
+    font-size: 1.1em;
+    font-weight: 400;
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin-bottom: 0.938em;
+    margin-bottom: 0.9em;
 }
 
 /* CSS for input comportement */
 .labelInput input {
-    margin: 0 1.875em;
-    padding: 0.625em;
-    border: 0.063em solid #cccccc;
-    border-radius: 0.625em;
+    margin: 0 1.6em;
+    padding: 0.6em;
+    border: 0.05em solid #cccccc;
+    border-radius: 0.4em;
 }
 
 /* CSS for the label comportement */
 .labelInput label {
-    margin: 0 1.875em;
-    padding: 0.313em 0;
+    margin: 0 1.3em;
+    padding: 0.3em 0;
 }
 
 /* CSS for elements placement */
 .formElements {
+    margin-top: 1em;
     display: flex;
     flex-direction: column;
     width: 100%;
+    margin-bottom: 1em;
 }
 
 /* CSS for create button */
 .submitButton {
     background-color: #c93c2c;
     margin: auto;
-    padding: 0.625em;
+    padding: 0.5em;
     border: none;
-    border-radius: 0.625em;
+    border-radius: 0.4em;
     color: white;
     font-size: 1.25em;
     font-weight: 500;
     cursor: pointer;
 }
 
+.submitButton:hover {
+    background-color: #b32f21;
+}
+
 /* CSS for paragraph style */
 .formElements p {
-    font-size: 1.125em;
-    margin-top: 1.25em;
+    font-size: 1.1em;
+    margin-top: 1.2em;
     text-align: center;
 }
 
 /* CSS for link style */
 .formElements a {
     text-align: center;
-    font-size: 1.125em;
-    margin-bottom: 1.25em;
+    font-size: 1.1em;
+    margin-bottom: 1.4em;
 }
 
 /* CSS */

@@ -1,79 +1,78 @@
 .container {
     display: flex;
     flex-direction: column;
-    margin: 0 1.25em 0 15.625em;
+    margin: 2em 1.25em 0 15.6em;
 }
 
-form {
-    margin-bottom: 1.875em;
+/* placement et style du titre de la page */
+.pageTitle {
+    font-size: 1.9em;
+    font-weight: 550;
 }
-
-/* img { A changer ça écrase l'image du logo de la page login et createaccount
-    width: 9.375em;
-    height: 9.375em;
-} */
 
 .separation {
-    background-color: black;
-    height: 0;
-    width: 75%;
-    margin-top: 1.25em;
-}
-
-/* CSS for input & label */
-.labelInput {
-    font-size: 1.25em;
-    font-weight: 500;
-    display: flex;
-    flex-direction: column;
-    width: 30vw;
-    margin-bottom: 0.625em;
+    margin: 1em 0;
+    border-bottom: 0.063em solid #ccc;
 }
 
 /* CSS for input comportement */
 .labelInput input {
-    margin: 0 1.875em;
-    padding: 0.625em;
-    border: 0.0625em solid #cccccc;
-    border-radius: 0.625em;
+    padding: 0.55em;
+    border: 0.05em solid #cccccc;
+    border-radius: 0.4em;
+    width: 30%;
 }
 
 /* CSS for the label comportement */
 .labelInput label {
-    margin: 0 1.875em;
-    padding: 0.313em 0;
+    margin-bottom: 0.5em;
 }
 
 /* CSS for button positioning */
 .buttonPosition {
     display: flex;
-    width: 30vw;
-    margin-bottom: 1.25em;
+    gap: 1em;
     margin-top: 1.2em;
+    margin-bottom: 1.25em;
 }
 
-/* css for cancel button */
+/* CSS for cancel button */
 .cancelButton {
-    background-color: #ababab;
-    margin: auto;
-    padding: 0.625em;
+    background-color: #9c9c9c;
+    padding: 0.5em 0.9em;
     border: none;
-    border-radius: 0.625em;
+    border-radius: 0.4em;
     color: white;
-    font-size: 1.125em;
+    font-size: 1em;
     font-weight: 500;
     cursor: pointer;
+    margin-top: 1em;
+    display: flex;
+    align-items: center;
 }
 
 /* CSS for create button */
 .submitButton {
     background-color: #c93c2c;
-    margin: auto;
-    padding: 0.625em;
+    padding: 0.5em 0.9em;
     border: none;
-    border-radius: 0.625em;
+    border-radius: 0.4em;
     color: white;
-    font-size: 1.125em;
+    font-size: 1em;
     font-weight: 500;
     cursor: pointer;
+    margin-top: 1em;
+    display: flex;
+    align-items: center;
+}
+
+.submitButton i {
+    margin-right: 0.5em;
+}
+
+.formElements {
+    margin-top: 1.5em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
 }

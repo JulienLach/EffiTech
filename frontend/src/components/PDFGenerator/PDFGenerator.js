@@ -12,57 +12,60 @@ import {
 const styles = StyleSheet.create({
     page: {
         flexDirection: "column",
+        justifyContent: "space-between",
+        padding: 10,
     },
     logo: {
-        fontSize: 25,
-        margin: 20,
+        fontSize: 20,
+        margin: 10,
     },
     infoClientCompany: {
         flexDirection: "row",
         justifyContent: "space-between",
-        margin: 20,
-        fontSize: 14,
+        margin: 10,
+        fontSize: 12,
     },
     infoCompany: {
         alignItems: "flex-end",
     },
     title: {
-        fontSize: 20,
+        fontSize: 15,
         textAlign: "center",
-        marginTop: 40,
+        marginTop: 20,
     },
     interventionIdTitle: {
-        fontSize: 16,
-        margin: 20,
+        fontSize: 14,
+        margin: 10,
     },
     breakdown: {
-        fontSize: 14,
-        margin: 20,
-        paddingLeft: 10,
-        paddingTop: 10,
-        paddingRight: 10,
-        paddingBottom: 70,
-        border: 0.8,
+        fontSize: 12,
+        margin: 10,
+        padding: 15,
+        border: 0.4,
+        borderRadius: 3,
     },
     workDone: {
-        fontSize: 14,
-        margin: 20,
-        paddingLeft: 10,
-        paddingTop: 10,
-        paddingRight: 10,
-        paddingBottom: 70,
-        border: 0.8,
+        fontSize: 12,
+        margin: 10,
+        padding: 15,
+        border: 0.4,
+        borderRadius: 3,
     },
     dateAndHour: {
-        fontSize: 14,
-        marginTop: 10,
-        marginLeft: 20,
+        fontSize: 12,
+        marginTop: 5,
+        marginLeft: 10,
     },
     signature: {
-        fontSize: 20,
+        fontSize: 12,
         flexDirection: "row",
         justifyContent: "space-between",
-        margin: 50,
+        margin: 20,
+    },
+    footer: {
+        fontSize: 10,
+        margin: 10,
+        textAlign: "center",
     },
 });
 
@@ -72,21 +75,30 @@ const PDFGenerator = ({ report, reportData }) => {
     useEffect(() => {
         const generatePdf = async () => {
             const doc = (
-                <Document>
+                <Document
+                    title={`Rapport d'intervention - INT-${report.idEvent} - ${report.title}`}
+                >
                     <Page size="A4" style={styles.page}>
-                        <Text style={styles.logo}>[LOGO COMPANY]</Text>
+                        <Text style={styles.logo}>[company.logo]</Text>
                         <View style={styles.infoClientCompany}>
                             <View>
+                                <Text style={styles.title}>Client:</Text>
                                 <Text>
-                                    {report.client.firstname}{" "}
+                                    Nom : {report.client.firstname}{" "}
                                     {report.client.lastname}
                                 </Text>
-                                <Text>{report.client.address.address}</Text>
                                 <Text>
+                                    Adresse : {report.client.address.address}{" "}
                                     {report.client.address.zipcode}{" "}
                                     {report.client.address.city}
                                 </Text>
-                                <Text>{report.client.phoneNumber}</Text>
+                                <Text>
+                                    Téléphone : {report.client.phoneNumber}
+                                </Text>
+                            </View>
+                            <View>
+                                <Text style={styles.title}>Technicien:</Text>
+                                <Text>Nom :</Text>
                             </View>
                         </View>
                         <Text style={styles.title}>Rapport d'intervention</Text>
@@ -100,7 +112,7 @@ const PDFGenerator = ({ report, reportData }) => {
                         <Text style={styles.dateAndHour}>Réparation :</Text>
                         <Text style={styles.workDone}>{report.workDone}</Text>
                         <Text style={styles.dateAndHour}>
-                            Intervenu le:{" "}
+                            Intervenu le :{" "}
                             {new Date(report.startingDate).toLocaleDateString()}
                         </Text>
                         <Text style={styles.dateAndHour}>
@@ -124,6 +136,11 @@ const PDFGenerator = ({ report, reportData }) => {
                                 src={`data:image/png;base64,${reportData.employeeSignature}`}
                             />
                         </View>
+                        <Text style={styles.footer}>
+                            SIRET: [numéro de SIRET] | TVA: [numéro de TVA] |
+                            Capital: [montant du capital] | Adresse: [adresse de
+                            l'entreprise] | Téléphone: [numéro de téléphone]
+                        </Text>
                     </Page>
                 </Document>
             );

@@ -58,7 +58,7 @@ class CompanyPage extends Component {
                                 />
                             </div>
                             <div className={styles.separator}></div>
-                            <div>
+                            <div className={styles.informations}>
                                 <h3>Coordonnées</h3>
                                 <p>
                                     Adresse : {company.idAddress.address},{" "}
@@ -68,7 +68,7 @@ class CompanyPage extends Component {
                                 <p>Téléphone : {company.phoneNumber}</p>
                             </div>
                             <div className={styles.separator}></div>
-                            <div>
+                            <div className={styles.informations}>
                                 <h3>Informations</h3>
                                 <p>SIRET : {company.siret}</p>
                                 <p>
