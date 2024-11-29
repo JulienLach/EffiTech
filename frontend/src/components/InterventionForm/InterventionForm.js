@@ -361,7 +361,7 @@ class InterventionForm extends Component {
                                                             }
                                                             type="submit"
                                                         >
-                                                            <i class="fa-regular fa-pen-to-square"></i>{" "}
+                                                            <i class="fa-solid fa-pen"></i>{" "}
                                                             Remplir le rapport
                                                         </button>
                                                     );

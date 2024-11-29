@@ -104,8 +104,16 @@ body {
     background-color: #1c8aff;
     color: white;
     padding: 0.5em;
-    border-radius: 10em;
+    border-radius: 2em;
     margin-left: 0.5em;
+    font-size: 0.95em;
+    height: 2.5em;
+    width: 2.5em;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
 }
 
 .dateHour {
