@@ -24,6 +24,7 @@ class ClientsPage extends Component {
             selectedCategory: "All",
             currentPage: 1,
             clientsPerPage: 10,
+            searchItem: "", // Utilisation de searchItem
         };
         this.handleButtonClick = this.handleButtonClick.bind(this);
         this.openModal = this.openModal.bind(this);
@@ -35,6 +36,7 @@ class ClientsPage extends Component {
         this.handlePageChange = this.handlePageChange.bind(this);
         this.handleNextPage = this.handleNextPage.bind(this);
         this.handlePreviousPage = this.handlePreviousPage.bind(this);
+        this.handleSearchChange = this.handleSearchChange.bind(this);
     }
 
     componentDidMount() {
@@ -172,6 +174,10 @@ class ClientsPage extends Component {
         });
     }
 
+    handleSearchChange(event) {
+        this.setState({ searchItem: event.target.value });
+    }
+
     render() {
         const {
             clients,
@@ -180,15 +186,29 @@ class ClientsPage extends Component {
             selectedCategory,
             currentPage,
             clientsPerPage,
+            searchItem, // Utilisation de searchItem
         } = this.state;
 
-        // Filtrer les clients en fonction de la catégorie sélectionnée
-        const filteredClients =
-            selectedCategory === "All"
-                ? clients
-                : clients.filter(
-                      (client) => client.category === selectedCategory
-                  );
+        // Filtrer les clients en fonction de la catégorie sélectionnée et de la recherche
+        const filteredClients = clients.filter((client) => {
+            const matchesCategory =
+                selectedCategory === "All" ||
+                client.category === selectedCategory;
+            const matchesSearchItem =
+                (client.lastname &&
+                    client.lastname
+                        .toLowerCase()
+                        .includes(searchItem.toLowerCase())) ||
+                (client.firstname &&
+                    client.firstname
+                        .toLowerCase()
+                        .includes(searchItem.toLowerCase())) ||
+                (client.company &&
+                    client.company
+                        .toLowerCase()
+                        .includes(searchItem.toLowerCase()));
+            return matchesCategory && matchesSearchItem;
+        });
 
         // Calculer les clients à afficher pour la page actuelle
         const indexOfLastClient = currentPage * clientsPerPage;
@@ -215,6 +235,8 @@ class ClientsPage extends Component {
                                     id="search"
                                     name="search"
                                     placeholder="Recherche"
+                                    value={searchItem}
+                                    onChange={this.handleSearchChange}
                                 />
                             </div>
                             <div
