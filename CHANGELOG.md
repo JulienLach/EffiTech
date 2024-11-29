@@ -6,13 +6,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+# [0.3.0] (2024-11-29)
+
 ## Changes
 
+-   Complete style overhaul on all pages
 -   Add employee initials to mobile view
+-   Update Fontawesome CDN to latest
 
 ## Fixes
 
 -   Fix create account page by adding createAccount api call to auth route and and missing parameters
+-   Add missing fields in PDFGenerator component
+-   Add missing company name field on mobile view
 
 # [0.2.1] (2024-11-24)
 
