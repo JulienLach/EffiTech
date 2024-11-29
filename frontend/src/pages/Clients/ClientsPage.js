@@ -22,6 +22,8 @@ class ClientsPage extends Component {
             company: "",
             isCategeoryModalOpen: false,
             selectedCategory: "All",
+            currentPage: 1,
+            clientsPerPage: 10,
         };
         this.handleButtonClick = this.handleButtonClick.bind(this);
         this.openModal = this.openModal.bind(this);
@@ -30,6 +32,9 @@ class ClientsPage extends Component {
         this.handleModalCategoryChange =
             this.handleModalCategoryChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handlePageChange = this.handlePageChange.bind(this);
+        this.handleNextPage = this.handleNextPage.bind(this);
+        this.handlePreviousPage = this.handlePreviousPage.bind(this);
     }
 
     componentDidMount() {
@@ -76,7 +81,31 @@ class ClientsPage extends Component {
                         Particulier
                     </span>
                 );
+            default:
+                return null;
         }
+    }
+
+    handlePageChange(event, pageNumber) {
+        event.preventDefault();
+        this.setState({ currentPage: pageNumber });
+    }
+
+    handleNextPage(event) {
+        event.preventDefault();
+        this.setState((prevState) => ({
+            currentPage: Math.min(
+                prevState.currentPage + 1,
+                Math.ceil(prevState.clients.length / prevState.clientsPerPage)
+            ),
+        }));
+    }
+
+    handlePreviousPage(event) {
+        event.preventDefault();
+        this.setState((prevState) => ({
+            currentPage: Math.max(prevState.currentPage - 1, 1),
+        }));
     }
 
     handleButtonClick(client) {
@@ -85,7 +114,7 @@ class ClientsPage extends Component {
                 state: { client },
             });
         } else {
-            console.error("Données ddu client non définies");
+            console.error("Données du client non définies");
         }
     }
 
@@ -144,8 +173,14 @@ class ClientsPage extends Component {
     }
 
     render() {
-        const { clients, isModalOpen, isCategeoryModalOpen, selectedCategory } =
-            this.state;
+        const {
+            clients,
+            isModalOpen,
+            isCategeoryModalOpen,
+            selectedCategory,
+            currentPage,
+            clientsPerPage,
+        } = this.state;
 
         // Filtrer les clients en fonction de la catégorie sélectionnée
         const filteredClients =
@@ -154,6 +189,17 @@ class ClientsPage extends Component {
                 : clients.filter(
                       (client) => client.category === selectedCategory
                   );
+
+        // Calculer les clients à afficher pour la page actuelle
+        const indexOfLastClient = currentPage * clientsPerPage;
+        const indexOfFirstClient = indexOfLastClient - clientsPerPage;
+        const currentFilteredClients = filteredClients.slice(
+            indexOfFirstClient,
+            indexOfLastClient
+        );
+
+        // Calculer le nombre total de pages
+        const totalPages = Math.ceil(filteredClients.length / clientsPerPage);
 
         return (
             <>
@@ -271,7 +317,7 @@ class ClientsPage extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {filteredClients.map((client) => (
+                                {currentFilteredClients.map((client) => (
                                     <tr key={client.idClient}>
                                         <td>C-{client.idClient}</td>
                                         <td>
@@ -315,6 +361,20 @@ class ClientsPage extends Component {
                                 ))}
                             </tbody>
                         </table>
+                        <div className={styles.pagination}>
+                            <button
+                                onClick={(e) => this.handlePreviousPage(e)}
+                                disabled={currentPage === 1}
+                            >
+                                <i className="fa fa-arrow-left"></i>
+                            </button>
+                            <button
+                                onClick={(e) => this.handleNextPage(e)}
+                                disabled={currentPage === totalPages}
+                            >
+                                <i className="fa fa-arrow-right"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
                 {isModalOpen && (
