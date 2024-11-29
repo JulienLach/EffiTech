@@ -79,6 +79,9 @@ class CalendarPage extends Component {
 
             return {
                 title: event.title,
+                description: event.description,
+                idEmployee: event.employee.idEmployee,
+                client: event.client.firstname + " " + event.client.lastname,
                 start: startDateTime,
                 end: endDateTime,
                 allDay: false,
