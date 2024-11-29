@@ -37,8 +37,12 @@ th,
 td {
     text-align: start;
     width: 100vw; /* Définit une largeur fixe pour les cellules */
-    padding: 0.625em; /* Augmente l'espace à l'intérieur des cellules */
+    padding: 0.6em; /* Augmente l'espace à l'intérieur des cellules */
     border-bottom: 0.06em solid #d3d3d3;
+}
+
+th {
+    font-weight: 550;
 }
 
 a {

@@ -29,13 +29,14 @@
 .tabs button {
     padding: 0.4em 1.25em;
     border: none;
-    border-radius: 0.625em;
-    font-size: 1.125em;
+    border-radius: 0.4em;
+    font-size: 1.1em;
     font-weight: 500;
     cursor: pointer;
     margin: 1em 0.5em;
     background-color: #f0f0f0;
     transition: background-color 0.3s, color 0.3s;
+    font-weight: 400;
 }
 
 .tabs button:hover {
