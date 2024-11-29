@@ -20,6 +20,7 @@ body {
     border-radius: 1em;
     position: sticky;
     border-top: 1px solid #cccccc89;
+    font-weight: 500;
 }
 
 .sideColorPro {
@@ -58,7 +59,7 @@ body {
 
 .type {
     font-size: 1.1em;
-    font-weight: 600;
+    font-weight: 500;
     margin-bottom: 0.3em;
 }
 
@@ -117,5 +118,6 @@ body {
 }
 
 .dateHour {
-    font-size: 0.8em;
+    padding-top: 0.2em;
+    font-size: 0.85em;
 }
