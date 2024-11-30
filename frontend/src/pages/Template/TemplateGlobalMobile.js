@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styles from "./TemplateGlobalMobile.module.css";
 import logo from "../../images/logo.svg";
 import bellIcon from "../../images/notificationBell.svg";
+import logoMobile from "../../images/iconMobile.png";
 
 class TemplateGlobalMobile extends Component {
     constructor(props) {
@@ -37,17 +38,30 @@ class TemplateGlobalMobile extends Component {
             <>
                 {/* Partie header */}
                 <div className={styles.headerDiv}>
-                    <h1 className={styles.title}>Calendrier</h1>
-
-                    <div className={styles.headerRight}>
-                        <div className={styles.notificationIcon}>
-                            <img
-                                src={bellIcon}
-                                className={styles.notificationBell}
-                            ></img>
-                            <span className={styles.notificationCount}>2</span>
+                    <div className={styles.topLeftHader}>
+                        <img
+                            src={logoMobile}
+                            alt="Logo"
+                            className={styles.logoMobile}
+                        />
+                        <h1 className={styles.title}>Calendrier</h1>
+                    </div>
+                    <div>
+                        <div className={styles.headerRight}>
+                            <div className={styles.notificationIcon}>
+                                <img
+                                    src={bellIcon}
+                                    className={styles.notificationBell}
+                                    alt="Notification Bell"
+                                />
+                                <span className={styles.notificationCount}>
+                                    2
+                                </span>
+                            </div>
+                            <div className={styles.profileBubble}>
+                                {initials}
+                            </div>
                         </div>
-                        <div className={styles.profileBubble}>{initials}</div>
                     </div>
                 </div>
 

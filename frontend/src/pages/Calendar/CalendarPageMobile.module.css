@@ -20,6 +20,7 @@ body {
     border-radius: 1em;
     position: sticky;
     border-top: 1px solid #cccccc89;
+    font-weight: 500;
 }
 
 .sideColorPro {
@@ -58,7 +59,7 @@ body {
 
 .type {
     font-size: 1.1em;
-    font-weight: 600;
+    font-weight: 500;
     margin-bottom: 0.3em;
 }
 
@@ -104,10 +105,19 @@ body {
     background-color: #1c8aff;
     color: white;
     padding: 0.5em;
-    border-radius: 10em;
+    border-radius: 2em;
     margin-left: 0.5em;
+    font-size: 0.95em;
+    height: 2.5em;
+    width: 2.5em;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
 }
 
 .dateHour {
-    font-size: 0.8em;
+    padding-top: 0.2em;
+    font-size: 0.85em;
 }

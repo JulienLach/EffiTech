@@ -22,6 +22,9 @@ class ClientsPage extends Component {
             company: "",
             isCategeoryModalOpen: false,
             selectedCategory: "All",
+            currentPage: 1,
+            clientsPerPage: 10,
+            searchItem: "",
         };
         this.handleButtonClick = this.handleButtonClick.bind(this);
         this.openModal = this.openModal.bind(this);
@@ -30,6 +33,10 @@ class ClientsPage extends Component {
         this.handleModalCategoryChange =
             this.handleModalCategoryChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handlePageChange = this.handlePageChange.bind(this);
+        this.handleNextPage = this.handleNextPage.bind(this);
+        this.handlePreviousPage = this.handlePreviousPage.bind(this);
+        this.handleSearchChange = this.handleSearchChange.bind(this);
     }
 
     componentDidMount() {
@@ -76,7 +83,31 @@ class ClientsPage extends Component {
                         Particulier
                     </span>
                 );
+            default:
+                return null;
         }
+    }
+
+    handlePageChange(event, pageNumber) {
+        event.preventDefault();
+        this.setState({ currentPage: pageNumber });
+    }
+
+    handleNextPage(event) {
+        event.preventDefault();
+        this.setState((prevState) => ({
+            currentPage: Math.min(
+                prevState.currentPage + 1,
+                Math.ceil(prevState.clients.length / prevState.clientsPerPage)
+            ),
+        }));
+    }
+
+    handlePreviousPage(event) {
+        event.preventDefault();
+        this.setState((prevState) => ({
+            currentPage: Math.max(prevState.currentPage - 1, 1),
+        }));
     }
 
     handleButtonClick(client) {
@@ -85,7 +116,7 @@ class ClientsPage extends Component {
                 state: { client },
             });
         } else {
-            console.error("Données ddu client non définies");
+            console.error("Données du client non définies");
         }
     }
 
@@ -143,17 +174,52 @@ class ClientsPage extends Component {
         });
     }
 
-    render() {
-        const { clients, isModalOpen, isCategeoryModalOpen, selectedCategory } =
-            this.state;
+    handleSearchChange(event) {
+        this.setState({ searchItem: event.target.value });
+    }
 
-        // Filtrer les clients en fonction de la catégorie sélectionnée
-        const filteredClients =
-            selectedCategory === "All"
-                ? clients
-                : clients.filter(
-                      (client) => client.category === selectedCategory
-                  );
+    render() {
+        const {
+            clients,
+            isModalOpen,
+            isCategeoryModalOpen,
+            selectedCategory,
+            currentPage,
+            clientsPerPage,
+            searchItem,
+        } = this.state;
+
+        // Filtrer les clients en fonction de la catégorie sélectionnée et de la recherche
+        const filteredClients = clients.filter((client) => {
+            const matchesCategory =
+                selectedCategory === "All" ||
+                client.category === selectedCategory;
+            const matchesSearchItem =
+                (client.lastname &&
+                    client.lastname
+                        .toLowerCase()
+                        .includes(searchItem.toLowerCase())) ||
+                (client.firstname &&
+                    client.firstname
+                        .toLowerCase()
+                        .includes(searchItem.toLowerCase())) ||
+                (client.company &&
+                    client.company
+                        .toLowerCase()
+                        .includes(searchItem.toLowerCase()));
+            return matchesCategory && matchesSearchItem;
+        });
+
+        // Calculer les clients à afficher pour la page actuelle
+        const indexOfLastClient = currentPage * clientsPerPage;
+        const indexOfFirstClient = indexOfLastClient - clientsPerPage;
+        const currentFilteredClients = filteredClients.slice(
+            indexOfFirstClient,
+            indexOfLastClient
+        );
+
+        // Calculer le nombre total de pages
+        const totalPages = Math.ceil(filteredClients.length / clientsPerPage);
 
         return (
             <>
@@ -169,6 +235,8 @@ class ClientsPage extends Component {
                                     id="search"
                                     name="search"
                                     placeholder="Recherche"
+                                    value={searchItem}
+                                    onChange={this.handleSearchChange}
                                 />
                             </div>
                             <div
@@ -271,7 +339,7 @@ class ClientsPage extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {filteredClients.map((client) => (
+                                {currentFilteredClients.map((client) => (
                                     <tr key={client.idClient}>
                                         <td>C-{client.idClient}</td>
                                         <td>
@@ -315,6 +383,20 @@ class ClientsPage extends Component {
                                 ))}
                             </tbody>
                         </table>
+                        <div className={styles.pagination}>
+                            <button
+                                onClick={(e) => this.handlePreviousPage(e)}
+                                disabled={currentPage === 1}
+                            >
+                                <i className="fa fa-arrow-left"></i>
+                            </button>
+                            <button
+                                onClick={(e) => this.handleNextPage(e)}
+                                disabled={currentPage === totalPages}
+                            >
+                                <i className="fa fa-arrow-right"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
                 {isModalOpen && (
@@ -430,6 +512,8 @@ class ClientsPage extends Component {
                                 <label htmlFor="phone">Téléphone :</label>
                                 <input type="text" id="phone" name="phone" />
                             </div>
+                            <div className={styles.separation}></div>
+
                             <div className={styles.buttonPosition}>
                                 <button
                                     type="reset"

@@ -113,9 +113,10 @@ class EmployeesPage extends Component {
                                                         )
                                                     }
                                                 >
-                                                    Voir détails
+                                                    {" "}
+                                                    Fiche employé
+                                                    <i class="fa-solid fa-user"></i>{" "}
                                                 </button>
-                                                <i className="fa-solid fa-arrow-right"></i>
                                             </div>
                                         </div>
                                     </div>

@@ -17,6 +17,7 @@ body {
 .modalHeader {
     font-size: 1.3em;
     font-weight: 500;
+    margin-bottom: 0.8em;
 }
 
 .modalContent {
@@ -68,9 +69,17 @@ body {
 /* Specific styles for cancel button */
 .cancelButton {
     background-color: #ababab;
+    border-radius: 0.4em !important;
 }
 
 /* Specific styles for submit button */
-.submitButton {
+.employeeSubmitButton {
     background-color: #c93c2c;
+    border-radius: 0.4em !important;
+}
+
+.separation {
+    height: 0.05em;
+    background-color: #ccc;
+    margin: 1.5em 0;
 }

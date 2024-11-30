@@ -19,8 +19,8 @@ class FilterBar extends Component {
                             <p>Type</p>
                         </div>
                         <div className={stylesMobile.typeFilter}>
-                            <i className="fa-solid fa-filter"></i>
-                            <p>Date</p>
+                            <i className="fa-solid fa-user"></i>
+                            <p>Clients</p>
                         </div>
                     </div>
                 ) : (
@@ -32,6 +32,7 @@ class FilterBar extends Component {
                                 id="search"
                                 name="search"
                                 placeholder="Recherche"
+                                onChange={this.props.handleSearchChange}
                             />
                         </div>
                         <div className={styles.typeFilter}>
@@ -39,7 +40,8 @@ class FilterBar extends Component {
                             <p>Clients</p>
                         </div>
                         <div className={styles.typeFilter}>
-                            <i class="fa-solid fa-tag"></i> <p>Status</p>
+                            <i className="fa-solid fa-tag"></i>
+                            <p>Status</p>
                         </div>
                         <div className={styles.typeFilter}>
                             <i className="fa-solid fa-user-group"></i>
