@@ -6,6 +6,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+# [0.3.1] (2024-11-30)
+
+## Changes
+
+-   Add paging to client page with 10 clients per page
+-   Add calendar as home link to logo
+-   Add colors on card events for each employees on calendar view
+-   Add more info on card events on calendar view
+-   Add search client function to client search field
+-   Add search event/employee function to event search field
+-   Add EffiTech small logo to mobile title header
+
+## Fixes
+
+-   Various CSS fixes
+
 # [0.3.0] (2024-11-29)
 
 ## Changes
