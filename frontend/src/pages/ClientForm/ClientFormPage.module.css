@@ -14,7 +14,8 @@
     justify-content: space-between;
     align-items: center;
     margin: 1em 0;
-    border: 0.1em solid #ccc;
+    height: 0.06em;
+    background-color: #ccc;
 }
 
 /* CSS for input & label */
@@ -55,20 +56,30 @@
     padding: 0.625em;
     border: none;
     border-radius: 0.4em;
-    color: white;
     font-size: 1em;
     font-weight: 500;
     cursor: pointer;
+    padding: 0.5em 0.9em;
 }
 
 /* Specific styles for cancel button */
 .cancelButton {
-    background-color: #ababab;
+    background-color: #cfcfcf;
+    color: black;
+}
+
+.cancelButton:hover {
+    background-color: #a9a9a9;
 }
 
 /* Specific styles for submit button */
 .submitButton {
     background-color: #c93c2c;
+    color: white;
+}
+
+.submitButton:hover {
+    background-color: #a93626;
 }
 
 .header {
