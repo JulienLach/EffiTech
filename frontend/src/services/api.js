@@ -13,7 +13,10 @@ const API_URL = "http://localhost:3001";
  * @apiSuccess {Boolean} events.isPlanned Indicates if the event is planned.
  * @apiSuccess {String} events.type Event type.
  * @apiSuccess {Object} events.client Client associated with the event.
- * @apiSuccess {String} events.address Event address.
+ * @apiSuccess {Object} events.address Event address.
+ * @apiSuccess {String} events.address.address Event address.
+ * @apiSuccess {String} events.address.city Event city.
+ * @apiSuccess {String} events.address.zipcode Event zipcode.
  * @apiSuccess {String} events.startingDate Event starting date.
  * @apiSuccess {String} events.startingHour Event starting hour.
  * @apiSuccess {String} events.endingHour Event ending hour.
@@ -24,7 +27,7 @@ const API_URL = "http://localhost:3001";
 function getAllEvents(callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", `${API_URL}/events`);
-    xhr.withCredentials = true; //les cookies sont envoyés avec la requête http
+    xhr.withCredentials = true; // les cookies sont envoyés avec la requête http
     xhr.onload = function () {
         if (xhr.status === 200) {
             callback(null, JSON.parse(xhr.responseText));
@@ -49,6 +52,9 @@ function getAllEvents(callback) {
  * @apiSuccess {String} clients.lastname Client last name.
  * @apiSuccess {String} clients.email Client email.
  * @apiSuccess {Object} clients.address Client address.
+ * @apiSuccess {String} clients.address.address Client address.
+ * @apiSuccess {String} clients.address.city Client city.
+ * @apiSuccess {String} clients.address.zipcode Client zipcode.
  * @apiSuccess {String} clients.phoneNumber Client phone number.
  * @apiSuccess {String} clients.company Client company.
  * @apiError {String} error Error message.
@@ -56,7 +62,7 @@ function getAllEvents(callback) {
 function getAllClients(callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", `${API_URL}/clients`);
-    xhr.withCredentials = true; //les cookies sont envoyés avec la requête http
+    xhr.withCredentials = true;
     xhr.onload = function () {
         if (xhr.status === 200) {
             callback(null, JSON.parse(xhr.responseText));
@@ -68,7 +74,6 @@ function getAllClients(callback) {
     };
     xhr.send();
 }
-
 /**
  * @api {get} /employees Get all employees
  * @apiName GetAllEmployees
@@ -110,39 +115,36 @@ function getAllEmployees(callback) {
  * @apiName CreateEvent
  * @apiGroup Events
  * @apiVersion 1.0.0
- * @apiParam {Number} idEvent Event ID.
  * @apiParam {String} title Event title.
  * @apiParam {String} description Event description.
  * @apiParam {Number} status Event status.
  * @apiParam {Boolean} isPlanned Indicates if the event is planned.
  * @apiParam {String} type Event type.
- * @apiParam {Object} client Client associated with the event.
- * @apiParam {String} address Event address.
+ * @apiParam {Number} idClient The ID of the client associated with the event.
+ * @apiParam {Number} idAddress The ID of the address of the event.
  * @apiParam {String} startingDate Event starting date.
- * @apiParam {String} startingHour Event starting hour.c
+ * @apiParam {String} startingHour Event starting hour.
  * @apiParam {String} endingHour Event ending hour.
- * @apiParam {Object} employee Employee associated with the event.
- * @apiParam {String} workToDo Work to be done during the event.
- * @apiSuccess {Object} event Created event objet.
+ * @apiParam {Number} idEmployee The ID of the employee associated with the event.
+ * @apiSuccess {Object} event Created event object.
  * @apiSuccess {Number} event.idEvent Event ID.
  * @apiSuccess {String} event.title Event title.
  * @apiSuccess {String} event.description Event description.
  * @apiSuccess {Number} event.status Event status.
  * @apiSuccess {Boolean} event.isPlanned Indicates if the event is planned.
  * @apiSuccess {String} event.type Event type.
- * @apiSuccess {Object} event.client Client associated with the event.
- * @apiSuccess {String} event.address Event address.
+ * @apiSuccess {Number} event.idClient Client ID associated with the event.
+ * @apiSuccess {Number} event.idAddress Address ID associated with the event.
  * @apiSuccess {String} event.startingDate Event starting date.
  * @apiSuccess {String} event.startingHour Event starting hour.
  * @apiSuccess {String} event.endingHour Event ending hour.
- * @apiSuccess {Object} event.employee Employee associated with the event.
- * @apiSuccess {String} event.workToDo Work to be done during the event.
+ * @apiSuccess {Number} event.idEmployee Employee ID associated with the event.
  * @apiError {String} error Error message.
  */
 function createEvent(eventData, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", `${API_URL}/events`);
-    xhr.withCredentials = true; //les cookies sont envoyés avec la requête http
+    xhr.withCredentials = true;
     xhr.setRequestHeader("Content-Type", "application/json"); // définir le contenu de la requête est en JSON
     xhr.onload = function () {
         if (xhr.status === 200 || xhr.status === 201) {
@@ -161,16 +163,16 @@ function createEvent(eventData, callback) {
  * @apiName CreateReport
  * @apiGroup Reports
  * @apiVersion 1.0.0
- * @apiParam (required) {String} breakdown The reported breakdown.
- * @apiParam (required) {String} workDone The work done.
- * @apiParam (required) {Boolean} reschedule Indicates if rescheduling is necessary.
- * @apiParam (required) {String} startingDate The starting date of the intervention.
- * @apiParam (required) {String} startingHour The starting hour of the intervention.
- * @apiParam (required) {String} endingHour The ending hour of the intervention.
- * @apiParam (required) {Number} duration The duration of the intervention.
- * @apiParam (required) {String} clientSignature The client's signature.
- * @apiParam (required) {String} employeeSignature The employee's signature.
- * @apiParam (required) {Number} idEvent The ID of the associated event.
+ * @apiParam {String} breakdown The reported breakdown.
+ * @apiParam {String} workDone The work done.
+ * @apiParam {Boolean} reschedule Indicates if rescheduling is necessary.
+ * @apiParam {String} startingDate The starting date of the intervention.
+ * @apiParam {String} startingHour The starting hour of the intervention.
+ * @apiParam {String} endingHour The ending hour of the intervention.
+ * @apiParam {Number} duration The duration of the intervention.
+ * @apiParam {String} clientSignature The client's signature.
+ * @apiParam {String} employeeSignature The employee's signature.
+ * @apiParam {Number} idEvent The ID of the associated event.
  * @apiSuccess {Object} report Created report object.
  * @apiSuccess {Number} report.idReport Report ID.
  * @apiSuccess {String} report.breakdown The reported breakdown.
@@ -264,7 +266,7 @@ function getReportById(idEvent, callback) {
  * @apiSuccess {Boolean} event.isPlanned Indicates if the event is planned.
  * @apiSuccess {String} event.type Event type.
  * @apiSuccess {Object} event.client Client associated with the event.
- * @apiSuccess {String} event.address Event address.
+ * @apiSuccess {Object} event.address Event address.
  * @apiSuccess {String} event.startingDate Event starting date.
  * @apiSuccess {String} event.startingHour Event starting hour.
  * @apiSuccess {String} event.endingHour Event ending hour.
@@ -420,6 +422,9 @@ function getEmployeeById(idEmployee, callback) {
  * @apiSuccess {String} client.lastname Client last name.
  * @apiSuccess {String} client.email Client email.
  * @apiSuccess {Object} client.address Client address.
+ * @apiSuccess {String} client.address.address Client address.
+ * @apiSuccess {String} client.address.city Client city.
+ * @apiSuccess {String} client.address.zipcode Client zipcode.
  * @apiSuccess {String} client.phoneNumber Client phone number.
  * @apiSuccess {String} client.company Client company.
  * @apiError {String} error Error message.
@@ -448,6 +453,9 @@ function getClientById(idClient, callback) {
  * @apiSuccess {Number} company.idCompany Company ID.
  * @apiSuccess {String} company.phoneNumber Company phone number.
  * @apiSuccess {Object} company.idAddress Company address.
+ * @apiSuccess {String} company.idAddress.address Company address.
+ * @apiSuccess {String} company.idAddress.city Company city.
+ * @apiSuccess {String} company.idAddress.zipcode Company zipcode.
  * @apiSuccess {String} company.siret Company SIRET number.
  * @apiSuccess {String} company.vatNumber Company VAT number.
  * @apiSuccess {Number} company.capital Company capital.
@@ -488,7 +496,19 @@ function getCompany(callback) {
  * @apiGroup Events
  * @apiVersion 1.0.0
  * @apiParam {Number} idEvent The ID of the event.
- * @apiSuccess {String} message Success message.
+ * @apiSuccess {Object} event The deleted event object.
+ * @apiSuccess {Number} event.idEvent Event ID.
+ * @apiSuccess {String} event.title Event title.
+ * @apiSuccess {String} event.description Event description.
+ * @apiSuccess {Number} event.status Event status.
+ * @apiSuccess {Boolean} event.isPlanned Indicates if the event is planned.
+ * @apiSuccess {String} event.type Event type.
+ * @apiSuccess {Number} event.idClient Client ID associated with the event.
+ * @apiSuccess {Number} event.idAddress Address ID associated with the event.
+ * @apiSuccess {String} event.startingDate Event starting date.
+ * @apiSuccess {String} event.startingHour Event starting hour.
+ * @apiSuccess {String} event.endingHour Event ending hour.
+ * @apiSuccess {Number} event.idEmployee Employee ID associated with the event.
  * @apiError {String} error Error message.
  */
 function deleteEvent(idEvent, callback) {
@@ -517,6 +537,9 @@ function deleteEvent(idEvent, callback) {
  * @apiParam {Number} idCompany The ID of the company.
  * @apiParam {String} phoneNumber The phone number of the company.
  * @apiParam {Object} idAddress The address of the company.
+ * @apiParam {String} idAddress.address The address of the company.
+ * @apiParam {String} idAddress.city The city of the company.
+ * @apiParam {String} idAddress.zipcode The zipcode of the company.
  * @apiParam {String} siret The SIRET number of the company.
  * @apiParam {String} vatNumber The VAT number of the company.
  * @apiParam {Number} capital The capital of the company.
@@ -526,6 +549,9 @@ function deleteEvent(idEvent, callback) {
  * @apiSuccess {Number} company.idCompany Company ID.
  * @apiSuccess {String} company.phoneNumber Company phone number.
  * @apiSuccess {Object} company.idAddress Company address.
+ * @apiSuccess {String} company.idAddress.address Company address.
+ * @apiSuccess {String} company.idAddress.city Company city.
+ * @apiSuccess {String} company.idAddress.zipcode Company zipcode.
  * @apiSuccess {String} company.siret Company SIRET number.
  * @apiSuccess {String} company.vatNumber Company VAT number.
  * @apiSuccess {Number} company.capital Company capital.
@@ -622,6 +648,9 @@ function updateEmployee(employeeData, callback) {
  * @apiSuccess {String} client.lastname Client last name.
  * @apiSuccess {String} client.email Client email.
  * @apiSuccess {Object} client.address Client address.
+ * @apiSuccess {String} client.address.address Client address.
+ * @apiSuccess {String} client.address.city Client city.
+ * @apiSuccess {String} client.address.zipcode Client zipcode.
  * @apiSuccess {String} client.phoneNumber Client phone number.
  * @apiSuccess {String} client.company Client company.
  * @apiError {String} error Error message.
@@ -667,6 +696,9 @@ function updateClient(clientData, callback) {
  * @apiSuccess {String} client.lastname Client last name.
  * @apiSuccess {String} client.email Client email.
  * @apiSuccess {Object} client.address Client address.
+ * @apiSuccess {String} client.address.address Client address.
+ * @apiSuccess {String} client.address.city Client city.
+ * @apiSuccess {String} client.address.zipcode Client zipcode.
  * @apiSuccess {String} client.phoneNumber Client phone number.
  * @apiSuccess {String} client.company Client company.
  * @apiError {String} error Error message.
@@ -749,6 +781,9 @@ function createEmployee(employeeData, callback) {
  * @apiSuccess {Number} company.idCompany Company ID.
  * @apiSuccess {String} company.phoneNumber Company phone number.
  * @apiSuccess {Object} company.idAddress Company address.
+ * @apiSuccess {String} company.idAddress.address Company address.
+ * @apiSuccess {String} company.idAddress.city Company city.
+ * @apiSuccess {String} company.idAddress.zipcode Company zipcode.
  * @apiSuccess {String} company.siret Company SIRET number.
  * @apiSuccess {String} company.vatNumber Company VAT number.
  * @apiSuccess {Number} company.capital Company capital.
