@@ -226,7 +226,7 @@ class AppointmentFormPage extends Component {
                                     className={stylesMobile.validateButton}
                                     type="submit"
                                 >
-                                    <i class="fa-solid fa-check"></i>
+                                    <i className="fa-solid fa-check"></i>
                                     Terminer le RDV
                                 </button>
                             </div>

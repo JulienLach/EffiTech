@@ -301,7 +301,7 @@ class InterventionFormPage extends Component {
                                     className={stylesMobile.validateButton}
                                     type="submit"
                                 >
-                                    <i class="fa-solid fa-check"></i>
+                                    <i className="fa-solid fa-check"></i>
                                     Valider le rapport
                                 </button>
                             </div>
@@ -493,7 +493,7 @@ class InterventionFormPage extends Component {
                                         type="submit"
                                         className={styles.validateButton}
                                     >
-                                        <i class="fa-solid fa-check"></i>
+                                        <i className="fa-solid fa-check"></i>
                                         Valider le rapport
                                     </button>
                                 </div>

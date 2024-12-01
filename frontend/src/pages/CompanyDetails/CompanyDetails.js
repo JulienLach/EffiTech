@@ -54,7 +54,7 @@ class CompanyDetails extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        updateCompany(this.state.company, (error, data) => {
+        updateCompany(this.state.company, (error) => {
             if (error) {
                 this.setState({ error: error.message });
             } else {

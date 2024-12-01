@@ -83,7 +83,7 @@ class ClientDetailsPage extends Component {
     }
 
     render() {
-        const { client, error } = this.state;
+        const { client } = this.state;
         console.log(client);
         return (
             <>
