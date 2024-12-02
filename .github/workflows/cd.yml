@@ -25,8 +25,12 @@ jobs:
               id: extract_notes
               run: |
                   TAG_NAME=$(echo ${{ github.ref }} | sed 's/refs\/tags\///')
-                  PREVIOUS_TAG=$(git describe --tags --abbrev=0 ${TAG_NAME}^)
-                  RELEASE_NOTES=$(awk "/# \[${TAG_NAME}\]/,/# \[${PREVIOUS_TAG}\]/" CHANGELOG.md | sed '$d')
+                  PREVIOUS_TAG=$(git describe --tags --abbrev=0 ${TAG_NAME}^ 2>/dev/null || echo "HEAD")
+                  if [ "${PREVIOUS_TAG}" = "HEAD" ]; then
+                    RELEASE_NOTES=$(awk "/# \[${TAG_NAME}\]/,0" CHANGELOG.md)
+                  else
+                    RELEASE_NOTES=$(awk "/# \[${TAG_NAME}\]/,/# \[${PREVIOUS_TAG}\]/" CHANGELOG.md | sed '$d')
+                  fi
                   echo "::set-output name=notes::${RELEASE_NOTES}"
 
             - name: Create GitHub Release
