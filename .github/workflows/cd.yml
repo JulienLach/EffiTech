@@ -13,10 +13,11 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v2
 
-            - name: Verify branch
+            - name: Verify commit is on main
               run: |
-                  if [ "$(git rev-parse --abbrev-ref HEAD)" != "main" ]; then
-                    echo "Not on main branch, exiting."
+                  git fetch origin main
+                  if ! git merge-base --is-ancestor $(git rev-parse HEAD) origin/main; then
+                    echo "Commit is not on main branch, exiting."
                     exit 1
                   fi
 
