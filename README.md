@@ -10,7 +10,7 @@
 -   Manage your employees and your clients
 -   Creation of reports with details and client signature.
 -   Assignment of qualified technicians by supervisors.
--   Access to necessary technical data before the intervention with documents (not implemented yet)
+-   Access to necessary technical data before the intervention with documents
 
 ## Requirements
 
