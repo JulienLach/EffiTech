@@ -20,6 +20,14 @@ jobs:
                     exit 1
                   fi
 
+            - name: Extract release notes
+              id: extract_notes
+              run: |
+                  TAG_NAME=$(echo ${{ github.ref }} | sed 's/refs\/tags\///')
+                  PREVIOUS_TAG=$(git describe --tags --abbrev=0 ${TAG_NAME}^)
+                  RELEASE_NOTES=$(awk "/# \[${TAG_NAME}\]/,/# \[${PREVIOUS_TAG}\]/" CHANGELOG.md | sed '$d')
+                  echo "::set-output name=notes::${RELEASE_NOTES}"
+
             - name: Create GitHub Release
               id: create_release
               uses: actions/create-release@v1
@@ -27,6 +35,7 @@ jobs:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
                   tag_name: ${{ github.ref }}
-                  release_name: ${{ github.ref }}
+                  release_name: Release ${{ github.ref }}
+                  body: ${{ steps.extract_notes.outputs.notes }}
                   draft: false
                   prerelease: false
