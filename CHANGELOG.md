@@ -10,7 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Changes
 
--   Fix cd.yml file for automatic release
+-   Fix cd.yml file for automatic release with github actions
 
 # [0.3.2] (2024-12-02)
 
