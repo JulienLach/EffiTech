@@ -63,3 +63,7 @@ a {
     flex-direction: column;
     gap: 1em;
 }
+
+.companyLogo {
+    margin: 1em 0;
+}

@@ -115,7 +115,7 @@ class ClientFormPage extends Component {
                 <TemplateGlobal />
                 <div className={styles.container}>
                     <h1 className={styles.pageTitle}>Client</h1>
-                    <div class>
+                    <div>
                         <img
                             src={profilPicture}
                             className={styles.profilPic}
@@ -215,7 +215,7 @@ class ClientFormPage extends Component {
                                 className={styles.submitButton}
                             >
                                 {" "}
-                                <i class="fa-solid fa-floppy-disk"></i>{" "}
+                                <i className="fa-solid fa-floppy-disk"></i>{" "}
                                 Enregistrer
                             </button>
                         </div>

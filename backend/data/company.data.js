@@ -42,7 +42,7 @@ class Company {
      * @param {function} callback - La fonction de rappel.
      */
     static createCompany(company, callback) {
-        console.log("Données reçues pour la création de la société :", company);
+        // console.log("Données reçues pour la création de la société :", company);
 
         // Première requête : insérer l'adresse
         const createAddressQuery =
@@ -65,7 +65,7 @@ class Company {
                     return callback(error, null);
                 }
                 const addressId = addressResult.rows[0].id_address;
-                console.log("Adresse insérée avec succès, ID :", addressId);
+                // console.log("Adresse insérée avec succès, ID :", addressId);
 
                 // Deuxième requête : insérer la société
                 const createCompanyQuery =
@@ -93,10 +93,10 @@ class Company {
                         }
 
                         const row = companyResult.rows[0];
-                        console.log(
-                            "Société insérée avec succès, données :",
-                            row
-                        );
+                        // console.log(
+                        //     "Société insérée avec succès, données :",
+                        //     row
+                        // );
 
                         // Convertir l'image en base64
                         let logoBase64 = null;
@@ -185,64 +185,60 @@ class Company {
             company.idAddress.idAddress,
         ];
 
-        pool.query(
-            updateAddressQuery,
-            addressValues,
-            (error, addressResult) => {
+        pool.query(updateAddressQuery, addressValues, (error) => {
+            if (error) {
+                return callback(error);
+            }
+
+            // Deuxième requête : mettre à jour la société
+            const query =
+                "UPDATE companies SET phone_number = $1, id_address = $2, siret = $3, vat_number = $4, capital = $5, logo = $6, database_version = $7 WHERE id_company = $8 RETURNING *";
+            const values = [
+                company.phoneNumber,
+                company.idAddress.idAddress,
+                company.siret,
+                company.vatNumber,
+                company.capital,
+                Buffer.from(company.logo, "base64"), // Convertir la chaîne base64 en Buffer
+                company.databaseVersion,
+                company.idCompany,
+            ];
+
+            pool.query(query, values, (error, result) => {
                 if (error) {
                     return callback(error);
                 }
 
-                // Deuxième requête : mettre à jour la société
-                const query =
-                    "UPDATE companies SET phone_number = $1, id_address = $2, siret = $3, vat_number = $4, capital = $5, logo = $6, database_version = $7 WHERE id_company = $8 RETURNING *";
-                const values = [
-                    company.phoneNumber,
-                    company.idAddress.idAddress,
-                    company.siret,
-                    company.vatNumber,
-                    company.capital,
-                    Buffer.from(company.logo, "base64"), // Convertir la chaîne base64 en Buffer
-                    company.databaseVersion,
-                    company.idCompany,
-                ];
+                const row = result.rows[0];
 
-                pool.query(query, values, (error, result) => {
-                    if (error) {
-                        return callback(error);
-                    }
-
-                    const row = result.rows[0];
-
-                    Address.getAddressById(
-                        row.id_address,
-                        function (error, address) {
-                            if (error) {
-                                return callback(error, null);
-                            }
-
-                            // Convertir l'image en base64
-                            let logoBase64 = null;
-                            if (row.logo) {
-                                logoBase64 = row.logo.toString("base64");
-                            }
-
-                            const updatedCompany = new Company(
-                                row.id_company,
-                                row.phone_number,
-                                address,
-                                row.siret,
-                                row.vat_number,
-                                row.capital,
-                                logoBase64,
-                                row.database_version
-                            );
-                            callback(null, updatedCompany);
+                Address.getAddressById(
+                    row.id_address,
+                    function (error, address) {
+                        if (error) {
+                            return callback(error, null);
                         }
-                    );
-                });
-            }
-        );
+
+                        // Convertir l'image en base64
+                        let logoBase64 = null;
+                        if (row.logo) {
+                            logoBase64 = row.logo.toString("base64");
+                        }
+
+                        const updatedCompany = new Company(
+                            row.id_company,
+                            row.phone_number,
+                            address,
+                            row.siret,
+                            row.vat_number,
+                            row.capital,
+                            logoBase64,
+                            row.database_version
+                        );
+                        callback(null, updatedCompany);
+                    }
+                );
+            });
+        });
     }
 }
 

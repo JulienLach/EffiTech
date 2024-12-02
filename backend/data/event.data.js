@@ -72,7 +72,7 @@ class Event {
         `;
         const values = [today];
 
-        pool.query(updateQuery, values, function (error, result) {
+        pool.query(updateQuery, values, function (error) {
             if (error) {
                 return callback(error);
             }

@@ -301,7 +301,7 @@ class InterventionFormPage extends Component {
                                     className={stylesMobile.validateButton}
                                     type="submit"
                                 >
-                                    <i class="fa-solid fa-check"></i>
+                                    <i className="fa-solid fa-check"></i>
                                     Valider le rapport
                                 </button>
                             </div>
@@ -320,6 +320,7 @@ class InterventionFormPage extends Component {
                                         Intervention
                                     </h2>
                                     <button
+                                        className={styles.buttonBack}
                                         type="button"
                                         onClick={() =>
                                             (window.location.href = "/calendar")
@@ -474,7 +475,7 @@ class InterventionFormPage extends Component {
                                     </div>
                                 </div>
                                 <div>
-                                    <h3>Planification</h3>
+                                    <h3>Planification :</h3>
                                     <div className={styles.checkbox}>
                                         <input
                                             type="checkbox"
@@ -488,12 +489,19 @@ class InterventionFormPage extends Component {
                                     </div>
                                 </div>
                                 <div className={styles.modalFooter}>
-                                    <button type="reset">Annuler</button>
+                                    <button
+                                        onClick={() =>
+                                            (window.location.href = "/calendar")
+                                        }
+                                        type="reset"
+                                    >
+                                        Annuler
+                                    </button>
                                     <button
                                         type="submit"
                                         className={styles.validateButton}
                                     >
-                                        <i class="fa-solid fa-check"></i>
+                                        <i className="fa-solid fa-check"></i>
                                         Valider le rapport
                                     </button>
                                 </div>

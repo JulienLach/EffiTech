@@ -2,20 +2,22 @@
 
 ## Overview
 
--   Manage scheduling of interventions for craftsmen, industrial technicians, and heating engineers.
+-   Manage scheduling of interventions for technicians.
 
 ## Features
 
 -   Individual management of technicians on the move with scheduling.
 -   Manage your employees and your clients
--   Access to necessary technical data before the intervention with documents.
--   Creation of detailed reports with text, and electronic client signature.
+-   Creation of reports with details and client signature.
 -   Assignment of qualified technicians by supervisors.
--   Recording of client and equipment information from the first appointment.
+-   Access to necessary technical data before the intervention with documents (not implemented yet)
 
-## Stack
+## Requirements
 
--   PostgreSQL, Node.js, JavaScript.
+-   PostgreSQL 15.10
+-   Node.js 18.19.0
+-   React 18.3.1
+-   Docker
 
 ## Environment variables configuration
 
@@ -31,17 +33,24 @@ You need to create a `.env.development.local` file at the root of the project wi
 
 ## Testing
 
--   **JEST** for test scripts
-    -   Run `test path/to/your/file` to display test errors
--   **ESLint** and **Prettier** for code quality and formatting
-    -   Run `npx eslint path/to/your/file` to check for errors
+This project uses **Jest**, **ESLint**, and **Prettier**.
+
+-   **JEST** for test scripts :
+    -   Run `npm test` or `npx jest` to execute all tests written in the `/tests` folder. This will output all errors and a coverage report.
+-   **ESLint** and **Prettier** for code quality and formatting :
+    -   Run `npx eslint path/to/your/file` to check for code errors.
+
+## Documentation
+
+This project uses **JSDoc** and **apidoc** to generate documentation.
+
+-   **JSDoc**: Move to `/backend` folder, run `npm run doc` to generate documentation for the `/data` files.
+-   **apidoc**: Move to `/backend` folder, for API documentation written in the `/services/api.js` file, run `npm run apidoc`.
 
 ## End-to-End Functional Test
 
 <details>
 <summary>Scenario 1: Plan and Assign Initial Intervention</summary>
-
-#### User Story: Planification des premières interventions de constatation de la panne
 
 1. **Supervisor receives a call from a client reporting a machine failure.**
 

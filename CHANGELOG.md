@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+# [0.3.2] (2024-12-02)
+
+## Changes
+
+-   Various CSS fixes
+-   Add CI unit tests with GitHub Actions
+-   Add CD file to automaticaly create a new release
+
 # [0.3.1] (2024-11-30)
 
 ## Changes

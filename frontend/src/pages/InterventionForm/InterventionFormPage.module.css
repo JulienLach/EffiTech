@@ -63,6 +63,11 @@
     transform: rotate(180deg);
 }
 
+.buttonBack {
+    background-color: #ccc;
+    display: flex;
+}
+
 .inputDisplay {
     display: flex;
     flex-direction: column;

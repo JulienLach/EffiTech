@@ -53,6 +53,7 @@ class CompanyPage extends Component {
                         <div>
                             <div className={styles.logoCompany}>
                                 <img
+                                    className={styles.companyLogo}
                                     src={`data:image/jpeg;base64,${company.logo}`}
                                     alt="Logo de la société"
                                 />
