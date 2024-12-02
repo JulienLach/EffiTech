@@ -33,16 +33,19 @@ You need to create a `.env.development.local` file at the root of the project wi
 
 ## Testing
 
--   **JEST** for test scripts
-    -   Run `test path/to/your/file` to display test errors
--   **ESLint** and **Prettier** for code quality and formatting
-    -   Run `npx eslint path/to/your/file` to check for errors
+This project uses **Jest**, **ESLint**, and **Prettier**.
+
+-   **JEST** for test scripts :
+    -   Run `npm test` or `npx jest` to execute all tests written in the `/tests` folder. This will output all errors and a coverage report.
+-   **ESLint** and **Prettier** for code quality and formatting :
+    -   Run `npx eslint path/to/your/file` to check for code errors.
 
 ## Documentation
 
--   **JSDOC**: In the `/backend` folder, run `npm run doc` to generate documentation for the `/data` files.
+This project uses **JSDoc** and **apidoc** to generate documentation.
 
--   **apidoc**: In the `/backend` folder, for API documentation written in the `/services/api.js` file, run `npm run apidoc`
+-   **JSDoc**: Move to `/backend` folder, run `npm run doc` to generate documentation for the `/data` files.
+-   **apidoc**: Move to `/backend` folder, for API documentation written in the `/services/api.js` file, run `npm run apidoc`.
 
 ## End-to-End Functional Test
 
