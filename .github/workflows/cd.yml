@@ -27,9 +27,9 @@ jobs:
                   TAG_NAME=$(echo ${{ github.ref }} | sed 's/refs\/tags\///')
                   PREVIOUS_TAG=$(git describe --tags --abbrev=0 ${TAG_NAME}^ 2>/dev/null || echo "HEAD")
                   if [ "${PREVIOUS_TAG}" = "HEAD" ]; then
-                    RELEASE_NOTES=$(awk "/# \[${TAG_NAME}\]/,0" CHANGELOG.md)
+                    RELEASE_NOTES=$(awk "/# \[${TAG_NAME}\]/,/^# \[/" CHANGELOG.md | sed '$d')
                   else
-                    RELEASE_NOTES=$(awk "/# \[${TAG_NAME}\]/,/# \[${PREVIOUS_TAG}\]/" CHANGELOG.md | sed '$d')
+                    RELEASE_NOTES=$(awk "/# \[${TAG_NAME}\]/,/^# \[${PREVIOUS_TAG}\]/" CHANGELOG.md | sed '$d')
                   fi
                   echo "::set-output name=notes::${RELEASE_NOTES}"
 
@@ -40,7 +40,7 @@ jobs:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
                   tag_name: ${{ github.ref }}
-                  release_name: Release ${{ github.ref }}
+                  release_name: ${{ github.ref }}
                   body: ${{ steps.extract_notes.outputs.notes }}
                   draft: false
                   prerelease: false
