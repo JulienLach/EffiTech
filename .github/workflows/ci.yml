@@ -1,4 +1,4 @@
-name: Simple Status Check for Develop
+name: Unit tests check on develop branch
 
 on:
     push:
