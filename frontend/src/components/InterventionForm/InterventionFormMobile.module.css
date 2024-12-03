@@ -91,6 +91,10 @@
     border-radius: 0.4em;
 }
 
+h3 {
+    margin: 0.3em 0;
+}
+
 .intStatus {
     display: flex;
 }
