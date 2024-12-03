@@ -42,7 +42,7 @@ class Company {
      * @param {function} callback - La fonction de rappel.
      */
     static createCompany(company, callback) {
-        console.log("Données reçues pour la création de la société :", company);
+        // console.log("Données reçues pour la création de la société :", company);
 
         // Première requête : insérer l'adresse
         const createAddressQuery =
@@ -65,7 +65,7 @@ class Company {
                     return callback(error, null);
                 }
                 const addressId = addressResult.rows[0].id_address;
-                console.log("Adresse insérée avec succès, ID :", addressId);
+                // console.log("Adresse insérée avec succès, ID :", addressId);
 
                 // Deuxième requête : insérer la société
                 const createCompanyQuery =
@@ -93,10 +93,10 @@ class Company {
                         }
 
                         const row = companyResult.rows[0];
-                        console.log(
-                            "Société insérée avec succès, données :",
-                            row
-                        );
+                        // console.log(
+                        //     "Société insérée avec succès, données :",
+                        //     row
+                        // );
 
                         // Convertir l'image en base64
                         let logoBase64 = null;

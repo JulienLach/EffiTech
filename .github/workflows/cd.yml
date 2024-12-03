@@ -1,0 +1,46 @@
+name: Create Release
+
+on:
+    push:
+        tags:
+            - "*"
+
+jobs:
+    release:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: Verify commit is on main
+              run: |
+                  git fetch origin main
+                  if ! git merge-base --is-ancestor $(git rev-parse HEAD) origin/main; then
+                    echo "Commit is not on main branch, exiting."
+                    exit 1
+                  fi
+
+            - name: Extract release notes
+              id: extract_notes
+              run: |
+                  TAG_NAME=$(echo ${{ github.ref }} | sed 's/refs\/tags\///')
+                  PREVIOUS_TAG=$(git describe --tags --abbrev=0 ${TAG_NAME}^ 2>/dev/null || echo "HEAD")
+                  if [ "${PREVIOUS_TAG}" = "HEAD" ]; then
+                    RELEASE_NOTES=$(awk "/# \[${TAG_NAME}\]/,0" CHANGELOG.md)
+                  else
+                    RELEASE_NOTES=$(awk "/# \[${TAG_NAME}\]/,/# \[${PREVIOUS_TAG}\]/" CHANGELOG.md | sed '$d')
+                  fi
+                  echo "::set-output name=notes::${RELEASE_NOTES}"
+
+            - name: Create GitHub Release
+              id: create_release
+              uses: actions/create-release@v1
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  tag_name: ${{ github.ref }}
+                  release_name: ${{ github.ref }}
+                  body: ${{ steps.extract_notes.outputs.notes }}
+                  draft: false
+                  prerelease: false

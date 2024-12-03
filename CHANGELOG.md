@@ -6,9 +6,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
--   Various CSS fixes
 -   Update report clients and report page on mobile
 -   Add links to mobile menu
+
+# [0.3.3] (2024-12-02)
+
+## Changes
+
+-   Fix cd.yml file for automatic release with github actions
+
+# [0.3.2] (2024-12-02)
+
+## Changes
+
+-   Various CSS fixes
+-   Add CI unit tests with GitHub Actions
+-   Add CD file to automaticaly create a new release
 
 # [0.3.1] (2024-11-30)
 
