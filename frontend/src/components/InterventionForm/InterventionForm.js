@@ -227,34 +227,35 @@ class InterventionForm extends Component {
                                             )}
                                         </p>
                                     </div>
-                                    <p>{event.title}</p>
+                                    <p className={stylesMobile.boldElement}>
+                                        {event.title}
+                                    </p>
                                 </div>
                                 <div className={stylesMobile.detailsCard}>
                                     <h3 className={stylesMobile.title}>
-                                        Détails
+                                        Client
                                     </h3>
-                                    <p className={stylesMobile.boldElement}></p>
                                     <p className={stylesMobile.dataElement}>
-                                        Client : {event.client.firstname}{" "}
+                                        {event.client.firstname}{" "}
                                         {event.client.lastname}
                                     </p>
-                                    <p className={stylesMobile.boldElement}></p>
+                                    <h3 className={stylesMobile.title}>
+                                        Téléphone
+                                    </h3>
                                     <p className={stylesMobile.dataElement}>
-                                        Téléphone : {event.client.phoneNumber}
+                                        {event.client.phoneNumber}
                                     </p>
-                                    <p className={stylesMobile.boldElement}></p>
+                                    <h3 className={stylesMobile.title}>
+                                        Adresse
+                                    </h3>
                                     <p className={stylesMobile.dataElement}>
-                                        Adresse : {event.client.address.address}
-                                        , {event.client.address.zipcode},{" "}
+                                        {event.client.address.address},{" "}
+                                        {event.client.address.zipcode},{" "}
                                         {event.client.address.city}
                                     </p>
-                                    <div
-                                        className={stylesMobile.separation}
-                                    ></div>
-
-                                    <p className={stylesMobile.boldElement}>
-                                        Description :
-                                    </p>
+                                    <h3 className={stylesMobile.title}>
+                                        Description
+                                    </h3>
                                     <p className={stylesMobile.dataElement}>
                                         {event.description}
                                     </p>
@@ -262,14 +263,13 @@ class InterventionForm extends Component {
 
                                 <div className={stylesMobile.planCard}>
                                     <h3 className={stylesMobile.title}>
-                                        Plannification
+                                        Technicien
                                     </h3>
-                                    <p className={stylesMobile.boldElement}></p>
                                     <p className={stylesMobile.dataElement}>
-                                        Technicien : {event.employee.firstname}{" "}
+                                        {event.employee.firstname}{" "}
                                         {event.employee.lastname}
                                     </p>
-                                    <p className={stylesMobile.boldElement}>
+                                    <h3 className={stylesMobile.title}>
                                         Début{" "}
                                         {(() => {
                                             if (event.type === "Intervention") {
@@ -278,7 +278,7 @@ class InterventionForm extends Component {
                                                 return "du rendez-vous :";
                                             }
                                         })()}
-                                    </p>
+                                    </h3>
                                     <p className={stylesMobile.dataElement}>
                                         {event.startingDate
                                             ? new Date(
@@ -293,7 +293,7 @@ class InterventionForm extends Component {
                                             minute: "2-digit",
                                         })}
                                     </p>
-                                    <p className={stylesMobile.boldElement}>
+                                    <h3 className={stylesMobile.title}>
                                         Fin{" "}
                                         {(() => {
                                             if (event.type === "Intervention") {
@@ -302,7 +302,7 @@ class InterventionForm extends Component {
                                                 return "du rendez-vous :";
                                             }
                                         })()}
-                                    </p>
+                                    </h3>
                                     <p className={stylesMobile.dataElement}>
                                         {event.startingDate
                                             ? new Date(
