@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+# [0.3.4] (2024-12-03)
+
 -   Update report clients and report page on mobile
 -   Add links to mobile menu
 
