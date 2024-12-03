@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import styles from "./TemplateGlobalMobile.module.css";
-import logo from "../../images/logo.svg";
-import bellIcon from "../../images/notificationBell.svg";
 import logoMobile from "../../images/iconMobile.png";
+import bellIcon from "../../images/notificationBell.svg";
 
 class TemplateGlobalMobile extends Component {
     constructor(props) {
@@ -32,7 +31,22 @@ class TemplateGlobalMobile extends Component {
     }
 
     render() {
-        const { initials } = this.state;
+        const { initials, currentPath } = this.state;
+
+        let pageTitle;
+        switch (currentPath) {
+            case "/calendar":
+                pageTitle = "Calendrier";
+                break;
+            case "/clients":
+                pageTitle = "Clients";
+                break;
+            case "/expense":
+                pageTitle = "Dépenses";
+                break;
+            default:
+                pageTitle = "Page";
+        }
 
         return (
             <>
@@ -44,7 +58,7 @@ class TemplateGlobalMobile extends Component {
                             alt="Logo"
                             className={styles.logoMobile}
                         />
-                        <h1 className={styles.title}>Calendrier</h1>
+                        <h1 className={styles.title}>{pageTitle}</h1>
                     </div>
                     <div>
                         <div className={styles.headerRight}>
