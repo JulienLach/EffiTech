@@ -62,6 +62,7 @@ This project uses **GitHub Actions** to automate unit tests and create new relea
 
     -   Merge your current working branch into the `develop` branch.
     -   Create a new pull request (PR) to merge `develop` into `main`.
+    -   Don't forget to update de `CHANGELOG.md` file before your `devlop` into `main` PR
     -   Locally in your terminal, switch to the `main` branch:
         ```sh
         git checkout main
