@@ -5,7 +5,7 @@ import stylesMobile from "./ReportPageMobile.module.css";
 import TemplateGlobal from "../Template/TemplateGlobal";
 import TemplateGlobalMobile from "../Template/TemplateGlobalMobile";
 import PDFGenerator from "../../components/PDFGenerator/PDFGenerator";
-import { getReportById } from "../../services/api";
+import { getReportById, getCompany } from "../../services/api";
 
 // Composant wrapper pour utiliser les hooks
 function ReportPageWrapper() {
@@ -21,12 +21,14 @@ class ReportPage extends Component {
         this.state = {
             reportData: report,
             event: event,
+            companyData: null,
         };
     }
 
     componentDidMount() {
         const { event } = this.state;
         const idEvent = event.idEvent;
+
         getReportById(idEvent, (error, data) => {
             if (error) {
                 console.error(
@@ -38,10 +40,22 @@ class ReportPage extends Component {
                 console.log("Donnée du rapport récupérée:", data);
             }
         });
+
+        getCompany((error, data) => {
+            if (error) {
+                console.error(
+                    "Erreur lors de la récupération des informations de l'entreprise",
+                    error
+                );
+            } else {
+                this.setState({ companyData: data });
+                console.log("Données de l'entreprise récupérées:", data);
+            }
+        });
     }
 
     render() {
-        const { event, reportData } = this.state;
+        const { event, reportData, companyData } = this.state;
 
         const reportDetails = reportData
             ? {
@@ -209,10 +223,11 @@ class ReportPage extends Component {
                                         </a>
                                     </div>
                                 </div>
-                                {reportDetails && (
+                                {reportDetails && companyData && (
                                     <PDFGenerator
                                         report={reportDetails}
                                         reportData={reportData}
+                                        companyData={companyData}
                                     />
                                 )}
                             </div>

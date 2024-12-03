@@ -16,8 +16,8 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     logo: {
-        fontSize: 20,
-        margin: 10,
+        width: 100,
+        height: 100,
     },
     infoClientCompany: {
         flexDirection: "row",
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     },
 });
 
-const PDFGenerator = ({ report, reportData }) => {
+const PDFGenerator = ({ report, reportData, companyData }) => {
     const [pdfBlob, setPdfBlob] = useState(null);
 
     useEffect(() => {
@@ -79,7 +79,10 @@ const PDFGenerator = ({ report, reportData }) => {
                     title={`Rapport d'intervention - INT-${report.idEvent} - ${report.title}`}
                 >
                     <Page size="A4" style={styles.page}>
-                        <Text style={styles.logo}>[company.logo]</Text>
+                        <Image
+                            style={styles.logo}
+                            src={`data:image/jpeg;base64,${companyData.logo}`}
+                        />{" "}
                         <View style={styles.infoClientCompany}>
                             <View>
                                 <Text style={styles.title}>Client:</Text>
@@ -137,9 +140,13 @@ const PDFGenerator = ({ report, reportData }) => {
                             />
                         </View>
                         <Text style={styles.footer}>
-                            SIRET: [numéro de SIRET] | TVA: [numéro de TVA] |
-                            Capital: [montant du capital] | Adresse: [adresse de
-                            l'entreprise] | Téléphone: [numéro de téléphone]
+                            SIRET: {companyData.siret} | TVA:{" "}
+                            {companyData.vatNumber} | Capital:{" "}
+                            {companyData.capital} € | Adresse:{" "}
+                            {companyData.idAddress.address},{" "}
+                            {companyData.idAddress.city},{" "}
+                            {companyData.idAddress.zipcode} | Téléphone:{" "}
+                            {companyData.phoneNumber}
                         </Text>
                     </Page>
                 </Document>
@@ -152,7 +159,7 @@ const PDFGenerator = ({ report, reportData }) => {
         };
 
         generatePdf();
-    }, [report, reportData]);
+    }, [report, reportData, companyData]);
 
     return (
         <div>
