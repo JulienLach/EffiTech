@@ -85,7 +85,7 @@ const PDFGenerator = ({ report, reportData, companyData }) => {
                         />{" "}
                         <View style={styles.infoClientCompany}>
                             <View>
-                                <Text style={styles.title}>Client:</Text>
+                                <Text style={styles.title}>Client :</Text>
                                 <Text>
                                     Nom : {report.client.firstname}{" "}
                                     {report.client.lastname}
@@ -100,8 +100,11 @@ const PDFGenerator = ({ report, reportData, companyData }) => {
                                 </Text>
                             </View>
                             <View>
-                                <Text style={styles.title}>Technicien:</Text>
-                                <Text>Nom :</Text>
+                                <Text style={styles.title}>Technicien :</Text>
+                                <Text>
+                                    Nom : {report.employee.firstname}{" "}
+                                    {report.employee.lastname}
+                                </Text>
                             </View>
                         </View>
                         <Text style={styles.title}>Rapport d'intervention</Text>

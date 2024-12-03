@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+-   Add employee name to report PDF
 -   Add company data and logo to report PDF
 -   Add dynamic title page on mobile
 

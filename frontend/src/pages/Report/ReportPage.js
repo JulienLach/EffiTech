@@ -70,6 +70,7 @@ class ReportPage extends Component {
                   client: event.client,
                   clientSignature: reportData.client_signature,
                   employeeSignature: reportData.employee_signature,
+                  employee: event.employee,
               }
             : null;
 
