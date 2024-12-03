@@ -4,42 +4,48 @@
     padding: 1em;
 }
 
-.filterBar {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1em;
-}
-
 .selectedCategory {
     display: flex;
     align-items: center;
     gap: 1em;
     margin: 1em 0em;
 }
+.clientCard {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1em;
+    width: 90%;
+    border-radius: 0.4em;
+    margin: 1em auto;
+    color: rgb(49, 49, 49);
+    box-shadow: 0 0.2em 0.2em rgba(0, 0, 0, 0.1);
+}
 
 .rightPart {
-    margin-left: auto;
+    text-align: start;
+    margin-right: 1em;
 }
 
-.particulier {
-    color: #c35e00;
-    font-weight: 550;
-    cursor: pointer;
+.name {
+    font-size: 1.5em;
+    font-weight: 500;
 }
 
-.particulier:hover {
-    text-decoration: underline;
+.address {
+    font-size: 1.2em;
+    font-weight: 400;
 }
 
-.professionnel {
-    color: #2c5ba1;
-    font-weight: 550;
-    cursor: pointer;
+.clientCard i {
+    font-size: 2.2em;
+    margin-left: 0.8em;
 }
 
-.professionnel:hover {
-    text-decoration: underline;
+.searchAndFilter {
+    margin: 0 auto;
 }
+
 .radioParticulier {
     color: #c35e00;
 }
@@ -53,20 +59,8 @@
     font-weight: 500;
 }
 
-.addClient {
-    background-color: #c93c2c;
-    padding: 0.6em 0.94em;
-    border: none;
-    border-radius: 0.4em;
-    color: white;
-    font-size: 1.1em;
-    font-weight: 500;
-    cursor: pointer;
-    margin: 0.625em 1.25em;
-}
-
-.addClient i {
-    margin-right: 0.625em;
+.leftPart {
+    text-align: center;
 }
 
 /* Style barre de recherche et filtre  */
@@ -80,7 +74,6 @@
     display: inline-flex;
     align-items: center;
     padding: 0 1.25em;
-    margin-right: 0.625em;
 }
 
 /* style when you hover over the filter button */
