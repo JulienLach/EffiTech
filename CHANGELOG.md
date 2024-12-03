@@ -7,6 +7,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 -   Various CSS fixes
+-   Update report clients and report page on mobile
+-   Add links to mobile menu
 
 # [0.3.1] (2024-11-30)
 
