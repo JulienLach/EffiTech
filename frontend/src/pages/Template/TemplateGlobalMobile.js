@@ -75,7 +75,9 @@ class TemplateGlobalMobile extends Component {
                             className={`fas fa-calendar ${styles.navbarIcon}`}
                         ></i>
                     </a>
-                    <i className={`fas fa-wallet ${styles.navbarIcon}`}></i>
+                    <a href="/expense">
+                        <i className={`fas fa-wallet ${styles.navbarIcon}`}></i>
+                    </a>
                     <a href="/clients">
                         <i
                             className={`fas fa-user-group ${styles.navbarIcon}`}
