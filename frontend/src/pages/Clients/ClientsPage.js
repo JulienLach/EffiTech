@@ -661,80 +661,94 @@ class ClientsPage extends Component {
                                     Ajouter un client
                                 </button>
                             </div>
-                        </div>
-                        <div>
-                            <table>
-                                <thead className={styles.stickyThead}>
-                                    <tr>
-                                        <th>Référence</th>
-                                        <th>Type</th>
-                                        <th>Nom/Entreprise</th>
-                                        <th>Adresse</th>
-                                        <th>Email</th>
-                                        <th>Téléphone</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {currentFilteredClients.map((client) => (
-                                        <tr key={client.idClient}>
-                                            <td>C-{client.idClient}</td>
-                                            <td>
-                                                {this.getCategoryIndicator(
-                                                    client.category
-                                                )}
-                                            </td>
-                                            <td
-                                                onClick={() =>
-                                                    this.handleButtonClick(
-                                                        client
-                                                    )
-                                                }
-                                            >
-                                                {client.category ===
-                                                "Professionnel" ? (
-                                                    <span
-                                                        className={
-                                                            styles.professionnel
-                                                        }
-                                                    >
-                                                        {client.company}
-                                                    </span>
-                                                ) : (
-                                                    <span
-                                                        className={
-                                                            styles.particulier
-                                                        }
-                                                    >
-                                                        {client.lastname}{" "}
-                                                        {client.firstname}
-                                                    </span>
-                                                )}
-                                            </td>
-                                            <td>
-                                                {client.address.address}
-                                                , <br />
-                                                {client.address.zipcode}{" "}
-                                                {client.address.city}
-                                            </td>
-                                            <td>{client.email}</td>
-                                            <td>{client.phoneNumber}</td>
+
+                            <div>
+                                <table>
+                                    <thead className={styles.stickyThead}>
+                                        <tr>
+                                            <th>Référence</th>
+                                            <th>Type</th>
+                                            <th>Nom/Entreprise</th>
+                                            <th>Adresse</th>
+                                            <th>Email</th>
+                                            <th>Téléphone</th>
                                         </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                            <div className={styles.pagination}>
-                                <button
-                                    onClick={(e) => this.handlePreviousPage(e)}
-                                    disabled={currentPage === 1}
-                                >
-                                    <i className="fa fa-arrow-left"></i>
-                                </button>
-                                <button
-                                    onClick={(e) => this.handleNextPage(e)}
-                                    disabled={currentPage === totalPages}
-                                >
-                                    <i className="fa fa-arrow-right"></i>
-                                </button>
+                                    </thead>
+                                    <tbody>
+                                        {currentFilteredClients.map(
+                                            (client) => (
+                                                <tr key={client.idClient}>
+                                                    <td>C-{client.idClient}</td>
+                                                    <td>
+                                                        {this.getCategoryIndicator(
+                                                            client.category
+                                                        )}
+                                                    </td>
+                                                    <td
+                                                        onClick={() =>
+                                                            this.handleButtonClick(
+                                                                client
+                                                            )
+                                                        }
+                                                    >
+                                                        {client.category ===
+                                                        "Professionnel" ? (
+                                                            <span
+                                                                className={
+                                                                    styles.professionnel
+                                                                }
+                                                            >
+                                                                {client.company}
+                                                            </span>
+                                                        ) : (
+                                                            <span
+                                                                className={
+                                                                    styles.particulier
+                                                                }
+                                                            >
+                                                                {
+                                                                    client.lastname
+                                                                }{" "}
+                                                                {
+                                                                    client.firstname
+                                                                }
+                                                            </span>
+                                                        )}
+                                                    </td>
+                                                    <td>
+                                                        {client.address.address}
+                                                        , <br />
+                                                        {
+                                                            client.address
+                                                                .zipcode
+                                                        }{" "}
+                                                        {client.address.city}
+                                                    </td>
+                                                    <td>{client.email}</td>
+                                                    <td>
+                                                        {client.phoneNumber}
+                                                    </td>
+                                                </tr>
+                                            )
+                                        )}
+                                    </tbody>
+                                </table>
+                                <div className={styles.pagination}>
+                                    <button
+                                        onClick={(e) =>
+                                            this.handlePreviousPage(e)
+                                        }
+                                        disabled={currentPage === 1}
+                                    >
+                                        <i className="fa fa-arrow-left"></i>
+                                    </button>
+                                    <button
+                                        onClick={(e) => this.handleNextPage(e)}
+                                        disabled={currentPage === totalPages}
+                                    >
+                                        <i className="fa fa-arrow-right"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                         {isModalOpen && (
