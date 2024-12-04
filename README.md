@@ -8,6 +8,7 @@
 -   [Environment variables configuration](#environment-variables-configuration)
 -   [Testing](#testing)
 -   [CI/CD](#cicd)
+-   [Docker](#docker)
 -   [Documentation](#documentation)
 -   [End-to-End Functional Test](#end-to-end-functional-test)
 -   [Other Functionalities](#other-functionalities)
