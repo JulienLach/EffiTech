@@ -1,0 +1,50 @@
+version: "3.8"
+
+services:
+    backend:
+        build:
+            context: ./backend
+            dockerfile: Dockerfile.backend
+        working_dir: /app
+        ports:
+            - "3000:3000"
+        environment:
+            - NODE_ENV=development
+        depends_on:
+            - db
+        command: ["npm", "start"]
+        env_file:
+            - .env.development.local
+
+    frontend:
+        build:
+            context: ./frontend
+            dockerfile: Dockerfile.frontend
+        ports:
+            - "3001:3000"
+        environment:
+            - NODE_ENV=development
+        command: ["npm", "start"]
+        env_file:
+            - .env.development.local
+
+    db:
+        image: postgres:13
+        environment:
+            POSTGRES_USER: ${DB_USER}
+            POSTGRES_PASSWORD: ${DB_PASSWORD}
+            POSTGRES_DB: ${DB_NAME}
+        ports:
+            - "5432:5432"
+        volumes:
+            - pgdata:/var/lib/postgresql/data
+            - ./database_script.sql:/docker-entrypoint-initdb.d/init.sql
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -U ${DB_USER}"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+        command: ["postgres", "-c", "fsync=off"]
+
+volumes:
+    pgdata:
