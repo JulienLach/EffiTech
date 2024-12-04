@@ -4,7 +4,6 @@
     margin: 2em 1.25em 0 15.6em;
 }
 
-/* placement et style du titre de la pge  */
 .pageTitle {
     font-size: 1.9em;
     font-weight: 550;
@@ -70,12 +69,22 @@ a {
 
 .addCompany {
     background-color: #c93c2c;
-    padding: 0.625em 0.938em;
+    padding: 0.5em 0.9em;
     border: none;
-    border-radius: 0.625em;
+    border-radius: 0.4em;
     color: white;
     font-size: 1.125em;
     font-weight: 500;
     cursor: pointer;
-    margin: 0.625em 1.25em;
+    margin: 2em 0em;
+}
+
+.addCompany i {
+    margin-right: 0.5em;
+}
+
+.addCompanyText {
+    font-size: 1.1em;
+    /* font-weight: 500; */
+    margin-top: 1em;
 }

@@ -100,6 +100,7 @@ class CompanyFormPage extends Component {
                                     alt="Logo de la société"
                                 />
                             )}
+                            <label htmlFor="logo">Logo : </label>
                             <input
                                 type="file"
                                 accept="image/*"
