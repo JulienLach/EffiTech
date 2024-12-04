@@ -344,6 +344,9 @@ class ClientsPage extends Component {
                                                 ? "rgb(193, 240, 255)"
                                                 : "rgb(255, 228, 188)",
                                     }}
+                                    onClick={() =>
+                                        this.handleButtonClick(client)
+                                    }
                                 >
                                     <div className={stylesMobile.rightPart}>
                                         <p>{client.category}</p>
@@ -553,7 +556,18 @@ class ClientsPage extends Component {
                     <>
                         <TemplateGlobal />
                         <div className={styles.container}>
-                            <h1 className={styles.pageTitle}>Clients</h1>
+                            <div className={styles.alignItems}>
+                                <h1 className={styles.pageTitle}>Clients</h1>
+                                <div className={styles.rightPart}>
+                                    <button
+                                        className={styles.addClient}
+                                        onClick={this.openModal}
+                                    >
+                                        <i className="fa-solid fa-plus"></i>
+                                        Ajouter un client
+                                    </button>
+                                </div>
+                            </div>
                             <div className={styles.filterBar}>
                                 <div className={styles.searchInput}>
                                     <i className="fa-solid fa-magnifying-glass"></i>
@@ -566,100 +580,93 @@ class ClientsPage extends Component {
                                         onChange={this.handleSearchChange}
                                     />
                                 </div>
-                                <div
-                                    className={styles.typeFilter}
-                                    onClick={this.openCategoryModal}
-                                >
-                                    <i className="fa-solid fa-filter"></i>
-                                    <p>Type</p>
-                                </div>
-                                {isCategeoryModalOpen && (
-                                    <div className={styles.modalFilter}>
-                                        <div>
-                                            <div>
-                                                <input
-                                                    type="radio"
-                                                    id="all"
-                                                    name="clientType"
-                                                    value="All"
-                                                    checked={
-                                                        this.state
-                                                            .selectedCategory ===
-                                                        "All"
-                                                    }
-                                                    onChange={
-                                                        this
-                                                            .handleCategoryChange
-                                                    }
-                                                />
-                                                <label htmlFor="all">
-                                                    Tous
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <input
-                                                    type="radio"
-                                                    name="clientType"
-                                                    value="Particulier"
-                                                    checked={
-                                                        this.state
-                                                            .selectedCategory ===
-                                                        "Particulier"
-                                                    }
-                                                    onChange={
-                                                        this
-                                                            .handleCategoryChange
-                                                    }
-                                                />
-                                                <label htmlFor="particuliers">
-                                                    Particuliers
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <input
-                                                    type="radio"
-                                                    name="clientType"
-                                                    value="Professionnel"
-                                                    checked={
-                                                        this.state
-                                                            .selectedCategory ===
-                                                        "Professionnel"
-                                                    }
-                                                    onChange={
-                                                        this
-                                                            .handleCategoryChange
-                                                    }
-                                                />
-                                                <label htmlFor="professionnels">
-                                                    Professionnels
-                                                </label>
-                                            </div>
-                                            <button
-                                                onClick={
-                                                    this.closeCategoryModal
-                                                }
-                                            >
-                                                Annuler
-                                            </button>
-                                            <button
-                                                onClick={
-                                                    this.closeCategoryModal
-                                                }
-                                            >
-                                                Filter
-                                            </button>
-                                        </div>
+                                <div className={styles.columnModalFilter}>
+                                    <div
+                                        className={styles.typeFilter}
+                                        onClick={this.openCategoryModal}
+                                    >
+                                        <i className="fa-solid fa-filter"></i>
+                                        <p>Type</p>
                                     </div>
-                                )}
-                            </div>
-                            <div className={styles.rightPart}>
-                                <button
-                                    className={styles.addClient}
-                                    onClick={this.openModal}
-                                >
-                                    <i className="fa-solid fa-plus"></i>
-                                    Ajouter un client
-                                </button>
+                                    {isCategeoryModalOpen && (
+                                        <div className={styles.modalFilter}>
+                                            <div>
+                                                <div>
+                                                    <input
+                                                        type="radio"
+                                                        id="all"
+                                                        name="clientType"
+                                                        value="All"
+                                                        checked={
+                                                            this.state
+                                                                .selectedCategory ===
+                                                            "All"
+                                                        }
+                                                        onChange={
+                                                            this
+                                                                .handleCategoryChange
+                                                        }
+                                                    />
+                                                    <label htmlFor="all">
+                                                        Tous
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <input
+                                                        type="radio"
+                                                        name="clientType"
+                                                        value="Particulier"
+                                                        checked={
+                                                            this.state
+                                                                .selectedCategory ===
+                                                            "Particulier"
+                                                        }
+                                                        onChange={
+                                                            this
+                                                                .handleCategoryChange
+                                                        }
+                                                    />
+                                                    <label htmlFor="particuliers">
+                                                        Particuliers
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <input
+                                                        type="radio"
+                                                        name="clientType"
+                                                        value="Professionnel"
+                                                        checked={
+                                                            this.state
+                                                                .selectedCategory ===
+                                                            "Professionnel"
+                                                        }
+                                                        onChange={
+                                                            this
+                                                                .handleCategoryChange
+                                                        }
+                                                    />
+                                                    <label htmlFor="professionnels">
+                                                        Professionnels
+                                                    </label>
+                                                </div>
+                                                <button
+                                                    onClick={
+                                                        this.closeCategoryModal
+                                                    }
+                                                >
+                                                    Annuler
+                                                </button>
+                                                <button
+                                                    onClick={
+                                                        this.closeCategoryModal
+                                                    }
+                                                >
+                                                    Filter
+                                                </button>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
 
                             <div>
