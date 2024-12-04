@@ -26,6 +26,10 @@
     z-index: 1;
 }
 
+.eventTitle {
+    margin-top: 1.25em;
+}
+
 /* placement du titre 'evennement' */
 h3 {
     font-size: 1.25em;

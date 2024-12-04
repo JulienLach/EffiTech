@@ -421,7 +421,9 @@ class CalendarPage extends Component {
                                         }
                                     />
                                 </div>
-                                <h3>Événements</h3>
+                                <h3 className={styles.eventTitle}>
+                                    Événements
+                                </h3>
                             </div>
                             <div className={styles.listView}>
                                 <div className={styles.tabs}>
