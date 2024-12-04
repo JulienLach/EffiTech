@@ -75,6 +75,12 @@
     margin-right: 0.625em;
 }
 
+.alignItems {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 /* Style barre de recherche et filtre  */
 /* style for each filter button */
 .typeFilter {
@@ -233,6 +239,8 @@
 
 .modalFilter {
     padding: 1em;
+    position: absolute;
+    background-color: white;
 }
 
 .modalFilter input {
