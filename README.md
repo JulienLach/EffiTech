@@ -33,8 +33,9 @@
 
 ## <a name="environment-variables-configuration"></a> Environment variables configuration
 
-You need to create a `.env.development.local` file at the root of the project with the following :
+You need to create a `.env` file at the root of the project with the following :
 
+-   NODE_ENV=development
 -   DB_USER=
 -   DB_HOST=
 -   DB_NAME=
@@ -95,6 +96,14 @@ This project uses **GitHub Actions** to automate unit tests and create new relea
         ```sh
         git push origin :refs/tags/x.x.x
         ```
+
+## <a name="docker"></a> Docker
+
+The app is divided into three images: one for the backend, one for the frontend, and one for the database.
+
+You can run the app in Docker with `docker-compose up --build`.
+
+To stop run `docker-compose down`
 
 ## <a name="documentation"></a> Documentation
 
