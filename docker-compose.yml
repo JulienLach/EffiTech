@@ -7,40 +7,51 @@ services:
             dockerfile: Dockerfile.backend
         working_dir: /app
         ports:
-            - "3000:3000"
+            - "3001:3001"
         environment:
-            - NODE_ENV=development
+            - NODE_ENV=docker
+            - DB_USER=postgres
+            - DB_PASSWORD=mypassword
+            - DB_NAME=EffiTech
+            - DB_PORT=5432
+            - JWT_SECRET=fzfzefze5zg84848z4gezgzgz8eg4z8e4g8ze4gzeg84zeg
+            - PORT=3001
         depends_on:
             - db
         command: ["npm", "start"]
-        env_file:
-            - .env.development.local
 
     frontend:
         build:
             context: ./frontend
             dockerfile: Dockerfile.frontend
         ports:
-            - "3001:3000"
+            - "3000:3000"
         environment:
-            - NODE_ENV=development
+            - NODE_ENV=docker
+            - DB_USER=postgres
+            - DB_PASSWORD=mypassword
+            - DB_NAME=EffiTech
+            - DB_PORT=5432
+            - JWT_SECRET=fzfzefze5zg84848z4gezgzgz8eg4z8e4g8ze4gzeg84zeg
+            - PORT=3000
         command: ["npm", "start"]
-        env_file:
-            - .env.development.local
 
     db:
         image: postgres:13
         environment:
-            POSTGRES_USER: ${DB_USER}
-            POSTGRES_PASSWORD: ${DB_PASSWORD}
-            POSTGRES_DB: ${DB_NAME}
+            # mettre l'utilisateur de postgres par défaut sinon il ne peut pas créer la BDD
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: mypassword
+            POSTGRES_DB: EffiTech
         ports:
             - "5432:5432"
         volumes:
+            # stocker les données de la base de données dans un volume
             - pgdata:/var/lib/postgresql/data
             - ./database_script.sql:/docker-entrypoint-initdb.d/init.sql
         healthcheck:
-            test: ["CMD-SHELL", "pg_isready -U ${DB_USER}"]
+            # test pour vérifier si le container postgres est prêt
+            test: ["CMD-SHELL", "pg_isready -U postgres"]
             interval: 10s
             timeout: 5s
             retries: 5
