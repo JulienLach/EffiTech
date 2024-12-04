@@ -1,74 +1,69 @@
+-- Créer les tables
 CREATE TABLE employees(
-   id_employee INT,
+   id_employee SERIAL PRIMARY KEY,
    firstname VARCHAR(50) NOT NULL,
    lastname VARCHAR(50) NOT NULL,
-   job VARCHAR(50) NOT NULL,
+   job VARCHAR(50),
    speciality VARCHAR(50),
    phone_number VARCHAR(20) NOT NULL,
    email VARCHAR(50) NOT NULL,
-   is_admin LOGICAL NOT NULL,
-   password VARCHAR(128) NOT NULL,
-   PRIMARY KEY(id_employee)
+   is_admin BOOLEAN NOT NULL,
+   password VARCHAR(128) NOT NULL
 );
 
 CREATE TABLE clients(
-   id_client INT,
+   id_client SERIAL PRIMARY KEY,
    category VARCHAR(50) NOT NULL,
    company VARCHAR(100),
    firstname VARCHAR(50) NOT NULL,
    lastname VARCHAR(50) NOT NULL,
    email VARCHAR(50) NOT NULL,
-   phone_number VARCHAR(50) NOT NULL,
-   PRIMARY KEY(id_client)
+   phone_number VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE documents(
-   id_document INT,
+   id_document SERIAL PRIMARY KEY,
    title VARCHAR(100) NOT NULL,
    brand VARCHAR(50) NOT NULL,
    model VARCHAR(50) NOT NULL,
-   file BLOB,
-   PRIMARY KEY(id_document)
+   file BYTEA
 );
 
 CREATE TABLE invoices(
-   id_invoice INT,
+   id_invoice SERIAL PRIMARY KEY,
    amount_including_tax DECIMAL(7,2) NOT NULL,
    amount_without_tax DECIMAL(7,2) NOT NULL,
    invoice_date DATE NOT NULL,
-   file BLOB NOT NULL,
+   file BYTEA NOT NULL,
    id_client INT NOT NULL,
-   PRIMARY KEY(id_invoice),
    FOREIGN KEY(id_client) REFERENCES clients(id_client)
 );
 
 CREATE TABLE notifications(
-   id_notification INT,
+   id_notification SERIAL PRIMARY KEY,
    action VARCHAR(50) NOT NULL,
    type VARCHAR(50) NOT NULL,
    title VARCHAR(50) NOT NULL,
-   creation_date DATETIME NOT NULL,
+   creation_date TIMESTAMP NOT NULL,
    creation_hour TIME NOT NULL,
    id_employee INT NOT NULL,
-   PRIMARY KEY(id_notification),
    FOREIGN KEY(id_employee) REFERENCES employees(id_employee)
 );
 
 CREATE TABLE addresses(
-   id_address INT,
+   id_address SERIAL PRIMARY KEY,
    address_street VARCHAR(100) NOT NULL,
    zipcode VARCHAR(50) NOT NULL,
    city VARCHAR(50) NOT NULL,
    id_client INT,
-   PRIMARY KEY(id_address),
    FOREIGN KEY(id_client) REFERENCES clients(id_client)
 );
 
 CREATE TABLE events(
-   id_event INT,
+   id_event SERIAL PRIMARY KEY,
    title VARCHAR(50) NOT NULL,
    status INT NOT NULL,
-   is_planned LOGICAL,
+   is_planned BOOLEAN,
    type VARCHAR(50) NOT NULL,
    starting_date DATE NOT NULL,
    starting_hour TIME NOT NULL,
@@ -78,39 +73,36 @@ CREATE TABLE events(
    id_client INT NOT NULL,
    id_address INT NOT NULL,
    id_employee INT NOT NULL,
-   PRIMARY KEY(id_event),
    FOREIGN KEY(id_client) REFERENCES clients(id_client),
    FOREIGN KEY(id_address) REFERENCES addresses(id_address),
    FOREIGN KEY(id_employee) REFERENCES employees(id_employee)
 );
 
 CREATE TABLE reports(
-   id_report INT,
+   id_report SERIAL PRIMARY KEY,
    breakdown TEXT NOT NULL,
    work_done TEXT NOT NULL,
-   reschedule LOGICAL,
+   reschedule BOOLEAN,
    starting_date DATE NOT NULL,
    starting_hour TIME NOT NULL,
    ending_hour TIME NOT NULL,
    duration TIME NOT NULL,
-   client_signature BLOB NOT NULL,
-   employee_signature BLOB NOT NULL,
+   client_signature BYTEA NOT NULL,
+   employee_signature BYTEA NOT NULL,
    id_event INT NOT NULL,
-   PRIMARY KEY(id_report),
    UNIQUE(id_event),
    FOREIGN KEY(id_event) REFERENCES events(id_event)
 );
 
 CREATE TABLE companies(
-   id_company INT,
+   id_company SERIAL PRIMARY KEY,
    phone_number VARCHAR(50),
    siret VARCHAR(50),
    vat_number VARCHAR(50),
    capital VARCHAR(50),
-   logo LONGBINARY NOT NULL,
+   logo BYTEA NOT NULL,
    database_version VARCHAR(50),
    id_address INT NOT NULL,
-   PRIMARY KEY(id_company),
    UNIQUE(id_address),
    FOREIGN KEY(id_address) REFERENCES addresses(id_address)
 );
