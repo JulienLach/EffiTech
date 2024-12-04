@@ -1,21 +1,89 @@
 .container {
     display: flex;
     flex-direction: column;
-    margin: 0 1.25em 0 15.6em;
+    margin: 2em 1.25em 0 15.6em;
 }
 
-/* placement et style du titre de la pge  */
 .pageTitle {
     font-size: 1.9em;
     font-weight: 550;
 }
 
-.separator {
+.separation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin: 1em 0;
-    border-bottom: 0.063em solid #ccc;
+    height: 0.06em;
+    background-color: #ccc;
 }
 
-.companyData {
+.labelInput {
+    font-size: 1em;
+    font-weight: 500;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.3em;
+    margin-bottom: 0.625em;
+    width: fit-content;
+}
+
+.labelInput input {
+    padding: 0.6em;
+    border: 0.06em solid #cccccc;
+    border-radius: 0.5em;
+}
+
+.labelInput label {
+    padding: 0.15em;
+}
+
+.buttonPosition {
+    display: flex;
+    justify-content: start;
+    gap: 1em;
+    margin-top: 1.5em;
+}
+
+.buttonPosition button {
+    padding: 0.625em;
+    border: none;
+    border-radius: 0.4em;
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 0.5em 0.9em;
+}
+
+.cancelButton {
+    background-color: #cfcfcf;
+    color: black;
+}
+
+.cancelButton:hover {
+    background-color: #a9a9a9;
+}
+
+.submitButton {
+    background-color: #c93c2c;
+    color: white;
+}
+
+.submitButton:hover {
+    background-color: #a93626;
+}
+
+.header {
+    margin-bottom: 1em;
+}
+
+.profilPic {
+    margin-top: 1em;
+    height: 7em;
+}
+
+.error {
+    color: red;
+    margin-top: 1em;
 }

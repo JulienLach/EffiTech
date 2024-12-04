@@ -93,7 +93,7 @@ class CompanyFormPage extends Component {
                     <h1 className={styles.pageTitle}>Créer Société</h1>
                     {error && <p className={styles.error}>{error}</p>}
                     <form onSubmit={this.handleSubmit}>
-                        <div className={styles.logoCompany}>
+                        <div className={styles.profilPic}>
                             {company.logo && (
                                 <img
                                     src={`data:image/jpeg;base64,${company.logo}`}
@@ -106,80 +106,93 @@ class CompanyFormPage extends Component {
                                 onChange={this.handleFileChange}
                             />
                         </div>
-                        <div className={styles.separator}></div>
-                        <div className={styles.companyData}>
-                            <h3>Coordonnées</h3>
-                            <label>
-                                Téléphone :
-                                <input
-                                    type="text"
-                                    name="phoneNumber"
-                                    value={company.phoneNumber}
-                                    onChange={this.handleChange}
-                                />
-                            </label>
-                            <label>
-                                Adresse :
-                                <input
-                                    type="text"
-                                    name="idAddress.address"
-                                    value={company.idAddress.address}
-                                    onChange={this.handleChange}
-                                />
-                            </label>
-                            <label>
+                        <div className={styles.separation}></div>
+                        <h2 className={styles.header}>Coordonnées</h2>
+                        <div className={styles.labelInput}>
+                            <label htmlFor="phoneNumber">Téléphone :</label>
+                            <input
+                                type="text"
+                                name="phoneNumber"
+                                value={company.phoneNumber}
+                                onChange={this.handleChange}
+                            />
+                        </div>
+                        <div className={styles.labelInput}>
+                            <label htmlFor="idAddress.address">Adresse :</label>
+                            <input
+                                type="text"
+                                name="idAddress.address"
+                                value={company.idAddress.address}
+                                onChange={this.handleChange}
+                            />
+                        </div>
+                        <div className={styles.labelInput}>
+                            <label htmlFor="idAddress.zipcode">
                                 Code Postal :
-                                <input
-                                    type="text"
-                                    name="idAddress.zipcode"
-                                    value={company.idAddress.zipcode}
-                                    onChange={this.handleChange}
-                                />
                             </label>
-                            <label>
-                                Ville :
-                                <input
-                                    type="text"
-                                    name="idAddress.city"
-                                    value={company.idAddress.city}
-                                    onChange={this.handleChange}
-                                />
-                            </label>
+                            <input
+                                type="text"
+                                name="idAddress.zipcode"
+                                value={company.idAddress.zipcode}
+                                onChange={this.handleChange}
+                            />
                         </div>
-                        <div className={styles.separator}></div>
-                        <div className={styles.companyData}>
-                            <h3>Informations</h3>
-                            <label>
-                                SIRET :
-                                <input
-                                    type="text"
-                                    name="siret"
-                                    value={company.siret}
-                                    onChange={this.handleChange}
-                                />
-                            </label>
-                            <label>
+                        <div className={styles.labelInput}>
+                            <label htmlFor="idAddress.city">Ville :</label>
+                            <input
+                                type="text"
+                                name="idAddress.city"
+                                value={company.idAddress.city}
+                                onChange={this.handleChange}
+                            />
+                        </div>
+                        <div className={styles.separation}></div>
+                        <h2 className={styles.header}>Informations</h2>
+                        <div className={styles.labelInput}>
+                            <label htmlFor="siret">SIRET :</label>
+                            <input
+                                type="text"
+                                name="siret"
+                                value={company.siret}
+                                onChange={this.handleChange}
+                            />
+                        </div>
+                        <div className={styles.labelInput}>
+                            <label htmlFor="vatNumber">
                                 N°TVA Intracommunautaire :
-                                <input
-                                    type="text"
-                                    name="vatNumber"
-                                    value={company.vatNumber}
-                                    onChange={this.handleChange}
-                                />
                             </label>
-                            <label>
-                                Capital :
-                                <input
-                                    type="text"
-                                    name="capital"
-                                    value={company.capital}
-                                    onChange={this.handleChange}
-                                />
-                            </label>
+                            <input
+                                type="text"
+                                name="vatNumber"
+                                value={company.vatNumber}
+                                onChange={this.handleChange}
+                            />
                         </div>
-                        <button type="submit" className={styles.saveButton}>
-                            <i className="fa-solid fa-save"></i> Enregistrer
-                        </button>
+                        <div className={styles.labelInput}>
+                            <label htmlFor="capital">Capital :</label>
+                            <input
+                                type="text"
+                                name="capital"
+                                value={company.capital}
+                                onChange={this.handleChange}
+                            />
+                        </div>
+                        <div className={styles.buttonPosition}>
+                            <button
+                                type="button"
+                                onClick={() => window.history.back()}
+                                className={styles.cancelButton}
+                            >
+                                Annuler
+                            </button>
+                            <button
+                                type="submit"
+                                className={styles.submitButton}
+                            >
+                                <i className="fa-solid fa-floppy-disk"></i>{" "}
+                                Enregistrer
+                            </button>
+                        </div>
                     </form>
                 </div>
             </>
