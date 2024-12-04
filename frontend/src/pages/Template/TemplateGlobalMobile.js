@@ -41,6 +41,9 @@ class TemplateGlobalMobile extends Component {
             case "/clients":
                 pageTitle = "Clients";
                 break;
+            case "/client-details/":
+                pageTitle = "Détails clients";
+                break;
             case "/expense":
                 pageTitle = "Dépenses";
                 break;
