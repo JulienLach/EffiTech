@@ -245,9 +245,12 @@
 }
 
 .modalFilter {
+    margin-top: 0.2em;
     padding: 1em;
     position: absolute;
     background-color: white;
+    border: 0.06em solid #c0c0c0;
+    border-radius: 0.4em;
 }
 
 .modalFilter input {
