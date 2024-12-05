@@ -1,0 +1,61 @@
+version: "3.8"
+
+services:
+    backend:
+        build:
+            context: ./backend
+            dockerfile: Dockerfile.backend
+        working_dir: /app
+        ports:
+            - "3001:3001"
+        environment:
+            - NODE_ENV=docker
+            - DB_USER=postgres
+            - DB_PASSWORD=mypassword
+            - DB_NAME=EffiTech
+            - DB_PORT=5432
+            - JWT_SECRET=fzfzefze5zg84848z4gezgzgz8eg4z8e4g8ze4gzeg84zeg
+            - PORT=3001
+        depends_on:
+            - db
+        command: ["npm", "start"]
+
+    frontend:
+        build:
+            context: ./frontend
+            dockerfile: Dockerfile.frontend
+        ports:
+            - "3000:3000"
+        environment:
+            - NODE_ENV=docker
+            - DB_USER=postgres
+            - DB_PASSWORD=mypassword
+            - DB_NAME=EffiTech
+            - DB_PORT=5432
+            - JWT_SECRET=fzfzefze5zg84848z4gezgzgz8eg4z8e4g8ze4gzeg84zeg
+            - PORT=3000
+        command: ["npm", "start"]
+
+    db:
+        image: postgres:13
+        environment:
+            # mettre l'utilisateur de postgres par défaut sinon il ne peut pas créer la BDD
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: mypassword
+            POSTGRES_DB: EffiTech
+        ports:
+            - "5432:5432"
+        volumes:
+            # stocker les données de la base de données dans un volume
+            - pgdata:/var/lib/postgresql/data
+            - ./database_script.sql:/docker-entrypoint-initdb.d/init.sql
+        healthcheck:
+            # test pour vérifier si le container postgres est prêt
+            test: ["CMD-SHELL", "pg_isready -U postgres"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+        command: ["postgres", "-c", "fsync=off"]
+
+volumes:
+    pgdata:

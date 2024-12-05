@@ -336,104 +336,42 @@ class ClientsPage extends Component {
                                 </div>
                             </div>
                             {currentFilteredClients.map((client) => (
-                                <div className={stylesMobile.clientCard}>
+                                <div
+                                    className={stylesMobile.clientCard}
+                                    style={{
+                                        backgroundColor:
+                                            client.category === "Professionnel"
+                                                ? "rgb(193, 240, 255)"
+                                                : "rgb(255, 228, 188)",
+                                    }}
+                                    onClick={() =>
+                                        this.handleButtonClick(client)
+                                    }
+                                >
                                     <div className={stylesMobile.rightPart}>
                                         <p>{client.category}</p>
-                                        <p>
-                                            <b>{client.lastname}</b>{" "}
-                                            {client.firstname}
+                                        {client.category === "Professionnel" ? (
+                                            <p className={stylesMobile.name}>
+                                                {client.company}
+                                            </p>
+                                        ) : (
+                                            <p className={stylesMobile.name}>
+                                                {client.lastname}{" "}
+                                                {client.firstname}
+                                            </p>
+                                        )}
+                                        <p className={stylesMobile.address}>
+                                            {client.address.city},{" "}
+                                            {client.address.zipcode}
                                         </p>
                                     </div>
+                                    {client.category === "Professionnel" ? (
+                                        <i class="fa-solid fa-landmark"></i>
+                                    ) : (
+                                        <i class="fa-solid fa-user"></i>
+                                    )}
                                 </div>
                             ))}
-                            <div>
-                                <table>
-                                    <thead className={stylesMobile.stickyThead}>
-                                        <tr>
-                                            <th>Référence</th>
-                                            <th>Type</th>
-                                            <th>Nom/Entreprise</th>
-                                            <th>Adresse</th>
-                                            <th>Email</th>
-                                            <th>Téléphone</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {currentFilteredClients.map(
-                                            (client) => (
-                                                <tr key={client.idClient}>
-                                                    <td>C-{client.idClient}</td>
-                                                    <td>
-                                                        {this.getCategoryIndicator(
-                                                            client.category
-                                                        )}
-                                                    </td>
-                                                    <td
-                                                        onClick={() =>
-                                                            this.handleButtonClick(
-                                                                client
-                                                            )
-                                                        }
-                                                    >
-                                                        {client.category ===
-                                                        "Professionnel" ? (
-                                                            <span
-                                                                className={
-                                                                    stylesMobile.professionnel
-                                                                }
-                                                            >
-                                                                {client.company}
-                                                            </span>
-                                                        ) : (
-                                                            <span
-                                                                className={
-                                                                    stylesMobile.particulier
-                                                                }
-                                                            >
-                                                                {
-                                                                    client.lastname
-                                                                }{" "}
-                                                                {
-                                                                    client.firstname
-                                                                }
-                                                            </span>
-                                                        )}
-                                                    </td>
-                                                    <td>
-                                                        {client.address.address}
-                                                        , <br />
-                                                        {
-                                                            client.address
-                                                                .zipcode
-                                                        }{" "}
-                                                        {client.address.city}
-                                                    </td>
-                                                    <td>{client.email}</td>
-                                                    <td>
-                                                        {client.phoneNumber}
-                                                    </td>
-                                                </tr>
-                                            )
-                                        )}
-                                    </tbody>
-                                </table>
-                                <div className={stylesMobile.pagination}>
-                                    <button
-                                        onClick={(e) =>
-                                            this.handlePreviousPage(e)
-                                        }
-                                        disabled={currentPage === 1}
-                                    >
-                                        <i className="fa fa-arrow-left"></i>
-                                    </button>
-                                    <button
-                                        onClick={(e) => this.handleNextPage(e)}
-                                        disabled={currentPage === totalPages}
-                                    >
-                                        <i className="fa fa-arrow-right"></i>
-                                    </button>
-                                </div>
-                            </div>
                         </div>
                         {isModalOpen && (
                             <Modal onClose={this.closeModal}>
@@ -618,20 +556,31 @@ class ClientsPage extends Component {
                     <>
                         <TemplateGlobal />
                         <div className={styles.container}>
-                            <h1 className={styles.pageTitle}>Clients</h1>
+                            <div className={styles.alignItems}>
+                                <h1 className={styles.pageTitle}>Clients</h1>
+                                <div className={styles.rightPart}>
+                                    <button
+                                        className={styles.addClient}
+                                        onClick={this.openModal}
+                                    >
+                                        <i className="fa-solid fa-plus"></i>
+                                        Ajouter un client
+                                    </button>
+                                </div>
+                            </div>
                             <div className={styles.filterBar}>
-                                <div className={styles.leftPart}>
-                                    <div className={styles.searchInput}>
-                                        <i className="fa-solid fa-magnifying-glass"></i>
-                                        <input
-                                            type="text"
-                                            id="search"
-                                            name="search"
-                                            placeholder="Recherche"
-                                            value={searchItem}
-                                            onChange={this.handleSearchChange}
-                                        />
-                                    </div>
+                                <div className={styles.searchInput}>
+                                    <i className="fa-solid fa-magnifying-glass"></i>
+                                    <input
+                                        type="text"
+                                        id="search"
+                                        name="search"
+                                        placeholder="Recherche"
+                                        value={searchItem}
+                                        onChange={this.handleSearchChange}
+                                    />
+                                </div>
+                                <div className={styles.columnModalFilter}>
                                     <div
                                         className={styles.typeFilter}
                                         onClick={this.openCategoryModal}
@@ -718,16 +667,8 @@ class ClientsPage extends Component {
                                         </div>
                                     )}
                                 </div>
-                                <div className={styles.rightPart}>
-                                    <button
-                                        className={styles.addClient}
-                                        onClick={this.openModal}
-                                    >
-                                        <i className="fa-solid fa-plus"></i>
-                                        Ajouter un client
-                                    </button>
-                                </div>
                             </div>
+
                             <div>
                                 <table>
                                     <thead className={styles.stickyThead}>

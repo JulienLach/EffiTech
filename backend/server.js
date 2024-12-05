@@ -10,7 +10,7 @@ const reportRoutes = require("./routes/report.routes.js");
 const authRoutes = require("./routes/auth.routes");
 const authenticateToken = require("./middlewares/auth.middleware");
 
-dotenv.config({ path: ".env.development.local" });
+dotenv.config({ path: ".env" });
 
 const PORT = process.env.PORT;
 const app = express();

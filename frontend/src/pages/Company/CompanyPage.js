@@ -88,14 +88,15 @@ class CompanyPage extends Component {
                         </div>
                     ) : (
                         <div>
-                            <p>
-                                Aucune société trouvée. Veuillez en créer une.
+                            <p className={styles.addCompanyText}>
+                                Aucune société trouvée. Veuillez ajouter votre
+                                société.
                             </p>
                             <button
                                 className={styles.addCompany}
                                 onClick={this.handleButtonClick}
                             >
-                                <i className="fa-solid fa-plus"></i>Créer une
+                                <i className="fa-solid fa-plus"></i>Ajouter la
                                 société
                             </button>
                         </div>
