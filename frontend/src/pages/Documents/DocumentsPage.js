@@ -137,7 +137,7 @@ class DocumentsPage extends Component {
                                 id="search"
                                 name="search"
                                 placeholder="Recherche"
-                                value="test"
+                                // value="test"
                                 onChange={this.handleSearchChange}
                             />
                         </div>
