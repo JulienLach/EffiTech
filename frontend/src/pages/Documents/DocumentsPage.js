@@ -137,7 +137,6 @@ class DocumentsPage extends Component {
                                 id="search"
                                 name="search"
                                 placeholder="Recherche"
-                                // value="test"
                                 onChange={this.handleSearchChange}
                             />
                         </div>
@@ -146,8 +145,8 @@ class DocumentsPage extends Component {
                                 className={styles.typeFilter}
                                 onClick={this.openCategoryModal}
                             >
-                                <i className="fa-solid fa-filter"></i>
-                                <p>Type</p>
+                                <i className="fa-solid fa-tag"></i>
+                                <p>Marque</p>
                             </div>
                             {/* {isCategeoryModalOpen && (
                                 <div className={styles.modalFilter}>
@@ -282,9 +281,7 @@ class DocumentsPage extends Component {
                                 <input type="text" id="model" name="model" />
                             </div>
                             <div className={styles.labelInput}>
-                                <label htmlFor="model">
-                                    Modèle de l'équipement :
-                                </label>
+                                <label htmlFor="model">Document PDF :</label>
                                 <input
                                     type="file"
                                     accept="image/*"
