@@ -15,9 +15,9 @@
     align-items: center;
     justify-content: space-between;
     padding: 1em;
-    width: 90%;
+    width: 100%;
     border-radius: 0.4em;
-    margin: 1em auto;
+    margin: 1em 0 0.5em 0;
     color: rgb(49, 49, 49);
     box-shadow: 0 0.2em 0.2em rgba(0, 0, 0, 0.1);
 }
@@ -28,17 +28,17 @@
 }
 
 .name {
-    font-size: 1.5em;
+    font-size: 1.3em;
     font-weight: 500;
 }
 
 .address {
-    font-size: 1.2em;
+    font-size: 1.1em;
     font-weight: 400;
 }
 
 .clientCard i {
-    font-size: 2.2em;
+    font-size: 2em;
     margin-left: 0.8em;
 }
 
@@ -83,10 +83,13 @@
     background-color: #c93c2c;
 }
 
-/* icon position */
 .typeFilter i {
     margin-right: 0.625em;
-    color: #424242;
+    color: #000;
+}
+
+.typeFilter i:hover {
+    color: white;
 }
 
 /* Search input container style */
@@ -219,7 +222,12 @@
 }
 
 .modalFilter {
-    padding: 1em;
+    padding: 1em 2em;
+    text-align: start;
+    border: 0.06em solid #c0c0c0;
+    width: 92%;
+    margin: 0.3em auto;
+    border-radius: 0.4em;
 }
 
 .modalFilter input {
@@ -234,11 +242,10 @@
 
 .modalFilter button {
     margin: 0.3em;
-    padding: 0.2em 0.5em;
+    padding: 0.4em 0.6em;
     border: none;
-    border-radius: 0.3em;
+    border-radius: 0.4em;
     font-size: 1em;
-    font-weight: 400;
     cursor: pointer;
 }
 
