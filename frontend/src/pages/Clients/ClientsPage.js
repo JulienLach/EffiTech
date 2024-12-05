@@ -780,6 +780,7 @@ class ClientsPage extends Component {
                                                 }
                                             >
                                                 <input
+                                                    className={styles.radioForm}
                                                     type="radio"
                                                     name="category"
                                                     value="Particulier"
@@ -801,6 +802,7 @@ class ClientsPage extends Component {
                                                 }
                                             >
                                                 <input
+                                                    className={styles.radioForm}
                                                     type="radio"
                                                     name="category"
                                                     value="Professionnel"

@@ -96,7 +96,7 @@ class CompanyPage extends Component {
                                 className={styles.addCompany}
                                 onClick={this.handleButtonClick}
                             >
-                                <i className="fa-solid fa-plus"></i>Ajouter la
+                                <i className="fa-solid fa-plus"></i>Ajouter une
                                 société
                             </button>
                         </div>
