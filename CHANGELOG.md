@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+# [0.4.0] (2024-12-05)
+
+## Changes
+
 -   Add employee name to report PDF
 -   Add company data and logo to report PDF
 -   Add dynamic title page on mobile
@@ -15,6 +19,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -   Update CD pipeline to upload a updated images for each release
 
 # [0.3.4] (2024-12-03)
+
+## Changes
 
 -   Update report clients and report page on mobile
 -   Add links to mobile menu
