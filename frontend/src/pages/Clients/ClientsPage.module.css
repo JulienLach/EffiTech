@@ -49,7 +49,12 @@
     text-decoration: underline;
 }
 .radioParticulier {
+    margin-left: 0.5em;
     color: #c35e00;
+}
+
+.radioForm {
+    margin-right: 0.6em;
 }
 
 .radioProfessionnel {

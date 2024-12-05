@@ -54,7 +54,7 @@
 }
 
 .createEventbutton {
-    background-color: #e0e0e0;
+    background-color: #c93c2c;
     border: none;
     border-radius: 0.4em;
     padding: 0.5em 0.5em;
@@ -62,9 +62,10 @@
     font-weight: 500;
     cursor: pointer;
     transition: 0.05s;
+    color: white;
 }
 
 .createEventbutton:hover {
-    background-color: #c93c2c;
+    background-color: #7e241a;
     color: white;
 }
