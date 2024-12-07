@@ -69,3 +69,38 @@
     background-color: #7e241a;
     color: white;
 }
+
+.statutModalOverlay {
+    position: absolute;
+    margin-top: 0.2em;
+    padding: 1em;
+    background-color: white;
+    border: 0.06em solid #c0c0c0;
+    border-radius: 0.4em;
+    width: 100%;
+}
+
+.statutModalOverlay input {
+    margin: 0.325em;
+    padding: 0.325em;
+    border: none;
+    border-radius: 0.4em;
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.statutModalOverlay button {
+    margin: 0.3em;
+    padding: 0.2em 0.5em;
+    border: none;
+    border-radius: 0.3em;
+    font-size: 1em;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.statutModalOverlay button:hover {
+    background-color: #c93c2c;
+    color: white;
+}

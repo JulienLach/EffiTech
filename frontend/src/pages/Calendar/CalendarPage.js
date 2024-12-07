@@ -33,6 +33,8 @@ class CalendarPage extends Component {
             currentPage: 1,
             eventsPerPage: 20,
             searchItem: "",
+            isStatusModalOpen: false,
+            selectedStatus: "",
         };
 
         this.toggleEventModal = this.toggleEventModal.bind(this);
@@ -44,6 +46,7 @@ class CalendarPage extends Component {
         this.handleNextPage = this.handleNextPage.bind(this);
         this.handlePreviousPage = this.handlePreviousPage.bind(this);
         this.handleSearchChange = this.handleSearchChange.bind(this);
+        this.toggleStatusModal = this.toggleStatusModal.bind(this);
     }
 
     componentDidMount() {
@@ -216,6 +219,12 @@ class CalendarPage extends Component {
         this.setState({ searchItem: event.target.value });
     }
 
+    toggleStatusModal() {
+        this.setState((prevState) => ({
+            isStatusModalOpen: !prevState.isStatusModalOpen,
+        }));
+    }
+
     render() {
         const {
             events,
@@ -228,6 +237,7 @@ class CalendarPage extends Component {
             currentPage,
             eventsPerPage,
             searchItem,
+            isStatusModalOpen,
         } = this.state;
 
         // Filtrer les événements en fonction de la recherche
@@ -419,6 +429,10 @@ class CalendarPage extends Component {
                                         toggleCreateEventModal={
                                             this.toggleCreateEventModal
                                         }
+                                        toggleStatusModal={
+                                            this.toggleStatusModal
+                                        }
+                                        isStatusModalOpen={isStatusModalOpen}
                                     />
                                 </div>
                                 <h3 className={styles.eventTitle}>

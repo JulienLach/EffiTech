@@ -771,7 +771,7 @@ class ClientsPage extends Component {
                                 >
                                     <div className={styles.selectedCategory}>
                                         <label className={styles.labelRadio}>
-                                            Type de client:
+                                            Type de client :
                                         </label>
                                         <div>
                                             <label
