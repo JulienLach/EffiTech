@@ -47,6 +47,7 @@ class CalendarPage extends Component {
         this.handlePreviousPage = this.handlePreviousPage.bind(this);
         this.handleSearchChange = this.handleSearchChange.bind(this);
         this.toggleStatusModal = this.toggleStatusModal.bind(this);
+        this.handleStatusChange = this.handleStatusChange.bind(this);
     }
 
     componentDidMount() {
@@ -225,6 +226,11 @@ class CalendarPage extends Component {
         }));
     }
 
+    handleStatusChange(event) {
+        const selectedStatus = event.target.value;
+        this.setState({ searchItem: selectedStatus });
+    }
+
     render() {
         const {
             events,
@@ -255,7 +261,9 @@ class CalendarPage extends Component {
                     .includes(searchItem.toLowerCase()) ||
                 event.employee.lastname
                     .toLowerCase()
-                    .includes(searchItem.toLowerCase())
+                    .includes(searchItem.toLowerCase()) ||
+                // ajout du filtre du statut
+                event.status.toString().includes(searchItem)
             );
         });
 
@@ -425,7 +433,7 @@ class CalendarPage extends Component {
                                     <FilterBar
                                         handleSearchChange={
                                             this.handleSearchChange
-                                        } // Ajout de handleSearchChange ici
+                                        }
                                         toggleCreateEventModal={
                                             this.toggleCreateEventModal
                                         }
@@ -433,6 +441,9 @@ class CalendarPage extends Component {
                                             this.toggleStatusModal
                                         }
                                         isStatusModalOpen={isStatusModalOpen}
+                                        handleStatusChange={
+                                            this.handleStatusChange
+                                        }
                                     />
                                 </div>
                                 <h3 className={styles.eventTitle}>

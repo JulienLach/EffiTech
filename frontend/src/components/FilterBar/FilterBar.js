@@ -55,6 +55,10 @@ class FilterBar extends Component {
                                                 type="radio"
                                                 name="status"
                                                 value="1"
+                                                onChange={
+                                                    this.props
+                                                        .handleStatusChange
+                                                }
                                             />
                                             À planifier
                                         </label>
@@ -63,6 +67,10 @@ class FilterBar extends Component {
                                                 type="radio"
                                                 name="status"
                                                 value="2"
+                                                onChange={
+                                                    this.props
+                                                        .handleStatusChange
+                                                }
                                             />
                                             En retard
                                         </label>
