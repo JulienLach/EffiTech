@@ -49,19 +49,54 @@ class FilterBar extends Component {
                         {this.props.isStatusModalOpen && (
                             <div className={styles.statutModalOverlay}>
                                 <div className={styles.modalContent}>
-                                    <div className={styles.modalHeader}>
-                                        <h2>Filtrer par statut</h2>
-                                        <button
-                                            onClick={
-                                                this.props.toggleStatusModal
-                                            }
-                                        >
-                                            Fermer
-                                        </button>
-                                    </div>
                                     <div className={styles.modalBody}>
-                                        {/* Ajoutez ici les options de filtrage de statut */}
+                                        <label>
+                                            <input
+                                                type="radio"
+                                                name="status"
+                                                value="1"
+                                            />
+                                            À planifier
+                                        </label>
+                                        <label>
+                                            <input
+                                                type="radio"
+                                                name="status"
+                                                value="2"
+                                            />
+                                            En retard
+                                        </label>
+                                        <label>
+                                            <input
+                                                type="radio"
+                                                name="status"
+                                                value="3"
+                                            />
+                                            À venir
+                                        </label>
+                                        <label>
+                                            <input
+                                                type="radio"
+                                                name="status"
+                                                value="4"
+                                            />
+                                            Aujourdh'ui
+                                        </label>
+                                        <label>
+                                            <input
+                                                type="radio"
+                                                name="status"
+                                                value="5"
+                                            />
+                                            Terminé
+                                        </label>
                                     </div>
+                                    <button
+                                        onClick={this.props.toggleStatusModal}
+                                    >
+                                        Fermer
+                                    </button>
+                                    <button>Filtrer</button>
                                 </div>
                             </div>
                         )}
