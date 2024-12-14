@@ -79,6 +79,22 @@ class FilterBar extends Component {
                                                 type="radio"
                                                 name="status"
                                                 value="3"
+                                                onChange={
+                                                    this.props
+                                                        .handleStatusChange
+                                                }
+                                            />
+                                            Aujourd'hui
+                                        </label>
+                                        <label>
+                                            <input
+                                                type="radio"
+                                                name="status"
+                                                value="4"
+                                                onChange={
+                                                    this.props
+                                                        .handleStatusChange
+                                                }
                                             />
                                             À venir
                                         </label>
@@ -86,15 +102,11 @@ class FilterBar extends Component {
                                             <input
                                                 type="radio"
                                                 name="status"
-                                                value="4"
-                                            />
-                                            Aujourdh'ui
-                                        </label>
-                                        <label>
-                                            <input
-                                                type="radio"
-                                                name="status"
                                                 value="5"
+                                                onChange={
+                                                    this.props
+                                                        .handleStatusChange
+                                                }
                                             />
                                             Terminé
                                         </label>
