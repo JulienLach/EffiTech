@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import TemplateGlobal from "../Template/TemplateGlobal";
 import styles from "./DocumentsPage.module.css";
 import { getAllDocuments } from "../../services/api";
+import DocumentForm from "../DocumentForm/DocumentForm";
 
 // Composant wrapper pour utiliser les hooks
 const DocumentsPageWrapper = () => {
@@ -47,14 +48,6 @@ class DocumentsPage extends Component {
 
     handleButtonClick() {}
 
-    openCategoryModal = () => {
-        this.setState({ isCategeoryModalOpen: true });
-    };
-
-    closeCategoryModal = () => {
-        this.setState({ isCategeoryModalOpen: false });
-    };
-
     openModal() {
         this.setState({ isModalOpen: true });
     }
@@ -76,48 +69,7 @@ class DocumentsPage extends Component {
     handleSearchChange() {}
 
     render() {
-        const {
-            //     clients,
-            isModalOpen,
-            documents,
-            //     isCategeoryModalOpen,
-            //     selectedCategory,
-            //     currentPage,
-            //     clientsPerPage,
-            //     searchItem,
-        } = this.state;
-
-        // Filtrer les clients en fonction de la catégorie sélectionnée et de la recherche
-        // const filteredClients = clients.filter((client) => {
-        //     const matchesCategory =
-        //         selectedCategory === "All" ||
-        //         client.category === selectedCategory;
-        //     const matchesSearchItem =
-        //         (client.lastname &&
-        //             client.lastname
-        //                 .toLowerCase()
-        //                 .includes(searchItem.toLowerCase())) ||
-        //         (client.firstname &&
-        //             client.firstname
-        //                 .toLowerCase()
-        //                 .includes(searchItem.toLowerCase())) ||
-        //         (client.company &&
-        //             client.company
-        //                 .toLowerCase()
-        //                 .includes(searchItem.toLowerCase()));
-        //     return matchesCategory && matchesSearchItem;
-        // });
-
-        // Calculer les clients à afficher pour la page actuelle
-        // const indexOfLastClient = currentPage * clientsPerPage;
-        // const indexOfFirstClient = indexOfLastClient - clientsPerPage;
-        // const currentFilteredClients = filteredClients.slice(
-        //     indexOfFirstClient,
-        //     indexOfLastClient
-        // );
-
-        // Calculer le nombre total de pages
-        // const totalPages = Math.ceil(filteredClients.length / clientsPerPage);
+        const { isModalOpen, documents } = this.state;
 
         return (
             <>
@@ -154,75 +106,6 @@ class DocumentsPage extends Component {
                                 <i className="fa-solid fa-tag"></i>
                                 <p>Marque</p>
                             </div>
-                            {/* {isCategeoryModalOpen && (
-                                <div className={styles.modalFilter}>
-                                    <div>
-                                        <div>
-                                            <input
-                                                type="radio"
-                                                id="all"
-                                                name="clientType"
-                                                value="All"
-                                                checked={
-                                                    this.state
-                                                        .selectedCategory ===
-                                                    "All"
-                                                }
-                                                onChange={
-                                                    this.handleCategoryChange
-                                                }
-                                            />
-                                            <label htmlFor="all">Tous</label>
-                                        </div>
-                                        <div>
-                                            <input
-                                                type="radio"
-                                                name="clientType"
-                                                value="Particulier"
-                                                checked={
-                                                    this.state
-                                                        .selectedCategory ===
-                                                    "Particulier"
-                                                }
-                                                onChange={
-                                                    this.handleCategoryChange
-                                                }
-                                            />
-                                            <label htmlFor="particuliers">
-                                                Particuliers
-                                            </label>
-                                        </div>
-                                        <div>
-                                            <input
-                                                type="radio"
-                                                name="clientType"
-                                                value="Professionnel"
-                                                checked={
-                                                    this.state
-                                                        .selectedCategory ===
-                                                    "Professionnel"
-                                                }
-                                                onChange={
-                                                    this.handleCategoryChange
-                                                }
-                                            />
-                                            <label htmlFor="professionnels">
-                                                Professionnels
-                                            </label>
-                                        </div>
-                                        <button
-                                            onClick={this.closeCategoryModal}
-                                        >
-                                            Annuler
-                                        </button>
-                                        <button
-                                            onClick={this.closeCategoryModal}
-                                        >
-                                            Filter
-                                        </button>
-                                    </div>
-                                </div>
-                            )} */}
                         </div>
                     </div>
 
@@ -258,86 +141,25 @@ class DocumentsPage extends Component {
                             </tbody>
                         </table>
                         <div className={styles.pagination}>
-                            <button
-                            // onClick={(e) => this.handlePreviousPage(e)}
-                            // disabled={currentPage === 1}
-                            >
+                            <button>
                                 <i className="fa fa-arrow-left"></i>
                             </button>
-                            <button
-                            // onClick={(e) => this.handleNextPage(e)}
-                            // disabled={currentPage === totalPages}
-                            >
+                            <button>
                                 <i className="fa fa-arrow-right"></i>
                             </button>
                         </div>
                     </div>
                 </div>
                 {isModalOpen && (
-                    <Modal onClose={this.closeModal}>
-                        <h1 className={styles.modalHeader}>Nouveau document</h1>
-                        <div className={styles.separation}></div>
-
-                        <form
-                            className={styles.formElements}
-                            onSubmit={this.handleSubmit}
-                        >
-                            <div className={styles.labelInput}>
-                                <label htmlFor="title">Titre :</label>
-                                <input type="text" id="title" name="title" />
-                            </div>
-                            <div className={styles.labelInput}>
-                                <label htmlFor="brand">
-                                    Marque de l'équipement :
-                                </label>
-                                <input type="text" id="brand" name="brand" />
-                            </div>
-                            <div className={styles.labelInput}>
-                                <label htmlFor="model">
-                                    Modèle de l'équipement :
-                                </label>
-                                <input type="text" id="model" name="model" />
-                            </div>
-                            <div className={styles.labelInput}>
-                                <label htmlFor="model">Document PDF :</label>
-                                <input
-                                    type="file"
-                                    accept="image/*"
-                                    onChange={this.handleFileChange}
-                                />
-                            </div>
-
-                            <div className={styles.separation}></div>
-
-                            <div className={styles.buttonPosition}>
-                                <button
-                                    type="reset"
-                                    className={styles.cancelButton}
-                                    onClick={this.closeModal}
-                                >
-                                    Annuler
-                                </button>
-                                <button
-                                    type="submit"
-                                    className={styles.submitButton}
-                                >
-                                    Ajouter
-                                </button>
-                            </div>
-                        </form>
-                    </Modal>
+                    <DocumentForm
+                        onClose={this.closeModal}
+                        onSubmit={this.handleSubmit}
+                        handleFileChange={this.handleFileChange}
+                    />
                 )}
             </>
         );
     }
 }
-
-const Modal = ({ onClose, children }) => {
-    return (
-        <div className={styles.modalOverlay}>
-            <div className={styles.modalContent}>{children}</div>
-        </div>
-    );
-};
 
 export default DocumentsPageWrapper;
