@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import TemplateGlobal from "../Template/TemplateGlobal";
-
 import styles from "./DocumentsPage.module.css";
-
-import { getAllClients, createClient } from "../../services/api";
+import { getAllDocuments } from "../../services/api";
 
 // Composant wrapper pour utiliser les hooks
 const DocumentsPageWrapper = () => {
@@ -17,14 +15,12 @@ class DocumentsPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            documents: [],
             isModalOpen: false,
         };
         this.handleButtonClick = this.handleButtonClick.bind(this);
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
-        this.handleCategoryChange = this.handleCategoryChange.bind(this);
-        this.handleModalCategoryChange =
-            this.handleModalCategoryChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handlePageChange = this.handlePageChange.bind(this);
         this.handleNextPage = this.handleNextPage.bind(this);
@@ -32,7 +28,16 @@ class DocumentsPage extends Component {
         this.handleSearchChange = this.handleSearchChange.bind(this);
     }
 
-    componentDidMount() {}
+    componentDidMount() {
+        getAllDocuments((error, data) => {
+            if (error) {
+                this.setState({ error: error.message });
+            } else {
+                this.setState({ documents: data });
+                console.log("Données des documents récupérées:", data);
+            }
+        });
+    }
 
     handlePageChange() {}
 
@@ -74,6 +79,7 @@ class DocumentsPage extends Component {
         const {
             //     clients,
             isModalOpen,
+            documents,
             //     isCategeoryModalOpen,
             //     selectedCategory,
             //     currentPage,
@@ -225,18 +231,30 @@ class DocumentsPage extends Component {
                             <thead className={styles.stickyThead}>
                                 <tr>
                                     <th>Référence</th>
-                                    <th>Type</th>
                                     <th>Titre</th>
-                                    <th>Equipement</th>
+                                    <th>Marque</th>
+                                    <th>Modèle</th>
+                                    <th>Télécharger</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>DOC01</td>
-                                    <td>Manuel</td>
-                                    <td>Manuel chaudière T500</td>
-                                    <td>Chaudière Bosh Olio Condens T500</td>
-                                </tr>
+                                {documents.map((document) => (
+                                    <tr key={document.id}>
+                                        <td>D-{document.idDocument}</td>
+                                        <td>{document.title}</td>
+                                        <td>{document.brand}</td>
+                                        <td>{document.model}</td>
+                                        <td>
+                                            <a
+                                                className={
+                                                    styles.downloadButton
+                                                }
+                                            >
+                                                <i className="fa-solid fa-file-pdf"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                ))}
                             </tbody>
                         </table>
                         <div className={styles.pagination}>

@@ -62,7 +62,8 @@ class EmployeesPage extends Component {
             <>
                 {screenType.mobile ? (
                     <>
-                        <h1>Mobile</h1>
+                        <h1>Mobile</h1>{" "}
+                        {/* ici faire une redirection simple vers la page de connexion */}
                     </>
                 ) : (
                     <>
