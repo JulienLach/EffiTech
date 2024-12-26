@@ -13,6 +13,3 @@ function getAllDocuments(req, res) {
 }
 
 exports.getAllDocuments = getAllDocuments;
-exports.getDocumentById = getDocumentById;
-exports.importDocument = importDocument;
-exports.downloadDocument = downloadDocument;

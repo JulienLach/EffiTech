@@ -51,7 +51,7 @@ app.use("/company", authenticateToken, companyRoutes);
 app.use("/reports", authenticateToken, reportRoutes);
 
 // Route des documents
-app.use("documents", authenticateToken, documentRoutes);
+app.use("/documents", authenticateToken, documentRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
