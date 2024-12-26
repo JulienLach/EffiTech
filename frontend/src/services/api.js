@@ -808,6 +808,25 @@ function createCompany(companyData, callback) {
     xhr.send(JSON.stringify(companyData));
 }
 
+function getAllDocuments(callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", `${API_URL}/documents`);
+    xhr.withCredentials = true;
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            callback(null, JSON.parse(xhr.responseText));
+        } else {
+            window.location.href = "http://localhost:3000/login";
+            console.error(
+                "Erreur de récupération des document",
+                xhr.statusText
+            );
+            callback(new Error(xhr.statusText), null);
+        }
+    };
+    xhr.send();
+}
+
 export {
     getAllEvents,
     getAllClients,
@@ -828,4 +847,5 @@ export {
     createClient,
     createEmployee,
     createCompany,
+    getAllDocuments,
 };
