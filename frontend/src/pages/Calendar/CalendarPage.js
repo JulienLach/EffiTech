@@ -34,7 +34,7 @@ class CalendarPage extends Component {
             eventsPerPage: 20,
             searchItem: "",
             isStatusModalOpen: false,
-            selectedStatus: "",
+            selectedStatus: "", // Ajout de selectedStatus
         };
 
         this.toggleEventModal = this.toggleEventModal.bind(this);
@@ -228,7 +228,7 @@ class CalendarPage extends Component {
 
     handleStatusChange(event) {
         const selectedStatus = event.target.value;
-        this.setState({ searchItem: selectedStatus });
+        this.setState({ selectedStatus });
     }
 
     render() {
@@ -244,11 +244,12 @@ class CalendarPage extends Component {
             eventsPerPage,
             searchItem,
             isStatusModalOpen,
+            selectedStatus,
         } = this.state;
 
-        // Filtrer les événements en fonction de la recherche
+        // Filtrer les événements en fonction de la recherche et du statut
         const filteredEvents = events.filter((event) => {
-            return (
+            const matchesSearchItem =
                 event.title.toLowerCase().includes(searchItem.toLowerCase()) ||
                 event.client.firstname
                     .toLowerCase()
@@ -261,10 +262,13 @@ class CalendarPage extends Component {
                     .includes(searchItem.toLowerCase()) ||
                 event.employee.lastname
                     .toLowerCase()
-                    .includes(searchItem.toLowerCase()) ||
-                // ajout du filtre du statut
-                event.status.toString().includes(searchItem)
-            );
+                    .includes(searchItem.toLowerCase());
+
+            const matchesStatus =
+                selectedStatus === "" ||
+                event.status.toString() === selectedStatus;
+            // renvois à la fois les événements qui correspondent à la recherche et au statut
+            return matchesSearchItem && matchesStatus;
         });
 
         // Calculer les événements à afficher pour la page actuelle

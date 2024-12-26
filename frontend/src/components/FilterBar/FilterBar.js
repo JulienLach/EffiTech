@@ -110,13 +110,24 @@ class FilterBar extends Component {
                                             />
                                             Terminé
                                         </label>
+                                        <label>
+                                            <input
+                                                type="radio"
+                                                name="status"
+                                                value=""
+                                                onChange={
+                                                    this.props
+                                                        .handleStatusChange
+                                                }
+                                            />
+                                            Tous
+                                        </label>
                                     </div>
                                     <button
                                         onClick={this.props.toggleStatusModal}
                                     >
                                         Fermer
                                     </button>
-                                    <button>Filtrer</button>
                                 </div>
                             </div>
                         )}
