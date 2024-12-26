@@ -1,53 +1,159 @@
-import React from "react";
+import React, { Component } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./DocumentForm.module.css";
+import { importDocument } from "../../services/api";
 
-const DocumentForm = ({ onClose, onSubmit, handleFileChange }) => {
-    return (
-        <div className={styles.modalOverlay}>
-            <div className={styles.modalContent}>
-                <h1 className={styles.modalHeader}>Nouveau document</h1>
-                <div className={styles.separation}></div>
+function DocumentFormWrapper(props) {
+    const navigate = useNavigate();
+    return <DocumentForm {...props} navigate={navigate} />;
+}
 
-                <form className={styles.formElements} onSubmit={onSubmit}>
-                    <div className={styles.labelInput}>
-                        <label htmlFor="title">Titre :</label>
-                        <input type="text" id="title" name="title" />
-                    </div>
-                    <div className={styles.labelInput}>
-                        <label htmlFor="brand">Marque de l'équipement :</label>
-                        <input type="text" id="brand" name="brand" />
-                    </div>
-                    <div className={styles.labelInput}>
-                        <label htmlFor="model">Modèle de l'équipement :</label>
-                        <input type="text" id="model" name="model" />
-                    </div>
-                    <div className={styles.labelInput}>
-                        <label htmlFor="model">Document PDF :</label>
-                        <input
-                            type="file"
-                            accept="image/*"
-                            onChange={handleFileChange}
-                        />
-                    </div>
+class DocumentForm extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            document: {
+                idDocument: "",
+                title: "",
+                brand: "",
+                model: "",
+                file: null,
+            },
+            error: null,
+        };
 
+        this.handleChange = this.handleChange.bind(this);
+        this.handleFileChange = this.handleFileChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleChange(event) {
+        const { name, value } = event.target;
+        this.setState((prevState) => ({
+            document: {
+                ...prevState.document,
+                [name]: value,
+            },
+        }));
+    }
+
+    handleFileChange(event) {
+        const file = event.target.files[0];
+        this.setState((prevState) => ({
+            document: {
+                ...prevState.document,
+                file: file,
+            },
+        }));
+    }
+
+    handleSubmit(event) {
+        event.preventDefault();
+        const { document } = this.state;
+        const data = {
+            idDocument: document.idDocument,
+            title: document.title,
+            brand: document.brand,
+            model: document.model,
+            file: document.file,
+        };
+        console.log("Données du formulaire soumises:", data);
+
+        importDocument(data, (error, newDocument) => {
+            if (error) {
+                console.error(
+                    "Erreur lors de l'importation du document :",
+                    error
+                );
+                this.setState({ error: error.message });
+            } else {
+                console.log("Document importé :", newDocument);
+                this.props.onClose();
+                this.props.navigate("/documents");
+            }
+        });
+    }
+
+    render() {
+        const { onClose } = this.props;
+        const { document, error } = this.state;
+
+        return (
+            <div className={styles.modalOverlay}>
+                <div className={styles.modalContent}>
+                    <h1 className={styles.modalHeader}>Nouveau document</h1>
                     <div className={styles.separation}></div>
 
-                    <div className={styles.buttonPosition}>
-                        <button
-                            type="reset"
-                            className={styles.cancelButton}
-                            onClick={onClose}
-                        >
-                            Annuler
-                        </button>
-                        <button type="submit" className={styles.submitButton}>
-                            Ajouter
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    );
-};
+                    {error && <p className={styles.error}>{error}</p>}
+                    <form
+                        className={styles.formElements}
+                        onSubmit={this.handleSubmit}
+                    >
+                        <div className={styles.labelInput}>
+                            <label htmlFor="title">Titre :</label>
+                            <input
+                                type="text"
+                                id="title"
+                                name="title"
+                                value={document.title}
+                                onChange={this.handleChange}
+                            />
+                        </div>
+                        <div className={styles.labelInput}>
+                            <label htmlFor="brand">
+                                Marque de l'équipement :
+                            </label>
+                            <input
+                                type="text"
+                                id="brand"
+                                name="brand"
+                                value={document.brand}
+                                onChange={this.handleChange}
+                            />
+                        </div>
+                        <div className={styles.labelInput}>
+                            <label htmlFor="model">
+                                Modèle de l'équipement :
+                            </label>
+                            <input
+                                type="text"
+                                id="model"
+                                name="model"
+                                value={document.model}
+                                onChange={this.handleChange}
+                            />
+                        </div>
+                        <div className={styles.labelInput}>
+                            <label htmlFor="file">Document PDF :</label>
+                            <input
+                                type="file"
+                                accept="application/pdf"
+                                onChange={this.handleFileChange}
+                            />
+                        </div>
 
-export default DocumentForm;
+                        <div className={styles.separation}></div>
+
+                        <div className={styles.buttonPosition}>
+                            <button
+                                type="reset"
+                                className={styles.cancelButton}
+                                onClick={onClose}
+                            >
+                                Annuler
+                            </button>
+                            <button
+                                type="submit"
+                                className={styles.submitButton}
+                            >
+                                Ajouter
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        );
+    }
+}
+
+export default DocumentFormWrapper;
