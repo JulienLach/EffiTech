@@ -13,7 +13,10 @@ function getAllDocuments(req, res) {
 }
 
 function importDocument(req, res) {
-    Document.importDocument(req.body, (error, document) => {
+    const { title, brand, model } = req.body;
+    const file = req.files.file;
+
+    Document.importDocument(title, brand, model, file, (error, document) => {
         if (error) {
             return res.status(500).send({
                 message: "Erreur lors de l'import du document",

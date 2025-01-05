@@ -1,6 +1,7 @@
 const dotenv = require("dotenv");
 const express = require("express");
 const cors = require("cors");
+const fileUpload = require("express-fileupload");
 const employeeRoutes = require("./routes/employee.routes.js");
 const clientRoutes = require("./routes/client.routes.js");
 const eventRoutes = require("./routes/event.routes.js");
@@ -24,6 +25,14 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json());
+
+app.use(
+    fileUpload({
+        useTempFiles: true,
+        tempFileDir: "/tmp/",
+        limits: { fileSize: 50 * 1024 * 1024 }, // Limite de taille de fichier de 50MB
+    })
+);
 
 app.get("/", (req, res) => {
     res.send("Test!");
