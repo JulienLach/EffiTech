@@ -50,16 +50,15 @@ class DocumentForm extends Component {
     handleSubmit(event) {
         event.preventDefault();
         const { document } = this.state;
-        const data = {
-            idDocument: document.idDocument,
-            title: document.title,
-            brand: document.brand,
-            model: document.model,
-            file: document.file,
-        };
-        console.log("Données du formulaire soumises:", data);
+        const formData = new FormData();
+        formData.append("title", document.title);
+        formData.append("brand", document.brand);
+        formData.append("model", document.model);
+        formData.append("file", document.file);
 
-        importDocument(data, (error, newDocument) => {
+        console.log("Données du formulaire soumises:", formData);
+
+        importDocument(formData, (error, newDocument) => {
             if (error) {
                 console.error(
                     "Erreur lors de l'importation du document :",
@@ -72,6 +71,7 @@ class DocumentForm extends Component {
                 this.props.navigate("/documents");
             }
         });
+        window.location.reload();
     }
 
     render() {
@@ -127,7 +127,8 @@ class DocumentForm extends Component {
                             <label htmlFor="file">Document PDF :</label>
                             <input
                                 type="file"
-                                accept="application/pdf"
+                                id="file"
+                                name="file"
                                 onChange={this.handleFileChange}
                             />
                         </div>
