@@ -840,11 +840,10 @@ function getAllDocuments(callback) {
     xhr.send();
 }
 
-function importDocument(documentData, callback) {
+function importDocument(formData, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", `${API_URL}/documents`);
     xhr.withCredentials = true;
-    xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onload = function () {
         if (xhr.status === 200 || xhr.status === 201) {
             console.log("Document importé");
@@ -854,7 +853,7 @@ function importDocument(documentData, callback) {
             callback(new Error(xhr.statusText), null);
         }
     };
-    xhr.send(JSON.stringify(documentData));
+    xhr.send(formData);
 }
 
 export {
