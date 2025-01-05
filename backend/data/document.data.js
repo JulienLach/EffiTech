@@ -1,4 +1,3 @@
-const fs = require("fs");
 const pool = require("../config/db.config");
 
 /**
@@ -70,30 +69,22 @@ class Document {
 
     /**
      * Importe un nouveau document.
-     * @param {number} idDocument - L'ID du document.
      * @param {string} title - Le titre du document.
      * @param {string} brand - La marque du document.
      * @param {string} model - Le modèle du document.
      * @param {Buffer} file - Le fichier du document.
      * @param {function} callback - La fonction de rappel.
      */
-    static importDocument(idDocument, title, brand, model, filePath, callback) {
-        fs.readFile(filePath, (error, fileBuffer) => {
-            if (error) {
-                return callback(error);
-            }
-        });
-
+    static importDocument(title, brand, model, file, callback) {
         const query =
-            "INSERT INTO documents (idDocument, title, brand, model, file) VALUES ($1, $2, $3, $4, $5)";
-        const values = [idDocument, title, brand, model, fileBuffer];
+            "INSERT INTO documents (title, brand, model, file) VALUES ($1, $2, $3, $4) RETURNING *";
+        const values = [title, brand, model, file];
         pool.query(query, values, (error, result) => {
             if (error) {
                 return callback(error);
             }
             const row = result.rows[0];
             const document = new Document(
-                row.id_document,
                 row.title,
                 row.brand,
                 row.model,
