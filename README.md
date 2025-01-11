@@ -5,7 +5,7 @@
 -   [Overview](#overview)
 -   [Features](#features)
 -   [Requirements](#requirements)
--   [Environment variables configuration](#environment-variables-configuration)
+-   [How to run the app](#how-to-run-the-app)
 -   [Testing](#testing)
 -   [CI/CD](#cicd)
 -   [Docker](#docker)
@@ -32,18 +32,113 @@
 -   React 18.3.1
 -   Docker
 
-## <a name="environment-variables-configuration"></a> Environment variables configuration
+## <a name="how-to-run-the-app"></a> How to run the app
 
-You need to create a `.env` file at the root of the project with the following :
+-   Install **Node.js 18** and **npm** :
 
--   NODE_ENV=development
--   DB_USER=
--   DB_HOST=
--   DB_NAME=
--   DB_PASSWORD=
--   DB_PORT=
--   PORT=
--   JWT_SECRET=
+```bash
+# Add the NodeSource repository for Node.js 18.x
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+
+# Update the package list
+sudo apt-get update
+
+# Install Node.js (which includes npm)
+sudo apt-get install -y nodejs
+
+# Verify the installation
+node -v
+npm -v
+```
+
+-   Install **PostgreSQL 15** :
+
+```bash
+# Add the PostgreSQL APT repository
+
+echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list
+
+# Import the repository signing key
+
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+
+# Update the package list
+
+sudo apt-get update
+
+# Install PostgreSQL 15
+
+sudo apt-get install -y postgresql-15
+
+# Verify the installation
+psql --version
+```
+
+-   Install **pgAdmin4** to manage the database, please follow official doc at https://www.pgadmin.org/download/pgadmin-4-apt/
+-   Create a new database and run `database_script.sql` in **pgAdmin4** in SQL query field
+
+For Linux/Debian OS, after installing pgadmin4 and postgreSQL you need to set password for postgres user. Besure to set the same password in your `.env` file.
+
+```bash
+sudo -u postgres psql
+```
+
+```bash
+ALTER USER postgres PASSWORD 'postgres';
+```
+
+To start a new server in pgadmin4, create a new server, add `127.0.0.1` to hostname, with postgres user and the password you set previous step, then click on save. Now to database and the server are running.
+
+#### Configure the .env file
+
+Create a .env file in the root of your backend project and add the following content, replacing newpassword with the password you set for the postgres user:
+
+```bash
+NODE_ENV=development
+DB_USER=postgres
+DB_HOST=localhost
+DB_NAME=EffiTech
+DB_PASSWORD=postgres
+DB_PORT=5432
+PORT=3001
+JWT_SECRET=your_randomly_generated_token
+```
+
+For `JWT_SECRET`, generate a random token and replace your_randomly_generated_token with it. You can use a command like the following to generate a secure token:
+
+```bash
+openssl rand -base64 32
+```
+
+#### Install project dependencies
+
+```bash
+cd backend
+npm install
+
+cd ../frontend
+npm install
+```
+
+#### Start the PostgreSQL server
+
+Ensure the PostgreSQL server is running :
+
+```bash
+sudo systemctl start postgresql
+```
+
+To launch the app run :
+
+```bash
+cd backend
+npm start
+
+cd frontend
+npm start
+```
+
+And access the application at http://localhost:3000
 
 ## <a name="testing"></a> Testing
 
@@ -167,3 +262,4 @@ This project uses **JSDoc** and **apidoc** to generate documentation.
     - Verifies that the new employee can log in and access the app according to their role.
 
 </details>
+````
