@@ -40,6 +40,7 @@ class EmployeeForm extends Component {
             } else {
                 console.log("Employé créé:", createdEmployee);
             }
+            window.location.reload();
         });
     }
 
