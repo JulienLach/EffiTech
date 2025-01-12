@@ -48,6 +48,7 @@
 
 .notificationBell {
     height: 1.3em;
+    cursor: pointer;
 }
 
 .notificationIcon {
@@ -58,15 +59,15 @@
 .notificationCount {
     display: flex;
     position: absolute;
-    top: -0.625em;
-    right: -0.625em;
+    top: -0.425em;
+    right: -0.325em;
     background-color: #e0240f;
     color: white;
     border-radius: 1em;
-    height: 1.25em;
-    width: 1.25em;
+    height: 1em;
+    width: 1em;
+    border-radius: 100%;
     font-size: 0.75em;
-    min-width: 1.25em;
     align-items: center;
     justify-content: center;
 }

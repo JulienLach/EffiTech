@@ -68,9 +68,9 @@ class TemplateGlobal extends Component {
                                     src={bellIcon}
                                     className={styles.notificationBell}
                                 ></img>
-                                <span className={styles.notificationCount}>
-                                    2
-                                </span>
+                                <span
+                                    className={styles.notificationCount}
+                                ></span>
                             </div>
                             <div
                                 className={styles.profileBubble}
