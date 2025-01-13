@@ -28,9 +28,14 @@ class LoginPage extends Component {
         event.preventDefault();
         const { email, password } = this.state;
 
+        if (password === "" || email === "") {
+            this.setState({ error: "Identifiants incorrects"});
+            return;
+        }
+
         loginEmployee({ email, password }, (error, result) => {
             if (error) {
-                this.setState({ error: error.message });
+                this.setState({ error: "Identifiants incorrects" });
             } else {
                 this.setState({ redirect: true });
             }
