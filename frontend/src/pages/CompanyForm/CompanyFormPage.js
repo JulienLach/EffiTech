@@ -19,7 +19,7 @@ class CompanyFormPage extends Component {
                 capital: "",
                 logo: "",
             },
-            error: null,
+            errors: {},
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -69,6 +69,35 @@ class CompanyFormPage extends Component {
         event.preventDefault();
         console.log("Données envoyées :", this.state.company);
 
+        const { company } = this.state;
+        const errors = {};
+        if (!company.phoneNumber) {
+            errors.phoneNumber = "* Champ obligatoire";
+        }
+        if (!company.idAddress.address) {
+            errors.address = "* Champ obligatoire";
+        }
+        if (!company.idAddress.zipcode) {
+            errors.zipcode = "* Champ obligatoire";
+        }
+        if (!company.idAddress.city) {
+            errors.city = "* Champ obligatoire";
+        }
+        if (!company.siret) {
+            errors.siret = "* Champ obligatoire";
+        }
+        if (!company.vatNumber) {
+            errors.vatNumber = "* Champ obligatoire";
+        }
+        if (!company.capital) {
+            errors.capital = "* Champ obligatoire";
+        }
+
+        if (Object.keys(errors).length > 0) {
+            this.setState({ errors });
+            return;
+        }
+
         createCompany(this.state.company, (error, data) => {
             if (error) {
                 console.error(
@@ -84,14 +113,13 @@ class CompanyFormPage extends Component {
     }
 
     render() {
-        const { company, error } = this.state;
+        const { company, errors } = this.state;
 
         return (
             <>
                 <TemplateGlobal />
                 <div className={styles.container}>
                     <h1 className={styles.pageTitle}>Créer Société</h1>
-                    {error && <p className={styles.error}>{error}</p>}
                     <form onSubmit={this.handleSubmit}>
                         <div className={styles.profilPic}>
                             {company.logo && (
@@ -117,6 +145,7 @@ class CompanyFormPage extends Component {
                                 value={company.phoneNumber}
                                 onChange={this.handleChange}
                             />
+                            {errors.phoneNumber && <span className={styles.error}>{errors.phoneNumber}</span>}
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="idAddress.address">Adresse :</label>
@@ -126,6 +155,7 @@ class CompanyFormPage extends Component {
                                 value={company.idAddress.address}
                                 onChange={this.handleChange}
                             />
+                            {errors.address && <span className={styles.error}>{errors.address}</span>}
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="idAddress.zipcode">
@@ -137,6 +167,7 @@ class CompanyFormPage extends Component {
                                 value={company.idAddress.zipcode}
                                 onChange={this.handleChange}
                             />
+                            {errors.zipcode && <span className={styles.error}>{errors.zipcode}</span>}
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="idAddress.city">Ville :</label>
@@ -146,6 +177,7 @@ class CompanyFormPage extends Component {
                                 value={company.idAddress.city}
                                 onChange={this.handleChange}
                             />
+                            {errors.city && <span className={styles.error}>{errors.city}</span>}
                         </div>
                         <div className={styles.separation}></div>
                         <h2 className={styles.header}>Informations</h2>
@@ -157,17 +189,17 @@ class CompanyFormPage extends Component {
                                 value={company.siret}
                                 onChange={this.handleChange}
                             />
+                            {errors.siret && <span className={styles.error}>{errors.siret}</span>}
                         </div>
                         <div className={styles.labelInput}>
-                            <label htmlFor="vatNumber">
-                                N°TVA Intracommunautaire :
-                            </label>
+                            <label htmlFor="vatNumber">Numéro de TVA :</label>
                             <input
                                 type="text"
                                 name="vatNumber"
                                 value={company.vatNumber}
                                 onChange={this.handleChange}
                             />
+                            {errors.vatNumber && <span className={styles.error}>{errors.vatNumber}</span>}
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="capital">Capital :</label>
@@ -177,20 +209,13 @@ class CompanyFormPage extends Component {
                                 value={company.capital}
                                 onChange={this.handleChange}
                             />
+                            {errors.capital && <span className={styles.error}>{errors.capital}</span>}
                         </div>
                         <div className={styles.buttonPosition}>
-                            <button
-                                type="button"
-                                onClick={() => window.history.back()}
-                                className={styles.cancelButton}
-                            >
+                            <button type="reset" className={styles.cancelButton}>
                                 Annuler
                             </button>
-                            <button
-                                type="submit"
-                                className={styles.submitButton}
-                            >
-                                <i className="fa-solid fa-floppy-disk"></i>{" "}
+                            <button type="submit" className={styles.submitButton}>
                                 Enregistrer
                             </button>
                         </div>
