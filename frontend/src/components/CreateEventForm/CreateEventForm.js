@@ -28,6 +28,7 @@ class CreateEventForm extends Component {
             isPlanned: false,
             selectedTab: "Intervention", // Par défaut sur l'onglet Intervention
             searchQuery: "",
+            errors: {}
         };
 
         this.handleClientChange = this.handleClientChange.bind(this);
@@ -118,11 +119,21 @@ class CreateEventForm extends Component {
             selectedEmployee,
             selectedTab,
         } = this.state;
+    
+        const errors = {};
+        if (!title || !selectedClient || !selectedEmployee) {
+            errors.title = "* Champ obligatoire";
+        }
+        
+        if (Object.keys(errors).length > 0) {
+            this.setState({ errors });
+            return;
+        }
 
         // Calculer le statut dynamiquement
         let status;
         const today = new Date().toISOString().split("T")[0]; // Obtenir la date du jour au format YYYY-MM-DD
-
+    
         if (!startingDate) {
             status = 1;
         } else if (startingDate < today) {
@@ -132,7 +143,7 @@ class CreateEventForm extends Component {
         } else if (startingDate > today) {
             status = 4;
         }
-
+    
         const eventData = {
             title: title,
             description: description,
@@ -146,7 +157,7 @@ class CreateEventForm extends Component {
             endingHour: endingHour || null,
             idEmployee: selectedEmployee,
         };
-
+    
         createEvent(eventData, (error, newEvent) => {
             if (error) {
                 console.error("Error creating event:", error);
@@ -179,6 +190,7 @@ class CreateEventForm extends Component {
             selectedEmployee,
             selectedTab,
             searchQuery,
+            errors
         } = this.state;
 
         // Filtrer les clients en fonction de la recherche
@@ -235,6 +247,7 @@ class CreateEventForm extends Component {
                             value={title}
                             onChange={this.handleChange}
                         />
+                        {errors.title && <span className={styles.error}>{errors.title}</span>}
                     </div>
                     <div>
                         <label>
@@ -299,6 +312,7 @@ class CreateEventForm extends Component {
                                 </option>
                             ))}
                         </select>
+                        {errors.title && <span className={styles.error}>{errors.title}</span>}
                     </div>
                     <div>
                         <label>
@@ -325,6 +339,7 @@ class CreateEventForm extends Component {
                                 </option>
                             ))}
                         </select>
+                        {errors.title && <span className={styles.error}>{errors.title}</span>}
                     </div>
                     <div>
                         <input

@@ -115,3 +115,8 @@
     color: #c93c2c;
     font-weight: bold;
 }
+
+.error {
+    font-size: 0.9em;
+    color: rgb(226, 12, 12);
+}
