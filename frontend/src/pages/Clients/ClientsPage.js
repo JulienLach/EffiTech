@@ -21,13 +21,14 @@ class ClientsPage extends Component {
             clients: [],
             error: null,
             isModalOpen: false,
-            category: "",
+            category: "Particulier",
             company: "",
             isCategeoryModalOpen: false,
             selectedCategory: "All",
             currentPage: 1,
             clientsPerPage: 10,
             searchItem: "",
+            errors: {}
         };
         this.handleButtonClick = this.handleButtonClick.bind(this);
         this.openModal = this.openModal.bind(this);
@@ -165,6 +166,37 @@ class ClientsPage extends Component {
         };
         console.log("Données du formulaire soumises:", data);
 
+        const errors = {};
+        if (!data.company) {
+            errors.company = "* Champ obligatoire";
+        }
+        if (!data.firstname) {
+            errors.firstname = "* Champ obligatoire";
+        }
+        if (!data.lastname) {
+            errors.lastname = "* Champ obligatoire";
+        }
+        if (!data.addressDetails.address) {
+            errors.address = "* Champ obligatoire";
+        }
+        if (!data.addressDetails.zipcode) {
+            errors.zipcode = "* Champ obligatoire";
+        }
+        if (!data.addressDetails.city) {
+            errors.city = "* Champ obligatoire";
+        }
+        if (!data.email) {
+            errors.email = "* Champ obligatoire";
+        }
+        if (!data.phoneNumber) {
+            errors.phone = "* Champ obligatoire";
+        }
+        
+        if (Object.keys(errors).length > 0) {
+            this.setState({ errors });
+            return;
+        }
+
         createClient(data, (error, newClient) => {
             if (error) {
                 this.setState({ error: error.message });
@@ -190,6 +222,7 @@ class ClientsPage extends Component {
             currentPage,
             clientsPerPage,
             searchItem,
+            errors
         } = this.state;
 
         // Filtrer les clients en fonction de la catégorie sélectionnée et de la recherche
@@ -829,6 +862,7 @@ class ClientsPage extends Component {
                                                     })
                                                 }
                                             />
+                                            {errors.company && <span className={styles.error}>{errors.company}</span>}
                                         </div>
                                     )}
                                     <div className={styles.labelInput}>
@@ -838,6 +872,7 @@ class ClientsPage extends Component {
                                             id="lastname"
                                             name="lastname"
                                         />
+                                        {errors.lastname && <span className={styles.error}>{errors.lastname}</span>}
                                     </div>
                                     <div className={styles.labelInput}>
                                         <label htmlFor="firstname">
@@ -848,6 +883,7 @@ class ClientsPage extends Component {
                                             id="firstname"
                                             name="firstname"
                                         />
+                                        {errors.firstname && <span className={styles.error}>{errors.firstname}</span>}
                                     </div>
                                     <div className={styles.labelInput}>
                                         <label htmlFor="address">
@@ -858,6 +894,7 @@ class ClientsPage extends Component {
                                             id="address"
                                             name="address"
                                         />
+                                        {errors.address && <span className={styles.error}>{errors.address}</span>}
                                     </div>
                                     <div className={styles.labelInput}>
                                         <label htmlFor="zipcode">
@@ -868,6 +905,7 @@ class ClientsPage extends Component {
                                             id="zipcode"
                                             name="zipcode"
                                         />
+                                        {errors.zipcode && <span className={styles.error}>{errors.zipcode}</span>}
                                     </div>
                                     <div className={styles.labelInput}>
                                         <label htmlFor="city">Ville :</label>
@@ -876,6 +914,7 @@ class ClientsPage extends Component {
                                             id="city"
                                             name="city"
                                         />
+                                        {errors.city && <span className={styles.error}>{errors.city}</span>}
                                     </div>
                                     <div className={styles.labelInput}>
                                         <label htmlFor="mail">Email :</label>
@@ -884,6 +923,7 @@ class ClientsPage extends Component {
                                             id="mail"
                                             name="mail"
                                         />
+                                        {errors.email && <span className={styles.error}>{errors.email}</span>}
                                     </div>
                                     <div className={styles.labelInput}>
                                         <label htmlFor="phone">
@@ -894,6 +934,7 @@ class ClientsPage extends Component {
                                             id="phone"
                                             name="phone"
                                         />
+                                        {errors.phone && <span className={styles.error}>{errors.phone}</span>}
                                     </div>
                                     <div className={styles.separation}></div>
 

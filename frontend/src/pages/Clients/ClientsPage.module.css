@@ -297,3 +297,9 @@
     background-color: #c93c2c;
     color: white;
 }
+
+.error {
+    margin-left: 1em;
+    font-size: 0.9em;
+    color: rgb(226, 12, 12);
+}
