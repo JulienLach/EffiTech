@@ -22,6 +22,7 @@ import CompanyPage from "./pages/Company/CompanyPage";
 import CompanyDetails from "./pages/CompanyDetails/CompanyDetails";
 import ExpensePage from "./pages/Expense/ExpenseFormPage";
 import DocumentsPage from "./pages/Documents/DocumentsPage";
+import NotificationsPage from "./pages/Notifications/NotificationsPage";
 
 const App = () => {
     return (
@@ -54,6 +55,7 @@ const App = () => {
                 <Route path="/company-details" element={<CompanyDetails />} />
                 <Route path="/expense" element={<ExpensePage />} />
                 <Route path="/documents" element={<DocumentsPage />} />
+                <Route path="/notifications" element={<NotificationsPage />} />
             </Routes>
         </Router>
     );
