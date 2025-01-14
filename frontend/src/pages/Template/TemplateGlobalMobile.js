@@ -90,7 +90,7 @@ class TemplateGlobalMobile extends Component {
                     <a href="/calendar">
                         <i className={`fas fa-list ${styles.navbarIcon}`}></i>
                     </a>
-                    <a href="/calendar">
+                    <a href="/calendar-mobile">
                         <i
                             className={`fas fa-calendar ${styles.navbarIcon}`}
                         ></i>
