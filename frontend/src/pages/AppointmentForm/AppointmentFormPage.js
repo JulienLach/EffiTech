@@ -24,10 +24,11 @@ class AppointmentFormPage extends Component {
             clientSignature: "",
             employeeSignature: "",
             duration: "",
-            workToDo: "- ",
+            workToDo: "",
             client: {},
             address: {},
             employee: {},
+            errors: {},
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -82,6 +83,16 @@ class AppointmentFormPage extends Component {
             workToDo,
         };
 
+        const errors = {};
+        if (!eventData.workToDo) {
+            errors.workToDo = "* Champ obligatoire";
+        }
+        
+        if (Object.keys(errors).length > 0) {
+            this.setState({ errors });
+            return;
+        }
+
         updateEvent(eventData, (error, updatedEvent) => {
             if (error) {
                 console.error(error);
@@ -97,7 +108,7 @@ class AppointmentFormPage extends Component {
 
     render() {
         const { event } = this.props.location.state;
-        const { reschedule, startingDate, duration, workToDo } = this.state;
+        const { reschedule, startingDate, duration, workToDo, errors } = this.state;
 
         //Variable pour savoir si c'est mobile ou desktop
         const isMobile = window.navigator.userAgentData;
@@ -153,6 +164,7 @@ class AppointmentFormPage extends Component {
                                         value={workToDo}
                                         onChange={this.handleChange}
                                     ></textarea>
+                                    {errors.workToDo && <span className={styles.error}>{errors.workToDo}</span>}
                                 </div>
                             </div>
                             <div className={stylesMobile.inputDisplay}>
@@ -292,6 +304,7 @@ class AppointmentFormPage extends Component {
                                             value={workToDo}
                                             onChange={this.handleChange}
                                         ></textarea>
+                                        {errors.workToDo && <span className={styles.error}>{errors.workToDo}</span>}
                                     </div>
                                 </div>
                                 <div>
