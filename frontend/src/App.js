@@ -22,6 +22,7 @@ import CompanyPage from "./pages/Company/CompanyPage";
 import CompanyDetails from "./pages/CompanyDetails/CompanyDetails";
 import ExpensePage from "./pages/Expense/ExpenseFormPage";
 import DocumentsPage from "./pages/Documents/DocumentsPage";
+import DocumentDetailsPage from "./pages/Documents/DocumentDetailsPage";
 import NotificationsPage from "./pages/Notifications/NotificationsPage";
 import CalendarMobilePage from "./pages/CalendarMobile/CalendarMobilePage";
 
@@ -56,6 +57,10 @@ const App = () => {
                 <Route path="/company-details" element={<CompanyDetails />} />
                 <Route path="/expense" element={<ExpensePage />} />
                 <Route path="/documents" element={<DocumentsPage />} />
+                <Route
+                    path="/document-details"
+                    elements={<DocumentDetailsPage />}
+                />
                 <Route path="/notifications" element={<NotificationsPage />} />
                 <Route
                     path="/calendar-mobile"

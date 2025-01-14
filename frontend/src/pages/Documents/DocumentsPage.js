@@ -124,7 +124,9 @@ class DocumentsPage extends Component {
                                 {documents.map((document) => (
                                     <tr key={document.id}>
                                         <td>D-{document.idDocument}</td>
-                                        <td>{document.title}</td>
+                                        <td>
+                                            <a>{document.title}</a>
+                                        </td>
                                         <td>{document.brand}</td>
                                         <td>{document.model}</td>
                                         <td>
