@@ -27,5 +27,22 @@ function importDocument(req, res) {
     });
 }
 
+function getDocumentById(req, res) {
+    const idDocument = req.params.idDocument;
+    Document.getDocumentById(idDocument, (error, document) => {
+        if (error) {
+            return res.status(500).send({
+                message: "Erreur lors de la récupération du document",
+                error: error.message,
+            });
+        }
+        if (document) {
+            res.status(200).send(document);
+        } else {
+            res.status(404).send({ message: "Document non trouvé" });
+        }
+    });
+}
 exports.getAllDocuments = getAllDocuments;
 exports.importDocument = importDocument;
+exports.getDocumentById = getDocumentById;
