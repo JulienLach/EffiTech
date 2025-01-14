@@ -34,7 +34,9 @@ class CalendarPage extends Component {
             eventsPerPage: 20,
             searchItem: "",
             isStatusModalOpen: false,
-            selectedStatus: "", // Ajout de selectedStatus
+            selectedStatus: "",
+            isTypeModalOpen: false,
+            selectedType: "",
         };
 
         this.toggleEventModal = this.toggleEventModal.bind(this);
@@ -48,6 +50,8 @@ class CalendarPage extends Component {
         this.handleSearchChange = this.handleSearchChange.bind(this);
         this.toggleStatusModal = this.toggleStatusModal.bind(this);
         this.handleStatusChange = this.handleStatusChange.bind(this);
+        this.toggleTypeModal = this.toggleTypeModal.bind(this);
+        this.handleTypeChange = this.handleTypeChange.bind(this);
     }
 
     componentDidMount() {
@@ -231,6 +235,17 @@ class CalendarPage extends Component {
         this.setState({ selectedStatus });
     }
 
+    toggleTypeModal() {
+        this.setState((prevState) => ({
+            isTypeModalOpen: !prevState.isTypeModalOpen,
+        }));
+    }
+
+    handleTypeChange(event) {
+        const selectedType = event.target.value;
+        this.setState({ selectedType });
+    }
+
     render() {
         const {
             events,
@@ -245,6 +260,8 @@ class CalendarPage extends Component {
             searchItem,
             isStatusModalOpen,
             selectedStatus,
+            isTypeModalOpen,
+            selectedType,
         } = this.state;
 
         // Filtrer les événements en fonction de la recherche et du statut
@@ -267,8 +284,11 @@ class CalendarPage extends Component {
             const matchesStatus =
                 selectedStatus === "" ||
                 event.status.toString() === selectedStatus;
-            // renvois à la fois les événements qui correspondent à la recherche et au statut
-            return matchesSearchItem && matchesStatus;
+
+            const matchesType =
+                selectedType === "" || event.type.toString() === selectedType;
+            // renvois à la fois les événements qui correspondent à la recherche au statut et au type
+            return matchesSearchItem && matchesStatus && matchesType;
         });
 
         // Calculer les événements à afficher pour la page actuelle
@@ -448,6 +468,9 @@ class CalendarPage extends Component {
                                         handleStatusChange={
                                             this.handleStatusChange
                                         }
+                                        toggleTypeModal={this.toggleTypeModal}
+                                        isTypeModalOpen={isTypeModalOpen}
+                                        handleTypeChange={this.handleTypeChange}
                                     />
                                 </div>
                                 <h3 className={styles.eventTitle}>

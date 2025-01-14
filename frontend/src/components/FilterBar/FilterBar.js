@@ -135,10 +135,48 @@ class FilterBar extends Component {
                             <i className="fa-solid fa-user-group"></i>
                             <p>Employé</p>
                         </div>
-                        <div className={styles.typeFilter}>
+                        <div
+                            className={styles.typeFilter}
+                            onClick={this.props.toggleTypeModal}
+                        >
                             <i className="fa-solid fa-filter"></i>
                             <p>Type</p>
                         </div>
+                        {this.props.isTypeModalOpen && (
+                            <div className={styles.typeModalOverlay}>
+                                <div className={styles.modalContent}>
+                                    <div className={styles.modalBody}>
+                                        <label>
+                                            <input
+                                                type="radio"
+                                                name="type"
+                                                value="Intervention"
+                                                onChange={
+                                                    this.props.handleTypeChange
+                                                }
+                                            />
+                                            Intervention
+                                        </label>
+                                        <label>
+                                            <input
+                                                type="radio"
+                                                name="type"
+                                                value="Rendez-vous"
+                                                onChange={
+                                                    this.props.handleTypeChange
+                                                }
+                                            />
+                                            Rendez-vous
+                                        </label>
+                                    </div>
+                                    <button
+                                        onClick={this.props.toggleTypeModal}
+                                    >
+                                        Fermer
+                                    </button>
+                                </div>
+                            </div>
+                        )}
                         <button
                             className={styles.createEventbutton}
                             onClick={this.props.toggleCreateEventModal}

@@ -7,10 +7,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ## Changes
+
 -   Add upload document to documents page
 -   Add error message to missing fields in all forms
 -   Add Notifications pages
 -   Events can be sorted by multiples filters status and by clients or employee first and last names
+-   Add sorting by event type on calendar page
 
 # [0.4.0] (2024-12-05)
 
