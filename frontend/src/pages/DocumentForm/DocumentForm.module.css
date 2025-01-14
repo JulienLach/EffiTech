@@ -102,3 +102,9 @@
 .submitButton {
     background-color: #c93c2c;
 }
+
+.error {
+    font-size: 0.9em;
+    margin: 0 0 0 1em;
+    color: rgb(226, 12, 12);
+}

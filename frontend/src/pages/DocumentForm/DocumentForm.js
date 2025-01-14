@@ -19,7 +19,7 @@ class DocumentForm extends Component {
                 model: "",
                 file: null,
             },
-            error: null,
+            errors: {},
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -56,6 +56,25 @@ class DocumentForm extends Component {
         formData.append("model", document.model);
         formData.append("file", document.file);
 
+        const errors = {};
+        if (!document.title) {
+            errors.title = "* Champ obligatoire";
+        }
+        if (!document.brand) {
+            errors.brand = "* Champ obligatoire";
+        }
+        if (!document.model) {
+            errors.model = "* Champ obligatoire";
+        }
+        if (!document.file) {
+            errors.file = "* Champ obligatoire";
+        }
+
+        if (Object.keys(errors).length > 0) {
+            this.setState({ errors });
+            return;
+        }
+
         console.log("Données du formulaire soumises:", formData);
 
         importDocument(formData, (error, newDocument) => {
@@ -76,15 +95,13 @@ class DocumentForm extends Component {
 
     render() {
         const { onClose } = this.props;
-        const { document, error } = this.state;
+        const { document, errors} = this.state;
 
         return (
             <div className={styles.modalOverlay}>
                 <div className={styles.modalContent}>
                     <h1 className={styles.modalHeader}>Nouveau document</h1>
                     <div className={styles.separation}></div>
-
-                    {error && <p className={styles.error}>{error}</p>}
                     <form
                         className={styles.formElements}
                         onSubmit={this.handleSubmit}
@@ -98,6 +115,7 @@ class DocumentForm extends Component {
                                 value={document.title}
                                 onChange={this.handleChange}
                             />
+                            {errors.title && <span className={styles.error}>{errors.title}</span>}
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="brand">
@@ -110,6 +128,7 @@ class DocumentForm extends Component {
                                 value={document.brand}
                                 onChange={this.handleChange}
                             />
+                            {errors.brand && <span className={styles.error}>{errors.brand}</span>}
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="model">
@@ -122,6 +141,7 @@ class DocumentForm extends Component {
                                 value={document.model}
                                 onChange={this.handleChange}
                             />
+                            {errors.model && <span className={styles.error}>{errors.model}</span>}
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="file">Document PDF :</label>
@@ -131,6 +151,7 @@ class DocumentForm extends Component {
                                 name="file"
                                 onChange={this.handleFileChange}
                             />
+                            {errors.file && <span className={styles.error}>{errors.file}</span>}
                         </div>
 
                         <div className={styles.separation}></div>
