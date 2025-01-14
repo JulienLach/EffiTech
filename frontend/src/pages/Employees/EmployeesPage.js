@@ -127,9 +127,12 @@ class EmployeesPage extends Component {
                     </>
                 )}
                 {isModalOpen && (
-                    <Modal onClose={this.closeModal}>
-                        <EmployeeForm onClose={this.closeModal} />
-                    </Modal>
+                    <>
+                        <Modal onClose={this.closeModal}>
+                            <EmployeeForm onClose={this.closeModal} />
+                        </Modal>
+                        <div className={styles.modalBackground}></div>
+                    </>
                 )}
             </>
         );

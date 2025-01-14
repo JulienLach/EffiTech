@@ -361,7 +361,7 @@ class ClientsPage extends Component {
                                                         this.closeCategoryModal
                                                     }
                                                 >
-                                                    Filtrer
+                                                    Filter
                                                 </button>
                                             </div>
                                         </div>
@@ -687,7 +687,14 @@ class ClientsPage extends Component {
                                                         this.closeCategoryModal
                                                     }
                                                 >
-                                                    Fermer
+                                                    Annuler
+                                                </button>
+                                                <button
+                                                    onClick={
+                                                        this.closeCategoryModal
+                                                    }
+                                                >
+                                                    Filter
                                                 </button>
                                             </div>
                                         </div>
@@ -797,7 +804,7 @@ class ClientsPage extends Component {
                                 >
                                     <div className={styles.selectedCategory}>
                                         <label className={styles.labelRadio}>
-                                            Type de client :
+                                            Type de client:
                                         </label>
                                         <div>
                                             <label

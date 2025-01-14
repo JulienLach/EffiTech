@@ -1,0 +1,300 @@
+/* InterventionFormPage.module.css */
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: 2em 1.25em 0 15.6em;
+}
+
+.pageTitle {
+    font-size: 1.9em;
+    font-weight: 550;
+    margin-bottom: 1em;
+}
+
+.filterBar {
+    display: flex;
+    align-items: center;
+    margin-top: -1.1em;
+    margin-bottom: 1em;
+}
+
+.selectedCategory {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    margin: 1em 0em;
+}
+
+.rightPart {
+    margin-left: auto;
+}
+
+.particulier {
+    color: #c35e00;
+    font-weight: 550;
+    cursor: pointer;
+}
+
+.particulier:hover {
+    text-decoration: underline;
+}
+
+.professionnel {
+    color: #2c5ba1;
+    font-weight: 550;
+    cursor: pointer;
+}
+
+.professionnel:hover {
+    text-decoration: underline;
+}
+.radioParticulier {
+    margin-left: 0.5em;
+    color: #c35e00;
+}
+
+.radioForm {
+    margin-right: 0.6em;
+}
+
+.radioProfessionnel {
+    color: #2c5ba1;
+}
+
+.labelRadio {
+    font-size: 1.25em;
+    font-weight: 500;
+}
+
+.addClient {
+    background-color: #c93c2c;
+    padding: 0.6em 0.94em;
+    border: none;
+    border-radius: 0.4em;
+    color: white;
+    font-size: 1.1em;
+    font-weight: 500;
+    cursor: pointer;
+    margin: 0.625em 1.25em;
+}
+
+.addClient i {
+    margin-right: 0.625em;
+}
+
+.alignItems {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Style barre de recherche et filtre  */
+/* style for each filter button */
+.typeFilter {
+    font-size: 1em;
+    font-weight: 500;
+    border-radius: 0.4em;
+    height: 2.18em;
+    border: 0.06em solid #c0c0c0;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 1.25em;
+    margin-right: 0.625em;
+}
+
+/* style when you hover over the filter button */
+.typeFilter:hover {
+    color: white;
+    cursor: pointer;
+    background-color: #c93c2c;
+}
+
+/* icon position */
+.typeFilter i {
+    margin-right: 0.625em;
+    color: #424242;
+}
+
+/* Search input container style */
+.searchInput {
+    position: relative;
+    display: inline-block;
+    margin-right: 0.625em;
+}
+
+/* icon position inside the input */
+.searchInput i {
+    position: absolute;
+    top: 50%;
+    left: 0.625em;
+    transform: translateY(-50%);
+    color: #999;
+    pointer-events: none;
+}
+
+/* Search input style */
+.searchInput input {
+    padding: 0.625em 0.625em 0.625em 2.19em;
+    border: 0.06em solid #c0c0c0;
+    border-radius: 0.4em;
+}
+
+/* style de la modal */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 30%; /* Ajustez la largeur selon vos besoins */
+    height: 100%;
+    border-top-left-radius: 1.25em;
+    background-color: rgba(
+        0,
+        0,
+        0,
+        0.5
+    ); /* Optionnel : pour un fond semi-transparent */
+    display: flex;
+    align-items: flex-start; /* Aligne le contenu en haut */
+    justify-content: flex-end; /* Aligne le contenu à droite */
+    z-index: 1000; /* Assurez-vous que la modale est au-dessus des autres éléments */
+}
+
+.modalContent {
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    border-top-left-radius: 1em;
+    overflow-y: auto;
+    padding: 1.25em;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.modalHeader {
+    font-size: 2em;
+    font-weight: 550;
+}
+
+.separation {
+    height: 0.05em;
+    background-color: #ccc;
+    margin: 1.5em 0;
+}
+
+.closeButton {
+    position: absolute;
+    top: 0.625em;
+    right: 0.625em;
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+/* CSS for input & label */
+.labelInput {
+    font-size: 1em;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    width: 20vw;
+    margin-bottom: 0.625em;
+}
+
+/* CSS for input comportement */
+.labelInput input {
+    margin: 0 1em;
+    padding: 0.6em;
+    border: 0.06em solid #cccccc;
+    border-radius: 0.5em;
+}
+
+/* CSS for the label comportement */
+.labelInput label {
+    margin: 0 1em;
+    padding: 0.15em;
+}
+
+/* CSS for button positioning */
+.buttonPosition {
+    display: flex;
+    justify-content: start;
+    gap: 1em;
+    margin-left: 1em;
+}
+
+/* Common styles for buttons */
+.buttonPosition button {
+    /* margin: 0; */
+    padding: 0.625em;
+    border: none;
+    border-radius: 0.4em;
+    color: white;
+    font-size: 1.125em;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+/* Specific styles for cancel button */
+.cancelButton {
+    background-color: #ababab;
+}
+
+/* Specific styles for submit button */
+.submitButton {
+    background-color: #c93c2c;
+}
+
+.modalFilter {
+    margin-top: 0.2em;
+    padding: 1em;
+    position: absolute;
+    background-color: white;
+    border: 0.06em solid #c0c0c0;
+    border-radius: 0.4em;
+}
+
+.modalFilter input {
+    margin: 0.325em;
+    padding: 0.325em;
+    border: none;
+    border-radius: 0.4em;
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.modalFilter button {
+    margin: 0.3em;
+    padding: 0.2em 0.5em;
+    border: none;
+    border-radius: 0.3em;
+    font-size: 1em;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.modalFilter button:hover {
+    background-color: #c93c2c;
+    color: white;
+}
+
+.pagination {
+    display: flex;
+    gap: 0.5em;
+}
+
+.pagination button {
+    background-color: #e9e9e9;
+    border: none;
+    border-radius: 0.4em;
+    padding: 0.4em 1em;
+    margin: 3vh 0vh;
+    font-size: 1em;
+    transition: 0.05s;
+}
+
+.pagination button:hover {
+    background-color: #c93c2c;
+    color: white;
+}
