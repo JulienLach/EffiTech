@@ -18,47 +18,8 @@
     margin-bottom: 1em;
 }
 
-.selectedCategory {
-    display: flex;
-    align-items: center;
-    gap: 1em;
-    margin: 1em 0em;
-}
-
 .rightPart {
     margin-left: auto;
-}
-
-.particulier {
-    color: #c35e00;
-    font-weight: 550;
-    cursor: pointer;
-}
-
-.particulier:hover {
-    text-decoration: underline;
-}
-
-.professionnel {
-    color: #2c5ba1;
-    font-weight: 550;
-    cursor: pointer;
-}
-
-.professionnel:hover {
-    text-decoration: underline;
-}
-.radioParticulier {
-    color: #c35e00;
-}
-
-.radioProfessionnel {
-    color: #2c5ba1;
-}
-
-.labelRadio {
-    font-size: 1.25em;
-    font-weight: 500;
 }
 
 .addClient {
@@ -138,37 +99,6 @@
     border-radius: 0.4em;
 }
 
-.modalFilter {
-    padding: 1em;
-    position: absolute;
-    background-color: white;
-}
-
-.modalFilter input {
-    margin: 0.325em;
-    padding: 0.325em;
-    border: none;
-    border-radius: 0.4em;
-    font-size: 1em;
-    font-weight: 500;
-    cursor: pointer;
-}
-
-.modalFilter button {
-    margin: 0.3em;
-    padding: 0.2em 0.5em;
-    border: none;
-    border-radius: 0.3em;
-    font-size: 1em;
-    font-weight: 400;
-    cursor: pointer;
-}
-
-.modalFilter button:hover {
-    background-color: #c93c2c;
-    color: white;
-}
-
 .pagination {
     display: flex;
     gap: 0.5em;
@@ -187,4 +117,12 @@
 .pagination button:hover {
     background-color: #c93c2c;
     color: white;
+}
+
+.titleLink {
+    cursor: pointer;
+}
+
+.titleLink:hover {
+    text-decoration: underline;
 }

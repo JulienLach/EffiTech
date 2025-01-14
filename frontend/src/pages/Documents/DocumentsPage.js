@@ -27,6 +27,7 @@ class DocumentsPage extends Component {
         this.handleNextPage = this.handleNextPage.bind(this);
         this.handlePreviousPage = this.handlePreviousPage.bind(this);
         this.handleSearchChange = this.handleSearchChange.bind(this);
+        this.handleTitleClick = this.handleButtonClick.bind(this);
     }
 
     componentDidMount() {
@@ -67,6 +68,12 @@ class DocumentsPage extends Component {
     handleSubmit() {}
 
     handleSearchChange() {}
+
+    handleButtonClick(document) {
+        this.props.navigate("/document-details", {
+            state: { document: document },
+        });
+    }
 
     render() {
         const { isModalOpen, documents } = this.state;
@@ -122,10 +129,19 @@ class DocumentsPage extends Component {
                             </thead>
                             <tbody>
                                 {documents.map((document) => (
-                                    <tr key={document.id}>
+                                    <tr key={document.idDocument}>
                                         <td>D-{document.idDocument}</td>
                                         <td>
-                                            <a>{document.title}</a>
+                                            <a
+                                                className={styles.titleLink}
+                                                onClick={() =>
+                                                    this.handleButtonClick(
+                                                        document
+                                                    )
+                                                }
+                                            >
+                                                {document.title}
+                                            </a>
                                         </td>
                                         <td>{document.brand}</td>
                                         <td>{document.model}</td>

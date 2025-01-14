@@ -1,0 +1,89 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: start;
+    margin: 2.125em 1.25em 0 15.625em;
+}
+
+.pageTitle {
+    font-size: 1.9em;
+    font-weight: 550;
+}
+
+.documentInfo {
+    width: 100%;
+}
+
+.alignBackButton {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.names {
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    font-size: 2em;
+    font-weight: 550;
+}
+
+.backButton {
+    padding: 0.5em;
+    background-color: #ccc;
+    border: none;
+    border-radius: 0.3em;
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+.backButton i {
+    transform: rotate(180deg);
+    margin-right: 0.5em;
+}
+
+.separation {
+    margin: 2em 0;
+    border-bottom: 0.063em solid #ccc;
+    height: 0.06em;
+    width: 75%;
+}
+
+.documentDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4em;
+    margin-top: 1em;
+    font-size: 1em;
+}
+
+.documentDetails p {
+    margin: 0.4em 0;
+}
+
+.editButton {
+    background-color: #ccc;
+    padding: 0.5em 0.8em;
+    border: none;
+    border-radius: 0.3em;
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+    margin: 1em 0em;
+    transition: 0.1s;
+}
+
+.editButton:hover {
+    background-color: #c93c2c;
+    color: white;
+}
+
+.editButton i {
+    margin-right: 0.5em;
+    font-size: 0.8em;
+}

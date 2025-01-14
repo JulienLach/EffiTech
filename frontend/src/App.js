@@ -59,7 +59,7 @@ const App = () => {
                 <Route path="/documents" element={<DocumentsPage />} />
                 <Route
                     path="/document-details"
-                    elements={<DocumentDetailsPage />}
+                    element={<DocumentDetailsPage />}
                 />
                 <Route path="/notifications" element={<NotificationsPage />} />
                 <Route
