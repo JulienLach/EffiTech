@@ -1,0 +1,12 @@
+body {
+    box-sizing: border-box;
+    margin: 0;
+}
+/* placement du container */
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    padding-top: 4em;
+    margin-bottom: 5em;
+}

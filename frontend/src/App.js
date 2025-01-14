@@ -23,6 +23,7 @@ import CompanyDetails from "./pages/CompanyDetails/CompanyDetails";
 import ExpensePage from "./pages/Expense/ExpenseFormPage";
 import DocumentsPage from "./pages/Documents/DocumentsPage";
 import NotificationsPage from "./pages/Notifications/NotificationsPage";
+import CalendarMobilePage from "./pages/CalendarMobile/CalendarMobilePage";
 
 const App = () => {
     return (
@@ -56,6 +57,10 @@ const App = () => {
                 <Route path="/expense" element={<ExpensePage />} />
                 <Route path="/documents" element={<DocumentsPage />} />
                 <Route path="/notifications" element={<NotificationsPage />} />
+                <Route
+                    path="/calendar-mobile"
+                    element={<CalendarMobilePage />}
+                />
             </Routes>
         </Router>
     );

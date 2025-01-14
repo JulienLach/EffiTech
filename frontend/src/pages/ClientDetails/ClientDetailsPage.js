@@ -137,7 +137,13 @@ class ClientDetailsPage extends Component {
                                             {client.firstname} {client.lastname}
                                         </p>
                                         <h3>Téléphone</h3>
-                                        <p>{client.phoneNumber}</p>
+                                        <p>
+                                            <a
+                                                href={`tel:${client.phoneNumber}`}
+                                            >
+                                                {client.phoneNumber}
+                                            </a>
+                                        </p>
                                         <h3>Adresse mail</h3>
                                         <p>{client.email}</p>
                                     </div>
@@ -179,7 +185,13 @@ class ClientDetailsPage extends Component {
                                         <h3>Prénom</h3>
                                         <p>{client.firstname}</p>
                                         <h3>Téléphone</h3>
-                                        <p>{client.phoneNumber}</p>
+                                        <p>
+                                            <a
+                                                href={`tel:${client.phoneNumber}`}
+                                            >
+                                                {client.phoneNumber}
+                                            </a>
+                                        </p>
                                         <h3>Adresse mail</h3>
                                         <p>{client.email}</p>
                                     </div>
@@ -258,7 +270,14 @@ class ClientDetailsPage extends Component {
                                             Contact client : {client.firstname}{" "}
                                             {client.lastname}
                                         </p>
-                                        <p>Téléphone : {client.phoneNumber}</p>
+                                        <p>
+                                            Téléphone :{" "}
+                                            <a
+                                                href={`tel:${client.phoneNumber}`}
+                                            >
+                                                {client.phoneNumber}
+                                            </a>
+                                        </p>
                                         <p>
                                             Adresse : {client.address.address},{" "}
                                             {client.address.zipcode},{" "}
@@ -319,7 +338,14 @@ class ClientDetailsPage extends Component {
                                     <div className={styles.separation}></div>
                                     <h2>Coordonnées</h2>
                                     <div className={styles.contactInfo}>
-                                        <p>Téléphone : {client.phoneNumber}</p>
+                                        <p>
+                                            Téléphone :{" "}
+                                            <a
+                                                href={`tel:${client.phoneNumber}`}
+                                            >
+                                                {client.phoneNumber}
+                                            </a>
+                                        </p>
                                         <p>
                                             Adresse : {client.address.address},{" "}
                                             {client.address.zipcode},{" "}
