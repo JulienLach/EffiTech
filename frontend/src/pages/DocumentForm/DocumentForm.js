@@ -95,85 +95,104 @@ class DocumentForm extends Component {
 
     render() {
         const { onClose } = this.props;
-        const { document, errors} = this.state;
+        const { document, errors } = this.state;
 
         return (
-            <div className={styles.modalOverlay}>
-                <div className={styles.modalContent}>
-                    <h1 className={styles.modalHeader}>Nouveau document</h1>
-                    <div className={styles.separation}></div>
-                    <form
-                        className={styles.formElements}
-                        onSubmit={this.handleSubmit}
-                    >
-                        <div className={styles.labelInput}>
-                            <label htmlFor="title">Titre :</label>
-                            <input
-                                type="text"
-                                id="title"
-                                name="title"
-                                value={document.title}
-                                onChange={this.handleChange}
-                            />
-                            {errors.title && <span className={styles.error}>{errors.title}</span>}
-                        </div>
-                        <div className={styles.labelInput}>
-                            <label htmlFor="brand">
-                                Marque de l'équipement :
-                            </label>
-                            <input
-                                type="text"
-                                id="brand"
-                                name="brand"
-                                value={document.brand}
-                                onChange={this.handleChange}
-                            />
-                            {errors.brand && <span className={styles.error}>{errors.brand}</span>}
-                        </div>
-                        <div className={styles.labelInput}>
-                            <label htmlFor="model">
-                                Modèle de l'équipement :
-                            </label>
-                            <input
-                                type="text"
-                                id="model"
-                                name="model"
-                                value={document.model}
-                                onChange={this.handleChange}
-                            />
-                            {errors.model && <span className={styles.error}>{errors.model}</span>}
-                        </div>
-                        <div className={styles.labelInput}>
-                            <label htmlFor="file">Document PDF :</label>
-                            <input
-                                type="file"
-                                id="file"
-                                name="file"
-                                onChange={this.handleFileChange}
-                            />
-                            {errors.file && <span className={styles.error}>{errors.file}</span>}
-                        </div>
-
+            <>
+                <div className={styles.modalBackground}></div>
+                <div className={styles.modalOverlay}>
+                    <div className={styles.modalContent}>
+                        <h1 className={styles.modalHeader}>Nouveau document</h1>
                         <div className={styles.separation}></div>
+                        <form
+                            className={styles.formElements}
+                            onSubmit={this.handleSubmit}
+                        >
+                            <div className={styles.labelInput}>
+                                <label htmlFor="title">Titre :</label>
+                                <input
+                                    type="text"
+                                    id="title"
+                                    name="title"
+                                    value={document.title}
+                                    onChange={this.handleChange}
+                                />
+                                {errors.title && (
+                                    <span className={styles.error}>
+                                        {errors.title}
+                                    </span>
+                                )}
+                            </div>
+                            <div className={styles.labelInput}>
+                                <label htmlFor="brand">
+                                    Marque de l'équipement :
+                                </label>
+                                <input
+                                    type="text"
+                                    id="brand"
+                                    name="brand"
+                                    value={document.brand}
+                                    onChange={this.handleChange}
+                                />
+                                {errors.brand && (
+                                    <span className={styles.error}>
+                                        {errors.brand}
+                                    </span>
+                                )}
+                            </div>
+                            <div className={styles.labelInput}>
+                                <label htmlFor="model">
+                                    Modèle de l'équipement :
+                                </label>
+                                <input
+                                    type="text"
+                                    id="model"
+                                    name="model"
+                                    value={document.model}
+                                    onChange={this.handleChange}
+                                />
+                                {errors.model && (
+                                    <span className={styles.error}>
+                                        {errors.model}
+                                    </span>
+                                )}
+                            </div>
+                            <div className={styles.labelInput}>
+                                <label htmlFor="file">Document PDF :</label>
+                                <input
+                                    type="file"
+                                    id="file"
+                                    name="file"
+                                    onChange={this.handleFileChange}
+                                />
+                                {errors.file && (
+                                    <span className={styles.error}>
+                                        {errors.file}
+                                    </span>
+                                )}
+                            </div>
 
-                        <div className={styles.buttonPosition}>
-                            <button
-                                type="reset"
-                                className={styles.cancelButton}
-                                onClick={onClose}
-                            >
-                                Annuler
-                            </button>
-                            <button
-                                type="submit"
-                                className={styles.submitButton}
-                            >
-                                Ajouter
-                            </button>
-                        </div>
-                    </form>
+                            <div className={styles.separation}></div>
+
+                            <div className={styles.buttonPosition}>
+                                <button
+                                    type="reset"
+                                    className={styles.cancelButton}
+                                    onClick={onClose}
+                                >
+                                    Annuler
+                                </button>
+                                <button
+                                    type="submit"
+                                    className={styles.submitButton}
+                                >
+                                    Ajouter
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </div>
+            </>
         );
     }
 }

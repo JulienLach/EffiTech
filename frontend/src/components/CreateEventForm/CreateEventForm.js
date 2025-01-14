@@ -28,7 +28,7 @@ class CreateEventForm extends Component {
             isPlanned: false,
             selectedTab: "Intervention", // Par défaut sur l'onglet Intervention
             searchQuery: "",
-            errors: {}
+            errors: {},
         };
 
         this.handleClientChange = this.handleClientChange.bind(this);
@@ -119,12 +119,12 @@ class CreateEventForm extends Component {
             selectedEmployee,
             selectedTab,
         } = this.state;
-    
+
         const errors = {};
         if (!title || !selectedClient || !selectedEmployee) {
             errors.title = "* Champ obligatoire";
         }
-        
+
         if (Object.keys(errors).length > 0) {
             this.setState({ errors });
             return;
@@ -133,7 +133,7 @@ class CreateEventForm extends Component {
         // Calculer le statut dynamiquement
         let status;
         const today = new Date().toISOString().split("T")[0]; // Obtenir la date du jour au format YYYY-MM-DD
-    
+
         if (!startingDate) {
             status = 1;
         } else if (startingDate < today) {
@@ -143,7 +143,7 @@ class CreateEventForm extends Component {
         } else if (startingDate > today) {
             status = 4;
         }
-    
+
         const eventData = {
             title: title,
             description: description,
@@ -157,7 +157,7 @@ class CreateEventForm extends Component {
             endingHour: endingHour || null,
             idEmployee: selectedEmployee,
         };
-    
+
         createEvent(eventData, (error, newEvent) => {
             if (error) {
                 console.error("Error creating event:", error);
@@ -190,7 +190,7 @@ class CreateEventForm extends Component {
             selectedEmployee,
             selectedTab,
             searchQuery,
-            errors
+            errors,
         } = this.state;
 
         // Filtrer les clients en fonction de la recherche
@@ -201,170 +201,189 @@ class CreateEventForm extends Component {
         );
 
         return (
-            <form className={`${styles.modal} ${styles.open}`}>
-                <div>
-                    <h2>Plannifier un évènement</h2>
-                </div>
-                <div className={styles.tabs}>
-                    <button
-                        type="button"
-                        className={`${styles.tabButton} ${
-                            selectedTab === "Intervention"
-                                ? styles.activeTab
-                                : ""
-                        }`}
-                        onClick={() => this.handleTabChange("Intervention")}
-                    >
-                        Intervention
-                    </button>
-                    <button
-                        type="button"
-                        className={`${styles.tabButton} ${
-                            selectedTab === "Rendez-vous"
-                                ? styles.activeTab
-                                : ""
-                        }`}
-                        onClick={() => this.handleTabChange("Rendez-vous")}
-                    >
-                        Rendez-vous
-                    </button>
-                </div>
-                <div className={styles.form}>
+            <>
+                <div className={styles.modalBackground}></div>
+                <form className={`${styles.modal} ${styles.open}`}>
                     <div>
-                        <h3 className={styles.eventFormTitle}>
-                            {selectedTab === "Intervention"
-                                ? "Nouvelle intervention"
-                                : "Nouveau rendez-vous"}
-                        </h3>
+                        <h2>Plannifier un évènement</h2>
                     </div>
-                    <div>
-                        <label>
-                            Titre <span className={styles.required}>*</span> :
-                        </label>
-                        <input
-                            type="text"
-                            name="title"
-                            value={title}
-                            onChange={this.handleChange}
-                        />
-                        {errors.title && <span className={styles.error}>{errors.title}</span>}
-                    </div>
-                    <div>
-                        <label>
-                            Date{" "}
-                            {selectedTab === "Intervention"
-                                ? "d'intervention :"
-                                : "de rendez-vous :"}
-                        </label>
-                        <input
-                            type="date"
-                            name="startingDate"
-                            value={startingDate}
-                            onChange={this.handleChange}
-                        />
-                    </div>
-                    <div>
-                        <label>Heure de début :</label>
-                        <input
-                            type="time"
-                            name="startingHour"
-                            value={startingHour}
-                            onChange={this.handleChange}
-                        />
-                    </div>
-                    <div>
-                        <label>Heure de fin :</label>
-                        <input
-                            type="time"
-                            name="endingHour"
-                            value={endingHour}
-                            onChange={this.handleChange}
-                        />
-                    </div>
-                    <div>
-                        <label>Description :</label>
-                        <textarea
-                            className={styles.createEventTextarea}
-                            name="description"
-                            value={description}
-                            onChange={this.handleChange}
-                        />
-                    </div>
-                    <div>
-                        <label>
-                            Sélectionner un client{" "}
-                            <span className={styles.required}>*</span> :
-                        </label>
-                        <input
-                            type="text"
-                            placeholder="Rechercher un client"
-                            value={searchQuery}
-                            onChange={this.handleSearchChange}
-                        />
-                        <select onChange={this.handleClientChange}>
-                            <option value="">Sélectionner un client</option>
-                            {filteredClients.map((client) => (
-                                <option
-                                    key={client.idClient}
-                                    value={client.idClient}
-                                >
-                                    {client.firstname} {client.lastname}
-                                </option>
-                            ))}
-                        </select>
-                        {errors.title && <span className={styles.error}>{errors.title}</span>}
-                    </div>
-                    <div>
-                        <label>
-                            Adresse <span className={styles.required}>*</span> :
-                        </label>
-                        <input type="text" value={address} readOnly />
-                    </div>
-                    <div>
-                        <label>
-                            Sélectionner un technicien{" "}
-                            <span className={styles.required}>*</span> :
-                        </label>
-                        <select
-                            value={selectedEmployee}
-                            onChange={this.handleEmployeeChange}
-                        >
-                            <option value="">Sélectionner un technicien</option>
-                            {employees.map((employee) => (
-                                <option
-                                    key={employee.idEmployee}
-                                    value={employee.idEmployee}
-                                >
-                                    {employee.firstname} {employee.lastname}
-                                </option>
-                            ))}
-                        </select>
-                        {errors.title && <span className={styles.error}>{errors.title}</span>}
-                    </div>
-                    <div>
-                        <input
-                            type="hidden"
-                            value={this.state.isPlanned ? "true" : "false"}
-                        />
-                    </div>
-                    <div className={styles.modalFooter}>
+                    <div className={styles.tabs}>
                         <button
                             type="button"
-                            className={styles.cancelButton}
-                            onClick={this.props.closeModal}
+                            className={`${styles.tabButton} ${
+                                selectedTab === "Intervention"
+                                    ? styles.activeTab
+                                    : ""
+                            }`}
+                            onClick={() => this.handleTabChange("Intervention")}
                         >
-                            Annuler
+                            Intervention
                         </button>
                         <button
                             type="button"
-                            className={styles.submitButton}
-                            onClick={this.handleSubmit}
+                            className={`${styles.tabButton} ${
+                                selectedTab === "Rendez-vous"
+                                    ? styles.activeTab
+                                    : ""
+                            }`}
+                            onClick={() => this.handleTabChange("Rendez-vous")}
                         >
-                            Créer
+                            Rendez-vous
                         </button>
                     </div>
-                </div>
-            </form>
+                    <div className={styles.form}>
+                        <div>
+                            <h3 className={styles.eventFormTitle}>
+                                {selectedTab === "Intervention"
+                                    ? "Nouvelle intervention"
+                                    : "Nouveau rendez-vous"}
+                            </h3>
+                        </div>
+                        <div>
+                            <label>
+                                Titre <span className={styles.required}>*</span>{" "}
+                                :
+                            </label>
+                            <input
+                                type="text"
+                                name="title"
+                                value={title}
+                                onChange={this.handleChange}
+                            />
+                            {errors.title && (
+                                <span className={styles.error}>
+                                    {errors.title}
+                                </span>
+                            )}
+                        </div>
+                        <div>
+                            <label>
+                                Date{" "}
+                                {selectedTab === "Intervention"
+                                    ? "d'intervention :"
+                                    : "de rendez-vous :"}
+                            </label>
+                            <input
+                                type="date"
+                                name="startingDate"
+                                value={startingDate}
+                                onChange={this.handleChange}
+                            />
+                        </div>
+                        <div>
+                            <label>Heure de début :</label>
+                            <input
+                                type="time"
+                                name="startingHour"
+                                value={startingHour}
+                                onChange={this.handleChange}
+                            />
+                        </div>
+                        <div>
+                            <label>Heure de fin :</label>
+                            <input
+                                type="time"
+                                name="endingHour"
+                                value={endingHour}
+                                onChange={this.handleChange}
+                            />
+                        </div>
+                        <div>
+                            <label>Description :</label>
+                            <textarea
+                                className={styles.createEventTextarea}
+                                name="description"
+                                value={description}
+                                onChange={this.handleChange}
+                            />
+                        </div>
+                        <div>
+                            <label>
+                                Sélectionner un client{" "}
+                                <span className={styles.required}>*</span> :
+                            </label>
+                            <input
+                                type="text"
+                                placeholder="Rechercher un client"
+                                value={searchQuery}
+                                onChange={this.handleSearchChange}
+                            />
+                            <select onChange={this.handleClientChange}>
+                                <option value="">Sélectionner un client</option>
+                                {filteredClients.map((client) => (
+                                    <option
+                                        key={client.idClient}
+                                        value={client.idClient}
+                                    >
+                                        {client.firstname} {client.lastname}
+                                    </option>
+                                ))}
+                            </select>
+                            {errors.title && (
+                                <span className={styles.error}>
+                                    {errors.title}
+                                </span>
+                            )}
+                        </div>
+                        <div>
+                            <label>
+                                Adresse{" "}
+                                <span className={styles.required}>*</span> :
+                            </label>
+                            <input type="text" value={address} readOnly />
+                        </div>
+                        <div>
+                            <label>
+                                Sélectionner un technicien{" "}
+                                <span className={styles.required}>*</span> :
+                            </label>
+                            <select
+                                value={selectedEmployee}
+                                onChange={this.handleEmployeeChange}
+                            >
+                                <option value="">
+                                    Sélectionner un technicien
+                                </option>
+                                {employees.map((employee) => (
+                                    <option
+                                        key={employee.idEmployee}
+                                        value={employee.idEmployee}
+                                    >
+                                        {employee.firstname} {employee.lastname}
+                                    </option>
+                                ))}
+                            </select>
+                            {errors.title && (
+                                <span className={styles.error}>
+                                    {errors.title}
+                                </span>
+                            )}
+                        </div>
+                        <div>
+                            <input
+                                type="hidden"
+                                value={this.state.isPlanned ? "true" : "false"}
+                            />
+                        </div>
+                        <div className={styles.modalFooter}>
+                            <button
+                                type="button"
+                                className={styles.cancelButton}
+                                onClick={this.props.closeModal}
+                            >
+                                Annuler
+                            </button>
+                            <button
+                                type="button"
+                                className={styles.submitButton}
+                                onClick={this.handleSubmit}
+                            >
+                                Créer
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </>
         );
     }
 }
