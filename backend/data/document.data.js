@@ -88,6 +88,7 @@ class Document {
             }
             const row = result.rows[0];
             const document = new Document(
+                row.id_document,
                 row.title,
                 row.brand,
                 row.model,

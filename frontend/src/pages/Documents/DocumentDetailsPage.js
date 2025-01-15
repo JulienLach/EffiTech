@@ -77,12 +77,12 @@ class DocumentDetailsPage extends Component {
                         <p>Modèle : {document.model}</p>
                     </div>
                     <div className={styles.pdfContainer}>
-                        <iframe
+                        <embed
                             src={pdfDataUri}
+                            type="application/pdf"
                             width="100%"
                             height="600px"
-                            title="Document PDF"
-                        ></iframe>
+                        ></embed>
                     </div>
                 </div>
             </>
