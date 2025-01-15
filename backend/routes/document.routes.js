@@ -6,4 +6,6 @@ router.get("/", documentServices.getAllDocuments);
 
 router.post("/", documentServices.importDocument);
 
+router.get("/:idDocument", documentServices.getDocumentById);
+
 module.exports = router;
