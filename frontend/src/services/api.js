@@ -808,6 +808,69 @@ function createCompany(companyData, callback) {
     xhr.send(JSON.stringify(companyData));
 }
 
+/**
+ * @api {get} /documents Get all documents
+ * @apiName GetAllDocuments
+ * @apiGroup Documents
+ * @apiVersion 1.0.0
+ * @apiSuccess {Object[]} documents List of documents.
+ * @apiSuccess {Number} documents.idDocument Document ID.
+ * @apiSuccess {String} documents.title Document title.
+ * @apiSuccess {String} documents.brand Document brand.
+ * @apiSuccess {String} documents.model Document model.
+ * @apiSuccess {String} documents.file URL to download the document.
+ * @apiError {String} error Error message.
+ */
+function getAllDocuments(callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", `${API_URL}/documents`);
+    xhr.withCredentials = true;
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            callback(null, JSON.parse(xhr.responseText));
+        } else {
+            window.location.href = "http://localhost:3000/login";
+            console.error(
+                "Erreur de récupération des document",
+                xhr.statusText
+            );
+            callback(new Error(xhr.statusText), null);
+        }
+    };
+    xhr.send();
+}
+
+function importDocument(formData, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", `${API_URL}/documents`);
+    xhr.withCredentials = true;
+    xhr.onload = function () {
+        if (xhr.status === 200 || xhr.status === 201) {
+            console.log("Document importé");
+            callback(null, JSON.parse(xhr.responseText));
+        } else {
+            console.error("Erreur d'importation du document", xhr.statusText);
+            callback(new Error(xhr.statusText), null);
+        }
+    };
+    xhr.send(formData);
+}
+
+function getDocumentById(idDocument, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", `${API_URL}/documents/${idDocument}`);
+    xhr.withCredentials = true;
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            callback(null, JSON.parse(xhr.responseText));
+        } else {
+            callback(new Error(xhr.statusText), null);
+        }
+    };
+    xhr.send();
+}
+
 export {
     getAllEvents,
     getAllClients,
@@ -828,4 +891,7 @@ export {
     createClient,
     createEmployee,
     createCompany,
+    getAllDocuments,
+    importDocument,
+    getDocumentById,
 };

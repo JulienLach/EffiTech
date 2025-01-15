@@ -47,6 +47,9 @@ class TemplateGlobalMobile extends Component {
             case "/expense":
                 pageTitle = "Dépenses";
                 break;
+            case "/report":
+                pageTitle = "Rapport";
+                break;
             default:
                 pageTitle = "Page";
         }
@@ -71,9 +74,9 @@ class TemplateGlobalMobile extends Component {
                                     className={styles.notificationBell}
                                     alt="Notification Bell"
                                 />
-                                <span className={styles.notificationCount}>
-                                    2
-                                </span>
+                                <span
+                                    className={styles.notificationCount}
+                                ></span>
                             </div>
                             <div className={styles.profileBubble}>
                                 {initials}
@@ -87,7 +90,7 @@ class TemplateGlobalMobile extends Component {
                     <a href="/calendar">
                         <i className={`fas fa-list ${styles.navbarIcon}`}></i>
                     </a>
-                    <a href="/calendar">
+                    <a href="/calendar-mobile">
                         <i
                             className={`fas fa-calendar ${styles.navbarIcon}`}
                         ></i>

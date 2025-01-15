@@ -21,6 +21,10 @@ import CompanyFormPage from "./pages/CompanyForm/CompanyFormPage";
 import CompanyPage from "./pages/Company/CompanyPage";
 import CompanyDetails from "./pages/CompanyDetails/CompanyDetails";
 import ExpensePage from "./pages/Expense/ExpenseFormPage";
+import DocumentsPage from "./pages/Documents/DocumentsPage";
+import DocumentDetailsPage from "./pages/Documents/DocumentDetailsPage";
+import NotificationsPage from "./pages/Notifications/NotificationsPage";
+import CalendarMobilePage from "./pages/CalendarMobile/CalendarMobilePage";
 
 const App = () => {
     return (
@@ -52,6 +56,16 @@ const App = () => {
                 <Route path="/company-form" element={<CompanyFormPage />} />
                 <Route path="/company-details" element={<CompanyDetails />} />
                 <Route path="/expense" element={<ExpensePage />} />
+                <Route path="/documents" element={<DocumentsPage />} />
+                <Route
+                    path="/document-details"
+                    element={<DocumentDetailsPage />}
+                />
+                <Route path="/notifications" element={<NotificationsPage />} />
+                <Route
+                    path="/calendar-mobile"
+                    element={<CalendarMobilePage />}
+                />
             </Routes>
         </Router>
     );

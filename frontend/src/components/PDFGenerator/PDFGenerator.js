@@ -170,7 +170,7 @@ const PDFGenerator = ({ report, reportData, companyData }) => {
                 <iframe
                     src={URL.createObjectURL(pdfBlob)}
                     width="100%"
-                    height="600px"
+                    height="850px"
                     title="PDF Document"
                 />
             )}

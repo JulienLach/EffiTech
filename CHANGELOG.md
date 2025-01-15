@@ -6,6 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## Changes
+
+-   Add upload document to documents page
+-   Display selected document with PDF view
+-   Add error message to missing fields in all forms
+-   Add Notifications page
+-   Events can be sorted by multiples filters status and by clients or employee first and last names
+-   Add sorting by event type on calendar page
+-   Add calendar view to calendar page on mobile
+-   Add a link to open google maps on mobile on client page
+
 # [0.4.0] (2024-12-05)
 
 ## Changes

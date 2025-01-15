@@ -62,7 +62,8 @@ class EmployeesPage extends Component {
             <>
                 {screenType.mobile ? (
                     <>
-                        <h1>Mobile</h1>
+                        <h1>Mobile</h1>{" "}
+                        {/* ici faire une redirection simple vers la page de connexion */}
                     </>
                 ) : (
                     <>
@@ -126,9 +127,12 @@ class EmployeesPage extends Component {
                     </>
                 )}
                 {isModalOpen && (
-                    <Modal onClose={this.closeModal}>
-                        <EmployeeForm onClose={this.closeModal} />
-                    </Modal>
+                    <>
+                        <Modal onClose={this.closeModal}>
+                            <EmployeeForm onClose={this.closeModal} />
+                        </Modal>
+                        <div className={styles.modalBackground}></div>
+                    </>
                 )}
             </>
         );

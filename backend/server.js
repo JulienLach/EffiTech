@@ -1,6 +1,7 @@
 const dotenv = require("dotenv");
 const express = require("express");
 const cors = require("cors");
+const fileUpload = require("express-fileupload");
 const employeeRoutes = require("./routes/employee.routes.js");
 const clientRoutes = require("./routes/client.routes.js");
 const eventRoutes = require("./routes/event.routes.js");
@@ -8,6 +9,7 @@ const companyRoutes = require("./routes/company.routes.js");
 const addressRoutes = require("./routes/address.routes.js");
 const reportRoutes = require("./routes/report.routes.js");
 const authRoutes = require("./routes/auth.routes");
+const documentRoutes = require("./routes/document.routes.js");
 const authenticateToken = require("./middlewares/auth.middleware");
 
 dotenv.config({ path: ".env" });
@@ -23,6 +25,14 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json());
+
+app.use(
+    fileUpload({
+        useTempFiles: true,
+        tempFileDir: "/tmp/",
+        limits: { fileSize: 50 * 1024 * 1024 }, // Limite de taille de fichier de 50MB
+    })
+);
 
 app.get("/", (req, res) => {
     res.send("Test!");
@@ -48,6 +58,9 @@ app.use("/company", authenticateToken, companyRoutes);
 
 // Route des reports
 app.use("/reports", authenticateToken, reportRoutes);
+
+// Route des documents
+app.use("/documents", authenticateToken, documentRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);

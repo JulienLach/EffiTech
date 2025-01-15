@@ -33,6 +33,10 @@ class CalendarPage extends Component {
             currentPage: 1,
             eventsPerPage: 20,
             searchItem: "",
+            isStatusModalOpen: false,
+            selectedStatus: "",
+            isTypeModalOpen: false,
+            selectedType: "",
         };
 
         this.toggleEventModal = this.toggleEventModal.bind(this);
@@ -44,6 +48,10 @@ class CalendarPage extends Component {
         this.handleNextPage = this.handleNextPage.bind(this);
         this.handlePreviousPage = this.handlePreviousPage.bind(this);
         this.handleSearchChange = this.handleSearchChange.bind(this);
+        this.toggleStatusModal = this.toggleStatusModal.bind(this);
+        this.handleStatusChange = this.handleStatusChange.bind(this);
+        this.toggleTypeModal = this.toggleTypeModal.bind(this);
+        this.handleTypeChange = this.handleTypeChange.bind(this);
     }
 
     componentDidMount() {
@@ -216,6 +224,28 @@ class CalendarPage extends Component {
         this.setState({ searchItem: event.target.value });
     }
 
+    toggleStatusModal() {
+        this.setState((prevState) => ({
+            isStatusModalOpen: !prevState.isStatusModalOpen,
+        }));
+    }
+
+    handleStatusChange(event) {
+        const selectedStatus = event.target.value;
+        this.setState({ selectedStatus });
+    }
+
+    toggleTypeModal() {
+        this.setState((prevState) => ({
+            isTypeModalOpen: !prevState.isTypeModalOpen,
+        }));
+    }
+
+    handleTypeChange(event) {
+        const selectedType = event.target.value;
+        this.setState({ selectedType });
+    }
+
     render() {
         const {
             events,
@@ -228,11 +258,15 @@ class CalendarPage extends Component {
             currentPage,
             eventsPerPage,
             searchItem,
+            isStatusModalOpen,
+            selectedStatus,
+            isTypeModalOpen,
+            selectedType,
         } = this.state;
 
-        // Filtrer les événements en fonction de la recherche
+        // Filtrer les événements en fonction de la recherche et du statut
         const filteredEvents = events.filter((event) => {
-            return (
+            const matchesSearchItem =
                 event.title.toLowerCase().includes(searchItem.toLowerCase()) ||
                 event.client.firstname
                     .toLowerCase()
@@ -245,8 +279,16 @@ class CalendarPage extends Component {
                     .includes(searchItem.toLowerCase()) ||
                 event.employee.lastname
                     .toLowerCase()
-                    .includes(searchItem.toLowerCase())
-            );
+                    .includes(searchItem.toLowerCase());
+
+            const matchesStatus =
+                selectedStatus === "" ||
+                event.status.toString() === selectedStatus;
+
+            const matchesType =
+                selectedType === "" || event.type.toString() === selectedType;
+            // renvois à la fois les événements qui correspondent à la recherche au statut et au type
+            return matchesSearchItem && matchesStatus && matchesType;
         });
 
         // Calculer les événements à afficher pour la page actuelle
@@ -415,10 +457,20 @@ class CalendarPage extends Component {
                                     <FilterBar
                                         handleSearchChange={
                                             this.handleSearchChange
-                                        } // Ajout de handleSearchChange ici
+                                        }
                                         toggleCreateEventModal={
                                             this.toggleCreateEventModal
                                         }
+                                        toggleStatusModal={
+                                            this.toggleStatusModal
+                                        }
+                                        isStatusModalOpen={isStatusModalOpen}
+                                        handleStatusChange={
+                                            this.handleStatusChange
+                                        }
+                                        toggleTypeModal={this.toggleTypeModal}
+                                        isTypeModalOpen={isTypeModalOpen}
+                                        handleTypeChange={this.handleTypeChange}
                                     />
                                 </div>
                                 <h3 className={styles.eventTitle}>

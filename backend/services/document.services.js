@@ -1,13 +1,35 @@
 const Document = require("../data/document.data.js");
 
-function getAllDocuments() {}
+function getAllDocuments(req, res) {
+    Document.getAllDocuments((error, documents) => {
+        if (error) {
+            return res.status(500).send({
+                message: "Erreur lors de la récupération des documents",
+                error: error.message,
+            });
+        }
+        res.status(200).send(documents);
+    });
+}
 
-function getDocumentById() {}
+function importDocument(req, res) {
+    const { title, brand, model, file } = req.body;
 
-function importDocument() {}
+    const buffer = Buffer.from(file, "base64");
 
-function downloadDocument(req, res) {
-    const idDocument = req.params.id;
+    Document.importDocument(title, brand, model, buffer, (error, document) => {
+        if (error) {
+            return res.status(500).send({
+                message: "Erreur lors de l'import du document",
+                error: error.message,
+            });
+        }
+        res.status(200).send(document);
+    });
+}
+
+function getDocumentById(req, res) {
+    const idDocument = req.params.idDocument;
     Document.getDocumentById(idDocument, (error, document) => {
         if (error) {
             return res.status(500).send({
@@ -16,7 +38,7 @@ function downloadDocument(req, res) {
             });
         }
         if (document) {
-            res.download(document.path, document.name);
+            res.status(200).send(document);
         } else {
             res.status(404).send({ message: "Document non trouvé" });
         }
@@ -24,6 +46,5 @@ function downloadDocument(req, res) {
 }
 
 exports.getAllDocuments = getAllDocuments;
-exports.getDocumentById = getDocumentById;
 exports.importDocument = importDocument;
-exports.downloadDocument = downloadDocument;
+exports.getDocumentById = getDocumentById;

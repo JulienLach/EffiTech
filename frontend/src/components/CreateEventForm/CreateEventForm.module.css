@@ -20,6 +20,16 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.modalBackground {
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.85);
+}
+
 .tabs {
     display: flex;
     justify-content: center;
@@ -114,4 +124,9 @@
 .required {
     color: #c93c2c;
     font-weight: bold;
+}
+
+.error {
+    font-size: 0.9em;
+    color: rgb(226, 12, 12);
 }

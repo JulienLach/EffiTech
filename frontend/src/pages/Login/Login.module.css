@@ -109,3 +109,13 @@
     height: 20em;
     width: 20em;
 }
+
+.error {
+    color: #FFF;
+    font-size: 1.1em;
+    padding: 0.6em 0.6em;
+    background-color: #cf2b18;
+    border-radius: 0.4em;
+    width: 80%;
+    margin: 1em auto;
+}

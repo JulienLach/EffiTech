@@ -21,13 +21,14 @@ class ClientsPage extends Component {
             clients: [],
             error: null,
             isModalOpen: false,
-            category: "",
+            category: "Particulier",
             company: "",
             isCategeoryModalOpen: false,
             selectedCategory: "All",
             currentPage: 1,
             clientsPerPage: 10,
             searchItem: "",
+            errors: {},
         };
         this.handleButtonClick = this.handleButtonClick.bind(this);
         this.openModal = this.openModal.bind(this);
@@ -165,6 +166,37 @@ class ClientsPage extends Component {
         };
         console.log("Données du formulaire soumises:", data);
 
+        const errors = {};
+        if (!data.company) {
+            errors.company = "* Champ obligatoire";
+        }
+        if (!data.firstname) {
+            errors.firstname = "* Champ obligatoire";
+        }
+        if (!data.lastname) {
+            errors.lastname = "* Champ obligatoire";
+        }
+        if (!data.addressDetails.address) {
+            errors.address = "* Champ obligatoire";
+        }
+        if (!data.addressDetails.zipcode) {
+            errors.zipcode = "* Champ obligatoire";
+        }
+        if (!data.addressDetails.city) {
+            errors.city = "* Champ obligatoire";
+        }
+        if (!data.email) {
+            errors.email = "* Champ obligatoire";
+        }
+        if (!data.phoneNumber) {
+            errors.phone = "* Champ obligatoire";
+        }
+
+        if (Object.keys(errors).length > 0) {
+            this.setState({ errors });
+            return;
+        }
+
         createClient(data, (error, newClient) => {
             if (error) {
                 this.setState({ error: error.message });
@@ -190,6 +222,7 @@ class ClientsPage extends Component {
             currentPage,
             clientsPerPage,
             searchItem,
+            errors,
         } = this.state;
 
         // Filtrer les clients en fonction de la catégorie sélectionnée et de la recherche
@@ -759,166 +792,232 @@ class ClientsPage extends Component {
                             </div>
                         </div>
                         {isModalOpen && (
-                            <Modal onClose={this.closeModal}>
-                                <h1 className={styles.modalHeader}>
-                                    Nouveau client
-                                </h1>
-                                <div className={styles.separation}></div>
+                            <>
+                                <Modal onClose={this.closeModal}>
+                                    <h1 className={styles.modalHeader}>
+                                        Nouveau client
+                                    </h1>
+                                    <div className={styles.separation}></div>
 
-                                <form
-                                    className={styles.formElements}
-                                    onSubmit={this.handleSubmit}
-                                >
-                                    <div className={styles.selectedCategory}>
-                                        <label className={styles.labelRadio}>
-                                            Type de client:
-                                        </label>
-                                        <div>
+                                    <form
+                                        className={styles.formElements}
+                                        onSubmit={this.handleSubmit}
+                                    >
+                                        <div
+                                            className={styles.selectedCategory}
+                                        >
                                             <label
-                                                className={
-                                                    styles.radioParticulier
-                                                }
+                                                className={styles.labelRadio}
                                             >
-                                                <input
-                                                    type="radio"
-                                                    name="category"
-                                                    value="Particulier"
-                                                    checked={
-                                                        this.state.category ===
-                                                        "Particulier"
-                                                    }
-                                                    onChange={this.handleModalCategoryChange.bind(
-                                                        this
-                                                    )}
-                                                />
-                                                Particulier
+                                                Type de client:
                                             </label>
-                                        </div>
-                                        <div>
-                                            <label
-                                                className={
-                                                    styles.radioProfessionnel
-                                                }
-                                            >
-                                                <input
-                                                    type="radio"
-                                                    name="category"
-                                                    value="Professionnel"
-                                                    checked={
-                                                        this.state.category ===
-                                                        "Professionnel"
+                                            <div>
+                                                <label
+                                                    className={
+                                                        styles.radioParticulier
                                                     }
-                                                    onChange={this.handleModalCategoryChange.bind(
-                                                        this
-                                                    )}
-                                                />
-                                                Professionnel
-                                            </label>
+                                                >
+                                                    <input
+                                                        className={
+                                                            styles.radioForm
+                                                        }
+                                                        type="radio"
+                                                        name="category"
+                                                        value="Particulier"
+                                                        checked={
+                                                            this.state
+                                                                .category ===
+                                                            "Particulier"
+                                                        }
+                                                        onChange={this.handleModalCategoryChange.bind(
+                                                            this
+                                                        )}
+                                                    />
+                                                    Particulier
+                                                </label>
+                                            </div>
+                                            <div>
+                                                <label
+                                                    className={
+                                                        styles.radioProfessionnel
+                                                    }
+                                                >
+                                                    <input
+                                                        className={
+                                                            styles.radioForm
+                                                        }
+                                                        type="radio"
+                                                        name="category"
+                                                        value="Professionnel"
+                                                        checked={
+                                                            this.state
+                                                                .category ===
+                                                            "Professionnel"
+                                                        }
+                                                        onChange={this.handleModalCategoryChange.bind(
+                                                            this
+                                                        )}
+                                                    />
+                                                    Professionnel
+                                                </label>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    {this.state.category ===
-                                        "Professionnel" && (
+                                        {this.state.category ===
+                                            "Professionnel" && (
+                                            <div className={styles.labelInput}>
+                                                <label htmlFor="company">
+                                                    Nom de l'entreprise :{" "}
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    id="company"
+                                                    name="company"
+                                                    value={this.state.company}
+                                                    onChange={(e) =>
+                                                        this.setState({
+                                                            company:
+                                                                e.target.value,
+                                                        })
+                                                    }
+                                                />
+                                                {errors.company && (
+                                                    <span
+                                                        className={styles.error}
+                                                    >
+                                                        {errors.company}
+                                                    </span>
+                                                )}
+                                            </div>
+                                        )}
                                         <div className={styles.labelInput}>
-                                            <label htmlFor="company">
-                                                Nom de l'entreprise :{" "}
+                                            <label htmlFor="lastname">
+                                                Nom :
                                             </label>
                                             <input
                                                 type="text"
-                                                id="company"
-                                                name="company"
-                                                value={this.state.company}
-                                                onChange={(e) =>
-                                                    this.setState({
-                                                        company: e.target.value,
-                                                    })
-                                                }
+                                                id="lastname"
+                                                name="lastname"
                                             />
+                                            {errors.lastname && (
+                                                <span className={styles.error}>
+                                                    {errors.lastname}
+                                                </span>
+                                            )}
                                         </div>
-                                    )}
-                                    <div className={styles.labelInput}>
-                                        <label htmlFor="lastname">Nom :</label>
-                                        <input
-                                            type="text"
-                                            id="lastname"
-                                            name="lastname"
-                                        />
-                                    </div>
-                                    <div className={styles.labelInput}>
-                                        <label htmlFor="firstname">
-                                            Prénom :
-                                        </label>
-                                        <input
-                                            type="text"
-                                            id="firstname"
-                                            name="firstname"
-                                        />
-                                    </div>
-                                    <div className={styles.labelInput}>
-                                        <label htmlFor="address">
-                                            Adresse :
-                                        </label>
-                                        <input
-                                            type="text"
-                                            id="address"
-                                            name="address"
-                                        />
-                                    </div>
-                                    <div className={styles.labelInput}>
-                                        <label htmlFor="zipcode">
-                                            Code postal :
-                                        </label>
-                                        <input
-                                            type="text"
-                                            id="zipcode"
-                                            name="zipcode"
-                                        />
-                                    </div>
-                                    <div className={styles.labelInput}>
-                                        <label htmlFor="city">Ville :</label>
-                                        <input
-                                            type="text"
-                                            id="city"
-                                            name="city"
-                                        />
-                                    </div>
-                                    <div className={styles.labelInput}>
-                                        <label htmlFor="mail">Email :</label>
-                                        <input
-                                            type="email"
-                                            id="mail"
-                                            name="mail"
-                                        />
-                                    </div>
-                                    <div className={styles.labelInput}>
-                                        <label htmlFor="phone">
-                                            Téléphone :
-                                        </label>
-                                        <input
-                                            type="text"
-                                            id="phone"
-                                            name="phone"
-                                        />
-                                    </div>
-                                    <div className={styles.separation}></div>
+                                        <div className={styles.labelInput}>
+                                            <label htmlFor="firstname">
+                                                Prénom :
+                                            </label>
+                                            <input
+                                                type="text"
+                                                id="firstname"
+                                                name="firstname"
+                                            />
+                                            {errors.firstname && (
+                                                <span className={styles.error}>
+                                                    {errors.firstname}
+                                                </span>
+                                            )}
+                                        </div>
+                                        <div className={styles.labelInput}>
+                                            <label htmlFor="address">
+                                                Adresse :
+                                            </label>
+                                            <input
+                                                type="text"
+                                                id="address"
+                                                name="address"
+                                            />
+                                            {errors.address && (
+                                                <span className={styles.error}>
+                                                    {errors.address}
+                                                </span>
+                                            )}
+                                        </div>
+                                        <div className={styles.labelInput}>
+                                            <label htmlFor="zipcode">
+                                                Code postal :
+                                            </label>
+                                            <input
+                                                type="text"
+                                                id="zipcode"
+                                                name="zipcode"
+                                            />
+                                            {errors.zipcode && (
+                                                <span className={styles.error}>
+                                                    {errors.zipcode}
+                                                </span>
+                                            )}
+                                        </div>
+                                        <div className={styles.labelInput}>
+                                            <label htmlFor="city">
+                                                Ville :
+                                            </label>
+                                            <input
+                                                type="text"
+                                                id="city"
+                                                name="city"
+                                            />
+                                            {errors.city && (
+                                                <span className={styles.error}>
+                                                    {errors.city}
+                                                </span>
+                                            )}
+                                        </div>
+                                        <div className={styles.labelInput}>
+                                            <label htmlFor="mail">
+                                                Email :
+                                            </label>
+                                            <input
+                                                type="email"
+                                                id="mail"
+                                                name="mail"
+                                            />
+                                            {errors.email && (
+                                                <span className={styles.error}>
+                                                    {errors.email}
+                                                </span>
+                                            )}
+                                        </div>
+                                        <div className={styles.labelInput}>
+                                            <label htmlFor="phone">
+                                                Téléphone :
+                                            </label>
+                                            <input
+                                                type="text"
+                                                id="phone"
+                                                name="phone"
+                                            />
+                                            {errors.phone && (
+                                                <span className={styles.error}>
+                                                    {errors.phone}
+                                                </span>
+                                            )}
+                                        </div>
+                                        <div
+                                            className={styles.separation}
+                                        ></div>
 
-                                    <div className={styles.buttonPosition}>
-                                        <button
-                                            type="reset"
-                                            className={styles.cancelButton}
-                                            onClick={this.closeModal}
-                                        >
-                                            Annuler
-                                        </button>
-                                        <button
-                                            type="submit"
-                                            className={styles.submitButton}
-                                        >
-                                            Enregister
-                                        </button>
-                                    </div>
-                                </form>
-                            </Modal>
+                                        <div className={styles.buttonPosition}>
+                                            <button
+                                                type="reset"
+                                                className={styles.cancelButton}
+                                                onClick={this.closeModal}
+                                            >
+                                                Annuler
+                                            </button>
+                                            <button
+                                                type="submit"
+                                                className={styles.submitButton}
+                                            >
+                                                Enregister
+                                            </button>
+                                        </div>
+                                    </form>
+                                </Modal>
+                                <div className={styles.modalBackground}></div>
+                            </>
                         )}
                     </>
                 )}

@@ -1,7 +1,22 @@
+/* InterventionFormPage.module.css */
 .container {
     display: flex;
     flex-direction: column;
-    padding: 1em;
+    width: 80%;
+    margin: 2em 1.25em 0 15.6em;
+}
+
+.pageTitle {
+    font-size: 1.9em;
+    font-weight: 550;
+    margin-bottom: 1em;
+}
+
+.filterBar {
+    display: flex;
+    align-items: center;
+    margin-top: -1.1em;
+    margin-bottom: 1em;
 }
 
 .selectedCategory {
@@ -10,44 +25,37 @@
     gap: 1em;
     margin: 1em 0em;
 }
-.clientCard {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1em;
-    width: 100%;
-    border-radius: 0.4em;
-    margin: 1em 0 0.5em 0;
-    color: rgb(49, 49, 49);
-    box-shadow: 0 0.2em 0.2em rgba(0, 0, 0, 0.1);
-}
 
 .rightPart {
-    text-align: start;
-    margin-right: 1em;
+    margin-left: auto;
 }
 
-.name {
-    font-size: 1.3em;
-    font-weight: 500;
-}
-
-.address {
-    font-size: 1.1em;
-    font-weight: 400;
-}
-
-.clientCard i {
-    font-size: 2em;
-    margin-left: 0.8em;
-}
-
-.searchAndFilter {
-    margin: 0 auto;
-}
-
-.radioParticulier {
+.particulier {
     color: #c35e00;
+    font-weight: 550;
+    cursor: pointer;
+}
+
+.particulier:hover {
+    text-decoration: underline;
+}
+
+.professionnel {
+    color: #2c5ba1;
+    font-weight: 550;
+    cursor: pointer;
+}
+
+.professionnel:hover {
+    text-decoration: underline;
+}
+.radioParticulier {
+    margin-left: 0.5em;
+    color: #c35e00;
+}
+
+.radioForm {
+    margin-right: 0.6em;
 }
 
 .radioProfessionnel {
@@ -59,8 +67,26 @@
     font-weight: 500;
 }
 
-.leftPart {
-    text-align: center;
+.addClient {
+    background-color: #c93c2c;
+    padding: 0.6em 0.94em;
+    border: none;
+    border-radius: 0.4em;
+    color: white;
+    font-size: 1.1em;
+    font-weight: 500;
+    cursor: pointer;
+    margin: 0.625em 1.25em;
+}
+
+.addClient i {
+    margin-right: 0.625em;
+}
+
+.alignItems {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 /* Style barre de recherche et filtre  */
@@ -74,6 +100,7 @@
     display: inline-flex;
     align-items: center;
     padding: 0 1.25em;
+    margin-right: 0.625em;
 }
 
 /* style when you hover over the filter button */
@@ -83,20 +110,17 @@
     background-color: #c93c2c;
 }
 
+/* icon position */
 .typeFilter i {
     margin-right: 0.625em;
-    color: #000;
-}
-
-.typeFilter i:hover {
-    color: white;
+    color: #424242;
 }
 
 /* Search input container style */
 .searchInput {
     position: relative;
     display: inline-block;
-    margin-right: 0.3em;
+    margin-right: 0.625em;
 }
 
 /* icon position inside the input */
@@ -222,11 +246,11 @@
 }
 
 .modalFilter {
-    padding: 1em 2em;
-    text-align: start;
+    margin-top: 0.2em;
+    padding: 1em;
+    position: absolute;
+    background-color: white;
     border: 0.06em solid #c0c0c0;
-    width: 92%;
-    margin: 0.3em auto;
     border-radius: 0.4em;
 }
 
@@ -242,10 +266,11 @@
 
 .modalFilter button {
     margin: 0.3em;
-    padding: 0.4em 0.6em;
+    padding: 0.2em 0.5em;
     border: none;
-    border-radius: 0.4em;
+    border-radius: 0.3em;
     font-size: 1em;
+    font-weight: 400;
     cursor: pointer;
 }
 

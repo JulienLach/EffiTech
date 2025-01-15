@@ -165,3 +165,8 @@
 .validateButton:hover {
     background-color: #b73c2e;
 }
+
+.error {
+    font-size: 0.9em;
+    color: rgb(226, 12, 12);
+}

@@ -99,6 +99,11 @@ class ClientDetailsPage extends Component {
                 : client.lastname.charAt(0).toUpperCase() +
                   client.firstname.charAt(0).toUpperCase();
 
+        const clientAddress = `${client.address.address}, ${client.address.zipcode} ${client.address.city}`;
+        const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+            clientAddress
+        )}`;
+
         return (
             <>
                 {isMobile.mobile ? (
@@ -137,7 +142,13 @@ class ClientDetailsPage extends Component {
                                             {client.firstname} {client.lastname}
                                         </p>
                                         <h3>Téléphone</h3>
-                                        <p>{client.phoneNumber}</p>
+                                        <p>
+                                            <a
+                                                href={`tel:${client.phoneNumber}`}
+                                            >
+                                                {client.phoneNumber}
+                                            </a>
+                                        </p>
                                         <h3>Adresse mail</h3>
                                         <p>{client.email}</p>
                                     </div>
@@ -149,6 +160,15 @@ class ClientDetailsPage extends Component {
                                         <h3>Ville</h3>
                                         <p>{client.address.city}</p>
                                     </div>
+                                    <p>
+                                        <a
+                                            href={googleMapsUrl}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                        >
+                                            Voir sur Google Maps
+                                        </a>
+                                    </p>
                                     <div className={stylesMobile.mapCard}>
                                         <iframe
                                             src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1295.9371259602922!2d0.1083643145593688!3d49.48688229569379!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2sfr!4v1733324124820!5m2!1sfr!2sfr"
@@ -179,7 +199,13 @@ class ClientDetailsPage extends Component {
                                         <h3>Prénom</h3>
                                         <p>{client.firstname}</p>
                                         <h3>Téléphone</h3>
-                                        <p>{client.phoneNumber}</p>
+                                        <p>
+                                            <a
+                                                href={`tel:${client.phoneNumber}`}
+                                            >
+                                                {client.phoneNumber}
+                                            </a>
+                                        </p>
                                         <h3>Adresse mail</h3>
                                         <p>{client.email}</p>
                                     </div>
@@ -191,6 +217,15 @@ class ClientDetailsPage extends Component {
                                         <h3>Ville</h3>
                                         <p>{client.address.city}</p>
                                     </div>
+                                    <p>
+                                        <a
+                                            href={googleMapsUrl}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                        >
+                                            Voir sur Google Maps
+                                        </a>
+                                    </p>
                                     <div className={stylesMobile.mapCard}>
                                         <iframe
                                             src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1295.9371259602922!2d0.1083643145593688!3d49.48688229569379!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2sfr!4v1733324124820!5m2!1sfr!2sfr"
@@ -258,11 +293,23 @@ class ClientDetailsPage extends Component {
                                             Contact client : {client.firstname}{" "}
                                             {client.lastname}
                                         </p>
-                                        <p>Téléphone : {client.phoneNumber}</p>
                                         <p>
-                                            Adresse : {client.address.address},{" "}
-                                            {client.address.zipcode},{" "}
-                                            {client.address.city}
+                                            Téléphone :{" "}
+                                            <a
+                                                href={`tel:${client.phoneNumber}`}
+                                            >
+                                                {client.phoneNumber}
+                                            </a>
+                                        </p>
+                                        <p>Adresse : {clientAddress}</p>
+                                        <p>
+                                            <a
+                                                href={googleMapsUrl}
+                                                target="_blank"
+                                                rel="noreferrer"
+                                            >
+                                                Voir sur Google Maps
+                                            </a>
                                         </p>
                                         <p>Mail : {client.email}</p>
                                     </div>
@@ -319,11 +366,23 @@ class ClientDetailsPage extends Component {
                                     <div className={styles.separation}></div>
                                     <h2>Coordonnées</h2>
                                     <div className={styles.contactInfo}>
-                                        <p>Téléphone : {client.phoneNumber}</p>
                                         <p>
-                                            Adresse : {client.address.address},{" "}
-                                            {client.address.zipcode},{" "}
-                                            {client.address.city}
+                                            Téléphone :{" "}
+                                            <a
+                                                href={`tel:${client.phoneNumber}`}
+                                            >
+                                                {client.phoneNumber}
+                                            </a>
+                                        </p>
+                                        <p>Adresse : {clientAddress}</p>
+                                        <p>
+                                            <a
+                                                href={googleMapsUrl}
+                                                target="_blank"
+                                                rel="noreferrer"
+                                            >
+                                                Voir sur Google Maps
+                                            </a>
                                         </p>
                                         <p>
                                             <p>Mail : {client.email}</p>

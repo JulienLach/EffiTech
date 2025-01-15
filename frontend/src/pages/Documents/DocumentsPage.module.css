@@ -1,0 +1,128 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: 2em 1.25em 0 15.6em;
+}
+
+.pageTitle {
+    font-size: 1.9em;
+    font-weight: 550;
+    margin-bottom: 1em;
+}
+
+.filterBar {
+    display: flex;
+    align-items: center;
+    margin-top: -1.1em;
+    margin-bottom: 1em;
+}
+
+.rightPart {
+    margin-left: auto;
+}
+
+.addClient {
+    background-color: #c93c2c;
+    padding: 0.6em 0.94em;
+    border: none;
+    border-radius: 0.4em;
+    color: white;
+    font-size: 1.1em;
+    font-weight: 500;
+    cursor: pointer;
+    margin: 0.625em 1.25em;
+}
+
+.addClient i {
+    margin-right: 0.625em;
+}
+
+.alignItems {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Style barre de recherche et filtre  */
+/* style for each filter button */
+.typeFilter {
+    font-size: 1em;
+    font-weight: 500;
+    border-radius: 0.4em;
+    height: 2.18em;
+    border: 0.06em solid #c0c0c0;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 1.25em;
+    margin-right: 0.625em;
+}
+
+/* style when you hover over the filter button */
+.typeFilter:hover {
+    color: white;
+    cursor: pointer;
+    background-color: #c93c2c;
+}
+
+/* icon position */
+.typeFilter i {
+    margin-right: 0.625em;
+    color: #000;
+}
+
+.typeFilter:hover i {
+    color: white;
+}
+
+/* Search input container style */
+.searchInput {
+    position: relative;
+    display: inline-block;
+    margin-right: 0.625em;
+}
+
+/* icon position inside the input */
+.searchInput i {
+    position: absolute;
+    top: 50%;
+    left: 0.625em;
+    transform: translateY(-50%);
+    color: #999;
+    pointer-events: none;
+}
+
+/* Search input style */
+.searchInput input {
+    padding: 0.625em 0.625em 0.625em 2.19em;
+    border: 0.06em solid #c0c0c0;
+    border-radius: 0.4em;
+}
+
+.pagination {
+    display: flex;
+    gap: 0.5em;
+}
+
+.pagination button {
+    background-color: #e9e9e9;
+    border: none;
+    border-radius: 0.4em;
+    padding: 0.4em 1em;
+    margin: 3vh 0vh;
+    font-size: 1em;
+    transition: 0.05s;
+}
+
+.pagination button:hover {
+    background-color: #c93c2c;
+    color: white;
+}
+
+.titleLink {
+    cursor: pointer;
+}
+
+.titleLink:hover {
+    text-decoration: underline;
+}
