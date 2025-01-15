@@ -31,12 +31,13 @@ class Document {
                 return callback(error, null);
             }
             const documents = result.rows.map(function (row) {
+                const fileBase64 = row.file.toString("base64");
                 return new Document(
                     row.id_document,
                     row.title,
                     row.brand,
                     row.model,
-                    row.file
+                    fileBase64
                 );
             });
             callback(null, documents);
@@ -49,19 +50,21 @@ class Document {
      * @param {function} callback - La fonction de rappel.
      */
     static getDocumentById(idDocument, callback) {
-        const query = "SELECT * FROM documents WHERE idDocument = $1";
+        const query = "SELECT * FROM documents WHERE id_document = $1";
         const values = [idDocument];
         pool.query(query, values, (error, result) => {
             if (error) {
                 return callback(error, null);
             }
             const row = result.rows[0];
+            const fileBase64 = row.file.toString("base64");
+
             const document = new Document(
                 row.id_document,
                 row.title,
                 row.brand,
                 row.model,
-                row.file
+                fileBase64
             );
             callback(null, document);
         });

@@ -32,8 +32,8 @@ class DocumentDetailsPage extends Component {
                 );
                 this.setState({ error: error.message });
             } else {
-                this.setState({ document: data });
                 console.log("Données du document récupérées:", data);
+                this.setState({ document: data });
             }
         });
     }
@@ -47,6 +47,9 @@ class DocumentDetailsPage extends Component {
     render() {
         const { document, error } = this.state;
 
+        //URI de la string base64 du PDF
+        const pdfDataUri = `data:application/pdf;base64,${document.file}`;
+
         return (
             <>
                 <TemplateGlobal />
@@ -54,9 +57,7 @@ class DocumentDetailsPage extends Component {
                     <div className={styles.documentInfo}>
                         <h1 className={styles.pageTitle}>Document</h1>
                         <div className={styles.alignBackButton}>
-                            <div className={styles.names}>
-                                <p className={styles.title}>{document.title}</p>
-                            </div>
+                            <div className={styles.names}></div>
                             <button
                                 type="button"
                                 className={styles.backButton}
@@ -70,10 +71,18 @@ class DocumentDetailsPage extends Component {
                         </div>
                     </div>
                     <div className={styles.separation}></div>
-                    <h2>Informations</h2>
                     <div className={styles.documentDetails}>
+                        <p>Titre : {document.title}</p>
                         <p>Marque : {document.brand}</p>
                         <p>Modèle : {document.model}</p>
+                    </div>
+                    <div className={styles.pdfContainer}>
+                        <iframe
+                            src={pdfDataUri}
+                            width="100%"
+                            height="600px"
+                            title="Document PDF"
+                        ></iframe>
                     </div>
                 </div>
             </>
