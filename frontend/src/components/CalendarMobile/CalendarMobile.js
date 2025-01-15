@@ -48,7 +48,7 @@ function eventStyleGetter(event) {
 class CalendarMobile extends Component {
     render() {
         return (
-            <div className="height" style={{ height: "80vh" }}>
+            <div className="height" style={{ height: "90vh", margin: "2em" }}>
                 <BigCalendar
                     localizer={localizer}
                     events={this.props.events}
@@ -70,7 +70,10 @@ class CalendarMobile extends Component {
                             localizer.format(start, "HH:mm", culture) +
                             " - " +
                             localizer.format(end, "HH:mm", culture),
-                        dayFormat: "dddd DD/MM", // Format des jours
+                        dayFormat: (date, culture, localizer) =>
+                            [1, 2, 3, 4, 5].includes(date.getDay())
+                                ? localizer.format(date, "dddd DD/MM", culture)
+                                : "", // Masquer samedi et dimanche
                         monthHeaderFormat: "MMMM YYYY", // Format des mois
                     }}
                     messages={{
@@ -90,6 +93,17 @@ class CalendarMobile extends Component {
                                 {event.title} - {event.client}
                             </span>
                         ),
+                    }}
+                    dayPropGetter={(date) => {
+                        const day = date.getDay();
+                        if (day === 0 || day === 6) {
+                            return {
+                                style: {
+                                    display: "none",
+                                },
+                            };
+                        }
+                        return {};
                     }}
                 />
             </div>
