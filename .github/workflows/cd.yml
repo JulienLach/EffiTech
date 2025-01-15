@@ -54,16 +54,19 @@ jobs:
             - name: Build and push Docker images
               run: |
                   TAG_NAME=$(echo ${{ github.ref }} | sed 's/refs\/tags\///')
-                  IMAGE_NAME_POSTGRES=julienlach/effitech:postgres-${TAG_NAME}
                   IMAGE_NAME_FRONTEND=julienlach/effitech:frontend-${TAG_NAME}
                   IMAGE_NAME_BACKEND=julienlach/effitech:backend-${TAG_NAME}
+                  IMAGE_NAME_POSTGRES=julienlach/effitech:postgres-${TAG_NAME}
 
-                  # Build images
-                  docker build -t $IMAGE_NAME_POSTGRES -f Dockerfile.postgres .
+                  # Build and push frontend image
                   docker build -t $IMAGE_NAME_FRONTEND -f Dockerfile.frontend .
-                  docker build -t $IMAGE_NAME_BACKEND -f Dockerfile.backend .
-
-                  # Push images
-                  docker push $IMAGE_NAME_POSTGRES
                   docker push $IMAGE_NAME_FRONTEND
+
+                  # Build and push backend image
+                  docker build -t $IMAGE_NAME_BACKEND -f Dockerfile.backend .
                   docker push $IMAGE_NAME_BACKEND
+
+                  # Push existing postgres image
+                  docker pull julienlach/effitech:postgres
+                  docker tag julienlach/effitech:postgres $IMAGE_NAME_POSTGRES
+                  docker push $IMAGE_NAME_POSTGRES

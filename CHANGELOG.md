@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+# [0.5.1] (2025-15-01)
+
+## Changes
+
+-   Fix cd pipeline
+
 # [0.5.0] (2025-15-01)
 
 ## Changes
