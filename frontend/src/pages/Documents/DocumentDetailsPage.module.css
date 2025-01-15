@@ -48,7 +48,6 @@
 }
 
 .separation {
-    margin: 2em 0;
     border-bottom: 0.063em solid #ccc;
     height: 0.06em;
     width: 75%;
@@ -90,7 +89,7 @@
 
 .pdfContainer {
     margin-top: 2em;
-    width: 80%;
+    width: 90%;
     height: 600px;
     border: 1px solid #ccc;
 }

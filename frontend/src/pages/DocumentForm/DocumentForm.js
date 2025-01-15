@@ -44,7 +44,7 @@ class DocumentForm extends Component {
             this.setState((prevState) => ({
                 document: {
                     ...prevState.document,
-                    file: reader.result.split(",")[1], // Encode en base64
+                    file: reader.result.split(",")[1],
                 },
             }));
         };
