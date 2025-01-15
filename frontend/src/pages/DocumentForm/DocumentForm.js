@@ -39,12 +39,16 @@ class DocumentForm extends Component {
 
     handleFileChange(event) {
         const file = event.target.files[0];
-        this.setState((prevState) => ({
-            document: {
-                ...prevState.document,
-                file: file,
-            },
-        }));
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            this.setState((prevState) => ({
+                document: {
+                    ...prevState.document,
+                    file: reader.result.split(",")[1], // Encode en base64
+                },
+            }));
+        };
+        reader.readAsDataURL(file);
     }
 
     handleSubmit(event) {

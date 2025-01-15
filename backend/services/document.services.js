@@ -13,10 +13,11 @@ function getAllDocuments(req, res) {
 }
 
 function importDocument(req, res) {
-    const { title, brand, model } = req.body;
-    const file = req.files.file;
+    const { title, brand, model, file } = req.body;
 
-    Document.importDocument(title, brand, model, file, (error, document) => {
+    const buffer = Buffer.from(file, "base64");
+
+    Document.importDocument(title, brand, model, buffer, (error, document) => {
         if (error) {
             return res.status(500).send({
                 message: "Erreur lors de l'import du document",
@@ -43,6 +44,7 @@ function getDocumentById(req, res) {
         }
     });
 }
+
 exports.getAllDocuments = getAllDocuments;
 exports.importDocument = importDocument;
 exports.getDocumentById = getDocumentById;
