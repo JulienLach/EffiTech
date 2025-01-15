@@ -59,11 +59,11 @@ jobs:
                   IMAGE_NAME_POSTGRES=julienlach/effitech:postgres-${TAG_NAME}
 
                   # Build and push frontend image
-                  docker build -t $IMAGE_NAME_FRONTEND -f Dockerfile.frontend .
+                  docker build -t $IMAGE_NAME_FRONTEND -f frontend/Dockerfile.frontend frontend
                   docker push $IMAGE_NAME_FRONTEND
 
                   # Build and push backend image
-                  docker build -t $IMAGE_NAME_BACKEND -f Dockerfile.backend .
+                  docker build -t $IMAGE_NAME_BACKEND -f backend/Dockerfile.backend backend
                   docker push $IMAGE_NAME_BACKEND
 
                   # Push existing postgres image
