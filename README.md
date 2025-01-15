@@ -157,9 +157,10 @@ This project uses **GitHub Actions** to automate unit tests and create new relea
 
 -   To automatically run **CD** actions, follow these steps:
 
-    -   Merge your current working branch into the `develop` branch.
-    -   Create a new pull request (PR) to merge `develop` into `main`.
-    -   Don't forget to update de `CHANGELOG.md` file before your `devlop` into `main` PR
+    -   Update `CHANGELOG.md` with all new changes and fixes
+    -   Merge your current working branch into the `develop` branch
+    -   Create a new pull request (PR) to merge `develop` into `main`, check all the code.
+    -   Merge your PR `develop` into `main`
     -   Locally in your terminal, switch to the `main` branch:
         ```sh
         git checkout main
