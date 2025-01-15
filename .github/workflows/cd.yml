@@ -66,7 +66,7 @@ jobs:
                   docker build -t $IMAGE_NAME_BACKEND -f backend/Dockerfile.backend backend
                   docker push $IMAGE_NAME_BACKEND
 
-                  # Tag and push existing postgres image
-                  docker pull postgres:13
-                  docker tag postgres:13 $IMAGE_NAME_POSTGRES
+                  # Push existing postgres image
+                  docker pull julienlach/effitech:postgres
+                  docker tag julienlach/effitech:postgres $IMAGE_NAME_POSTGRES
                   docker push $IMAGE_NAME_POSTGRES
