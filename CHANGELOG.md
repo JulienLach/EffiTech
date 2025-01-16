@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## Fixes
+
+-   Add Regex to all forms
+
 # [0.5.2] (2025-15-01)
 
 ## Fixes
