@@ -121,8 +121,18 @@ class CreateEventForm extends Component {
         } = this.state;
 
         const errors = {};
-        if (!title || !selectedClient || !selectedEmployee) {
+        if (!title) {
             errors.title = "* Champ obligatoire";
+        } else if (/['"\\;%()]/.test(title)) {
+            errors.title = "* Ne doit pas contenir de caractères spéciaux";
+        }
+
+        if (!selectedClient) {
+            errors.selectedClient = "* Champ obligatoire";
+        }
+
+        if (!selectedEmployee) {
+            errors.selectedEmployee = "* Champ obligatoire";
         }
 
         if (Object.keys(errors).length > 0) {
@@ -319,9 +329,9 @@ class CreateEventForm extends Component {
                                     </option>
                                 ))}
                             </select>
-                            {errors.title && (
+                            {errors.selectedClient && (
                                 <span className={styles.error}>
-                                    {errors.title}
+                                    {errors.selectedClient}
                                 </span>
                             )}
                         </div>
@@ -353,9 +363,9 @@ class CreateEventForm extends Component {
                                     </option>
                                 ))}
                             </select>
-                            {errors.title && (
+                            {errors.selectedEmployee && (
                                 <span className={styles.error}>
-                                    {errors.title}
+                                    {errors.selectedEmployee}
                                 </span>
                             )}
                         </div>
