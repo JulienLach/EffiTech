@@ -202,3 +202,13 @@ i {
 .active a {
     color: white !important;
 }
+
+.shortcutModalOverlay {
+    position: absolute;
+    top: 4em;
+    right: 4em;
+    background-color: rgb(255, 255, 255);
+    border: 0.1em solid rgb(204, 204, 204);
+    border-radius: 0.5em;
+    padding: 0.9em;
+}
