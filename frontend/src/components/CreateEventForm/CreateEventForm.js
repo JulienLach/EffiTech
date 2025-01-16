@@ -123,8 +123,9 @@ class CreateEventForm extends Component {
         const errors = {};
         if (!title) {
             errors.title = "* Champ obligatoire";
-        } else if (/['"\\;%()]/.test(title)) {
-            errors.title = "* Ne doit pas contenir de caractères spéciaux";
+        } else if (!/^[a-zA-ZÀ-ÿ\d\s-]+$/.test(title)) {
+            errors.title =
+                "* Ne doit contenir que des lettres, des chiffres, des espaces et des tirets";
         }
 
         if (!selectedClient) {
