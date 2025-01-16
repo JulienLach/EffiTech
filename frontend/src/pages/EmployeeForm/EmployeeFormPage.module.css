@@ -84,3 +84,10 @@
     flex-direction: column;
     gap: 1em;
 }
+
+.error {
+    font-size: 0.9em;
+    margin: 0 0 0 0.3em;
+    font-weight: 500;
+    color: rgb(226, 12, 12);
+}
