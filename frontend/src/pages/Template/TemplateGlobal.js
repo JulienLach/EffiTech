@@ -1,7 +1,13 @@
 import React, { Component } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./TemplateGlobal.module.css";
 import logo from "../../images/logo.svg";
 import bellIcon from "../../images/notificationBell.svg";
+
+function TemplateGlobalWrapper(props) {
+    const navigate = useNavigate();
+    return <TemplateGlobal {...props} navigate={navigate} />;
+}
 
 class TemplateGlobal extends Component {
     constructor(props) {
@@ -13,6 +19,7 @@ class TemplateGlobal extends Component {
         };
         this.toggleProfileMenu = this.toggleProfileMenu.bind(this);
         this.logout = this.logout.bind(this);
+        this.handleNotificationClick = this.handleNotificationClick.bind(this);
     }
 
     componentDidMount() {
@@ -44,6 +51,10 @@ class TemplateGlobal extends Component {
         window.location.href = "/login";
     }
 
+    handleNotificationClick() {
+        this.props.navigate("/notifications");
+    }
+
     render() {
         const { currentPath, showProfileMenu, initials } = this.state;
 
@@ -63,7 +74,10 @@ class TemplateGlobal extends Component {
                                     <i className="fa-solid fa-plus"></i>Créer
                                 </button>
                             </div>
-                            <div className={styles.notificationIcon}>
+                            <div
+                                className={styles.notificationIcon}
+                                onClick={this.handleNotificationClick}
+                            >
                                 <img
                                     src={bellIcon}
                                     className={styles.notificationBell}
@@ -195,4 +209,4 @@ class TemplateGlobal extends Component {
     }
 }
 
-export default TemplateGlobal;
+export default TemplateGlobalWrapper;
