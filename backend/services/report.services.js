@@ -1,3 +1,4 @@
+const { body, validationResult } = require("express-validator");
 const Report = require("../data/report.data.js"); // Importer le modèle Report
 
 function createReport(req, res) {
@@ -13,6 +14,30 @@ function createReport(req, res) {
         employeeSignature,
         idEvent,
     } = req.body;
+
+    // Exécuter les règles de validation
+    const validationChecks = [
+        body("breakdown").isString().trim().escape().notEmpty(),
+        body("workDone").isString().trim().escape().notEmpty(),
+        body("reschedule").isBoolean().notEmpty(),
+        body("startingDate").isISO8601().notEmpty(),
+        body("startingHour").isString().trim().escape().notEmpty(),
+        body("endingHour").isString().trim().escape().notEmpty(),
+        body("duration").isString().trim().escape().notEmpty(),
+        body("clientSignature").isString().trim().escape().notEmpty(),
+        body("employeeSignature").isString().trim().escape().notEmpty(),
+        body("idEvent").isInt().notEmpty(),
+    ];
+
+    for (let validation of validationChecks) {
+        validation.run(req);
+    }
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
     console.log("Données reçues:", req.body); // Log des données reçues
 
     Report.createReport(
