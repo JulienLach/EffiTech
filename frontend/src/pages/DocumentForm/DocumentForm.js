@@ -63,17 +63,25 @@ class DocumentForm extends Component {
         const errors = {};
         if (!document.title) {
             errors.title = "* Champ obligatoire";
+        } else if (!/^[a-zA-Z0-9\s-]+$/.test(document.title)) {
+            errors.title =
+                "* Ne doit contenir que des lettres, des chiffres, des espaces ou des traits d'union";
         }
         if (!document.brand) {
             errors.brand = "* Champ obligatoire";
+        } else if (!/^[a-zA-Z0-9\s-]+$/.test(document.brand)) {
+            errors.brand =
+                "* Ne doit contenir que des lettres, des chiffres, des espaces ou des traits d'union";
         }
         if (!document.model) {
             errors.model = "* Champ obligatoire";
+        } else if (!/^[a-zA-Z0-9\s-]+$/.test(document.model)) {
+            errors.model =
+                "* Ne doit contenir que des lettres, des chiffres, des espaces ou des traits d'union";
         }
         if (!document.file) {
             errors.file = "* Champ obligatoire";
         }
-
         if (Object.keys(errors).length > 0) {
             this.setState({ errors });
             return;

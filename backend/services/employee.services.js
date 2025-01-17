@@ -1,3 +1,4 @@
+const { body, validationResult } = require("express-validator");
 const Employee = require("../data/employee.data.js"); // Importer le modèle Employee
 
 function getAllEmployees(req, res) {
@@ -40,6 +41,28 @@ function createEmployee(req, res) {
         password = "",
         speciality,
     } = req.body;
+
+    // Exécuter les règles de validation
+    const validationChecks = [
+        body("firstname").isString().trim().escape().notEmpty(),
+        body("lastname").isString().trim().escape().notEmpty(),
+        body("job").isString().trim().escape().notEmpty(),
+        body("phoneNumber").isString().trim().escape().notEmpty(),
+        body("email").isEmail().normalizeEmail().notEmpty(),
+        body("isAdmin").isBoolean().optional(),
+        body("password").isString().trim().notEmpty(),
+        body("speciality").isString().trim().escape().notEmpty(),
+    ];
+
+    for (let validation of validationChecks) {
+        validation.run(req);
+    }
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
     Employee.createEmployee(
         firstname,
         lastname,
@@ -73,6 +96,28 @@ function updateEmployee(req, res) {
         password,
         speciality,
     } = req.body;
+
+    // Exécuter les règles de validation
+    const validationChecks = [
+        body("firstname").isString().trim().escape().notEmpty(),
+        body("lastname").isString().trim().escape().notEmpty(),
+        body("job").isString().trim().escape().notEmpty(),
+        body("phoneNumber").isString().trim().escape().notEmpty(),
+        body("email").isEmail().normalizeEmail().notEmpty(),
+        body("isAdmin").isBoolean().optional(),
+        body("password").isString().trim().notEmpty(),
+        body("speciality").isString().trim().escape().notEmpty(),
+    ];
+
+    for (let validation of validationChecks) {
+        validation.run(req);
+    }
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
     Employee.updateEmployee(
         idEmployee,
         firstname,

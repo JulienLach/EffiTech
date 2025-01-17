@@ -1,3 +1,4 @@
+const { body, validationResult } = require("express-validator");
 const Event = require("../data/event.data.js");
 const Intervention = require("../data/event.data.js");
 const Appointment = require("../data/event.data.js");
@@ -53,6 +54,30 @@ function createEvent(req, res) {
         endingHour,
         idEmployee,
     } = req.body;
+
+    const validationChecks = [
+        body("title").isString().trim().escape().notEmpty(),
+        body("description").isString().trim().escape().optional(),
+        body("status").isString().trim().escape().notEmpty(),
+        body("isPlanned").isBoolean().notEmpty(),
+        body("type").isString().trim().escape().notEmpty(),
+        body("idClient").isInt().notEmpty(),
+        body("idAddress").isInt().notEmpty(),
+        body("startingDate").isISO8601().notEmpty(),
+        body("startingHour").isString().trim().escape().notEmpty(),
+        body("endingHour").isString().trim().escape().notEmpty(),
+        body("idEmployee").isInt().notEmpty(),
+    ];
+
+    for (let validation of validationChecks) {
+        validation.run(req);
+    }
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
     Event.createEvent(
         title,
         description,
@@ -94,7 +119,29 @@ function updateEvent(req, res) {
         workToDo,
     } = req.body;
 
-    console.log("Données reçues pour la mise à jour:", req.body); // Log des données reçues
+    const validationChecks = [
+        body("title").isString().trim().escape().notEmpty(),
+        body("description").isString().trim().escape().optional(),
+        body("status").isString().trim().escape().notEmpty(),
+        body("isPlanned").isBoolean().notEmpty(),
+        body("type").isString().trim().escape().notEmpty(),
+        body("idClient").isInt().notEmpty(),
+        body("idAddress").isInt().notEmpty(),
+        body("startingDate").isISO8601().notEmpty(),
+        body("startingHour").isString().trim().escape().notEmpty(),
+        body("endingHour").isString().trim().escape().notEmpty(),
+        body("idEmployee").isInt().notEmpty(),
+        body("workToDo").isString().trim().escape().optional(),
+    ];
+
+    for (let validation of validationChecks) {
+        validation.run(req);
+    }
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
 
     Event.updateEvent(
         idEvent,
@@ -161,6 +208,27 @@ function submitInterventionForm(req, res) {
         clientSignature,
         employeeSignature,
     } = req.body;
+
+    const validationChecks = [
+        body("idEvent").isInt().notEmpty(),
+        body("breakdown").isString().trim().escape().notEmpty(),
+        body("workDone").isString().trim().escape().notEmpty(),
+        body("reschedule").isBoolean().notEmpty(),
+        body("endingHour").isString().trim().escape().notEmpty(),
+        body("duration").isString().trim().escape().notEmpty(),
+        body("clientSignature").isString().trim().escape().notEmpty(),
+        body("employeeSignature").isString().trim().escape().notEmpty(),
+    ];
+
+    for (let validation of validationChecks) {
+        validation.run(req);
+    }
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
     Intervention.submitInterventionForm(
         idEvent,
         breakdown,
@@ -187,6 +255,22 @@ function submitInterventionForm(req, res) {
 
 function submitAppointmentForm(req, res) {
     const { idEvent, workToDo, planIntervention } = req.body;
+
+    const validationChecks = [
+        body("idEvent").isInt().notEmpty(),
+        body("workToDo").isString().trim().escape().notEmpty(),
+        body("planIntervention").isBoolean().notEmpty(),
+    ];
+
+    for (let validation of validationChecks) {
+        validation.run(req);
+    }
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
     Appointment.submitAppointmentForm(
         idEvent,
         workToDo,

@@ -172,24 +172,42 @@ class ClientsPage extends Component {
         }
         if (!data.firstname) {
             errors.firstname = "* Champ obligatoire";
+        } else if (!/^[a-zA-ZÀ-ÿ\s-]+$/.test(data.firstname)) {
+            errors.firstname =
+                "* Ne doit contenir que des lettres et des tirets";
         }
         if (!data.lastname) {
             errors.lastname = "* Champ obligatoire";
+        } else if (!/^[a-zA-ZÀ-ÿ\s-]+$/.test(data.lastname)) {
+            errors.lastname =
+                "* Ne doit contenir que des lettres et des tirets";
         }
         if (!data.addressDetails.address) {
             errors.address = "* Champ obligatoire";
+        } else if (!/^[a-zA-ZÀ-ÿ\d\s-]+$/.test(data.addressDetails.address)) {
+            errors.address =
+                "* Ne doit contenir que des lettres, des chiffres, des espaces et des tirets";
         }
         if (!data.addressDetails.zipcode) {
             errors.zipcode = "* Champ obligatoire";
+        } else if (!/^\d{5}$/.test(data.addressDetails.zipcode)) {
+            errors.zipcode = "* Doit contenir exactement 5 chiffres";
         }
         if (!data.addressDetails.city) {
             errors.city = "* Champ obligatoire";
+        } else if (!/^[a-zA-ZÀ-ÿ\s-]+$/.test(data.addressDetails.city)) {
+            errors.city =
+                "* Ne doit contenir que des lettres, des espaces et des tirets";
         }
         if (!data.email) {
             errors.email = "* Champ obligatoire";
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+            errors.email = "* Adresse email invalide";
         }
         if (!data.phoneNumber) {
             errors.phone = "* Champ obligatoire";
+        } else if (!/^[\d\s]+$/.test(data.phoneNumber)) {
+            errors.phone = "* Ne doit contenir que des chiffres et des espaces";
         }
 
         if (Object.keys(errors).length > 0) {

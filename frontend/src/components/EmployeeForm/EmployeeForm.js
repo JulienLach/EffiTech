@@ -30,28 +30,46 @@ class EmployeeForm extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const { lastname, firstname, job, speciality, email, phoneNumber, password } = this.state;
+        const {
+            lastname,
+            firstname,
+            job,
+            speciality,
+            email,
+            phoneNumber,
+            password,
+        } = this.state;
         const employeeData = this.state;
         console.log("Données du formulaire soumises:", employeeData);
 
         const errors = {};
         if (!lastname) {
             errors.lastname = "* Champ obligatoire";
+        } else if (!/^[a-zA-Z\s-]+$/.test(lastname)) {
+            errors.lastname = "* Ne doit contenir que des lettres";
         }
         if (!firstname) {
             errors.firstname = "* Champ obligatoire";
+        } else if (!/^[a-zA-Z\s-]+$/.test(firstname)) {
+            errors.firstname = "* Ne doit contenir que des lettres";
         }
         if (!job) {
             errors.job = "* Champ obligatoire";
+        } else if (!/^[a-zA-Z\s-]+$/.test(job)) {
+            errors.job = "* Ne doit contenir que des lettres";
         }
         if (!speciality) {
             errors.speciality = "* Champ obligatoire";
+        } else if (!/^[a-zA-Z\s-]+$/.test(speciality)) {
+            errors.speciality = "* Ne doit contenir que des lettres";
         }
         if (!email) {
             errors.email = "* Champ obligatoire";
         }
         if (!phoneNumber) {
             errors.phoneNumber = "* Champ obligatoire";
+        } else if (!/^\d+$/.test(phoneNumber)) {
+            errors.phoneNumber = "* Ne doit contenir que des chiffres";
         }
         if (!password) {
             errors.password = "* Champ obligatoire";
@@ -97,7 +115,11 @@ class EmployeeForm extends Component {
                                 value={this.state.lastname}
                                 onChange={this.handleChange}
                             />
-                            {errors.lastname && <span className={styles.error}>{errors.lastname}</span>}
+                            {errors.lastname && (
+                                <span className={styles.error}>
+                                    {errors.lastname}
+                                </span>
+                            )}
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="firstname">Prénom : </label>
@@ -108,7 +130,11 @@ class EmployeeForm extends Component {
                                 value={this.state.firstname}
                                 onChange={this.handleChange}
                             />
-                            {errors.firstname && <span className={styles.error}>{errors.firstname}</span>}
+                            {errors.firstname && (
+                                <span className={styles.error}>
+                                    {errors.firstname}
+                                </span>
+                            )}
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="job">Métier : </label>
@@ -119,7 +145,11 @@ class EmployeeForm extends Component {
                                 value={this.state.job}
                                 onChange={this.handleChange}
                             />
-                            {errors.job && <span className={styles.error}>{errors.job}</span>}
+                            {errors.job && (
+                                <span className={styles.error}>
+                                    {errors.job}
+                                </span>
+                            )}
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="speciality">Spécialité : </label>
@@ -130,7 +160,11 @@ class EmployeeForm extends Component {
                                 value={this.state.speciality}
                                 onChange={this.handleChange}
                             />
-                            {errors.speciality && <span className={styles.error}>{errors.speciality}</span>}
+                            {errors.speciality && (
+                                <span className={styles.error}>
+                                    {errors.speciality}
+                                </span>
+                            )}
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="email">Adresse email : </label>
@@ -141,7 +175,11 @@ class EmployeeForm extends Component {
                                 value={this.state.email}
                                 onChange={this.handleChange}
                             />
-                            {errors.email && <span className={styles.error}>{errors.email}</span>}
+                            {errors.email && (
+                                <span className={styles.error}>
+                                    {errors.email}
+                                </span>
+                            )}
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="phone">Téléphone : </label>
@@ -152,7 +190,11 @@ class EmployeeForm extends Component {
                                 value={this.state.phoneNumber}
                                 onChange={this.handleChange}
                             />
-                            {errors.phoneNumber && <span className={styles.error}>{errors.phoneNumber}</span>}
+                            {errors.phoneNumber && (
+                                <span className={styles.error}>
+                                    {errors.phoneNumber}
+                                </span>
+                            )}
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="password">Mot de passe : </label>
@@ -163,7 +205,11 @@ class EmployeeForm extends Component {
                                 value={this.state.password}
                                 onChange={this.handleChange}
                             />
-                            {errors.password && <span className={styles.error}>{errors.password}</span>}
+                            {errors.password && (
+                                <span className={styles.error}>
+                                    {errors.password}
+                                </span>
+                            )}
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="isAdmin">Admin : </label>

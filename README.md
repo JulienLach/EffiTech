@@ -178,7 +178,7 @@ This project uses **GitHub Actions** to automate unit tests and create new relea
         git push origin x.x.x
         ```
 
-    After these steps, the release should be automatically created.
+    After these steps, the release should be automatically created on GitHub, and the Docker images should be pushed to Docker Hub with the tag as defined in `cd.yml`.
 
 -   If you need to delete a local and remote tag, use the following commands:
     -   List all tags:

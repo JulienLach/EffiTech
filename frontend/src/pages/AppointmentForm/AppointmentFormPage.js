@@ -86,8 +86,11 @@ class AppointmentFormPage extends Component {
         const errors = {};
         if (!eventData.workToDo) {
             errors.workToDo = "* Champ obligatoire";
+        } else if (!/^[a-zA-ZÀ-ÿ\d\s-'"()-]+$/.test(workToDo)) {
+            errors.workToDo =
+                "* Ne doit contenir que des lettres, des chiffres, des tirets et des espaces";
         }
-        
+
         if (Object.keys(errors).length > 0) {
             this.setState({ errors });
             return;
@@ -108,7 +111,8 @@ class AppointmentFormPage extends Component {
 
     render() {
         const { event } = this.props.location.state;
-        const { reschedule, startingDate, duration, workToDo, errors } = this.state;
+        const { reschedule, startingDate, duration, workToDo, errors } =
+            this.state;
 
         //Variable pour savoir si c'est mobile ou desktop
         const isMobile = window.navigator.userAgentData;
@@ -164,7 +168,11 @@ class AppointmentFormPage extends Component {
                                         value={workToDo}
                                         onChange={this.handleChange}
                                     ></textarea>
-                                    {errors.workToDo && <span className={styles.error}>{errors.workToDo}</span>}
+                                    {errors.workToDo && (
+                                        <span className={styles.error}>
+                                            {errors.workToDo}
+                                        </span>
+                                    )}
                                 </div>
                             </div>
                             <div className={stylesMobile.inputDisplay}>
@@ -304,7 +312,11 @@ class AppointmentFormPage extends Component {
                                             value={workToDo}
                                             onChange={this.handleChange}
                                         ></textarea>
-                                        {errors.workToDo && <span className={styles.error}>{errors.workToDo}</span>}
+                                        {errors.workToDo && (
+                                            <span className={styles.error}>
+                                                {errors.workToDo}
+                                            </span>
+                                        )}
                                     </div>
                                 </div>
                                 <div>

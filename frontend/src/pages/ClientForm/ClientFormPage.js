@@ -20,6 +20,7 @@ class ClientFormPage extends Component {
             client: client,
             idClient: client.idClient,
             error: null,
+            errors: {},
         };
         this.handleCancel = this.handleCancel.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -97,6 +98,51 @@ class ClientFormPage extends Component {
 
         console.log("Données du formulaire soumises:", clientData);
 
+        const errors = {};
+        if (!lastname) {
+            errors.lastname = "* Champ obligatoire";
+        } else if (!/^[a-zA-Z\s-]+$/.test(lastname)) {
+            errors.lastname = "* Ne doit contenir que des lettres";
+        }
+        if (!firstname) {
+            errors.firstname = "* Champ obligatoire";
+        } else if (!/^[a-zA-Z\s-]+$/.test(firstname)) {
+            errors.firstname = "* Ne doit contenir que des lettres";
+        }
+        if (!phoneNumber) {
+            errors.phoneNumber = "* Champ obligatoire";
+        } else if (!/^[\d\s]+$/.test(phoneNumber)) {
+            errors.phoneNumber =
+                "* Ne doit contenir que des chiffres et des espaces";
+        }
+        if (!addressDetails.address) {
+            errors.address = "* Champ obligatoire";
+        } else if (!/^[a-zA-ZÀ-ÿ\d\s-]+$/.test(addressDetails.address)) {
+            errors.address =
+                "* Ne doit contenir que des lettres, des chiffres, des espaces et des tirets";
+        }
+        if (!addressDetails.zipcode) {
+            errors.zipcode = "* Champ obligatoire";
+        } else if (!/^\d{5}$/.test(addressDetails.zipcode)) {
+            errors.zipcode = "* Doit contenir exactement 5 chiffres";
+        }
+        if (!addressDetails.city) {
+            errors.city = "* Champ obligatoire";
+        } else if (!/^[a-zA-ZÀ-ÿ\s-]+$/.test(addressDetails.city)) {
+            errors.city =
+                "* Ne doit contenir que des lettres, des espaces et des tirets";
+        }
+        if (!email) {
+            errors.email = "* Champ obligatoire";
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            errors.email = "* Adresse email invalide";
+        }
+
+        if (Object.keys(errors).length > 0) {
+            this.setState({ errors });
+            return;
+        }
+
         updateClient(clientData, (error, data) => {
             if (error) {
                 this.setState({ error: error.message });
@@ -108,7 +154,7 @@ class ClientFormPage extends Component {
     }
 
     render() {
-        const { client } = this.state;
+        const { client, errors } = this.state;
 
         return (
             <>
@@ -136,6 +182,11 @@ class ClientFormPage extends Component {
                                 value={client.lastname}
                                 onChange={this.handleChange}
                             />
+                            {errors.lastname && (
+                                <span className={styles.error}>
+                                    {errors.lastname}
+                                </span>
+                            )}
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="firstname">Prénom :</label>
@@ -145,6 +196,11 @@ class ClientFormPage extends Component {
                                 value={client.firstname}
                                 onChange={this.handleChange}
                             />
+                            {errors.firstname && (
+                                <span className={styles.error}>
+                                    {errors.firstname}
+                                </span>
+                            )}
                         </div>
                         {client.category !== "Particulier" && (
                             <div className={styles.labelInput}>
@@ -165,6 +221,11 @@ class ClientFormPage extends Component {
                                 value={client.phoneNumber}
                                 onChange={this.handleChange}
                             />
+                            {errors.phoneNumber && (
+                                <span className={styles.error}>
+                                    {errors.phoneNumber}
+                                </span>
+                            )}
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="address">Adresse :</label>
@@ -174,6 +235,11 @@ class ClientFormPage extends Component {
                                 value={client.address.address}
                                 onChange={this.handleChange}
                             />
+                            {errors.address && (
+                                <span className={styles.error}>
+                                    {errors.address}
+                                </span>
+                            )}
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="zipcode">Code postal : </label>
@@ -183,6 +249,11 @@ class ClientFormPage extends Component {
                                 value={client.address.zipcode}
                                 onChange={this.handleChange}
                             />
+                            {errors.zipcode && (
+                                <span className={styles.error}>
+                                    {errors.zipcode}
+                                </span>
+                            )}
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="city">Ville :</label>
@@ -192,6 +263,11 @@ class ClientFormPage extends Component {
                                 value={client.address.city}
                                 onChange={this.handleChange}
                             />
+                            {errors.city && (
+                                <span className={styles.error}>
+                                    {errors.city}
+                                </span>
+                            )}
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="email">Mail :</label>
@@ -201,6 +277,11 @@ class ClientFormPage extends Component {
                                 value={client.email}
                                 onChange={this.handleChange}
                             />
+                            {errors.email && (
+                                <span className={styles.error}>
+                                    {errors.email}
+                                </span>
+                            )}
                         </div>
                         <div className={styles.buttonPosition}>
                             <button

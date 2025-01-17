@@ -81,7 +81,7 @@ class DocumentDetailsPage extends Component {
                             src={pdfDataUri}
                             type="application/pdf"
                             width="100%"
-                            height="600px"
+                            height="750px"
                         ></embed>
                     </div>
                 </div>

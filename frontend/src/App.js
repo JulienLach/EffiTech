@@ -25,6 +25,7 @@ import DocumentsPage from "./pages/Documents/DocumentsPage";
 import DocumentDetailsPage from "./pages/Documents/DocumentDetailsPage";
 import NotificationsPage from "./pages/Notifications/NotificationsPage";
 import CalendarMobilePage from "./pages/CalendarMobile/CalendarMobilePage";
+import InvoicesPage from "./pages/Invoices/InvoicesPage";
 
 const App = () => {
     return (
@@ -66,6 +67,7 @@ const App = () => {
                     path="/calendar-mobile"
                     element={<CalendarMobilePage />}
                 />
+                <Route path="/invoices" element={<InvoicesPage />} />
             </Routes>
         </Router>
     );

@@ -1,3 +1,4 @@
+/* InterventionFormPage.module.css */
 .container {
     display: flex;
     flex-direction: column;
@@ -115,10 +116,6 @@
     color: #424242;
 }
 
-.typeFilter:hover i {
-    color: white;
-}
-
 /* Search input container style */
 .searchInput {
     position: relative;
@@ -171,16 +168,6 @@
     overflow-y: auto;
     padding: 1.25em;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.modalBackground {
-    z-index: 1;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 100vw;
-    background-color: rgba(0, 0, 0, 0.85);
 }
 
 .modalHeader {
@@ -312,8 +299,16 @@
     color: white;
 }
 
-.error {
-    margin-left: 1em;
-    font-size: 0.9em;
-    color: rgb(226, 12, 12);
+.addInvoiceButton {
+    background-color: #c93c2c;
+    padding: 0.55em 0.9em;
+    border: none;
+    border-radius: 0.4em;
+    color: white;
+    font-size: 1.125em;
+    font-weight: 500;
+    cursor: pointer;
+    margin-left: auto;
+    margin-bottom: 1em;
+    display: block;
 }

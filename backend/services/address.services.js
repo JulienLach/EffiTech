@@ -1,4 +1,5 @@
 const Address = require("../data/address.data.js");
+const { body, validationResult } = require("express-validator");
 
 function getAddressById(req, res) {
     const idAddress = req.params.idAddress;
@@ -14,6 +15,22 @@ function getAddressById(req, res) {
 }
 
 function createAddress(req, res) {
+    const validationChecks = [
+        body("address").isString().trim().escape().notEmpty(),
+        body("city").isString().trim().escape().notEmpty(),
+        body("zipcode").isInt().notEmpty(),
+        body("idClient").isInt().notEmpty(),
+    ];
+
+    for (let validation of validationChecks) {
+        validation.run(req);
+    }
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
     const { address, city, zipcode, idClient } = req.body;
     Address.createAddress(
         address,

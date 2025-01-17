@@ -311,7 +311,12 @@ class ClientDetailsPage extends Component {
                                                 Voir sur Google Maps
                                             </a>
                                         </p>
-                                        <p>Mail : {client.email}</p>
+                                        <p>
+                                            Mail :{" "}
+                                            <a href={`mailto:${client.email}`}>
+                                                {client.email}
+                                            </a>
+                                        </p>
                                     </div>
                                     <button
                                         className={styles.editButton}
@@ -385,7 +390,10 @@ class ClientDetailsPage extends Component {
                                             </a>
                                         </p>
                                         <p>
-                                            <p>Mail : {client.email}</p>
+                                            Mail :{" "}
+                                            <a href={`mailto:${client.email}`}>
+                                                {client.email}
+                                            </a>
                                         </p>
                                     </div>
                                     <button

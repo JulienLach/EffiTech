@@ -1,3 +1,4 @@
+const { body, validationResult } = require("express-validator");
 const Document = require("../data/document.data.js");
 
 function getAllDocuments(req, res) {
@@ -13,6 +14,25 @@ function getAllDocuments(req, res) {
 }
 
 function importDocument(req, res) {
+    //execute validation rules
+    const validationChecks = [
+        body("title").isString().trim().escape().notEmpty(),
+        body("brand").isString().trim().escape().notEmpty(),
+        body("model").isString().trim().escape().notEmpty(),
+        body("file").isString().notEmpty(),
+    ];
+
+    //execute each validations
+    for (let validation of validationChecks) {
+        validation.run(req);
+    }
+
+    //check if validations errors
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
     const { title, brand, model, file } = req.body;
 
     const buffer = Buffer.from(file, "base64");
