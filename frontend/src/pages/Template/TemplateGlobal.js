@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import styles from "./TemplateGlobal.module.css";
 import logo from "../../images/logo.svg";
 import bellIcon from "../../images/notificationBell.svg";
+import CreateEventForm from "../../components/CreateEventForm/CreateEventForm";
+import InterventionForm from "../../components/InterventionForm/InterventionForm";
 
 function TemplateGlobalWrapper(props) {
     const navigate = useNavigate();
@@ -16,10 +18,19 @@ class TemplateGlobal extends Component {
             currentPath: window.location.pathname,
             showProfileMenu: false,
             initials: "",
+            isCreateModalOpen: false, // État pour gérer l'affichage de la modal
+            isCreateEventModalOpen: false,
+            isEventModalOpen: false,
+            selectedEvent: null,
+            isUpdateFormOpen: false,
         };
         this.toggleProfileMenu = this.toggleProfileMenu.bind(this);
         this.logout = this.logout.bind(this);
         this.handleNotificationClick = this.handleNotificationClick.bind(this);
+        this.toggleCreateModal = this.toggleCreateModal.bind(this); // Méthode pour ouvrir/fermer la modal
+        this.toggleCreateEventModal = this.toggleCreateEventModal.bind(this);
+        this.toggleEventModal = this.toggleEventModal.bind(this);
+        this.handleCreateEventClick = this.handleCreateEventClick.bind(this); // Méthode pour gérer le clic sur "Créer un événement"
     }
 
     componentDidMount() {
@@ -55,8 +66,42 @@ class TemplateGlobal extends Component {
         this.props.navigate("/notifications");
     }
 
+    toggleCreateModal() {
+        this.setState((prevState) => ({
+            isCreateModalOpen: !prevState.isCreateModalOpen,
+        }));
+    }
+
+    toggleCreateEventModal() {
+        this.setState((prevState) => ({
+            isCreateEventModalOpen: !prevState.isCreateEventModalOpen,
+        }));
+    }
+
+    toggleEventModal(event = null) {
+        this.setState({
+            selectedEvent: event,
+            isEventModalOpen: event !== null,
+            isUpdateFormOpen: false, // Fermer le formulaire de mise à jour si un autre événement est sélectionné
+        });
+    }
+
+    handleCreateEventClick() {
+        this.toggleCreateModal(); // Fermer la modal de création
+        this.toggleCreateEventModal(); // Ouvrir la modal de création d'événement
+    }
+
     render() {
-        const { currentPath, showProfileMenu, initials } = this.state;
+        const {
+            currentPath,
+            showProfileMenu,
+            initials,
+            isCreateModalOpen,
+            isCreateEventModalOpen,
+            isEventModalOpen,
+            selectedEvent,
+            isUpdateFormOpen,
+        } = this.state;
 
         return (
             <>
@@ -70,7 +115,10 @@ class TemplateGlobal extends Component {
                         </div>
                         <div className={styles.headerRight}>
                             <div>
-                                <button className={styles.planifierButton}>
+                                <button
+                                    className={styles.planifierButton}
+                                    onClick={this.toggleCreateModal}
+                                >
                                     <i className="fa-solid fa-plus"></i>Créer
                                 </button>
                             </div>
@@ -81,6 +129,7 @@ class TemplateGlobal extends Component {
                                 <img
                                     src={bellIcon}
                                     className={styles.notificationBell}
+                                    alt="Notifications"
                                 ></img>
                                 <span
                                     className={styles.notificationCount}
@@ -204,6 +253,36 @@ class TemplateGlobal extends Component {
                 {/* partie container à copier pour les nouvelles pages */}
                 {/* <div className={styles.container}>
                 </div> */}
+
+                {/* Modal pour créer */}
+                {isCreateModalOpen && (
+                    <div className={styles.modalOverlay}>
+                        <div className={styles.modalContent}>
+                            <button
+                                className={styles.createEventButton}
+                                onClick={this.handleCreateEventClick}
+                            >
+                                Créer un événement
+                            </button>
+
+                            {/* Ajoutez ici les options pour créer un événement, un client, etc. */}
+                        </div>
+                    </div>
+                )}
+
+                {/* Modal pour afficher un événement */}
+                {isEventModalOpen && !isUpdateFormOpen && (
+                    <InterventionForm
+                        event={selectedEvent}
+                        closeModal={() => this.toggleEventModal()}
+                        openUpdateForm={this.openUpdateForm}
+                    />
+                )}
+
+                {/* Modal pour créer un événement */}
+                {isCreateEventModalOpen && (
+                    <CreateEventForm closeModal={this.toggleCreateEventModal} />
+                )}
             </>
         );
     }
