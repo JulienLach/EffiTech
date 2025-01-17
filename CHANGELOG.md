@@ -6,9 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+# [0.5.3] (2025-17-01)
+
+## Changes
+
+-   Add global button to create event form everywhere
+-   Add link to client email on client page to open local email app
+-   Add invoices page
+
 ## Fixes
 
--   Add Regex to all forms
+-   Add regex to all forms
+-   Sanitize all entries on server side
 
 # [0.5.2] (2025-15-01)
 

@@ -115,6 +115,10 @@
     color: #424242;
 }
 
+.typeFilter:hover i {
+    color: white;
+}
+
 /* Search input container style */
 .searchInput {
     position: relative;
