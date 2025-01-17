@@ -78,9 +78,15 @@ class InterventionFormPage extends Component {
         const errors = {};
         if (!breakdown) {
             errors.breakdown = "* Champ obligatoire";
+        } else if (!/^[a-zA-ZÀ-ÿ\d\s-'"()-]+$/.test(breakdown)) {
+            errors.breakdown =
+                "* Ne doit contenir que des lettres, des chiffres, des tirets et des espaces";
         }
         if (!workDone) {
             errors.workDone = "* Champ obligatoire";
+        } else if (!/^[a-zA-ZÀ-ÿ\d\s-'"()-]+$/.test(breakdown)) {
+            errors.breakdown =
+                "* Ne doit contenir que des lettres, des chiffres, des tirets et des espaces";
         }
         if (!clientSignature) {
             errors.clientSignature = "* Champ obligatoire";
@@ -195,7 +201,11 @@ class InterventionFormPage extends Component {
                                         value={breakdown}
                                         onChange={this.handleChange}
                                     ></textarea>
-                                    {errors.workDone && <span className={styles.error}>{errors.workDone}</span>}
+                                    {errors.workDone && (
+                                        <span className={styles.error}>
+                                            {errors.workDone}
+                                        </span>
+                                    )}
                                 </div>
                             </div>
                             <div>
@@ -213,7 +223,11 @@ class InterventionFormPage extends Component {
                                         value={workDone}
                                         onChange={this.handleChange}
                                     ></textarea>
-                                    {errors.workDone && <span className={styles.error}>{errors.workDone}</span>}
+                                    {errors.workDone && (
+                                        <span className={styles.error}>
+                                            {errors.workDone}
+                                        </span>
+                                    )}
                                 </div>
                             </div>
                             <div>
@@ -275,7 +289,11 @@ class InterventionFormPage extends Component {
                                             )
                                         }
                                     />
-                                    {errors.employeeSignature && <span className={styles.error}>{errors.employeeSignature}</span>}
+                                    {errors.employeeSignature && (
+                                        <span className={styles.error}>
+                                            {errors.employeeSignature}
+                                        </span>
+                                    )}
                                 </div>
                             </div>
                             <div>
@@ -296,7 +314,11 @@ class InterventionFormPage extends Component {
                                             )
                                         }
                                     />
-                                    {errors.clientSignature && <span className={styles.error}>{errors.clientSignature}</span>}
+                                    {errors.clientSignature && (
+                                        <span className={styles.error}>
+                                            {errors.clientSignature}
+                                        </span>
+                                    )}
                                 </div>
                             </div>
                             <div>
@@ -399,7 +421,11 @@ class InterventionFormPage extends Component {
                                             value={breakdown}
                                             onChange={this.handleChange}
                                         ></textarea>
-                                        {errors.breakdown && <span className={styles.error}>{errors.breakdown}</span>}
+                                        {errors.breakdown && (
+                                            <span className={styles.error}>
+                                                {errors.breakdown}
+                                            </span>
+                                        )}
                                     </div>
                                 </div>
                                 <div>
@@ -417,7 +443,11 @@ class InterventionFormPage extends Component {
                                             value={workDone}
                                             onChange={this.handleChange}
                                         ></textarea>
-                                        {errors.workDone && <span className={styles.error}>{errors.workDone}</span>}
+                                        {errors.workDone && (
+                                            <span className={styles.error}>
+                                                {errors.workDone}
+                                            </span>
+                                        )}
                                     </div>
                                 </div>
                                 <div>
@@ -479,7 +509,11 @@ class InterventionFormPage extends Component {
                                                 )
                                             }
                                         />
-                                        {errors.employeeSignature && <span className={styles.error}>{errors.employeeSignature}</span>}
+                                        {errors.employeeSignature && (
+                                            <span className={styles.error}>
+                                                {errors.employeeSignature}
+                                            </span>
+                                        )}
                                     </div>
                                 </div>
                                 <div>
@@ -500,7 +534,11 @@ class InterventionFormPage extends Component {
                                                 )
                                             }
                                         />
-                                        {errors.clientSignature && <span className={styles.error}>{errors.clientSignature}</span>}
+                                        {errors.clientSignature && (
+                                            <span className={styles.error}>
+                                                {errors.clientSignature}
+                                            </span>
+                                        )}
                                     </div>
                                 </div>
                                 <div>
