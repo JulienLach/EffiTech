@@ -1,3 +1,4 @@
+const { body, validationResult } = require("express-validator");
 const Company = require("../data/company.data.js"); // Importer le modèle Client
 
 function getCompany(req, res) {
@@ -17,7 +18,50 @@ function getCompany(req, res) {
 }
 
 function updateCompany(req, res) {
-    Company.updateCompany(req.body, (error, company) => {
+    const {
+        phoneNumber,
+        idAddress,
+        siret,
+        vatNumber,
+        capital,
+        logo,
+        idCompany,
+    } = req.body;
+
+    // Exécuter les règles de validation
+    const validationChecks = [
+        body("phoneNumber").isString().trim().escape().notEmpty(),
+        body("idAddress.address").isString().trim().escape().notEmpty(),
+        body("idAddress.zipcode").isString().trim().escape().notEmpty(),
+        body("idAddress.city").isString().trim().escape().notEmpty(),
+        body("idAddress.idAddress").isInt().notEmpty(),
+        body("siret").isString().trim().escape().notEmpty(),
+        body("vatNumber").isString().trim().escape().notEmpty(),
+        body("capital").isString().trim().escape().notEmpty(),
+        body("logo").isString().optional(),
+        body("idCompany").isInt().notEmpty(),
+    ];
+
+    for (let validation of validationChecks) {
+        validation.run(req);
+    }
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    const companyData = {
+        phoneNumber,
+        idAddress,
+        siret,
+        vatNumber,
+        capital,
+        logo,
+        idCompany,
+    };
+
+    Company.updateCompany(companyData, (error, company) => {
         if (error) {
             return res.status(500).send({
                 message: "Erreur lors de la mise à jour de la société",
@@ -33,18 +77,32 @@ function updateCompany(req, res) {
 }
 
 function createCompany(req, res) {
-    const {
-        phoneNumber,
-        idAddress: { address, zipcode, city },
-        siret,
-        vatNumber,
-        capital,
-        logo,
-    } = req.body;
+    const validationChecks = [
+        body("phoneNumber").isString().trim().escape().notEmpty(),
+        body("idAddress.address").isString().trim().escape().notEmpty(),
+        body("idAddress.zipcode").isString().trim().escape().notEmpty(),
+        body("idAddress.city").isString().trim().escape().notEmpty(),
+        body("siret").isString().trim().escape().notEmpty(),
+        body("vatNumber").isString().trim().escape().notEmpty(),
+        body("capital").isString().trim().escape().notEmpty(),
+        body("logo").isString().optional(),
+    ];
+
+    for (let validation of validationChecks) {
+        validation.run(req);
+    }
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { phoneNumber, idAddress, siret, vatNumber, capital, logo } =
+        req.body;
 
     const companyData = {
         phoneNumber,
-        idAddress: { address, zipcode, city },
+        idAddress,
         siret,
         vatNumber,
         capital,

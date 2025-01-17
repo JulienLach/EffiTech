@@ -1,3 +1,4 @@
+const { body, validationResult } = require("express-validator");
 const Client = require("../data/client.data.js"); // Importer le modèle Client
 
 function getAllClients(req, res) {
@@ -30,6 +31,25 @@ function getClientById(req, res) {
 }
 
 function createClient(req, res) {
+    const validationChecks = [
+        body("category").isString().trim().escape().notEmpty(),
+        body("company").isString().trim().escape().optional(),
+        body("firstname").isString().trim().escape().notEmpty(),
+        body("lastname").isString().trim().escape().notEmpty(),
+        body("email").isEmail().normalizeEmail().notEmpty(),
+        body("addressDetails").isObject().notEmpty(),
+        body("phoneNumber").isString().trim().escape().notEmpty(),
+    ];
+
+    for (let validation of validationChecks) {
+        validation.run(req);
+    }
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
     const {
         category,
         company,
@@ -61,6 +81,25 @@ function createClient(req, res) {
 
 function updateClient(req, res) {
     const idClient = req.params.idClient;
+    const validationChecks = [
+        body("category").isString().trim().escape().notEmpty(),
+        body("company").isString().trim().escape().optional(),
+        body("firstname").isString().trim().escape().notEmpty(),
+        body("lastname").isString().trim().escape().notEmpty(),
+        body("email").isEmail().normalizeEmail().notEmpty(),
+        body("addressDetails").isObject().notEmpty(),
+        body("phoneNumber").isString().trim().escape().notEmpty(),
+    ];
+
+    for (let validation of validationChecks) {
+        validation.run(req);
+    }
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
     const {
         category,
         firstname,

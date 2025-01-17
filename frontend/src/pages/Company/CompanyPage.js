@@ -63,7 +63,7 @@ class CompanyPage extends Component {
                                 <h3>Coordonnées</h3>
                                 <p>
                                     Adresse : {company.idAddress.address},{" "}
-                                    {company.idAddress.zipcode} ,
+                                    {company.idAddress.zipcode},{" "}
                                     {company.idAddress.city}
                                 </p>{" "}
                                 <p>Téléphone : {company.phoneNumber}</p>
