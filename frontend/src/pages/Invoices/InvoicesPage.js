@@ -34,6 +34,13 @@ class InvoicesPage extends Component {
                 <TemplateGlobal />
                 <div className={styles.container}>
                     <h1 className={styles.pageTitle}>Factures</h1>
+                    <button
+                        className={styles.addInvoiceButton}
+                        onClick={this.openModal}
+                    >
+                        <i className="fa-solid fa-plus"></i> Importer une
+                        facture
+                    </button>
                     <div>
                         <table>
                             <thead className={styles.stickyThead}>

@@ -298,3 +298,17 @@
     background-color: #c93c2c;
     color: white;
 }
+
+.addInvoiceButton {
+    background-color: #c93c2c;
+    padding: 0.55em 0.9em;
+    border: none;
+    border-radius: 0.4em;
+    color: white;
+    font-size: 1.125em;
+    font-weight: 500;
+    cursor: pointer;
+    margin-left: auto;
+    margin-bottom: 1em;
+    display: block;
+}
