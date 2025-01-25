@@ -209,6 +209,8 @@ This project uses **JSDoc** and **apidoc** to generate documentation.
 -   **JSDoc**: Move to `/backend` folder, run `npm run doc` to generate documentation for the `/data` files.
 -   **apidoc**: Move to `/backend` folder, for API documentation written in the `/services/api.js` file, run `npm run apidoc`.
 
+Then to see the documentation pages, run `index.html` from both folders with LiveServer VSCode extension for exemple.
+
 ## <a name="end-to-end-functional-test"></a> End-to-End Functional Test
 
 <details>
