@@ -262,7 +262,8 @@ class TemplateGlobal extends Component {
                                 className={styles.createEventButton}
                                 onClick={this.handleCreateEventClick}
                             >
-                                Créer un événement
+                                Créer un événement{" "}
+                                <i className="fa-solid fa-plus"></i>
                             </button>
 
                             {/* Ajoutez ici les options pour créer un événement, un client, etc. */}

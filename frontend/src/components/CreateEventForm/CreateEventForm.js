@@ -216,7 +216,10 @@ class CreateEventForm extends Component {
                 <div className={styles.modalBackground}></div>
                 <form className={`${styles.modal} ${styles.open}`}>
                     <div>
-                        <h2>Plannifier un évènement</h2>
+                        <h2>
+                            <i className="fa-regular fa-calendar"></i>{" "}
+                            Plannifier un évènement
+                        </h2>
                     </div>
                     <div className={styles.tabs}>
                         <button

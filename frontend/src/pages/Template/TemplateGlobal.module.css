@@ -5,7 +5,7 @@
     width: 100%;
     z-index: 1000;
     background-color: white;
-    box-shadow: 0 0.18em 0.2em rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.1em 0.1em rgba(102, 102, 102, 0.1);
 }
 
 /* Header.css */
@@ -13,11 +13,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.625em 1.25em;
+    padding: 0.6em 1em;
 }
 
 .logo img {
-    height: 3em;
+    height: 2.6em;
 }
 
 .headerRight {
@@ -78,9 +78,9 @@
     background-color: #1c8aff;
     color: white;
     border-radius: 2em;
-    width: 2.4em;
-    height: 2.4em;
-    font-size: 1.25em;
+    width: 2.1em;
+    height: 2.1em;
+    font-size: 1.15em;
     font-weight: 500;
     display: flex;
     align-items: center;
@@ -205,14 +205,13 @@ i {
 
 .modalOverlay {
     background-color: rgb(255, 255, 255);
-    border: 1px solid #d5d5d5;
-    border-radius: 0.5em;
-    padding: 1em;
-    height: auto;
+    border: 1px solid #c9c9c9;
+    border-radius: 0.4em;
+    padding: 0.5em;
     position: absolute;
-    top: 5em;
-    right: 3em;
-    z-index: 2;
+    top: 4em;
+    right: 6.9em;
+    z-index: 1000;
 }
 
 .modalContent {
