@@ -111,11 +111,12 @@
 }
 
 .error {
-    color: #FFF;
+    color: #e70000;
     font-size: 1.1em;
     padding: 0.6em 0.6em;
-    background-color: #cf2b18;
+    background-color: #ffebe9;
     border-radius: 0.4em;
-    width: 80%;
+    border: 1px solid #e70000;
+    width: 70%;
     margin: 1em auto;
 }

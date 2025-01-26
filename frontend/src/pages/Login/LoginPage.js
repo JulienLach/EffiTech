@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Navigate } from "react-router-dom";
-import styles from "./Login.module.css";
+import styles from "./LoginPage.module.css";
 import stylesMobile from "./LoginMobile.module.css";
 import LogoDesktop from "../../components/LogoDesktop/LogoDesktop";
 import LogoMobile from "../../images/logoMobile.svg";
@@ -29,7 +29,7 @@ class LoginPage extends Component {
         const { email, password } = this.state;
 
         if (password === "" || email === "") {
-            this.setState({ error: "Identifiants incorrects"});
+            this.setState({ error: "Identifiants incorrects" });
             return;
         }
 

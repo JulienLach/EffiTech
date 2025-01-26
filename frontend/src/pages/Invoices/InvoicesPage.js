@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./InvoicesPage.module.css";
-// import stylesMobile from "./InvoicePageMobile.module.css";
 import TemplateGlobal from "../Template/TemplateGlobal";
-import TemplateGlobalMobile from "../Template/TemplateGlobalMobile";
 
 // Composant wrapper pour utiliser les hooks
 function InvoicesPageWrapper() {

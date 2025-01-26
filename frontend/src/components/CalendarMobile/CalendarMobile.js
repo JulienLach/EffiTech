@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import { Calendar as BigCalendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment-timezone";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import "moment/locale/fr"; // Importer la locale française
+import "moment/locale/fr";
 
 // Setup the localizer by providing the moment Object to the correct localizer.
 moment.tz.setDefault("Europe/Paris");
-moment.locale("fr"); // Définir la locale française
+moment.locale("fr");
 const localizer = momentLocalizer(moment);
 
 function eventStyleGetter(event) {
