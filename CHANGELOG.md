@@ -10,14 +10,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Changes
 
--   Add global button to create event form everywhere
+-   Add global button in top menu to create event form everywhere
 -   Add link to client email on client page to open local email app
 -   Add invoices page
 
 ## Fixes
 
 -   Add regex to all forms
--   Sanitize all entries on server side
+-   Add sanitize methods to all entries on server side
 
 # [0.5.2] (2025-15-01)
 
@@ -51,10 +51,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -   Add employee name to report PDF
 -   Add company data and logo to report PDF
 -   Add dynamic title page on mobile
--   Add Dockerfile for frontend/backend and add a docker-compose file to run the app on Docker
+-   Add Dockerfile to frontend/backend folders and add a docker-compose.yml file to run the app with Docker
 -   Add client details page to mobile
 -   Update add company forms
--   Update CD pipeline to upload a updated images for each release
+-   Update CD pipeline to upload updated images for each release
 
 # [0.3.4] (2024-12-03)
 
@@ -65,7 +65,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 # [0.3.3] (2024-12-02)
 
-## Changes
+## Fixes
 
 -   Fix cd.yml file for automatic release with github actions
 
@@ -73,9 +73,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Changes
 
--   Various CSS fixes
 -   Add CI unit tests with GitHub Actions
 -   Add CD file to automaticaly create a new release
+
+## Fixes
+
+-   Various CSS fixes
 
 # [0.3.1] (2024-11-30)
 
