@@ -871,6 +871,26 @@ function getDocumentById(idDocument, callback) {
     xhr.send();
 }
 
+function createNotification(notificationData, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", `${API_URL}/notifications`);
+    xhr.withCredentials = true;
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onload = function () {
+        if (xhr.status === 200 || xhr.status === 201) {
+            console.log("Notification créée");
+            callback(null, JSON.parse(xhr.responseText));
+        } else {
+            console.error(
+                "Erreur de création de la notification",
+                xhr.statusText
+            );
+            callback(new Error(xhr.statusText), null);
+        }
+    };
+    xhr.send(JSON.stringify(notificationData));
+}
+
 export {
     getAllEvents,
     getAllClients,
@@ -894,4 +914,5 @@ export {
     getAllDocuments,
     importDocument,
     getDocumentById,
+    createNotification,
 };
