@@ -56,6 +56,24 @@ class Notification {
             callback(null, notifications);
         });
     }
+
+    static createNotification(notification, callback) {
+        const query = `INSERT INTO notifications (id_employee, action, type, title, creation_date, creation_hour) VALUES ($1, $2, $3, $4, $5, $6)`;
+        const values = [
+            notification.idEmployee,
+            notification.action,
+            notification.type,
+            notification.title,
+            notification.creationDate,
+            notification.creationHour,
+        ];
+        pool.query(query, values, (error, result) => {
+            if (error) {
+                return callback(error, null);
+            }
+            callback(null, result);
+        });
+    }
 }
 
 module.exports = Notification;

@@ -14,4 +14,19 @@ function getAllNotifications(req, res) {
     });
 }
 
+function createNotification(req, res) {
+    Event.createNotification(req.body, (error, result) => {
+        if (error) {
+            res.status(500).send({
+                message:
+                    error.message ||
+                    "Une erreur s'est produite lors de la création de la notification.",
+            });
+        } else {
+            res.send(result);
+        }
+    });
+}
+
 exports.getAllNotifications = getAllNotifications;
+exports.createNotification = createNotification;
