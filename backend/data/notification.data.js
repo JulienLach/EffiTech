@@ -16,12 +16,12 @@ class Notification {
      */
     constructor(
         idNotification,
-        idEmployee,
         action,
         type,
         title,
         creationDate,
-        creationHour
+        creationHour,
+        idEmployee
     ) {
         this.idNotification = idNotification;
         this.idEmployee = idEmployee;
@@ -58,20 +58,34 @@ class Notification {
     }
 
     static createNotification(notification, callback) {
-        const query = `INSERT INTO notifications (id_employee, action, type, title, creation_date, creation_hour) VALUES ($1, $2, $3, $4, $5, $6)`;
+        const query = `
+        INSERT INTO notifications (action, type, title, creation_date, creation_hour, id_employee) 
+        VALUES ($1, $2, $3, $4, $5, $6) 
+        RETURNING id_notification, action, type, title, creation_date, creation_hour, id_employee`;
         const values = [
-            notification.idEmployee,
             notification.action,
             notification.type,
             notification.title,
             notification.creationDate,
             notification.creationHour,
+            notification.idEmployee,
         ];
         pool.query(query, values, (error, result) => {
             if (error) {
                 return callback(error, null);
             }
-            callback(null, result);
+            const row = result.rows[0];
+            const createdNotification = new Notification(
+                row.id_notification,
+                row.action,
+                row.type,
+                row.title,
+                row.creation_date,
+                row.creation_hour,
+                row.id_employee
+            );
+
+            callback(null, createdNotification);
         });
     }
 }

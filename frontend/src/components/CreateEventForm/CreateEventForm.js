@@ -4,6 +4,7 @@ import {
     getAllClients,
     getAllEmployees,
     createEvent,
+    createNotification,
 } from "../../services/api";
 
 // Composant wrapper pour utiliser les hooks
@@ -169,6 +170,18 @@ class CreateEventForm extends Component {
             idEmployee: selectedEmployee,
         };
 
+        const notificationData = {
+            idEmployee: selectedEmployee,
+            action: "Création",
+            type: "Évènement",
+            title: `Nouveau ${selectedTab}`,
+            creationDate: new Date().toISOString().split("T")[0],
+            creationHour: new Date().toLocaleTimeString("fr-FR", {
+                hour: "2-digit",
+                minute: "2-digit",
+            }),
+        };
+
         createEvent(eventData, (error, newEvent) => {
             if (error) {
                 console.error("Error creating event:", error);
@@ -176,6 +189,13 @@ class CreateEventForm extends Component {
                 console.log("Event created successfully:", newEvent);
                 this.props.closeModal();
             }
+            createNotification(notificationData, (error, result) => {
+                if (error) {
+                    console.error("Error creating notification:", error);
+                } else {
+                    console.log("Notification created successfully:", result);
+                }
+            });
             window.location.reload();
         });
     }
