@@ -36,11 +36,6 @@ class NotificationsPage extends Component {
         const isMobile = window.navigator.userAgentData;
         const { notifications } = this.state;
 
-        const formatedCreationDate = (date) => {
-            const dateArray = date.split("-");
-            return `${dateArray[2]}/${dateArray[1]}/${dateArray[0]}`;
-        };
-
         return (
             <>
                 {isMobile.mobile ? (
