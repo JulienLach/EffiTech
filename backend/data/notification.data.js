@@ -45,12 +45,12 @@ class Notification {
             const notifications = result.rows.map(function (row) {
                 return new Notification(
                     row.id_notification,
-                    row.id_employee,
                     row.action,
                     row.type,
                     row.title,
                     row.creation_date,
-                    row.creation_hour
+                    row.creation_hour,
+                    row.id_employee
                 );
             });
             callback(null, notifications);

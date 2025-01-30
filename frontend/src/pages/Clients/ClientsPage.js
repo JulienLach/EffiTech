@@ -4,7 +4,6 @@ import TemplateGlobal from "../Template/TemplateGlobal";
 import TemplateGlobalMobile from "../Template/TemplateGlobalMobile";
 import styles from "./ClientsPage.module.css";
 import stylesMobile from "./ClientsPageMobile.module.css";
-
 import { getAllClients, createClient } from "../../services/api";
 
 // Composant wrapper pour utiliser les hooks

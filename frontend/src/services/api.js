@@ -871,6 +871,24 @@ function getDocumentById(idDocument, callback) {
     xhr.send();
 }
 
+function getAllNotifications(callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", `${API_URL}/notifications`);
+    xhr.withCredentials = true;
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            callback(null, JSON.parse(xhr.responseText));
+        } else {
+            console.error(
+                "Erreur de récupération des notifications",
+                xhr.statusText
+            );
+            callback(new Error(xhr.statusText), null);
+        }
+    };
+    xhr.send();
+}
+
 function createNotification(notificationData, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", `${API_URL}/notifications`);
@@ -915,4 +933,5 @@ export {
     importDocument,
     getDocumentById,
     createNotification,
+    getAllNotifications,
 };
