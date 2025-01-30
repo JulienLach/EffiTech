@@ -167,7 +167,7 @@ class ClientsPage extends Component {
         console.log("Données du formulaire soumises:", data);
 
         const errors = {};
-        if (!data.company) {
+        if (!data.company && data.category === "Professionnel") {
             errors.company = "* Champ obligatoire";
         }
         if (!data.firstname) {
