@@ -74,7 +74,8 @@ class NotificationsPage extends Component {
                                                 }
                                             >
                                                 <td>
-                                                    {notification.idEmployee}
+                                                    {notification.firstName}{" "}
+                                                    {notification.lastName}
                                                 </td>
                                                 <td>{notification.action}</td>
                                                 <td>{notification.type}</td>

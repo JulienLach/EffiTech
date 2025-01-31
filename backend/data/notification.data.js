@@ -37,13 +37,14 @@ class Notification {
      * @param {function(Error, Notification[]):void} callback - La fonction de rappel à exécuter après la récupération des notifications.
      */
     static getAllNotifications(callback) {
-        const query = "SELECT * FROM notifications";
+        const query =
+            "SELECT * FROM notifications JOIN employees ON notifications.id_employee = employees.id_employee";
         pool.query(query, (error, result) => {
             if (error) {
                 return callback(error, null);
             }
             const notifications = result.rows.map(function (row) {
-                return new Notification(
+                const notification = new Notification(
                     row.id_notification,
                     row.action,
                     row.type,
@@ -52,6 +53,9 @@ class Notification {
                     row.creation_hour,
                     row.id_employee
                 );
+                notification.firstName = row.firstname;
+                notification.lastName = row.lastname;
+                return notification;
             });
             callback(null, notifications);
         });
