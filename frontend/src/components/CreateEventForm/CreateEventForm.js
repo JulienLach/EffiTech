@@ -172,7 +172,7 @@ class CreateEventForm extends Component {
 
         const notificationData = {
             idEmployee: selectedEmployee,
-            action: "Création",
+            action: "Enregistrement",
             type: selectedTab,
             title: title,
             creationDate: new Date().toISOString().split("T")[0],

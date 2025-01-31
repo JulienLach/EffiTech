@@ -62,8 +62,8 @@ class NotificationsPage extends Component {
                                             <th>Action</th>
                                             <th>Type</th>
                                             <th>Titre</th>
-                                            <th>Date de création</th>
-                                            <th>Heure de création</th>
+                                            <th>Date</th>
+                                            <th>Heure</th>
                                         </tr>
                                     </thead>
                                     <tbody>
