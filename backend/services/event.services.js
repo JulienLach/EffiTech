@@ -58,14 +58,14 @@ function createEvent(req, res) {
     const validationChecks = [
         body("title").isString().trim().escape().notEmpty(),
         body("description").isString().trim().escape().optional(),
-        body("status").isString().trim().escape().notEmpty(),
+        body("status").isString().trim().escape(),
         body("isPlanned").isBoolean().notEmpty(),
         body("type").isString().trim().escape().notEmpty(),
         body("idClient").isInt().notEmpty(),
         body("idAddress").isInt().notEmpty(),
-        body("startingDate").isISO8601().notEmpty(),
-        body("startingHour").isString().trim().escape().notEmpty(),
-        body("endingHour").isString().trim().escape().notEmpty(),
+        body("startingDate").isISO8601().notEmpty().optional(),
+        body("startingHour").isString().trim().escape().optional(),
+        body("endingHour").isString().trim().escape().optional(),
         body("idEmployee").isInt().notEmpty(),
     ];
 

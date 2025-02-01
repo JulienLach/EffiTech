@@ -416,9 +416,9 @@ class ClientsPage extends Component {
                                         </p>
                                     </div>
                                     {client.category === "Professionnel" ? (
-                                        <i class="fa-solid fa-landmark"></i>
+                                        <i className="fa-solid fa-landmark"></i>
                                     ) : (
-                                        <i class="fa-solid fa-user"></i>
+                                        <i className="fa-solid fa-user"></i>
                                     )}
                                 </div>
                             ))}

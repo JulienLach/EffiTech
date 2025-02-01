@@ -36,7 +36,7 @@ class InvoicesPage extends Component {
                         className={styles.addInvoiceButton}
                         onClick={this.openModal}
                     >
-                        <i class="fa-solid fa-download"></i> Importer une
+                        <i className="fa-solid fa-download"></i> Importer une
                         facture
                     </button>
                     <div>
