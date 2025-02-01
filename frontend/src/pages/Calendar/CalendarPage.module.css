@@ -94,9 +94,14 @@ a {
 .viewButton:active {
     text-decoration: underline;
     text-decoration-color: #c93c2c;
-    text-underline-offset: 0.6em;
-    text-decoration-thickness: 0.15em;
+    text-underline-offset: 0.4em;
     color: #c93c2c;
+}
+
+.viewButtonActive {
+    color: #c93c2c;
+    text-decoration: underline;
+    text-underline-offset: 0.4em;
 }
 
 .divider {

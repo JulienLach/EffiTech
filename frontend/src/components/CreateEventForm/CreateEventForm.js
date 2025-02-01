@@ -237,8 +237,8 @@ class CreateEventForm extends Component {
                 <form className={`${styles.modal} ${styles.open}`}>
                     <div>
                         <h2>
-                            <i className="fa-regular fa-calendar"></i>{" "}
-                            Plannifier un évènement
+                            <i className="fa-regular fa-calendar"></i> Planifier
+                            un évènement
                         </h2>
                     </div>
                     <div className={styles.tabs}>
@@ -273,6 +273,7 @@ class CreateEventForm extends Component {
                                     : "Nouveau rendez-vous"}
                             </h3>
                         </div>
+                        <div className={styles.separator}></div>
                         <div>
                             <label>
                                 Titre <span className={styles.required}>*</span>{" "}
@@ -412,7 +413,7 @@ class CreateEventForm extends Component {
                                 className={styles.submitButton}
                                 onClick={this.handleSubmit}
                             >
-                                Créer
+                                Valider
                             </button>
                         </div>
                     </div>

@@ -126,7 +126,7 @@ class CalendarPage extends Component {
             padding: "2px 10px",
             borderRadius: "8px",
             color: "white",
-            fontSize: "0.8em",
+            fontSize: "0.9em",
             fontWeight: "500",
         };
 
@@ -480,13 +480,21 @@ class CalendarPage extends Component {
                             <div className={styles.listView}>
                                 <div className={styles.tabs}>
                                     <button
-                                        className={styles.viewButton}
+                                        className={`${styles.viewButton} ${
+                                            view === "list"
+                                                ? styles.viewButtonActive
+                                                : ""
+                                        }`}
                                         onClick={() => this.toggleView("list")}
                                     >
                                         Liste
                                     </button>
                                     <button
-                                        className={styles.viewButton}
+                                        className={`${styles.viewButton} ${
+                                            view === "calendar"
+                                                ? styles.viewButtonActive
+                                                : ""
+                                        }`}
                                         onClick={() =>
                                             this.toggleView("calendar")
                                         }

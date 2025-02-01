@@ -10,9 +10,9 @@
     background-color: white;
     border-radius: 0.8em;
     z-index: 1000;
-    padding: 1.5em;
+    padding: 1.8em;
     display: block;
-    border: 0.05em solid lightgray;
+    border: 0.09em solid lightgray;
     overflow: auto;
     max-width: 90%;
     max-height: 90%;
@@ -27,7 +27,7 @@
     left: 0;
     height: 100vh;
     width: 100vw;
-    background-color: rgba(0, 0, 0, 0.85);
+    background-color: rgba(0, 0, 0, 0.57);
 }
 
 .tabs {
@@ -45,7 +45,7 @@
     cursor: pointer;
     margin: 1em 0.5em;
     background-color: #f0f0f0;
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color 0.05s, color 0.05s;
     font-weight: 400;
 }
 
@@ -57,6 +57,7 @@
 .tabs .activeTab {
     background-color: #c93c2c;
     color: white;
+    font-weight: 500;
 }
 
 .form {
@@ -129,4 +130,9 @@
 .error {
     font-size: 0.9em;
     color: rgb(226, 12, 12);
+}
+
+.separator {
+    width: 100%;
+    border-bottom: 0.06em solid #ccc;
 }
