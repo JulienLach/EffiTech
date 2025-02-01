@@ -115,7 +115,7 @@ class DocumentsPage extends Component {
                             </div>
                         </div>
                     </div>
-
+                    <div className={styles.divider}></div>
                     <div>
                         <table>
                             <thead className={styles.stickyThead}>

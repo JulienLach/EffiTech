@@ -124,7 +124,7 @@ class EmployeesPage extends Component {
                                                     }
                                                 >
                                                     {" "}
-                                                    Fiche employé
+                                                    Profil employé
                                                     <i className="fa-solid fa-user"></i>{" "}
                                                 </button>
                                             </div>

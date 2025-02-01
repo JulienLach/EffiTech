@@ -378,7 +378,7 @@ class ClientsPage extends Component {
                                                         this.closeCategoryModal
                                                     }
                                                 >
-                                                    Filter
+                                                    Filtrer
                                                 </button>
                                             </div>
                                         </div>
@@ -702,14 +702,7 @@ class ClientsPage extends Component {
                                                         this.closeCategoryModal
                                                     }
                                                 >
-                                                    Annuler
-                                                </button>
-                                                <button
-                                                    onClick={
-                                                        this.closeCategoryModal
-                                                    }
-                                                >
-                                                    Filter
+                                                    Fermer
                                                 </button>
                                             </div>
                                         </div>

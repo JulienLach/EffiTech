@@ -15,11 +15,10 @@
     flex-direction: column;
     align-self: flex-start;
     min-width: 30%;
-    max-width: 50%;
     margin-left: 0.5em;
     padding: 1.5em;
-    border-radius: 0.5em;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    border-radius: 0.8em;
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.1);
     align-items: center;
 }
 
@@ -32,7 +31,7 @@
 .employeeChart {
     margin: 1em 0;
     width: 550px;
-    height: 250px;
+    height: 302px;
 }
 
 .labelStats {

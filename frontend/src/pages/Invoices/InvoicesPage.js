@@ -39,6 +39,7 @@ class InvoicesPage extends Component {
                         <i className="fa-solid fa-download"></i> Importer une
                         facture
                     </button>
+                    <div className={styles.divider}></div>
                     <div>
                         <table>
                             <thead className={styles.stickyThead}>

@@ -186,7 +186,7 @@ class TemplateGlobal extends Component {
                                 }
                             >
                                 <a href="/statistics">
-                                    <i class="fa-solid fa-chart-simple"></i>
+                                    <i className="fa-solid fa-chart-simple"></i>
                                     Statistiques
                                 </a>
                             </li>

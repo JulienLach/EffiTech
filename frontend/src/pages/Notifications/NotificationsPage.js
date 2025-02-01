@@ -59,6 +59,7 @@ class NotificationsPage extends Component {
                         <TemplateGlobal />
                         <div className={styles.container}>
                             <h1 className={styles.pageTitle}>Notifications</h1>
+                            <div className={styles.divider}></div>
                             <div>
                                 <table>
                                     <thead className={styles.stickyThead}>

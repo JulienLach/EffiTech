@@ -45,8 +45,8 @@ th,
 td,
 tr {
     text-align: start;
-    width: 100vw; /* Définit une largeur fixe pour les cellules */
-    padding: 0.6em; /* Augmente l'espace à l'intérieur des cellules */
+    width: 100vw;
+    padding: 0.6em;
     border-bottom: 0.06em solid #d3d3d3;
 }
 
