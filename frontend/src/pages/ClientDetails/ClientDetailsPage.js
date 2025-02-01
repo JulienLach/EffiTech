@@ -150,7 +150,12 @@ class ClientDetailsPage extends Component {
                                             </a>
                                         </p>
                                         <h3>Adresse mail</h3>
-                                        <p>{client.email}</p>
+                                        <p>
+                                            Mail :{" "}
+                                            <a href={`mailto:${client.email}`}>
+                                                {client.email}
+                                            </a>
+                                        </p>
                                     </div>
                                     <div className={stylesMobile.addressCard}>
                                         <h3>Adresse</h3>
@@ -165,6 +170,9 @@ class ClientDetailsPage extends Component {
                                             href={googleMapsUrl}
                                             target="_blank"
                                             rel="noreferrer"
+                                            className={
+                                                stylesMobile.openMapsLink
+                                            }
                                         >
                                             Voir sur Google Maps
                                         </a>
@@ -207,7 +215,12 @@ class ClientDetailsPage extends Component {
                                             </a>
                                         </p>
                                         <h3>Adresse mail</h3>
-                                        <p>{client.email}</p>
+                                        <p>
+                                            Mail :{" "}
+                                            <a href={`mailto:${client.email}`}>
+                                                {client.email}
+                                            </a>
+                                        </p>
                                     </div>
                                     <div className={stylesMobile.addressCard}>
                                         <h3>Adresse</h3>
@@ -222,6 +235,9 @@ class ClientDetailsPage extends Component {
                                             href={googleMapsUrl}
                                             target="_blank"
                                             rel="noreferrer"
+                                            className={
+                                                stylesMobile.openMapsLink
+                                            }
                                         >
                                             Voir sur Google Maps
                                         </a>
@@ -307,6 +323,7 @@ class ClientDetailsPage extends Component {
                                                 href={googleMapsUrl}
                                                 target="_blank"
                                                 rel="noreferrer"
+                                                className={styles.openMapsLink}
                                             >
                                                 Voir sur Google Maps
                                             </a>
@@ -385,6 +402,7 @@ class ClientDetailsPage extends Component {
                                                 href={googleMapsUrl}
                                                 target="_blank"
                                                 rel="noreferrer"
+                                                className={styles.openMapsLink}
                                             >
                                                 Voir sur Google Maps
                                             </a>

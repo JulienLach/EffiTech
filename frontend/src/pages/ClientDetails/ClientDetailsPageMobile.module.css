@@ -35,7 +35,7 @@
 }
 
 .mapCard {
-    margin-bottom: 5em;
+    margin-bottom: 6em;
 }
 
 .profilInitial {
@@ -50,4 +50,14 @@
     border-radius: 100%;
     width: 2.1em;
     height: 2.1em;
+}
+
+.openMapsLink {
+    display: flex;
+    justify-content: center;
+    margin-top: 0.7em;
+    padding: 0.5em;
+    background-color: #c93c2c;
+    color: white;
+    border-radius: 0.3em;
 }

@@ -38,6 +38,9 @@ class TemplateGlobalMobile extends Component {
             case "/calendar":
                 pageTitle = "Calendrier";
                 break;
+            case "/calendar-mobile":
+                pageTitle = "Calendrier";
+                break;
             case "/clients":
                 pageTitle = "Clients";
                 break;

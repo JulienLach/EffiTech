@@ -32,6 +32,11 @@ class NotificationsPage extends Component {
         });
     }
 
+    formatDate(date) {
+        const creationDate = new Date(date);
+        return creationDate.toLocaleDateString("fr-FR");
+    }
+
     render() {
         const isMobile = window.navigator.userAgentData;
         const { notifications } = this.state;
@@ -81,7 +86,9 @@ class NotificationsPage extends Component {
                                                 <td>{notification.type}</td>
                                                 <td>{notification.title}</td>
                                                 <td>
-                                                    {notification.creationDate}
+                                                    {this.formatDate(
+                                                        notification.creationDate
+                                                    )}
                                                 </td>
                                                 <td>
                                                     {notification.creationHour}

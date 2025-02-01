@@ -61,6 +61,11 @@
     font-weight: 600;
 }
 
+h2 {
+    font-size: 1.5em;
+    font-weight: 550;
+}
+
 .names {
     margin-left: 1.5em;
     display: flex;
@@ -154,4 +159,11 @@
     font-size: 1em;
     cursor: pointer;
     margin-top: 0.9em;
+}
+
+.openMapsLink {
+    padding: 0.5em 1em;
+    background-color: #c93c2c;
+    color: white;
+    border-radius: 0.3em;
 }
