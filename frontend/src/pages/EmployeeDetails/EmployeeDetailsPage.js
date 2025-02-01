@@ -60,6 +60,13 @@ class EmployeeDetailsPage extends Component {
                                 <p className={styles.firstname}>
                                     {employee.firstname} {employee.lastname}
                                 </p>
+                                <p>
+                                    {employee.isAdmin && (
+                                        <span className={styles.adminBadge}>
+                                            Administrateur
+                                        </span>
+                                    )}
+                                </p>
                             </div>
                             <button
                                 type="button"

@@ -95,6 +95,15 @@ class EmployeesPage extends Component {
                                             <p className={styles.name}>
                                                 {employee.firstname}{" "}
                                                 {employee.lastname}
+                                                {employee.isAdmin && (
+                                                    <span
+                                                        className={
+                                                            styles.adminBadge
+                                                        }
+                                                    >
+                                                        Administrateur
+                                                    </span>
+                                                )}
                                             </p>
                                             <p className={styles.job}>
                                                 {employee.job}
