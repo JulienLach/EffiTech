@@ -46,28 +46,29 @@
     background-color: #b73c2e;
 }
 
-.notificationBell {
-    height: 1.3em;
+.notificationIcon {
+    position: relative;
+    margin-right: 1em;
+    font-size: 1.3em;
     cursor: pointer;
 }
 
-.notificationIcon {
-    position: relative;
-    margin-right: 1.25em;
+.notificationIcon:hover {
+    color: #2e3030;
 }
 
 .notificationCount {
     display: flex;
     position: absolute;
-    top: -0.425em;
-    right: -0.325em;
+    top: -0.2em;
+    right: 0.4em;
     background-color: #e0240f;
     color: white;
     border-radius: 1em;
     height: 1em;
-    width: 1em;
+    width: 1.05em;
     border-radius: 100%;
-    font-size: 0.75em;
+    font-size: 0.5em;
     align-items: center;
     justify-content: center;
 }
@@ -75,7 +76,7 @@
 .profileBubble {
     top: -0.625em;
     right: -0.625em;
-    background-color: #1c8aff;
+    background-color: #464849;
     color: white;
     border-radius: 2em;
     width: 2.1em;
@@ -89,17 +90,16 @@
 }
 
 .profileBubble:hover {
-    background-color: #0056b3;
+    background-color: #2e3030;
 }
 
 .profileMenu {
     position: fixed;
-    top: 4.5em;
+    top: 3.7em;
     right: 1.3em;
     z-index: 1000;
-    height: 90px;
-    padding: 1em;
-    border: 0.15em solid #d5d5d5;
+    padding: 0.5em 1em;
+    border: 0.1em solid #e9e9e9;
     border-radius: 0.5em;
     background-color: #fff;
     box-shadow: 0 0.18em 0.2em rgba(0, 0, 0, 0.1);
@@ -108,6 +108,11 @@
 ul li {
     list-style: none;
     padding: 0.3em 0;
+}
+
+ul li:hover {
+    text-decoration: underline;
+    color: #c93c2c;
 }
 
 .profileMenu ul li a i {
@@ -207,7 +212,7 @@ i {
     border-radius: 0.4em;
     padding: 0.5em;
     position: absolute;
-    top: 4em;
+    top: 3.3em;
     right: 6.9em;
     z-index: 1000;
 }
@@ -228,5 +233,9 @@ i {
     font-size: 1.05em;
     font-weight: 500;
     cursor: pointer;
-    margin: 0 1em;
+    margin: 0 0.5em;
+}
+
+.createEventButton:hover {
+    background-color: #b73c2e;
 }

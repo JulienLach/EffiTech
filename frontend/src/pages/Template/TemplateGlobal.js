@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./TemplateGlobal.module.css";
 import logo from "../../images/logo.svg";
-import bellIcon from "../../images/notificationBell.svg";
 import CreateEventForm from "../../components/CreateEventForm/CreateEventForm";
 import InterventionForm from "../../components/InterventionForm/InterventionForm";
 
@@ -35,6 +34,19 @@ class TemplateGlobal extends Component {
 
     componentDidMount() {
         this.setInitials();
+        document
+            .getElementById("notificationIcon")
+            .addEventListener("mouseover", function () {
+                this.classList.remove("fa-regular");
+                this.classList.add("fa-solid");
+            });
+
+        document
+            .getElementById("notificationIcon")
+            .addEventListener("mouseout", function () {
+                this.classList.remove("fa-solid");
+                this.classList.add("fa-regular");
+            });
     }
 
     setInitials() {
@@ -126,11 +138,10 @@ class TemplateGlobal extends Component {
                                 className={styles.notificationIcon}
                                 onClick={this.handleNotificationClick}
                             >
-                                <img
-                                    src={bellIcon}
-                                    className={styles.notificationBell}
-                                    alt="Notifications"
-                                ></img>
+                                <i
+                                    id="notificationIcon"
+                                    className="fa-regular fa-bell"
+                                ></i>
                                 <span
                                     className={styles.notificationCount}
                                 ></span>
@@ -262,8 +273,8 @@ class TemplateGlobal extends Component {
                                 className={styles.createEventButton}
                                 onClick={this.handleCreateEventClick}
                             >
-                                Créer un événement{" "}
-                                <i className="fa-solid fa-plus"></i>
+                                <i className="fa-solid fa-plus"></i> Créer un
+                                événement
                             </button>
 
                             {/* Ajoutez ici les options pour créer un événement, un client, etc. */}

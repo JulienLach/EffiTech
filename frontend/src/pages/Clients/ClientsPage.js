@@ -57,7 +57,7 @@ class ClientsPage extends Component {
             padding: "2px 10px",
             borderRadius: "8px",
             color: "white",
-            fontSize: "0.8em",
+            fontSize: "0.9em",
             fontWeight: "500",
         };
 
@@ -291,7 +291,7 @@ class ClientsPage extends Component {
                                             type="text"
                                             id="search"
                                             name="search"
-                                            placeholder="Recherche"
+                                            placeholder="Rechercher"
                                             value={searchItem}
                                             onChange={this.handleSearchChange}
                                         />
@@ -625,7 +625,7 @@ class ClientsPage extends Component {
                                         type="text"
                                         id="search"
                                         name="search"
-                                        placeholder="Recherche"
+                                        placeholder="Rechercher"
                                         value={searchItem}
                                         onChange={this.handleSearchChange}
                                     />
@@ -718,7 +718,7 @@ class ClientsPage extends Component {
                                     )}
                                 </div>
                             </div>
-
+                            <div className={styles.divider}></div>
                             <div>
                                 <table>
                                     <thead className={styles.stickyThead}>
@@ -797,13 +797,13 @@ class ClientsPage extends Component {
                                         }
                                         disabled={currentPage === 1}
                                     >
-                                        <i className="fa fa-arrow-left"></i>
+                                        <i className="fa-solid fa-chevron-left"></i>
                                     </button>
                                     <button
                                         onClick={(e) => this.handleNextPage(e)}
                                         disabled={currentPage === totalPages}
                                     >
-                                        <i className="fa fa-arrow-right"></i>
+                                        <i className="fa-solid fa-chevron-right"></i>
                                     </button>
                                 </div>
                             </div>

@@ -70,13 +70,13 @@ class Calendar extends Component {
                             localizer.format(start, "HH:mm", culture) +
                             " - " +
                             localizer.format(end, "HH:mm", culture),
-                        dayFormat: "dddd DD/MM", // Format des jours
-                        monthHeaderFormat: "MMMM YYYY", // Format des mois
+                        dayFormat: "dddd DD/MM",
+                        monthHeaderFormat: "MMMM YYYY",
                     }}
                     messages={{
                         today: "Aujourd'hui",
-                        previous: <i className="fa fa-arrow-left"></i>,
-                        next: <i className="fa fa-arrow-right"></i>,
+                        previous: <i className="fa-solid fa-chevron-left"></i>,
+                        next: <i className="fa-solid fa-chevron-right"></i>,
                         week: "Semaine",
                         day: "Jour",
                         date: "Date",

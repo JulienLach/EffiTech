@@ -36,24 +36,24 @@ class InvoicesPage extends Component {
                         className={styles.addInvoiceButton}
                         onClick={this.openModal}
                     >
-                        <i className="fa-solid fa-plus"></i> Importer une
+                        <i class="fa-solid fa-download"></i> Importer une
                         facture
                     </button>
                     <div>
                         <table>
                             <thead className={styles.stickyThead}>
                                 <tr>
-                                    <th>Numéro</th>
+                                    <th>Référence</th>
                                     <th>Client</th>
                                     <th>Montant HT</th>
                                     <th>Montant TTC</th>
-                                    <th>Importé le</th>
+                                    <th>Date de facturation</th>
                                     <th>Visualiser</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>[INV001]</td>
+                                    <td>[FC-001]</td>
                                     <td>[Jean Bombeur]</td>
                                     <td>[100€]</td>
                                     <td>[120€]</td>

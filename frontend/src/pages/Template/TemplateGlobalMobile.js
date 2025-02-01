@@ -62,11 +62,13 @@ class TemplateGlobalMobile extends Component {
                 {/* Partie header */}
                 <div className={styles.headerDiv}>
                     <div className={styles.topLeftHader}>
-                        <img
-                            src={logoMobile}
-                            alt="Logo"
-                            className={styles.logoMobile}
-                        />
+                        <a href="/calendar">
+                            <img
+                                src={logoMobile}
+                                alt="Logo"
+                                className={styles.logoMobile}
+                            />
+                        </a>
                         <h1 className={styles.title}>{pageTitle}</h1>
                     </div>
                     <div>

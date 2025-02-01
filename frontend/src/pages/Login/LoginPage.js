@@ -91,7 +91,7 @@ class LoginPage extends Component {
                                     </p>
                                 )}
                                 <a href="/forgot-password">
-                                    Mot de passe oublié ?
+                                    Mot de passe oublié
                                 </a>
                                 <button
                                     type="submit"
@@ -142,7 +142,7 @@ class LoginPage extends Component {
                                         </p>
                                     )}
                                     <a href="/forgot-password">
-                                        Mot de passe oublié ?
+                                        Mot de passe oublié
                                     </a>
                                     <button
                                         type="submit"

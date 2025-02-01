@@ -351,16 +351,7 @@ class CalendarPage extends Component {
                                                     )}
                                                 </p>
                                             </div>
-                                            <p
-                                                className={
-                                                    event.client.category ===
-                                                    "Particulier"
-                                                        ? stylesMobile.partTag
-                                                        : stylesMobile.proTag
-                                                }
-                                            >
-                                                {event.client.category}
-                                            </p>
+
                                             {event.client.category ===
                                             "Professionnel" ? (
                                                 <p
@@ -380,6 +371,16 @@ class CalendarPage extends Component {
                                                     {event.client.lastname}
                                                 </p>
                                             )}
+                                            <p
+                                                className={
+                                                    event.client.category ===
+                                                    "Particulier"
+                                                        ? stylesMobile.partTag
+                                                        : stylesMobile.proTag
+                                                }
+                                            >
+                                                {event.client.category}
+                                            </p>
                                         </div>
                                     </div>
                                     <div className={stylesMobile.rightSide}>
@@ -512,8 +513,8 @@ class CalendarPage extends Component {
                                                 className={styles.stickyThead}
                                             >
                                                 <tr>
-                                                    <th>Client</th>
                                                     <th>Référence</th>
+                                                    <th>Client</th>
                                                     <th>Type</th>
                                                     <th>Titre</th>
                                                     <th>Statut</th>
@@ -524,6 +525,19 @@ class CalendarPage extends Component {
                                             <tbody>
                                                 {currentEvents.map((event) => (
                                                     <tr key={event.idEvent}>
+                                                        <td>
+                                                            {(() => {
+                                                                if (
+                                                                    event.type ===
+                                                                    "Intervention"
+                                                                ) {
+                                                                    return "INT-";
+                                                                } else {
+                                                                    return "RDV-";
+                                                                }
+                                                            })()}
+                                                            {event.idEvent}
+                                                        </td>
                                                         <td
                                                             className={
                                                                 styles.eventLink
@@ -539,19 +553,6 @@ class CalendarPage extends Component {
                                                                         .lastname
                                                                 }
                                                             </a>
-                                                        </td>
-                                                        <td>
-                                                            {(() => {
-                                                                if (
-                                                                    event.type ===
-                                                                    "Intervention"
-                                                                ) {
-                                                                    return "INT-";
-                                                                } else {
-                                                                    return "RDV-";
-                                                                }
-                                                            })()}
-                                                            {event.idEvent}
                                                         </td>
                                                         <td>{event.type}</td>
                                                         <td
@@ -611,7 +612,7 @@ class CalendarPage extends Component {
                                                 }
                                                 disabled={currentPage === 1}
                                             >
-                                                <i className="fa fa-arrow-left"></i>
+                                                <i className="fa-solid fa-chevron-left"></i>
                                             </button>
                                             <button
                                                 onClick={(e) =>
@@ -621,7 +622,7 @@ class CalendarPage extends Component {
                                                     currentPage === totalPages
                                                 }
                                             >
-                                                <i className="fa fa-arrow-right"></i>
+                                                <i class="fa-solid fa-chevron-right"></i>
                                             </button>
                                         </div>
                                     </div>

@@ -101,7 +101,7 @@ class DocumentsPage extends Component {
                                 type="text"
                                 id="search"
                                 name="search"
-                                placeholder="Recherche"
+                                placeholder="Rechercher"
                                 onChange={this.handleSearchChange}
                             />
                         </div>
@@ -160,10 +160,10 @@ class DocumentsPage extends Component {
                         </table>
                         <div className={styles.pagination}>
                             <button>
-                                <i className="fa fa-arrow-left"></i>
+                                <i className="fa-solid fa-chevron-left"></i>
                             </button>
                             <button>
-                                <i className="fa fa-arrow-right"></i>
+                                <i className="fa-solid fa-chevron-right"></i>
                             </button>
                         </div>
                     </div>
