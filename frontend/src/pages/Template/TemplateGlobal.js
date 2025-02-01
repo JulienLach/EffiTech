@@ -22,6 +22,7 @@ class TemplateGlobal extends Component {
             isEventModalOpen: false,
             selectedEvent: null,
             isUpdateFormOpen: false,
+            idEmployee: localStorage.getItem("idEmployee"),
         };
         this.toggleProfileMenu = this.toggleProfileMenu.bind(this);
         this.logout = this.logout.bind(this);
@@ -162,7 +163,7 @@ class TemplateGlobal extends Component {
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="">
+                                            <a href="/employees">
                                                 Mon profil{" "}
                                                 <i className="fa-solid fa-user"></i>
                                             </a>
