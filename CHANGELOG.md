@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## Changes
+
+-   Add company name
+-   Add basic notification for create events
+
+## Fixes
+
+-   Various CSS fixes
+-   Fix client form
+
 # [0.5.3] (2025-17-01)
 
 ## Changes

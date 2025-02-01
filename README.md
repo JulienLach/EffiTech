@@ -4,7 +4,8 @@
 
 <p align="center">
     <a href="https://github.com/JulienLach/EffiTech/releases">
-        <img src="https://img.shields.io/github/v/tag/JulienLach/EffiTech" alt="Tag"></a>
+        <img src="https://img.shields.io/badge/Release-0.5.3-orange?logo=github" alt="Release" />
+    </a>
 </p>
 
 ## Table of Contents
