@@ -116,11 +116,9 @@ ul li {
 
 /* SIDEBAR */
 .sidebar {
-    margin-left: 1.25em;
-    border-top-right-radius: 0.625em;
-    border-bottom-right-radius: 0.625em;
+    margin-left: 0.8em;
     height: auto;
-    margin-top: 0.7em;
+    margin-top: 0.5em;
 }
 
 .sidebar ul {

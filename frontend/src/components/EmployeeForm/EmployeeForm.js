@@ -68,8 +68,9 @@ class EmployeeForm extends Component {
         }
         if (!phoneNumber) {
             errors.phoneNumber = "* Champ obligatoire";
-        } else if (!/^\d+$/.test(phoneNumber)) {
-            errors.phoneNumber = "* Ne doit contenir que des chiffres";
+        } else if (!/^[\d\s]+$/.test(phoneNumber)) {
+            errors.phoneNumber =
+                "* Ne doit contenir que des chiffres et des espaces";
         }
         if (!password) {
             errors.password = "* Champ obligatoire";

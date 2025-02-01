@@ -37,8 +37,13 @@ h3 {
     margin-top: 1.25em;
 }
 
+table {
+    border-collapse: collapse;
+}
+
 th,
-td {
+td,
+tr {
     text-align: start;
     width: 100vw; /* Définit une largeur fixe pour les cellules */
     padding: 0.6em; /* Augmente l'espace à l'intérieur des cellules */
