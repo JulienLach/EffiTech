@@ -475,7 +475,7 @@ class CalendarPage extends Component {
                                     />
                                 </div>
                                 <h3 className={styles.eventTitle}>
-                                    Événements
+                                    Évènements
                                 </h3>
                             </div>
                             <div className={styles.listView}>

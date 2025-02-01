@@ -8,3 +8,23 @@
     font-size: 1.9em;
     font-weight: 550;
 }
+
+.eventCard {
+    display: flex;
+    flex-direction: column;
+    width: 28%;
+    padding: 0.6em;
+    border-radius: 0.5em;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    align-items: center;
+}
+
+.eventChart {
+    margin: 1em 0;
+    width: 250px;
+    height: 250px;
+}
+
+.labelStats {
+    margin-top: 0.4em;
+}

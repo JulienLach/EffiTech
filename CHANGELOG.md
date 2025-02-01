@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -   Add company name
 -   Add basic notification for create events
 -   Add statistics page
+-   Add current month event stats card
 
 ## Fixes
 
