@@ -11,6 +11,7 @@ const reportRoutes = require("./routes/report.routes.js");
 const authRoutes = require("./routes/auth.routes");
 const documentRoutes = require("./routes/document.routes.js");
 const notificationRoutes = require("./routes/notification.routes.js");
+const statisticRoutes = require("./routes/statistic.routes.js");
 const authenticateToken = require("./middlewares/auth.middleware");
 
 dotenv.config({ path: ".env" });
@@ -65,6 +66,9 @@ app.use("/documents", authenticateToken, documentRoutes);
 
 // Route des notifications
 app.use("/notifications", authenticateToken, notificationRoutes);
+
+// Route des statistiques
+app.use("/statistics", authenticateToken, statisticRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);

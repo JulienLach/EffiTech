@@ -912,6 +912,25 @@ function createNotification(notificationData, callback) {
     xhr.send(JSON.stringify(notificationData));
 }
 
+function getAllEventStatistics(callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", `${API_URL}/statistics`);
+    xhr.withCredentials = true;
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            console.log(JSON.parse(xhr.responseText));
+            callback(null, JSON.parse(xhr.responseText));
+        } else {
+            console.error(
+                "Erreur de récupération des statistiques",
+                xhr.statusText
+            );
+            callback(new Error(xhr.statusText), null);
+        }
+    };
+    xhr.send();
+}
+
 export {
     getAllEvents,
     getAllClients,
@@ -937,4 +956,5 @@ export {
     getDocumentById,
     createNotification,
     getAllNotifications,
+    getAllEventStatistics,
 };

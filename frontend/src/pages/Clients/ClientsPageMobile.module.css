@@ -10,25 +10,50 @@
     gap: 1em;
     margin: 1em 0em;
 }
-.clientCard {
+
+.clientCardProfessionnel {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1em;
+    padding: 1.2em;
     width: 100%;
-    border-radius: 0.4em;
+    border-radius: 0.6em;
     margin: 1em 0 0.5em 0;
     color: rgb(49, 49, 49);
     box-shadow: 0 0.2em 0.2em rgba(0, 0, 0, 0.1);
+    border-left: 10px solid #87c2f9;
+    border-top: 1px solid #e7e7e7;
+}
+
+.clientCardParticulier {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2em;
+    width: 100%;
+    border-radius: 0.6em;
+    margin: 1em 0 0.5em 0;
+    color: rgb(49, 49, 49);
+    box-shadow: 0 0.2em 0.2em rgba(0, 0, 0, 0.1);
+    border-left: 10px solid #fccd86;
+    border-top: 1px solid #e7e7e7;
+}
+
+.clientCardParticulier i,
+.clientCardProfessionnel i {
+    font-size: 1.8em;
 }
 
 .rightPart {
     text-align: start;
     margin-right: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
 }
 
 .name {
-    font-size: 1.3em;
+    font-size: 1.2em;
     font-weight: 500;
 }
 

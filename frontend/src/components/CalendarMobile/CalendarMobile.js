@@ -78,8 +78,8 @@ class CalendarMobile extends Component {
                     }}
                     messages={{
                         today: "Aujourd'hui",
-                        previous: <i className="fa fa-arrow-left"></i>,
-                        next: <i className="fa fa-arrow-right"></i>,
+                        previous: <i className="fa fa-chevron-left"></i>,
+                        next: <i className="fa fa-chevron-right"></i>,
                         week: "Semaine",
                         day: "Jour",
                         date: "Date",

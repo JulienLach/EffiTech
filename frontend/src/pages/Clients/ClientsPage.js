@@ -387,13 +387,11 @@ class ClientsPage extends Component {
                             </div>
                             {currentFilteredClients.map((client) => (
                                 <div
-                                    className={stylesMobile.clientCard}
-                                    style={{
-                                        backgroundColor:
-                                            client.category === "Professionnel"
-                                                ? "rgb(193, 240, 255)"
-                                                : "rgb(255, 228, 188)",
-                                    }}
+                                    className={
+                                        client.category === "Professionnel"
+                                            ? stylesMobile.clientCardProfessionnel
+                                            : stylesMobile.clientCardParticulier
+                                    }
                                     onClick={() =>
                                         this.handleButtonClick(client)
                                     }
