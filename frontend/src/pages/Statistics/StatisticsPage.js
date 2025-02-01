@@ -1,14 +1,12 @@
-// filepath: /home/julien/Documents/EffiTech/frontend/src/pages/Statistics/StatisticsPage.js
 import React, { Component } from "react";
 import { useNavigate } from "react-router-dom";
 import TemplateGlobal from "../Template/TemplateGlobal";
 import styles from "./StatisticsPage.module.css";
 import { getAllEventStatistics } from "../../services/api";
-import { Pie } from "react-chartjs-2";
+import { Pie, Bar } from "react-chartjs-2";
 import "chart.js/auto";
 
-// Composant fonctionnel wrapper
-const CompanyPageWrapper = () => {
+const StatisticsPageWrapper = () => {
     const navigate = useNavigate();
     return <StatisticsPage navigate={navigate} location={location} />;
 };
@@ -42,6 +40,22 @@ class StatisticsPage extends Component {
         );
     }
 
+    countEventsByEmployeeAndMonth() {
+        const currentMonth = new Date().getMonth() + 1;
+        const employeeEventCount = {};
+
+        this.state.events?.events.forEach((event) => {
+            if (new Date(event.startingDate).getMonth() + 1 === currentMonth) {
+                const employeeName = `${event.employee.firstname} ${event.employee.lastname}`;
+                if (!employeeEventCount[employeeName]) {
+                    employeeEventCount[employeeName] = 0;
+                }
+                employeeEventCount[employeeName]++;
+            }
+        });
+        return employeeEventCount;
+    }
+
     getCurrentMonthName() {
         return new Date().toLocaleString("fr-FR", { month: "long" });
     }
@@ -51,7 +65,7 @@ class StatisticsPage extends Component {
             this.countEventsByTypeAndMonth("Intervention");
         const totalRendezVous = this.countEventsByTypeAndMonth("Rendez-vous");
 
-        const chartData = {
+        const monthlyEventsChart = {
             labels: ["Interventions", "Rendez-vous"],
             datasets: [
                 {
@@ -60,6 +74,18 @@ class StatisticsPage extends Component {
                         "rgba(187, 12, 12, 0.6)",
                         "rgba(134, 134, 134, 0.6)",
                     ],
+                },
+            ],
+        };
+
+        const employeeEventCount = this.countEventsByEmployeeAndMonth();
+        const employeeEventChart = {
+            labels: Object.keys(employeeEventCount),
+            datasets: [
+                {
+                    label: "Nombre d'événements",
+                    data: Object.values(employeeEventCount),
+                    backgroundColor: "rgba(187, 12, 12, 0.6)",
                 },
             ],
         };
@@ -83,7 +109,16 @@ class StatisticsPage extends Component {
                             Nombre de rendez-vous : {totalRendezVous}
                         </p>
                         <div className={styles.eventChart}>
-                            <Pie data={chartData} />
+                            <Pie data={monthlyEventsChart} />
+                        </div>
+                    </div>
+                    <div className={styles.eventCard}>
+                        <h3>
+                            Répartition par employé en{" "}
+                            {this.getCurrentMonthName()}
+                        </h3>
+                        <div className={styles.employeeChart}>
+                            <Bar data={employeeEventChart} />
                         </div>
                     </div>
                 </div>
@@ -92,4 +127,4 @@ class StatisticsPage extends Component {
     }
 }
 
-export default CompanyPageWrapper;
+export default StatisticsPageWrapper;
