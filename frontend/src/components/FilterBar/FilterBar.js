@@ -168,6 +168,17 @@ class FilterBar extends Component {
                                             />
                                             Rendez-vous
                                         </label>
+                                        <label>
+                                            <input
+                                                type="radio"
+                                                name="type"
+                                                value=""
+                                                onChange={
+                                                    this.props.handleTypeChange
+                                                }
+                                            />
+                                            Tous
+                                        </label>
                                     </div>
                                     <button
                                         onClick={this.props.toggleTypeModal}
