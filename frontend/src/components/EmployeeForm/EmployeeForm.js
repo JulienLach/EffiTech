@@ -211,15 +211,20 @@ class EmployeeForm extends Component {
                                 </span>
                             )}
                         </div>
-                        <div className={styles.labelInput}>
-                            <label htmlFor="isAdmin">Admin : </label>
-                            <input
-                                type="checkbox"
-                                id="isAdmin"
-                                name="isAdmin"
-                                checked={this.state.isAdmin}
-                                onChange={this.handleChange}
-                            />
+                        <div className={styles.labelAdminInput}>
+                            <label htmlFor="isAdmin">
+                                Compte administrareur :{" "}
+                            </label>
+                            <label className={styles.switch}>
+                                <input
+                                    type="checkbox"
+                                    id="isAdmin"
+                                    name="isAdmin"
+                                    checked={this.state.isAdmin}
+                                    onChange={this.handleChange}
+                                />
+                                <span className={styles.slider}></span>
+                            </label>
                         </div>
                         <div className={styles.separation}></div>
                         <div className={styles.buttonPosition}>
