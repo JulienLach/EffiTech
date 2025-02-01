@@ -10,11 +10,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 -   Add company name
 -   Add basic notification for create events
+-   Add statistics page
 
 ## Fixes
 
 -   Various CSS fixes
 -   Fix client form
+-   Add missing all type to sort type filter
 
 # [0.5.3] (2025-17-01)
 

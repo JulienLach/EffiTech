@@ -100,7 +100,11 @@
 }
 
 .modalFooter .cancelButton {
-    background-color: #686868;
+    background-color: #838383;
+}
+
+.modalFooter .cancelButton:hover {
+    background-color: #4d4d4d;
 }
 
 .modalFooter .submitButton {
@@ -108,8 +112,8 @@
     color: white;
 }
 
-.modalFooter button:hover {
-    opacity: 0.8;
+.modalFooter .submitButton:hover {
+    background-color: #941c11;
 }
 
 .eventFormTitle {

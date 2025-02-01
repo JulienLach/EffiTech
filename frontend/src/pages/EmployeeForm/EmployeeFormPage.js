@@ -211,13 +211,14 @@ class EmployeeFormPage extends Component {
                                 onClick={this.handleCancel}
                                 className={styles.cancelButton}
                             >
+                                <i className="fa-solid fa-xmark"></i>
                                 Annuler
                             </button>
                             <button
                                 type="submit"
                                 className={styles.submitButton}
                             >
-                                <i className="fa-solid fa-save"></i>
+                                <i className="fa-regular fa-save"></i>
                                 Enregistrer
                             </button>
                         </div>

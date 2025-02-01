@@ -290,10 +290,12 @@ class CompanyDetails extends Component {
                                 className={styles.cancelButton}
                                 onClick={() => this.props.navigate(`/company`)}
                             >
+                                <i className="fa-solid fa-xmark"></i>
                                 Annuler
                             </button>
                             <button type="submit" className={styles.saveButton}>
-                                <i className="fa-solid fa-save"></i> Enregistrer
+                                <i className="fa-regular fa-save"></i>{" "}
+                                Enregistrer
                             </button>
                         </div>
                     </form>

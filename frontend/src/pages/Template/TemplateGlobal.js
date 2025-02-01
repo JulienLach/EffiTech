@@ -180,6 +180,18 @@ class TemplateGlobal extends Component {
                         <ul>
                             <li
                                 className={
+                                    currentPath === "/statistics"
+                                        ? styles.active
+                                        : ""
+                                }
+                            >
+                                <a href="/statistics">
+                                    <i class="fa-solid fa-chart-simple"></i>
+                                    Statistiques
+                                </a>
+                            </li>
+                            <li
+                                className={
                                     currentPath === "/calendar"
                                         ? styles.active
                                         : ""
