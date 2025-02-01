@@ -19,6 +19,7 @@ function getCompany(req, res) {
 
 function updateCompany(req, res) {
     const {
+        name,
         phoneNumber,
         idAddress,
         siret,
@@ -30,6 +31,7 @@ function updateCompany(req, res) {
 
     // Exécuter les règles de validation
     const validationChecks = [
+        body("name").isString().trim().escape().optional(),
         body("phoneNumber").isString().trim().escape().notEmpty(),
         body("idAddress.address").isString().trim().escape().notEmpty(),
         body("idAddress.zipcode").isString().trim().escape().notEmpty(),
@@ -52,6 +54,7 @@ function updateCompany(req, res) {
     }
 
     const companyData = {
+        name,
         phoneNumber,
         idAddress,
         siret,
@@ -78,6 +81,7 @@ function updateCompany(req, res) {
 
 function createCompany(req, res) {
     const validationChecks = [
+        body("name").isString().trim().escape().notEmpty(),
         body("phoneNumber").isString().trim().escape().notEmpty(),
         body("idAddress.address").isString().trim().escape().notEmpty(),
         body("idAddress.zipcode").isString().trim().escape().notEmpty(),
@@ -97,10 +101,11 @@ function createCompany(req, res) {
         return res.status(400).json({ errors: errors.array() });
     }
 
-    const { phoneNumber, idAddress, siret, vatNumber, capital, logo } =
+    const { name, phoneNumber, idAddress, siret, vatNumber, capital, logo } =
         req.body;
 
     const companyData = {
+        name,
         phoneNumber,
         idAddress,
         siret,

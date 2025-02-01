@@ -96,6 +96,7 @@ CREATE TABLE reports(
 
 CREATE TABLE companies(
    id_company SERIAL PRIMARY KEY,
+   name VARCHAR(100),
    phone_number VARCHAR(50),
    siret VARCHAR(50),
    vat_number VARCHAR(50),

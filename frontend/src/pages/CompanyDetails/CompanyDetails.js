@@ -83,6 +83,12 @@ class CompanyDetails extends Component {
             errors.city =
                 "* Ne doit contenir que des lettres, des espaces et des tirets";
         }
+        if (!company.name) {
+            errors.name = "* Champ obligatoire";
+        } else if (!/^[a-zA-ZÀ-ÿ\d\s]+$/.test(company.name)) {
+            errors.name =
+                "* Ne doit contenir que des lettres, des chiffres et des espaces";
+        }
         if (!company.phoneNumber) {
             errors.phoneNumber = "* Champ obligatoire";
         } else if (!/^[\d\s]+$/.test(company.phoneNumber)) {
@@ -160,6 +166,20 @@ class CompanyDetails extends Component {
                         <div className={styles.separator}></div>
                         <div className={styles.companyData}>
                             <h3>Coordonnées</h3>
+                            <label>
+                                Nom :
+                                <input
+                                    type="text"
+                                    name="name"
+                                    value={company.name}
+                                    onChange={this.handleChange}
+                                />
+                                {errors.name && (
+                                    <p className={styles.error}>
+                                        {errors.name}
+                                    </p>
+                                )}
+                            </label>
                             <label>
                                 Adresse :
                                 <input

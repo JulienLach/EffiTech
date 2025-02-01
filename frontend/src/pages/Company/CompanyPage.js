@@ -61,6 +61,7 @@ class CompanyPage extends Component {
                             <div className={styles.separator}></div>
                             <div className={styles.informations}>
                                 <h3>Coordonnées</h3>
+                                <p>Nom : {company.name}</p>
                                 <p>
                                     Adresse : {company.idAddress.address},{" "}
                                     {company.idAddress.zipcode},{" "}

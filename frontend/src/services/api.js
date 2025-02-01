@@ -451,6 +451,7 @@ function getClientById(idClient, callback) {
  * @apiVersion 1.0.0
  * @apiSuccess {Object} company The company object.
  * @apiSuccess {Number} company.idCompany Company ID.
+ * @apiSuccess {String} company.name Company name.
  * @apiSuccess {String} company.phoneNumber Company phone number.
  * @apiSuccess {Object} company.idAddress Company address.
  * @apiSuccess {String} company.idAddress.address Company address.
@@ -535,6 +536,7 @@ function deleteEvent(idEvent, callback) {
  * @apiGroup Company
  * @apiVersion 1.0.0
  * @apiParam {Number} idCompany The ID of the company.
+ * @apiParam {String} name The name of the company.
  * @apiParam {String} phoneNumber The phone number of the company.
  * @apiParam {Object} idAddress The address of the company.
  * @apiParam {String} idAddress.address The address of the company.
@@ -779,6 +781,7 @@ function createEmployee(employeeData, callback) {
  * @apiParam {String} databaseVersion The database version of the company.
  * @apiSuccess {Object} company The created company object.
  * @apiSuccess {Number} company.idCompany Company ID.
+ * @apiSuccess {String} company.phoneNumber Company phone number.
  * @apiSuccess {String} company.phoneNumber Company phone number.
  * @apiSuccess {Object} company.idAddress Company address.
  * @apiSuccess {String} company.idAddress.address Company address.

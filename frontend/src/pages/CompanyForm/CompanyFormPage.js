@@ -8,6 +8,7 @@ class CompanyFormPage extends Component {
         super(props);
         this.state = {
             company: {
+                name: "",
                 phoneNumber: "",
                 idAddress: {
                     address: "",
@@ -71,6 +72,9 @@ class CompanyFormPage extends Component {
 
         const { company } = this.state;
         const errors = {};
+        if (!company.name) {
+            errors.name = "* Champ obligatoire";
+        }
         if (!company.phoneNumber) {
             errors.phoneNumber = "* Champ obligatoire";
         }
@@ -138,6 +142,20 @@ class CompanyFormPage extends Component {
                         <div className={styles.separation}></div>
                         <h2 className={styles.header}>Coordonnées</h2>
                         <div className={styles.labelInput}>
+                            <label htmlFor="name">Nom :</label>
+                            <input
+                                type="text"
+                                name="name"
+                                value={company.name}
+                                onChange={this.handleChange}
+                            />
+                            {errors.name && (
+                                <span className={styles.error}>
+                                    {errors.name}
+                                </span>
+                            )}
+                        </div>
+                        <div className={styles.labelInput}>
                             <label htmlFor="phoneNumber">Téléphone :</label>
                             <input
                                 type="text"
@@ -145,7 +163,11 @@ class CompanyFormPage extends Component {
                                 value={company.phoneNumber}
                                 onChange={this.handleChange}
                             />
-                            {errors.phoneNumber && <span className={styles.error}>{errors.phoneNumber}</span>}
+                            {errors.phoneNumber && (
+                                <span className={styles.error}>
+                                    {errors.phoneNumber}
+                                </span>
+                            )}
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="idAddress.address">Adresse :</label>
@@ -155,7 +177,11 @@ class CompanyFormPage extends Component {
                                 value={company.idAddress.address}
                                 onChange={this.handleChange}
                             />
-                            {errors.address && <span className={styles.error}>{errors.address}</span>}
+                            {errors.address && (
+                                <span className={styles.error}>
+                                    {errors.address}
+                                </span>
+                            )}
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="idAddress.zipcode">
@@ -167,7 +193,11 @@ class CompanyFormPage extends Component {
                                 value={company.idAddress.zipcode}
                                 onChange={this.handleChange}
                             />
-                            {errors.zipcode && <span className={styles.error}>{errors.zipcode}</span>}
+                            {errors.zipcode && (
+                                <span className={styles.error}>
+                                    {errors.zipcode}
+                                </span>
+                            )}
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="idAddress.city">Ville :</label>
@@ -177,7 +207,11 @@ class CompanyFormPage extends Component {
                                 value={company.idAddress.city}
                                 onChange={this.handleChange}
                             />
-                            {errors.city && <span className={styles.error}>{errors.city}</span>}
+                            {errors.city && (
+                                <span className={styles.error}>
+                                    {errors.city}
+                                </span>
+                            )}
                         </div>
                         <div className={styles.separation}></div>
                         <h2 className={styles.header}>Informations</h2>
@@ -189,7 +223,11 @@ class CompanyFormPage extends Component {
                                 value={company.siret}
                                 onChange={this.handleChange}
                             />
-                            {errors.siret && <span className={styles.error}>{errors.siret}</span>}
+                            {errors.siret && (
+                                <span className={styles.error}>
+                                    {errors.siret}
+                                </span>
+                            )}
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="vatNumber">Numéro de TVA :</label>
@@ -199,7 +237,11 @@ class CompanyFormPage extends Component {
                                 value={company.vatNumber}
                                 onChange={this.handleChange}
                             />
-                            {errors.vatNumber && <span className={styles.error}>{errors.vatNumber}</span>}
+                            {errors.vatNumber && (
+                                <span className={styles.error}>
+                                    {errors.vatNumber}
+                                </span>
+                            )}
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="capital">Capital :</label>
@@ -209,13 +251,23 @@ class CompanyFormPage extends Component {
                                 value={company.capital}
                                 onChange={this.handleChange}
                             />
-                            {errors.capital && <span className={styles.error}>{errors.capital}</span>}
+                            {errors.capital && (
+                                <span className={styles.error}>
+                                    {errors.capital}
+                                </span>
+                            )}
                         </div>
                         <div className={styles.buttonPosition}>
-                            <button type="reset" className={styles.cancelButton}>
+                            <button
+                                type="reset"
+                                className={styles.cancelButton}
+                            >
                                 Annuler
                             </button>
-                            <button type="submit" className={styles.submitButton}>
+                            <button
+                                type="submit"
+                                className={styles.submitButton}
+                            >
                                 Enregistrer
                             </button>
                         </div>
