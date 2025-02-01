@@ -1,3 +1,7 @@
+.modalHeader {
+    text-align: center;
+}
+
 .modal {
     display: none; /* mettre 'none' pour masquer par défaut */
 }
@@ -135,4 +139,8 @@
 .separator {
     width: 100%;
     border-bottom: 0.06em solid #ccc;
+}
+
+.inputDisplay input {
+    background-color: #f0f0f0;
 }

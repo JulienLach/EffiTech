@@ -49,10 +49,10 @@ class ClientDetailsPage extends Component {
 
     getCategoryIndicator(category) {
         const style = {
-            padding: "2px 10px",
+            padding: "2px 11px",
             borderRadius: "8px",
             color: "white",
-            fontSize: "0.8em",
+            fontSize: "0.9em",
             fontWeight: "500",
         };
 

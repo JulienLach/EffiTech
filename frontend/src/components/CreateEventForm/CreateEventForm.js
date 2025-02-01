@@ -236,7 +236,7 @@ class CreateEventForm extends Component {
                 <div className={styles.modalBackground}></div>
                 <form className={`${styles.modal} ${styles.open}`}>
                     <div>
-                        <h2>
+                        <h2 className={styles.modalHeader}>
                             <i className="fa-regular fa-calendar"></i> Planifier
                             un évènement
                         </h2>
@@ -360,11 +360,8 @@ class CreateEventForm extends Component {
                                 </span>
                             )}
                         </div>
-                        <div>
-                            <label>
-                                Adresse{" "}
-                                <span className={styles.required}>*</span> :
-                            </label>
+                        <div className={styles.inputDisplay}>
+                            <label>Adresse :</label>
                             <input type="text" value={address} readOnly />
                         </div>
                         <div>

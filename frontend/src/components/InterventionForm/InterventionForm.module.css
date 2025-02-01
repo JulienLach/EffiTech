@@ -24,13 +24,22 @@
 
 .modalFooter {
     display: flex;
-    gap: 1em;
+    flex-direction: row;
+    gap: 0.7em;
+}
+
+.modalButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.3em;
 }
 
 .modalFooter button {
-    padding: 0.4em 0.9em;
+    padding: 0.4em 0.6em;
     border: none;
-    border-radius: 0.3em;
+    border-radius: 0.4em;
     font-size: 1em;
     transition: 10ms;
     cursor: pointer;

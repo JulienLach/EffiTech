@@ -497,20 +497,28 @@ class InterventionForm extends Component {
                             <div className={styles.modalFooter}>
                                 {event.status !== 5 && (
                                     <button
+                                        className={styles.modalButtons}
                                         type="button"
                                         onClick={this.handleDelete}
                                     >
+                                        <i className="fa-solid fa-trash"></i>{" "}
                                         Supprimer
                                     </button>
                                 )}
-                                <button type="button" onClick={closeModal}>
-                                    Retour
+                                <button
+                                    className={styles.modalButtons}
+                                    type="button"
+                                    onClick={closeModal}
+                                >
+                                    <i className="fa fa-arrow-left"></i> Retour
                                 </button>
                                 {event.status !== 5 && (
                                     <button
+                                        className={styles.modalButtons}
                                         type="button"
                                         onClick={this.handleEdit}
                                     >
+                                        <i className="fa fa-edit"></i>
                                         Modifier
                                     </button>
                                 )}
@@ -519,11 +527,15 @@ class InterventionForm extends Component {
                                         if (event.status === 5) {
                                             return (
                                                 <button
+                                                    className={
+                                                        styles.modalButtons
+                                                    }
                                                     type="button"
                                                     onClick={
                                                         this.handleViewReport
                                                     }
                                                 >
+                                                    <i class="fa-solid fa-file-circle-check"></i>
                                                     Voir le rapport validé
                                                 </button>
                                             );
@@ -534,7 +546,13 @@ class InterventionForm extends Component {
                                                 event.endingHour !== null
                                             ) {
                                                 return (
-                                                    <button type="submit">
+                                                    <button
+                                                        className={
+                                                            styles.modalButtons
+                                                        }
+                                                        type="submit"
+                                                    >
+                                                        <i class="fa-solid fa-file-circle-check"></i>
                                                         Remplir le rapport
                                                     </button>
                                                 );
@@ -549,7 +567,13 @@ class InterventionForm extends Component {
                                             event.endingHour !== null
                                         ) {
                                             return (
-                                                <button type="submit">
+                                                <button
+                                                    className={
+                                                        styles.modalButtons
+                                                    }
+                                                    type="submit"
+                                                >
+                                                    <i class="fa-solid fa-file-circle-check"></i>
                                                     Remplir le questionnaire
                                                 </button>
                                             );
