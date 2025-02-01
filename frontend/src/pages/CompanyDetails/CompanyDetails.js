@@ -255,7 +255,7 @@ class CompanyDetails extends Component {
                                 )}
                             </label>
                             <label>
-                                N°TVA Intracommunautaire :
+                                N° TVA Intracommunautaire :
                                 <input
                                     type="text"
                                     name="vatNumber"

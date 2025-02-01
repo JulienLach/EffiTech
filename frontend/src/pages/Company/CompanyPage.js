@@ -74,7 +74,7 @@ class CompanyPage extends Component {
                                 <h3>Informations</h3>
                                 <p>SIRET : {company.siret}</p>
                                 <p>
-                                    N°TVA Intracommunautaire :{" "}
+                                    N° TVA Intracommunautaire :{" "}
                                     {company.vatNumber}
                                 </p>
                                 <p>Capital : {company.capital} €</p>
