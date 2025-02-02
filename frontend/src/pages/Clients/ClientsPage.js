@@ -772,9 +772,19 @@ class ClientsPage extends Component {
                                                         }{" "}
                                                         {client.address.city}
                                                     </td>
-                                                    <td>{client.email}</td>
                                                     <td>
-                                                        {client.phoneNumber}
+                                                        <a
+                                                            href={`mailto:${client.email}`}
+                                                        >
+                                                            {client.email}
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a
+                                                            href={`tel:${client.phoneNumber}`}
+                                                        >
+                                                            {client.phoneNumber}
+                                                        </a>
                                                     </td>
                                                 </tr>
                                             )
