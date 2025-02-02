@@ -124,6 +124,10 @@ class AppointmentFormPage extends Component {
                 "* Ne doit contenir que des lettres, des chiffres, des tirets et des espaces";
         }
 
+        if (endingHour === "") {
+            errors.endingHour = "* Champ obligatoire";
+        }
+
         if (Object.keys(errors).length > 0) {
             this.setState({ errors });
             return;
@@ -345,7 +349,13 @@ class AppointmentFormPage extends Component {
                                 </div>
                                 <div>
                                     <div className={styles.textArea}>
-                                        <label>Travaux à effectuer :</label>
+                                        <label>
+                                            Travaux à effectuer{" "}
+                                            <span className={styles.required}>
+                                                *
+                                            </span>{" "}
+                                            :
+                                        </label>
                                         <textarea
                                             rows="5"
                                             name="workToDo"
@@ -381,7 +391,7 @@ class AppointmentFormPage extends Component {
                                         />
                                     </div>
                                 </div>
-                                <div>
+                                <div className={styles.endingHourContainer}>
                                     <div className={styles.endingHourInput}>
                                         <label>
                                             Heure de fin{" "}
@@ -398,6 +408,11 @@ class AppointmentFormPage extends Component {
                                             onChange={this.handleChange}
                                         />
                                     </div>
+                                    {errors.endingHour && (
+                                        <span className={styles.error}>
+                                            {errors.endingHour}
+                                        </span>
+                                    )}
                                 </div>
                                 <div>
                                     <div className={styles.labelInput}>
@@ -409,13 +424,7 @@ class AppointmentFormPage extends Component {
                                             readOnly
                                         />
                                     </div>
-                                    {errors.duration && (
-                                        <span className={styles.error}>
-                                            {errors.duration}
-                                        </span>
-                                    )}
                                 </div>
-                                <div className={styles.separation}></div>
                                 <div>
                                     <div className={styles.checkbox}>
                                         <label>
@@ -435,6 +444,7 @@ class AppointmentFormPage extends Component {
                                         </label>
                                     </div>
                                 </div>
+                                <div className={styles.separation}></div>
                                 <div className={styles.modalFooter}>
                                     <button
                                         onClick={() =>

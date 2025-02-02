@@ -96,9 +96,9 @@
     margin-top: 0.8em;
     width: 100%;
     padding: 1em;
-    border-radius: 0.5em; /* Ajoute un border-radius */
-    border: 0.06em solid #ccc; /* Ajoute une bordure de couleur #ccc */
-    resize: vertical; /* Permet de redimensionner verticalement */
+    border-radius: 0.5em;
+    border: 0.06em solid #ccc;
+    resize: vertical;
 }
 
 .labelInput input {
@@ -190,6 +190,7 @@
 
 .error {
     font-size: 0.9em;
+    margin-top: 0.2em;
     color: rgb(226, 12, 12);
 }
 
@@ -241,4 +242,21 @@ input:checked + .slider {
 
 input:checked + .slider:before {
     transform: translateX(20px);
+}
+
+.checkbox .switch {
+    margin: 1em 0;
+    font-weight: 500;
+}
+
+.checkbox label {
+    font-weight: 500;
+}
+
+.endingHourContainer {
+    margin-bottom: 0.6em;
+}
+
+.endingHourContainer span {
+    font-weight: 500;
 }
