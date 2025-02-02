@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./InvoicesPage.module.css";
 import TemplateGlobal from "../Template/TemplateGlobal";
+import InvoiceForm from "../../components/InvoiceForm/InvoiceForm";
 
-// Composant wrapper pour utiliser les hooks
 function InvoicesPageWrapper() {
     const navigate = useNavigate();
     const location = useLocation();
@@ -20,11 +20,18 @@ class InvoicesPage extends Component {
             invoicesDate: "",
             file: "",
             client: {},
+            isModalOpen: false,
         };
+        this.openModal = this.openModal.bind(this);
+    }
+
+    openModal() {
+        this.setState({ isModalOpen: true });
     }
 
     render() {
-        //Variable pour savoir si c'est mobile ou desktop
+        const { isModalOpen } = this.state;
+
         const isMobile = window.navigator.userAgentData;
 
         return (
@@ -36,7 +43,7 @@ class InvoicesPage extends Component {
                         className={styles.addInvoiceButton}
                         onClick={this.openModal}
                     >
-                        <i className="fa-solid fa-download"></i> Importer une
+                        <i className="fa-solid fa-plus"></i> Importer une
                         facture
                     </button>
                     <div className={styles.divider}></div>
@@ -63,24 +70,14 @@ class InvoicesPage extends Component {
                                 </tr>
                             </tbody>
                         </table>
-                        {/* <div className={styles.pagination}>
-                                    <button
-                                        onClick={(e) =>
-                                            this.handlePreviousPage(e)
-                                        }
-                                        disabled={currentPage === 1}
-                                    >
-                                        <i className="fa fa-arrow-left"></i>
-                                    </button>
-                                    <button
-                                        onClick={(e) => this.handleNextPage(e)}
-                                        disabled={currentPage === totalPages}
-                                    >
-                                        <i className="fa fa-arrow-right"></i>
-                                    </button>
-                                </div> */}
                     </div>
                 </div>
+                {isModalOpen && (
+                    <InvoiceForm
+                        onClose={() => this.setState({ isModalOpen: false })}
+                        navigate={this.props.navigate}
+                    />
+                )}
             </>
         );
     }

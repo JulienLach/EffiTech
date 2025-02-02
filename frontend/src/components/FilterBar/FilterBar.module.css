@@ -55,12 +55,11 @@
     font-size: 1em;
     font-weight: 500;
     cursor: pointer;
-    transition: 0.05s;
     color: white;
 }
 
 .createEventbutton:hover {
-    background-color: #7e241a;
+    background-color: #9e2113;
     color: white;
 }
 

@@ -108,7 +108,7 @@ class DocumentsPage extends Component {
                                 onClick={this.openModal}
                             >
                                 <i className="fa-solid fa-plus"></i>
-                                Ajouter un document
+                                Importer un document
                             </button>
                         </div>
                     </div>

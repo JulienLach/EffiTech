@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -   Add download document link
 -   Add tel and mail link to table clients
 -   Add reset filter to clients and calendar pages
+-   Add import invoice form
 
 ## Fixes
 
