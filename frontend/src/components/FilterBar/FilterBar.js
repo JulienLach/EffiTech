@@ -188,6 +188,13 @@ class FilterBar extends Component {
                                 </div>
                             </div>
                         )}
+                        <div
+                            className={styles.typeFilter}
+                            onClick={this.props.handleResetFilter}
+                        >
+                            <i class="fa-solid fa-arrow-rotate-left"></i>
+                            <p>Réinitialiser</p>
+                        </div>
                         <button
                             className={styles.createEventbutton}
                             onClick={this.props.toggleCreateEventModal}

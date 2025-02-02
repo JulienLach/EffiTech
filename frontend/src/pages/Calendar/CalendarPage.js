@@ -52,6 +52,7 @@ class CalendarPage extends Component {
         this.handleStatusChange = this.handleStatusChange.bind(this);
         this.toggleTypeModal = this.toggleTypeModal.bind(this);
         this.handleTypeChange = this.handleTypeChange.bind(this);
+        this.handleResetFilter = this.handleResetFilter.bind(this);
     }
 
     componentDidMount() {
@@ -244,6 +245,10 @@ class CalendarPage extends Component {
     handleTypeChange(event) {
         const selectedType = event.target.value;
         this.setState({ selectedType });
+    }
+
+    handleResetFilter() {
+        this.setState({ selectedStatus: "", selectedType: "" });
     }
 
     render() {
@@ -472,6 +477,9 @@ class CalendarPage extends Component {
                                         toggleTypeModal={this.toggleTypeModal}
                                         isTypeModalOpen={isTypeModalOpen}
                                         handleTypeChange={this.handleTypeChange}
+                                        handleResetFilter={
+                                            this.handleResetFilter
+                                        }
                                     />
                                 </div>
                                 <h3 className={styles.eventTitle}>

@@ -267,6 +267,16 @@ class TemplateGlobal extends Component {
                                     Documents
                                 </a>
                             </li>
+                            <li
+                                className={
+                                    currentPath === "/" ? styles.active : ""
+                                }
+                            >
+                                <a href="/calendar">
+                                    <i class="fa-solid fa-gear"></i>
+                                    Paramètres
+                                </a>
+                            </li>
                         </ul>
                     </div>
                     <div className={styles.sideOrange}>
