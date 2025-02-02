@@ -40,6 +40,7 @@ class ClientsPage extends Component {
         this.handleNextPage = this.handleNextPage.bind(this);
         this.handlePreviousPage = this.handlePreviousPage.bind(this);
         this.handleSearchChange = this.handleSearchChange.bind(this);
+        this.handleResetFilter = this.handleResetFilter.bind(this);
     }
 
     componentDidMount() {
@@ -145,6 +146,10 @@ class ClientsPage extends Component {
 
     handleModalCategoryChange(event) {
         this.setState({ category: event.target.value });
+    }
+
+    handleResetFilter() {
+        this.setState({ selectedCategory: "All" });
     }
 
     handleSubmit(event) {
@@ -635,6 +640,13 @@ class ClientsPage extends Component {
                                     >
                                         <i className="fa-solid fa-filter"></i>
                                         <p>Type</p>
+                                    </div>
+                                    <div
+                                        className={styles.typeFilter}
+                                        onClick={this.handleResetFilter}
+                                    >
+                                        <i class="fa-solid fa-arrow-rotate-left"></i>
+                                        <p>Réinitialiser</p>
                                     </div>
                                     {isCategeoryModalOpen && (
                                         <div className={styles.modalFilter}>

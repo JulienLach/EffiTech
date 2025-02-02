@@ -97,7 +97,7 @@ class LoginPage extends Component {
                                     type="submit"
                                     className={stylesMobile.submitButton}
                                 >
-                                    Se connecter
+                                    Connexion
                                 </button>
                             </form>
                         </div>
@@ -107,9 +107,7 @@ class LoginPage extends Component {
                         <div className={styles.container}>
                             <LogoDesktop />
                             <div className={styles.loginFormCard}>
-                                <h1 className={styles.titleCard}>
-                                    Se connecter
-                                </h1>
+                                <h1 className={styles.titleCard}>Connexion</h1>
                                 <form
                                     onSubmit={this.handleSubmit}
                                     className={styles.formElements}
@@ -148,7 +146,7 @@ class LoginPage extends Component {
                                         type="submit"
                                         className={styles.submitButton}
                                     >
-                                        Se connecter
+                                        Connexion
                                     </button>
                                     <p>
                                         Pas encore de compte ?{" "}
