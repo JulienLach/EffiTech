@@ -104,21 +104,14 @@ class Document {
      * @param {function} callback - La fonction de rappel.
      */
     static downloadDocument(idDocument, callback) {
-        const query = "SELECT file FROM documents WHERE idDocument = $1";
+        const query = "SELECT file FROM documents WHERE id_document = $1";
         const values = [idDocument];
         pool.query(query, values, (error, result) => {
             if (error) {
                 return callback(error, null);
             }
             const row = result.rows[0];
-            const document = new Document(
-                row.id_document,
-                row.title,
-                row.brand,
-                row.model,
-                row.file
-            );
-            callback(null, document);
+            callback(null, row.file);
         });
     }
 }

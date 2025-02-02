@@ -931,6 +931,25 @@ function getAllEventStatistics(callback) {
     xhr.send();
 }
 
+function downloadDocument(idDocument, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", `${API_URL}/documents/download/${idDocument}`);
+    xhr.withCredentials = true;
+    xhr.responseType = "blob";
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            callback(null, xhr.response);
+        } else {
+            console.error(
+                "Erreur de téléchargement du document",
+                xhr.statusText
+            );
+            callback(new Error(xhr.statusText), null);
+        }
+    };
+    xhr.send();
+}
+
 export {
     getAllEvents,
     getAllClients,
@@ -957,4 +976,5 @@ export {
     createNotification,
     getAllNotifications,
     getAllEventStatistics,
+    downloadDocument,
 };

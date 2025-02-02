@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -   Add statistics page
 -   Add current month event stats card
 -   Add events by employee stats card
+-   Add download document link
 
 ## Fixes
 
