@@ -11,7 +11,7 @@ class Invoice {
      * @param {number} amountIncludingTax - Le montant TTC de la facture.
      * @param {number} amountWithoutTax - Le montant HT de la facture.
      * @param {string} invoiceDate - La date de la facture.
-     * @param {string} file - Le fichier de la facture.
+     * @param {Buffer} file - Le fichier de la facture.
      */
     constructor(
         idInvoice,
@@ -40,13 +40,14 @@ class Invoice {
                 return callback(error, null);
             }
             const invoices = result.rows.map(function (row) {
+                const fileBase64 = row.file.toString("base64");
                 return new Invoice(
                     row.id_invoice,
                     row.id_client,
                     row.amount_including_tax,
                     row.amount_without_tax,
                     row.invoice_date,
-                    row.file
+                    row.fileBase64
                 );
             });
             callback(null, invoices);
@@ -59,20 +60,22 @@ class Invoice {
      * @param {function(Error, Invoice):void} callback - La fonction de rappel à exécuter après la récupération de la facture.
      */
     static getInvoiceById(idInvoice, callback) {
-        const query = "SELECT * FROM invoices WHERE idInvoice = $1";
+        const query = "SELECT * FROM invoices WHERE id_invoice = $1";
         const values = [idInvoice];
         pool.query(query, values, (error, result) => {
             if (error) {
                 return callback(error, null);
             }
             const row = result.rows[0];
+            const fileBase64 = row.file.toString("base64");
+
             const invoice = new Invoice(
                 row.id_invoice,
                 row.id_client,
                 row.amount_including_tax,
                 row.amount_without_tax,
                 row.invoice_date,
-                row.file
+                row.fileBase64
             );
             callback(null, invoice);
         });
@@ -96,8 +99,9 @@ class Invoice {
         callback
     ) {
         const query = `
-            INSERT INTO invoices (idClient, amountIncludingTax, amountWithoutTax, invoiceDate, file) 
+            INSERT INTO invoices (id_client, amount_including_tax, amount_without_tax, invoice_date, file) 
             VALUES ($1, $2, $3, $4, $5)
+            RETURNING *
         `;
         const values = [
             idClient,
@@ -108,7 +112,7 @@ class Invoice {
         ];
         pool.query(query, values, (error, result) => {
             if (error) {
-                return callback(error, null);
+                return callback(error);
             }
             const row = result.rows[0];
             const invoice = new Invoice(

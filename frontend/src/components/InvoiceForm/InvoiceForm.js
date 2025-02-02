@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./InvoiceForm.module.css";
-import { getAllClients } from "../../services/api";
+import { getAllClients, importInvoice } from "../../services/api";
 
 function InvoiceFormWrapper(props) {
     const navigate = useNavigate();

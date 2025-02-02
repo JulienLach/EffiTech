@@ -968,6 +968,22 @@ function getAllInvoices(callback) {
     xhr.send();
 }
 
+function importInvoice(formData, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", `${API_URL}/invoices`);
+    xhr.withCredentials = true;
+    xhr.onload = function () {
+        if (xhr.status === 200 || xhr.status === 201) {
+            console.log("Facture importée");
+            callback(null, JSON.parse(xhr.responseText));
+        } else {
+            console.error("Erreur d'importation de la facture", xhr.statusText);
+            callback(new Error(xhr.statusText), null);
+        }
+    };
+    xhr.send(formData);
+}
+
 export {
     getAllEvents,
     getAllClients,
@@ -996,4 +1012,5 @@ export {
     getAllEventStatistics,
     downloadDocument,
     getAllInvoices,
+    importInvoice,
 };
