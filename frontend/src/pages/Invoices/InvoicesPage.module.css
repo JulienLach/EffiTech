@@ -31,3 +31,7 @@
     height: 0.05em;
     background-color: #d3d3d3;
 }
+
+.downloadButton {
+    font-size: 1.2em;
+}

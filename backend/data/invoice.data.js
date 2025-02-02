@@ -1,4 +1,5 @@
 const pool = require("../config/db.config");
+const Client = require("./client.data");
 
 /**
  * Classe représentant une facture.
@@ -34,33 +35,42 @@ class Invoice {
      * @param {function(Error, Invoice[]):void} callback - La fonction de rappel à exécuter après la récupération des factures.
      */
     static getAllInvoices(callback) {
-        const query = "SELECT * FROM invoices";
+        const query = `
+            SELECT 
+                invoices.*, 
+                clients.firstname AS client_firstname, 
+                clients.lastname AS client_lastname 
+            FROM invoices 
+            JOIN clients ON invoices.id_client = clients.id_client
+        `;
         pool.query(query, (error, result) => {
             if (error) {
                 return callback(error, null);
             }
             const invoices = result.rows.map(function (row) {
                 const fileBase64 = row.file.toString("base64");
-                return new Invoice(
-                    row.id_invoice,
-                    row.id_client,
-                    row.amount_including_tax,
-                    row.amount_without_tax,
-                    row.invoice_date,
-                    row.fileBase64
-                );
+                return {
+                    idInvoice: row.id_invoice,
+                    idClient: row.id_client,
+                    clientFirstname: row.client_firstname,
+                    clientLastname: row.client_lastname,
+                    amountIncludingTax: row.amount_including_tax,
+                    amountWithoutTax: row.amount_without_tax,
+                    invoiceDate: row.invoice_date,
+                    file: fileBase64,
+                };
             });
             callback(null, invoices);
         });
     }
-
     /**
      * Récupère une facture par son identifiant.
      * @param {number} idInvoice - L'identifiant de la facture.
      * @param {function(Error, Invoice):void} callback - La fonction de rappel à exécuter après la récupération de la facture.
      */
     static getInvoiceById(idInvoice, callback) {
-        const query = "SELECT * FROM invoices WHERE id_invoice = $1";
+        const query =
+            "SELECT * FROM invoices WHERE id_invoice = $1 JOIN clients ON invoices.id_client = clients.id_client RETURNING *";
         const values = [idInvoice];
         pool.query(query, values, (error, result) => {
             if (error) {

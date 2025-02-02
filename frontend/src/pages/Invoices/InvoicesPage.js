@@ -24,6 +24,7 @@ class InvoicesPage extends Component {
             isModalOpen: false,
         };
         this.openModal = this.openModal.bind(this);
+        this.formatDate = this.formatDate.bind(this);
     }
 
     componentDidMount() {
@@ -37,12 +38,21 @@ class InvoicesPage extends Component {
         });
     }
 
+    formatDate(invoiceDate) {
+        const date = new Date(invoiceDate);
+        return date.toLocaleDateString("fr-FR", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+        });
+    }
+
     openModal() {
         this.setState({ isModalOpen: true });
     }
 
     render() {
-        const { isModalOpen } = this.state;
+        const { isModalOpen, invoices } = this.state;
 
         const isMobile = window.navigator.userAgentData;
 
@@ -68,18 +78,37 @@ class InvoicesPage extends Component {
                                     <th>Montant HT</th>
                                     <th>Montant TTC</th>
                                     <th>Date de facturation</th>
-                                    <th>Visualiser</th>
+                                    <th>Télécharger</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>[FC-001]</td>
-                                    <td>[Jean Bombeur]</td>
-                                    <td>[100€]</td>
-                                    <td>[120€]</td>
-                                    <td>[24.02.2025]</td>
-                                    <td>[Visualiser la facture]</td>
-                                </tr>
+                                {invoices.map((invoice) => (
+                                    <tr key={invoice.id}>
+                                        <td>
+                                            <a>FC-{invoice.idInvoice}</a>
+                                        </td>
+                                        <td>
+                                            {invoice.clientFirstname}{" "}
+                                            {invoice.clientLastname}
+                                        </td>
+                                        <td>{invoice.amountWithoutTax}€</td>
+                                        <td>{invoice.amountIncludingTax}€</td>
+                                        <td>
+                                            {this.formatDate(
+                                                invoice.invoiceDate
+                                            )}
+                                        </td>
+                                        <td>
+                                            <a
+                                                className={
+                                                    styles.downloadButton
+                                                }
+                                            >
+                                                <i className="fa-solid fa-file-pdf"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                ))}
                             </tbody>
                         </table>
                     </div>
