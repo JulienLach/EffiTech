@@ -53,6 +53,12 @@ class TemplateGlobalMobile extends Component {
             case "/report":
                 pageTitle = "Rapport";
                 break;
+            case "/appointment-form":
+                pageTitle = "Rendez-vous";
+                break;
+            case "/intervention-form":
+                pageTitle = "Intervention";
+                break;
             default:
                 pageTitle = "Page";
         }

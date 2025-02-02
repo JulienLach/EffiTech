@@ -81,6 +81,7 @@
     border: none;
     background-color: #e0e0e0;
     padding: 1em;
+    border: 0.06em solid #ccc;
 }
 
 .textArea {
@@ -88,6 +89,7 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 1.25em;
+    font-weight: 500;
 }
 
 .textArea textarea {
@@ -105,6 +107,7 @@
     align-items: start;
     margin-bottom: 0.6em;
     gap: 0.7em;
+    font-weight: 500;
 }
 
 .labelInput input {

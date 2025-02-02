@@ -43,6 +43,7 @@ class AppointmentFormPage extends Component {
             .toLocaleDateString()
             .substring(11, 16);
 
+        console.log(duration);
         this.setState({
             startingDate: new Date(event.startingDate).toLocaleDateString(
                 "en-CA"
@@ -384,12 +385,14 @@ class AppointmentFormPage extends Component {
                                         }
                                         type="reset"
                                     >
+                                        <i className="fa-solid fa-xmark"></i>{" "}
                                         Annuler
                                     </button>
                                     <button
                                         type="submit"
                                         className={styles.validateButton}
                                     >
+                                        <i className="fa-solid fa-check"></i>{" "}
                                         Terminer le rendez-vous
                                     </button>
                                 </div>

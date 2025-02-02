@@ -342,6 +342,7 @@ class InterventionFormPage extends Component {
                                         (window.location.href = "/calendar#")
                                     }
                                 >
+                                    <i className="fa-solid fa-xmark"></i>
                                     Annuler
                                 </button>
                                 <button
