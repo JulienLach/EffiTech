@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./InvoicesPage.module.css";
 import TemplateGlobal from "../Template/TemplateGlobal";
+import { getAllInvoices } from "../../services/api";
 import InvoiceForm from "../../components/InvoiceForm/InvoiceForm";
 
 function InvoicesPageWrapper() {
@@ -23,6 +24,17 @@ class InvoicesPage extends Component {
             isModalOpen: false,
         };
         this.openModal = this.openModal.bind(this);
+    }
+
+    componentDidMount() {
+        getAllInvoices((error, invoices) => {
+            if (error) {
+                console.error(error);
+            } else {
+                this.setState({ invoices });
+                console.log("Données des factures récupérées:", invoices);
+            }
+        });
     }
 
     openModal() {

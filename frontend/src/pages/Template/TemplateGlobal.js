@@ -273,7 +273,7 @@ class TemplateGlobal extends Component {
                                 }
                             >
                                 <a href="/calendar">
-                                    <i class="fa-solid fa-gear"></i>
+                                    <i className="fa-solid fa-gear"></i>
                                     Paramètres
                                 </a>
                             </li>

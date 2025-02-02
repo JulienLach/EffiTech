@@ -950,6 +950,24 @@ function downloadDocument(idDocument, callback) {
     xhr.send();
 }
 
+function getAllInvoices(callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", `${API_URL}/invoices`);
+    xhr.withCredentials = true;
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            callback(null, JSON.parse(xhr.responseText));
+        } else {
+            console.error(
+                "Erreur de récupération des factures",
+                xhr.statusText
+            );
+            callback(new Error(xhr.statusText), null);
+        }
+    };
+    xhr.send();
+}
+
 export {
     getAllEvents,
     getAllClients,
@@ -977,4 +995,5 @@ export {
     getAllNotifications,
     getAllEventStatistics,
     downloadDocument,
+    getAllInvoices,
 };

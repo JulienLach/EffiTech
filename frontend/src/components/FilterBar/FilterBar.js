@@ -192,7 +192,7 @@ class FilterBar extends Component {
                             className={styles.typeFilter}
                             onClick={this.props.handleResetFilter}
                         >
-                            <i class="fa-solid fa-arrow-rotate-left"></i>
+                            <i className="fa-solid fa-arrow-rotate-left"></i>
                             <p>Réinitialiser</p>
                         </div>
                         <button
