@@ -556,13 +556,18 @@ class InterventionFormPage extends Component {
                                         </label>
                                     </div>
                                 </div>
+                                <div className={styles.separation}></div>
                                 <div className={styles.modalFooter}>
                                     <button
+                                        className={
+                                            styles.cancelInterventionButton
+                                        }
                                         onClick={() =>
                                             (window.location.href = "/calendar")
                                         }
                                         type="reset"
                                     >
+                                        <i className="fa-solid fa-xmark"></i>{" "}
                                         Annuler
                                     </button>
                                     <button
