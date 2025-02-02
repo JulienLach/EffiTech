@@ -319,7 +319,7 @@ class AppointmentFormPage extends Component {
                                     </button>
                                 </div>
                                 <div className={styles.appointmentId}>
-                                    <div>
+                                    <div className={styles.appointmentRef}>
                                         <h3>RDV-{event.idEvent}</h3>
                                     </div>
                                 </div>
@@ -447,6 +447,7 @@ class AppointmentFormPage extends Component {
                                 <div className={styles.separation}></div>
                                 <div className={styles.modalFooter}>
                                     <button
+                                        className={styles.cancelAppointmentForm}
                                         onClick={() =>
                                             (window.location.href = "/calendar")
                                         }

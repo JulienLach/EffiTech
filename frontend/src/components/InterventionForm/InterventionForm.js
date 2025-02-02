@@ -361,7 +361,7 @@ class InterventionForm extends Component {
                                                             }
                                                             type="submit"
                                                         >
-                                                            <i className="fa-solid fa-file-circle-check"></i>{" "}
+                                                            <i class="fa-solid fa-file-pen"></i>{" "}
                                                             Remplir le rapport
                                                         </button>
                                                     );
@@ -518,7 +518,7 @@ class InterventionForm extends Component {
                                         type="button"
                                         onClick={this.handleEdit}
                                     >
-                                        <i className="fa fa-edit"></i>
+                                        <i className="fa fa-pen"></i>
                                         Modifier
                                     </button>
                                 )}
@@ -535,7 +535,7 @@ class InterventionForm extends Component {
                                                         this.handleViewReport
                                                     }
                                                 >
-                                                    <i className="fa-solid fa-file-circle-check"></i>
+                                                    <i class="fa-solid fa-file-pen"></i>
                                                     Voir le rapport validé
                                                 </button>
                                             );
@@ -552,7 +552,7 @@ class InterventionForm extends Component {
                                                         }
                                                         type="submit"
                                                     >
-                                                        <i className="fa-solid fa-file-circle-check"></i>
+                                                        <i class="fa-solid fa-file-pen"></i>
                                                         Remplir le rapport
                                                     </button>
                                                 );
@@ -573,7 +573,7 @@ class InterventionForm extends Component {
                                                     }
                                                     type="submit"
                                                 >
-                                                    <i className="fa-solid fa-file-circle-check"></i>
+                                                    <i class="fa-solid fa-file-pen"></i>
                                                     Remplir le questionnaire
                                                 </button>
                                             );

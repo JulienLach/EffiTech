@@ -218,7 +218,7 @@ class EmployeeFormPage extends Component {
                                 type="submit"
                                 className={styles.submitButton}
                             >
-                                <i className="fa-regular fa-save"></i>
+                                <i className="fa-solid fa-check"></i>
                                 Enregistrer
                             </button>
                         </div>

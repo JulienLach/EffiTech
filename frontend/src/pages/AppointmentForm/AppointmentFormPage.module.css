@@ -9,7 +9,7 @@
     margin: 2em 0em;
     width: 80%;
     padding: 2em;
-    border-radius: 0.4em;
+    border-radius: 0.6em;
     box-shadow: 0 0 0.625em rgba(0, 0, 0, 0.1);
 }
 
@@ -17,8 +17,8 @@
     display: flex;
     justify-content: start;
     margin-bottom: 1.25em;
-    color: #3e3e3e;
-    font-weight: 600;
+    font-weight: 500;
+    font-size: 1.2em;
 }
 
 .pageTitle {
@@ -153,7 +153,6 @@
     font-size: 1em;
     font-weight: 500;
     cursor: pointer;
-    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .modalFooter .cancelButton {
@@ -185,7 +184,7 @@
 }
 
 .validateButton:hover {
-    background-color: #b73c2e;
+    background-color: #a4281a;
 }
 
 .error {
@@ -259,4 +258,8 @@ input:checked + .slider:before {
 
 .endingHourContainer span {
     font-weight: 500;
+}
+
+.cancelAppointmentForm:hover {
+    background-color: #ababab;
 }

@@ -275,7 +275,7 @@ class CreateEventForm extends Component {
                         </div>
                         <div className={styles.separator}></div>
                         <div>
-                            <label>
+                            <label className={styles.formLabel}>
                                 Titre <span className={styles.required}>*</span>{" "}
                                 :
                             </label>
@@ -292,7 +292,7 @@ class CreateEventForm extends Component {
                             )}
                         </div>
                         <div>
-                            <label>
+                            <label className={styles.formLabel}>
                                 Date{" "}
                                 {selectedTab === "Intervention"
                                     ? "d'intervention :"
@@ -306,7 +306,9 @@ class CreateEventForm extends Component {
                             />
                         </div>
                         <div>
-                            <label>Heure de début :</label>
+                            <label className={styles.formLabel}>
+                                Heure de début :
+                            </label>
                             <input
                                 type="time"
                                 name="startingHour"
@@ -315,7 +317,9 @@ class CreateEventForm extends Component {
                             />
                         </div>
                         <div>
-                            <label>Heure de fin :</label>
+                            <label className={styles.formLabel}>
+                                Heure de fin :
+                            </label>
                             <input
                                 type="time"
                                 name="endingHour"
@@ -324,7 +328,9 @@ class CreateEventForm extends Component {
                             />
                         </div>
                         <div>
-                            <label>Description :</label>
+                            <label className={styles.formLabel}>
+                                Description :
+                            </label>
                             <textarea
                                 className={styles.createEventTextarea}
                                 name="description"
@@ -333,7 +339,7 @@ class CreateEventForm extends Component {
                             />
                         </div>
                         <div>
-                            <label>
+                            <label className={styles.formLabel}>
                                 Sélectionner un client{" "}
                                 <span className={styles.required}>*</span> :
                             </label>
@@ -361,11 +367,13 @@ class CreateEventForm extends Component {
                             )}
                         </div>
                         <div className={styles.inputDisplay}>
-                            <label>Adresse :</label>
+                            <label className={styles.formLabel}>
+                                Adresse :
+                            </label>
                             <input type="text" value={address} readOnly />
                         </div>
                         <div>
-                            <label>
+                            <label className={styles.formLabel}>
                                 Sélectionner un technicien{" "}
                                 <span className={styles.required}>*</span> :
                             </label>
@@ -403,6 +411,7 @@ class CreateEventForm extends Component {
                                 className={styles.cancelButton}
                                 onClick={this.props.closeModal}
                             >
+                                <i className="fa-solid fa-xmark"> </i>
                                 Annuler
                             </button>
                             <button
@@ -410,7 +419,7 @@ class CreateEventForm extends Component {
                                 className={styles.submitButton}
                                 onClick={this.handleSubmit}
                             >
-                                Valider
+                                <i className="fa-solid fa-check"> </i> Valider
                             </button>
                         </div>
                     </div>

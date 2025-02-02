@@ -159,6 +159,7 @@ class CompanyDetails extends Component {
                                     htmlFor="fileInput"
                                     className={styles.fileInputLabel}
                                 >
+                                    <i class="fa-solid fa-file"></i>
                                     Choisir un fichier
                                 </label>
                             </div>
@@ -294,7 +295,7 @@ class CompanyDetails extends Component {
                                 Annuler
                             </button>
                             <button type="submit" className={styles.saveButton}>
-                                <i className="fa-regular fa-save"></i>{" "}
+                                <i className="fa-solid fa-check"></i>{" "}
                                 Enregistrer
                             </button>
                         </div>
