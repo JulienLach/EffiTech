@@ -29,6 +29,12 @@
     overflow-y: auto; /* Ajoute une barre de défilement verticale */
 }
 
+.modalTitle {
+    font-size: 1.8em;
+    font-weight: bold;
+    padding-top: 0.18em;
+}
+
 .modal.open {
     display: block;
 }
@@ -75,7 +81,7 @@
 .container {
     display: flex;
     flex-direction: column;
-    gap: 1.5em;
+    gap: 1em;
 }
 
 .modalFooter {

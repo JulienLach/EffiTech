@@ -63,10 +63,10 @@ class InterventionForm extends Component {
 
     getStatusIndicator(status) {
         const style = {
-            padding: ".125em .625em",
+            padding: "0.14em 0.7em",
             borderRadius: ".5em",
             color: "white",
-            fontSize: "0.8em",
+            fontSize: "0.85em",
             fontWeight: "500",
         };
 
@@ -432,33 +432,53 @@ class InterventionForm extends Component {
                                 {event.client.company &&
                                     event.client.company !== "N/A" && (
                                         <div>
-                                            Entreprise : {event.client.company}
+                                            <span className={styles.eventLabel}>
+                                                Entreprise :
+                                            </span>{" "}
+                                            {event.client.company}
                                         </div>
                                     )}
                                 <div>
-                                    Client : {event.client.firstname}{" "}
+                                    <span className={styles.eventLabel}>
+                                        Client :
+                                    </span>{" "}
+                                    {event.client.firstname}{" "}
                                     {event.client.lastname}
                                 </div>
                                 <div>
-                                    Téléphone : {event.client.phoneNumber}
+                                    <span className={styles.eventLabel}>
+                                        Téléphone :{" "}
+                                    </span>{" "}
+                                    {event.client.phoneNumber}
                                 </div>
                                 <div>
-                                    Adresse : {event.client.address.address},{" "}
+                                    <span className={styles.eventLabel}>
+                                        Adresse :{" "}
+                                    </span>
+                                    {event.client.address.address},{" "}
                                     {event.client.address.zipcode}{" "}
                                     {event.client.address.city}
                                 </div>
-                                <div>Description : {event.description}</div>
+                                <div>
+                                    {" "}
+                                    <span className={styles.eventLabel}>
+                                        Description :{" "}
+                                    </span>
+                                    {event.description}
+                                </div>
                                 <div className={styles.separator}></div>
                                 <h3>Planification</h3>
                                 <div>
-                                    Début{" "}
-                                    {(() => {
-                                        if (event.type === "Intervention") {
-                                            return "de l'intervention";
-                                        } else {
-                                            return "du rendez-vous";
-                                        }
-                                    })()}{" "}
+                                    <span className={styles.eventLabel}>
+                                        Début{" "}
+                                        {(() => {
+                                            if (event.type === "Intervention") {
+                                                return "de l'intervention";
+                                            } else {
+                                                return "du rendez-vous";
+                                            }
+                                        })()}{" "}
+                                    </span>
                                     :{" "}
                                     {event.startingDate
                                         ? new Date(
@@ -468,18 +488,22 @@ class InterventionForm extends Component {
                                     - {event.startingHour}
                                 </div>
                                 <div>
-                                    Fin{" "}
-                                    {(() => {
-                                        if (event.type === "Intervention") {
-                                            return "de l'intervention";
-                                        } else {
-                                            return "du rendez-vous";
-                                        }
-                                    })()}{" "}
+                                    <span className={styles.eventLabel}>
+                                        Fin{" "}
+                                        {(() => {
+                                            if (event.type === "Intervention") {
+                                                return "de l'intervention";
+                                            } else {
+                                                return "du rendez-vous";
+                                            }
+                                        })()}{" "}
+                                    </span>
                                     : {event.endingHour}
                                 </div>
                                 <div>
-                                    Technicien intervenant :{" "}
+                                    <span className={styles.eventLabel}>
+                                        Technicien intervenant :{" "}
+                                    </span>{" "}
                                     {event.employee.firstname}{" "}
                                     {event.employee.lastname}
                                 </div>

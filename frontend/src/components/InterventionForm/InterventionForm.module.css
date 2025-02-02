@@ -67,3 +67,7 @@
     flex-direction: column;
     gap: 0.5em;
 }
+
+.eventLabel {
+    font-weight: 500;
+}

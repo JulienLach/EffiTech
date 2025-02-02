@@ -57,7 +57,7 @@ body {
 }
 
 .labelAdminInput label {
-    margin: 0 1em;
+    margin-left: 1em;
     padding: 0.15em;
 }
 
