@@ -234,12 +234,13 @@ class EmployeeForm extends Component {
                                 className={styles.cancelButton}
                                 onClick={this.props.onClose}
                             >
-                                Annuler
+                                <i className="fa-solid fa-xmark"></i> Annuler
                             </button>
                             <button
                                 type="submit"
                                 className={styles.employeeSubmitButton}
                             >
+                                <i className="fa-solid fa-check"></i>{" "}
                                 Enregistrer
                             </button>
                         </div>

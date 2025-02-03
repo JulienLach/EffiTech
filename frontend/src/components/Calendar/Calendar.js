@@ -54,8 +54,8 @@ class Calendar extends Component {
                     events={this.props.events}
                     startAccessor="start"
                     endAccessor="end"
-                    defaultView="week"
-                    views={["week", "day"]}
+                    defaultView="work_week"
+                    views={["work_week", "day"]}
                     min={new Date(1970, 1, 1, 8, 0, 0)}
                     max={new Date(1970, 1, 1, 20, 0, 0)}
                     timeslots={2}

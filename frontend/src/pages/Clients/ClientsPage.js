@@ -1035,12 +1035,14 @@ class ClientsPage extends Component {
                                                 className={styles.cancelButton}
                                                 onClick={this.closeModal}
                                             >
+                                                <i className="fa-solid fa-xmark"></i>{" "}
                                                 Annuler
                                             </button>
                                             <button
                                                 type="submit"
                                                 className={styles.submitButton}
                                             >
+                                                <i className="fa-solid fa-check"></i>{" "}
                                                 Enregister
                                             </button>
                                         </div>

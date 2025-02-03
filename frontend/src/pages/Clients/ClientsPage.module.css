@@ -107,6 +107,7 @@
     color: white;
     cursor: pointer;
     background-color: #c93c2c;
+    border: 0.06em solid #c93c2c;
 }
 
 /* icon position */
