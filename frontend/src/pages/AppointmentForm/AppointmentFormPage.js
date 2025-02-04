@@ -111,7 +111,7 @@ class AppointmentFormPage extends Component {
             idAddress: address.idAddress,
             startingDate,
             startingHour: eventDetails.startingHour,
-            endingHour, // Assurez-vous que endingHour est inclus ici
+            endingHour,
             idEmployee: employee.idEmployee,
             workToDo,
         };
