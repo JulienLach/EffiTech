@@ -83,7 +83,7 @@ class CalendarMobile extends Component {
                         today: "Aujourd'hui",
                         previous: <i className="fa fa-chevron-left"></i>,
                         next: <i className="fa fa-chevron-right"></i>,
-                        week: "Semaine",
+                        work_week: "Semaine",
                         day: "Jour",
                         date: "Date",
                         time: "Heure",

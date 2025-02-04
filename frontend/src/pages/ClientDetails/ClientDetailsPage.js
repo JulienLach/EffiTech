@@ -306,18 +306,34 @@ class ClientDetailsPage extends Component {
                                     <h2>Coordonnées</h2>
                                     <div className={styles.contactInfo}>
                                         <p className={styles.firstnamePro}>
-                                            Contact client : {client.firstname}{" "}
-                                            {client.lastname}
+                                            <span
+                                                className={styles.clientLabel}
+                                            >
+                                                Contact client :
+                                            </span>{" "}
+                                            {client.firstname} {client.lastname}
                                         </p>
                                         <p>
-                                            Téléphone :{" "}
+                                            <span
+                                                className={styles.clientLabel}
+                                            >
+                                                Téléphone :{" "}
+                                            </span>
                                             <a
                                                 href={`tel:${client.phoneNumber}`}
                                             >
                                                 {client.phoneNumber}
                                             </a>
                                         </p>
-                                        <p>Adresse : {clientAddress}</p>
+                                        <p>
+                                            {" "}
+                                            <span
+                                                className={styles.clientLabel}
+                                            >
+                                                Adresse :
+                                            </span>{" "}
+                                            {clientAddress}
+                                        </p>
                                         <p>
                                             <a
                                                 href={googleMapsUrl}
@@ -329,7 +345,11 @@ class ClientDetailsPage extends Component {
                                             </a>
                                         </p>
                                         <p>
-                                            Mail :{" "}
+                                            <span
+                                                className={styles.clientLabel}
+                                            >
+                                                Mail :
+                                            </span>{" "}
                                             <a href={`mailto:${client.email}`}>
                                                 {client.email}
                                             </a>
@@ -389,14 +409,25 @@ class ClientDetailsPage extends Component {
                                     <h2>Coordonnées</h2>
                                     <div className={styles.contactInfo}>
                                         <p>
-                                            Téléphone :{" "}
+                                            <span
+                                                className={styles.clientLabel}
+                                            >
+                                                Téléphone :
+                                            </span>{" "}
                                             <a
                                                 href={`tel:${client.phoneNumber}`}
                                             >
                                                 {client.phoneNumber}
                                             </a>
                                         </p>
-                                        <p>Adresse : {clientAddress}</p>
+                                        <p>
+                                            <span
+                                                className={styles.clientLabel}
+                                            >
+                                                Adresse :
+                                            </span>{" "}
+                                            {clientAddress}
+                                        </p>
                                         <p>
                                             <a
                                                 href={googleMapsUrl}
@@ -408,7 +439,11 @@ class ClientDetailsPage extends Component {
                                             </a>
                                         </p>
                                         <p>
-                                            Mail :{" "}
+                                            <span
+                                                className={styles.clientLabel}
+                                            >
+                                                Mail :
+                                            </span>{" "}
                                             <a href={`mailto:${client.email}`}>
                                                 {client.email}
                                             </a>

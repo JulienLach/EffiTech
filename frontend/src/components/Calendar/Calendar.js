@@ -77,7 +77,7 @@ class Calendar extends Component {
                         today: "Aujourd'hui",
                         previous: <i className="fa-solid fa-chevron-left"></i>,
                         next: <i className="fa-solid fa-chevron-right"></i>,
-                        week: "Semaine",
+                        work_week: "Semaine",
                         day: "Jour",
                         date: "Date",
                         time: "Heure",

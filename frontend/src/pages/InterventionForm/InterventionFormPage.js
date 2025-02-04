@@ -543,16 +543,20 @@ class InterventionFormPage extends Component {
                                     </div>
                                 </div>
                                 <div>
-                                    <h3>Planification :</h3>
                                     <div className={styles.checkbox}>
-                                        <input
-                                            type="checkbox"
-                                            name="reschedule"
-                                            checked={reschedule}
-                                            onChange={this.handleChange}
-                                        ></input>
                                         <label>
                                             Planifier une nouvelle intervention
+                                        </label>
+                                        <label className={styles.switch}>
+                                            <input
+                                                type="checkbox"
+                                                name="reschedule"
+                                                checked={reschedule}
+                                                onChange={this.handleChange}
+                                            />
+                                            <span
+                                                className={styles.slider}
+                                            ></span>
                                         </label>
                                     </div>
                                 </div>

@@ -121,5 +121,6 @@ body {
 
 .dateHour {
     padding-top: 0.2em;
-    font-size: 0.85em;
+    margin-right: 0.4em;
+    font-size: 0.95em;
 }

@@ -167,3 +167,7 @@ h2 {
     color: white;
     border-radius: 0.3em;
 }
+
+.clientLabel {
+    font-weight: 500;
+}

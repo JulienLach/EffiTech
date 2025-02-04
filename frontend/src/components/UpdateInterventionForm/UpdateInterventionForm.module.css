@@ -115,6 +115,10 @@
     gap: 0.4em;
 }
 
+.eventLabels textarea {
+    height: 6em;
+}
+
 .labelInput select {
     padding: 0.5em;
     border: 0.06em solid #cccccc;
