@@ -9,7 +9,7 @@
     margin: 2em 0em;
     width: 80%;
     padding: 2em;
-    border-radius: 0.4em;
+    border-radius: 0.6em;
     box-shadow: 0 0 0.625em rgba(0, 0, 0, 0.1);
 }
 
@@ -17,8 +17,8 @@
     display: flex;
     justify-content: start;
     margin-bottom: 1.25em;
-    color: #3e3e3e;
-    font-weight: 600;
+    font-weight: 500;
+    font-size: 1.2em;
 }
 
 .pageTitle {
@@ -40,7 +40,8 @@
 }
 
 .alignButton button {
-    padding: 0.6em;
+    padding: 0.45em 0.7em;
+    background-color: #e3e3e3;
     border: none;
     border-radius: 0.4em;
     font-size: 1em;
@@ -72,6 +73,7 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 1.25em;
+    font-weight: 500;
 }
 
 .inputDisplay label {
@@ -86,6 +88,7 @@
     border: none;
     background-color: #e0e0e0;
     padding: 1em;
+    border: 0.06em solid #ccc;
 }
 
 .textArea {
@@ -93,22 +96,23 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 1.25em;
+    font-weight: 500;
 }
 
 .textArea textarea {
-    margin-top: 0.8em;
+    margin-top: 0.4em;
     width: 100%;
     padding: 1em;
-    border-radius: 0.5em; /* Ajoute un border-radius */
-    border: 0.06em solid #ccc; /* Ajoute une bordure de couleur #ccc */
-    resize: vertical; /* Permet de redimensionner verticalement */
+    border-radius: 0.5em;
+    border: 0.06em solid #ccc;
+    resize: vertical;
 }
 
 .labelInput {
     display: flex;
     flex-direction: column;
     align-items: start;
-    margin-bottom: 0.625em;
+    margin-bottom: 0.6em;
     gap: 0.7em;
 }
 
@@ -117,8 +121,12 @@
     height: 2.5em;
     border-radius: 0.5em;
     padding: 1em;
-    border: none;
+    border: 1px solid #c9c9c9;
     background-color: #e0e0e0;
+}
+
+.labelInput label {
+    font-weight: 500;
 }
 
 .modalFooter {
@@ -136,11 +144,14 @@
     font-size: 1em;
     font-weight: 500;
     cursor: pointer;
-    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .modalFooter .cancelButton {
     background-color: #ababab;
+}
+
+.modalFooter .cancelButton:hover {
+    background-color: #d7d7d7;
 }
 
 .modalFooter .submitButton {
@@ -148,8 +159,12 @@
     color: white;
 }
 
-.modalFooter button:hover {
-    opacity: 0.8;
+.modalFooter .submitButton:hover {
+    background-color: #a72c1f;
+}
+
+.cancelInterventionButton:hover {
+    background-color: #ababab;
 }
 
 .validateButton {
@@ -187,4 +202,59 @@
 .error {
     font-size: 0.9em;
     color: rgb(226, 12, 12);
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    margin-left: 0.4em;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.1s;
+    border-radius: 20px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.1s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #b73c2e;
+}
+
+input:checked + .slider:before {
+    transform: translateX(20px);
+}
+
+.checkbox .switch {
+    margin: 1em 0.5em;
+    font-weight: 500;
+}
+
+.checkbox label {
+    font-weight: 500;
 }

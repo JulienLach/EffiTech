@@ -5,7 +5,7 @@
     width: 30vw;
     height: 100vh;
     background-color: white;
-    box-shadow: -0.188em 0 0.188em rgba(0, 0, 0, 0.2);
+    box-shadow: -0.17em 0 0.17em rgba(0, 0, 0, 0.1);
     z-index: 1000;
     padding: 1.5em;
     border-radius: 1em;
@@ -24,15 +24,24 @@
 
 .modalFooter {
     display: flex;
-    gap: 1em;
+    flex-direction: row;
+    gap: 0.7em;
+}
+
+.modalButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.3em;
 }
 
 .modalFooter button {
-    padding: 0.4em 0.9em;
+    padding: 0.4em 0.6em;
     border: none;
-    border-radius: 0.3em;
+    border-radius: 0.4em;
     font-size: 1em;
-    transition: 80ms;
+    transition: 10ms;
     cursor: pointer;
 }
 
@@ -57,4 +66,8 @@
     display: flex;
     flex-direction: column;
     gap: 0.5em;
+}
+
+.eventLabel {
+    font-weight: 500;
 }

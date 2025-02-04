@@ -44,6 +44,7 @@
     display: flex;
     flex-direction: row;
     gap: 1em;
+    align-items: center;
 }
 
 .lastname,
@@ -89,7 +90,6 @@
     font-weight: 500;
     cursor: pointer;
     margin: 1em 0em;
-    transition: 0.1s;
 }
 
 .editButton:hover {
@@ -100,4 +100,14 @@
 .editButton i {
     margin-right: 0.5em;
     font-size: 0.8em;
+}
+
+.adminBadge {
+    background-color: #ed5544;
+    color: white;
+    padding: 0.3em 0.5em;
+    border-radius: 1em;
+    font-size: 0.9em;
+    font-weight: 500;
+    margin-left: 0.5em;
 }

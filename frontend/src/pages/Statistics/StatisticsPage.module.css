@@ -1,0 +1,39 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    margin: 2em 1.25em 0 15.6em;
+    gap: 2em;
+}
+
+.pageTitle {
+    font-size: 1.9em;
+    font-weight: 550;
+}
+
+.eventCard {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    min-width: 30%;
+    margin-left: 0.5em;
+    padding: 1.5em;
+    border-radius: 0.8em;
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.1);
+    align-items: center;
+}
+
+.eventChart {
+    margin: 1em 0;
+    width: 250px;
+    height: 250px;
+}
+
+.employeeChart {
+    margin: 1em 0;
+    width: 550px;
+    height: 302px;
+}
+
+.labelStats {
+    margin-top: 0.4em;
+}

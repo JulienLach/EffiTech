@@ -4,7 +4,6 @@ import TemplateGlobal from "../Template/TemplateGlobal";
 import TemplateGlobalMobile from "../Template/TemplateGlobalMobile";
 import styles from "./ClientsPage.module.css";
 import stylesMobile from "./ClientsPageMobile.module.css";
-
 import { getAllClients, createClient } from "../../services/api";
 
 // Composant wrapper pour utiliser les hooks
@@ -41,6 +40,7 @@ class ClientsPage extends Component {
         this.handleNextPage = this.handleNextPage.bind(this);
         this.handlePreviousPage = this.handlePreviousPage.bind(this);
         this.handleSearchChange = this.handleSearchChange.bind(this);
+        this.handleResetFilter = this.handleResetFilter.bind(this);
     }
 
     componentDidMount() {
@@ -58,7 +58,7 @@ class ClientsPage extends Component {
             padding: "2px 10px",
             borderRadius: "8px",
             color: "white",
-            fontSize: "0.8em",
+            fontSize: "0.9em",
             fontWeight: "500",
         };
 
@@ -148,6 +148,10 @@ class ClientsPage extends Component {
         this.setState({ category: event.target.value });
     }
 
+    handleResetFilter() {
+        this.setState({ selectedCategory: "All" });
+    }
+
     handleSubmit(event) {
         event.preventDefault();
         const form = event.target;
@@ -167,7 +171,7 @@ class ClientsPage extends Component {
         console.log("Données du formulaire soumises:", data);
 
         const errors = {};
-        if (!data.company) {
+        if (!data.company && data.category === "Professionnel") {
             errors.company = "* Champ obligatoire";
         }
         if (!data.firstname) {
@@ -292,7 +296,7 @@ class ClientsPage extends Component {
                                             type="text"
                                             id="search"
                                             name="search"
-                                            placeholder="Recherche"
+                                            placeholder="Rechercher"
                                             value={searchItem}
                                             onChange={this.handleSearchChange}
                                         />
@@ -379,7 +383,7 @@ class ClientsPage extends Component {
                                                         this.closeCategoryModal
                                                     }
                                                 >
-                                                    Filter
+                                                    Filtrer
                                                 </button>
                                             </div>
                                         </div>
@@ -388,13 +392,11 @@ class ClientsPage extends Component {
                             </div>
                             {currentFilteredClients.map((client) => (
                                 <div
-                                    className={stylesMobile.clientCard}
-                                    style={{
-                                        backgroundColor:
-                                            client.category === "Professionnel"
-                                                ? "rgb(193, 240, 255)"
-                                                : "rgb(255, 228, 188)",
-                                    }}
+                                    className={
+                                        client.category === "Professionnel"
+                                            ? stylesMobile.clientCardProfessionnel
+                                            : stylesMobile.clientCardParticulier
+                                    }
                                     onClick={() =>
                                         this.handleButtonClick(client)
                                     }
@@ -417,9 +419,9 @@ class ClientsPage extends Component {
                                         </p>
                                     </div>
                                     {client.category === "Professionnel" ? (
-                                        <i class="fa-solid fa-landmark"></i>
+                                        <i className="fa-solid fa-landmark"></i>
                                     ) : (
-                                        <i class="fa-solid fa-user"></i>
+                                        <i className="fa-solid fa-user"></i>
                                     )}
                                 </div>
                             ))}
@@ -626,7 +628,7 @@ class ClientsPage extends Component {
                                         type="text"
                                         id="search"
                                         name="search"
-                                        placeholder="Recherche"
+                                        placeholder="Rechercher"
                                         value={searchItem}
                                         onChange={this.handleSearchChange}
                                     />
@@ -638,6 +640,13 @@ class ClientsPage extends Component {
                                     >
                                         <i className="fa-solid fa-filter"></i>
                                         <p>Type</p>
+                                    </div>
+                                    <div
+                                        className={styles.typeFilter}
+                                        onClick={this.handleResetFilter}
+                                    >
+                                        <i className="fa-solid fa-arrow-rotate-left"></i>
+                                        <p>Réinitialiser</p>
                                     </div>
                                     {isCategeoryModalOpen && (
                                         <div className={styles.modalFilter}>
@@ -705,21 +714,14 @@ class ClientsPage extends Component {
                                                         this.closeCategoryModal
                                                     }
                                                 >
-                                                    Annuler
-                                                </button>
-                                                <button
-                                                    onClick={
-                                                        this.closeCategoryModal
-                                                    }
-                                                >
-                                                    Filter
+                                                    Fermer
                                                 </button>
                                             </div>
                                         </div>
                                     )}
                                 </div>
                             </div>
-
+                            <div className={styles.divider}></div>
                             <div>
                                 <table>
                                     <thead className={styles.stickyThead}>
@@ -782,9 +784,19 @@ class ClientsPage extends Component {
                                                         }{" "}
                                                         {client.address.city}
                                                     </td>
-                                                    <td>{client.email}</td>
                                                     <td>
-                                                        {client.phoneNumber}
+                                                        <a
+                                                            href={`mailto:${client.email}`}
+                                                        >
+                                                            {client.email}
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a
+                                                            href={`tel:${client.phoneNumber}`}
+                                                        >
+                                                            {client.phoneNumber}
+                                                        </a>
                                                     </td>
                                                 </tr>
                                             )
@@ -798,13 +810,13 @@ class ClientsPage extends Component {
                                         }
                                         disabled={currentPage === 1}
                                     >
-                                        <i className="fa fa-arrow-left"></i>
+                                        <i className="fa-solid fa-chevron-left"></i>
                                     </button>
                                     <button
                                         onClick={(e) => this.handleNextPage(e)}
                                         disabled={currentPage === totalPages}
                                     >
-                                        <i className="fa fa-arrow-right"></i>
+                                        <i className="fa-solid fa-chevron-right"></i>
                                     </button>
                                 </div>
                             </div>
@@ -1023,12 +1035,14 @@ class ClientsPage extends Component {
                                                 className={styles.cancelButton}
                                                 onClick={this.closeModal}
                                             >
+                                                <i className="fa-solid fa-xmark"></i>{" "}
                                                 Annuler
                                             </button>
                                             <button
                                                 type="submit"
                                                 className={styles.submitButton}
                                             >
+                                                <i className="fa-solid fa-check"></i>{" "}
                                                 Enregister
                                             </button>
                                         </div>

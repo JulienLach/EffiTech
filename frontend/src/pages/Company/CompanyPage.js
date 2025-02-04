@@ -61,6 +61,7 @@ class CompanyPage extends Component {
                             <div className={styles.separator}></div>
                             <div className={styles.informations}>
                                 <h3>Coordonnées</h3>
+                                <p>Nom : {company.name}</p>
                                 <p>
                                     Adresse : {company.idAddress.address},{" "}
                                     {company.idAddress.zipcode},{" "}
@@ -73,7 +74,7 @@ class CompanyPage extends Component {
                                 <h3>Informations</h3>
                                 <p>SIRET : {company.siret}</p>
                                 <p>
-                                    N°TVA Intracommunautaire :{" "}
+                                    N° TVA Intracommunautaire :{" "}
                                     {company.vatNumber}
                                 </p>
                                 <p>Capital : {company.capital} €</p>

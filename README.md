@@ -1,4 +1,12 @@
-# Intervention management platform
+<p align="center">
+ <img alt="Logo" src="frontend/src/images/logo.svg" width=400 align="center">
+</p>
+
+<p align="center">
+    <a href="https://github.com/JulienLach/EffiTech/releases">
+        <img src="https://img.shields.io/badge/Release-0.5.3-orange?logo=github" alt="Release" />
+    </a>
+</p>
 
 ## Table of Contents
 
@@ -13,11 +21,11 @@
 -   [End-to-End Functional Test](#end-to-end-functional-test)
 -   [Other Functionalities](#other-functionalities)
 
-## <a name="overview"></a> Overview
+### <a name="overview"></a> Overview
 
--   Manage scheduling of interventions for technicians.
+-   EffiTech is an intervention management application. Manage scheduling of interventions for technicians.
 
-## <a name="features"></a> Features
+### <a name="features"></a> Features
 
 -   Individual management of technicians on the move with scheduling.
 -   Manage your employees and your clients
@@ -25,14 +33,14 @@
 -   Assignment of qualified technicians by supervisors.
 -   Access to necessary technical data before the intervention with documents
 
-## <a name="requirements"></a> Requirements
+### <a name="requirements"></a> Requirements
 
 -   PostgreSQL 15.10
 -   Node.js 18.19.0
 -   React 18.3.1
 -   Docker
 
-## <a name="how-to-run-the-app"></a> How to run the app
+### <a name="how-to-run-the-app"></a> How to run the app
 
 -   Install **Node.js 18** and **npm** :
 
@@ -140,7 +148,7 @@ npm start
 
 And access the application at http://localhost:3000
 
-## <a name="testing"></a> Testing
+### <a name="testing"></a> Testing
 
 This project uses **Jest**, **ESLint**, and **Prettier**.
 
@@ -149,7 +157,7 @@ This project uses **Jest**, **ESLint**, and **Prettier**.
 -   **ESLint** and **Prettier** for code quality and formatting :
     -   Run `npx eslint path/to/your/file` to check for code errors.
 
-## <a name="cicd"></a> CI/CD
+### <a name="cicd"></a> CI/CD
 
 This project uses **GitHub Actions** to automate unit tests and create new releases.
 
@@ -157,7 +165,7 @@ This project uses **GitHub Actions** to automate unit tests and create new relea
 
 -   To automatically run **CD** actions, follow these steps:
 
-    -   Update `CHANGELOG.md` with all new changes and fixes
+    -   Update `CHANGELOG.md` with all new changes and fixes and add the new tag [x.x.x] (yyyy-dd-mm)
     -   Merge your current working branch into the `develop` branch
     -   Create a new pull request (PR) to merge `develop` into `main`, check all the code.
     -   Merge your PR `develop` into `main`
@@ -194,7 +202,7 @@ This project uses **GitHub Actions** to automate unit tests and create new relea
         git push origin :refs/tags/x.x.x
         ```
 
-## <a name="docker"></a> Docker
+### <a name="docker"></a> Docker
 
 The app is divided into three images: one for the backend, one for the frontend, and one for the database.
 
@@ -202,14 +210,16 @@ You can run the app in Docker with `docker-compose up --build`.
 
 To stop run `docker-compose down`
 
-## <a name="documentation"></a> Documentation
+### <a name="documentation"></a> Documentation
 
 This project uses **JSDoc** and **apidoc** to generate documentation.
 
 -   **JSDoc**: Move to `/backend` folder, run `npm run doc` to generate documentation for the `/data` files.
 -   **apidoc**: Move to `/backend` folder, for API documentation written in the `/services/api.js` file, run `npm run apidoc`.
 
-## <a name="end-to-end-functional-test"></a> End-to-End Functional Test
+Then to see the documentation pages, run `index.html` from both folders with LiveServer VSCode extension for exemple.
+
+### <a name="end-to-end-functional-test"></a> End-to-End Functional Test
 
 <details>
 <summary>Scenario 1: Plan and Assign Initial Intervention</summary>
@@ -232,7 +242,7 @@ This project uses **JSDoc** and **apidoc** to generate documentation.
 
 </details>
 
-## <a name="other-functionalities"></a> Other Functionalities
+### <a name="other-functionalities"></a> Other Functionalities
 
 <details>
 <summary>Enter Company Data</summary>

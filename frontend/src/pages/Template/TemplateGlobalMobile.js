@@ -38,6 +38,9 @@ class TemplateGlobalMobile extends Component {
             case "/calendar":
                 pageTitle = "Calendrier";
                 break;
+            case "/calendar-mobile":
+                pageTitle = "Calendrier";
+                break;
             case "/clients":
                 pageTitle = "Clients";
                 break;
@@ -50,6 +53,12 @@ class TemplateGlobalMobile extends Component {
             case "/report":
                 pageTitle = "Rapport";
                 break;
+            case "/appointment-form":
+                pageTitle = "Rendez-vous";
+                break;
+            case "/intervention-form":
+                pageTitle = "Intervention";
+                break;
             default:
                 pageTitle = "Page";
         }
@@ -59,11 +68,13 @@ class TemplateGlobalMobile extends Component {
                 {/* Partie header */}
                 <div className={styles.headerDiv}>
                     <div className={styles.topLeftHader}>
-                        <img
-                            src={logoMobile}
-                            alt="Logo"
-                            className={styles.logoMobile}
-                        />
+                        <a href="/calendar">
+                            <img
+                                src={logoMobile}
+                                alt="Logo"
+                                className={styles.logoMobile}
+                            />
+                        </a>
                         <h1 className={styles.title}>{pageTitle}</h1>
                     </div>
                     <div>

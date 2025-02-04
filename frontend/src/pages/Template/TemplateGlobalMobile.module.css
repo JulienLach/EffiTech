@@ -17,7 +17,7 @@
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 0.25em 0.25em rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.2em 0.2em rgba(0, 0, 0, 0.1);
     width: 100vw;
 }
 
@@ -33,12 +33,12 @@
 }
 
 .notificationBell {
-    height: 1.3em;
+    height: 1.5em;
 }
 
 .notificationIcon {
     position: relative;
-    margin-right: 1.2em;
+    margin-right: 1.4em;
     margin-top: 0.5em;
 }
 
@@ -50,10 +50,10 @@
     background-color: #cf2f1d;
     color: white;
     border-radius: 1em;
-    height: 1.25em;
-    width: 1.25em;
-    font-size: 0.75em;
-    min-width: 1.25em;
+    height: 1.2em;
+    width: 1.2em;
+    font-size: 0.7em;
+    min-width: 1.2em;
     align-items: center;
     justify-content: center;
 }
@@ -61,12 +61,12 @@
 .profileBubble {
     top: -0.625em;
     right: -0.625em;
-    background-color: #007bff;
+    background-color: #464849;
     color: white;
     border-radius: 2em;
-    width: 2em;
-    height: 2em;
-    font-size: 1.2em;
+    width: 2.2em;
+    height: 2.2em;
+    font-size: 1.3em;
     font-weight: 500;
     display: flex;
     align-items: center;
@@ -89,7 +89,7 @@
     border-radius: 0.6em 0.6em 0 0;
     padding: 0.8em 0;
     z-index: 1000;
-    box-shadow: 0 -0.25em 0.25em rgba(0, 0, 0, 0.1);
+    box-shadow: 0 -0.2em 0.2em rgba(0, 0, 0, 0.1);
 }
 
 .navbarIcon {

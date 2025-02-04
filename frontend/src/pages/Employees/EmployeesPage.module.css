@@ -11,17 +11,18 @@
     left: 0;
     height: 100vh;
     width: 100vw;
-    background-color: rgba(0, 0, 0, 0.85);
+    background-color: rgba(0, 0, 0, 0.57);
 }
 
 .pageTitle {
-    font-size: 1.8em;
+    font-size: 1.9em;
     font-weight: 550;
+    margin-bottom: 1em;
 }
 
 .cardContainer {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
     gap: 1em;
 }
 
@@ -29,9 +30,10 @@
     display: flex;
     justify-content: space-between;
     margin: 0.7em;
-    padding: 1.25em;
-    border-radius: 0.6em;
-    box-shadow: 0 0 0.625em rgba(0, 0, 0, 0.1);
+    padding: 1.4em;
+    border-radius: 0.7em;
+    border: 0.5px solid #e7e7f5;
+    box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.1);
     background-color: white;
 }
 
@@ -49,10 +51,6 @@
     display: block;
 }
 
-a {
-    text-decoration: none;
-}
-
 .profilPicture {
     width: 6.25em;
     height: 6.25em;
@@ -62,15 +60,25 @@ a {
     text-align: end;
 }
 
-.profilInfo .job {
+.name {
+    margin: 0.3em 0;
+    padding: 0;
+    font-size: 1.4em;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.job {
     text-align: center;
     border-radius: 3.5em;
-    background-color: #d9d9d9;
+    background-color: #e7e7f5;
     font-size: 1em;
     font-weight: 500;
-    margin: 0.8em 0;
-    padding: 0.1em 0em;
-    color: #3e3e3e;
+    margin: 0.3em 0;
+    padding: 0.1em 1em;
+    display: inline-block;
 }
 
 .info {
@@ -93,7 +101,7 @@ a {
     color: #c93c2c;
     border: none;
     cursor: pointer;
-    font-size: 1.125em;
+    font-size: 1.1em;
     font-weight: 500;
     background-color: white;
 }
@@ -103,14 +111,8 @@ a {
 }
 
 .moreInfo button i {
-    margin-left: 0.2em;
-}
-
-.name {
-    margin: 0.3em;
-    padding: 0;
-    font-size: 1.4em;
-    font-weight: 600;
+    margin-left: 0.3em;
+    font-size: 1.1em;
 }
 
 /* style de la modal */
@@ -118,95 +120,32 @@ a {
     position: fixed;
     top: 0;
     right: 0;
-    width: 30%; /* Ajustez la largeur selon vos besoins */
+    width: 30%;
     height: 100%;
     border-top-left-radius: 1.25em;
-    background-color: rgba(
-        0,
-        0,
-        0,
-        0.5
-    ); /* Optionnel : pour un fond semi-transparent */
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
-    align-items: flex-start; /* Aligne le contenu en haut */
-    justify-content: flex-end; /* Aligne le contenu à droite */
-    z-index: 1000; /* Assurez-vous que la modale est au-dessus des autres éléments */
+    align-items: flex-start;
+    justify-content: flex-end;
+    z-index: 1000;
 }
 
 .modalContent {
     background-color: white;
     width: 100%;
-    height: 100%; /* Ajustez la hauteur pour ne pas se superposer au header */
+    height: 100%;
     border-top-left-radius: 1.25em;
-    overflow-y: auto; /* Ajoute un défilement si le contenu dépasse la hauteur */
-    padding: 1.25em; /* Optionnel : pour ajouter du padding à l'intérieur de la modale */
+    overflow-y: auto;
+    padding: 1.25em;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.closeButton {
-    position: absolute;
-    top: 0.625em;
-    right: 0.625em;
-    background: none;
-    border: none;
-    font-size: 1.5em;
-    cursor: pointer;
-}
-
-/* CSS for input & label */
-.labelInput {
-    font-size: 1.25em;
-    font-weight: 500;
-    display: flex;
-    flex-direction: column;
-    width: 30vw;
-    margin-bottom: 0.625em;
-}
-
-/* CSS for input comportement */
-.labelInput input {
-    margin: 0 1.875em;
-    padding: 0.625em;
-    border: 0.063em solid #cccccc;
-    border-radius: 0.625em;
-}
-
-/* CSS for the label comportement */
-.labelInput label {
-    margin: 0 1.875em;
-    padding: 0.313em 0;
-}
-
-/* CSS for button positioning */
-.buttonPosition {
-    display: flex;
-    width: 30vw;
-    margin-bottom: 1.25em;
-    margin-top: 1.2em;
-}
-
-/* css for cancel button */
-.cancelButton {
-    background-color: #ababab;
-    margin: auto;
-    padding: 0.625em;
-    border: none;
-    border-radius: 0.625em;
+.adminBadge {
+    background-color: #ed5544;
     color: white;
-    font-size: 1.125em;
+    padding: 0.3em 0.5em;
+    border-radius: 1em;
+    font-size: 0.6em;
     font-weight: 500;
-    cursor: pointer;
-}
-
-/* CSS for create button */
-.submitButton {
-    background-color: #c93c2c;
-    margin: auto;
-    padding: 0.625em;
-    border: none;
-    border-radius: 0.625em;
-    color: white;
-    font-size: 1.125em;
-    font-weight: 500;
-    cursor: pointer;
+    margin-left: 0.7em;
 }

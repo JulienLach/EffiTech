@@ -85,6 +85,9 @@ const PDFGenerator = ({ report, reportData, companyData }) => {
                         />{" "}
                         <View style={styles.infoClientCompany}>
                             <View>
+                                <Text style={styles.title}>
+                                    {companyData.name}
+                                </Text>
                                 <Text style={styles.title}>Client :</Text>
                                 <Text>
                                     Nom : {report.client.firstname}{" "}
@@ -143,8 +146,8 @@ const PDFGenerator = ({ report, reportData, companyData }) => {
                             />
                         </View>
                         <Text style={styles.footer}>
-                            SIRET: {companyData.siret} | TVA:{" "}
-                            {companyData.vatNumber} | Capital:{" "}
+                            {companyData.name} | SIRET: {companyData.siret} |
+                            TVA: {companyData.vatNumber} | Capital:{" "}
                             {companyData.capital} € | Adresse:{" "}
                             {companyData.idAddress.address},{" "}
                             {companyData.idAddress.city},{" "}

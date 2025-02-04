@@ -3,13 +3,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
 }
 
 .logoMobile {
-    text-align: center;
-    height: 18em;
-    width: 18em;
+    height: 14em;
+    width: 14em;
 }
 
 /* CSS title style font */
@@ -31,17 +29,18 @@
 
 /* CSS for input comportement */
 .labelInput input {
-    margin: 0 1.875em;
+    margin: auto;
+    width: 80%;
     padding: 0.7em;
-    border: 0.063em solid #cccccc;
-    border-radius: 0.625em;
+    border: 0.15em solid #cccccc;
+    border-radius: 0.6em;
     font-size: 0.7em;
 }
 
 /* CSS for the label comportement */
 .labelInput label {
-    margin: 0 1.875em;
-    padding: 0.313em 0;
+    margin: 0 1.8em;
+    padding: 0.3em 0;
 }
 
 /* CSS for elements placement */
@@ -55,19 +54,20 @@
 .submitButton {
     background-color: #c93c2c;
     margin: auto;
-    padding: 0.625em;
+    width: 80%;
+    padding: 0.5em 1.5em;
     border: none;
-    border-radius: 0.625em;
+    border-radius: 0.5em;
     color: white;
     font-size: 1.25em;
     font-weight: 500;
     cursor: pointer;
-    margin-top: 5em;
+    margin-top: 2em;
 }
 
 /* CSS for paragraph style */
 .formElements p {
-    font-size: 1.125em;
+    font-size: 1.1em;
     margin-top: 1.25em;
     text-align: center;
 }
@@ -75,6 +75,6 @@
 /* CSS for link style */
 .formElements a {
     text-align: center;
-    font-size: 1em;
-    margin-bottom: 1.25em;
+    font-size: 1.2em;
+    margin-top: 0.8em;
 }

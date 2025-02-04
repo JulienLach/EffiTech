@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import { Calendar as BigCalendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment-timezone";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import "moment/locale/fr"; // Importer la locale française
+import "moment/locale/fr";
 
 // Setup the localizer by providing the moment Object to the correct localizer.
 moment.tz.setDefault("Europe/Paris");
-moment.locale("fr"); // Définir la locale française
+moment.locale("fr");
 const localizer = momentLocalizer(moment);
 
 function eventStyleGetter(event) {
@@ -48,14 +48,17 @@ function eventStyleGetter(event) {
 class CalendarMobile extends Component {
     render() {
         return (
-            <div className="height" style={{ height: "90vh", margin: "2em" }}>
+            <div
+                className="height"
+                style={{ height: "90vh", margin: "2em 0.7em" }}
+            >
                 <BigCalendar
                     localizer={localizer}
                     events={this.props.events}
                     startAccessor="start"
                     endAccessor="end"
-                    defaultView="week"
-                    views={["week", "day"]}
+                    defaultView="work_week"
+                    views={["work_week", "day"]}
                     min={new Date(1970, 1, 1, 8, 0, 0)}
                     max={new Date(1970, 1, 1, 20, 0, 0)}
                     timeslots={2}
@@ -78,9 +81,9 @@ class CalendarMobile extends Component {
                     }}
                     messages={{
                         today: "Aujourd'hui",
-                        previous: <i className="fa fa-arrow-left"></i>,
-                        next: <i className="fa fa-arrow-right"></i>,
-                        week: "Semaine",
+                        previous: <i className="fa fa-chevron-left"></i>,
+                        next: <i className="fa fa-chevron-right"></i>,
+                        work_week: "Semaine",
                         day: "Jour",
                         date: "Date",
                         time: "Heure",

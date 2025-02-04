@@ -4,6 +4,7 @@ import styles from "./NotificationsPage.module.css";
 import stylesMobile from "./NotificationsPageMobile.module.css";
 import TemplateGlobal from "../Template/TemplateGlobal";
 import TemplateGlobalMobile from "../Template/TemplateGlobalMobile";
+import { getAllNotifications } from "../../services/api";
 
 // Composant wrapper pour utiliser les hooks
 function NotificationsPageWrapper() {
@@ -16,18 +17,29 @@ class NotificationsPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            notification: [],
-            action: "",
-            type: "",
-            title: "",
-            creationDate: "",
-            employee: {},
+            notifications: [],
         };
     }
 
+    componentDidMount() {
+        getAllNotifications((error, data) => {
+            if (error) {
+                this.setState({ error: error.message });
+            } else {
+                this.setState({ notifications: data });
+            }
+            console.log(data);
+        });
+    }
+
+    formatDate(date) {
+        const creationDate = new Date(date);
+        return creationDate.toLocaleDateString("fr-FR");
+    }
+
     render() {
-        //Variable pour savoir si c'est mobile ou desktop
         const isMobile = window.navigator.userAgentData;
+        const { notifications } = this.state;
 
         return (
             <>
@@ -39,15 +51,6 @@ class NotificationsPage extends Component {
                                 <h1 className={styles.pageTitle}>
                                     Notifications
                                 </h1>
-                                <div className={styles.rightPart}>
-                                    <button
-                                        className={styles.addClient}
-                                        onClick={this.openModal}
-                                    >
-                                        <i className="fa-solid fa-plus"></i>
-                                        Ajouter un client
-                                    </button>
-                                </div>
                             </div>
                         </div>
                     </>
@@ -56,6 +59,7 @@ class NotificationsPage extends Component {
                         <TemplateGlobal />
                         <div className={styles.container}>
                             <h1 className={styles.pageTitle}>Notifications</h1>
+                            <div className={styles.divider}></div>
                             <div>
                                 <table>
                                     <thead className={styles.stickyThead}>
@@ -64,33 +68,36 @@ class NotificationsPage extends Component {
                                             <th>Action</th>
                                             <th>Type</th>
                                             <th>Titre</th>
+                                            <th>Date</th>
+                                            <th>Heure</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>[Employee]</td>
-                                            <td>[Action]</td>
-                                            <td>[Type]</td>
-                                            <td>[Titre]</td>
-                                        </tr>
+                                        {notifications.map((notification) => (
+                                            <tr
+                                                key={
+                                                    notification.id_notification
+                                                }
+                                            >
+                                                <td>
+                                                    {notification.firstName}{" "}
+                                                    {notification.lastName}
+                                                </td>
+                                                <td>{notification.action}</td>
+                                                <td>{notification.type}</td>
+                                                <td>{notification.title}</td>
+                                                <td>
+                                                    {this.formatDate(
+                                                        notification.creationDate
+                                                    )}
+                                                </td>
+                                                <td>
+                                                    {notification.creationHour}
+                                                </td>
+                                            </tr>
+                                        ))}
                                     </tbody>
                                 </table>
-                                {/* <div className={styles.pagination}>
-                                    <button
-                                        onClick={(e) =>
-                                            this.handlePreviousPage(e)
-                                        }
-                                        disabled={currentPage === 1}
-                                    >
-                                        <i className="fa fa-arrow-left"></i>
-                                    </button>
-                                    <button
-                                        onClick={(e) => this.handleNextPage(e)}
-                                        disabled={currentPage === totalPages}
-                                    >
-                                        <i className="fa fa-arrow-right"></i>
-                                    </button>
-                                </div> */}
                             </div>
                         </div>
                     </>

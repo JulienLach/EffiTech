@@ -6,10 +6,10 @@ class UpdateInterventionForm extends Component {
     constructor(props) {
         super(props);
 
-        // Convertir la date pour afficahge dans le champs
+        // Convertir la date pour affichage dans le champs
         const startingDate = props.event.startingDate
             ? new Date(props.event.startingDate).toLocaleDateString("en-CA")
-            : "";
+            : null;
 
         this.state = {
             idEvent: props.event.idEvent,
@@ -95,8 +95,8 @@ class UpdateInterventionForm extends Component {
             idEvent,
             title,
             description,
-            // status,
-            // isPlanned,
+            status,
+            isPlanned,
             type,
             startingDate,
             startingHour,
@@ -112,7 +112,7 @@ class UpdateInterventionForm extends Component {
                 className={`${styles.modal} ${styles.open}`}
             >
                 <div className={styles.container}>
-                    <h2>
+                    <h2 className={styles.modalTitle}>
                         {type === "Intervention"
                             ? "Modifier l'intervention"
                             : "Modifier le rendez-vous"}
@@ -220,9 +220,11 @@ class UpdateInterventionForm extends Component {
                             onClick={this.handleCancel}
                             className={styles.cancelButton}
                         >
+                            <i className="fa-solid fa-xmark"></i>
                             Annuler
                         </button>
                         <button type="submit" className={styles.submitButton}>
+                            <i className="fa-solid fa-check"></i>
                             Enregistrer
                         </button>
                     </div>

@@ -16,12 +16,12 @@ class Notification {
      */
     constructor(
         idNotification,
-        idEmployee,
         action,
         type,
         title,
         creationDate,
-        creationHour
+        creationHour,
+        idEmployee
     ) {
         this.idNotification = idNotification;
         this.idEmployee = idEmployee;
@@ -37,23 +37,59 @@ class Notification {
      * @param {function(Error, Notification[]):void} callback - La fonction de rappel à exécuter après la récupération des notifications.
      */
     static getAllNotifications(callback) {
-        const query = "SELECT * FROM notifications";
+        const query =
+            "SELECT * FROM notifications JOIN employees ON notifications.id_employee = employees.id_employee";
         pool.query(query, (error, result) => {
             if (error) {
                 return callback(error, null);
             }
             const notifications = result.rows.map(function (row) {
-                return new Notification(
+                const notification = new Notification(
                     row.id_notification,
-                    row.id_employee,
                     row.action,
                     row.type,
                     row.title,
                     row.creation_date,
-                    row.creation_hour
+                    row.creation_hour,
+                    row.id_employee
                 );
+                notification.firstName = row.firstname;
+                notification.lastName = row.lastname;
+                return notification;
             });
             callback(null, notifications);
+        });
+    }
+
+    static createNotification(notification, callback) {
+        const query = `
+        INSERT INTO notifications (action, type, title, creation_date, creation_hour, id_employee) 
+        VALUES ($1, $2, $3, $4, $5, $6) 
+        RETURNING id_notification, action, type, title, creation_date, creation_hour, id_employee`;
+        const values = [
+            notification.action,
+            notification.type,
+            notification.title,
+            notification.creationDate,
+            notification.creationHour,
+            notification.idEmployee,
+        ];
+        pool.query(query, values, (error, result) => {
+            if (error) {
+                return callback(error, null);
+            }
+            const row = result.rows[0];
+            const createdNotification = new Notification(
+                row.id_notification,
+                row.action,
+                row.type,
+                row.title,
+                row.creation_date,
+                row.creation_hour,
+                row.id_employee
+            );
+
+            callback(null, createdNotification);
         });
     }
 }

@@ -26,6 +26,7 @@ import DocumentDetailsPage from "./pages/Documents/DocumentDetailsPage";
 import NotificationsPage from "./pages/Notifications/NotificationsPage";
 import CalendarMobilePage from "./pages/CalendarMobile/CalendarMobilePage";
 import InvoicesPage from "./pages/Invoices/InvoicesPage";
+import StatisticsPage from "./pages/Statistics/StatisticsPage";
 
 const App = () => {
     return (
@@ -68,6 +69,7 @@ const App = () => {
                     element={<CalendarMobilePage />}
                 />
                 <Route path="/invoices" element={<InvoicesPage />} />
+                <Route path="/statistics" element={<StatisticsPage />} />
             </Routes>
         </Router>
     );

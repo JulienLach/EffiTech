@@ -451,6 +451,7 @@ function getClientById(idClient, callback) {
  * @apiVersion 1.0.0
  * @apiSuccess {Object} company The company object.
  * @apiSuccess {Number} company.idCompany Company ID.
+ * @apiSuccess {String} company.name Company name.
  * @apiSuccess {String} company.phoneNumber Company phone number.
  * @apiSuccess {Object} company.idAddress Company address.
  * @apiSuccess {String} company.idAddress.address Company address.
@@ -535,6 +536,7 @@ function deleteEvent(idEvent, callback) {
  * @apiGroup Company
  * @apiVersion 1.0.0
  * @apiParam {Number} idCompany The ID of the company.
+ * @apiParam {String} name The name of the company.
  * @apiParam {String} phoneNumber The phone number of the company.
  * @apiParam {Object} idAddress The address of the company.
  * @apiParam {String} idAddress.address The address of the company.
@@ -780,6 +782,7 @@ function createEmployee(employeeData, callback) {
  * @apiSuccess {Object} company The created company object.
  * @apiSuccess {Number} company.idCompany Company ID.
  * @apiSuccess {String} company.phoneNumber Company phone number.
+ * @apiSuccess {String} company.phoneNumber Company phone number.
  * @apiSuccess {Object} company.idAddress Company address.
  * @apiSuccess {String} company.idAddress.address Company address.
  * @apiSuccess {String} company.idAddress.city Company city.
@@ -871,6 +874,116 @@ function getDocumentById(idDocument, callback) {
     xhr.send();
 }
 
+function getAllNotifications(callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", `${API_URL}/notifications`);
+    xhr.withCredentials = true;
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            callback(null, JSON.parse(xhr.responseText));
+        } else {
+            console.error(
+                "Erreur de récupération des notifications",
+                xhr.statusText
+            );
+            callback(new Error(xhr.statusText), null);
+        }
+    };
+    xhr.send();
+}
+
+function createNotification(notificationData, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", `${API_URL}/notifications`);
+    xhr.withCredentials = true;
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onload = function () {
+        if (xhr.status === 200 || xhr.status === 201) {
+            console.log("Notification créée");
+            callback(null, JSON.parse(xhr.responseText));
+        } else {
+            console.error(
+                "Erreur de création de la notification",
+                xhr.statusText
+            );
+            callback(new Error(xhr.statusText), null);
+        }
+    };
+    xhr.send(JSON.stringify(notificationData));
+}
+
+function getAllEventStatistics(callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", `${API_URL}/statistics`);
+    xhr.withCredentials = true;
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            console.log(JSON.parse(xhr.responseText));
+            callback(null, JSON.parse(xhr.responseText));
+        } else {
+            console.error(
+                "Erreur de récupération des statistiques",
+                xhr.statusText
+            );
+            callback(new Error(xhr.statusText), null);
+        }
+    };
+    xhr.send();
+}
+
+function downloadDocument(idDocument, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", `${API_URL}/documents/download/${idDocument}`);
+    xhr.withCredentials = true;
+    xhr.responseType = "blob";
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            callback(null, xhr.response);
+        } else {
+            console.error(
+                "Erreur de téléchargement du document",
+                xhr.statusText
+            );
+            callback(new Error(xhr.statusText), null);
+        }
+    };
+    xhr.send();
+}
+
+function getAllInvoices(callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", `${API_URL}/invoices`);
+    xhr.withCredentials = true;
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            callback(null, JSON.parse(xhr.responseText));
+        } else {
+            console.error(
+                "Erreur de récupération des factures",
+                xhr.statusText
+            );
+            callback(new Error(xhr.statusText), null);
+        }
+    };
+    xhr.send();
+}
+
+function importInvoice(formData, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", `${API_URL}/invoices`);
+    xhr.withCredentials = true;
+    xhr.onload = function () {
+        if (xhr.status === 200 || xhr.status === 201) {
+            console.log("Facture importée");
+            callback(null, JSON.parse(xhr.responseText));
+        } else {
+            console.error("Erreur d'importation de la facture", xhr.statusText);
+            callback(new Error(xhr.statusText), null);
+        }
+    };
+    xhr.send(formData);
+}
+
 export {
     getAllEvents,
     getAllClients,
@@ -894,4 +1007,10 @@ export {
     getAllDocuments,
     importDocument,
     getDocumentById,
+    createNotification,
+    getAllNotifications,
+    getAllEventStatistics,
+    downloadDocument,
+    getAllInvoices,
+    importInvoice,
 };

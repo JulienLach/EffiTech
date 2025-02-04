@@ -24,20 +24,20 @@ class FilterBar extends Component {
                         </div>
                     </div>
                 ) : (
-                    <div>
+                    <div className={styles.filterDiv}>
                         <div className={styles.searchInput}>
                             <i className="fa-solid fa-magnifying-glass"></i>
                             <input
                                 type="text"
                                 id="search"
                                 name="search"
-                                placeholder="Recherche"
+                                placeholder="Rechercher"
                                 onChange={this.props.handleSearchChange}
                             />
                         </div>
                         <div className={styles.typeFilter}>
                             <i className="fa-solid fa-user"></i>
-                            <p>Clients</p>
+                            <p>Client</p>
                         </div>
                         <div
                             className={styles.typeFilter}
@@ -168,6 +168,17 @@ class FilterBar extends Component {
                                             />
                                             Rendez-vous
                                         </label>
+                                        <label>
+                                            <input
+                                                type="radio"
+                                                name="type"
+                                                value=""
+                                                onChange={
+                                                    this.props.handleTypeChange
+                                                }
+                                            />
+                                            Tous
+                                        </label>
                                     </div>
                                     <button
                                         onClick={this.props.toggleTypeModal}
@@ -177,6 +188,13 @@ class FilterBar extends Component {
                                 </div>
                             </div>
                         )}
+                        <div
+                            className={styles.typeFilter}
+                            onClick={this.props.handleResetFilter}
+                        >
+                            <i className="fa-solid fa-arrow-rotate-left"></i>
+                            <p>Réinitialiser</p>
+                        </div>
                         <button
                             className={styles.createEventbutton}
                             onClick={this.props.toggleCreateEventModal}

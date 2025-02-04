@@ -57,8 +57,13 @@
 
 .id {
     margin-right: 1em;
-    font-size: 1.2em;
+    font-size: 1.4em;
     font-weight: 600;
+}
+
+h2 {
+    font-size: 1.5em;
+    font-weight: 550;
 }
 
 .names {
@@ -107,7 +112,7 @@
 }
 
 .contactInfo p {
-    margin: 0.4em 0;
+    margin: 0.5em 0;
 }
 
 .separation {
@@ -154,4 +159,15 @@
     font-size: 1em;
     cursor: pointer;
     margin-top: 0.9em;
+}
+
+.openMapsLink {
+    padding: 0.5em 1em;
+    background-color: #c93c2c;
+    color: white;
+    border-radius: 0.3em;
+}
+
+.clientLabel {
+    font-weight: 500;
 }

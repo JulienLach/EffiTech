@@ -1,3 +1,4 @@
+const { body, validationResult } = require("express-validator");
 const Invoice = require("../data/invoice.data.js");
 
 function getAllInvoices(req, res) {
@@ -30,6 +31,23 @@ function getInvoiceById(req, res) {
 }
 
 function importInvoice(req, res) {
+    const validationChecks = [
+        body("idClient").isInt().notEmpty(),
+        body("amountIncludingTax").isFloat().notEmpty(),
+        body("amountWithoutTax").isFloat().notEmpty(),
+        body("invoiceDate").isString().trim().escape().notEmpty(),
+        body("file").isString().notEmpty(),
+    ];
+
+    for (let validation of validationChecks) {
+        validation.run(req);
+    }
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
     const {
         idClient,
         amountIncludingTax,
@@ -37,13 +55,16 @@ function importInvoice(req, res) {
         invoiceDate,
         file,
     } = req.body;
+
+    const buffer = Buffer.from(file, "base64");
+
     Invoice.importInvoice(
         idClient,
         amountIncludingTax,
         amountWithoutTax,
         invoiceDate,
-        file,
-        (error, result) => {
+        buffer,
+        (error, invoice) => {
             if (error) {
                 return res.status(500).send({
                     message: "Erreur lors de l'importation de la facture",
@@ -52,7 +73,7 @@ function importInvoice(req, res) {
             }
             res.status(201).send({
                 message: "Facture importée avec succès",
-                result,
+                invoice,
             });
         }
     );

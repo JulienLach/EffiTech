@@ -49,10 +49,10 @@ class ClientDetailsPage extends Component {
 
     getCategoryIndicator(category) {
         const style = {
-            padding: "2px 10px",
+            padding: "2px 11px",
             borderRadius: "8px",
             color: "white",
-            fontSize: "0.8em",
+            fontSize: "0.9em",
             fontWeight: "500",
         };
 
@@ -150,7 +150,12 @@ class ClientDetailsPage extends Component {
                                             </a>
                                         </p>
                                         <h3>Adresse mail</h3>
-                                        <p>{client.email}</p>
+                                        <p>
+                                            Mail :{" "}
+                                            <a href={`mailto:${client.email}`}>
+                                                {client.email}
+                                            </a>
+                                        </p>
                                     </div>
                                     <div className={stylesMobile.addressCard}>
                                         <h3>Adresse</h3>
@@ -165,6 +170,9 @@ class ClientDetailsPage extends Component {
                                             href={googleMapsUrl}
                                             target="_blank"
                                             rel="noreferrer"
+                                            className={
+                                                stylesMobile.openMapsLink
+                                            }
                                         >
                                             Voir sur Google Maps
                                         </a>
@@ -207,7 +215,12 @@ class ClientDetailsPage extends Component {
                                             </a>
                                         </p>
                                         <h3>Adresse mail</h3>
-                                        <p>{client.email}</p>
+                                        <p>
+                                            Mail :{" "}
+                                            <a href={`mailto:${client.email}`}>
+                                                {client.email}
+                                            </a>
+                                        </p>
                                     </div>
                                     <div className={stylesMobile.addressCard}>
                                         <h3>Adresse</h3>
@@ -222,6 +235,9 @@ class ClientDetailsPage extends Component {
                                             href={googleMapsUrl}
                                             target="_blank"
                                             rel="noreferrer"
+                                            className={
+                                                stylesMobile.openMapsLink
+                                            }
                                         >
                                             Voir sur Google Maps
                                         </a>
@@ -290,29 +306,50 @@ class ClientDetailsPage extends Component {
                                     <h2>Coordonnées</h2>
                                     <div className={styles.contactInfo}>
                                         <p className={styles.firstnamePro}>
-                                            Contact client : {client.firstname}{" "}
-                                            {client.lastname}
+                                            <span
+                                                className={styles.clientLabel}
+                                            >
+                                                Contact client :
+                                            </span>{" "}
+                                            {client.firstname} {client.lastname}
                                         </p>
                                         <p>
-                                            Téléphone :{" "}
+                                            <span
+                                                className={styles.clientLabel}
+                                            >
+                                                Téléphone :{" "}
+                                            </span>
                                             <a
                                                 href={`tel:${client.phoneNumber}`}
                                             >
                                                 {client.phoneNumber}
                                             </a>
                                         </p>
-                                        <p>Adresse : {clientAddress}</p>
+                                        <p>
+                                            {" "}
+                                            <span
+                                                className={styles.clientLabel}
+                                            >
+                                                Adresse :
+                                            </span>{" "}
+                                            {clientAddress}
+                                        </p>
                                         <p>
                                             <a
                                                 href={googleMapsUrl}
                                                 target="_blank"
                                                 rel="noreferrer"
+                                                className={styles.openMapsLink}
                                             >
                                                 Voir sur Google Maps
                                             </a>
                                         </p>
                                         <p>
-                                            Mail :{" "}
+                                            <span
+                                                className={styles.clientLabel}
+                                            >
+                                                Mail :
+                                            </span>{" "}
                                             <a href={`mailto:${client.email}`}>
                                                 {client.email}
                                             </a>
@@ -372,25 +409,41 @@ class ClientDetailsPage extends Component {
                                     <h2>Coordonnées</h2>
                                     <div className={styles.contactInfo}>
                                         <p>
-                                            Téléphone :{" "}
+                                            <span
+                                                className={styles.clientLabel}
+                                            >
+                                                Téléphone :
+                                            </span>{" "}
                                             <a
                                                 href={`tel:${client.phoneNumber}`}
                                             >
                                                 {client.phoneNumber}
                                             </a>
                                         </p>
-                                        <p>Adresse : {clientAddress}</p>
+                                        <p>
+                                            <span
+                                                className={styles.clientLabel}
+                                            >
+                                                Adresse :
+                                            </span>{" "}
+                                            {clientAddress}
+                                        </p>
                                         <p>
                                             <a
                                                 href={googleMapsUrl}
                                                 target="_blank"
                                                 rel="noreferrer"
+                                                className={styles.openMapsLink}
                                             >
                                                 Voir sur Google Maps
                                             </a>
                                         </p>
                                         <p>
-                                            Mail :{" "}
+                                            <span
+                                                className={styles.clientLabel}
+                                            >
+                                                Mail :
+                                            </span>{" "}
                                             <a href={`mailto:${client.email}`}>
                                                 {client.email}
                                             </a>

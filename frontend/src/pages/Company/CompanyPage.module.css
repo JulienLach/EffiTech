@@ -14,6 +14,10 @@
     flex-wrap: wrap;
 }
 
+.companyLogo {
+    height: 130px;
+}
+
 .addEmployee {
     background-color: #c93c2c;
     padding: 0.625em 0.938em;

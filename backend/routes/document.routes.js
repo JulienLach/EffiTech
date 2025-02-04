@@ -8,4 +8,6 @@ router.post("/", documentServices.importDocument);
 
 router.get("/:idDocument", documentServices.getDocumentById);
 
+router.get("/download/:idDocument", documentServices.downloadDocument);
+
 module.exports = router;

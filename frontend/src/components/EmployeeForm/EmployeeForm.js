@@ -68,8 +68,9 @@ class EmployeeForm extends Component {
         }
         if (!phoneNumber) {
             errors.phoneNumber = "* Champ obligatoire";
-        } else if (!/^\d+$/.test(phoneNumber)) {
-            errors.phoneNumber = "* Ne doit contenir que des chiffres";
+        } else if (!/^[\d\s]+$/.test(phoneNumber)) {
+            errors.phoneNumber =
+                "* Ne doit contenir que des chiffres et des espaces";
         }
         if (!password) {
             errors.password = "* Champ obligatoire";
@@ -211,15 +212,20 @@ class EmployeeForm extends Component {
                                 </span>
                             )}
                         </div>
-                        <div className={styles.labelInput}>
-                            <label htmlFor="isAdmin">Admin : </label>
-                            <input
-                                type="checkbox"
-                                id="isAdmin"
-                                name="isAdmin"
-                                checked={this.state.isAdmin}
-                                onChange={this.handleChange}
-                            />
+                        <div className={styles.labelAdminInput}>
+                            <label htmlFor="isAdmin">
+                                Compte administrareur :{" "}
+                            </label>
+                            <label className={styles.switch}>
+                                <input
+                                    type="checkbox"
+                                    id="isAdmin"
+                                    name="isAdmin"
+                                    checked={this.state.isAdmin}
+                                    onChange={this.handleChange}
+                                />
+                                <span className={styles.slider}></span>
+                            </label>
                         </div>
                         <div className={styles.separation}></div>
                         <div className={styles.buttonPosition}>
@@ -228,12 +234,13 @@ class EmployeeForm extends Component {
                                 className={styles.cancelButton}
                                 onClick={this.props.onClose}
                             >
-                                Annuler
+                                <i className="fa-solid fa-xmark"></i> Annuler
                             </button>
                             <button
                                 type="submit"
                                 className={styles.employeeSubmitButton}
                             >
+                                <i className="fa-solid fa-check"></i>{" "}
                                 Enregistrer
                             </button>
                         </div>

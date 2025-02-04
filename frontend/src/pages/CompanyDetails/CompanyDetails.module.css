@@ -18,7 +18,7 @@
 .logoCompany {
     display: flex;
     align-items: center;
-    margin-bottom: 1em;
+    margin: 1.2em 0;
 }
 
 .logoCompany img {
@@ -115,6 +115,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 
 .fileInputLabel:hover {

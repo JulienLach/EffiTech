@@ -63,10 +63,10 @@ class InterventionForm extends Component {
 
     getStatusIndicator(status) {
         const style = {
-            padding: ".125em .625em",
+            padding: "0.14em 0.7em",
             borderRadius: ".5em",
             color: "white",
-            fontSize: "0.8em",
+            fontSize: "0.85em",
             fontWeight: "500",
         };
 
@@ -361,7 +361,7 @@ class InterventionForm extends Component {
                                                             }
                                                             type="submit"
                                                         >
-                                                            <i className="fa-solid fa-pen"></i>{" "}
+                                                            <i class="fa-solid fa-file-pen"></i>{" "}
                                                             Remplir le rapport
                                                         </button>
                                                     );
@@ -432,33 +432,53 @@ class InterventionForm extends Component {
                                 {event.client.company &&
                                     event.client.company !== "N/A" && (
                                         <div>
-                                            Entreprise : {event.client.company}
+                                            <span className={styles.eventLabel}>
+                                                Entreprise :
+                                            </span>{" "}
+                                            {event.client.company}
                                         </div>
                                     )}
                                 <div>
-                                    Client : {event.client.firstname}{" "}
+                                    <span className={styles.eventLabel}>
+                                        Client :
+                                    </span>{" "}
+                                    {event.client.firstname}{" "}
                                     {event.client.lastname}
                                 </div>
                                 <div>
-                                    Téléphone : {event.client.phoneNumber}
+                                    <span className={styles.eventLabel}>
+                                        Téléphone :{" "}
+                                    </span>{" "}
+                                    {event.client.phoneNumber}
                                 </div>
                                 <div>
-                                    Adresse : {event.client.address.address},{" "}
+                                    <span className={styles.eventLabel}>
+                                        Adresse :{" "}
+                                    </span>
+                                    {event.client.address.address},{" "}
                                     {event.client.address.zipcode}{" "}
                                     {event.client.address.city}
                                 </div>
-                                <div>Description : {event.description}</div>
+                                <div>
+                                    {" "}
+                                    <span className={styles.eventLabel}>
+                                        Description :{" "}
+                                    </span>
+                                    {event.description}
+                                </div>
                                 <div className={styles.separator}></div>
                                 <h3>Planification</h3>
                                 <div>
-                                    Début{" "}
-                                    {(() => {
-                                        if (event.type === "Intervention") {
-                                            return "de l'intervention";
-                                        } else {
-                                            return "du rendez-vous";
-                                        }
-                                    })()}{" "}
+                                    <span className={styles.eventLabel}>
+                                        Début{" "}
+                                        {(() => {
+                                            if (event.type === "Intervention") {
+                                                return "de l'intervention";
+                                            } else {
+                                                return "du rendez-vous";
+                                            }
+                                        })()}{" "}
+                                    </span>
                                     :{" "}
                                     {event.startingDate
                                         ? new Date(
@@ -468,18 +488,22 @@ class InterventionForm extends Component {
                                     - {event.startingHour}
                                 </div>
                                 <div>
-                                    Fin{" "}
-                                    {(() => {
-                                        if (event.type === "Intervention") {
-                                            return "de l'intervention";
-                                        } else {
-                                            return "du rendez-vous";
-                                        }
-                                    })()}{" "}
+                                    <span className={styles.eventLabel}>
+                                        Fin{" "}
+                                        {(() => {
+                                            if (event.type === "Intervention") {
+                                                return "de l'intervention";
+                                            } else {
+                                                return "du rendez-vous";
+                                            }
+                                        })()}{" "}
+                                    </span>
                                     : {event.endingHour}
                                 </div>
                                 <div>
-                                    Technicien intervenant :{" "}
+                                    <span className={styles.eventLabel}>
+                                        Technicien intervenant :{" "}
+                                    </span>{" "}
                                     {event.employee.firstname}{" "}
                                     {event.employee.lastname}
                                 </div>
@@ -497,20 +521,28 @@ class InterventionForm extends Component {
                             <div className={styles.modalFooter}>
                                 {event.status !== 5 && (
                                     <button
+                                        className={styles.modalButtons}
                                         type="button"
                                         onClick={this.handleDelete}
                                     >
+                                        <i className="fa-solid fa-trash"></i>{" "}
                                         Supprimer
                                     </button>
                                 )}
-                                <button type="button" onClick={closeModal}>
-                                    Retour
+                                <button
+                                    className={styles.modalButtons}
+                                    type="button"
+                                    onClick={closeModal}
+                                >
+                                    <i className="fa fa-arrow-left"></i> Retour
                                 </button>
                                 {event.status !== 5 && (
                                     <button
+                                        className={styles.modalButtons}
                                         type="button"
                                         onClick={this.handleEdit}
                                     >
+                                        <i className="fa fa-pen"></i>
                                         Modifier
                                     </button>
                                 )}
@@ -519,11 +551,15 @@ class InterventionForm extends Component {
                                         if (event.status === 5) {
                                             return (
                                                 <button
+                                                    className={
+                                                        styles.modalButtons
+                                                    }
                                                     type="button"
                                                     onClick={
                                                         this.handleViewReport
                                                     }
                                                 >
+                                                    <i class="fa-solid fa-file-pen"></i>
                                                     Voir le rapport validé
                                                 </button>
                                             );
@@ -534,7 +570,13 @@ class InterventionForm extends Component {
                                                 event.endingHour !== null
                                             ) {
                                                 return (
-                                                    <button type="submit">
+                                                    <button
+                                                        className={
+                                                            styles.modalButtons
+                                                        }
+                                                        type="submit"
+                                                    >
+                                                        <i class="fa-solid fa-file-pen"></i>
                                                         Remplir le rapport
                                                     </button>
                                                 );
@@ -549,7 +591,13 @@ class InterventionForm extends Component {
                                             event.endingHour !== null
                                         ) {
                                             return (
-                                                <button type="submit">
+                                                <button
+                                                    className={
+                                                        styles.modalButtons
+                                                    }
+                                                    type="submit"
+                                                >
+                                                    <i class="fa-solid fa-file-pen"></i>
                                                     Remplir le questionnaire
                                                 </button>
                                             );

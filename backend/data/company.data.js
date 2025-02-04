@@ -8,6 +8,7 @@ class Company {
     /**
      * Crée une instance de Company.
      * @param {number} idCompany - L'ID de la société.
+     * @param {string} name - Le nom de de la société.
      * @param {string} phoneNumber - Le numéro de téléphone de la société.
      * @param {Object} idAddress - L'adresse de la société.
      * @param {string} siret - Le numéro SIRET de la société.
@@ -18,6 +19,7 @@ class Company {
      */
     constructor(
         idCompany,
+        name,
         phoneNumber,
         idAddress,
         siret,
@@ -27,6 +29,7 @@ class Company {
         databaseVersion
     ) {
         this.idCompany = idCompany;
+        this.name = name;
         this.phoneNumber = phoneNumber;
         this.idAddress = idAddress;
         this.siret = siret;
@@ -69,9 +72,10 @@ class Company {
 
                 // Deuxième requête : insérer la société
                 const createCompanyQuery =
-                    "INSERT INTO companies (phone_number, id_address, siret, vat_number, capital, logo, database_version) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *";
+                    "INSERT INTO companies (phone_number, name, id_address, siret, vat_number, capital, logo, database_version) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *";
                 const companyValues = [
                     company.phoneNumber,
+                    company.name,
                     addressId, // Utiliser l'ID de la nouvelle adresse
                     company.siret,
                     company.vatNumber,
@@ -106,6 +110,7 @@ class Company {
 
                         const newCompany = new Company(
                             row.id_company,
+                            row.name,
                             row.phone_number,
                             {
                                 id_address: addressId,
@@ -156,6 +161,7 @@ class Company {
 
                 const company = new Company(
                     row.id_company,
+                    row.name,
                     row.phone_number,
                     address,
                     row.siret,
@@ -192,8 +198,9 @@ class Company {
 
             // Deuxième requête : mettre à jour la société
             const query =
-                "UPDATE companies SET phone_number = $1, id_address = $2, siret = $3, vat_number = $4, capital = $5, logo = $6, database_version = $7 WHERE id_company = $8 RETURNING *";
+                "UPDATE companies SET name = $1, phone_number = $2, id_address = $3, siret = $4, vat_number = $5, capital = $6, logo = $7, database_version = $8 WHERE id_company = $9 RETURNING *";
             const values = [
+                company.name,
                 company.phoneNumber,
                 company.idAddress.idAddress,
                 company.siret,
@@ -226,6 +233,7 @@ class Company {
 
                         const updatedCompany = new Company(
                             row.id_company,
+                            row.name,
                             row.phone_number,
                             address,
                             row.siret,

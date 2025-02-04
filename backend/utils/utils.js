@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const Event = require("../data/event.data.js"); // Correction ici
 
 // Pour passer n'importe quel argument à la méthode addLog
 // Exemple : Utils.addLog("Erreur : " + error.message); ou Utils.addLog("Message", employee.name);
@@ -19,6 +20,20 @@ class Utils {
         // Ajoute le message au fichier log.txt
         const logMessage = `${new Date().toISOString()} - ${message}\n`;
         fs.appendFileSync(logFile, logMessage, "utf8");
+    }
+
+    static getAllEventStatistics(callback) {
+        Event.getAllEvents(function (error, events) {
+            if (error) {
+                callback(error, null);
+            } else {
+                const eventStatistics = {
+                    totalEvents: events.length,
+                    events: events,
+                };
+                callback(null, eventStatistics);
+            }
+        });
     }
 }
 

@@ -65,24 +65,26 @@ body {
 
 .partTag {
     font-weight: 500;
-    font-size: 0.75em;
+    font-size: 0.85em;
     color: #c35e00;
     background-color: #ffe4bc;
     border-radius: 0.6em;
     text-align: center;
-    margin-bottom: 0.4em;
-    width: 7em;
+    margin-bottom: 0.1em;
+    margin-top: 0.9em;
+    padding: 2px 8px;
 }
 
 .proTag {
     font-weight: 500;
-    font-size: 0.75em;
+    font-size: 0.85em;
     color: #2c5ba1;
     background-color: #c1f0ff;
     border-radius: 0.6em;
     text-align: center;
-    margin-bottom: 0.4em;
-    width: 7em;
+    margin-bottom: 0.1em;
+    margin-top: 0.9em;
+    padding: 2px 8px;
 }
 
 .intStatus {
@@ -102,7 +104,7 @@ body {
 }
 
 .initiale {
-    background-color: #1c8aff;
+    background-color: #464849;
     color: white;
     padding: 0.5em;
     border-radius: 2em;
@@ -119,5 +121,6 @@ body {
 
 .dateHour {
     padding-top: 0.2em;
-    font-size: 0.85em;
+    margin-right: 0.4em;
+    font-size: 0.95em;
 }

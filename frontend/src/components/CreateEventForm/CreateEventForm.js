@@ -4,6 +4,7 @@ import {
     getAllClients,
     getAllEmployees,
     createEvent,
+    createNotification,
 } from "../../services/api";
 
 // Composant wrapper pour utiliser les hooks
@@ -169,6 +170,18 @@ class CreateEventForm extends Component {
             idEmployee: selectedEmployee,
         };
 
+        const notificationData = {
+            idEmployee: selectedEmployee,
+            action: "Enregistrement",
+            type: selectedTab,
+            title: title,
+            creationDate: new Date().toISOString().split("T")[0],
+            creationHour: new Date().toLocaleTimeString("fr-FR", {
+                hour: "2-digit",
+                minute: "2-digit",
+            }),
+        };
+
         createEvent(eventData, (error, newEvent) => {
             if (error) {
                 console.error("Error creating event:", error);
@@ -176,6 +189,13 @@ class CreateEventForm extends Component {
                 console.log("Event created successfully:", newEvent);
                 this.props.closeModal();
             }
+            createNotification(notificationData, (error, result) => {
+                if (error) {
+                    console.error("Error creating notification:", error);
+                } else {
+                    console.log("Notification created successfully:", result);
+                }
+            });
             window.location.reload();
         });
     }
@@ -216,7 +236,10 @@ class CreateEventForm extends Component {
                 <div className={styles.modalBackground}></div>
                 <form className={`${styles.modal} ${styles.open}`}>
                     <div>
-                        <h2>Plannifier un évènement</h2>
+                        <h2 className={styles.modalHeader}>
+                            <i className="fa-regular fa-calendar"></i> Planifier
+                            un évènement
+                        </h2>
                     </div>
                     <div className={styles.tabs}>
                         <button
@@ -250,8 +273,9 @@ class CreateEventForm extends Component {
                                     : "Nouveau rendez-vous"}
                             </h3>
                         </div>
+                        <div className={styles.separator}></div>
                         <div>
-                            <label>
+                            <label className={styles.formLabel}>
                                 Titre <span className={styles.required}>*</span>{" "}
                                 :
                             </label>
@@ -268,7 +292,7 @@ class CreateEventForm extends Component {
                             )}
                         </div>
                         <div>
-                            <label>
+                            <label className={styles.formLabel}>
                                 Date{" "}
                                 {selectedTab === "Intervention"
                                     ? "d'intervention :"
@@ -282,7 +306,9 @@ class CreateEventForm extends Component {
                             />
                         </div>
                         <div>
-                            <label>Heure de début :</label>
+                            <label className={styles.formLabel}>
+                                Heure de début :
+                            </label>
                             <input
                                 type="time"
                                 name="startingHour"
@@ -291,7 +317,9 @@ class CreateEventForm extends Component {
                             />
                         </div>
                         <div>
-                            <label>Heure de fin :</label>
+                            <label className={styles.formLabel}>
+                                Heure de fin :
+                            </label>
                             <input
                                 type="time"
                                 name="endingHour"
@@ -300,7 +328,9 @@ class CreateEventForm extends Component {
                             />
                         </div>
                         <div>
-                            <label>Description :</label>
+                            <label className={styles.formLabel}>
+                                Description :
+                            </label>
                             <textarea
                                 className={styles.createEventTextarea}
                                 name="description"
@@ -309,7 +339,7 @@ class CreateEventForm extends Component {
                             />
                         </div>
                         <div>
-                            <label>
+                            <label className={styles.formLabel}>
                                 Sélectionner un client{" "}
                                 <span className={styles.required}>*</span> :
                             </label>
@@ -336,15 +366,14 @@ class CreateEventForm extends Component {
                                 </span>
                             )}
                         </div>
-                        <div>
-                            <label>
-                                Adresse{" "}
-                                <span className={styles.required}>*</span> :
+                        <div className={styles.inputDisplay}>
+                            <label className={styles.formLabel}>
+                                Adresse :
                             </label>
                             <input type="text" value={address} readOnly />
                         </div>
                         <div>
-                            <label>
+                            <label className={styles.formLabel}>
                                 Sélectionner un technicien{" "}
                                 <span className={styles.required}>*</span> :
                             </label>
@@ -382,6 +411,7 @@ class CreateEventForm extends Component {
                                 className={styles.cancelButton}
                                 onClick={this.props.closeModal}
                             >
+                                <i className="fa-solid fa-xmark"> </i>
                                 Annuler
                             </button>
                             <button
@@ -389,7 +419,7 @@ class CreateEventForm extends Component {
                                 className={styles.submitButton}
                                 onClick={this.handleSubmit}
                             >
-                                Créer
+                                <i className="fa-solid fa-check"> </i> Valider
                             </button>
                         </div>
                     </div>

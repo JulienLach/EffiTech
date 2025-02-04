@@ -52,6 +52,7 @@ class CalendarPage extends Component {
         this.handleStatusChange = this.handleStatusChange.bind(this);
         this.toggleTypeModal = this.toggleTypeModal.bind(this);
         this.handleTypeChange = this.handleTypeChange.bind(this);
+        this.handleResetFilter = this.handleResetFilter.bind(this);
     }
 
     componentDidMount() {
@@ -126,7 +127,7 @@ class CalendarPage extends Component {
             padding: "2px 10px",
             borderRadius: "8px",
             color: "white",
-            fontSize: "0.8em",
+            fontSize: "0.9em",
             fontWeight: "500",
         };
 
@@ -246,6 +247,10 @@ class CalendarPage extends Component {
         this.setState({ selectedType });
     }
 
+    handleResetFilter() {
+        this.setState({ selectedStatus: "", selectedType: "" });
+    }
+
     render() {
         const {
             events,
@@ -351,16 +356,7 @@ class CalendarPage extends Component {
                                                     )}
                                                 </p>
                                             </div>
-                                            <p
-                                                className={
-                                                    event.client.category ===
-                                                    "Particulier"
-                                                        ? stylesMobile.partTag
-                                                        : stylesMobile.proTag
-                                                }
-                                            >
-                                                {event.client.category}
-                                            </p>
+
                                             {event.client.category ===
                                             "Professionnel" ? (
                                                 <p
@@ -380,6 +376,16 @@ class CalendarPage extends Component {
                                                     {event.client.lastname}
                                                 </p>
                                             )}
+                                            <p
+                                                className={
+                                                    event.client.category ===
+                                                    "Particulier"
+                                                        ? stylesMobile.partTag
+                                                        : stylesMobile.proTag
+                                                }
+                                            >
+                                                {event.client.category}
+                                            </p>
                                         </div>
                                     </div>
                                     <div className={stylesMobile.rightSide}>
@@ -471,22 +477,33 @@ class CalendarPage extends Component {
                                         toggleTypeModal={this.toggleTypeModal}
                                         isTypeModalOpen={isTypeModalOpen}
                                         handleTypeChange={this.handleTypeChange}
+                                        handleResetFilter={
+                                            this.handleResetFilter
+                                        }
                                     />
                                 </div>
                                 <h3 className={styles.eventTitle}>
-                                    Événements
+                                    Évènements
                                 </h3>
                             </div>
                             <div className={styles.listView}>
                                 <div className={styles.tabs}>
                                     <button
-                                        className={styles.viewButton}
+                                        className={`${styles.viewButton} ${
+                                            view === "list"
+                                                ? styles.viewButtonActive
+                                                : ""
+                                        }`}
                                         onClick={() => this.toggleView("list")}
                                     >
                                         Liste
                                     </button>
                                     <button
-                                        className={styles.viewButton}
+                                        className={`${styles.viewButton} ${
+                                            view === "calendar"
+                                                ? styles.viewButtonActive
+                                                : ""
+                                        }`}
                                         onClick={() =>
                                             this.toggleView("calendar")
                                         }
@@ -504,8 +521,8 @@ class CalendarPage extends Component {
                                                 className={styles.stickyThead}
                                             >
                                                 <tr>
-                                                    <th>Client</th>
                                                     <th>Référence</th>
+                                                    <th>Client</th>
                                                     <th>Type</th>
                                                     <th>Titre</th>
                                                     <th>Statut</th>
@@ -516,6 +533,19 @@ class CalendarPage extends Component {
                                             <tbody>
                                                 {currentEvents.map((event) => (
                                                     <tr key={event.idEvent}>
+                                                        <td>
+                                                            {(() => {
+                                                                if (
+                                                                    event.type ===
+                                                                    "Intervention"
+                                                                ) {
+                                                                    return "INT-";
+                                                                } else {
+                                                                    return "RDV-";
+                                                                }
+                                                            })()}
+                                                            {event.idEvent}
+                                                        </td>
                                                         <td
                                                             className={
                                                                 styles.eventLink
@@ -531,19 +561,6 @@ class CalendarPage extends Component {
                                                                         .lastname
                                                                 }
                                                             </a>
-                                                        </td>
-                                                        <td>
-                                                            {(() => {
-                                                                if (
-                                                                    event.type ===
-                                                                    "Intervention"
-                                                                ) {
-                                                                    return "INT-";
-                                                                } else {
-                                                                    return "RDV-";
-                                                                }
-                                                            })()}
-                                                            {event.idEvent}
                                                         </td>
                                                         <td>{event.type}</td>
                                                         <td
@@ -603,7 +620,7 @@ class CalendarPage extends Component {
                                                 }
                                                 disabled={currentPage === 1}
                                             >
-                                                <i className="fa fa-arrow-left"></i>
+                                                <i className="fa-solid fa-chevron-left"></i>
                                             </button>
                                             <button
                                                 onClick={(e) =>
@@ -613,7 +630,7 @@ class CalendarPage extends Component {
                                                     currentPage === totalPages
                                                 }
                                             >
-                                                <i className="fa fa-arrow-right"></i>
+                                                <i className="fa-solid fa-chevron-right"></i>
                                             </button>
                                         </div>
                                     </div>

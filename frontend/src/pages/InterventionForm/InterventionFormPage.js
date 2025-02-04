@@ -46,14 +46,39 @@ class InterventionFormPage extends Component {
                 "en-CA"
             ),
             duration,
+            endingHour: event.endingHour,
         });
+    }
+
+    calculateDuration(startingHour, endingHour) {
+        const duration = new Date(endingHour - startingHour)
+            .toISOString()
+            .substring(11, 16);
+        return duration;
     }
 
     handleChange(event) {
         const { name, value, type, checked } = event.target;
-        this.setState({
-            [name]: type === "checkbox" ? checked : value,
-        });
+        this.setState(
+            {
+                [name]: type === "checkbox" ? checked : value,
+            },
+            () => {
+                if (name === "endingHour" && value) {
+                    const startingHour = new Date(
+                        `1970-01-01T${this.props.location.state.event.startingHour}`
+                    );
+                    const endingHour = new Date(
+                        `1970-01-01T${this.state.endingHour}`
+                    );
+                    const duration = this.calculateDuration(
+                        startingHour,
+                        endingHour
+                    );
+                    this.setState({ duration });
+                }
+            }
+        );
     }
 
     handleSignatureChange(name, signature) {
@@ -73,6 +98,7 @@ class InterventionFormPage extends Component {
             clientSignature,
             employeeSignature,
             duration,
+            endingHour,
         } = this.state;
 
         const errors = {};
@@ -93,6 +119,9 @@ class InterventionFormPage extends Component {
         }
         if (!employeeSignature) {
             errors.employeeSignature = "* Champ obligatoire";
+        }
+        if (!endingHour) {
+            errors.endingHour = "* Champ obligatoire";
         }
 
         if (Object.keys(errors).length > 0) {
@@ -138,10 +167,10 @@ class InterventionFormPage extends Component {
             clientSignature,
             employeeSignature,
             duration,
+            endingHour,
             errors,
         } = this.state;
 
-        //Variable pour savoir si c'est mobile ou desktop
         const isMobile = window.navigator.userAgentData;
 
         return (
@@ -256,8 +285,9 @@ class InterventionFormPage extends Component {
                                     <label>Heure de fin :</label>
                                     <input
                                         type="time"
-                                        value={event.endingHour}
-                                        readOnly
+                                        name="endingHour"
+                                        value={endingHour}
+                                        onChange={this.handleChange}
                                     />
                                 </div>
                             </div>
@@ -342,6 +372,7 @@ class InterventionFormPage extends Component {
                                         (window.location.href = "/calendar#")
                                     }
                                 >
+                                    <i className="fa-solid fa-xmark"></i>
                                     Annuler
                                 </button>
                                 <button
@@ -473,12 +504,24 @@ class InterventionFormPage extends Component {
                                 </div>
                                 <div>
                                     <div className={styles.labelInput}>
-                                        <label>Heure de fin :</label>
+                                        <label>
+                                            Heure de fin{" "}
+                                            <span className={styles.required}>
+                                                *
+                                            </span>{" "}
+                                            :
+                                        </label>
                                         <input
                                             type="time"
-                                            value={event.endingHour}
-                                            readOnly
+                                            name="endingHour"
+                                            value={endingHour}
+                                            onChange={this.handleChange}
                                         />
+                                        {errors.endingHour && (
+                                            <span className={styles.error}>
+                                                {errors.endingHour}
+                                            </span>
+                                        )}
                                     </div>
                                 </div>
                                 <div>
@@ -542,26 +585,36 @@ class InterventionFormPage extends Component {
                                     </div>
                                 </div>
                                 <div>
-                                    <h3>Planification :</h3>
                                     <div className={styles.checkbox}>
-                                        <input
-                                            type="checkbox"
-                                            name="reschedule"
-                                            checked={reschedule}
-                                            onChange={this.handleChange}
-                                        ></input>
                                         <label>
                                             Planifier une nouvelle intervention
+                                            :
+                                        </label>
+                                        <label className={styles.switch}>
+                                            <input
+                                                type="checkbox"
+                                                name="reschedule"
+                                                checked={reschedule}
+                                                onChange={this.handleChange}
+                                            />
+                                            <span
+                                                className={styles.slider}
+                                            ></span>
                                         </label>
                                     </div>
                                 </div>
+                                <div className={styles.separation}></div>
                                 <div className={styles.modalFooter}>
                                     <button
+                                        className={
+                                            styles.cancelInterventionButton
+                                        }
                                         onClick={() =>
                                             (window.location.href = "/calendar")
                                         }
                                         type="reset"
                                     >
+                                        <i className="fa-solid fa-xmark"></i>{" "}
                                         Annuler
                                     </button>
                                     <button

@@ -23,6 +23,7 @@ class AppointmentFormPage extends Component {
             startingDate: "",
             clientSignature: "",
             employeeSignature: "",
+            endingHour: "",
             duration: "",
             workToDo: "",
             client: {},
@@ -40,9 +41,10 @@ class AppointmentFormPage extends Component {
         const startingHour = new Date(`1970-01-01T${event.startingHour}`);
         const endingHour = new Date(`1970-01-01T${event.endingHour}`);
         const duration = new Date(endingHour - startingHour)
-            .toLocaleDateString()
+            .toISOString()
             .substring(11, 16);
 
+        console.log(duration);
         this.setState({
             startingDate: new Date(event.startingDate).toLocaleDateString(
                 "en-CA"
@@ -51,21 +53,52 @@ class AppointmentFormPage extends Component {
             client: event.client,
             address: event.address,
             employee: event.employee,
+            endingHour: event.endingHour,
         });
+    }
+
+    calculateDuration(startingHour, endingHour) {
+        const duration = new Date(endingHour - startingHour)
+            .toISOString()
+            .substring(11, 16);
+        return duration;
     }
 
     handleChange(event) {
         const { name, value, type, checked } = event.target;
-        this.setState({
-            [name]: type === "checkbox" ? checked : value,
-        });
+        this.setState(
+            {
+                [name]: type === "checkbox" ? checked : value,
+            },
+            () => {
+                if (name === "endingHour" && value) {
+                    const startingHour = new Date(
+                        `1970-01-01T${this.props.location.state.event.startingHour}`
+                    );
+                    const endingHour = new Date(
+                        `1970-01-01T${this.state.endingHour}`
+                    );
+                    const duration = this.calculateDuration(
+                        startingHour,
+                        endingHour
+                    );
+                    this.setState({ duration });
+                }
+            }
+        );
     }
 
     handleSubmit(event) {
         event.preventDefault();
         const { event: eventDetails } = this.props.location.state;
-        const { startingDate, workToDo, client, address, employee } =
-            this.state;
+        const {
+            startingDate,
+            workToDo,
+            client,
+            address,
+            employee,
+            endingHour,
+        } = this.state;
 
         const eventData = {
             idEvent: eventDetails.idEvent,
@@ -78,7 +111,7 @@ class AppointmentFormPage extends Component {
             idAddress: address.idAddress,
             startingDate,
             startingHour: eventDetails.startingHour,
-            endingHour: eventDetails.endingHour,
+            endingHour,
             idEmployee: employee.idEmployee,
             workToDo,
         };
@@ -89,6 +122,10 @@ class AppointmentFormPage extends Component {
         } else if (!/^[a-zA-ZÀ-ÿ\d\s-'"()-]+$/.test(workToDo)) {
             errors.workToDo =
                 "* Ne doit contenir que des lettres, des chiffres, des tirets et des espaces";
+        }
+
+        if (endingHour === "") {
+            errors.endingHour = "* Champ obligatoire";
         }
 
         if (Object.keys(errors).length > 0) {
@@ -111,8 +148,14 @@ class AppointmentFormPage extends Component {
 
     render() {
         const { event } = this.props.location.state;
-        const { reschedule, startingDate, duration, workToDo, errors } =
-            this.state;
+        const {
+            reschedule,
+            startingDate,
+            duration,
+            endingHour,
+            workToDo,
+            errors,
+        } = this.state;
 
         //Variable pour savoir si c'est mobile ou desktop
         const isMobile = window.navigator.userAgentData;
@@ -202,8 +245,9 @@ class AppointmentFormPage extends Component {
                                     <label>Heure de fin :</label>
                                     <input
                                         type="time"
-                                        value={event.endingHour}
-                                        readOnly
+                                        name="endingHour"
+                                        value={endingHour}
+                                        onChange={this.handleChange}
                                     />
                                 </div>
                             </div>
@@ -275,7 +319,7 @@ class AppointmentFormPage extends Component {
                                     </button>
                                 </div>
                                 <div className={styles.appointmentId}>
-                                    <div>
+                                    <div className={styles.appointmentRef}>
                                         <h3>RDV-{event.idEvent}</h3>
                                     </div>
                                 </div>
@@ -305,7 +349,13 @@ class AppointmentFormPage extends Component {
                                 </div>
                                 <div>
                                     <div className={styles.textArea}>
-                                        <label>Travaux à effectuer :</label>
+                                        <label>
+                                            Travaux à effectuer{" "}
+                                            <span className={styles.required}>
+                                                *
+                                            </span>{" "}
+                                            :
+                                        </label>
                                         <textarea
                                             rows="5"
                                             name="workToDo"
@@ -341,55 +391,76 @@ class AppointmentFormPage extends Component {
                                         />
                                     </div>
                                 </div>
-                                <div>
-                                    <div className={styles.labelInput}>
-                                        <label>Heure de fin :</label>
+                                <div className={styles.endingHourContainer}>
+                                    <div className={styles.endingHourInput}>
+                                        <label>
+                                            Heure de fin{" "}
+                                            <span className={styles.required}>
+                                                *
+                                            </span>{" "}
+                                            :
+                                        </label>
                                         <input
-                                            className={styles.inputField}
+                                            className={styles.endingHourInput}
                                             type="time"
-                                            value={event.endingHour}
-                                            readOnly
+                                            name="endingHour"
+                                            value={endingHour}
+                                            onChange={this.handleChange}
                                         />
                                     </div>
+                                    {errors.endingHour && (
+                                        <span className={styles.error}>
+                                            {errors.endingHour}
+                                        </span>
+                                    )}
                                 </div>
                                 <div>
                                     <div className={styles.labelInput}>
                                         <label>Durée :</label>
                                         <input
                                             type="time"
+                                            name="duration"
                                             value={duration}
                                             readOnly
                                         />
                                     </div>
                                 </div>
-                                <div className={styles.separation}></div>
                                 <div>
                                     <div className={styles.checkbox}>
                                         <label>
                                             Créer directement l'intervention à
                                             planifier :{" "}
                                         </label>
-                                        <input
-                                            type="checkbox"
-                                            name="reschedule"
-                                            checked={reschedule}
-                                            onChange={this.handleChange}
-                                        ></input>
+                                        <label className={styles.switch}>
+                                            <input
+                                                type="checkbox"
+                                                name="reschedule"
+                                                checked={reschedule}
+                                                onChange={this.handleChange}
+                                            />
+                                            <span
+                                                className={styles.slider}
+                                            ></span>
+                                        </label>
                                     </div>
                                 </div>
+                                <div className={styles.separation}></div>
                                 <div className={styles.modalFooter}>
                                     <button
+                                        className={styles.cancelAppointmentForm}
                                         onClick={() =>
                                             (window.location.href = "/calendar")
                                         }
                                         type="reset"
                                     >
+                                        <i className="fa-solid fa-xmark"></i>{" "}
                                         Annuler
                                     </button>
                                     <button
                                         type="submit"
                                         className={styles.validateButton}
                                     >
+                                        <i className="fa-solid fa-check"></i>{" "}
                                         Terminer le rendez-vous
                                     </button>
                                 </div>

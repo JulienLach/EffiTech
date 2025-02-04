@@ -65,6 +65,25 @@ function getDocumentById(req, res) {
     });
 }
 
+function downloadDocument(req, res) {
+    const idDocument = req.params.idDocument;
+    Document.downloadDocument(idDocument, (error, fileData) => {
+        if (error) {
+            return res.status(500).send({
+                message: "Erreur lors de la récupération du document",
+                error: error.message,
+            });
+        }
+        if (fileData) {
+            res.setHeader("Content-Type", "application/pdf");
+            res.status(200).send(fileData);
+        } else {
+            res.status(404).send({ message: "Document non trouvé" });
+        }
+    });
+}
+
 exports.getAllDocuments = getAllDocuments;
 exports.importDocument = importDocument;
 exports.getDocumentById = getDocumentById;
+exports.downloadDocument = downloadDocument;
