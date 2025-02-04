@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+# [0.6.0] (2025-04-02)
+
 ## Changes
 
 -   Add company name
@@ -24,6 +26,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -   Fix client form
 -   Add missing all type to sort type filter
 -   Fix to update ending hour for appointment event
+-   Fix to update ending hour for intervention event
 
 # [0.5.3] (2025-17-01)
 
