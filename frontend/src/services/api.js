@@ -367,6 +367,7 @@ function loginEmployee(credentials, callback) {
             if (response.firstname && response.lastname) {
                 localStorage.setItem("firstname", response.firstname);
                 localStorage.setItem("lastname", response.lastname);
+                localStorage.setItem("idEmployee", response.idEmployee);
             }
 
             callback(null, response);

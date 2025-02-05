@@ -31,6 +31,9 @@ class TemplateGlobal extends Component {
         this.toggleCreateEventModal = this.toggleCreateEventModal.bind(this);
         this.toggleEventModal = this.toggleEventModal.bind(this);
         this.handleCreateEventClick = this.handleCreateEventClick.bind(this); // Méthode pour gérer le clic sur "Créer un événement"
+        this.getIdEmployeeLocalStorage =
+            this.getIdEmployeeLocalStorage.bind(this);
+        this.handleProfileClick = this.handleProfileClick.bind(this);
     }
 
     componentDidMount() {
@@ -66,6 +69,15 @@ class TemplateGlobal extends Component {
         this.setState((prevState) => ({
             showProfileMenu: !prevState.showProfileMenu,
         }));
+    }
+
+    getIdEmployeeLocalStorage() {
+        return localStorage.getItem("idEmployee");
+    }
+
+    handleProfileClick() {
+        const idEmployee = this.getIdEmployeeLocalStorage();
+        this.props.navigate("/employee-details", { state: { idEmployee } });
     }
 
     logout() {
@@ -163,7 +175,12 @@ class TemplateGlobal extends Component {
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="/employees">
+                                            <a
+                                                href="#"
+                                                onClick={
+                                                    this.handleProfileClick
+                                                }
+                                            >
                                                 Mon profil{" "}
                                                 <i className="fa-solid fa-user"></i>
                                             </a>

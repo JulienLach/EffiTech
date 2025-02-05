@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## Changes
+
+-   Add my profile link for connected user
+
 # [0.6.0] (2025-04-02)
 
 ## Changes

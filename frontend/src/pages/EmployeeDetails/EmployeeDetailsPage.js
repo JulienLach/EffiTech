@@ -15,10 +15,12 @@ function EmployeeDetailsPageWrapper() {
 class EmployeeDetailsPage extends Component {
     constructor(props) {
         super(props);
-        const { employee } = this.props.location.state;
         this.state = {
-            employee: employee,
-            idEmployee: employee.idEmployee,
+            employee: {},
+            idEmployee:
+                this.props.location.state?.idEmployee ||
+                localStorage.getItem("idEmployee"),
+            error: null,
         };
         this.handleButtonClick = this.handleButtonClick.bind(this);
     }
