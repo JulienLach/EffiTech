@@ -18,6 +18,8 @@ class DocumentsPage extends Component {
         this.state = {
             documents: [],
             isModalOpen: false,
+            currentPage: 1,
+            documentsPerPage: 10,
         };
         this.handleButtonClick = this.handleButtonClick.bind(this);
         this.openModal = this.openModal.bind(this);
@@ -42,11 +44,29 @@ class DocumentsPage extends Component {
         });
     }
 
-    handlePageChange() {}
+    handlePageChange(event, pageNumber) {
+        event.preventDefault();
+        this.setState({ currentPage: pageNumber });
+    }
 
-    handleNextPage() {}
+    handleNextPage(event) {
+        event.preventDefault();
+        this.setState((prevState) => ({
+            currentPage: Math.min(
+                prevState.currentPage + 1,
+                Math.ceil(
+                    prevState.documents.length / prevState.documentsPerPage
+                )
+            ),
+        }));
+    }
 
-    handlePreviousPage() {}
+    handlePreviousPage(event) {
+        event.preventDefault();
+        this.setState((prevState) => ({
+            currentPage: Math.max(prevState.currentPage - 1, 1),
+        }));
+    }
 
     handleButtonClick(document) {
         this.props.navigate("/document-details", {
@@ -94,7 +114,8 @@ class DocumentsPage extends Component {
     handleSearchChange() {}
 
     render() {
-        const { isModalOpen, documents } = this.state;
+        const { isModalOpen, documents, currentPage, documentsPerPage } =
+            this.state;
 
         return (
             <>
