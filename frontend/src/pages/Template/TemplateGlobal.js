@@ -112,8 +112,8 @@ class TemplateGlobal extends Component {
     }
 
     handleCreateEventClick() {
-        this.toggleCreateModal(); // Fermer la modal de création
-        this.toggleCreateEventModal(); // Ouvrir la modal de création d'événement
+        this.toggleCreateModal();
+        this.toggleCreateEventModal();
     }
 
     render() {
@@ -309,13 +309,13 @@ class TemplateGlobal extends Component {
                 {isCreateModalOpen && (
                     <div className={styles.modalOverlay}>
                         <div className={styles.modalContent}>
-                            <button
-                                className={styles.createEventButton}
+                            <a
+                                className={styles}
                                 onClick={this.handleCreateEventClick}
                             >
-                                <i className="fa-solid fa-plus"></i> Créer un
-                                événement
-                            </button>
+                                Créer un événement{" "}
+                                <i className="fa-solid fa-calendar"></i>
+                            </a>
 
                             {/* Ajoutez ici les options pour créer un événement, un client, etc. */}
                         </div>
