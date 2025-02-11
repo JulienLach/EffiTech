@@ -265,8 +265,7 @@ class AppointmentFormPage extends Component {
                                 <h4>Planification :</h4>
                                 <div className={stylesMobile.checkbox}>
                                     <label>
-                                        Créer directement l'intervention à
-                                        planifier
+                                        Créer l'intervention à planifier
                                     </label>
                                     <input
                                         type="checkbox"
@@ -428,8 +427,7 @@ class AppointmentFormPage extends Component {
                                 <div>
                                     <div className={styles.checkbox}>
                                         <label>
-                                            Créer directement l'intervention à
-                                            planifier :{" "}
+                                            Créer l'intervention à planifier :{" "}
                                         </label>
                                         <label className={styles.switch}>
                                             <input

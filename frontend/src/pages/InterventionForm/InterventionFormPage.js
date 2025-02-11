@@ -587,8 +587,7 @@ class InterventionFormPage extends Component {
                                 <div>
                                     <div className={styles.checkbox}>
                                         <label>
-                                            Planifier une nouvelle intervention
-                                            :
+                                            Créer une nouvelle intervention :
                                         </label>
                                         <label className={styles.switch}>
                                             <input

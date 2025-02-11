@@ -559,7 +559,7 @@ class InterventionForm extends Component {
                                                         this.handleViewReport
                                                     }
                                                 >
-                                                    <i class="fa-solid fa-file-pen"></i>
+                                                    <i class="fa-solid fa-file-circle-check"></i>
                                                     Voir le rapport validé
                                                 </button>
                                             );

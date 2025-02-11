@@ -103,7 +103,9 @@ class ReportPage extends Component {
                                 <h2 className={stylesMobile.titlePage}>
                                     Rapport d'intervention
                                 </h2>
-                                <h3>INT-{event.idEvent}</h3>
+                                <h3 className={stylesMobile.reportId}>
+                                    INT-{event.idEvent}
+                                </h3>
                             </div>
 
                             <div className={stylesMobile.detailsCard}>
@@ -139,7 +141,7 @@ class ReportPage extends Component {
                             </div>
 
                             <div className={stylesMobile.documentCard}>
-                                <h3 className={stylesMobile.documentTitle}>
+                                <h3 className={stylesMobile.infoTitle}>
                                     Document :
                                 </h3>
                                 <div className={stylesMobile.documentLink}>
@@ -174,7 +176,9 @@ class ReportPage extends Component {
                                 </div>
                                 <div className={styles.interventionInfo}>
                                     <div>
-                                        <h3>INT-{event.idEvent}</h3>
+                                        <h3 className={styles.reportId}>
+                                            INT-{event.idEvent}
+                                        </h3>
                                     </div>
                                 </div>
                                 <div className={styles.separation}></div>
@@ -211,17 +215,22 @@ class ReportPage extends Component {
                                 </div>
                                 <div className={styles.separation}></div>
                                 <div className={styles.documentInfo}>
-                                    <h2 className={styles.documentTitle}>
+                                    <h3 className={styles.infoTitle}>
                                         Document :
-                                    </h2>
+                                    </h3>
                                     <div className={styles.documentLink}>
-                                        <i className="fa-solid fa-file"></i>{" "}
                                         <a href="#">
+                                            <i className="fa-solid fa-file"></i>{" "}
                                             INT-{event.idEvent}-
                                             {event.client.firstname}-
                                             {event.client.lastname}-
                                             {event.title}
                                         </a>
+
+                                        <button className={styles.mailButton}>
+                                            <i class="fa-solid fa-paper-plane"></i>{" "}
+                                            Envoyer par email
+                                        </button>
                                     </div>
                                 </div>
                                 {reportDetails && companyData && (
