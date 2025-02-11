@@ -75,8 +75,8 @@ class EmployeesPage extends Component {
                                     className={styles.addEmployee}
                                     onClick={this.openModal}
                                 >
-                                    <i className="fa-solid fa-plus"></i>Ajouter
-                                    un employé
+                                    <i className="fa-solid fa-plus"> </i>{" "}
+                                    Ajouter un employé
                                 </button>
                             </div>
                             <div className={styles.cardContainer}>

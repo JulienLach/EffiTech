@@ -316,8 +316,10 @@ class TemplateGlobal extends Component {
                                 Créer un événement{" "}
                                 <i className="fa-solid fa-calendar"></i>
                             </a>
-
-                            {/* Ajoutez ici les options pour créer un événement, un client, etc. */}
+                            <a>
+                                Ajouter un client{" "}
+                                <i className="fa-solid fa-user"></i>
+                            </a>
                         </div>
                     </div>
                 )}
