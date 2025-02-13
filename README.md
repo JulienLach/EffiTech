@@ -110,6 +110,9 @@ DB_PASSWORD=postgres
 DB_PORT=5432
 PORT=3001
 JWT_SECRET=your_randomly_generated_token
+EMAIL=your_email@exemple.com
+MAILJET_API_KEY=mailjet_api_key
+MAILJET_SECRET_KEY=mailjet_secret_key
 ```
 
 For `JWT_SECRET`, generate a random token and replace your_randomly_generated_token with it. You can use a command like the following to generate a secure token:
