@@ -1,38 +1,25 @@
 const nodemailer = require("nodemailer");
-const { SMTPServer } = require("smtp-server");
+require("dotenv").config();
 
-const server = new SMTPServer({
-    authOptional: true,
-    onData(stream, session, callback) {
-        stream.pipe(process.stdout);
-        stream.on("end", callback);
-    },
-});
-
-server.listen(2525, () => {
-    console.log("Serveur SMTP local en écoute sur le port 2525");
-});
-
-// Transporteur avec les informations du serveur SMTP local
+// Transporteur avec les informations du serveur SMTP Mailjet
 const transporter = nodemailer.createTransport({
-    host: "localhost",
-    port: 2525,
-    secure: false,
+    host: "in-v3.mailjet.com",
+    port: 587,
     auth: {
-        user: "utilisateur",
-        pass: "mot-de-passe",
+        user: process.env.MAILJET_API_KEY,
+        pass: process.env.MAILJET_SECRET_KEY,
     },
 });
 
 const sendEmail = (to, subject, text) => {
-    const mailOptions = {
-        from: "contact@effitech.com",
+    const emailData = {
+        from: process.env.EMAIL,
         to: to,
         subject: subject,
         text: text,
     };
 
-    transporter.sendMail(mailOptions, (error, info) => {
+    transporter.sendMail(emailData, (error, info) => {
         if (error) {
             console.log("Erreur lors de l'envoi de l'email:", error);
         } else {

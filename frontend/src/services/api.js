@@ -988,6 +988,7 @@ function importInvoice(formData, callback) {
 function sendReport(emailData, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", `${API_URL}/email`);
+    xhr.setRequestHeader("Content-Type", "application/json");
     xhr.withCredentials = true;
     xhr.onload = function () {
         if (xhr.status === 200) {
@@ -998,7 +999,7 @@ function sendReport(emailData, callback) {
             callback(new Error(xhr.statusText), null);
         }
     };
-    xhr.send(emailData);
+    xhr.send(JSON.stringify(emailData));
 }
 
 export {

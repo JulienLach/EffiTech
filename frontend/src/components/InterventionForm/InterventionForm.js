@@ -361,7 +361,7 @@ class InterventionForm extends Component {
                                                             }
                                                             type="submit"
                                                         >
-                                                            <i class="fa-solid fa-file-pen"></i>{" "}
+                                                            <i className="fa-solid fa-file-pen"></i>{" "}
                                                             Remplir le rapport
                                                         </button>
                                                     );
@@ -559,7 +559,7 @@ class InterventionForm extends Component {
                                                         this.handleViewReport
                                                     }
                                                 >
-                                                    <i class="fa-solid fa-file-circle-check"></i>
+                                                    <i className="fa-solid fa-file-circle-check"></i>
                                                     Voir le rapport validé
                                                 </button>
                                             );
@@ -576,7 +576,7 @@ class InterventionForm extends Component {
                                                         }
                                                         type="submit"
                                                     >
-                                                        <i class="fa-solid fa-file-pen"></i>
+                                                        <i className="fa-solid fa-file-pen"></i>
                                                         Remplir le rapport
                                                     </button>
                                                 );
@@ -597,7 +597,7 @@ class InterventionForm extends Component {
                                                     }
                                                     type="submit"
                                                 >
-                                                    <i class="fa-solid fa-file-pen"></i>
+                                                    <i className="fa-solid fa-file-pen"></i>
                                                     Remplir le questionnaire
                                                 </button>
                                             );

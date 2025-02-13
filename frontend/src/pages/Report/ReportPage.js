@@ -5,7 +5,7 @@ import stylesMobile from "./ReportPageMobile.module.css";
 import TemplateGlobal from "../Template/TemplateGlobal";
 import TemplateGlobalMobile from "../Template/TemplateGlobalMobile";
 import PDFGenerator from "../../components/PDFGenerator/PDFGenerator";
-import { getReportById, getCompany } from "../../services/api";
+import { getReportById, getCompany, sendReport } from "../../services/api";
 
 // Composant wrapper pour utiliser les hooks
 function ReportPageWrapper() {
@@ -22,7 +22,9 @@ class ReportPage extends Component {
             reportData: report,
             event: event,
             companyData: null,
+            clientEmail: event.client.email,
         };
+        this.sendReport = this.sendReport.bind(this);
     }
 
     componentDidMount() {
@@ -50,6 +52,23 @@ class ReportPage extends Component {
             } else {
                 this.setState({ companyData: data });
                 console.log("Données de l'entreprise récupérées:", data);
+            }
+        });
+    }
+    sendReport() {
+        const { clientEmail } = this.state;
+
+        const emailData = {
+            to: clientEmail,
+            subject: "Rapport d'intervention",
+            text: "TEST",
+        };
+
+        sendReport(emailData, (error, data) => {
+            if (error) {
+                console.error("Erreur lors de l'envoi du rapport", error);
+            } else {
+                console.log("Rapport envoyé par email", data, clientEmail);
             }
         });
     }
@@ -227,8 +246,11 @@ class ReportPage extends Component {
                                             {event.title}
                                         </a>
 
-                                        <button className={styles.mailButton}>
-                                            <i class="fa-solid fa-paper-plane"></i>{" "}
+                                        <button
+                                            className={styles.mailButton}
+                                            onClick={this.sendReport}
+                                        >
+                                            <i className="fa-solid fa-paper-plane"></i>{" "}
                                             Envoyer par email
                                         </button>
                                     </div>
