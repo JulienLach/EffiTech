@@ -8,4 +8,4 @@ function sendReport(req, res) {
     res.status(200).send({ message: "Mail bien envoyé" });
 }
 
-module.exports = sendReport;
+exports.sendReport = sendReport;
