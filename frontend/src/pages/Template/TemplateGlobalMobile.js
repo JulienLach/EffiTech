@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import styles from "./TemplateGlobalMobile.module.css";
 import logoMobile from "../../images/iconMobile.png";
-import bellIcon from "../../images/notificationBell.svg";
 
 class TemplateGlobalMobile extends Component {
     constructor(props) {
@@ -80,11 +79,7 @@ class TemplateGlobalMobile extends Component {
                     <div>
                         <div className={styles.headerRight}>
                             <div className={styles.notificationIcon}>
-                                <img
-                                    src={bellIcon}
-                                    className={styles.notificationBell}
-                                    alt="Notification Bell"
-                                />
+                                <i class="fa-regular fa-bell"></i>
                                 <span
                                     className={styles.notificationCount}
                                 ></span>

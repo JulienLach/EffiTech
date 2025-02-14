@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import styles from "./InterventionForm.module.css";
 import stylesMobile from "./InterventionFormMobile.module.css";
 import { deleteEvent } from "../../services/api";
-import bellIcon from "../../images/notificationBell.svg";
 
 // Composant wrapper pour utiliser les hooks
 function InterventionFormWrapper(props) {
@@ -165,12 +164,7 @@ class InterventionForm extends Component {
                                             stylesMobile.notificationIcon
                                         }
                                     >
-                                        <img
-                                            src={bellIcon}
-                                            className={
-                                                stylesMobile.notificationBell
-                                            }
-                                        ></img>
+                                        <i class="fa-regular fa-bell"></i>
                                         <span
                                             className={
                                                 stylesMobile.notificationCount
