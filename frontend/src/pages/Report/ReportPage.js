@@ -55,13 +55,23 @@ class ReportPage extends Component {
             }
         });
     }
+
     sendReport() {
         const { clientEmail } = this.state;
 
         const emailData = {
             to: clientEmail,
             subject: "Rapport d'intervention",
-            text: "TEST",
+            text: `Bonjour,
+        
+        Ci-joint le rapport d'intervention réalisé ce jour.`,
+            attachments: [
+                {
+                    filename: "rapport_intervention.pdf",
+                    path: pdfPath,
+                    contentType: "application/pdf",
+                },
+            ],
         };
 
         sendReport(emailData, (error, data) => {

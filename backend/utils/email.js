@@ -17,6 +17,7 @@ const sendEmail = (to, subject, text) => {
         to: to,
         subject: subject,
         text: text,
+        attachments: attachments,
     };
 
     transporter.sendMail(emailData, (error, info) => {
