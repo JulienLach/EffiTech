@@ -8,12 +8,20 @@ import {
     pdf,
     Image,
 } from "@react-pdf/renderer";
+import { Font } from "@react-pdf/renderer";
+import UbuntuFont from "./fonts/Ubuntu-Regular.ttf";
+
+Font.register({
+    family: "Ubuntu",
+    src: UbuntuFont,
+});
 
 const styles = StyleSheet.create({
     page: {
         flexDirection: "column",
         justifyContent: "space-between",
         padding: 10,
+        fontFamily: "Ubuntu",
     },
     logo: {
         width: 100,
