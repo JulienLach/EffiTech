@@ -5,7 +5,7 @@ import stylesMobile from "./ReportPageMobile.module.css";
 import TemplateGlobal from "../Template/TemplateGlobal";
 import TemplateGlobalMobile from "../Template/TemplateGlobalMobile";
 import PDFGenerator from "../../components/PDFGenerator/PDFGenerator";
-import generateSimplePDF from "../../components/PDFMail/PDFMail";
+import generatePDF from "../../components/jsPDF/jsPDF";
 import { getReportById, getCompany, sendReport } from "../../services/api";
 
 // Composant wrapper pour utiliser les hooks
@@ -60,44 +60,36 @@ class ReportPage extends Component {
     sendReport() {
         const { clientEmail, event } = this.state;
 
-        generateSimplePDF(event.title)
-            .then((dataUrl) => {
-                const base64Data = dataUrl.split(",")[1];
+        try {
+            const dataUrl = generatePDF(event.title);
+            const base64Data = dataUrl.split(",")[1];
 
-                const attachments = [
-                    {
-                        filename: "rapport_intervention.pdf",
-                        content: base64Data,
-                        contentType: "application/pdf",
-                        encoding: "base64",
-                    },
-                ];
+            const attachments = [
+                {
+                    filename: "rapport_intervention.pdf",
+                    content: base64Data,
+                    contentType: "application/pdf",
+                    encoding: "base64",
+                },
+            ];
 
-                const emailData = {
-                    to: clientEmail,
-                    subject: "Rapport d'intervention",
-                    text: `Bonjour, ci-joint le rapport d'intervention réalisé ce jour.`,
-                    attachments: attachments,
-                };
+            const emailData = {
+                to: clientEmail,
+                subject: "Rapport d'intervention",
+                text: `Bonjour, ci-joint le rapport d'intervention réalisé ce jour.`,
+                attachments: attachments,
+            };
 
-                sendReport(emailData, (error, data) => {
-                    if (error) {
-                        console.error(
-                            "Erreur lors de l'envoi du rapport",
-                            error
-                        );
-                    } else {
-                        console.log(
-                            "Rapport envoyé par email",
-                            data,
-                            clientEmail
-                        );
-                    }
-                });
-            })
-            .catch((error) => {
-                console.error("Erreur lors de la génération du PDF", error);
+            sendReport(emailData, (error, data) => {
+                if (error) {
+                    console.error("Erreur lors de l'envoi du rapport", error);
+                } else {
+                    console.log("Rapport envoyé par email", data, clientEmail);
+                }
             });
+        } catch (error) {
+            console.error("Erreur lors de la génération du PDF", error);
+        }
     }
 
     render() {
