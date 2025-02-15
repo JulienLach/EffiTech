@@ -24,6 +24,7 @@ class ReportPage extends Component {
             event: event,
             companyData: null,
             clientEmail: event.client.email,
+            showAlert: false,
         };
         this.sendReport = this.sendReport.bind(this);
     }
@@ -85,6 +86,10 @@ class ReportPage extends Component {
                     console.error("Erreur lors de l'envoi du rapport", error);
                 } else {
                     console.log("Rapport envoyé par email", data, clientEmail);
+                    this.setState({ showAlert: true });
+                    setTimeout(() => {
+                        this.setState({ showAlert: false });
+                    }, 3000);
                 }
             });
         } catch (error) {
@@ -93,7 +98,7 @@ class ReportPage extends Component {
     }
 
     render() {
-        const { event, reportData, companyData } = this.state;
+        const { event, reportData, companyData, showAlert } = this.state;
 
         const reportDetails = reportData
             ? {
@@ -282,6 +287,12 @@ class ReportPage extends Component {
                                     />
                                 )}
                             </div>
+                            {showAlert && (
+                                <div className={styles.alert}>
+                                    Email envoyé{" "}
+                                    <i class="fa-solid fa-check"></i>
+                                </div>
+                            )}
                         </div>
                     </>
                 )}
