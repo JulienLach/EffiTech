@@ -227,6 +227,7 @@ class Event {
      * @param {string} startingHour - L'heure de début de l'événement.
      * @param {string} endingHour - L'heure de fin de l'événement.
      * @param {number} idEmployee - L'identifiant de l'employé associé à l'événement.
+     * @param {string} workToDo - Le travail à effectuer lors de l'événement.
      * @param {function(Error, Event):void} callback - La fonction de rappel à exécuter après la création de l'événement.
      */
     static createEvent(

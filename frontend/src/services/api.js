@@ -126,6 +126,7 @@ function getAllEmployees(callback) {
  * @apiParam {String} startingHour Event starting hour.
  * @apiParam {String} endingHour Event ending hour.
  * @apiParam {Number} idEmployee The ID of the employee associated with the event.
+ * @apiParam {String} workToDo Work to be done during the event.
  * @apiSuccess {Object} event Created event object.
  * @apiSuccess {Number} event.idEvent Event ID.
  * @apiSuccess {String} event.title Event title.

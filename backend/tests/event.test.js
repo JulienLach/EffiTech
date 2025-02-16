@@ -327,6 +327,7 @@ describe("createEvent", () => {
         starting_hour: "10:00",
         ending_hour: "12:00",
         id_employee: 1,
+        workToDo: "Test work to do",
     };
 
     beforeEach(() => {
@@ -348,6 +349,7 @@ describe("createEvent", () => {
             "10:00",
             "12:00",
             1,
+            "Test work to do",
             (error, event) => {
                 expect(error).toBeNull();
                 expect(event).toEqual(
@@ -364,7 +366,7 @@ describe("createEvent", () => {
                         startingHour: "10:00",
                         endingHour: "12:00",
                         employee: 1,
-                        workToDo: undefined,
+                        workToDo: "Test work to do",
                     })
                 );
                 done();
@@ -389,6 +391,7 @@ describe("createEvent", () => {
             "10:00",
             "12:00",
             1,
+            "Test work to do",
             (error, event) => {
                 expect(error).toBeInstanceOf(Error);
                 expect(error.message).toBe("Database error");
