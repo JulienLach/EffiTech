@@ -327,7 +327,7 @@ describe("createEvent", () => {
         starting_hour: "10:00",
         ending_hour: "12:00",
         id_employee: 1,
-        workToDo: "Test work to do",
+        work_to_do: "Test work to do",
     };
 
     beforeEach(() => {
