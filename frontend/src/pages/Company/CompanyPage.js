@@ -61,23 +61,50 @@ class CompanyPage extends Component {
                             <div className={styles.separator}></div>
                             <div className={styles.informations}>
                                 <h3>Coordonnées</h3>
-                                <p>Nom : {company.name}</p>
                                 <p>
-                                    Adresse : {company.idAddress.address},{" "}
+                                    {" "}
+                                    <span className={styles.companyInfos}>
+                                        Nom :{" "}
+                                    </span>{" "}
+                                    {company.name}
+                                </p>
+                                <p>
+                                    <span className={styles.companyInfos}>
+                                        Adresse :{" "}
+                                    </span>{" "}
+                                    {company.idAddress.address},{" "}
                                     {company.idAddress.zipcode},{" "}
                                     {company.idAddress.city}
                                 </p>{" "}
-                                <p>Téléphone : {company.phoneNumber}</p>
+                                <p>
+                                    <span className={styles.companyInfos}>
+                                        Téléphone :{" "}
+                                    </span>{" "}
+                                    {company.phoneNumber}
+                                </p>
                             </div>
                             <div className={styles.separator}></div>
                             <div className={styles.informations}>
                                 <h3>Informations</h3>
-                                <p>SIRET : {company.siret}</p>
                                 <p>
-                                    N° TVA Intracommunautaire :{" "}
+                                    <span className={styles.companyInfos}>
+                                        SIRET :{" "}
+                                    </span>{" "}
+                                    {company.siret}
+                                </p>
+                                <p>
+                                    <span className={styles.companyInfos}>
+                                        N° TVA Intracommunautaire :{" "}
+                                    </span>{" "}
                                     {company.vatNumber}
                                 </p>
-                                <p>Capital : {company.capital} €</p>
+                                <p>
+                                    {" "}
+                                    <span className={styles.companyInfos}>
+                                        Capital :{" "}
+                                    </span>{" "}
+                                    {company.capital} €
+                                </p>
                             </div>
                             <button
                                 className={styles.editButton}

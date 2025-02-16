@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -   Add send report PDF to client by email
 -   Add MailJet api keys with free SMTP server
 -   Add success message when report is sent to client by email
+-   Add option to create an unscheduled intervention when the technician validates the appointment form
 
 # [0.6.0] (2025-04-02)
 

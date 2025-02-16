@@ -53,6 +53,7 @@ function createEvent(req, res) {
         startingHour,
         endingHour,
         idEmployee,
+        workToDo,
     } = req.body;
 
     const validationChecks = [
@@ -67,6 +68,7 @@ function createEvent(req, res) {
         body("startingHour").isString().trim().escape().optional(),
         body("endingHour").isString().trim().escape().optional(),
         body("idEmployee").isInt().notEmpty(),
+        body("workToDo").isString().trim().escape().optional(),
     ];
 
     for (let validation of validationChecks) {
@@ -90,6 +92,7 @@ function createEvent(req, res) {
         startingHour,
         endingHour,
         idEmployee,
+        workToDo,
         (error) => {
             if (error) {
                 return res.status(500).send({

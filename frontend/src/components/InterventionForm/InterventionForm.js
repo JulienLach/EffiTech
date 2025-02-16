@@ -503,13 +503,15 @@ class InterventionForm extends Component {
                                 </div>
                                 <div className={styles.separator}></div>
                                 <div>
-                                    {event.type === "Rendez-vous" &&
-                                        event.status === 5 && (
-                                            <>
-                                                <h3>Travaux à effectuer</h3>
-                                                <div>{event.workToDo}</div>
-                                            </>
-                                        )}
+                                    {(event.type === "Rendez-vous" &&
+                                        event.status === 5) ||
+                                    (event.type === "Intervention" &&
+                                        event.status === 1) ? (
+                                        <>
+                                            <h3>Travaux à effectuer</h3>
+                                            <div>{event.workToDo}</div>
+                                        </>
+                                    ) : null}
                                 </div>
                             </div>
                             <div className={styles.modalFooter}>
