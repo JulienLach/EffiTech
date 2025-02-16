@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { isMobile } from "react-device-detect";
 import { useNavigate, useLocation } from "react-router-dom";
 import TemplateGlobal from "../Template/TemplateGlobal";
 import styles from "./EmployeesPage.module.css";
@@ -60,7 +61,7 @@ class EmployeesPage extends Component {
         const screenType = window.navigator.userAgentData;
         return (
             <>
-                {screenType.mobile ? (
+                {isMobile ? (
                     <>
                         <h1>Mobile</h1>{" "}
                         {/* ici faire une redirection simple vers la page de connexion */}
