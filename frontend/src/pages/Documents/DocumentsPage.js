@@ -17,7 +17,11 @@ class DocumentsPage extends Component {
         super(props);
         this.state = {
             documents: [],
+            filteredDocuments: [],
             isModalOpen: false,
+            currentPage: 1,
+            documentsPerPage: 10,
+            searchItem: "",
         };
         this.handleButtonClick = this.handleButtonClick.bind(this);
         this.openModal = this.openModal.bind(this);
@@ -36,17 +40,36 @@ class DocumentsPage extends Component {
             if (error) {
                 this.setState({ error: error.message });
             } else {
-                this.setState({ documents: data });
+                this.setState({ documents: data, filteredDocuments: data });
                 console.log("Données des documents récupérées:", data);
             }
         });
     }
 
-    handlePageChange() {}
+    handlePageChange(event, pageNumber) {
+        event.preventDefault();
+        this.setState({ currentPage: pageNumber });
+    }
 
-    handleNextPage() {}
+    handleNextPage(event) {
+        event.preventDefault();
+        this.setState((prevState) => ({
+            currentPage: Math.min(
+                prevState.currentPage + 1,
+                Math.ceil(
+                    prevState.filteredDocuments.length /
+                        prevState.documentsPerPage
+                )
+            ),
+        }));
+    }
 
-    handlePreviousPage() {}
+    handlePreviousPage(event) {
+        event.preventDefault();
+        this.setState((prevState) => ({
+            currentPage: Math.max(prevState.currentPage - 1, 1),
+        }));
+    }
 
     handleButtonClick(document) {
         this.props.navigate("/document-details", {
@@ -91,10 +114,36 @@ class DocumentsPage extends Component {
 
     handleSubmit() {}
 
-    handleSearchChange() {}
+    handleSearchChange(event) {
+        const searchItem = event.target.value.toLowerCase();
+        this.setState((prevState) => {
+            const filteredDocuments = prevState.documents.filter((document) =>
+                document.title.toLowerCase().includes(searchItem)
+            );
+            return { searchItem, filteredDocuments, currentPage: 1 };
+        });
+    }
 
     render() {
-        const { isModalOpen, documents } = this.state;
+        const {
+            isModalOpen,
+            filteredDocuments,
+            currentPage,
+            documentsPerPage,
+        } = this.state;
+
+        // Calculer les documents à afficher pour la page actuelle
+        const indexOfLastDocument = currentPage * documentsPerPage;
+        const indexOfFirstDocument = indexOfLastDocument - documentsPerPage;
+        const currentFilteredDocuments = filteredDocuments.slice(
+            indexOfFirstDocument,
+            indexOfLastDocument
+        );
+
+        // Calculer le nombre total de pages
+        const totalPages = Math.ceil(
+            filteredDocuments.length / documentsPerPage
+        );
 
         return (
             <>
@@ -119,7 +168,7 @@ class DocumentsPage extends Component {
                                 type="text"
                                 id="search"
                                 name="search"
-                                placeholder="Rechercher"
+                                placeholder="Rechercher par titre"
                                 onChange={this.handleSearchChange}
                             />
                         </div>
@@ -146,7 +195,7 @@ class DocumentsPage extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {documents.map((document) => (
+                                {currentFilteredDocuments.map((document) => (
                                     <tr key={document.idDocument}>
                                         <td>D-{document.idDocument}</td>
                                         <td>
@@ -182,10 +231,16 @@ class DocumentsPage extends Component {
                             </tbody>
                         </table>
                         <div className={styles.pagination}>
-                            <button>
+                            <button
+                                onClick={(e) => this.handlePreviousPage(e)}
+                                disabled={currentPage === 1}
+                            >
                                 <i className="fa-solid fa-chevron-left"></i>
                             </button>
-                            <button>
+                            <button
+                                onClick={(e) => this.handleNextPage(e)}
+                                disabled={currentPage === totalPages}
+                            >
                                 <i className="fa-solid fa-chevron-right"></i>
                             </button>
                         </div>

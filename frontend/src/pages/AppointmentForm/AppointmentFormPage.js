@@ -4,7 +4,7 @@ import styles from "./AppointmentFormPage.module.css";
 import stylesMobile from "./AppointmentFormPageMobile.module.css";
 import TemplateGlobal from "../Template/TemplateGlobal";
 import TemplateGlobalMobile from "../Template/TemplateGlobalMobile";
-import { updateEvent } from "../../services/api";
+import { updateEvent, createEvent } from "../../services/api";
 
 // Composant wrapper pour utiliser les hooks
 function AppointmentFormPageWrapper() {
@@ -84,6 +84,9 @@ class AppointmentFormPage extends Component {
                     );
                     this.setState({ duration });
                 }
+                if (name === "reschedule") {
+                    this.setState({ reschedule: checked });
+                }
             }
         );
     }
@@ -98,6 +101,7 @@ class AppointmentFormPage extends Component {
             address,
             employee,
             endingHour,
+            reschedule,
         } = this.state;
 
         const eventData = {
@@ -131,6 +135,37 @@ class AppointmentFormPage extends Component {
         if (Object.keys(errors).length > 0) {
             this.setState({ errors });
             return;
+        }
+
+        if (reschedule) {
+            const eventToCreate = {
+                title: "A planifier",
+                description: "",
+                status: 1,
+                isPlanned: false,
+                type: "Intervention",
+                idClient: client.idClient,
+                idAddress: address.idAddress,
+                startingDate: null,
+                startingHour: null,
+                endingHour: null,
+                idEmployee: employee.idEmployee,
+                workToDo: eventData.workToDo,
+            };
+
+            console.log("Creating event with data:", eventToCreate);
+
+            createEvent(eventToCreate, (error, createdEvent) => {
+                if (error) {
+                    console.error("Erreur de création de l'événement", error);
+                    console.log("Error details:", error);
+                    return;
+                }
+
+                if (createdEvent) {
+                    console.log("Created event details:", createdEvent);
+                }
+            });
         }
 
         updateEvent(eventData, (error, updatedEvent) => {
@@ -265,8 +300,7 @@ class AppointmentFormPage extends Component {
                                 <h4>Planification :</h4>
                                 <div className={stylesMobile.checkbox}>
                                     <label>
-                                        Créer directement l'intervention à
-                                        planifier
+                                        Créer l'intervention à planifier
                                     </label>
                                     <input
                                         type="checkbox"
@@ -428,8 +462,7 @@ class AppointmentFormPage extends Component {
                                 <div>
                                     <div className={styles.checkbox}>
                                         <label>
-                                            Créer directement l'intervention à
-                                            planifier :{" "}
+                                            Créer l'intervention à planifier :{" "}
                                         </label>
                                         <label className={styles.switch}>
                                             <input

@@ -13,6 +13,7 @@ const documentRoutes = require("./routes/document.routes.js");
 const notificationRoutes = require("./routes/notification.routes.js");
 const statisticRoutes = require("./routes/statistic.routes.js");
 const invoiceRoutes = require("./routes/invoice.routes.js");
+const emailRoutes = require("./routes/email.routes.js");
 const authenticateToken = require("./middlewares/auth.middleware");
 
 dotenv.config({ path: ".env" });
@@ -73,6 +74,9 @@ app.use("/statistics", authenticateToken, statisticRoutes);
 
 // Route des factures
 app.use("/invoices", authenticateToken, invoiceRoutes);
+
+// Route des emails
+app.use("/email", authenticateToken, emailRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);

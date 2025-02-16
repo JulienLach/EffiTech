@@ -40,7 +40,7 @@
 }
 
 .alignButton button {
-    padding: 0.6em;
+    padding: 0.4em 0.6em;
     border: none;
     border-radius: 0.4em;
     font-size: 1em;
@@ -65,9 +65,16 @@
 }
 
 .infoTitle h3 {
+    font-size: 1.4em;
+    font-weight: 500;
+    margin-bottom: 0.6em;
+}
+
+.reportId {
     font-size: 1.5em;
     font-weight: 600;
     margin-bottom: 0.5em;
+    color: #000;
 }
 
 .infoTitle p {
@@ -78,15 +85,41 @@
     margin-top: 1.5em;
 }
 
+.documentInfo h3 {
+    font-size: 1.4em;
+    font-weight: 500;
+    margin-bottom: 0.6em;
+}
+
 .documentLink {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     margin-bottom: 1.25em;
 }
 
 .documentLink i {
-    margin: 0 0.3em;
+    margin: 0 0.1em 0 0;
     color: #b73c2e;
+}
+
+.mailButton {
+    padding: 0.6em;
+    border: none;
+    border-radius: 0.4em;
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+    background-color: #b73c2e;
+    color: white;
+}
+
+.mailButton i {
+    color: white;
+}
+
+.mailButton:hover {
+    background-color: #a32f22;
 }
 
 .pdf {
@@ -98,4 +131,16 @@
     font-size: 1.5em;
     font-weight: 600;
     margin-bottom: 0.5em;
+}
+
+.alert {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #50c254;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
 }

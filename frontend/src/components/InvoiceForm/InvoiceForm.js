@@ -264,13 +264,15 @@ class InvoiceForm extends Component {
                                     className={styles.cancelButton}
                                     onClick={onClose}
                                 >
+                                    <i className="fa-solid fa-xmark"></i>{" "}
                                     Annuler
                                 </button>
                                 <button
                                     type="submit"
                                     className={styles.submitButton}
                                 >
-                                    Ajouter
+                                    <i className="fa-solid fa-check"></i>{" "}
+                                    Enregistrer
                                 </button>
                             </div>
                         </form>

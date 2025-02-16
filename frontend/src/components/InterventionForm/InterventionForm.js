@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import styles from "./InterventionForm.module.css";
 import stylesMobile from "./InterventionFormMobile.module.css";
 import { deleteEvent } from "../../services/api";
-import bellIcon from "../../images/notificationBell.svg";
 
 // Composant wrapper pour utiliser les hooks
 function InterventionFormWrapper(props) {
@@ -165,12 +164,7 @@ class InterventionForm extends Component {
                                             stylesMobile.notificationIcon
                                         }
                                     >
-                                        <img
-                                            src={bellIcon}
-                                            className={
-                                                stylesMobile.notificationBell
-                                            }
-                                        ></img>
+                                        <i class="fa-regular fa-bell"></i>
                                         <span
                                             className={
                                                 stylesMobile.notificationCount
@@ -361,7 +355,7 @@ class InterventionForm extends Component {
                                                             }
                                                             type="submit"
                                                         >
-                                                            <i class="fa-solid fa-file-pen"></i>{" "}
+                                                            <i className="fa-solid fa-file-pen"></i>{" "}
                                                             Remplir le rapport
                                                         </button>
                                                     );
@@ -509,13 +503,15 @@ class InterventionForm extends Component {
                                 </div>
                                 <div className={styles.separator}></div>
                                 <div>
-                                    {event.type === "Rendez-vous" &&
-                                        event.status === 5 && (
-                                            <>
-                                                <h3>Travaux à effectuer</h3>
-                                                <div>{event.workToDo}</div>
-                                            </>
-                                        )}
+                                    {(event.type === "Rendez-vous" &&
+                                        event.status === 5) ||
+                                    (event.type === "Intervention" &&
+                                        event.status === 1) ? (
+                                        <>
+                                            <h3>Travaux à effectuer</h3>
+                                            <div>{event.workToDo}</div>
+                                        </>
+                                    ) : null}
                                 </div>
                             </div>
                             <div className={styles.modalFooter}>
@@ -559,7 +555,7 @@ class InterventionForm extends Component {
                                                         this.handleViewReport
                                                     }
                                                 >
-                                                    <i class="fa-solid fa-file-pen"></i>
+                                                    <i className="fa-solid fa-file-circle-check"></i>
                                                     Voir le rapport validé
                                                 </button>
                                             );
@@ -576,7 +572,7 @@ class InterventionForm extends Component {
                                                         }
                                                         type="submit"
                                                     >
-                                                        <i class="fa-solid fa-file-pen"></i>
+                                                        <i className="fa-solid fa-file-pen"></i>
                                                         Remplir le rapport
                                                     </button>
                                                 );
@@ -597,7 +593,7 @@ class InterventionForm extends Component {
                                                     }
                                                     type="submit"
                                                 >
-                                                    <i class="fa-solid fa-file-pen"></i>
+                                                    <i className="fa-solid fa-file-pen"></i>
                                                     Remplir le questionnaire
                                                 </button>
                                             );

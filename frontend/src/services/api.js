@@ -126,6 +126,7 @@ function getAllEmployees(callback) {
  * @apiParam {String} startingHour Event starting hour.
  * @apiParam {String} endingHour Event ending hour.
  * @apiParam {Number} idEmployee The ID of the employee associated with the event.
+ * @apiParam {String} workToDo Work to be done during the event.
  * @apiSuccess {Object} event Created event object.
  * @apiSuccess {Number} event.idEvent Event ID.
  * @apiSuccess {String} event.title Event title.
@@ -367,6 +368,7 @@ function loginEmployee(credentials, callback) {
             if (response.firstname && response.lastname) {
                 localStorage.setItem("firstname", response.firstname);
                 localStorage.setItem("lastname", response.lastname);
+                localStorage.setItem("idEmployee", response.idEmployee);
             }
 
             callback(null, response);
@@ -984,6 +986,23 @@ function importInvoice(formData, callback) {
     xhr.send(formData);
 }
 
+function sendReport(emailData, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", `${API_URL}/email`);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.withCredentials = true;
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            console.log(JSON.parse(xhr.responseText));
+            callback(null, JSON.parse(xhr.responseText));
+        } else {
+            console.error("Erreur d'envois du mail", xhr.statusText);
+            callback(new Error(xhr.statusText), null);
+        }
+    };
+    xhr.send(JSON.stringify(emailData));
+}
+
 export {
     getAllEvents,
     getAllClients,
@@ -1013,4 +1032,5 @@ export {
     downloadDocument,
     getAllInvoices,
     importInvoice,
+    sendReport,
 };

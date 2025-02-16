@@ -159,7 +159,7 @@ class CompanyDetails extends Component {
                                     htmlFor="fileInput"
                                     className={styles.fileInputLabel}
                                 >
-                                    <i class="fa-solid fa-file"></i>
+                                    <i className="fa-solid fa-file"></i>
                                     Choisir un fichier
                                 </label>
                             </div>

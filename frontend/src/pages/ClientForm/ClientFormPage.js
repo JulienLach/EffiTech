@@ -289,14 +289,15 @@ class ClientFormPage extends Component {
                                 onClick={this.handleCancel}
                                 className={styles.cancelButton}
                             >
-                                Annuler
+                                {" "}
+                                <i className="fa-solid fa-xmark"></i> Annuler
                             </button>
                             <button
                                 type="submit"
                                 className={styles.submitButton}
                             >
                                 {" "}
-                                <i className="fa-solid fa-floppy-disk"></i>{" "}
+                                <i className="fa-solid fa-check"></i>{" "}
                                 Enregistrer
                             </button>
                         </div>

@@ -31,6 +31,9 @@ class TemplateGlobal extends Component {
         this.toggleCreateEventModal = this.toggleCreateEventModal.bind(this);
         this.toggleEventModal = this.toggleEventModal.bind(this);
         this.handleCreateEventClick = this.handleCreateEventClick.bind(this); // Méthode pour gérer le clic sur "Créer un événement"
+        this.getIdEmployeeLocalStorage =
+            this.getIdEmployeeLocalStorage.bind(this);
+        this.handleProfileClick = this.handleProfileClick.bind(this);
     }
 
     componentDidMount() {
@@ -68,6 +71,15 @@ class TemplateGlobal extends Component {
         }));
     }
 
+    getIdEmployeeLocalStorage() {
+        return localStorage.getItem("idEmployee");
+    }
+
+    handleProfileClick() {
+        const idEmployee = this.getIdEmployeeLocalStorage();
+        this.props.navigate("/employee-details", { state: { idEmployee } });
+    }
+
     logout() {
         // Supprimer le cookie employee
         document.cookie =
@@ -100,8 +112,8 @@ class TemplateGlobal extends Component {
     }
 
     handleCreateEventClick() {
-        this.toggleCreateModal(); // Fermer la modal de création
-        this.toggleCreateEventModal(); // Ouvrir la modal de création d'événement
+        this.toggleCreateModal();
+        this.toggleCreateEventModal();
     }
 
     render() {
@@ -163,7 +175,12 @@ class TemplateGlobal extends Component {
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="/employees">
+                                            <a
+                                                href="#"
+                                                onClick={
+                                                    this.handleProfileClick
+                                                }
+                                            >
                                                 Mon profil{" "}
                                                 <i className="fa-solid fa-user"></i>
                                             </a>
@@ -292,15 +309,17 @@ class TemplateGlobal extends Component {
                 {isCreateModalOpen && (
                     <div className={styles.modalOverlay}>
                         <div className={styles.modalContent}>
-                            <button
-                                className={styles.createEventButton}
+                            <a
+                                className={styles}
                                 onClick={this.handleCreateEventClick}
                             >
-                                <i className="fa-solid fa-plus"></i> Créer un
-                                événement
-                            </button>
-
-                            {/* Ajoutez ici les options pour créer un événement, un client, etc. */}
+                                Créer un événement{" "}
+                                <i className="fa-solid fa-calendar"></i>
+                            </a>
+                            <a>
+                                Ajouter un client{" "}
+                                <i className="fa-solid fa-user"></i>
+                            </a>
                         </div>
                     </div>
                 )}

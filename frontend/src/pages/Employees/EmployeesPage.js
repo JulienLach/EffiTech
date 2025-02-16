@@ -39,8 +39,8 @@ class EmployeesPage extends Component {
 
     handleButtonClick(employee) {
         if (employee && employee.idEmployee) {
-            this.props.navigate(`/employee-details/`, {
-                state: { employee },
+            this.props.navigate("/employee-details", {
+                state: { idEmployee: employee.idEmployee },
             });
         } else {
             console.error("Données de l'employé non définies");
@@ -75,8 +75,8 @@ class EmployeesPage extends Component {
                                     className={styles.addEmployee}
                                     onClick={this.openModal}
                                 >
-                                    <i className="fa-solid fa-plus"></i>Ajouter
-                                    un employé
+                                    <i className="fa-solid fa-plus"> </i>{" "}
+                                    Ajouter un employé
                                 </button>
                             </div>
                             <div className={styles.cardContainer}>

@@ -227,6 +227,7 @@ class Event {
      * @param {string} startingHour - L'heure de début de l'événement.
      * @param {string} endingHour - L'heure de fin de l'événement.
      * @param {number} idEmployee - L'identifiant de l'employé associé à l'événement.
+     * @param {string} workToDo - Le travail à effectuer lors de l'événement.
      * @param {function(Error, Event):void} callback - La fonction de rappel à exécuter après la création de l'événement.
      */
     static createEvent(
@@ -241,10 +242,11 @@ class Event {
         startingHour,
         endingHour,
         idEmployee,
+        workToDo,
         callback
     ) {
         const query =
-            "INSERT INTO events (title, description, status, is_planned, type, id_client, id_address, starting_date, starting_hour, ending_hour, id_employee) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *";
+            "INSERT INTO events (title, description, status, is_planned, type, id_client, id_address, starting_date, starting_hour, ending_hour, id_employee, work_to_do) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *";
         const values = [
             title,
             description,
@@ -257,6 +259,7 @@ class Event {
             startingHour,
             endingHour,
             idEmployee,
+            workToDo,
         ];
 
         pool.query(query, values, (error, result) => {
@@ -277,7 +280,8 @@ class Event {
                 row.starting_date,
                 row.starting_hour,
                 row.ending_hour,
-                row.id_employee
+                row.id_employee,
+                row.work_to_do
             );
 
             callback(null, newEvent);

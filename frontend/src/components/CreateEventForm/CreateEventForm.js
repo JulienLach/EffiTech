@@ -419,7 +419,8 @@ class CreateEventForm extends Component {
                                 className={styles.submitButton}
                                 onClick={this.handleSubmit}
                             >
-                                <i className="fa-solid fa-check"> </i> Valider
+                                <i className="fa-solid fa-check"> </i>{" "}
+                                Enregistrer
                             </button>
                         </div>
                     </div>

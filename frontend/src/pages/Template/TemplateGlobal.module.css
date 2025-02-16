@@ -38,8 +38,8 @@
 }
 
 .planifierButton i {
-    margin-right: 0.6em;
-    font-size: 0.9em;
+    margin-right: 0.4em;
+    font-size: 1em;
 }
 
 .planifierButton:hover {
@@ -207,14 +207,25 @@ i {
 }
 
 .modalOverlay {
-    background-color: rgb(255, 255, 255);
-    border: 1px solid #c9c9c9;
-    border-radius: 0.4em;
-    padding: 0.5em;
-    position: absolute;
-    top: 3.3em;
-    right: 6.9em;
+    position: fixed;
+    top: 3.7em;
+    right: 7.3em;
     z-index: 1000;
+    padding: 0.85em 1em;
+    border: 0.1em solid #e9e9e9;
+    border-radius: 0.5em;
+    background-color: #fff;
+    box-shadow: 0 0.18em 0.2em rgba(0, 0, 0, 0.1);
+}
+
+.modalContent a i {
+    margin-left: 0.3em;
+}
+
+.modalContent a:hover {
+    text-decoration: underline;
+    cursor: pointer;
+    color: #c93c2c;
 }
 
 .modalContent {

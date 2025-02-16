@@ -83,7 +83,7 @@ class StatisticsPage extends Component {
             labels: Object.keys(employeeEventCount),
             datasets: [
                 {
-                    label: "Nombre d'événements",
+                    label: "Nombre d'évènements par employés",
                     data: Object.values(employeeEventCount),
                     backgroundColor: "rgba(187, 12, 12, 0.6)",
                 },

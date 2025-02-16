@@ -63,9 +63,9 @@ class DocumentForm extends Component {
         const errors = {};
         if (!document.title) {
             errors.title = "* Champ obligatoire";
-        } else if (!/^[a-zA-Z0-9\s-]+$/.test(document.title)) {
+        } else if (!/^[a-zA-Z0-9\s-'`]+$/.test(document.title)) {
             errors.title =
-                "* Ne doit contenir que des lettres, des chiffres, des espaces ou des traits d'union";
+                "* Ne doit contenir que des lettres, des chiffres, des espaces, des traits d'union ou des apostrophes";
         }
         if (!document.brand) {
             errors.brand = "* Champ obligatoire";
@@ -192,13 +192,15 @@ class DocumentForm extends Component {
                                     className={styles.cancelButton}
                                     onClick={onClose}
                                 >
+                                    <i className="fa-solid fa-xmark"></i>{" "}
                                     Annuler
                                 </button>
                                 <button
                                     type="submit"
                                     className={styles.submitButton}
                                 >
-                                    Ajouter
+                                    <i className="fa-solid fa-check"></i>{" "}
+                                    Enregistrer
                                 </button>
                             </div>
                         </form>

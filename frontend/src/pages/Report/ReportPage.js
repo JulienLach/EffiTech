@@ -5,7 +5,8 @@ import stylesMobile from "./ReportPageMobile.module.css";
 import TemplateGlobal from "../Template/TemplateGlobal";
 import TemplateGlobalMobile from "../Template/TemplateGlobalMobile";
 import PDFGenerator from "../../components/PDFGenerator/PDFGenerator";
-import { getReportById, getCompany } from "../../services/api";
+import generatePDF from "../../components/jsPDF/jsPDF";
+import { getReportById, getCompany, sendReport } from "../../services/api";
 
 // Composant wrapper pour utiliser les hooks
 function ReportPageWrapper() {
@@ -22,7 +23,10 @@ class ReportPage extends Component {
             reportData: report,
             event: event,
             companyData: null,
+            clientEmail: event.client.email,
+            showAlert: false,
         };
+        this.sendReport = this.sendReport.bind(this);
     }
 
     componentDidMount() {
@@ -54,8 +58,47 @@ class ReportPage extends Component {
         });
     }
 
+    sendReport() {
+        const { clientEmail, event } = this.state;
+
+        try {
+            const dataUrl = generatePDF(event.title);
+            const base64Data = dataUrl.split(",")[1];
+
+            const attachments = [
+                {
+                    filename: "rapport_intervention.pdf",
+                    content: base64Data,
+                    contentType: "application/pdf",
+                    encoding: "base64",
+                },
+            ];
+
+            const emailData = {
+                to: clientEmail,
+                subject: "Rapport d'intervention",
+                text: `Bonjour, ci-joint le rapport d'intervention réalisé ce jour.`,
+                attachments: attachments,
+            };
+
+            sendReport(emailData, (error, data) => {
+                if (error) {
+                    console.error("Erreur lors de l'envoi du rapport", error);
+                } else {
+                    console.log("Rapport envoyé par email", data, clientEmail);
+                    this.setState({ showAlert: true });
+                    setTimeout(() => {
+                        this.setState({ showAlert: false });
+                    }, 3000);
+                }
+            });
+        } catch (error) {
+            console.error("Erreur lors de la génération du PDF", error);
+        }
+    }
+
     render() {
-        const { event, reportData, companyData } = this.state;
+        const { event, reportData, companyData, showAlert } = this.state;
 
         const reportDetails = reportData
             ? {
@@ -103,7 +146,9 @@ class ReportPage extends Component {
                                 <h2 className={stylesMobile.titlePage}>
                                     Rapport d'intervention
                                 </h2>
-                                <h3>INT-{event.idEvent}</h3>
+                                <h3 className={stylesMobile.reportId}>
+                                    INT-{event.idEvent}
+                                </h3>
                             </div>
 
                             <div className={stylesMobile.detailsCard}>
@@ -139,7 +184,7 @@ class ReportPage extends Component {
                             </div>
 
                             <div className={stylesMobile.documentCard}>
-                                <h3 className={stylesMobile.documentTitle}>
+                                <h3 className={stylesMobile.infoTitle}>
                                     Document :
                                 </h3>
                                 <div className={stylesMobile.documentLink}>
@@ -174,7 +219,9 @@ class ReportPage extends Component {
                                 </div>
                                 <div className={styles.interventionInfo}>
                                     <div>
-                                        <h3>INT-{event.idEvent}</h3>
+                                        <h3 className={styles.reportId}>
+                                            INT-{event.idEvent}
+                                        </h3>
                                     </div>
                                 </div>
                                 <div className={styles.separation}></div>
@@ -211,17 +258,25 @@ class ReportPage extends Component {
                                 </div>
                                 <div className={styles.separation}></div>
                                 <div className={styles.documentInfo}>
-                                    <h2 className={styles.documentTitle}>
+                                    <h3 className={styles.infoTitle}>
                                         Document :
-                                    </h2>
+                                    </h3>
                                     <div className={styles.documentLink}>
-                                        <i className="fa-solid fa-file"></i>{" "}
                                         <a href="#">
+                                            <i className="fa-solid fa-file"></i>{" "}
                                             INT-{event.idEvent}-
                                             {event.client.firstname}-
                                             {event.client.lastname}-
                                             {event.title}
                                         </a>
+
+                                        <button
+                                            className={styles.mailButton}
+                                            onClick={this.sendReport}
+                                        >
+                                            <i className="fa-solid fa-paper-plane"></i>{" "}
+                                            Envoyer par email
+                                        </button>
                                     </div>
                                 </div>
                                 {reportDetails && companyData && (
@@ -232,6 +287,12 @@ class ReportPage extends Component {
                                     />
                                 )}
                             </div>
+                            {showAlert && (
+                                <div className={styles.alert}>
+                                    Email envoyé{" "}
+                                    <i class="fa-solid fa-check"></i>
+                                </div>
+                            )}
                         </div>
                     </>
                 )}
