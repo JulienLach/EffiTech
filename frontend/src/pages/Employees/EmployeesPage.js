@@ -58,7 +58,6 @@ class EmployeesPage extends Component {
 
     render() {
         const { employees, isModalOpen } = this.state;
-        const screenType = window.navigator.userAgentData;
         return (
             <>
                 {isMobile ? (
