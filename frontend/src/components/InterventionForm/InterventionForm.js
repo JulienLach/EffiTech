@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { isMobile } from "react-device-detect";
 import { useNavigate } from "react-router-dom";
 import styles from "./InterventionForm.module.css";
 import stylesMobile from "./InterventionFormMobile.module.css";
@@ -136,12 +137,9 @@ class InterventionForm extends Component {
     render() {
         const { event, closeModal } = this.props;
 
-        //Variable pour savoir si c'est mobile ou desktop
-        const isMobile = window.navigator.userAgentData;
-
         return (
             <>
-                {isMobile.mobile ? (
+                {isMobile ? (
                     <>
                         <form
                             onSubmit={this.handleSubmit}

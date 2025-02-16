@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { isMobile } from "react-device-detect";
 import { useLocation, useNavigate } from "react-router-dom";
 import TemplateGlobal from "../Template/TemplateGlobal";
 import TemplateGlobalMobile from "../Template/TemplateGlobalMobile";
@@ -279,12 +280,9 @@ class ClientsPage extends Component {
         // Calculer le nombre total de pages
         const totalPages = Math.ceil(filteredClients.length / clientsPerPage);
 
-        //Variable pour savoir si c'est mobile ou desktop
-        const isMobile = window.navigator.userAgentData;
-
         return (
             <>
-                {isMobile.mobile ? (
+                {isMobile ? (
                     <>
                         <TemplateGlobalMobile />
                         <div className={stylesMobile.container}>

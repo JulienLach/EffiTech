@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { isMobile } from "react-device-detect";
 import { useLocation } from "react-router-dom";
 import styles from "./ReportPage.module.css";
 import stylesMobile from "./ReportPageMobile.module.css";
@@ -120,12 +121,9 @@ class ReportPage extends Component {
         console.log("Donnée du rapport avec évènement", reportData);
         console.log("donnée du rapport", reportDetails);
 
-        //Variable pour savoir si c'est mobile ou desktop
-        const isMobile = window.navigator.userAgentData;
-
         return (
             <>
-                {isMobile.mobile ? (
+                {isMobile ? (
                     <>
                         <TemplateGlobalMobile />
                         <div className={stylesMobile.container}>

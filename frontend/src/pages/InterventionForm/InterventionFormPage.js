@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { isMobile } from "react-device-detect";
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./InterventionFormPage.module.css";
 import stylesMobile from "./InterventionFormPageMobile.module.css";
@@ -171,11 +172,9 @@ class InterventionFormPage extends Component {
             errors,
         } = this.state;
 
-        const isMobile = window.navigator.userAgentData;
-
         return (
             <>
-                {isMobile.mobile ? (
+                {isMobile ? (
                     <>
                         <TemplateGlobalMobile />
                         <form

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { isMobile } from "react-device-detect";
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./NotificationsPage.module.css";
 import stylesMobile from "./NotificationsPageMobile.module.css";
@@ -38,12 +39,11 @@ class NotificationsPage extends Component {
     }
 
     render() {
-        const isMobile = window.navigator.userAgentData;
         const { notifications } = this.state;
 
         return (
             <>
-                {isMobile.mobile ? (
+                {isMobile ? (
                     <>
                         <TemplateGlobalMobile />
                         <div className={stylesMobile.container}>

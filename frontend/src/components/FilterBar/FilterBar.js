@@ -1,14 +1,14 @@
 import React, { Component } from "react";
+import { isMobile } from "react-device-detect";
+
 import styles from "./FilterBar.module.css";
 import stylesMobile from "./FilterBarMobile.module.css";
 
 class FilterBar extends Component {
     render() {
-        const isMobile = window.navigator.userAgentData;
-
         return (
             <>
-                {isMobile.mobile ? (
+                {isMobile ? (
                     <div className={stylesMobile.filterDiv}>
                         <div className={stylesMobile.typeFilter}>
                             <i className="fa-solid fa-tag"></i>

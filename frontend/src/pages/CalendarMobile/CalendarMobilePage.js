@@ -276,9 +276,6 @@ class CalendarMobilePage extends Component {
         // Calculer le nombre total de pages
         const totalPages = Math.ceil(filteredEvents.length / eventsPerPage);
 
-        //Variable pour savoir si c'est mobile ou desktop
-        const isMobile = window.navigator.userAgentData;
-
         return (
             <>
                 <TemplateGlobalMobile />

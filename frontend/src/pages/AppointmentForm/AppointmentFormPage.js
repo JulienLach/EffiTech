@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { isMobile } from "react-device-detect";
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./AppointmentFormPage.module.css";
 import stylesMobile from "./AppointmentFormPageMobile.module.css";
@@ -192,12 +193,9 @@ class AppointmentFormPage extends Component {
             errors,
         } = this.state;
 
-        //Variable pour savoir si c'est mobile ou desktop
-        const isMobile = window.navigator.userAgentData;
-
         return (
             <>
-                {isMobile.mobile ? (
+                {isMobile ? (
                     <>
                         <TemplateGlobalMobile />
                         <form
