@@ -172,7 +172,7 @@ i {
 .sidebarAndOrange {
     display: flex;
     position: fixed;
-    top: 6em;
+    top: 5.5em;
 }
 
 /* Couleur orange de la div pour le liseret de la sidebar */

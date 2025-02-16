@@ -38,21 +38,21 @@
 
 .notificationIcon {
     position: relative;
-    margin-right: 1.4em;
-    margin-top: 0.5em;
+    margin-right: 1em;
+    font-size: 1.5em;
 }
 
 .notificationCount {
     display: flex;
     position: absolute;
-    top: -0.625em;
-    right: -0.625em;
+    top: -0.25em;
+    right: -0.35em;
     background-color: #cf2f1d;
     color: white;
     border-radius: 1em;
     height: 1.2em;
-    width: 1.2em;
-    font-size: 0.7em;
+    width: 1em;
+    font-size: 0.55em;
     min-width: 1.2em;
     align-items: center;
     justify-content: center;

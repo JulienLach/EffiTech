@@ -412,7 +412,8 @@ class ClientsPage extends Component {
                                             </p>
                                         )}
                                         <p className={stylesMobile.address}>
-                                            {client.address.city},{" "}
+                                            {client.address.address},{" "}
+                                            {client.address.city}{" "}
                                             {client.address.zipcode}
                                         </p>
                                     </div>
@@ -782,14 +783,22 @@ class ClientsPage extends Component {
                                                         }{" "}
                                                         {client.address.city}
                                                     </td>
-                                                    <td>
+                                                    <td
+                                                        className={
+                                                            styles.clientLinks
+                                                        }
+                                                    >
                                                         <a
                                                             href={`mailto:${client.email}`}
                                                         >
                                                             {client.email}
                                                         </a>
                                                     </td>
-                                                    <td>
+                                                    <td
+                                                        className={
+                                                            styles.clientLinks
+                                                        }
+                                                    >
                                                         <a
                                                             href={`tel:${client.phoneNumber}`}
                                                         >

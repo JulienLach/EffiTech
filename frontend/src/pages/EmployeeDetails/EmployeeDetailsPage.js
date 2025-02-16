@@ -85,10 +85,30 @@ class EmployeeDetailsPage extends Component {
                     <div className={styles.separation}></div>
                     <h2>Coordonnées</h2>
                     <div className={styles.contactInfo}>
-                        <p>Métier : {employee.job}</p>
-                        <p>Spécialité : {employee.speciality}</p>
-                        <p>Email : {employee.email}</p>
-                        <p>Téléphone : {employee.phoneNumber}</p>
+                        <p>
+                            <span className={styles.employeeLabels}>
+                                Métier :
+                            </span>{" "}
+                            {employee.job}
+                        </p>
+                        <p>
+                            <span className={styles.employeeLabels}>
+                                Spécialité :
+                            </span>{" "}
+                            {employee.speciality}
+                        </p>
+                        <p>
+                            <span className={styles.employeeLabels}>
+                                Email :
+                            </span>{" "}
+                            {employee.email}
+                        </p>
+                        <p>
+                            <span className={styles.employeeLabels}>
+                                Téléphone :
+                            </span>{" "}
+                            {employee.phoneNumber}
+                        </p>
                     </div>
                     <button
                         className={styles.editButton}

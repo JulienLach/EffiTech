@@ -230,7 +230,8 @@ class TemplateGlobal extends Component {
                                 }
                             >
                                 <a href="/clients">
-                                    <i className="fa-solid fa-user"></i>Clients
+                                    <i className="fa-solid fa-user-group"></i>
+                                    Clients
                                 </a>
                             </li>
                             <li
@@ -243,7 +244,7 @@ class TemplateGlobal extends Component {
                                 }
                             >
                                 <a href="/employees">
-                                    <i className="fa-solid fa-user-group"></i>
+                                    <i className="fa-solid fa-user"></i>
                                     Employés
                                 </a>
                             </li>
