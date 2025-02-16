@@ -22,9 +22,15 @@ class InvoicesPage extends Component {
             file: "",
             client: {},
             isModalOpen: false,
+            filteredInvoices: [],
+            invoicesPerPage: 10,
+            currentPage: 1,
         };
         this.openModal = this.openModal.bind(this);
         this.formatDate = this.formatDate.bind(this);
+        this.handlePageChange = this.handlePageChange.bind(this);
+        this.handleNextPage = this.handleNextPage.bind(this);
+        this.handlePreviousPage = this.handlePreviousPage.bind(this);
     }
 
     componentDidMount() {
@@ -32,10 +38,35 @@ class InvoicesPage extends Component {
             if (error) {
                 console.error(error);
             } else {
-                this.setState({ invoices });
+                this.setState({ invoices, filteredInvoices: invoices });
                 console.log("Données des factures récupérées:", invoices);
             }
         });
+    }
+
+    handlePageChange(event, pageNumber) {
+        event.preventDefault();
+        this.setState({ currentPage: pageNumber });
+    }
+
+    handleNextPage(event) {
+        event.preventDefault();
+        this.setState((prevState) => ({
+            currentPage: Math.min(
+                prevState.currentPage + 1,
+                Math.ceil(
+                    prevState.filteredInvoices.length /
+                        prevState.invoicesPerPage
+                )
+            ),
+        }));
+    }
+
+    handlePreviousPage(event) {
+        event.preventDefault();
+        this.setState((prevState) => ({
+            currentPage: Math.max(prevState.currentPage - 1, 1),
+        }));
     }
 
     formatDate(invoiceDate) {
@@ -52,9 +83,24 @@ class InvoicesPage extends Component {
     }
 
     render() {
-        const { isModalOpen, invoices } = this.state;
+        const {
+            isModalOpen,
+            invoices,
+            filteredInvoices,
+            currentPage,
+            invoicesPerPage,
+        } = this.state;
 
         const isMobile = window.navigator.userAgentData;
+
+        const indexOfLastInvoice = currentPage * invoicesPerPage;
+        const indexOfFirstInvoice = indexOfLastInvoice - invoicesPerPage;
+        const currentFilteredInvoices = filteredInvoices.slice(
+            indexOfFirstInvoice,
+            indexOfLastInvoice
+        );
+
+        const totalPages = Math.ceil(filteredInvoices.length / invoicesPerPage);
 
         return (
             <>
@@ -82,7 +128,7 @@ class InvoicesPage extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {invoices.map((invoice) => (
+                                {currentFilteredInvoices.map((invoice) => (
                                     <tr key={invoice.id}>
                                         <td>
                                             <a>FC-{invoice.idInvoice}</a>
@@ -111,6 +157,20 @@ class InvoicesPage extends Component {
                                 ))}
                             </tbody>
                         </table>
+                        <div className={styles.pagination}>
+                            <button
+                                onClick={(e) => this.handlePreviousPage(e)}
+                                disabled={currentPage === 1}
+                            >
+                                <i className="fa-solid fa-chevron-left"></i>
+                            </button>
+                            <button
+                                onClick={(e) => this.handleNextPage(e)}
+                                disabled={currentPage === totalPages}
+                            >
+                                <i className="fa-solid fa-chevron-right"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
                 {isModalOpen && (

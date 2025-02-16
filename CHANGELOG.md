@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 -   Add search field for documents
 -   Add paging for documents page
+-   Add paging for invoices page
 -   Add my profile link for current connected user
 -   Add send report PDF to client by email
 -   Add MailJet api keys with free SMTP server
