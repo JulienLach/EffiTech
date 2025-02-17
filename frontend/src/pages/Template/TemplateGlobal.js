@@ -297,9 +297,7 @@ class TemplateGlobal extends Component {
                             </li>
                         </ul>
                     </div>
-                    <div className={styles.sideOrange}>
-                        <i className="fa-solid fa-caret-down"></i>
-                    </div>
+                    <div className={styles.sideOrange}></div>
                 </div>
 
                 {/* partie container à copier pour les nouvelles pages */}

@@ -11,12 +11,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -   Add option to create an unscheduled intervention when the technician validates the intervention form
 -   Add notifications for creating, updating, deleting, and validating events with employee and date details
 -   Send employee credentials by email when creating an employee account
+-   Add clickable employee card to see profile
+-   Change default calendar mobile view to day view
 
 ## Fixes
 
 -   Remove userAgentData condition for mobile view and and react-device-detect package
--   UI updates
+-   Desktop UI updates
 -   Fix signature component to avoid scrolling while signing report on mobile
+-   Mobile UI updates
 
 # [0.6.1] (2025-15-02)
 

@@ -84,6 +84,9 @@ class EmployeesPage extends Component {
                                     <div
                                         key={employee.idEmployee}
                                         className={styles.card}
+                                        onClick={() =>
+                                            this.handleButtonClick(employee)
+                                        }
                                     >
                                         <div className={styles.profilPicture}>
                                             <img
