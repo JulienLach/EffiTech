@@ -488,6 +488,7 @@ class InterventionFormPage extends Component {
                                             name="startingDate"
                                             value={startingDate}
                                             onChange={this.handleChange}
+                                            readOnly
                                         />
                                     </div>
                                 </div>
@@ -502,7 +503,7 @@ class InterventionFormPage extends Component {
                                     </div>
                                 </div>
                                 <div>
-                                    <div className={styles.labelInput}>
+                                    <div className={styles.endingHourInput}>
                                         <label>
                                             Heure de fin{" "}
                                             <span className={styles.required}>
