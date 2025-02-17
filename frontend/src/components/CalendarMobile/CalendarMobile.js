@@ -33,12 +33,12 @@ function eventStyleGetter(event) {
     const style = {
         backgroundColor: backgroundColor,
         borderRadius: "0.4em",
-        opacity: 0.88,
+        opacity: 0.95,
         color: "white",
-        border: "0.15em solid lightgrey",
-        paddingLeft: "0.5em",
+        border: "0.1em solid lightgrey",
+        paddingLeft: "0.4em",
         fontWeight: "400",
-        fontSize: "0.9em",
+        fontSize: "0.95em",
     };
     return {
         style,
