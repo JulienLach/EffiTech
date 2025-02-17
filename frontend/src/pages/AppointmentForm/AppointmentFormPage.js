@@ -5,7 +5,11 @@ import styles from "./AppointmentFormPage.module.css";
 import stylesMobile from "./AppointmentFormPageMobile.module.css";
 import TemplateGlobal from "../Template/TemplateGlobal";
 import TemplateGlobalMobile from "../Template/TemplateGlobalMobile";
-import { updateEvent, createEvent } from "../../services/api";
+import {
+    updateEvent,
+    createEvent,
+    createNotification,
+} from "../../services/api";
 
 // Composant wrapper pour utiliser les hooks
 function AppointmentFormPageWrapper() {
@@ -168,6 +172,27 @@ class AppointmentFormPage extends Component {
                 }
             });
         }
+
+        const notificationData = {
+            idEmployee: eventDetails.employee.idEmployee,
+            action: "Validation",
+            type: eventDetails.type,
+            title: eventDetails.title,
+            creationDate: new Date().toISOString().split("T")[0],
+            creationHour: new Date().toLocaleTimeString("fr-FR", {
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+            }),
+        };
+
+        createNotification(notificationData, (error, result) => {
+            if (error) {
+                console.error("Error creating notification:", error);
+            } else {
+                console.log("Notification created successfully:", result);
+            }
+        });
 
         updateEvent(eventData, (error, updatedEvent) => {
             if (error) {

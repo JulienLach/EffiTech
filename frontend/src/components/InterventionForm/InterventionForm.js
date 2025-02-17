@@ -3,7 +3,7 @@ import { isMobile } from "react-device-detect";
 import { useNavigate } from "react-router-dom";
 import styles from "./InterventionForm.module.css";
 import stylesMobile from "./InterventionFormMobile.module.css";
-import { deleteEvent } from "../../services/api";
+import { deleteEvent, createNotification } from "../../services/api";
 
 // Composant wrapper pour utiliser les hooks
 function InterventionFormWrapper(props) {
@@ -43,6 +43,28 @@ class InterventionForm extends Component {
 
     handleDelete() {
         const { event, deleteEvent } = this.props;
+
+        const notificationData = {
+            idEmployee: event.employee.idEmployee,
+            action: "Suppression",
+            type: event.type,
+            title: event.title,
+            creationDate: new Date().toISOString().split("T")[0],
+            creationHour: new Date().toLocaleTimeString("fr-FR", {
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+            }),
+        };
+
+        createNotification(notificationData, (error, result) => {
+            if (error) {
+                console.error("Error creating notification:", error);
+            } else {
+                console.log("Notification created successfully:", result);
+            }
+        });
+
         deleteEvent(event.idEvent, (error, response) => {
             if (error) {
                 console.error(

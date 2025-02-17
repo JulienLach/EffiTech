@@ -38,6 +38,69 @@ class NotificationsPage extends Component {
         return creationDate.toLocaleDateString("fr-FR");
     }
 
+    getActionIndicator(action) {
+        const style = {
+            padding: "2px 10px",
+            borderRadius: "8px",
+            color: "white",
+            fontSize: "0.9em",
+            fontWeight: "500",
+        };
+
+        switch (action) {
+            case "Enregistrement":
+                return (
+                    <span
+                        style={{
+                            ...style,
+                            backgroundColor: "#D3F4FF",
+                            color: "#2C5BA1",
+                        }}
+                    >
+                        Enregistrement
+                    </span>
+                );
+            case "Suppression":
+                return (
+                    <span
+                        style={{
+                            ...style,
+                            backgroundColor: "#FFDEDE",
+                            color: "#923838",
+                        }}
+                    >
+                        Suppression
+                    </span>
+                );
+            case "Modification":
+                return (
+                    <span
+                        style={{
+                            ...style,
+                            backgroundColor: "#FFECCF",
+                            color: "#C35E00",
+                        }}
+                    >
+                        Modification
+                    </span>
+                );
+            case "Validation":
+                return (
+                    <span
+                        style={{
+                            ...style,
+                            backgroundColor: "#DCFFD6",
+                            color: "#48903C",
+                        }}
+                    >
+                        Validation
+                    </span>
+                );
+            default:
+                return null;
+        }
+    }
+
     render() {
         const { notifications } = this.state;
 
@@ -76,14 +139,18 @@ class NotificationsPage extends Component {
                                         {notifications.map((notification) => (
                                             <tr
                                                 key={
-                                                    notification.id_notification
+                                                    notification.idNotification
                                                 }
                                             >
                                                 <td>
                                                     {notification.firstName}{" "}
                                                     {notification.lastName}
                                                 </td>
-                                                <td>{notification.action}</td>
+                                                <td>
+                                                    {this.getActionIndicator(
+                                                        notification.action
+                                                    )}
+                                                </td>
                                                 <td>{notification.type}</td>
                                                 <td>{notification.title}</td>
                                                 <td>

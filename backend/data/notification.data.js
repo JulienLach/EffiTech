@@ -38,7 +38,7 @@ class Notification {
      */
     static getAllNotifications(callback) {
         const query =
-            "SELECT * FROM notifications JOIN employees ON notifications.id_employee = employees.id_employee";
+            "SELECT * FROM notifications JOIN employees ON notifications.id_employee = employees.id_employee ORDER BY creation_date DESC, creation_hour DESC";
         pool.query(query, (error, result) => {
             if (error) {
                 return callback(error, null);
