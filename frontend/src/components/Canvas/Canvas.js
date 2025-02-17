@@ -22,6 +22,7 @@ class Canvas extends Component {
     }
 
     startDrawing(event) {
+        event.preventDefault();
         this.isDrawing = true;
         const rect = this.canvasRef.current.getBoundingClientRect();
         const clientX = event.clientX || event.touches[0].clientX;
@@ -31,6 +32,7 @@ class Canvas extends Component {
     }
 
     draw(event) {
+        event.preventDefault();
         if (!this.isDrawing) return;
 
         const canvas = this.canvasRef.current;
@@ -52,7 +54,8 @@ class Canvas extends Component {
         this.lastY = y;
     }
 
-    stopDrawing() {
+    stopDrawing(event) {
+        event.preventDefault();
         this.isDrawing = false;
         const signatureDataURL = this.canvasRef.current.toDataURL();
         this.props.onSignatureChange(signatureDataURL);

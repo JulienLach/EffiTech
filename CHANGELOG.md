@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 -   Remove userAgentData condition for mobile view and and react-device-detect package
 -   UI updates
+-   Fix signature component to avoid scrolling while signing report on mobile
 
 # [0.6.1] (2025-15-02)
 
