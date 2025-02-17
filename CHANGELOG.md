@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## Changes
+
+-   Add option to create an unscheduled intervention when the technician validates the intervention form
+
 ## Fixes
 
 -   Remove userAgentData condition for mobile view and and react-device-detect package

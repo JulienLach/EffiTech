@@ -5,7 +5,7 @@ import styles from "./InterventionFormPage.module.css";
 import stylesMobile from "./InterventionFormPageMobile.module.css";
 import TemplateGlobal from "../Template/TemplateGlobal";
 import TemplateGlobalMobile from "../Template/TemplateGlobalMobile";
-import { createReport } from "../../services/api";
+import { createReport, createEvent } from "../../services/api";
 import Canvas from "../../components/Canvas/Canvas";
 
 // Composant wrapper pour utiliser les hooks
@@ -78,6 +78,9 @@ class InterventionFormPage extends Component {
                     );
                     this.setState({ duration });
                 }
+                if (name === "reschedule") {
+                    this.setState({ reschedule: checked });
+                }
             }
         );
     }
@@ -128,6 +131,37 @@ class InterventionFormPage extends Component {
         if (Object.keys(errors).length > 0) {
             this.setState({ errors });
             return;
+        }
+
+        if (reschedule) {
+            const eventToCreate = {
+                title: "Nouvelle intervention",
+                description: "",
+                status: 1,
+                isPlanned: false,
+                type: "Intervention",
+                idClient: eventDetails.client.idClient,
+                idAddress: eventDetails.client.address.idAddress,
+                startingDate: null,
+                startingHour: null,
+                endingHour: null,
+                idEmployee: eventDetails.employee.idEmployee,
+                workToDo: workDone,
+            };
+
+            console.log("Creating event with data:", eventToCreate);
+
+            createEvent(eventToCreate, (error, createdEvent) => {
+                if (error) {
+                    console.error("Erreur de création de l'événement", error);
+                    console.log("Error details:", error);
+                    return;
+                }
+
+                if (createdEvent) {
+                    console.log("Created event details:", createdEvent);
+                }
+            });
         }
 
         const reportData = {
