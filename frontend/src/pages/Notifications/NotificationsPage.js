@@ -152,7 +152,9 @@ class NotificationsPage extends Component {
                                                     )}
                                                 </td>
                                                 <td>{notification.type}</td>
-                                                <td>{notification.title}</td>
+                                                <td>
+                                                    <a>{notification.title}</a>
+                                                </td>
                                                 <td>
                                                     {this.formatDate(
                                                         notification.creationDate

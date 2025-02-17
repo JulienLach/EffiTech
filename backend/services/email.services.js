@@ -8,4 +8,13 @@ function sendReport(req, res) {
     res.status(200).send({ message: "Mail bien envoyé" });
 }
 
+function sendEmployeeCredentials(req, res) {
+    const { to, subject, text } = req.body;
+
+    sendMail(to, subject, text);
+
+    res.status(200).send({ message: "Mail bien envoyé" });
+}
+
 exports.sendReport = sendReport;
+exports.sendEmployeeCredentials = sendEmployeeCredentials;

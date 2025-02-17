@@ -1003,6 +1003,23 @@ function sendReport(emailData, callback) {
     xhr.send(JSON.stringify(emailData));
 }
 
+function sendEmployeeCredentials(emailData, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", `${API_URL}/email/employeeCredentials`);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.withCredentials = true;
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            console.log(JSON.parse(xhr.responseText));
+            callback(null, JSON.parse(xhr.responseText));
+        } else {
+            console.error("Erreur d'envois du mail", xhr.statusText);
+            callback(new Error(xhr.statusText), null);
+        }
+    };
+    xhr.send(JSON.stringify(emailData));
+}
+
 export {
     getAllEvents,
     getAllClients,
@@ -1033,4 +1050,5 @@ export {
     getAllInvoices,
     importInvoice,
     sendReport,
+    sendEmployeeCredentials,
 };

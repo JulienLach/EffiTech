@@ -11,9 +11,9 @@ const localizer = momentLocalizer(moment);
 
 function eventStyleGetter(event) {
     const employeeColors = {
-        1: "#CC3333",
-        2: "#FF6666",
-        3: "#FF4D4D",
+        1: "#AD455D",
+        2: "#HTGO74",
+        3: "#RAG845",
         4: "#FF4D1A",
         5: "#CC4d33",
         6: "#33CCCC",

@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 -   Add option to create an unscheduled intervention when the technician validates the intervention form
 -   Add notifications for creating, updating, deleting, and validating events with employee and date details
+-   Send employee credentials by email when creating an employee account
 
 ## Fixes
 
