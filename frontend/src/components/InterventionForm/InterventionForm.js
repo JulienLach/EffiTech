@@ -398,7 +398,7 @@ class InterventionForm extends Component {
                                                         }
                                                         type="submit"
                                                     >
-                                                        <i className="fa-regular fa-file-pen"></i>{" "}
+                                                        <i className="fa-solid fa-file-pen"></i>{" "}
                                                         Remplir le questionnaire
                                                     </button>
                                                 );
@@ -522,13 +522,14 @@ class InterventionForm extends Component {
                                     {event.employee.lastname}
                                 </div>
                                 <div className={styles.separator}></div>
-                                <div>
+                                <div className={styles.workToDo}>
                                     {(event.type === "Rendez-vous" &&
                                         event.status === 5) ||
                                     (event.type === "Intervention" &&
                                         event.status === 1) ? (
                                         <>
                                             <h3>Travaux à effectuer</h3>
+
                                             <div>{event.workToDo}</div>
                                         </>
                                     ) : null}

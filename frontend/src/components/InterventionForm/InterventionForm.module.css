@@ -71,3 +71,9 @@
 .eventLabel {
     font-weight: 500;
 }
+
+.workToDo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
