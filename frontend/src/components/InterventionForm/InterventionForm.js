@@ -376,7 +376,7 @@ class InterventionForm extends Component {
                                                         }
                                                         type="submit"
                                                     >
-                                                        <i className="fa-regular fa-pen-to-square"></i>{" "}
+                                                        <i className="fa-regular fa-file-pen"></i>{" "}
                                                         Remplir le questionnaire
                                                     </button>
                                                 );
