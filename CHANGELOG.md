@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -   Send employee credentials by email when creating an employee account
 -   Add clickable employee card to see profile
 -   Change default calendar mobile view to day view
+-   Add erase button on client and technician signature
 
 ## Fixes
 
