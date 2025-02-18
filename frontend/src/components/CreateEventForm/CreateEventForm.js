@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Select from "react-select";
 import styles from "./CreateEventForm.module.css";
 import {
     getAllClients,
@@ -37,7 +38,6 @@ class CreateEventForm extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleTabChange = this.handleTabChange.bind(this);
-        this.handleSearchChange = this.handleSearchChange.bind(this);
     }
 
     componentDidMount() {
@@ -91,10 +91,9 @@ class CreateEventForm extends Component {
         }
     }
 
-    handleClientChange(event) {
-        const clientId = event.target.value;
+    handleClientChange(selectedOption) {
         const client = this.state.clients.find(
-            (client) => client.idClient.toString() === clientId
+            (client) => client.idClient === selectedOption.value
         );
         this.setState({ selectedClient: client });
     }
@@ -204,10 +203,6 @@ class CreateEventForm extends Component {
         this.setState({ selectedTab: tab });
     }
 
-    handleSearchChange(event) {
-        this.setState({ searchQuery: event.target.value });
-    }
-
     render() {
         const {
             clients,
@@ -220,16 +215,13 @@ class CreateEventForm extends Component {
             description,
             selectedEmployee,
             selectedTab,
-            searchQuery,
             errors,
         } = this.state;
 
-        // Filtrer les clients en fonction de la recherche
-        const filteredClients = clients.filter((client) =>
-            `${client.firstname} ${client.lastname}`
-                .toLowerCase()
-                .includes(searchQuery.toLowerCase())
-        );
+        const clientOptions = clients.map((client) => ({
+            value: client.idClient,
+            label: `${client.firstname} ${client.lastname}`,
+        }));
 
         return (
             <>
@@ -343,23 +335,18 @@ class CreateEventForm extends Component {
                                 Sélectionner un client{" "}
                                 <span className={styles.required}>*</span> :
                             </label>
-                            <input
-                                type="text"
-                                placeholder="Rechercher un client"
-                                value={searchQuery}
-                                onChange={this.handleSearchChange}
+                            <Select
+                                options={clientOptions}
+                                onChange={this.handleClientChange}
+                                placeholder={
+                                    <span>
+                                        <i className="fa fa-search"></i>{" "}
+                                        Rechercher un client
+                                    </span>
+                                }
+                                className={styles.reactSelect}
+                                classNamePrefix="react-select"
                             />
-                            <select onChange={this.handleClientChange}>
-                                <option value="">Sélectionner un client</option>
-                                {filteredClients.map((client) => (
-                                    <option
-                                        key={client.idClient}
-                                        value={client.idClient}
-                                    >
-                                        {client.firstname} {client.lastname}
-                                    </option>
-                                ))}
-                            </select>
                             {errors.selectedClient && (
                                 <span className={styles.error}>
                                     {errors.selectedClient}

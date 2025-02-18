@@ -166,3 +166,10 @@
 .formLabel {
     font-weight: 500;
 }
+
+.reactSelect {
+    font-size: 1em;
+    border-radius: 0.4em;
+    width: 25vw;
+    margin-top: 0.3em;
+}
