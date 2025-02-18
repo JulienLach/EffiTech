@@ -227,6 +227,8 @@ class ClientsPage extends Component {
                 this.setState((prevState) => ({
                     clients: [...prevState.clients, newClient],
                     isModalOpen: false,
+                    company: "",
+                    category: "Particulier",
                 }));
             }
         });

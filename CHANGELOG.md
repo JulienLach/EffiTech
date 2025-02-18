@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -   Add clickable employee card to see profile
 -   Change default calendar mobile view to day view
 -   Add react-select npm package in create event form for client selector
+-   Add erase button on client and technician signature
 
 ## Fixes
 
