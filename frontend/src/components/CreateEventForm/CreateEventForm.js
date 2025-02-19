@@ -99,10 +99,10 @@ class CreateEventForm extends Component {
     }
 
     handleEmployeeChange(selectedOption) {
-        const technicien = this.state.employees.find(
+        const employee = this.state.employees.find(
             (employee) => employee.idEmployee === selectedOption.value
         );
-        this.setState({ selectedEmployee: technicien });
+        this.setState({ selectedEmployee: employee.idEmployee });
     }
 
     handleChange(event) {
@@ -198,7 +198,7 @@ class CreateEventForm extends Component {
                     console.log("Notification created successfully:", result);
                 }
             });
-            window.location.reload();
+            // window.location.reload();
         });
     }
 
