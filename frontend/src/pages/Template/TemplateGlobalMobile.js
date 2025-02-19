@@ -43,7 +43,7 @@ class TemplateGlobalMobile extends Component {
             case "/clients":
                 pageTitle = "Clients";
                 break;
-            case "/client-details/":
+            case "/client-details":
                 pageTitle = "Détails clients";
                 break;
             case "/expense":
@@ -66,15 +66,15 @@ class TemplateGlobalMobile extends Component {
             <>
                 {/* Partie header */}
                 <div className={styles.headerDiv}>
-                    <div className={styles.topLeftHader}>
+                    <div className={styles.topLeftHeader}>
                         <a href="/calendar">
                             <img
                                 src={logoMobile}
                                 alt="Logo"
                                 className={styles.logoMobile}
                             />
+                            <h1 className={styles.title}>{pageTitle}</h1>
                         </a>
-                        <h1 className={styles.title}>{pageTitle}</h1>
                     </div>
                     <div>
                         <div className={styles.headerRight}>
@@ -94,7 +94,7 @@ class TemplateGlobalMobile extends Component {
                 {/* Partie bar navigation bottom */}
                 <div className={styles.navbarBottom}>
                     <a href="/calendar">
-                        <i className={`fas fa-list ${styles.navbarIcon}`}></i>
+                        <i className={`fas fa-home ${styles.navbarIcon}`}></i>
                     </a>
                     <a href="/calendar-mobile">
                         <i
@@ -102,7 +102,7 @@ class TemplateGlobalMobile extends Component {
                         ></i>
                     </a>
                     <a href="/expense">
-                        <i className={`fas fa-wallet ${styles.navbarIcon}`}></i>
+                        <i className={`fas fa-euro ${styles.navbarIcon}`}></i>
                     </a>
                     <a href="/clients">
                         <i

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { isMobile } from "react-device-detect";
 import { useNavigate, useLocation } from "react-router-dom";
 import TemplateGlobal from "../Template/TemplateGlobal";
 import styles from "./EmployeesPage.module.css";
@@ -57,10 +58,9 @@ class EmployeesPage extends Component {
 
     render() {
         const { employees, isModalOpen } = this.state;
-        const screenType = window.navigator.userAgentData;
         return (
             <>
-                {screenType.mobile ? (
+                {isMobile ? (
                     <>
                         <h1>Mobile</h1>{" "}
                         {/* ici faire une redirection simple vers la page de connexion */}
@@ -84,6 +84,9 @@ class EmployeesPage extends Component {
                                     <div
                                         key={employee.idEmployee}
                                         className={styles.card}
+                                        onClick={() =>
+                                            this.handleButtonClick(employee)
+                                        }
                                     >
                                         <div className={styles.profilPicture}>
                                             <img

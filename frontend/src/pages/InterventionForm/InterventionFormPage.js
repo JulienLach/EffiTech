@@ -1,16 +1,24 @@
 import React, { Component } from "react";
+import { isMobile } from "react-device-detect";
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./InterventionFormPage.module.css";
 import stylesMobile from "./InterventionFormPageMobile.module.css";
 import TemplateGlobal from "../Template/TemplateGlobal";
 import TemplateGlobalMobile from "../Template/TemplateGlobalMobile";
-import { createReport } from "../../services/api";
+import {
+    createReport,
+    createEvent,
+    createNotification,
+} from "../../services/api";
 import Canvas from "../../components/Canvas/Canvas";
 
 // Composant wrapper pour utiliser les hooks
 function InterventionFormPageWrapper() {
     const navigate = useNavigate();
     const location = useLocation();
+    if (!location.state) {
+        window.location.href = "/calendar";
+    }
     return <InterventionFormPage navigate={navigate} location={location} />;
 }
 
@@ -77,6 +85,9 @@ class InterventionFormPage extends Component {
                     );
                     this.setState({ duration });
                 }
+                if (name === "reschedule") {
+                    this.setState({ reschedule: checked });
+                }
             }
         );
     }
@@ -129,6 +140,58 @@ class InterventionFormPage extends Component {
             return;
         }
 
+        if (reschedule) {
+            const eventToCreate = {
+                title: "Nouvelle intervention",
+                description: "",
+                status: 1,
+                isPlanned: false,
+                type: "Intervention",
+                idClient: eventDetails.client.idClient,
+                idAddress: eventDetails.client.address.idAddress,
+                startingDate: null,
+                startingHour: null,
+                endingHour: null,
+                idEmployee: eventDetails.employee.idEmployee,
+                workToDo: workDone,
+            };
+
+            console.log("Creating event with data:", eventToCreate);
+
+            createEvent(eventToCreate, (error, createdEvent) => {
+                if (error) {
+                    console.error("Erreur de création de l'événement", error);
+                    console.log("Error details:", error);
+                    return;
+                }
+
+                if (createdEvent) {
+                    console.log("Created event details:", createdEvent);
+                }
+            });
+        }
+
+        const notificationData = {
+            idEmployee: eventDetails.employee.idEmployee,
+            action: "Validation",
+            type: eventDetails.type,
+            title: eventDetails.title,
+            creationDate: new Date().toISOString().split("T")[0],
+            creationHour: new Date().toLocaleTimeString("fr-FR", {
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+            }),
+        };
+
+        createNotification(notificationData, (error, result) => {
+            if (error) {
+                console.error("Error creating notification:", error);
+            } else {
+                console.log("Notification created successfully:", result);
+            }
+        });
+
         const reportData = {
             breakdown,
             workDone,
@@ -171,11 +234,9 @@ class InterventionFormPage extends Component {
             errors,
         } = this.state;
 
-        const isMobile = window.navigator.userAgentData;
-
         return (
             <>
-                {isMobile.mobile ? (
+                {isMobile ? (
                     <>
                         <TemplateGlobalMobile />
                         <form
@@ -489,6 +550,7 @@ class InterventionFormPage extends Component {
                                             name="startingDate"
                                             value={startingDate}
                                             onChange={this.handleChange}
+                                            readOnly
                                         />
                                     </div>
                                 </div>
@@ -503,7 +565,7 @@ class InterventionFormPage extends Component {
                                     </div>
                                 </div>
                                 <div>
-                                    <div className={styles.labelInput}>
+                                    <div className={styles.endingHourInput}>
                                         <label>
                                             Heure de fin{" "}
                                             <span className={styles.required}>

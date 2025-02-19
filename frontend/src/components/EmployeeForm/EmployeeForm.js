@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styles from "./EmployeeForm.module.css";
-import { createEmployee } from "../../services/api";
+import { createEmployee, sendEmployeeCredentials } from "../../services/api";
 
 class EmployeeForm extends Component {
     constructor(props) {
@@ -89,6 +89,23 @@ class EmployeeForm extends Component {
                 );
             } else {
                 console.log("Employé créé:", createdEmployee);
+
+                const emailData = {
+                    to: createdEmployee.email,
+                    subject: "🔧 Vos identifiants de connexion EffiTech",
+                    text: `Bonjour ${createdEmployee.firstname},\n\nVoici vos identifiants de connexion à l'application EffiTech :\nEmail: ${createdEmployee.email}\nMot de passe: ${password}\n\.`,
+                };
+
+                sendEmployeeCredentials(emailData, (error, data) => {
+                    if (error) {
+                        console.error(
+                            "Erreur lors de l'envoi des identifiants",
+                            error
+                        );
+                    } else {
+                        console.log("Identifiants envoyés par email", data);
+                    }
+                });
             }
             window.location.reload();
         });

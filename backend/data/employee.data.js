@@ -281,7 +281,7 @@ class Employee {
             // Stocker le token dans les cookies
             res.setHeader(
                 "Set-Cookie",
-                `token=${token}; HttpOnly; Max-Age=3600; Path=/`
+                `token=${token}; HttpOnly; Max-Age=10800; Path=/`
             );
 
             callback(null, employee);

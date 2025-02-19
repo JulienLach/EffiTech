@@ -22,6 +22,7 @@ class Canvas extends Component {
     }
 
     startDrawing(event) {
+        event.preventDefault();
         this.isDrawing = true;
         const rect = this.canvasRef.current.getBoundingClientRect();
         const clientX = event.clientX || event.touches[0].clientX;
@@ -31,6 +32,7 @@ class Canvas extends Component {
     }
 
     draw(event) {
+        event.preventDefault();
         if (!this.isDrawing) return;
 
         const canvas = this.canvasRef.current;
@@ -52,11 +54,19 @@ class Canvas extends Component {
         this.lastY = y;
     }
 
-    stopDrawing() {
+    stopDrawing(event) {
+        event.preventDefault();
         this.isDrawing = false;
         const signatureDataURL = this.canvasRef.current.toDataURL();
         this.props.onSignatureChange(signatureDataURL);
     }
+
+    clearCanvas = () => {
+        const canvas = this.canvasRef.current;
+        const context = canvas.getContext("2d");
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        this.props.onSignatureChange("");
+    };
 
     render() {
         const isDesktop = navigator.userAgentData
@@ -64,16 +74,31 @@ class Canvas extends Component {
             : !/Mobi|Android/i.test(navigator.userAgent);
 
         return (
-            <canvas
-                ref={this.canvasRef}
-                width={340}
-                height={100}
-                style={{
-                    border: "0.06em solid #cecece",
-                    borderRadius: "0.4em",
-                    marginRight: isDesktop ? "auto" : "initial",
-                }}
-            />
+            <div>
+                <canvas
+                    ref={this.canvasRef}
+                    width={340}
+                    height={100}
+                    style={{
+                        border: "0.06em solid #cecece",
+                        borderRadius: "0.4em",
+                        marginRight: isDesktop ? "auto" : "initial",
+                    }}
+                />
+                <button
+                    style={{
+                        marginLeft: "1em",
+                        padding: "0.5em",
+                        borderRadius: "0.4em",
+                        backgroundColor: "#ebebeb",
+                        border: "none",
+                        cursor: "pointer",
+                    }}
+                    onClick={this.clearCanvas}
+                >
+                    <i className="fa-solid fa-eraser"></i>
+                </button>
+            </div>
         );
     }
 }

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { isMobile } from "react-device-detect";
 import { useLocation, useNavigate } from "react-router-dom";
 import TemplateGlobal from "../Template/TemplateGlobal";
 import TemplateGlobalMobile from "../Template/TemplateGlobalMobile";
@@ -88,10 +89,6 @@ class ClientDetailsPage extends Component {
         const { client } = this.state;
         console.log(client);
 
-        //Variable pour savoir si c'est mobile ou desktop
-        const isMobile = window.navigator.userAgentData;
-
-        // Initials for the client's profile picture
         const initial =
             client.category === "Professionnel"
                 ? client.company.charAt(0).toUpperCase() +
@@ -106,7 +103,7 @@ class ClientDetailsPage extends Component {
 
         return (
             <>
-                {isMobile.mobile ? (
+                {isMobile ? (
                     <>
                         <TemplateGlobalMobile />
                         <div className={stylesMobile.container}>

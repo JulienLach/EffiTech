@@ -23,7 +23,7 @@
 
 .title {
     margin: 0;
-    font-size: 1.8em;
+    font-size: 1.6em;
     font-weight: 600;
 }
 
@@ -38,21 +38,21 @@
 
 .notificationIcon {
     position: relative;
-    margin-right: 1.4em;
-    margin-top: 0.5em;
+    margin-right: 1em;
+    font-size: 1.5em;
 }
 
 .notificationCount {
     display: flex;
     position: absolute;
-    top: -0.625em;
-    right: -0.625em;
+    top: -0.25em;
+    right: -0.35em;
     background-color: #cf2f1d;
     color: white;
     border-radius: 1em;
     height: 1.2em;
-    width: 1.2em;
-    font-size: 0.7em;
+    width: 1em;
+    font-size: 0.55em;
     min-width: 1.2em;
     align-items: center;
     justify-content: center;
@@ -81,10 +81,11 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 5em;
+    height: 4.5em;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    text-align: center;
     background-color: rgb(255, 255, 255);
     border-radius: 0.6em 0.6em 0 0;
     padding: 0.8em 0;
@@ -101,8 +102,16 @@
     height: 2em;
 }
 
-.topLeftHader {
+.topLeftHeader {
     display: flex;
     align-items: center;
     gap: 0.5em;
+}
+
+.topLeftHeader a {
+    display: flex;
+    color: #333;
+    flex-direction: row;
+    gap: 0.5em;
+    align-items: center;
 }

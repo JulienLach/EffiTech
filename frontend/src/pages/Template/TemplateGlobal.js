@@ -223,14 +223,15 @@ class TemplateGlobal extends Component {
                             <li
                                 className={
                                     currentPath === "/clients" ||
-                                    currentPath === "/client-details/" ||
+                                    currentPath === "/client-details" ||
                                     currentPath === "/client-form"
                                         ? styles.active
                                         : ""
                                 }
                             >
                                 <a href="/clients">
-                                    <i className="fa-solid fa-user"></i>Clients
+                                    <i className="fa-solid fa-user-group"></i>
+                                    Clients
                                 </a>
                             </li>
                             <li
@@ -243,7 +244,7 @@ class TemplateGlobal extends Component {
                                 }
                             >
                                 <a href="/employees">
-                                    <i className="fa-solid fa-user-group"></i>
+                                    <i className="fa-solid fa-user"></i>
                                     Employés
                                 </a>
                             </li>
@@ -296,9 +297,7 @@ class TemplateGlobal extends Component {
                             </li>
                         </ul>
                     </div>
-                    <div className={styles.sideOrange}>
-                        <i className="fa-solid fa-caret-down"></i>
-                    </div>
+                    <div className={styles.sideOrange}></div>
                 </div>
 
                 {/* partie container à copier pour les nouvelles pages */}
@@ -313,7 +312,7 @@ class TemplateGlobal extends Component {
                                 className={styles}
                                 onClick={this.handleCreateEventClick}
                             >
-                                Créer un événement{" "}
+                                Créer un évènement{" "}
                                 <i className="fa-solid fa-calendar"></i>
                             </a>
                             <a>

@@ -7,8 +7,12 @@ body {
     display: flex;
     flex-direction: column;
     width: 100vw;
-    padding-top: 4em;
     margin-bottom: 5em;
+}
+.filterBar {
+    z-index: 900;
+    position: sticky;
+    top: 5em;
 }
 
 /*CSS event cards*/

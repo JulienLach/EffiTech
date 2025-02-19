@@ -17,7 +17,8 @@
 .container {
     display: flex;
     flex-direction: column;
-    padding-bottom: 10em;
+    padding-bottom: 5em;
+    margin-top: 5em;
 }
 
 .modalFooter {
@@ -120,7 +121,7 @@ h3 {
     border: none;
     border-radius: 0.4em;
     padding: 0.5em 0.6em;
-    font-size: 1em;
+    font-size: 1.15em;
     margin: 0.9em 0 1em 0;
 }
 

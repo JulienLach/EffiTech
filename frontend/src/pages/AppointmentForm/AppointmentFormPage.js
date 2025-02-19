@@ -1,15 +1,23 @@
 import React, { Component } from "react";
+import { isMobile } from "react-device-detect";
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./AppointmentFormPage.module.css";
 import stylesMobile from "./AppointmentFormPageMobile.module.css";
 import TemplateGlobal from "../Template/TemplateGlobal";
 import TemplateGlobalMobile from "../Template/TemplateGlobalMobile";
-import { updateEvent, createEvent } from "../../services/api";
+import {
+    updateEvent,
+    createEvent,
+    createNotification,
+} from "../../services/api";
 
 // Composant wrapper pour utiliser les hooks
 function AppointmentFormPageWrapper() {
     const navigate = useNavigate();
     const location = useLocation();
+    if (!location.state) {
+        window.location.href = "/calendar";
+    }
     return <AppointmentFormPage navigate={navigate} location={location} />;
 }
 
@@ -168,6 +176,27 @@ class AppointmentFormPage extends Component {
             });
         }
 
+        const notificationData = {
+            idEmployee: eventDetails.employee.idEmployee,
+            action: "Validation",
+            type: eventDetails.type,
+            title: eventDetails.title,
+            creationDate: new Date().toISOString().split("T")[0],
+            creationHour: new Date().toLocaleTimeString("fr-FR", {
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+            }),
+        };
+
+        createNotification(notificationData, (error, result) => {
+            if (error) {
+                console.error("Error creating notification:", error);
+            } else {
+                console.log("Notification created successfully:", result);
+            }
+        });
+
         updateEvent(eventData, (error, updatedEvent) => {
             if (error) {
                 console.error(error);
@@ -192,12 +221,9 @@ class AppointmentFormPage extends Component {
             errors,
         } = this.state;
 
-        //Variable pour savoir si c'est mobile ou desktop
-        const isMobile = window.navigator.userAgentData;
-
         return (
             <>
-                {isMobile.mobile ? (
+                {isMobile ? (
                     <>
                         <TemplateGlobalMobile />
                         <form

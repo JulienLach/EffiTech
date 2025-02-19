@@ -8,6 +8,9 @@ import { getDocumentById } from "../../services/api";
 function DocumentDetailsPageWrapper() {
     const navigate = useNavigate();
     const location = useLocation();
+    if (!location.state) {
+        window.location.href = "/calendar";
+    }
     return <DocumentDetailsPage navigate={navigate} location={location} />;
 }
 

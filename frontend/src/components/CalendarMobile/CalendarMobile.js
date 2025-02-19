@@ -33,12 +33,12 @@ function eventStyleGetter(event) {
     const style = {
         backgroundColor: backgroundColor,
         borderRadius: "0.4em",
-        opacity: 0.88,
+        opacity: 0.95,
         color: "white",
-        border: "0.15em solid lightgrey",
-        paddingLeft: "0.5em",
-        fontWeight: "300",
-        fontSize: "0.9em",
+        border: "0.1em solid lightgrey",
+        paddingLeft: "0.4em",
+        fontWeight: "400",
+        fontSize: "0.95em",
     };
     return {
         style,
@@ -57,7 +57,7 @@ class CalendarMobile extends Component {
                     events={this.props.events}
                     startAccessor="start"
                     endAccessor="end"
-                    defaultView="work_week"
+                    defaultView="day"
                     views={["work_week", "day"]}
                     min={new Date(1970, 1, 1, 8, 0, 0)}
                     max={new Date(1970, 1, 1, 20, 0, 0)}

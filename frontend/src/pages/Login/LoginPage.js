@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Navigate } from "react-router-dom";
+import { isMobile } from "react-device-detect";
 import styles from "./LoginPage.module.css";
 import stylesMobile from "./LoginMobile.module.css";
 import LogoDesktop from "../../components/LogoDesktop/LogoDesktop";
@@ -43,15 +44,13 @@ class LoginPage extends Component {
     }
 
     render() {
-        const isMobile = window.navigator.userAgentData;
-
         if (this.state.redirect) {
             return <Navigate to="/calendar" />;
         }
 
         return (
             <>
-                {isMobile.mobile ? (
+                {isMobile ? (
                     <>
                         <div className={stylesMobile.container}>
                             <img
@@ -90,9 +89,7 @@ class LoginPage extends Component {
                                         {this.state.error}
                                     </p>
                                 )}
-                                <a href="/forgot-password">
-                                    Mot de passe oublié
-                                </a>
+                                <a href="/login">Mot de passe oublié</a>
                                 <button
                                     type="submit"
                                     className={stylesMobile.submitButton}

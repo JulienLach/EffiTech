@@ -258,3 +258,22 @@ input:checked + .slider:before {
 .checkbox label {
     font-weight: 500;
 }
+
+.endingHourInput input {
+    width: 50%;
+    height: 2.5em;
+    border-radius: 0.5em;
+    padding: 1em;
+    border: 1px solid #c9c9c9;
+    background-color: #ffffff;
+    margin-bottom: 0.6em;
+}
+
+.endingHourInput label {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    margin-bottom: 0.6em;
+    gap: 0.25em;
+    font-weight: 500;
+}

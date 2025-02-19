@@ -6,6 +6,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+# [0.7.0] (2025-18-02)
+
+## Changes
+
+-   Add option to create an unscheduled intervention when the technician validates the intervention form
+-   Add notifications for creating, updating, deleting, and validating events with employee and date details
+-   Send employee credentials by email when creating an employee account
+-   Add clickable employee card to see employee profile
+-   Change default calendar mobile view to day view
+-   Add react-select npm package in create event form for client selector
+-   Add erase button on client and technician signature
+
+## Fixes
+
+-   Remove userAgentData condition for mobile view and and react-device-detect package
+-   Fix signature component to avoid scrolling while signing report on mobile
+-   Fix to hande redirection for report and client details pages when access it directly in url
+-   Add search item to reset filter method to clean search bar on reset button click
+-   Desktop and Mobile UI updates
+
 # [0.6.1] (2025-15-02)
 
 ## Changes

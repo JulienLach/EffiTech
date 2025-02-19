@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styles from "./UpdateInterventionForm.module.css";
-import { updateEvent } from "../../services/api.js";
+import { updateEvent, createNotification } from "../../services/api.js";
 
 class UpdateInterventionForm extends Component {
     constructor(props) {
@@ -68,6 +68,27 @@ class UpdateInterventionForm extends Component {
             idEmployee,
             workToDo,
         };
+
+        const notificationData = {
+            idEmployee: eventData.idEmployee,
+            action: "Modification",
+            type: eventData.type,
+            title: eventData.title,
+            creationDate: new Date().toISOString().split("T")[0],
+            creationHour: new Date().toLocaleTimeString("fr-FR", {
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+            }),
+        };
+
+        createNotification(notificationData, (error, result) => {
+            if (error) {
+                console.error("Error creating notification:", error);
+            } else {
+                console.log("Notification created successfully:", result);
+            }
+        });
 
         console.log("Données envoyées à l'API:", eventData); // Log des données envoyées
 

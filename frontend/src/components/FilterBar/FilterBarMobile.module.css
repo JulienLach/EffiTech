@@ -1,12 +1,10 @@
 .filterDiv {
-    position: fixed;
     display: flex;
-    margin-top: 5em;
+    margin-top: 1em;
     justify-content: space-between;
     background-color: rgb(255, 255, 255);
     z-index: 900;
     width: 100%;
-    top: 0;
 }
 
 /* style for each filter button */
@@ -19,7 +17,7 @@
     display: inline-flex;
     align-items: center;
     padding: 0 1.25em;
-    margin: 1em auto;
+    margin: 0.5em auto;
 }
 
 /* icon position */

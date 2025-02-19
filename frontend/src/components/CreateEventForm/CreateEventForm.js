@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Select from "react-select";
 import styles from "./CreateEventForm.module.css";
 import {
     getAllClients,
@@ -37,7 +38,6 @@ class CreateEventForm extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleTabChange = this.handleTabChange.bind(this);
-        this.handleSearchChange = this.handleSearchChange.bind(this);
     }
 
     componentDidMount() {
@@ -91,16 +91,18 @@ class CreateEventForm extends Component {
         }
     }
 
-    handleClientChange(event) {
-        const clientId = event.target.value;
+    handleClientChange(selectedOption) {
         const client = this.state.clients.find(
-            (client) => client.idClient.toString() === clientId
+            (client) => client.idClient === selectedOption.value
         );
         this.setState({ selectedClient: client });
     }
 
-    handleEmployeeChange(event) {
-        this.setState({ selectedEmployee: event.target.value });
+    handleEmployeeChange(selectedOption) {
+        const employee = this.state.employees.find(
+            (employee) => employee.idEmployee === selectedOption.value
+        );
+        this.setState({ selectedEmployee: employee.idEmployee });
     }
 
     handleChange(event) {
@@ -204,10 +206,6 @@ class CreateEventForm extends Component {
         this.setState({ selectedTab: tab });
     }
 
-    handleSearchChange(event) {
-        this.setState({ searchQuery: event.target.value });
-    }
-
     render() {
         const {
             clients,
@@ -220,16 +218,18 @@ class CreateEventForm extends Component {
             description,
             selectedEmployee,
             selectedTab,
-            searchQuery,
             errors,
         } = this.state;
 
-        // Filtrer les clients en fonction de la recherche
-        const filteredClients = clients.filter((client) =>
-            `${client.firstname} ${client.lastname}`
-                .toLowerCase()
-                .includes(searchQuery.toLowerCase())
-        );
+        const clientOptions = clients.map((client) => ({
+            value: client.idClient,
+            label: `${client.firstname} ${client.lastname}`,
+        }));
+
+        const employeeOptions = employees.map((employee) => ({
+            value: employee.idEmployee,
+            label: `${employee.firstname} ${employee.lastname}`,
+        }));
 
         return (
             <>
@@ -343,23 +343,18 @@ class CreateEventForm extends Component {
                                 Sélectionner un client{" "}
                                 <span className={styles.required}>*</span> :
                             </label>
-                            <input
-                                type="text"
-                                placeholder="Rechercher un client"
-                                value={searchQuery}
-                                onChange={this.handleSearchChange}
+                            <Select
+                                options={clientOptions}
+                                onChange={this.handleClientChange}
+                                placeholder={
+                                    <span>
+                                        <i className="fa fa-search"></i>{" "}
+                                        Rechercher un client
+                                    </span>
+                                }
+                                className={styles.reactSelect}
+                                classNamePrefix="react-select"
                             />
-                            <select onChange={this.handleClientChange}>
-                                <option value="">Sélectionner un client</option>
-                                {filteredClients.map((client) => (
-                                    <option
-                                        key={client.idClient}
-                                        value={client.idClient}
-                                    >
-                                        {client.firstname} {client.lastname}
-                                    </option>
-                                ))}
-                            </select>
                             {errors.selectedClient && (
                                 <span className={styles.error}>
                                     {errors.selectedClient}
@@ -377,22 +372,18 @@ class CreateEventForm extends Component {
                                 Sélectionner un technicien{" "}
                                 <span className={styles.required}>*</span> :
                             </label>
-                            <select
-                                value={selectedEmployee}
+                            <Select
+                                options={employeeOptions}
                                 onChange={this.handleEmployeeChange}
-                            >
-                                <option value="">
-                                    Sélectionner un technicien
-                                </option>
-                                {employees.map((employee) => (
-                                    <option
-                                        key={employee.idEmployee}
-                                        value={employee.idEmployee}
-                                    >
-                                        {employee.firstname} {employee.lastname}
-                                    </option>
-                                ))}
-                            </select>
+                                placeholder={
+                                    <span>
+                                        <i className="fa fa-search"></i>{" "}
+                                        Rechercher un client
+                                    </span>
+                                }
+                                className={styles.reactSelect}
+                                classNamePrefix="react-select"
+                            />
                             {errors.selectedEmployee && (
                                 <span className={styles.error}>
                                     {errors.selectedEmployee}

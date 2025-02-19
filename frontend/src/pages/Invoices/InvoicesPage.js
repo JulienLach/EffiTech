@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { isMobile } from "react-device-detect";
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./InvoicesPage.module.css";
 import TemplateGlobal from "../Template/TemplateGlobal";
@@ -90,8 +91,6 @@ class InvoicesPage extends Component {
             currentPage,
             invoicesPerPage,
         } = this.state;
-
-        const isMobile = window.navigator.userAgentData;
 
         const indexOfLastInvoice = currentPage * invoicesPerPage;
         const indexOfFirstInvoice = indexOfLastInvoice - invoicesPerPage;

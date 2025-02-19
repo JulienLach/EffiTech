@@ -37,6 +37,12 @@
     background-color: white;
 }
 
+.card:hover {
+    cursor: pointer;
+    box-shadow: 0 0 1em rgba(0, 0, 0, 0.13);
+    transition: 0.2s;
+}
+
 .addEmployee {
     background-color: #c93c2c;
     padding: 0.55em 0.9em;

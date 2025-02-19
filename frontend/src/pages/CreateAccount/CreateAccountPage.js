@@ -134,13 +134,16 @@ class CreateAccountPage extends Component {
                                 onClick={this.handleCancel}
                                 className={styles.cancelButton}
                             >
+                                <i class="fa-solid fa-xmark"></i>
+                                {""}
                                 Annuler
                             </button>
                             <button
                                 type="submit"
                                 className={styles.submitButton}
                             >
-                                Créer mon compte
+                                <i class="fa-solid fa-check"></i> Créer mon
+                                compte
                             </button>
                         </div>
                     </form>

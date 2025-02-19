@@ -28,9 +28,10 @@ class ExpenseFormPage extends Component {
                     </div>
                     <div className={stylesMobile.inputDisplay}>
                         <label>Justificatif</label>
-                        <button className={stylesMobile.download} type="submit">
-                            Télécharger un fichier
-                        </button>
+                        <input
+                            className={stylesMobile.download}
+                            type="file"
+                        ></input>
                     </div>
                     <div className={stylesMobile.inputDisplay}>
                         <label>Numéro d'intervention</label>
