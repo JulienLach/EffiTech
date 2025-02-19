@@ -98,6 +98,13 @@ class CreateEventForm extends Component {
         this.setState({ selectedClient: client });
     }
 
+    handleEmployeeChange(selectedOption) {
+        const technicien = this.state.employees.find(
+            (employee) => employee.idEmployee === selectedOption.value
+        );
+        this.setState({ selectedEmployee: technicien.idEmployee });
+    }
+
     handleEmployeeChange(event) {
         this.setState({ selectedEmployee: event.target.value });
     }
@@ -221,6 +228,11 @@ class CreateEventForm extends Component {
         const clientOptions = clients.map((client) => ({
             value: client.idClient,
             label: `${client.firstname} ${client.lastname}`,
+        }));
+
+        const employeeOptions = employees.map((employee) => ({
+            value: employee.idEmployee,
+            label: `${employee.firstname} ${employee.lastname}`,
         }));
 
         return (
@@ -364,22 +376,18 @@ class CreateEventForm extends Component {
                                 Sélectionner un technicien{" "}
                                 <span className={styles.required}>*</span> :
                             </label>
-                            <select
-                                value={selectedEmployee}
+                            <Select
+                                options={employeeOptions}
                                 onChange={this.handleEmployeeChange}
-                            >
-                                <option value="">
-                                    Sélectionner un technicien
-                                </option>
-                                {employees.map((employee) => (
-                                    <option
-                                        key={employee.idEmployee}
-                                        value={employee.idEmployee}
-                                    >
-                                        {employee.firstname} {employee.lastname}
-                                    </option>
-                                ))}
-                            </select>
+                                placeholder={
+                                    <span>
+                                        <i className="fa fa-search"></i>{" "}
+                                        Rechercher un client
+                                    </span>
+                                }
+                                className={styles.reactSelect}
+                                classNamePrefix="react-select"
+                            />
                             {errors.selectedEmployee && (
                                 <span className={styles.error}>
                                     {errors.selectedEmployee}
