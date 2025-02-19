@@ -102,11 +102,7 @@ class CreateEventForm extends Component {
         const technicien = this.state.employees.find(
             (employee) => employee.idEmployee === selectedOption.value
         );
-        this.setState({ selectedEmployee: technicien.idEmployee });
-    }
-
-    handleEmployeeChange(event) {
-        this.setState({ selectedEmployee: event.target.value });
+        this.setState({ selectedEmployee: technicien });
     }
 
     handleChange(event) {
