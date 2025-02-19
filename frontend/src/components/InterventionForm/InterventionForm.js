@@ -301,17 +301,6 @@ class InterventionForm extends Component {
                                         })}
                                     </p>
                                 </div>
-
-                                {/* <div>
-                                    <div>
-                                        {event.type === "Rendez-vous" && event.status === 5 && (
-                                            <>
-                                                <h3>Travaux à effectuer</h3>
-                                                <div>{event.workToDo}</div>
-                                            </>
-                                        )}
-                                    </div>
-                                </div> */}
                                 <div className={stylesMobile.modalFooter}>
                                     {(() => {
                                         if (event.type === "Intervention") {
@@ -386,15 +375,25 @@ class InterventionForm extends Component {
                     >
                         <div className={styles.container}>
                             <div className={styles.formHeader}>
-                                <h2>
-                                    {(() => {
-                                        if (event.type === "Intervention") {
-                                            return "Intervention";
-                                        } else {
-                                            return "Rendez-vous";
-                                        }
-                                    })()}
-                                </h2>
+                                <div className={styles.titleCard}>
+                                    <h2>
+                                        {(() => {
+                                            if (event.type === "Intervention") {
+                                                return "Intervention";
+                                            } else {
+                                                return "Rendez-vous";
+                                            }
+                                        })()}
+                                    </h2>
+                                    <button
+                                        className={styles.backButton}
+                                        type="button"
+                                        onClick={closeModal}
+                                    >
+                                        <i className="fa fa-arrow-left"></i>{" "}
+                                        Retour
+                                    </button>
+                                </div>
                                 <p>{this.getStatusIndicator(event.status)}</p>
                             </div>
 
@@ -504,53 +503,61 @@ class InterventionForm extends Component {
                                     ) : null}
                                 </div>
                             </div>
-                            <div className={styles.modalFooter}>
-                                {event.status !== 5 && (
-                                    <button
-                                        className={styles.modalButtons}
-                                        type="button"
-                                        onClick={this.handleDelete}
-                                    >
-                                        <i className="fa-solid fa-trash"></i>{" "}
-                                        Supprimer
-                                    </button>
-                                )}
-                                <button
-                                    className={styles.modalButtons}
-                                    type="button"
-                                    onClick={closeModal}
-                                >
-                                    <i className="fa fa-arrow-left"></i> Retour
-                                </button>
-                                {event.status !== 5 && (
-                                    <button
-                                        className={styles.modalButtons}
-                                        type="button"
-                                        onClick={this.handleEdit}
-                                    >
-                                        <i className="fa fa-pen"></i>
-                                        Modifier
-                                    </button>
-                                )}
-                                {(() => {
-                                    if (event.type === "Intervention") {
-                                        if (event.status === 5) {
-                                            return (
-                                                <button
-                                                    className={
-                                                        styles.modalButtons
-                                                    }
-                                                    type="button"
-                                                    onClick={
-                                                        this.handleViewReport
-                                                    }
-                                                >
-                                                    <i className="fa-solid fa-file-circle-check"></i>
-                                                    Voir le rapport validé
-                                                </button>
-                                            );
-                                        } else {
+                            <div className={styles.buttonPosition}>
+                                <div className={styles.modalButtonsContainer}>
+                                    {event.status !== 5 && (
+                                        <button
+                                            className={styles.classicButtons}
+                                            type="button"
+                                            onClick={this.handleEdit}
+                                        >
+                                            <i className="fa-solid fa-pen"></i>{" "}
+                                            Modifier
+                                        </button>
+                                    )}
+                                    {(() => {
+                                        if (event.type === "Intervention") {
+                                            if (event.status === 5) {
+                                                return (
+                                                    <button
+                                                        className={
+                                                            styles.classicButtons
+                                                        }
+                                                        type="button"
+                                                        onClick={
+                                                            this
+                                                                .handleViewReport
+                                                        }
+                                                    >
+                                                        Voir le rapport validé
+                                                    </button>
+                                                );
+                                            } else {
+                                                if (
+                                                    event.status !== 1 &&
+                                                    event.startingHour !==
+                                                        null &&
+                                                    event.endingHour !== null
+                                                ) {
+                                                    return (
+                                                        <button
+                                                            className={
+                                                                styles.classicButtons
+                                                            }
+                                                            type="submit"
+                                                        >
+                                                            <i className="fa-solid fa-file-pen"></i>{" "}
+                                                            Remplir le rapport
+                                                        </button>
+                                                    );
+                                                }
+                                                return null;
+                                            }
+                                        } else if (
+                                            event.type === "Rendez-vous"
+                                        ) {
                                             if (
+                                                event.status !== 5 &&
                                                 event.status !== 1 &&
                                                 event.startingHour !== null &&
                                                 event.endingHour !== null
@@ -558,39 +565,31 @@ class InterventionForm extends Component {
                                                 return (
                                                     <button
                                                         className={
-                                                            styles.modalButtons
+                                                            styles.classicButtons
                                                         }
                                                         type="submit"
                                                     >
-                                                        <i className="fa-solid fa-file-pen"></i>
-                                                        Remplir le rapport
+                                                        <i className="fa-solid fa-file-pen"></i>{" "}
+                                                        Remplir le formulaire
                                                     </button>
                                                 );
                                             }
-                                            return null;
                                         }
-                                    } else if (event.type === "Rendez-vous") {
-                                        if (
-                                            event.status !== 5 &&
-                                            event.status !== 1 &&
-                                            event.startingHour !== null &&
-                                            event.endingHour !== null
-                                        ) {
-                                            return (
-                                                <button
-                                                    className={
-                                                        styles.modalButtons
-                                                    }
-                                                    type="submit"
-                                                >
-                                                    <i className="fa-solid fa-file-pen"></i>
-                                                    Remplir le questionnaire
-                                                </button>
-                                            );
-                                        }
-                                    }
-                                    return null;
-                                })()}
+                                        return null;
+                                    })()}
+                                </div>
+                                <div className={styles.deleteButtonsContainer}>
+                                    {event.status !== 5 && (
+                                        <button
+                                            className={styles.deleteButtons}
+                                            type="button"
+                                            onClick={this.handleDelete}
+                                        >
+                                            <i className="fa-solid fa-xmark"></i>{" "}
+                                            Supprimer
+                                        </button>
+                                    )}
+                                </div>
                             </div>
                         </div>
                     </form>
