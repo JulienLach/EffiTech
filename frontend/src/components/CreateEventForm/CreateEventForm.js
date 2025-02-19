@@ -198,7 +198,7 @@ class CreateEventForm extends Component {
                     console.log("Notification created successfully:", result);
                 }
             });
-            // window.location.reload();
+            window.location.reload();
         });
     }
 

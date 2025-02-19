@@ -15,6 +15,9 @@ import {
 function AppointmentFormPageWrapper() {
     const navigate = useNavigate();
     const location = useLocation();
+    if (!location.state) {
+        window.location.href = "/calendar";
+    }
     return <AppointmentFormPage navigate={navigate} location={location} />;
 }
 

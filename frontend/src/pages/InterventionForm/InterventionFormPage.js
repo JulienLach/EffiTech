@@ -16,6 +16,9 @@ import Canvas from "../../components/Canvas/Canvas";
 function InterventionFormPageWrapper() {
     const navigate = useNavigate();
     const location = useLocation();
+    if (!location.state) {
+        window.location.href = "/calendar";
+    }
     return <InterventionFormPage navigate={navigate} location={location} />;
 }
 
