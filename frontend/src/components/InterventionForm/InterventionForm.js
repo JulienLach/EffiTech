@@ -316,6 +316,7 @@ class InterventionForm extends Component {
                                                                 .handleViewReport
                                                         }
                                                     >
+                                                        <i class="fa-solid fa-file-circle-check"></i>{" "}
                                                         Voir le rapport validé
                                                     </button>
                                                 );
@@ -529,6 +530,8 @@ class InterventionForm extends Component {
                                                                 .handleViewReport
                                                         }
                                                     >
+                                                        <i class="fa-solid fa-file-circle-check"></i>
+                                                        {""}
                                                         Voir le rapport validé
                                                     </button>
                                                 );

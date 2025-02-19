@@ -312,7 +312,7 @@ class TemplateGlobal extends Component {
                                 className={styles}
                                 onClick={this.handleCreateEventClick}
                             >
-                                Créer un événement{" "}
+                                Créer un évènement{" "}
                                 <i className="fa-solid fa-calendar"></i>
                             </a>
                             <a>
