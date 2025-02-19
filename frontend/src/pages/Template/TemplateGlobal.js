@@ -223,7 +223,7 @@ class TemplateGlobal extends Component {
                             <li
                                 className={
                                     currentPath === "/clients" ||
-                                    currentPath === "/client-details/" ||
+                                    currentPath === "/client-details" ||
                                     currentPath === "/client-form"
                                         ? styles.active
                                         : ""

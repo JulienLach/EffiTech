@@ -117,7 +117,7 @@ class ClientsPage extends Component {
 
     handleButtonClick(client) {
         if (client && client.idClient) {
-            this.props.navigate(`/client-details/`, {
+            this.props.navigate(`/client-details`, {
                 state: { client },
             });
         } else {

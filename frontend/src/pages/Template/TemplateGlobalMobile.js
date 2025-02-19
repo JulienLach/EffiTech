@@ -43,7 +43,7 @@ class TemplateGlobalMobile extends Component {
             case "/clients":
                 pageTitle = "Clients";
                 break;
-            case "/client-details/":
+            case "/client-details":
                 pageTitle = "Détails clients";
                 break;
             case "/expense":

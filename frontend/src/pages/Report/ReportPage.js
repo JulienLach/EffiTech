@@ -12,6 +12,9 @@ import { getReportById, getCompany, sendReport } from "../../services/api";
 // Composant wrapper pour utiliser les hooks
 function ReportPageWrapper() {
     const location = useLocation();
+    if (!location.state) {
+        window.location.href = "/calendar";
+    }
     return <ReportPage location={location} />;
 }
 
