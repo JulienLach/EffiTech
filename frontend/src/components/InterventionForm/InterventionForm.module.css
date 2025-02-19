@@ -16,43 +16,76 @@
     display: block;
 }
 
+.buttonPosition {
+    display: flex;
+    flex-direction: column;
+    gap: 10em;
+}
+
 .container {
     display: flex;
     flex-direction: column;
     gap: 2em;
+    overflow-y: auto;
+    height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
-.modalFooter {
-    display: flex;
-    flex-direction: row;
-    gap: 0.7em;
-}
-
-.modalButtons {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 0.3em;
-}
-
-.modalFooter button {
-    padding: 0.4em 0.6em;
-    border: none;
-    border-radius: 0.4em;
+.backButton {
     font-size: 1em;
-    transition: 10ms;
+    background-color: #e2e2e2;
+    border-radius: 0.3em;
+    padding: 0.3em 0.6em;
+    border: none;
     cursor: pointer;
 }
 
-.modalFooter button:hover {
-    background-color: #c93c2c;
+.deleteButtons {
+    padding: 0.625em;
+    border: none;
+    border-radius: 0.625em;
     color: white;
+    font-size: 1.125em;
+    font-weight: 500;
+    cursor: pointer;
+    background-color: #3f3f3f;
+}
+
+deleteButtonsContainer {
+    text-align: right;
+}
+
+.classicButtons {
+    padding: 0.625em;
+    border: none;
+    border-radius: 0.625em;
+    color: white;
+    font-size: 1.125em;
+    font-weight: 500;
+    cursor: pointer;
+    background-color: #c93c2c;
+}
+
+.classicButtons:hover {
+    background-color: #92291d;
 }
 
 .separator {
     margin: 1em 0;
     border-bottom: 0.063em solid #ccc;
+}
+
+.modalButtonsContainer {
+    display: flex;
+    gap: 1em;
+    /* background-color: red; */
+}
+
+.titleCard {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .formHeader {
