@@ -23,6 +23,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -   Fix signature component to avoid scrolling while signing report on mobile
 -   Mobile UI updates
 -   Fix to hande redirection for report and client details pages when access it directly in url
+-   Add search item to reset filter method
 
 # [0.6.1] (2025-15-02)
 

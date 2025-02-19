@@ -150,7 +150,7 @@ class ClientsPage extends Component {
     }
 
     handleResetFilter() {
-        this.setState({ selectedCategory: "All" });
+        this.setState({ selectedCategory: "All", searchItem: "" });
     }
 
     handleSubmit(event) {

@@ -249,7 +249,7 @@ class CalendarPage extends Component {
     }
 
     handleResetFilter() {
-        this.setState({ selectedStatus: "", selectedType: "" });
+        this.setState({ selectedStatus: "", selectedType: "", searchItem: "" });
     }
 
     render() {
@@ -459,6 +459,7 @@ class CalendarPage extends Component {
                                 <h1 className={styles.pageTitle}>Calendrier</h1>
                                 <div className={styles.filterBar}>
                                     <FilterBar
+                                        searchItem={this.state.searchItem}
                                         handleSearchChange={
                                             this.handleSearchChange
                                         }

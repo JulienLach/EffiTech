@@ -32,6 +32,7 @@ class FilterBar extends Component {
                                 id="search"
                                 name="search"
                                 placeholder="Rechercher"
+                                value={this.props.searchItem}
                                 onChange={this.props.handleSearchChange}
                             />
                         </div>
