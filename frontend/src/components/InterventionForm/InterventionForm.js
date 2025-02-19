@@ -167,37 +167,6 @@ class InterventionForm extends Component {
                             onSubmit={this.handleSubmit}
                             className={`${stylesMobile.modal} ${stylesMobile.open}`}
                         >
-                            <div className={stylesMobile.headerDiv}>
-                                <h1 className={stylesMobile.title}>
-                                    {(() => {
-                                        if (event.type === "Intervention") {
-                                            return "Intervention";
-                                        } else {
-                                            return "Rendez-vous";
-                                        }
-                                    })()}
-                                </h1>
-
-                                <div className={stylesMobile.headerRight}>
-                                    <div
-                                        className={
-                                            stylesMobile.notificationIcon
-                                        }
-                                    >
-                                        <i class="fa-regular fa-bell"></i>
-                                        <span
-                                            className={
-                                                stylesMobile.notificationCount
-                                            }
-                                        >
-                                            2
-                                        </span>
-                                    </div>
-                                    <div className={stylesMobile.profileBubble}>
-                                        JL
-                                    </div>
-                                </div>
-                            </div>
                             <div className={stylesMobile.container}>
                                 <div className={stylesMobile.buttonContainer}>
                                     <button
