@@ -179,6 +179,7 @@ class NotificationsPage extends Component {
                                             {this.formatDate(
                                                 notification.creationDate
                                             )}
+                                            <p>{notification.creationHour}</p>
                                         </span>
                                     </div>
                                     <div
@@ -186,18 +187,6 @@ class NotificationsPage extends Component {
                                             stylesMobile.notificationBody
                                         }
                                     >
-                                        <p>
-                                            {notification.type ===
-                                            "Intervention"
-                                                ? "INT-"
-                                                : notification.type ===
-                                                  "Rendez-vous"
-                                                ? "RDV-"
-                                                : ""}
-                                            {notification.idEvent}
-                                        </p>
-
-                                        <p>{notification.creationHour}</p>
                                         <p>
                                             {this.getActionIndicator(
                                                 notification.action

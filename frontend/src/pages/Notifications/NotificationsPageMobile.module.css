@@ -22,7 +22,7 @@
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
-    padding: 0.7em;
+    padding: 1em;
     margin-bottom: 1em;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -36,7 +36,8 @@
 
 .notificationTitle {
     font-size: 1em;
-    font-weight: bold;
+    font-weight: 500;
+    margin-right: 1em;
 }
 
 .notificationBody {
