@@ -1,6 +1,12 @@
 import React, { Component } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./TemplateGlobalMobile.module.css";
 import logoMobile from "../../images/iconMobile.png";
+
+function TemplateGlobalMobileWrapper(props) {
+    const navigate = useNavigate();
+    return <TemplateGlobalMobile {...props} navigate={navigate} />;
+}
 
 class TemplateGlobalMobile extends Component {
     constructor(props) {
@@ -9,8 +15,12 @@ class TemplateGlobalMobile extends Component {
             currentPath: window.location.pathname,
             showProfileMenu: false,
             initials: "",
+            idEmployee: localStorage.getItem("idEmployee"),
         };
         this.setInitials = this.setInitials.bind(this);
+        this.getIdEmployeeLocalStorage =
+            this.getIdEmployeeLocalStorage.bind(this);
+        this.handleProfileClick = this.handleProfileClick.bind(this);
     }
 
     componentDidMount() {
@@ -27,6 +37,15 @@ class TemplateGlobalMobile extends Component {
             )}`.toUpperCase();
             this.setState({ initials });
         }
+    }
+
+    getIdEmployeeLocalStorage() {
+        return localStorage.getItem("idEmployee");
+    }
+
+    handleProfileClick() {
+        const idEmployee = this.getIdEmployeeLocalStorage();
+        this.props.navigate("/employee-details", { state: { idEmployee } });
     }
 
     render() {
@@ -84,7 +103,10 @@ class TemplateGlobalMobile extends Component {
                                     className={styles.notificationCount}
                                 ></span>
                             </div>
-                            <div className={styles.profileBubble}>
+                            <div
+                                className={styles.profileBubble}
+                                onClick={this.handleProfileClick}
+                            >
                                 {initials}
                             </div>
                         </div>
@@ -115,4 +137,4 @@ class TemplateGlobalMobile extends Component {
     }
 }
 
-export default TemplateGlobalMobile;
+export default TemplateGlobalMobileWrapper;

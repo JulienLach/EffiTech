@@ -15,7 +15,9 @@ function getAllEvents(req, res) {
         // Filtrer les événements en fonction de l'utilisateur connecté en vérifiant si l'utilisateur est un administrateur, infos récupéré dans le payload de la requête HTTP
         if (req.employee.isAdmin === false) {
             events = events.filter(
-                (event) => event.employee.idEmployee === req.employee.idEmployee
+                (event) =>
+                    event.employee.idEmployee === req.employee.idEmployee &&
+                    event.status !== 1
             );
         }
 
