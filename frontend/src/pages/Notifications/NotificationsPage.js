@@ -19,7 +19,12 @@ class NotificationsPage extends Component {
         super(props);
         this.state = {
             notifications: [],
+            currentPage: 1,
+            notificationsPerPage: 12,
         };
+        this.handlePageChange = this.handlePageChange.bind(this);
+        this.handleNextPage = this.handleNextPage.bind(this);
+        this.handlePreviousPage = this.handlePreviousPage.bind(this);
     }
 
     componentDidMount() {
@@ -31,6 +36,31 @@ class NotificationsPage extends Component {
             }
             console.log(data);
         });
+    }
+
+    handlePageChange(event, pageNumber) {
+        event.preventDefault();
+        this.setState({ currentPage: pageNumber });
+    }
+
+    handleNextPage(event) {
+        event.preventDefault();
+        this.setState((prevState) => ({
+            currentPage: Math.min(
+                prevState.currentPage + 1,
+                Math.ceil(
+                    prevState.notifications.length /
+                        prevState.notificationsPerPage
+                )
+            ),
+        }));
+    }
+
+    handlePreviousPage(event) {
+        event.preventDefault();
+        this.setState((prevState) => ({
+            currentPage: Math.max(prevState.currentPage - 1, 1),
+        }));
     }
 
     formatDate(date) {
@@ -102,7 +132,21 @@ class NotificationsPage extends Component {
     }
 
     render() {
-        const { notifications } = this.state;
+        const { notifications, currentPage, notificationsPerPage } = this.state;
+
+        // Calculer les notifications à afficher pour la page actuelle
+        const indexOfLastNotification = currentPage * notificationsPerPage;
+        const indexOfFirstNotification =
+            indexOfLastNotification - notificationsPerPage;
+        const currentNotifications = notifications.slice(
+            indexOfFirstNotification,
+            indexOfLastNotification
+        );
+
+        // Calculer le nombre total de pages
+        const totalPages = Math.ceil(
+            notifications.length / notificationsPerPage
+        );
 
         return (
             <>
@@ -136,37 +180,59 @@ class NotificationsPage extends Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {notifications.map((notification) => (
-                                            <tr
-                                                key={
-                                                    notification.idNotification
-                                                }
-                                            >
-                                                <td>
-                                                    {notification.firstName}{" "}
-                                                    {notification.lastName}
-                                                </td>
-                                                <td>
-                                                    {this.getActionIndicator(
-                                                        notification.action
-                                                    )}
-                                                </td>
-                                                <td>{notification.type}</td>
-                                                <td>
-                                                    <a>{notification.title}</a>
-                                                </td>
-                                                <td>
-                                                    {this.formatDate(
-                                                        notification.creationDate
-                                                    )}
-                                                </td>
-                                                <td>
-                                                    {notification.creationHour}
-                                                </td>
-                                            </tr>
-                                        ))}
+                                        {currentNotifications.map(
+                                            (notification) => (
+                                                <tr
+                                                    key={
+                                                        notification.idNotification
+                                                    }
+                                                >
+                                                    <td>
+                                                        {notification.firstName}{" "}
+                                                        {notification.lastName}
+                                                    </td>
+                                                    <td>
+                                                        {this.getActionIndicator(
+                                                            notification.action
+                                                        )}
+                                                    </td>
+                                                    <td>{notification.type}</td>
+                                                    <td>
+                                                        <a>
+                                                            {notification.title}
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        {this.formatDate(
+                                                            notification.creationDate
+                                                        )}
+                                                    </td>
+                                                    <td>
+                                                        {
+                                                            notification.creationHour
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            )
+                                        )}
                                     </tbody>
                                 </table>
+                                <div className={styles.pagination}>
+                                    <button
+                                        onClick={(e) =>
+                                            this.handlePreviousPage(e)
+                                        }
+                                        disabled={currentPage === 1}
+                                    >
+                                        <i className="fa-solid fa-chevron-left"></i>
+                                    </button>
+                                    <button
+                                        onClick={(e) => this.handleNextPage(e)}
+                                        disabled={currentPage === totalPages}
+                                    >
+                                        <i className="fa-solid fa-chevron-right"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </>
