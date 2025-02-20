@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -   Add paging on notifications page
 -   Add notification on mobile for employee
 -   Add profile page on mobile
+-   Add to be planned events tab on calendar page
 
 ## Fixes
 

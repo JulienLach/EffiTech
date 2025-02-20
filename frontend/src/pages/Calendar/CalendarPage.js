@@ -270,6 +270,8 @@ class CalendarPage extends Component {
             selectedType,
         } = this.state;
 
+        const toBePlannedEvents = events.filter((event) => event.status === 1);
+
         // Filtrer les événements en fonction de la recherche et du statut
         const filteredEvents = events.filter((event) => {
             const matchesSearchItem =
@@ -509,11 +511,34 @@ class CalendarPage extends Component {
                                     >
                                         Calendrier
                                     </button>
+                                    <button
+                                        className={`${styles.viewButton} ${
+                                            view === "toBePlanned"
+                                                ? styles.viewButtonActive
+                                                : ""
+                                        }`}
+                                        onClick={() =>
+                                            this.toggleView("toBePlanned")
+                                        }
+                                    >
+                                        <span className="buttonText">
+                                            À planifier
+                                        </span>{" "}
+                                        <span
+                                            className={
+                                                toBePlannedEvents.length === 0
+                                                    ? `${styles.toBePlannedEvents} ${styles.toBePlannedEventsEmpty}`
+                                                    : styles.toBePlannedEvents
+                                            }
+                                        >
+                                            {toBePlannedEvents.length}
+                                        </span>
+                                    </button>
                                     <div className={styles.divider}></div>
                                 </div>
                                 {view === "calendar" ? (
                                     <Calendar events={calendarEvents} />
-                                ) : (
+                                ) : view === "list" ? (
                                     <div>
                                         <table>
                                             <thead
@@ -530,86 +555,97 @@ class CalendarPage extends Component {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {currentEvents.map((event) => (
-                                                    <tr key={event.idEvent}>
-                                                        <td>
-                                                            {(() => {
-                                                                if (
-                                                                    event.type ===
-                                                                    "Intervention"
-                                                                ) {
-                                                                    return "INT-";
-                                                                } else {
-                                                                    return "RDV-";
-                                                                }
-                                                            })()}
-                                                            {event.idEvent}
-                                                        </td>
-                                                        <td
-                                                            className={
-                                                                styles.eventLink
-                                                            }
-                                                        >
-                                                            <a href="#">
-                                                                {
-                                                                    event.client
-                                                                        .firstname
-                                                                }{" "}
-                                                                {
-                                                                    event.client
-                                                                        .lastname
-                                                                }
-                                                            </a>
-                                                        </td>
-                                                        <td>{event.type}</td>
-                                                        <td
-                                                            className={
-                                                                styles.eventLink
-                                                            }
-                                                        >
-                                                            <a
-                                                                href="#"
-                                                                onClick={() =>
-                                                                    this.toggleEventModal(
-                                                                        event
-                                                                    )
+                                                {currentEvents
+                                                    .filter(
+                                                        (event) =>
+                                                            event.status != 1
+                                                    )
+                                                    .map((event) => (
+                                                        <tr key={event.idEvent}>
+                                                            <td>
+                                                                {(() => {
+                                                                    if (
+                                                                        event.type ===
+                                                                        "Intervention"
+                                                                    ) {
+                                                                        return "INT-";
+                                                                    } else {
+                                                                        return "RDV-";
+                                                                    }
+                                                                })()}
+                                                                {event.idEvent}
+                                                            </td>
+                                                            <td
+                                                                className={
+                                                                    styles.eventLink
                                                                 }
                                                             >
-                                                                {event.title}
-                                                            </a>
-                                                        </td>
-                                                        <td>
-                                                            {this.getStatusIndicator(
-                                                                event.status
-                                                            )}
-                                                        </td>
-                                                        <td>
-                                                            {event.startingDate
-                                                                ? new Date(
-                                                                      event.startingDate
-                                                                  ).toLocaleDateString()
-                                                                : ""}
-                                                        </td>
-                                                        <td
-                                                            className={
-                                                                styles.eventLink
-                                                            }
-                                                        >
-                                                            <a href="#">
-                                                                {
-                                                                    event
-                                                                        .employee
-                                                                        .firstname
-                                                                }{" "}
-                                                                {
-                                                                    event
-                                                                        .employee
-                                                                        .lastname
+                                                                <a href="#">
+                                                                    {
+                                                                        event
+                                                                            .client
+                                                                            .firstname
+                                                                    }{" "}
+                                                                    {
+                                                                        event
+                                                                            .client
+                                                                            .lastname
+                                                                    }
+                                                                </a>
+                                                            </td>
+                                                            <td>
+                                                                {event.type}
+                                                            </td>
+                                                            <td
+                                                                className={
+                                                                    styles.eventLink
                                                                 }
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                ))}
+                                                            >
+                                                                <a
+                                                                    href="#"
+                                                                    onClick={() =>
+                                                                        this.toggleEventModal(
+                                                                            event
+                                                                        )
+                                                                    }
+                                                                >
+                                                                    {
+                                                                        event.title
+                                                                    }
+                                                                </a>
+                                                            </td>
+                                                            <td>
+                                                                {this.getStatusIndicator(
+                                                                    event.status
+                                                                )}
+                                                            </td>
+                                                            <td>
+                                                                {event.startingDate
+                                                                    ? new Date(
+                                                                          event.startingDate
+                                                                      ).toLocaleDateString()
+                                                                    : ""}
+                                                            </td>
+                                                            <td
+                                                                className={
+                                                                    styles.eventLink
+                                                                }
+                                                            >
+                                                                <a href="#">
+                                                                    {
+                                                                        event
+                                                                            .employee
+                                                                            .firstname
+                                                                    }{" "}
+                                                                    {
+                                                                        event
+                                                                            .employee
+                                                                            .lastname
+                                                                    }
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    ))}
                                             </tbody>
                                         </table>
                                         <div className={styles.pagination}>
@@ -633,7 +669,138 @@ class CalendarPage extends Component {
                                             </button>
                                         </div>
                                     </div>
-                                )}
+                                ) : view === "toBePlanned" ? (
+                                    <div>
+                                        <table>
+                                            <thead
+                                                className={styles.stickyThead}
+                                            >
+                                                <tr>
+                                                    <th>Référence</th>
+                                                    <th>Client</th>
+                                                    <th>Type</th>
+                                                    <th>Titre</th>
+                                                    <th>Statut</th>
+                                                    <th>Date</th>
+                                                    <th>Employé</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {currentEvents
+                                                    .filter(
+                                                        (event) =>
+                                                            event.status === 1
+                                                    )
+                                                    .map((event) => (
+                                                        <tr key={event.idEvent}>
+                                                            <td>
+                                                                {(() => {
+                                                                    if (
+                                                                        event.type ===
+                                                                        "Intervention"
+                                                                    ) {
+                                                                        return "INT-";
+                                                                    } else {
+                                                                        return "RDV-";
+                                                                    }
+                                                                })()}
+                                                                {event.idEvent}
+                                                            </td>
+                                                            <td
+                                                                className={
+                                                                    styles.eventLink
+                                                                }
+                                                            >
+                                                                <a href="#">
+                                                                    {
+                                                                        event
+                                                                            .client
+                                                                            .firstname
+                                                                    }{" "}
+                                                                    {
+                                                                        event
+                                                                            .client
+                                                                            .lastname
+                                                                    }
+                                                                </a>
+                                                            </td>
+                                                            <td>
+                                                                {event.type}
+                                                            </td>
+                                                            <td
+                                                                className={
+                                                                    styles.eventLink
+                                                                }
+                                                            >
+                                                                <a
+                                                                    href="#"
+                                                                    onClick={() =>
+                                                                        this.toggleEventModal(
+                                                                            event
+                                                                        )
+                                                                    }
+                                                                >
+                                                                    {
+                                                                        event.title
+                                                                    }
+                                                                </a>
+                                                            </td>
+                                                            <td>
+                                                                {this.getStatusIndicator(
+                                                                    event.status
+                                                                )}
+                                                            </td>
+                                                            <td>
+                                                                {event.startingDate
+                                                                    ? new Date(
+                                                                          event.startingDate
+                                                                      ).toLocaleDateString()
+                                                                    : ""}
+                                                            </td>
+                                                            <td
+                                                                className={
+                                                                    styles.eventLink
+                                                                }
+                                                            >
+                                                                <a href="#">
+                                                                    {
+                                                                        event
+                                                                            .employee
+                                                                            .firstname
+                                                                    }{" "}
+                                                                    {
+                                                                        event
+                                                                            .employee
+                                                                            .lastname
+                                                                    }
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    ))}
+                                            </tbody>
+                                        </table>
+                                        <div className={styles.pagination}>
+                                            <button
+                                                onClick={(e) =>
+                                                    this.handlePreviousPage(e)
+                                                }
+                                                disabled={currentPage === 1}
+                                            >
+                                                <i className="fa-solid fa-chevron-left"></i>
+                                            </button>
+                                            <button
+                                                onClick={(e) =>
+                                                    this.handleNextPage(e)
+                                                }
+                                                disabled={
+                                                    currentPage === totalPages
+                                                }
+                                            >
+                                                <i className="fa-solid fa-chevron-right"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                ) : null}
                             </div>
                         </div>
                         {isEventModalOpen && !isUpdateFormOpen && (
