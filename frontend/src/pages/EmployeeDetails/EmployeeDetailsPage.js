@@ -9,7 +9,10 @@ import { getEmployeeById } from "../../services/api";
 function EmployeeDetailsPageWrapper() {
     const navigate = useNavigate();
     const location = useLocation();
-    if (!location.state) {
+    const idEmployee =
+        location.state?.idEmployee || localStorage.getItem("idEmployee");
+
+    if (!idEmployee) {
         window.location.href = "/employees";
     }
     return <EmployeeDetailsPage navigate={navigate} location={location} />;
