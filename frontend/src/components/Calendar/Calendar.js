@@ -3,6 +3,7 @@ import { Calendar as BigCalendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment-timezone";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "moment/locale/fr";
+import { getAllEmployees } from "../../services/api";
 
 // Setup the localizer by providing the moment Object to the correct localizer.
 moment.tz.setDefault("Europe/Paris");
@@ -46,6 +47,13 @@ function eventStyleGetter(event) {
 }
 
 class Calendar extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            selectedEmployees: [],
+        };
+    }
+
     render() {
         return (
             <div className="height" style={{ height: "80vh" }}>
