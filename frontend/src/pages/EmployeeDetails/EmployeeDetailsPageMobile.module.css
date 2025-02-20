@@ -1,0 +1,53 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: end;
+}
+
+.backButton {
+    font-size: 1em;
+    margin: 0.5em 0 0.5em 0;
+    background-color: #e2e2e2;
+    border-radius: 0.3em;
+    padding: 0.3em 0.6em;
+    border: none;
+}
+
+.backButton i {
+    margin-right: 0.5em;
+}
+
+.infoEmployeeCard,
+.contactCard,
+.mapCard {
+    display: flex;
+    flex-direction: column;
+    margin: 0.3em 0.3em;
+    padding: 0.5em;
+    background-color: white;
+    box-shadow: 0 0.2em 0.2em rgba(0, 0, 0, 0.1);
+    border-radius: 0.4em;
+}
+
+.contactCard {
+    margin-bottom: 4em;
+}
+
+.profilInitial {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 1.5em;
+    font-size: 1.7em;
+    color: white;
+    background-color: #494949;
+    border-radius: 100%;
+    width: 2.1em;
+    height: 2.1em;
+}

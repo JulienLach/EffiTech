@@ -85,6 +85,9 @@ class TemplateGlobalMobile extends Component {
             case "/notifications":
                 pageTitle = "Notifications";
                 break;
+            case "/employee-details":
+                pageTitle = "Mon profil";
+                break;
             default:
                 pageTitle = "Page";
         }
