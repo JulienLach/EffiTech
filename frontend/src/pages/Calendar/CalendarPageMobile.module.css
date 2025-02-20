@@ -95,12 +95,6 @@ body {
     margin-bottom: 1em;
 }
 
-.status {
-    font-size: 0.9em;
-    font-weight: 500;
-    color: #c93c2c;
-}
-
 .idInter {
     display: flex;
     align-items: center;

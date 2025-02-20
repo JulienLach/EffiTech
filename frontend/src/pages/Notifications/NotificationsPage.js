@@ -154,10 +154,71 @@ class NotificationsPage extends Component {
                     <>
                         <TemplateGlobalMobile />
                         <div className={stylesMobile.container}>
-                            <div className={styles.alignItems}>
-                                <h1 className={styles.pageTitle}>
-                                    Notifications
-                                </h1>
+                            {currentNotifications.map((notification) => (
+                                <div
+                                    key={notification.idNotification}
+                                    className={stylesMobile.notificationCard}
+                                >
+                                    <div
+                                        className={
+                                            stylesMobile.notificationHeader
+                                        }
+                                    >
+                                        <span
+                                            className={
+                                                stylesMobile.notificationTitle
+                                            }
+                                        >
+                                            {notification.title}
+                                        </span>
+                                        <span
+                                            className={
+                                                stylesMobile.notificationDate
+                                            }
+                                        >
+                                            {this.formatDate(
+                                                notification.creationDate
+                                            )}
+                                        </span>
+                                    </div>
+                                    <div
+                                        className={
+                                            stylesMobile.notificationBody
+                                        }
+                                    >
+                                        <p>
+                                            {notification.type ===
+                                            "Intervention"
+                                                ? "INT-"
+                                                : notification.type ===
+                                                  "Rendez-vous"
+                                                ? "RDV-"
+                                                : ""}
+                                            {notification.idEvent}
+                                        </p>
+
+                                        <p>{notification.creationHour}</p>
+                                        <p>
+                                            {this.getActionIndicator(
+                                                notification.action
+                                            )}
+                                        </p>
+                                    </div>
+                                </div>
+                            ))}
+                            <div className={stylesMobile.pagination}>
+                                <button
+                                    onClick={(e) => this.handlePreviousPage(e)}
+                                    disabled={currentPage === 1}
+                                >
+                                    <i className="fa-solid fa-chevron-left"></i>
+                                </button>
+                                <button
+                                    onClick={(e) => this.handleNextPage(e)}
+                                    disabled={currentPage === totalPages}
+                                >
+                                    <i className="fa-solid fa-chevron-right"></i>
+                                </button>
                             </div>
                         </div>
                     </>

@@ -109,7 +109,7 @@ class TemplateGlobalMobile extends Component {
                                 className={styles.notificationIcon}
                                 onClick={this.handleNotificationClick}
                             >
-                                <i class="fa-regular fa-bell"></i>
+                                <i className="fa-regular fa-bell"></i>
                                 <span
                                     className={styles.notificationCount}
                                 ></span>
