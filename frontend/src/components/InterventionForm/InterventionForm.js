@@ -497,7 +497,7 @@ class InterventionForm extends Component {
                                     (event.type === "Intervention" &&
                                         event.status === 1) ? (
                                         <>
-                                            <h3>Travaux à effectuer</h3>
+                                            <h3>Travaux à réaliser</h3>
 
                                             <div>{event.workToDo}</div>
                                         </>

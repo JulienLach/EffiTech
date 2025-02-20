@@ -225,7 +225,7 @@ class UpdateInterventionForm extends Component {
                         </div>
                         <div className={styles.labelInput}>
                             <label className={styles.eventLabels}>
-                                Travaux à effectuer :
+                                Travaux à réaliser :
                                 <textarea
                                     name="workToDo"
                                     value={workToDo}

@@ -301,7 +301,7 @@ class InterventionFormPage extends Component {
                             <div>
                                 <div className={stylesMobile.textArea}>
                                     <label>
-                                        Travaux efféctués{" "}
+                                        Travaux réalisés{" "}
                                         <span className={styles.required}>
                                             *
                                         </span>{" "}
@@ -528,7 +528,7 @@ class InterventionFormPage extends Component {
                                 <div>
                                     <div className={styles.textArea}>
                                         <label>
-                                            Travaux efféctués:{" "}
+                                            Travaux réalisés:{" "}
                                             <span className={styles.required}>
                                                 *
                                             </span>{" "}
