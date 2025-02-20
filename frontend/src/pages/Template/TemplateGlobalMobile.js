@@ -21,6 +21,7 @@ class TemplateGlobalMobile extends Component {
         this.getIdEmployeeLocalStorage =
             this.getIdEmployeeLocalStorage.bind(this);
         this.handleProfileClick = this.handleProfileClick.bind(this);
+        this.handleNotificationClick = this.handleNotificationClick.bind(this);
     }
 
     componentDidMount() {
@@ -48,13 +49,17 @@ class TemplateGlobalMobile extends Component {
         this.props.navigate("/employee-details", { state: { idEmployee } });
     }
 
+    handleNotificationClick() {
+        this.props.navigate("/notifications");
+    }
+
     render() {
         const { initials, currentPath } = this.state;
 
         let pageTitle;
         switch (currentPath) {
             case "/calendar":
-                pageTitle = "Calendrier";
+                pageTitle = "Mes évènements";
                 break;
             case "/calendar-mobile":
                 pageTitle = "Calendrier";
@@ -63,10 +68,10 @@ class TemplateGlobalMobile extends Component {
                 pageTitle = "Clients";
                 break;
             case "/client-details":
-                pageTitle = "Détails clients";
+                pageTitle = "Détails client";
                 break;
             case "/expense":
-                pageTitle = "Dépenses";
+                pageTitle = "Dépense / Frais";
                 break;
             case "/report":
                 pageTitle = "Rapport";
@@ -76,6 +81,9 @@ class TemplateGlobalMobile extends Component {
                 break;
             case "/intervention-form":
                 pageTitle = "Intervention";
+                break;
+            case "/notifications":
+                pageTitle = "Notifications";
                 break;
             default:
                 pageTitle = "Page";
@@ -97,7 +105,10 @@ class TemplateGlobalMobile extends Component {
                     </div>
                     <div>
                         <div className={styles.headerRight}>
-                            <div className={styles.notificationIcon}>
+                            <div
+                                className={styles.notificationIcon}
+                                onClick={this.handleNotificationClick}
+                            >
                                 <i class="fa-regular fa-bell"></i>
                                 <span
                                     className={styles.notificationCount}

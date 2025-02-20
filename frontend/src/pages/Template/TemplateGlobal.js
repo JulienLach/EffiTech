@@ -169,12 +169,6 @@ class TemplateGlobal extends Component {
                                 <div className={styles.profileMenu}>
                                     <ul>
                                         <li>
-                                            <a onClick={this.logout} href="#">
-                                                Se déconnecter{" "}
-                                                <i className="fa-solid fa-sign-out-alt"></i>
-                                            </a>
-                                        </li>
-                                        <li>
                                             <a
                                                 href="#"
                                                 onClick={
@@ -183,6 +177,12 @@ class TemplateGlobal extends Component {
                                             >
                                                 Mon profil{" "}
                                                 <i className="fa-solid fa-user"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a onClick={this.logout} href="#">
+                                                Se déconnecter{" "}
+                                                <i className="fa-solid fa-sign-out-alt"></i>
                                             </a>
                                         </li>
                                     </ul>
