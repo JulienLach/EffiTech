@@ -498,7 +498,6 @@ class InterventionForm extends Component {
                                         event.status === 1) ? (
                                         <>
                                             <h3>Travaux à réaliser</h3>
-
                                             <div>{event.workToDo}</div>
                                         </>
                                     ) : null}

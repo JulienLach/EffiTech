@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import styles from "./UpdateInterventionForm.module.css";
-import { updateEvent, createNotification } from "../../services/api.js";
+import Select from "react-select";
+import {
+    updateEvent,
+    createNotification,
+    getAllEmployees,
+} from "../../services/api.js";
 
 class UpdateInterventionForm extends Component {
     constructor(props) {
@@ -25,14 +30,37 @@ class UpdateInterventionForm extends Component {
             endingHour: props.event.endingHour,
             idEmployee: props.event.employee.idEmployee || "",
             workToDo: props.event.workToDo || "",
+            employees: [],
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleCancel = this.handleCancel.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleEmployeeChange = this.handleEmployeeChange.bind(this);
+    }
+
+    componentDidMount() {
+        getAllEmployees((error, data) => {
+            if (error) {
+                console.error(
+                    "Erreur lors de la récupération des employés",
+                    error
+                );
+            } else {
+                const employeeOptions = data.map((employee) => ({
+                    value: employee.idEmployee,
+                    label: `${employee.firstname} ${employee.lastname}`,
+                }));
+                this.setState({ employees: employeeOptions });
+            }
+        });
     }
 
     handleChange(e) {
         this.setState({ [e.target.name]: e.target.value });
+    }
+
+    handleEmployeeChange(selectedOption) {
+        this.setState({ idEmployee: selectedOption.value });
     }
 
     handleSubmit(e) {
@@ -123,7 +151,14 @@ class UpdateInterventionForm extends Component {
             startingHour,
             endingHour,
             workToDo,
+            employees,
+            idEmployee,
         } = this.state;
+
+        const employeeOptions = employees.map((employee) => ({
+            value: employee.value,
+            label: employee.label,
+        }));
 
         console.log("État actuel du formulaire:", this.state); // Log de l'état actuel du formulaire
 
@@ -141,13 +176,7 @@ class UpdateInterventionForm extends Component {
                     <div className={styles.separator}></div>
                     <div>
                         <h2>
-                            {(() => {
-                                if (type === "Intervention") {
-                                    return "INT-";
-                                } else {
-                                    return "RDV-";
-                                }
-                            })()}
+                            {type === "Intervention" ? "INT-" : "RDV-"}
                             {idEvent}
                         </h2>
                     </div>
@@ -188,6 +217,24 @@ class UpdateInterventionForm extends Component {
                                         Rendez-vous
                                     </option>
                                 </select>
+                            </label>
+                        </div>
+                        <div className={styles.labelInput}>
+                            <label className={styles.eventLabels}>
+                                Employé :
+                                <Select
+                                    options={employeeOptions}
+                                    value={employeeOptions.find(
+                                        (option) => option.value === idEmployee
+                                    )}
+                                    placeholder={
+                                        <span>
+                                            <i className="fa fa-search"></i>{" "}
+                                            Rechercher un employé
+                                        </span>
+                                    }
+                                    onChange={this.handleEmployeeChange}
+                                />
                             </label>
                         </div>
                         <div className={styles.labelInput}>
