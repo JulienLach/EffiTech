@@ -5,30 +5,29 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import "moment/locale/fr";
 import { getAllEmployees } from "../../services/api";
 
-// Setup the localizer by providing the moment Object to the correct localizer.
 moment.tz.setDefault("Europe/Paris");
 moment.locale("fr");
 const localizer = momentLocalizer(moment);
 
-function eventStyleGetter(event) {
-    const employeeColors = {
-        1: "#CC3333",
-        2: "#E09122",
-        3: "#506EE1",
-        4: "#795EC4",
-        5: "#CC9933",
-        6: "#33CCCC",
-        7: "#CCCC33",
-        8: "#9933CC",
-        9: "#33CC99",
-        10: "#CC3333",
-        11: "#3399CC",
-        12: "#CC3333",
-        13: "#33CC33",
-        14: "#3333CC",
-        15: "#CC3399",
-    };
+const employeeColors = {
+    1: "#CC3333",
+    2: "#E09122",
+    3: "#506EE1",
+    4: "#795EC4",
+    5: "#CC9933",
+    6: "#33CCCC",
+    7: "#CCCC33",
+    8: "#9933CC",
+    9: "#33CC99",
+    10: "#CC3333",
+    11: "#3399CC",
+    12: "#CC3333",
+    13: "#33CC33",
+    14: "#3333CC",
+    15: "#CC3399",
+};
 
+function eventStyleGetter(event) {
     const backgroundColor = employeeColors[event.idEmployee] || "#C93C2C";
 
     const style = {
@@ -51,55 +50,125 @@ class Calendar extends Component {
         super(props);
         this.state = {
             selectedEmployees: [],
+            employees: [],
         };
     }
 
+    componentDidMount() {
+        getAllEmployees((error, data) => {
+            if (error) {
+                this.setState({ error: error.message });
+            } else {
+                this.setState({ employees: data });
+            }
+        });
+    }
+
+    handleCheckboxChange = (idEmployee) => {
+        this.setState((prevState) => {
+            const { selectedEmployees } = prevState;
+            if (selectedEmployees.includes(idEmployee)) {
+                return {
+                    selectedEmployees: selectedEmployees.filter(
+                        (id) => id !== idEmployee
+                    ),
+                };
+            } else {
+                return {
+                    selectedEmployees: [idEmployee],
+                };
+            }
+        });
+    };
+
     render() {
+        const { selectedEmployees, employees } = this.state;
+        const filteredEvents =
+            selectedEmployees.length === 0
+                ? this.props.events
+                : this.props.events.filter((event) =>
+                      selectedEmployees.includes(event.idEmployee)
+                  );
+
         return (
-            <div className="height" style={{ height: "80vh" }}>
-                <BigCalendar
-                    localizer={localizer}
-                    events={this.props.events}
-                    startAccessor="start"
-                    endAccessor="end"
-                    defaultView="work_week"
-                    views={["work_week", "day"]}
-                    min={new Date(1970, 1, 1, 8, 0, 0)}
-                    max={new Date(1970, 1, 1, 20, 0, 0)}
-                    timeslots={2}
-                    step={30}
-                    formats={{
-                        timeGutterFormat: "HH:mm",
-                        eventTimeRangeFormat: (
-                            { start, end },
-                            culture,
-                            localizer
-                        ) =>
-                            localizer.format(start, "HH:mm", culture) +
-                            " - " +
-                            localizer.format(end, "HH:mm", culture),
-                        dayFormat: "dddd DD/MM",
-                        monthHeaderFormat: "MMMM YYYY",
-                    }}
-                    messages={{
-                        today: "Aujourd'hui",
-                        previous: <i className="fa-solid fa-chevron-left"></i>,
-                        next: <i className="fa-solid fa-chevron-right"></i>,
-                        work_week: "Semaine",
-                        day: "Jour",
-                        date: "Date",
-                        time: "Heure",
-                        event: "Événement",
-                    }}
-                    eventPropGetter={eventStyleGetter}
-                    components={{
-                        event: ({ event }) => (
-                            <span className="event-title">
-                                {event.title} - {event.client}
-                            </span>
-                        ),
-                    }}
-                />
+            <div>
+                <div className="employee-filters">
+                    {employees.map((employee) => (
+                        <label
+                            key={employee.idEmployee}
+                            style={{
+                                backgroundColor:
+                                    employeeColors[employee.idEmployee],
+                                color: "white",
+                                padding: "0.2em 0.5em",
+                                borderRadius: "0.25em",
+                                margin: "0.5em 0.2em",
+                                display: "inline-block",
+                            }}
+                        >
+                            <input
+                                type="checkbox"
+                                checked={selectedEmployees.includes(
+                                    employee.idEmployee
+                                )}
+                                onChange={() =>
+                                    this.handleCheckboxChange(
+                                        employee.idEmployee
+                                    )
+                                }
+                                style={{ marginRight: "0.5em" }}
+                            />
+                            {employee.firstname} {employee.lastname}
+                        </label>
+                    ))}
+                </div>
+                <div className="height" style={{ height: "80vh" }}>
+                    <BigCalendar
+                        localizer={localizer}
+                        events={filteredEvents}
+                        startAccessor="start"
+                        endAccessor="end"
+                        defaultView="work_week"
+                        views={["work_week", "day"]}
+                        min={new Date(1970, 1, 1, 8, 0, 0)}
+                        max={new Date(1970, 1, 1, 20, 0, 0)}
+                        timeslots={2}
+                        step={30}
+                        formats={{
+                            timeGutterFormat: "HH:mm",
+                            eventTimeRangeFormat: (
+                                { start, end },
+                                culture,
+                                localizer
+                            ) =>
+                                localizer.format(start, "HH:mm", culture) +
+                                " - " +
+                                localizer.format(end, "HH:mm", culture),
+                            dayFormat: "dddd DD/MM",
+                            monthHeaderFormat: "MMMM YYYY",
+                        }}
+                        messages={{
+                            today: "Aujourd'hui",
+                            previous: (
+                                <i className="fa-solid fa-chevron-left"></i>
+                            ),
+                            next: <i className="fa-solid fa-chevron-right"></i>,
+                            work_week: "Semaine",
+                            day: "Jour",
+                            date: "Date",
+                            time: "Heure",
+                            event: "Événement",
+                        }}
+                        eventPropGetter={eventStyleGetter}
+                        components={{
+                            event: ({ event }) => (
+                                <span className="event-title">
+                                    {event.title} - {event.client}
+                                </span>
+                            ),
+                        }}
+                    />
+                </div>
             </div>
         );
     }
