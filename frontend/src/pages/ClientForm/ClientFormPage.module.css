@@ -20,26 +20,22 @@
 
 /* CSS for input & label */
 .labelInput {
-    font-size: 1em;
-    font-weight: 500;
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.3em;
-    margin-bottom: 0.625em;
-    width: fit-content;
+    flex-direction: column;
+    gap: 0.5em;
 }
 
 /* CSS for input comportement */
 .labelInput input {
-    padding: 0.6em;
-    border: 0.06em solid #cccccc;
-    border-radius: 0.5em;
+    padding: 0.55em;
+    border: 0.05em solid #cccccc;
+    border-radius: 0.4em;
+    width: 30%;
 }
 
 /* CSS for the label comportement */
 .labelInput label {
-    /* margin: 0 1em; */
+    font-weight: 500;
     padding: 0.15em;
 }
 
