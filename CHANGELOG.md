@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+# [0.8.0] (2025-21-02)
+
 ## Changes
 
 -   Add paging on notifications page
