@@ -29,7 +29,7 @@
 .card {
     display: flex;
     justify-content: space-between;
-    width: 30em;
+    width: 25vw;
     margin: 0.7em;
     padding: 1.4em;
     border-radius: 0.7em;
