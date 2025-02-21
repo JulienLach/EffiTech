@@ -37,7 +37,7 @@ class FilterBar extends Component {
                             />
                         </div>
                         <div className={styles.typeFilter}>
-                            <i className="fa-solid fa-user"></i>
+                            <i className="fa-solid fa-user-group"></i>
                             <p>Client</p>
                         </div>
                         <div
@@ -133,7 +133,7 @@ class FilterBar extends Component {
                             </div>
                         )}
                         <div className={styles.typeFilter}>
-                            <i className="fa-solid fa-user-group"></i>
+                            <i className="fa-solid fa-user"></i>
                             <p>Employé</p>
                         </div>
                         <div

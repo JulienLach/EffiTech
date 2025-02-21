@@ -4,6 +4,7 @@ import moment from "moment-timezone";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "moment/locale/fr";
 import { getAllEmployees } from "../../services/api";
+import "./Calendar.css";
 
 moment.tz.setDefault("Europe/Paris");
 moment.locale("fr");
@@ -39,9 +40,11 @@ function eventStyleGetter(event) {
         paddingLeft: "0.4em",
         fontWeight: "400",
         fontSize: "0.95em",
+        transition: "transform 0.1s ease-in-out",
     };
     return {
         style,
+        className: "event-hover",
     };
 }
 
@@ -51,6 +54,8 @@ class Calendar extends Component {
         this.state = {
             selectedEmployees: [],
             employees: [],
+            openEventModal: false,
+            selectedEvent: null,
         };
     }
 
@@ -63,6 +68,14 @@ class Calendar extends Component {
             }
         });
     }
+
+    openEventModal = (event) => {
+        this.setState({ openEventModal: true, selectedEvent: event });
+    };
+
+    closeEventModal = () => {
+        this.setState({ openEventModal: false, selectedEvent: null });
+    };
 
     handleCheckboxChange = (idEmployee) => {
         this.setState((prevState) => {
@@ -82,7 +95,8 @@ class Calendar extends Component {
     };
 
     render() {
-        const { selectedEmployees, employees } = this.state;
+        const { selectedEmployees, employees, openEventModal, selectedEvent } =
+            this.state;
         const filteredEvents =
             selectedEmployees.length === 0
                 ? this.props.events
@@ -160,6 +174,7 @@ class Calendar extends Component {
                             event: "Événement",
                         }}
                         eventPropGetter={eventStyleGetter}
+                        onSelectEvent={this.openEventModal}
                         components={{
                             event: ({ event }) => (
                                 <span className="event-title">
@@ -169,6 +184,27 @@ class Calendar extends Component {
                         }}
                     />
                 </div>
+                {openEventModal && selectedEvent && (
+                    <div
+                        className="modalOverlay"
+                        onClick={this.closeEventModal}
+                    >
+                        <div
+                            className="modalContent"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <h3>{selectedEvent.title}</h3>
+                            <p>Client : {selectedEvent.client}</p>
+                            <p>Description : {selectedEvent.description}</p>
+                            <button
+                                className="closeButton"
+                                onClick={this.closeEventModal}
+                            >
+                                <i className="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+                    </div>
+                )}
             </div>
         );
     }
