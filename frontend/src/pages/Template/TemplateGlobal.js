@@ -31,6 +31,7 @@ class TemplateGlobal extends Component {
         this.handleNotificationClick = this.handleNotificationClick.bind(this);
         this.toggleCreateModal = this.toggleCreateModal.bind(this); // Méthode pour ouvrir/fermer la modal
         this.toggleCreateEventModal = this.toggleCreateEventModal.bind(this);
+        this.toggleCreateClientModal = this.toggleCreateClientModal.bind(this);
         this.toggleEventModal = this.toggleEventModal.bind(this);
         this.handleCreateEventClick = this.handleCreateEventClick.bind(this); // Méthode pour gérer le clic sur "Créer un événement"
         this.handleCreateClientClick = this.handleCreateClientClick.bind(this); // Méthode pour gérer le clic sur "Créer un client"
@@ -355,10 +356,14 @@ class TemplateGlobal extends Component {
                     <CreateEventForm closeModal={this.toggleCreateEventModal} />
                 )}
 
-                {/* Modal pour créer un événement */}
+                {/* Modal pour créer un client */}
                 {isCreateClientModalOpen && (
-                    <div className={styles.CreatemodalOverlay}>
-                        <ClientForm closeModal={this.toggleCreateClientModal} />
+                    <div className={styles.isCreatemodalOverlay}>
+                        <div className={styles.isCreatemodalContent}>
+                            <ClientForm
+                                onClose={this.toggleCreateClientModal}
+                            />
+                        </div>
                     </div>
                 )}
             </>
