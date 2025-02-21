@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -   Add employee selector to update intervention form
 -   Add employee filters on calendar component for admin
 -   Add event modal displayed on event card click on calendar component
+-   Add create client on global create button
 
 ## Fixes
 
