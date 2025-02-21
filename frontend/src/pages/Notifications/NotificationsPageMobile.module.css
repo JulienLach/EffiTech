@@ -1,7 +1,69 @@
-/* AppointmentFormPage.module.css */
 .container {
     display: flex;
     flex-direction: column;
     justify-content: start;
-    padding: 1.5em 2em 5em 2em;
+    padding: 1.5em 1.2em 5em 1.2em;
+}
+
+.alignItems {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1em;
+}
+
+.pageTitle {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+}
+
+.notificationCard {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1em;
+    margin-bottom: 1em;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.notificationHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5em;
+}
+
+.notificationTitle {
+    font-size: 1em;
+    font-weight: 500;
+    margin-right: 1em;
+}
+
+.notificationBody {
+    font-size: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4em;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 1em;
+    margin-bottom: 3em;
+}
+
+.pagination button {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    color: #333;
+    cursor: pointer;
+    margin: 0 0.5em;
+}
+
+.pagination button:disabled {
+    color: #ccc;
+    cursor: not-allowed;
 }

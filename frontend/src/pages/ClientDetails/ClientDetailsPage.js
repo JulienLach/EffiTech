@@ -171,7 +171,7 @@ class ClientDetailsPage extends Component {
                                                 stylesMobile.openMapsLink
                                             }
                                         >
-                                            <i class="fa-solid fa-location-dot"></i>
+                                            <i className="fa-solid fa-location-dot"></i>
                                             Voir sur Google Maps
                                         </a>
                                     </p>
@@ -237,7 +237,7 @@ class ClientDetailsPage extends Component {
                                                 stylesMobile.openMapsLink
                                             }
                                         >
-                                            <i class="fa-solid fa-location-dot"></i>
+                                            <i className="fa-solid fa-location-dot"></i>
                                             Voir sur Google Maps
                                         </a>
                                     </p>
@@ -265,7 +265,7 @@ class ClientDetailsPage extends Component {
                                     {/* code pour le professionnel ici */}
                                     <div className={styles.profilInfo}>
                                         <h1 className={styles.pageTitle}>
-                                            Client
+                                            Détails client
                                         </h1>
                                         <div
                                             className={styles.profilCompanyBack}
@@ -340,7 +340,7 @@ class ClientDetailsPage extends Component {
                                                 rel="noreferrer"
                                                 className={styles.openMapsLink}
                                             >
-                                                <i class="fa-solid fa-location-dot"></i>
+                                                <i className="fa-solid fa-location-dot"></i>
                                                 Voir sur Google Maps
                                             </a>
                                         </p>
@@ -368,7 +368,7 @@ class ClientDetailsPage extends Component {
                                     {/* code pour le particulier ici */}
                                     <div className={styles.profilInfo}>
                                         <h1 className={styles.pageTitle}>
-                                            Client
+                                            Détails client
                                         </h1>
                                         <div className={styles.profilNamesBack}>
                                             <img
@@ -435,7 +435,7 @@ class ClientDetailsPage extends Component {
                                                 rel="noreferrer"
                                                 className={styles.openMapsLink}
                                             >
-                                                <i class="fa-solid fa-location-dot"></i>
+                                                <i className="fa-solid fa-location-dot"></i>
                                                 Voir sur Google Maps
                                             </a>
                                         </p>

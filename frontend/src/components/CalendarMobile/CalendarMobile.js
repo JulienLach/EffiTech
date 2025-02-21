@@ -75,7 +75,7 @@ class CalendarMobile extends Component {
                             localizer.format(end, "HH:mm", culture),
                         dayFormat: (date, culture, localizer) =>
                             [1, 2, 3, 4, 5].includes(date.getDay())
-                                ? localizer.format(date, "dddd DD/MM", culture)
+                                ? localizer.format(date, "ddd DD/MM", culture)
                                 : "", // Masquer samedi et dimanche
                         monthHeaderFormat: "MMMM YYYY", // Format des mois
                     }}

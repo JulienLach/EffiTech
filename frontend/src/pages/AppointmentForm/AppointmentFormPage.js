@@ -265,7 +265,7 @@ class AppointmentFormPage extends Component {
                             </div>
                             <div>
                                 <div className={stylesMobile.textArea}>
-                                    <label>Travaux à effectuer :</label>
+                                    <label>Travaux à réaliser :</label>
                                     <textarea
                                         rows="5"
                                         name="workToDo"
@@ -328,12 +328,15 @@ class AppointmentFormPage extends Component {
                                     <label>
                                         Créer l'intervention à planifier
                                     </label>
-                                    <input
-                                        type="checkbox"
-                                        name="reschedule"
-                                        checked={reschedule}
-                                        onChange={this.handleChange}
-                                    ></input>
+                                    <label className={styles.switch}>
+                                        <input
+                                            type="checkbox"
+                                            name="reschedule"
+                                            checked={reschedule}
+                                            onChange={this.handleChange}
+                                        />
+                                        <span className={styles.slider}></span>
+                                    </label>
                                 </div>
                             </div>
                             <div className={stylesMobile.modalFooter}>
@@ -344,6 +347,7 @@ class AppointmentFormPage extends Component {
                                         (window.location.href = "/calendar#")
                                     }
                                 >
+                                    <i className="fa-solid fa-xmark"></i>
                                     Annuler
                                 </button>
                                 <button
@@ -410,7 +414,7 @@ class AppointmentFormPage extends Component {
                                 <div>
                                     <div className={styles.textArea}>
                                         <label>
-                                            Travaux à effectuer{" "}
+                                            Travaux à réaliser{" "}
                                             <span className={styles.required}>
                                                 *
                                             </span>{" "}

@@ -113,6 +113,14 @@ class CompanyPage extends Component {
                                 <i className="fa-solid fa-pen"></i>
                                 Modifier
                             </button>
+                            <div className={styles.separator}></div>
+                            <p>
+                                {" "}
+                                <span className={styles.companyInfos}>
+                                    Version de l'application :{" "}
+                                </span>{" "}
+                                {company.databaseVersion}
+                            </p>
                         </div>
                     ) : (
                         <div>

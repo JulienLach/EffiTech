@@ -301,7 +301,7 @@ class InterventionFormPage extends Component {
                             <div>
                                 <div className={stylesMobile.textArea}>
                                     <label>
-                                        Travaux efféctués{" "}
+                                        Travaux réalisés{" "}
                                         <span className={styles.required}>
                                             *
                                         </span>{" "}
@@ -417,12 +417,17 @@ class InterventionFormPage extends Component {
                                     <label>
                                         Créer une nouvelle intervention :
                                     </label>
-                                    <input
-                                        type="checkbox"
-                                        name="reschedule"
-                                        checked={reschedule}
-                                        onChange={this.handleChange}
-                                    ></input>
+                                    <label className={stylesMobile.switch}>
+                                        <input
+                                            type="checkbox"
+                                            name="reschedule"
+                                            checked={reschedule}
+                                            onChange={this.handleChange}
+                                        />
+                                        <span
+                                            className={stylesMobile.slider}
+                                        ></span>
+                                    </label>
                                 </div>
                             </div>
                             <div className={stylesMobile.modalFooter}>
@@ -523,7 +528,7 @@ class InterventionFormPage extends Component {
                                 <div>
                                     <div className={styles.textArea}>
                                         <label>
-                                            Travaux efféctués:{" "}
+                                            Travaux réalisés:{" "}
                                             <span className={styles.required}>
                                                 *
                                             </span>{" "}

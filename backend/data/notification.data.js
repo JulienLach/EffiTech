@@ -55,6 +55,7 @@ class Notification {
                 );
                 notification.firstName = row.firstname;
                 notification.lastName = row.lastname;
+                notification.idEvent = row.id_event;
                 return notification;
             });
             callback(null, notifications);

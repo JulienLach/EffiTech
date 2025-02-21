@@ -1,6 +1,12 @@
 import React, { Component } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./TemplateGlobalMobile.module.css";
 import logoMobile from "../../images/iconMobile.png";
+
+function TemplateGlobalMobileWrapper(props) {
+    const navigate = useNavigate();
+    return <TemplateGlobalMobile {...props} navigate={navigate} />;
+}
 
 class TemplateGlobalMobile extends Component {
     constructor(props) {
@@ -9,8 +15,13 @@ class TemplateGlobalMobile extends Component {
             currentPath: window.location.pathname,
             showProfileMenu: false,
             initials: "",
+            idEmployee: localStorage.getItem("idEmployee"),
         };
         this.setInitials = this.setInitials.bind(this);
+        this.getIdEmployeeLocalStorage =
+            this.getIdEmployeeLocalStorage.bind(this);
+        this.handleProfileClick = this.handleProfileClick.bind(this);
+        this.handleNotificationClick = this.handleNotificationClick.bind(this);
     }
 
     componentDidMount() {
@@ -29,13 +40,26 @@ class TemplateGlobalMobile extends Component {
         }
     }
 
+    getIdEmployeeLocalStorage() {
+        return localStorage.getItem("idEmployee");
+    }
+
+    handleProfileClick() {
+        const idEmployee = this.getIdEmployeeLocalStorage();
+        this.props.navigate("/employee-details", { state: { idEmployee } });
+    }
+
+    handleNotificationClick() {
+        this.props.navigate("/notifications");
+    }
+
     render() {
         const { initials, currentPath } = this.state;
 
         let pageTitle;
         switch (currentPath) {
             case "/calendar":
-                pageTitle = "Calendrier";
+                pageTitle = "Mes évènements";
                 break;
             case "/calendar-mobile":
                 pageTitle = "Calendrier";
@@ -44,10 +68,10 @@ class TemplateGlobalMobile extends Component {
                 pageTitle = "Clients";
                 break;
             case "/client-details":
-                pageTitle = "Détails clients";
+                pageTitle = "Détails client";
                 break;
             case "/expense":
-                pageTitle = "Dépenses";
+                pageTitle = "Dépense / Frais";
                 break;
             case "/report":
                 pageTitle = "Rapport";
@@ -57,6 +81,12 @@ class TemplateGlobalMobile extends Component {
                 break;
             case "/intervention-form":
                 pageTitle = "Intervention";
+                break;
+            case "/notifications":
+                pageTitle = "Notifications";
+                break;
+            case "/employee-details":
+                pageTitle = "Mon profil";
                 break;
             default:
                 pageTitle = "Page";
@@ -78,13 +108,19 @@ class TemplateGlobalMobile extends Component {
                     </div>
                     <div>
                         <div className={styles.headerRight}>
-                            <div className={styles.notificationIcon}>
-                                <i class="fa-regular fa-bell"></i>
+                            <div
+                                className={styles.notificationIcon}
+                                onClick={this.handleNotificationClick}
+                            >
+                                <i className="fa-regular fa-bell"></i>
                                 <span
                                     className={styles.notificationCount}
                                 ></span>
                             </div>
-                            <div className={styles.profileBubble}>
+                            <div
+                                className={styles.profileBubble}
+                                onClick={this.handleProfileClick}
+                            >
                                 {initials}
                             </div>
                         </div>
@@ -115,4 +151,4 @@ class TemplateGlobalMobile extends Component {
     }
 }
 
-export default TemplateGlobalMobile;
+export default TemplateGlobalMobileWrapper;

@@ -291,7 +291,7 @@ class ReportPage extends Component {
                             {showAlert && (
                                 <div className={styles.alert}>
                                     Email envoyé{" "}
-                                    <i class="fa-solid fa-check"></i>
+                                    <i className="fa-solid fa-check"></i>
                                 </div>
                             )}
                         </div>

@@ -316,7 +316,7 @@ class InterventionForm extends Component {
                                                                 .handleViewReport
                                                         }
                                                     >
-                                                        <i class="fa-solid fa-file-circle-check"></i>{" "}
+                                                        <i className="fa-solid fa-file-circle-check"></i>{" "}
                                                         Voir le rapport validé
                                                     </button>
                                                 );
@@ -497,8 +497,7 @@ class InterventionForm extends Component {
                                     (event.type === "Intervention" &&
                                         event.status === 1) ? (
                                         <>
-                                            <h3>Travaux à effectuer</h3>
-
+                                            <h3>Travaux à réaliser</h3>
                                             <div>{event.workToDo}</div>
                                         </>
                                     ) : null}
@@ -530,7 +529,7 @@ class InterventionForm extends Component {
                                                                 .handleViewReport
                                                         }
                                                     >
-                                                        <i class="fa-solid fa-file-circle-check"></i>
+                                                        <i className="fa-solid fa-file-circle-check"></i>
                                                         {""}
                                                         Voir le rapport validé
                                                     </button>

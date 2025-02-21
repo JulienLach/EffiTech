@@ -6,6 +6,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+# [0.8.0] (2025-21-02)
+
+## Changes
+
+-   Add paging on notifications page
+-   Add notification on mobile for employee
+-   Add profile page on mobile
+-   Add to be planned events tab on calendar page
+-   Add employee selector to update intervention form
+-   Add employee filters on calendar component for admin
+-   Add event modal displayed on event card click on calendar component
+-   Add create client on global create button
+
+## Fixes
+
+-   Hide unplaned event assigned to employee
+-   UI updates
+
 # [0.7.0] (2025-18-02)
 
 ## Changes

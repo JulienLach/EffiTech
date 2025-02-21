@@ -160,7 +160,7 @@ class ClientFormPage extends Component {
             <>
                 <TemplateGlobal />
                 <div className={styles.container}>
-                    <h1 className={styles.pageTitle}>Client</h1>
+                    <h1 className={styles.pageTitle}>Détails client</h1>
                     <div>
                         <img
                             src={profilPicture}

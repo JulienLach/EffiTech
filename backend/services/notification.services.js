@@ -2,19 +2,26 @@ const { body, validationResult } = require("express-validator");
 const Notification = require("../data/notification.data.js");
 
 function getAllNotifications(req, res) {
-    Notification.getAllNotifications((error, result) => {
+    Notification.getAllNotifications((error, notifications) => {
         if (error) {
-            res.status(500).send({
+            return res.status(500).json({
                 message:
                     error.message ||
                     "Une erreur s'est produite lors de la récupération des notifications.",
             });
-        } else {
-            res.send(result);
         }
+
+        // Filtrer les notifications en fonction de l'utilisateur connecté
+        if (req.employee.isAdmin === false) {
+            notifications = notifications.filter(
+                (notification) =>
+                    notification.idEmployee === req.employee.idEmployee
+            );
+        }
+
+        res.status(200).send(notifications); // Renvoyer toutes les notifications
     });
 }
-
 function createNotification(req, res) {
     const { action, type, title, creationDate, creationHour, idEmployee } =
         req.body;
