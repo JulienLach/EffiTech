@@ -4,6 +4,7 @@ import styles from "./TemplateGlobal.module.css";
 import logo from "../../images/logo.svg";
 import CreateEventForm from "../../components/CreateEventForm/CreateEventForm";
 import InterventionForm from "../../components/InterventionForm/InterventionForm";
+import ClientForm from "../../components/ClientForm/ClientForm";
 
 function TemplateGlobalWrapper(props) {
     const navigate = useNavigate();
@@ -19,6 +20,7 @@ class TemplateGlobal extends Component {
             initials: "",
             isCreateModalOpen: false, // État pour gérer l'affichage de la modal
             isCreateEventModalOpen: false,
+            isCreateClientModalOpen: false,
             isEventModalOpen: false,
             selectedEvent: null,
             isUpdateFormOpen: false,
@@ -31,6 +33,7 @@ class TemplateGlobal extends Component {
         this.toggleCreateEventModal = this.toggleCreateEventModal.bind(this);
         this.toggleEventModal = this.toggleEventModal.bind(this);
         this.handleCreateEventClick = this.handleCreateEventClick.bind(this); // Méthode pour gérer le clic sur "Créer un événement"
+        this.handleCreateClientClick = this.handleCreateClientClick.bind(this); // Méthode pour gérer le clic sur "Créer un client"
         this.getIdEmployeeLocalStorage =
             this.getIdEmployeeLocalStorage.bind(this);
         this.handleProfileClick = this.handleProfileClick.bind(this);
@@ -103,6 +106,12 @@ class TemplateGlobal extends Component {
         }));
     }
 
+    toggleCreateClientModal() {
+        this.setState((prevState) => ({
+            isCreateClientModalOpen: !prevState.isCreateClientModalOpen,
+        }));
+    }
+
     toggleEventModal(event = null) {
         this.setState({
             selectedEvent: event,
@@ -116,6 +125,11 @@ class TemplateGlobal extends Component {
         this.toggleCreateEventModal();
     }
 
+    handleCreateClientClick() {
+        this.toggleCreateModal();
+        this.toggleCreateClientModal();
+    }
+
     render() {
         const {
             currentPath,
@@ -123,6 +137,7 @@ class TemplateGlobal extends Component {
             initials,
             isCreateModalOpen,
             isCreateEventModalOpen,
+            isCreateClientModalOpen,
             isEventModalOpen,
             selectedEvent,
             isUpdateFormOpen,
@@ -306,8 +321,8 @@ class TemplateGlobal extends Component {
 
                 {/* Modal pour créer */}
                 {isCreateModalOpen && (
-                    <div className={styles.modalOverlay}>
-                        <div className={styles.modalContent}>
+                    <div className={styles.CreatemodalOverlay}>
+                        <div className={styles.CreatemodalContent}>
                             <a
                                 className={styles}
                                 onClick={this.handleCreateEventClick}
@@ -315,7 +330,10 @@ class TemplateGlobal extends Component {
                                 Créer un évènement{" "}
                                 <i className="fa-solid fa-calendar"></i>
                             </a>
-                            <a>
+                            <a
+                                className={styles}
+                                onClick={this.handleCreateClientClick}
+                            >
                                 Ajouter un client{" "}
                                 <i className="fa-solid fa-user"></i>
                             </a>
@@ -335,6 +353,13 @@ class TemplateGlobal extends Component {
                 {/* Modal pour créer un événement */}
                 {isCreateEventModalOpen && (
                     <CreateEventForm closeModal={this.toggleCreateEventModal} />
+                )}
+
+                {/* Modal pour créer un événement */}
+                {isCreateClientModalOpen && (
+                    <div className={styles.CreatemodalOverlay}>
+                        <ClientForm closeModal={this.toggleCreateClientModal} />
+                    </div>
                 )}
             </>
         );
