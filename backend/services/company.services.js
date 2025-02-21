@@ -62,6 +62,7 @@ function updateCompany(req, res) {
         capital,
         logo,
         idCompany,
+        databaseVersion: process.env.DATABASE_VERSION,
     };
 
     Company.updateCompany(companyData, (error, company) => {
@@ -112,6 +113,7 @@ function createCompany(req, res) {
         vatNumber,
         capital,
         logo,
+        databaseVersion: process.env.DATABASE_VERSION,
     };
 
     Company.createCompany(companyData, (error, company) => {

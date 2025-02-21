@@ -22,7 +22,7 @@
 .labelInput {
     display: flex;
     flex-direction: column;
-    gap: 0.5em;
+    margin-top: 0.5em;
 }
 
 /* CSS for input comportement */
