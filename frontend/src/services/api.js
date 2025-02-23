@@ -1,4 +1,5 @@
 const API_URL = "http://localhost:3001";
+const LOGIN_URL = "http://localhost:3000/login";
 
 /**
  * @api {get} /events Get all events
@@ -32,7 +33,7 @@ function getAllEvents(callback) {
         if (xhr.status === 200) {
             callback(null, JSON.parse(xhr.responseText));
         } else {
-            window.location.href = "http://localhost:3000/login";
+            window.location.href = LOGIN_URL;
             console.error("Erreur de récupération des events", xhr.statusText);
             callback(new Error(xhr.statusText), null);
         }
@@ -67,7 +68,7 @@ function getAllClients(callback) {
         if (xhr.status === 200) {
             callback(null, JSON.parse(xhr.responseText));
         } else {
-            window.location.href = "http://localhost:3000/login";
+            window.location.href = LOGIN_URL;
             console.error("Erreur de récupération des clients", xhr.statusText);
             callback(new Error(xhr.statusText), null);
         }
@@ -99,7 +100,7 @@ function getAllEmployees(callback) {
         if (xhr.status === 200) {
             callback(null, JSON.parse(xhr.responseText));
         } else {
-            window.location.href = "http://localhost:3000/login";
+            window.location.href = LOGIN_URL;
             console.error(
                 "Erreur de récupération des employés",
                 xhr.statusText
@@ -481,7 +482,7 @@ function getCompany(callback) {
             callback(new Error(xhr.statusText), null);
         } else if (xhr.status === 403) {
             // Rediriger vers la page d'erreur 403 si l'utilisateur n'est pas autorisé
-            window.location.href = "http://localhost:3000/login";
+            window.location.href = LOGIN_URL;
         } else {
             console.error(
                 "Erreur de récupération des informations de la société",
@@ -834,7 +835,7 @@ function getAllDocuments(callback) {
         if (xhr.status === 200) {
             callback(null, JSON.parse(xhr.responseText));
         } else {
-            window.location.href = "http://localhost:3000/login";
+            window.location.href = LOGIN_URL;
             console.error(
                 "Erreur de récupération des document",
                 xhr.statusText

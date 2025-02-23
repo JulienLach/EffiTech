@@ -102,17 +102,29 @@ To start a new server in pgadmin4, create a new server, add `127.0.0.1` to hostn
 Create a .env file in the root of your backend project and add the following content, replacing newpassword with the password you set for the postgres user:
 
 ```bash
+# Environment
 NODE_ENV=development
+PORT=3001
+
+# Database
 DB_USER=postgres
 DB_HOST=localhost
 DB_NAME=EffiTech
 DB_PASSWORD=postgres
 DB_PORT=5432
-PORT=3001
-JWT_SECRET=your_randomly_generated_token
-EMAIL=your_email@exemple.com
-MAILJET_API_KEY=mailjet_api_key
-MAILJET_SECRET_KEY=mailjet_secret_key
+DATABASE_VERSION=x.x.x
+
+# Authentication
+JWT_SECRET=**************
+
+# Email SMTP
+EMAIL=exemple@mail.com
+MAILJET_API_KEY=***************
+MAILJET_SECRET_KEY=**************
+
+# URLs
+ORIGIN_URL=http://localhost:3000
+SERVER_URL=http://localhost:3001
 ```
 
 For `JWT_SECRET`, generate a random token and replace your_randomly_generated_token with it. You can use a command like the following to generate a secure token:
