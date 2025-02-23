@@ -63,19 +63,15 @@ npm -v
 
 ```bash
 # Add the PostgreSQL APT repository
-
 echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list
 
 # Import the repository signing key
-
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 
 # Update the package list
-
 sudo apt-get update
 
 # Install PostgreSQL 15
-
 sudo apt-get install -y postgresql-15
 
 # Verify the installation
@@ -83,7 +79,7 @@ psql --version
 ```
 
 -   Install **pgAdmin4** to manage the database, please follow official doc at https://www.pgadmin.org/download/pgadmin-4-apt/
--   Create a new database and run `database_script.sql` in **pgAdmin4** in SQL query field
+-   Create a **new database** and run `database_script.sql` in **pgAdmin4** in SQL query field
 
 For Linux/Debian OS, after installing pgadmin4 and postgreSQL you need to set password for postgres user. Besure to set the same password in your `.env` file.
 
@@ -221,7 +217,7 @@ This project uses **GitHub Actions** to automate unit tests and create new relea
 
 The app is divided into three images: one for the backend, one for the frontend, and one for the database.
 
-You can run the app in Docker with `docker-compose up --build`.
+You can run the app in Docker with `docker-compose up --build` or `docker-compose up --build -d`
 
 To stop run `docker-compose down`
 
@@ -288,4 +284,3 @@ Then to see the documentation pages, run `index.html` from both folders with Liv
     - Verifies that the new employee can log in and access the app according to their role.
 
 </details>
-````
