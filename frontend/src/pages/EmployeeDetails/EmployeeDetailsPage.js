@@ -8,7 +8,6 @@ import stylesMobile from "./EmployeeDetailsPageMobile.module.css";
 import profilPicture from "../../images/profil.png";
 import { getEmployeeById } from "../../services/api";
 
-// Composant wrapper pour utiliser les hooks
 function EmployeeDetailsPageWrapper() {
     const navigate = useNavigate();
     const location = useLocation();

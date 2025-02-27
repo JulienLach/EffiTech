@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import GlobalStyles from "../../styles/GlobalStyles.module.css";
 import { Navigate } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 import styles from "./LoginPage.module.css";

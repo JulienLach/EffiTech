@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import GlobalStyles from "../../styles/GlobalStyles.module.css";
 import styles from "./CreateAccount.module.css";
 import { useNavigate } from "react-router-dom";
 import LogoDesktop from "../../components/LogoDesktop/LogoDesktop";
