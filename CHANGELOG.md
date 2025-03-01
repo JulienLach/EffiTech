@@ -6,6 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## Changes
+
+-   Revised .env variables to improve the deployment process
+
+## Fixes
+
+-   Fix event unit tests
+-   Fix employee unit tests
+
 # [0.8.0] (2025-21-02)
 
 ## Changes

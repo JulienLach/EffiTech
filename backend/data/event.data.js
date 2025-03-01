@@ -376,14 +376,14 @@ class Event {
                 row.description,
                 row.status,
                 row.is_planned,
-                row.work_to_do,
                 row.type,
                 client,
                 address,
                 row.starting_date,
                 row.starting_hour,
                 row.ending_hour,
-                employee
+                employee,
+                row.work_to_do
             );
             callback(null, updatedEvent);
         });

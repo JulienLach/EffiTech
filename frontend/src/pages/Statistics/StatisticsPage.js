@@ -99,8 +99,7 @@ class StatisticsPage extends Component {
                 <div className={styles.container}>
                     <div className={styles.eventCard}>
                         <h3>
-                            Total d'évènements en {this.getCurrentMonthName()} :{" "}
-                            {this.state.events?.totalEvents}
+                            Total d'évènements en {this.getCurrentMonthName()}
                         </h3>
                         <p className={styles.labelStats}>
                             Nombre d'interventions : {totalInterventions}
