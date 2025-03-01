@@ -3,7 +3,11 @@ const pool = require("../config/db.config");
 const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
 
-jest.mock("../config/db.config");
+jest.mock("../config/db.config", () => ({
+    query: jest.fn((query, values, callback) => {
+        callback(null, { rows: [] }); // Réponse par défaut
+    }),
+}));
 jest.mock("crypto");
 jest.mock("jsonwebtoken");
 
@@ -230,132 +234,135 @@ describe("Employee", () => {
         });
     });
 
-    // describe("Employee", () => {
-    //     describe("loginEmployee", () => {
-    //         it("should return an error if the employee is not found", (done) => {
-    //             pool.query.mockImplementation((query, values, callback) => {
-    //                 callback(null, { rows: [] });
-    //             });
+    describe("loginEmployee", () => {
+        beforeEach(() => {
+            // Réinitialiser les mocks avant chaque test
+            pool.query.mockClear();
+            crypto.createHash.mockClear();
+            jwt.sign.mockClear();
+            // Mocker console.error pour éviter les logs
+            jest.spyOn(console, "error").mockImplementation(() => {});
+        });
 
-    //             const res = {
-    //                 setHeader: jest.fn(),
-    //             };
+        afterEach(() => {
+            // Restaurer console.error après chaque test
+            console.error.mockRestore();
+        });
 
-    //             Employee.loginEmployee(
-    //                 "invalid@example.com",
-    //                 "password123",
-    //                 res,
-    //                 (error, employee) => {
-    //                     try {
-    //                         expect(error).toEqual(
-    //                             new Error("Compte employé non trouvé")
-    //                         );
-    //                         expect(employee).toBeNull();
-    //                         done();
-    //                     } catch (err) {
-    //                         done(err);
-    //                     }
-    //                 }
-    //             );
-    //         });
+        it("should return an error if the employee is not found", (done) => {
+            pool.query.mockImplementation((query, values, callback) => {
+                callback(null, { rows: [] });
+            });
 
-    //         it("should return an error if the password is invalid", (done) => {
-    //             pool.query.mockImplementation((query, values, callback) => {
-    //                 callback(null, {
-    //                     rows: [{ password: "validHashedPassword" }],
-    //                 });
-    //             });
+            const res = {
+                setHeader: jest.fn(),
+            };
 
-    //             const hash = {
-    //                 update: jest.fn().mockReturnThis(),
-    //                 digest: jest.fn().mockReturnValue("invalidHashedPassword"),
-    //             };
-    //             crypto.createHash.mockReturnValue(hash);
+            Employee.loginEmployee(
+                "test@gmail.com",
+                "test",
+                res,
+                (error, employee) => {
+                    expect(error).toEqual(
+                        new Error("Compte employé non trouvé")
+                    );
+                    expect(employee).toBeNull();
+                    done();
+                }
+            );
+        });
 
-    //             const res = {
-    //                 setHeader: jest.fn(),
-    //             };
+        it("should return an error if the password is invalid", (done) => {
+            pool.query.mockImplementation((query, values, callback) => {
+                callback(null, {
+                    rows: [
+                        {
+                            password: "validHashedPassword",
+                        },
+                    ],
+                });
+            });
 
-    //             Employee.loginEmployee(
-    //                 "john.doe@example.com",
-    //                 "invalidPassword",
-    //                 res,
-    //                 (error, employee) => {
-    //                     try {
-    //                         expect(error).toEqual(
-    //                             new Error("Mot de passe invalide")
-    //                         );
-    //                         expect(employee).toBeNull();
-    //                         done();
-    //                     } catch (err) {
-    //                         done(err);
-    //                     }
-    //                 }
-    //             );
-    //         });
+            const hash = {
+                update: jest.fn().mockReturnThis(),
+                digest: jest.fn().mockReturnValue("invalidHashedPassword"),
+            };
+            crypto.createHash.mockReturnValue(hash);
 
-    //         it("should login the employee with valid credentials", (done) => {
-    //             pool.query.mockImplementation((query, values, callback) => {
-    //                 callback(null, {
-    //                     rows: [
-    //                         {
-    //                             password: "validHashedPassword",
-    //                             id_employee: 1,
-    //                             firstname: "John",
-    //                             lastname: "Doe",
-    //                             job: "Developer",
-    //                             phone_number: "1234567890",
-    //                             email: "john.doe@example.com",
-    //                             is_admin: false,
-    //                             speciality: "JavaScript",
-    //                         },
-    //                     ],
-    //                 });
-    //             });
+            const res = {
+                setHeader: jest.fn(),
+            };
 
-    //             const hash = {
-    //                 update: jest.fn().mockReturnThis(),
-    //                 digest: jest.fn().mockReturnValue("validHashedPassword"),
-    //             };
-    //             crypto.createHash.mockReturnValue(hash);
+            Employee.loginEmployee(
+                "test@gmail.com",
+                "test",
+                res,
+                (error, employee) => {
+                    expect(error).toEqual(new Error("Mot de passe invalide"));
+                    expect(employee).toBeNull();
+                    done();
+                }
+            );
+        });
 
-    //             const token = "validToken";
-    //             generateToken.mockReturnValue(token);
+        it("should login the employee with valid credentials", (done) => {
+            pool.query.mockImplementation((query, values, callback) => {
+                callback(null, {
+                    rows: [
+                        {
+                            id_employee: 1,
+                            firstname: "John",
+                            lastname: "Doe",
+                            job: "Developer",
+                            phone_number: "1234567890",
+                            email: "test@gmail.com",
+                            is_admin: false,
+                            password: "validHashedPassword",
+                            speciality: "JavaScript",
+                        },
+                    ],
+                });
+            });
 
-    //             const res = {
-    //                 setHeader: jest.fn(),
-    //             };
+            const hash = {
+                update: jest.fn().mockReturnThis(),
+                digest: jest.fn().mockReturnValue("validHashedPassword"),
+            };
+            crypto.createHash.mockReturnValue(hash);
 
-    //             Employee.loginEmployee(
-    //                 "john.doe@example.com",
-    //                 "validPassword",
-    //                 res,
-    //                 (error, employee) => {
-    //                     try {
-    //                         expect(error).toBeNull();
-    //                         expect(employee).toEqual(
-    //                             expect.objectContaining({
-    //                                 id_employee: 1,
-    //                                 firstname: "John",
-    //                                 lastname: "Doe",
-    //                                 job: "Developer",
-    //                                 phone_number: "1234567890",
-    //                                 email: "john.doe@example.com",
-    //                                 is_admin: false,
-    //                                 speciality: "JavaScript",
-    //                             })
-    //                         );
-    //                         expect(res.setHeader).toHaveBeenCalledWith(
-    //                             "Set-Cookie",
-    //                             `token=${token}; HttpOnly; Max-Age=3600; Path=/`
-    //                         );
-    //                         done();
-    //                     } catch (err) {
-    //                         done(err);
-    //                     }
-    //                 }
-    //             );
-    //         });
-    //     });
-    // });
+            const token = "validToken";
+            jwt.sign.mockReturnValue(token);
+
+            const res = {
+                setHeader: jest.fn(),
+            };
+
+            Employee.loginEmployee(
+                "test@gmail.com",
+                "validPassword",
+                res,
+                (error, employee) => {
+                    expect(error).toBeNull();
+                    expect(employee).toEqual(
+                        expect.objectContaining({
+                            idEmployee: 1,
+                            firstname: "John",
+                            lastname: "Doe",
+                            job: "Developer",
+                            phoneNumber: "1234567890",
+                            email: "test@gmail.com",
+                            isAdmin: false,
+                            password: "validHashedPassword",
+                            speciality: "JavaScript",
+                        })
+                    );
+                    expect(res.setHeader).toHaveBeenCalledWith(
+                        "Set-Cookie",
+                        `token=${token}; HttpOnly; Max-Age=10800; Path=/`
+                    );
+                    done();
+                }
+            );
+        });
+    });
 });
