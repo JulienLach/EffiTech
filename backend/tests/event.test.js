@@ -1,4 +1,4 @@
-const Event = require("../data/event.data");
+const { Event, Appointment, Intervention } = require("../data/event.data");
 const Client = require("../data/client.data");
 const Employee = require("../data/employee.data");
 const pool = require("../config/db.config");
@@ -552,5 +552,161 @@ describe("deleteEvent", () => {
             expect(event).toBeNull();
             done();
         });
+    });
+});
+
+describe("submitAppointmentForm", () => {
+    const mockUpdatedAppointment = {
+        id_event: 1,
+        title: "Event 1",
+        description: "Description 1",
+        status: 2,
+        is_planned: true,
+        type: "Type 1",
+        id_client: 1,
+        id_address: 1,
+        starting_date: "2023-10-01",
+        starting_hour: "10:00",
+        ending_hour: "12:00",
+        id_employee: 1,
+        work_to_do: "Updated work to do",
+        plan_intervention: true,
+    };
+
+    beforeEach(() => {
+        pool.query.mockImplementation((query, values, callback) => {
+            callback(null, { rows: [mockUpdatedAppointment] });
+        });
+    });
+
+    it("should submit the appointment form and update the event", (done) => {
+        Appointment.submitAppointmentForm(
+            1,
+            "Updated work to do",
+            true,
+            (error, appointment) => {
+                expect(error).toBeNull();
+                expect(appointment).toEqual(
+                    expect.objectContaining({
+                        idEvent: 1,
+                        title: "Event 1",
+                        description: "Description 1",
+                        status: 2,
+                        isPlanned: true,
+                        type: "Type 1",
+                        client: 1,
+                        address: 1,
+                        startingDate: "2023-10-01",
+                        startingHour: "10:00",
+                        endingHour: "12:00",
+                        employee: 1,
+                        workToDo: "Updated work to do",
+                        planIntervention: true,
+                    })
+                );
+                done();
+            }
+        );
+    });
+
+    it("should handle errors from pool.query", (done) => {
+        pool.query.mockImplementationOnce((query, values, callback) => {
+            callback(new Error("Database error"));
+        });
+
+        Appointment.submitAppointmentForm(
+            1,
+            "Updated work to do",
+            true,
+            (error, appointment) => {
+                expect(error).toBeInstanceOf(Error);
+                expect(error.message).toBe("Database error");
+                expect(appointment).toBeNull();
+                done();
+            }
+        );
+    });
+});
+
+describe("submitInterventionForm", () => {
+    const mockUpdatedIntervention = {
+        id_event: 1,
+        title: "Event 1",
+        description: "Description 1",
+        status: 2,
+        is_planned: true,
+        type: "Type 1",
+        id_client: 1,
+        id_address: 1,
+        starting_date: "2023-10-01",
+        starting_hour: "10:00",
+        ending_hour: "12:00",
+        id_employee: 1,
+        report: "Intervention report",
+        plan_intervention: true,
+    };
+
+    beforeEach(() => {
+        pool.query.mockImplementation((query, values, callback) => {
+            callback(null, { rows: [mockUpdatedIntervention] });
+        });
+    });
+
+    it("should submit the intervention form and update the event", (done) => {
+        Intervention.submitInterventionForm(
+            1,
+            "Breakdown description",
+            "Work done",
+            true,
+            "12:00",
+            2,
+            "Client signature",
+            "Employee signature",
+            (error, intervention) => {
+                expect(error).toBeNull();
+                expect(intervention).toEqual(
+                    expect.objectContaining({
+                        idEvent: 1,
+                        title: "Event 1",
+                        description: "Description 1",
+                        status: 2,
+                        isPlanned: true,
+                        type: "Type 1",
+                        client: 1,
+                        address: 1,
+                        startingDate: "2023-10-01",
+                        startingHour: "10:00",
+                        endingHour: "12:00",
+                        employee: 1,
+                        report: "Intervention report",
+                        planIntervention: true,
+                    })
+                );
+                done();
+            }
+        );
+    });
+
+    it("should handle errors from pool.query", (done) => {
+        pool.query.mockImplementationOnce((query, values, callback) => {
+            callback(new Error("Database error"));
+        });
+
+        Intervention.submitInterventionForm(
+            1,
+            "Breakdown description",
+            "Work done",
+            true,
+            "12:00",
+            2,
+            "Client signature",
+            "Employee signature",
+            (error, intervention) => {
+                expect(error).toBeInstanceOf(Error);
+                expect(error.message).toBe("Database error");
+                expect(intervention).toBeNull();
+                done();
+            }
+        );
     });
 });

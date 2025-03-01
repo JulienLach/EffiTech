@@ -1,7 +1,5 @@
 const { body, validationResult } = require("express-validator");
-const Event = require("../data/event.data.js");
-const Intervention = require("../data/event.data.js");
-const Appointment = require("../data/event.data.js");
+const { Event, Appointment, Intervention } = require("../data/event.data");
 
 function getAllEvents(req, res) {
     Event.getAllEvents((error, events) => {
@@ -21,7 +19,7 @@ function getAllEvents(req, res) {
             );
         }
 
-        res.status(200).send(events); // Renvoyer tous les événements
+        res.status(200).send(events);
     });
 }
 
