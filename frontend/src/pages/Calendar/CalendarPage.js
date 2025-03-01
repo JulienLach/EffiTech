@@ -321,6 +321,7 @@ class CalendarPage extends Component {
                         <div className={stylesMobile.container}>
                             {currentEvents.map((event) => (
                                 <div
+                                    key={event.idEvent}
                                     className={stylesMobile.eventCard}
                                     onClick={() => this.toggleEventModal(event)}
                                 >

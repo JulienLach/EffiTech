@@ -5,6 +5,7 @@ import {
     Routes,
     Navigate,
 } from "react-router-dom";
+import "./styles/GlobalStyles.module.css";
 import LoginPage from "./pages/Login/LoginPage";
 import CreateAccountPage from "./pages/CreateAccount/CreateAccountPage";
 import CalendarPage from "./pages/Calendar/CalendarPage";

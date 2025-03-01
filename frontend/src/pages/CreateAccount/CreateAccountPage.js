@@ -41,15 +41,8 @@ class CreateAccountPage extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const {
-            firstname,
-            lastname,
-            email,
-            phoneNumber,
-            password,
-            job,
-            speciality,
-        } = this.state;
+        const { firstname, lastname, email, phoneNumber, password } =
+            this.state;
 
         const employeeData = {
             firstname,

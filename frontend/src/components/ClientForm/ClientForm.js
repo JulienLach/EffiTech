@@ -126,7 +126,7 @@ class ClientForm extends Component {
             return;
         }
 
-        createClient(data, (error, newClient) => {
+        createClient(data, (error) => {
             if (error) {
                 this.setState({ error: error.message });
             } else {

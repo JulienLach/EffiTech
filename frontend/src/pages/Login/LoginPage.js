@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import GlobalStyles from "../../styles/GlobalStyles.module.css";
 import { Navigate } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 import styles from "./LoginPage.module.css";
@@ -35,7 +34,7 @@ class LoginPage extends Component {
             return;
         }
 
-        loginEmployee({ email, password }, (error, result) => {
+        loginEmployee({ email, password }, (error) => {
             if (error) {
                 this.setState({ error: "Identifiants incorrects" });
             } else {

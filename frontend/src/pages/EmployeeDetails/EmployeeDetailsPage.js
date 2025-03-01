@@ -56,7 +56,7 @@ class EmployeeDetailsPage extends Component {
     };
 
     render() {
-        const { employee, error } = this.state;
+        const { employee } = this.state;
         const initial =
             employee.firstname && employee.lastname
                 ? employee.firstname.charAt(0).toUpperCase() +
