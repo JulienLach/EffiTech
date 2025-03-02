@@ -171,7 +171,7 @@ class Calendar extends Component {
                             day: "Jour",
                             date: "Date",
                             time: "Heure",
-                            event: "Événement",
+                            event: "Évènement",
                         }}
                         eventPropGetter={eventStyleGetter}
                         onSelectEvent={this.openEventModal}
@@ -193,15 +193,15 @@ class Calendar extends Component {
                             className="modalContent"
                             onClick={(e) => e.stopPropagation()}
                         >
-                            <h3>{selectedEvent.title}</h3>
-                            <p>Client : {selectedEvent.client}</p>
-                            <p>Description : {selectedEvent.description}</p>
                             <button
                                 className="closeButton"
                                 onClick={this.closeEventModal}
                             >
                                 <i className="fa-solid fa-xmark"></i>
                             </button>
+                            <h3>{selectedEvent.title}</h3>
+                            <p>Client : {selectedEvent.client}</p>
+                            <p>Description : {selectedEvent.description}</p>
                         </div>
                     </div>
                 )}

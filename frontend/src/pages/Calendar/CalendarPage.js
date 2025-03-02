@@ -310,6 +310,12 @@ class CalendarPage extends Component {
         // Calculer le nombre total de pages
         const totalPages = Math.ceil(filteredEvents.length / eventsPerPage);
 
+        // Générer les numéros de page
+        const pageNumbers = [];
+        for (let i = 1; i <= totalPages; i++) {
+            pageNumbers.push(i);
+        }
+
         return (
             <>
                 {isMobile ? (
@@ -321,6 +327,7 @@ class CalendarPage extends Component {
                         <div className={stylesMobile.container}>
                             {currentEvents.map((event) => (
                                 <div
+                                    key={event.idEvent}
                                     className={stylesMobile.eventCard}
                                     onClick={() => this.toggleEventModal(event)}
                                 >
@@ -651,12 +658,47 @@ class CalendarPage extends Component {
                                         <div className={styles.pagination}>
                                             <button
                                                 onClick={(e) =>
+                                                    this.handlePageChange(e, 1)
+                                                }
+                                                disabled={currentPage === 1}
+                                            >
+                                                Début
+                                            </button>
+                                            <button
+                                                onClick={(e) =>
                                                     this.handlePreviousPage(e)
                                                 }
                                                 disabled={currentPage === 1}
                                             >
                                                 <i className="fa-solid fa-chevron-left"></i>
                                             </button>
+                                            {pageNumbers
+                                                .slice(
+                                                    Math.max(
+                                                        0,
+                                                        currentPage - 2
+                                                    ),
+                                                    currentPage + 1
+                                                )
+                                                .map((number) => (
+                                                    <button
+                                                        key={number}
+                                                        onClick={(e) =>
+                                                            this.handlePageChange(
+                                                                e,
+                                                                number
+                                                            )
+                                                        }
+                                                        className={
+                                                            currentPage ===
+                                                            number
+                                                                ? styles.activePage
+                                                                : ""
+                                                        }
+                                                    >
+                                                        {number}
+                                                    </button>
+                                                ))}
                                             <button
                                                 onClick={(e) =>
                                                     this.handleNextPage(e)
@@ -666,6 +708,19 @@ class CalendarPage extends Component {
                                                 }
                                             >
                                                 <i className="fa-solid fa-chevron-right"></i>
+                                            </button>
+                                            <button
+                                                onClick={(e) =>
+                                                    this.handlePageChange(
+                                                        e,
+                                                        totalPages
+                                                    )
+                                                }
+                                                disabled={
+                                                    currentPage === totalPages
+                                                }
+                                            >
+                                                Fin
                                             </button>
                                         </div>
                                     </div>
@@ -782,12 +837,47 @@ class CalendarPage extends Component {
                                         <div className={styles.pagination}>
                                             <button
                                                 onClick={(e) =>
+                                                    this.handlePageChange(e, 1)
+                                                }
+                                                disabled={currentPage === 1}
+                                            >
+                                                Début
+                                            </button>
+                                            <button
+                                                onClick={(e) =>
                                                     this.handlePreviousPage(e)
                                                 }
                                                 disabled={currentPage === 1}
                                             >
                                                 <i className="fa-solid fa-chevron-left"></i>
                                             </button>
+                                            {pageNumbers
+                                                .slice(
+                                                    Math.max(
+                                                        0,
+                                                        currentPage - 2
+                                                    ),
+                                                    currentPage + 1
+                                                )
+                                                .map((number) => (
+                                                    <button
+                                                        key={number}
+                                                        onClick={(e) =>
+                                                            this.handlePageChange(
+                                                                e,
+                                                                number
+                                                            )
+                                                        }
+                                                        className={
+                                                            currentPage ===
+                                                            number
+                                                                ? styles.activePage
+                                                                : ""
+                                                        }
+                                                    >
+                                                        {number}
+                                                    </button>
+                                                ))}
                                             <button
                                                 onClick={(e) =>
                                                     this.handleNextPage(e)
@@ -797,6 +887,19 @@ class CalendarPage extends Component {
                                                 }
                                             >
                                                 <i className="fa-solid fa-chevron-right"></i>
+                                            </button>
+                                            <button
+                                                onClick={(e) =>
+                                                    this.handlePageChange(
+                                                        e,
+                                                        totalPages
+                                                    )
+                                                }
+                                                disabled={
+                                                    currentPage === totalPages
+                                                }
+                                            >
+                                                Fin
                                             </button>
                                         </div>
                                     </div>

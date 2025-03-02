@@ -6,6 +6,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+# [0.8.1] (2025-02-03)
+
+## Changes
+
+-   Revised .env variables to improve the deployment process
+-   UI updates
+-   Add more option to paging on calendar page
+
+## Fixes
+
+-   Fix event unit tests
+-   Fix employee unit tests
+-   Add Appointment and Intervention classes unit tests
+
 # [0.8.0] (2025-21-02)
 
 ## Changes

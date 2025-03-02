@@ -3,7 +3,6 @@ import { isMobile } from "react-device-detect";
 import { useNavigate, useLocation } from "react-router-dom";
 import TemplateGlobal from "../Template/TemplateGlobal";
 import styles from "./EmployeesPage.module.css";
-import profilPicture from "../../images/profil.png";
 import { getAllEmployees } from "../../services/api";
 import EmployeeForm from "../../components/EmployeeForm/EmployeeForm";
 
@@ -89,10 +88,9 @@ class EmployeesPage extends Component {
                                         }
                                     >
                                         <div className={styles.profilPicture}>
-                                            <img
-                                                src={profilPicture}
-                                                alt="Profil picture"
-                                            />
+                                            <div className={styles.iconWrapper}>
+                                                <i className="fa-solid fa-user"></i>
+                                            </div>
                                         </div>
                                         <div className={styles.profilInfo}>
                                             <p className={styles.name}>

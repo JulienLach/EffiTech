@@ -93,7 +93,7 @@ class EmployeeForm extends Component {
                 const emailData = {
                     to: createdEmployee.email,
                     subject: "🔧 Vos identifiants de connexion EffiTech",
-                    text: `Bonjour ${createdEmployee.firstname},\n\nVoici vos identifiants de connexion à l'application EffiTech :\nEmail: ${createdEmployee.email}\nMot de passe: ${password}\n\.`,
+                    text: `Bonjour ${createdEmployee.firstname},\n\nVoici vos identifiants de connexion à l'application EffiTech :\nEmail: ${createdEmployee.email}\nMot de passe: ${password}\n`,
                 };
 
                 sendEmployeeCredentials(emailData, (error, data) => {

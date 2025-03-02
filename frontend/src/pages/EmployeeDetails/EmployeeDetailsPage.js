@@ -5,10 +5,8 @@ import TemplateGlobal from "../Template/TemplateGlobal";
 import TemplateGlobalMobile from "../Template/TemplateGlobalMobile";
 import styles from "./EmployeeDetailsPage.module.css";
 import stylesMobile from "./EmployeeDetailsPageMobile.module.css";
-import profilPicture from "../../images/profil.png";
 import { getEmployeeById } from "../../services/api";
 
-// Composant wrapper pour utiliser les hooks
 function EmployeeDetailsPageWrapper() {
     const navigate = useNavigate();
     const location = useLocation();
@@ -57,7 +55,7 @@ class EmployeeDetailsPage extends Component {
     };
 
     render() {
-        const { employee, error } = this.state;
+        const { employee } = this.state;
         const initial =
             employee.firstname && employee.lastname
                 ? employee.firstname.charAt(0).toUpperCase() +
@@ -113,10 +111,9 @@ class EmployeeDetailsPage extends Component {
                             <div className={styles.profilInfo}>
                                 <h1 className={styles.pageTitle}>Employé</h1>
                                 <div className={styles.alignBackButton}>
-                                    <img
-                                        src={profilPicture}
-                                        alt="Profil picture"
-                                    />
+                                    <div className={styles.iconWrapper}>
+                                        <i className="fa-solid fa-user"></i>
+                                    </div>
                                     <div className={styles.names}>
                                         <p className={styles.firstname}>
                                             {employee.firstname}{" "}

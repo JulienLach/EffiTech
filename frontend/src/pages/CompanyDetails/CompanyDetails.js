@@ -15,16 +15,15 @@ class CompanyDetails extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            company:
-                {
-                    ...props.location.state.company,
-                    idAddress: {
-                        address: "",
-                        zipcode: "",
-                        city: "",
-                        ...props.location.state.company?.idAddress,
-                    },
-                } || {},
+            company: {
+                ...props.location.state.company,
+                idAddress: {
+                    address: "",
+                    zipcode: "",
+                    city: "",
+                    ...props.location.state.company?.idAddress,
+                },
+            },
             errors: {},
         };
         this.handleChange = this.handleChange.bind(this);

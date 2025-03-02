@@ -5,10 +5,8 @@ import TemplateGlobal from "../Template/TemplateGlobal";
 import TemplateGlobalMobile from "../Template/TemplateGlobalMobile";
 import styles from "./ClientDetailsPage.module.css";
 import stylesMobile from "./ClientDetailsPageMobile.module.css";
-import profilPicture from "../../images/profil.png";
 import { getClientById } from "../../services/api";
 
-// Composant wrapper pour utiliser les hooks
 function ClientDetailsPageWrapper() {
     const navigate = useNavigate();
     const location = useLocation();
@@ -183,7 +181,7 @@ class ClientDetailsPage extends Component {
                                             style={{ border: 0 }}
                                             allowfullscreen=""
                                             loading="lazy"
-                                            referrerpolicy="no-referrer-when-downgrade"
+                                            referrerPolicy="no-referrer-when-downgrade"
                                         ></iframe>
                                     </div>
                                 </>
@@ -249,7 +247,7 @@ class ClientDetailsPage extends Component {
                                             style={{ border: 0 }}
                                             allowfullscreen=""
                                             loading="lazy"
-                                            referrerpolicy="no-referrer-when-downgrade"
+                                            referrerPolicy="no-referrer-when-downgrade"
                                         ></iframe>
                                     </div>
                                 </>
@@ -270,10 +268,9 @@ class ClientDetailsPage extends Component {
                                         <div
                                             className={styles.profilCompanyBack}
                                         >
-                                            <img
-                                                src={profilPicture}
-                                                alt="Profil picture"
-                                            />
+                                            <div className={styles.iconWrapper}>
+                                                <i className="fa-solid fa-landmark"></i>
+                                            </div>
                                             <p className={styles.company}>
                                                 {client.company}
                                             </p>
@@ -371,10 +368,9 @@ class ClientDetailsPage extends Component {
                                             Détails client
                                         </h1>
                                         <div className={styles.profilNamesBack}>
-                                            <img
-                                                src={profilPicture}
-                                                alt="Profil picture"
-                                            />
+                                            <div className={styles.iconWrapper}>
+                                                <i className="fa-solid fa-user"></i>
+                                            </div>
                                             <div className={styles.nameColumn}>
                                                 <p className={styles.lastname}>
                                                     {client.lastname}{" "}

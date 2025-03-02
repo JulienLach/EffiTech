@@ -60,6 +60,10 @@
     align-items: center;
 }
 
+.saveButton:hover {
+    background-color: #a83228;
+}
+
 .saveButton i {
     margin-right: 0.5em;
 }
@@ -76,6 +80,10 @@
     margin-top: 1em;
     display: flex;
     align-items: center;
+}
+
+.cancelButton:hover {
+    background-color: #7c7c7c;
 }
 
 .buttons {

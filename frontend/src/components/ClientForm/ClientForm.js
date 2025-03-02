@@ -126,7 +126,7 @@ class ClientForm extends Component {
             return;
         }
 
-        createClient(data, (error, newClient) => {
+        createClient(data, (error) => {
             if (error) {
                 this.setState({ error: error.message });
             } else {
@@ -153,7 +153,7 @@ class ClientForm extends Component {
                 >
                     <div className={styles.selectedCategory}>
                         <label className={styles.labelRadio}>
-                            Type de client:
+                            Type de client :
                         </label>
                         <div>
                             <label className={styles.radioParticulier}>

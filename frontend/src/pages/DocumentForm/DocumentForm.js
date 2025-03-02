@@ -176,6 +176,7 @@ class DocumentForm extends Component {
                                     id="file"
                                     name="file"
                                     onChange={this.handleFileChange}
+                                    className={styles.fileInput}
                                 />
                                 {errors.file && (
                                     <span className={styles.error}>

@@ -261,6 +261,9 @@ class CompanyFormPage extends Component {
                             <button
                                 type="reset"
                                 className={styles.cancelButton}
+                                onClick={() =>
+                                    (window.location.href = "/company")
+                                }
                             >
                                 Annuler
                             </button>

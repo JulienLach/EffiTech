@@ -1,11 +1,8 @@
 import React, { Component } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import stylesMobile from "./ExpenseFormPage.module.css";
-import TemplateGlobal from "../Template/TemplateGlobal";
 import TemplateGlobalMobile from "../Template/TemplateGlobalMobile";
-import { createReport } from "../../services/api";
 
-// Composant wrapper pour utiliser les hooks
 function ExpenseFormPageWrapper() {
     const navigate = useNavigate();
     const location = useLocation();

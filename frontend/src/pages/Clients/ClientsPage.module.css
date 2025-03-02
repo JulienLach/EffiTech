@@ -68,14 +68,13 @@
 
 .addClient {
     background-color: #c93c2c;
-    padding: 0.6em 0.94em;
+    padding: 0.6em 0.9em;
     border: none;
     border-radius: 0.4em;
     color: white;
     font-size: 1.1em;
     font-weight: 500;
     cursor: pointer;
-    margin: 0.625em 1.25em;
 }
 
 .addClient i {
@@ -88,8 +87,6 @@
     justify-content: space-between;
 }
 
-/* Style barre de recherche et filtre  */
-/* style for each filter button */
 .typeFilter {
     font-size: 1em;
     font-weight: 500;
@@ -102,7 +99,6 @@
     margin-right: 0.625em;
 }
 
-/* style when you hover over the filter button */
 .typeFilter:hover {
     color: white;
     cursor: pointer;
@@ -110,7 +106,6 @@
     border: 0.06em solid #c93c2c;
 }
 
-/* icon position */
 .typeFilter i {
     margin-right: 0.625em;
     color: #424242;
@@ -120,14 +115,12 @@
     color: white;
 }
 
-/* Search input container style */
 .searchInput {
     position: relative;
     display: inline-block;
     margin-right: 0.625em;
 }
 
-/* icon position inside the input */
 .searchInput i {
     position: absolute;
     top: 50%;
@@ -137,11 +130,11 @@
     pointer-events: none;
 }
 
-/* Search input style */
 .searchInput input {
     padding: 0.625em 0.625em 0.625em 2.19em;
     border: 0.06em solid #c0c0c0;
     border-radius: 0.4em;
+    font-size: 0.9em;
 }
 
 .divider {
@@ -150,7 +143,6 @@
     background-color: #d3d3d3;
 }
 
-/* style de la modal */
 .modalOverlay {
     position: fixed;
     top: 0;
@@ -211,7 +203,6 @@
     cursor: pointer;
 }
 
-/* CSS for input & label */
 .labelInput {
     font-size: 1em;
     font-weight: 500;
@@ -221,7 +212,6 @@
     margin-bottom: 0.625em;
 }
 
-/* CSS for input comportement */
 .labelInput input {
     margin: 0 1em;
     padding: 0.6em;
@@ -229,13 +219,11 @@
     border-radius: 0.5em;
 }
 
-/* CSS for the label comportement */
 .labelInput label {
     margin: 0 1em;
     padding: 0.15em;
 }
 
-/* CSS for button positioning */
 .buttonPosition {
     display: flex;
     justify-content: start;
@@ -243,9 +231,7 @@
     margin-left: 1em;
 }
 
-/* Common styles for buttons */
 .buttonPosition button {
-    /* margin: 0; */
     padding: 0.625em;
     border: none;
     border-radius: 0.4em;
@@ -255,12 +241,10 @@
     cursor: pointer;
 }
 
-/* Specific styles for cancel button */
 .cancelButton {
     background-color: #ababab;
 }
 
-/* Specific styles for submit button */
 .submitButton {
     background-color: #c93c2c;
 }

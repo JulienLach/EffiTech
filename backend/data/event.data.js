@@ -376,14 +376,14 @@ class Event {
                 row.description,
                 row.status,
                 row.is_planned,
-                row.work_to_do,
                 row.type,
                 client,
                 address,
                 row.starting_date,
                 row.starting_hour,
                 row.ending_hour,
-                employee
+                employee,
+                row.work_to_do
             );
             callback(null, updatedEvent);
         });
@@ -421,7 +421,6 @@ class Event {
     }
 }
 
-// Voir si ces classes sont nécessaires ou si on peut tout faire avec la classe Event
 class Appointment extends Event {
     /**
      * Crée une instance d'Appointment.
@@ -630,6 +629,8 @@ class Intervention extends Event {
     }
 }
 
-module.exports = Event;
-module.exports = Appointment;
-module.exports = Intervention;
+module.exports = {
+    Event,
+    Appointment,
+    Intervention,
+};

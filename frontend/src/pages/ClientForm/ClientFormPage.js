@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import TemplateGlobal from "../Template/TemplateGlobal";
 import styles from "./ClientFormPage.module.css";
-import profilPicture from "../../images/profil.png";
 import { getClientById, updateClient } from "../../services/api";
 
 // Composant wrapper pour utiliser les hooks
@@ -162,11 +161,13 @@ class ClientFormPage extends Component {
                 <div className={styles.container}>
                     <h1 className={styles.pageTitle}>Détails client</h1>
                     <div>
-                        <img
-                            src={profilPicture}
-                            className={styles.profilPic}
-                            alt="Profil picture"
-                        />
+                        <div className={styles.iconWrapper}>
+                            {client.category === "Professionnel" ? (
+                                <i className="fa-solid fa-landmark"></i>
+                            ) : (
+                                <i className="fa-solid fa-user"></i>
+                            )}
+                        </div>
                     </div>
                     <div className={styles.separation}></div>
                     <h2 className={styles.header}>Coordonnées</h2>

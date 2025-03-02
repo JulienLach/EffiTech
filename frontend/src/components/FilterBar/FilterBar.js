@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { isMobile } from "react-device-detect";
-
 import styles from "./FilterBar.module.css";
 import stylesMobile from "./FilterBarMobile.module.css";
 

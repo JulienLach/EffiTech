@@ -34,7 +34,7 @@ class LoginPage extends Component {
             return;
         }
 
-        loginEmployee({ email, password }, (error, result) => {
+        loginEmployee({ email, password }, (error) => {
             if (error) {
                 this.setState({ error: "Identifiants incorrects" });
             } else {

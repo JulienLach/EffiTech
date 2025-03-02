@@ -19,10 +19,13 @@ const authenticateToken = require("./middlewares/auth.middleware");
 dotenv.config({ path: ".env" });
 
 const PORT = process.env.PORT;
+const ORIGIN_URL = process.env.ORIGIN_URL;
+const SERVER_URL = process.env.SERVER_URL;
+
 const app = express();
 
 const corsOptions = {
-    origin: "http://localhost:3000",
+    origin: ORIGIN_URL,
     credentials: true,
     methods: "GET, POST, PUT, DELETE, OPTIONS",
 };
@@ -79,5 +82,5 @@ app.use("/invoices", authenticateToken, invoiceRoutes);
 app.use("/email", authenticateToken, emailRoutes);
 
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`Server is running on ${SERVER_URL}`);
 });

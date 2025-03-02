@@ -4,7 +4,7 @@
 
 <p align="center">
     <a href="https://github.com/JulienLach/EffiTech/releases">
-        <img src="https://img.shields.io/badge/Release-0.8.0-red?logo=github" alt="Release" />
+        <img src="https://img.shields.io/badge/Release-0.8.1-red?logo=github" alt="Release" />
     </a>
 </p>
 
@@ -63,19 +63,15 @@ npm -v
 
 ```bash
 # Add the PostgreSQL APT repository
-
 echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list
 
 # Import the repository signing key
-
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 
 # Update the package list
-
 sudo apt-get update
 
 # Install PostgreSQL 15
-
 sudo apt-get install -y postgresql-15
 
 # Verify the installation
@@ -83,7 +79,7 @@ psql --version
 ```
 
 -   Install **pgAdmin4** to manage the database, please follow official doc at https://www.pgadmin.org/download/pgadmin-4-apt/
--   Create a new database and run `database_script.sql` in **pgAdmin4** in SQL query field
+-   Create a **new database** and run `database_script.sql` in **pgAdmin4** in SQL query field
 
 For Linux/Debian OS, after installing pgadmin4 and postgreSQL you need to set password for postgres user. Besure to set the same password in your `.env` file.
 
@@ -102,17 +98,29 @@ To start a new server in pgadmin4, create a new server, add `127.0.0.1` to hostn
 Create a .env file in the root of your backend project and add the following content, replacing newpassword with the password you set for the postgres user:
 
 ```bash
+# Environment
 NODE_ENV=development
+PORT=3001
+
+# Database
 DB_USER=postgres
 DB_HOST=localhost
 DB_NAME=EffiTech
 DB_PASSWORD=postgres
 DB_PORT=5432
-PORT=3001
-JWT_SECRET=your_randomly_generated_token
-EMAIL=your_email@exemple.com
-MAILJET_API_KEY=mailjet_api_key
-MAILJET_SECRET_KEY=mailjet_secret_key
+DATABASE_VERSION=x.x.x
+
+# Authentication
+JWT_SECRET=**************
+
+# Email SMTP
+EMAIL=exemple@mail.com
+MAILJET_API_KEY=***************
+MAILJET_SECRET_KEY=**************
+
+# URLs
+ORIGIN_URL=http://localhost:3000
+SERVER_URL=http://localhost:3001
 ```
 
 For `JWT_SECRET`, generate a random token and replace your_randomly_generated_token with it. You can use a command like the following to generate a secure token:
@@ -209,7 +217,7 @@ This project uses **GitHub Actions** to automate unit tests and create new relea
 
 The app is divided into three images: one for the backend, one for the frontend, and one for the database.
 
-You can run the app in Docker with `docker-compose up --build`.
+You can run the app in Docker with `docker-compose up --build` or `docker-compose up --build -d`
 
 To stop run `docker-compose down`
 
@@ -276,4 +284,3 @@ Then to see the documentation pages, run `index.html` from both folders with Liv
     - Verifies that the new employee can log in and access the app according to their role.
 
 </details>
-````

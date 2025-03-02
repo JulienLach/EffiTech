@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import GlobalStyles from "../../styles/GlobalStyles.module.css";
 import styles from "./CreateAccount.module.css";
 import { useNavigate } from "react-router-dom";
 import LogoDesktop from "../../components/LogoDesktop/LogoDesktop";
@@ -42,15 +41,8 @@ class CreateAccountPage extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const {
-            firstname,
-            lastname,
-            email,
-            phoneNumber,
-            password,
-            job,
-            speciality,
-        } = this.state;
+        const { firstname, lastname, email, phoneNumber, password } =
+            this.state;
 
         const employeeData = {
             firstname,
