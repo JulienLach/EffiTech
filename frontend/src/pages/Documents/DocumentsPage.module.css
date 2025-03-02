@@ -129,7 +129,11 @@
 
 .downloadButton {
     cursor: pointer;
-    font-size: 1.2em;
+    font-size: 1.4em;
+}
+
+.downloadButton:hover {
+    color: #9b1a0b;
 }
 
 .divider {

@@ -87,7 +87,7 @@ class CalendarMobile extends Component {
                         day: "Jour",
                         date: "Date",
                         time: "Heure",
-                        event: "Événement",
+                        event: "Évènement",
                     }}
                     eventPropGetter={eventStyleGetter}
                     components={{

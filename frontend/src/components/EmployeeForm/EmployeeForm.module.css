@@ -116,9 +116,9 @@ input:checked + .slider:before {
 
 /* Common styles for buttons */
 .buttonPosition button {
-    padding: 0.625em;
+    padding: 0.55em;
     border: none;
-    border-radius: 0.625em;
+    border-radius: 0.4em;
     color: white;
     font-size: 1.125em;
     font-weight: 500;
@@ -131,10 +131,18 @@ input:checked + .slider:before {
     border-radius: 0.4em !important;
 }
 
+.cancelButton:hover {
+    background-color: #777777;
+}
+
 /* Specific styles for submit button */
 .employeeSubmitButton {
     background-color: #c93c2c;
     border-radius: 0.4em !important;
+}
+
+.employeeSubmitButton:hover {
+    background-color: #a12e24;
 }
 
 .separation {

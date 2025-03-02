@@ -94,7 +94,7 @@
 /* Common styles for buttons */
 .buttonPosition button {
     /* margin: 0; */
-    padding: 0.625em;
+    padding: 0.55em;
     border: none;
     border-radius: 0.4em;
     color: white;
@@ -108,9 +108,17 @@
     background-color: #ababab;
 }
 
+.cancelButton:hover {
+    background-color: #8c8c8c;
+}
+
 /* Specific styles for submit button */
 .submitButton {
     background-color: #c93c2c;
+}
+
+.submitButton:hover {
+    background-color: #a92c1c;
 }
 
 .error {

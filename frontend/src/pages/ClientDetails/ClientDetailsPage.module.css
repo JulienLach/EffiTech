@@ -31,6 +31,10 @@
     margin-left: auto;
 }
 
+.backButton:hover {
+    background-color: #aeaeae;
+}
+
 .backButton i {
     transform: rotate(180deg);
     margin-right: 0.5em;
@@ -169,4 +173,14 @@ h2 {
 
 .clientLabel {
     font-weight: 500;
+}
+
+.iconWrapper {
+    background-color: #556080;
+    border-radius: 50%;
+    padding: 0.45em;
+    color: #efefef;
+    font-size: 2.2em;
+    text-align: center;
+    margin-right: 0.3em;
 }

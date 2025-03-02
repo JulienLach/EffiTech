@@ -24,14 +24,21 @@
 .radioParticulier {
     margin-left: 0.5em;
     color: #c35e00;
+    font-size: 1.15em;
+    font-weight: 500;
+    cursor: pointer;
 }
 
 .radioForm {
     margin-right: 0.6em;
+    cursor: pointer;
 }
 
 .radioProfessionnel {
     color: #2c5ba1;
+    font-size: 1.15em;
+    font-weight: 500;
+    cursor: pointer;
 }
 
 .labelInput {
@@ -63,7 +70,7 @@
 }
 
 .buttonPosition button {
-    padding: 0.625em;
+    padding: 0.55em;
     border: none;
     border-radius: 0.4em;
     color: white;
@@ -76,8 +83,16 @@
     background-color: #ababab;
 }
 
+.cancelButton:hover {
+    background-color: #777777;
+}
+
 .submitButton {
     background-color: #c93c2c;
+}
+
+.submitButton:hover {
+    background-color: #a82b1c;
 }
 
 .error {
