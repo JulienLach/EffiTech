@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## Fixes
+
+-   Fix Event object import in utils
+-   Add Select react library to invoice form for client selector
+
 # [0.8.1] (2025-02-03)
 
 ## Changes

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { useNavigate } from "react-router-dom";
+import Select from "react-select";
 import styles from "./InvoiceForm.module.css";
 import { getAllClients, importInvoice } from "../../services/api";
 
@@ -158,32 +159,27 @@ class InvoiceForm extends Component {
                                 <label htmlFor="searchClient">
                                     Sélectionner un client :
                                 </label>
-                                <input
-                                    type="text"
-                                    id="searchClient"
-                                    placeholder="Rechercher un client"
-                                    value={searchQuery}
-                                    onChange={this.handleSearchChange}
+                                <Select
+                                    options={clients.map((client) => ({
+                                        value: client.idClient,
+                                        label: `${client.firstname} ${client.lastname}`,
+                                    }))}
+                                    onChange={(selectedOption) =>
+                                        this.handleClientChange({
+                                            target: {
+                                                value: selectedOption.value,
+                                            },
+                                        })
+                                    }
+                                    placeholder={
+                                        <span>
+                                            <i className="fa fa-search"></i>{" "}
+                                            Rechercher un client
+                                        </span>
+                                    }
+                                    className={styles.reactSelect}
+                                    classNamePrefix="react-select"
                                 />
-                                <select
-                                    className={styles.selectClient}
-                                    id="idClient"
-                                    name="idClient"
-                                    value={invoice.idClient}
-                                    onChange={this.handleClientChange}
-                                >
-                                    <option value="">
-                                        Sélectionner un client
-                                    </option>
-                                    {filteredClients.map((client) => (
-                                        <option
-                                            key={client.idClient}
-                                            value={client.idClient}
-                                        >
-                                            {client.firstname} {client.lastname}
-                                        </option>
-                                    ))}
-                                </select>
                                 {errors.idClient && (
                                     <span className={styles.error}>
                                         {errors.idClient}
