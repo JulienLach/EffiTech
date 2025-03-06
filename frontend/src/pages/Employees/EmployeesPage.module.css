@@ -21,15 +21,14 @@
 }
 
 .cardContainer {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(390px, 1fr));
     gap: 1em;
 }
 
 .card {
     display: flex;
     justify-content: space-between;
-    width: 29vw;
     margin: 0.7em;
     padding: 1.4em;
     border-radius: 0.7em;
