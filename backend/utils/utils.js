@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const Event = require("../data/event.data.js"); // Correction ici
+const { Event } = require("../data/event.data.js");
 
 // Pour passer n'importe quel argument à la méthode addLog
 // Exemple : Utils.addLog("Erreur : " + error.message); ou Utils.addLog("Message", employee.name);
