@@ -103,12 +103,27 @@
     background-color: #ababab;
 }
 
+.cancelButton:hover {
+    background-color: #8f8f8f;
+}
+
 .submitButton {
     background-color: #c93c2c;
+}
+
+.submitButton:hover {
+    background-color: #b82717;
 }
 
 .error {
     font-size: 0.9em;
     margin: 0 0 0 1em;
     color: rgb(226, 12, 12);
+}
+
+.reactSelect {
+    margin: 0 0.8em;
+    width: 18.3vw;
+    font-weight: 400;
+    font-size: 0.95em;
 }
