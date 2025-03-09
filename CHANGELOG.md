@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## Changes
 
 -   Add send by email button on mobile report page
+-   Add search field to employee page
 
 # [0.8.2] (2025-07-03)
 

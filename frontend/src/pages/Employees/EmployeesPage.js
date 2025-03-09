@@ -6,7 +6,6 @@ import styles from "./EmployeesPage.module.css";
 import { getAllEmployees } from "../../services/api";
 import EmployeeForm from "../../components/EmployeeForm/EmployeeForm";
 
-// Composant fonctionnel wrapper
 const EmployeesPageWrapper = () => {
     const navigate = useNavigate();
     const location = useLocation();
@@ -18,12 +17,14 @@ class EmployeesPage extends Component {
         super(props);
         this.state = {
             employees: [],
+            filteredEmployees: [],
             isModalOpen: false,
-            employee: {},
+            searchItem: "",
         };
         this.handleButtonClick = this.handleButtonClick.bind(this);
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
+        this.handleSearchChange = this.handleSearchChange.bind(this);
     }
 
     componentDidMount() {
@@ -31,9 +32,21 @@ class EmployeesPage extends Component {
             if (error) {
                 this.setState({ error: error.message });
             } else {
-                // console.log("Données des employés récupérées:", data);
-                this.setState({ employees: data });
+                this.setState({ employees: data, filteredEmployees: data });
             }
+        });
+    }
+
+    handleSearchChange(event) {
+        const searchItem = event.target.value.toLowerCase();
+        this.setState((prevState) => {
+            const filteredEmployees = prevState.employees.filter(
+                (employee) =>
+                    employee.firstname.toLowerCase().includes(searchItem) ||
+                    employee.lastname.toLowerCase().includes(searchItem) ||
+                    employee.job.toLowerCase().includes(searchItem)
+            );
+            return { searchItem, filteredEmployees };
         });
     }
 
@@ -56,7 +69,8 @@ class EmployeesPage extends Component {
     }
 
     render() {
-        const { employees, isModalOpen } = this.state;
+        const { filteredEmployees, isModalOpen } = this.state;
+
         return (
             <>
                 {isMobile ? (
@@ -68,18 +82,42 @@ class EmployeesPage extends Component {
                     <>
                         <TemplateGlobal />
                         <div className={styles.container}>
-                            <h1 className={styles.pageTitle}>Employés</h1>
-                            <div>
-                                <button
-                                    className={styles.addEmployee}
-                                    onClick={this.openModal}
-                                >
-                                    <i className="fa-solid fa-plus"> </i>{" "}
-                                    Ajouter un employé
-                                </button>
+                            <div className={styles.alignItems}>
+                                <h1 className={styles.pageTitle}>Employés</h1>
+                                <div className={styles.rightPart}>
+                                    <button
+                                        className={styles.addEmployee}
+                                        onClick={this.openModal}
+                                    >
+                                        <i className="fa-solid fa-plus"> </i>{" "}
+                                        Ajouter un employé
+                                    </button>
+                                </div>
                             </div>
+                            <div className={styles.filterBar}>
+                                <div className={styles.searchInput}>
+                                    <i className="fa-solid fa-magnifying-glass"></i>
+                                    <input
+                                        type="text"
+                                        id="search"
+                                        name="search"
+                                        placeholder="Rechercher"
+                                        onChange={this.handleSearchChange}
+                                    />
+                                </div>
+                                <div className={styles.columnModalFilter}>
+                                    <div
+                                        className={styles.typeFilter}
+                                        onClick={this.openCategoryModal}
+                                    >
+                                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                                        <p>Poste</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className={styles.divider}></div>
                             <div className={styles.cardContainer}>
-                                {employees.map((employee) => (
+                                {filteredEmployees.map((employee) => (
                                     <div
                                         key={employee.idEmployee}
                                         className={styles.card}

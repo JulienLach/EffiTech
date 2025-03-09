@@ -74,6 +74,17 @@ h3 {
     color: white;
 }
 
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
 @media (max-width: 768px) {
     .alert {
         position: fixed;
@@ -83,5 +94,6 @@ h3 {
         border-radius: 0.4em;
         font-size: 1.2em;
         background-color: #5aff60;
+        animation: slideInRight 0.08s ease-out;
     }
 }
