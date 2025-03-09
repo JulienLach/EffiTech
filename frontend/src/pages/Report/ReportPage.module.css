@@ -101,6 +101,7 @@
 .documentLink i {
     margin: 0 0.1em 0 0;
     color: #b73c2e;
+    font-size: 1.3em;
 }
 
 .mailButton {
@@ -116,6 +117,7 @@
 
 .mailButton i {
     color: white;
+    font-size: 1.1em;
 }
 
 .mailButton:hover {

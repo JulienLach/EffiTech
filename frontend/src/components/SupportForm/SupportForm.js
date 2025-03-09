@@ -44,7 +44,10 @@ class SupportForm extends Component {
         const emailData = {
             to: "support@effitech.ovh", //support email à configurer dans ovh
             subject: "Demande de support",
-            text: `De: ${email}\n\nMessage:\n${message}`,
+            text: `De: ${email}\n\nMessage:\n${message}
+            Nous avons reçu votre message et nous vous répondrons dans les plus brefs délais.
+            Merci de votre confiance.
+            `,
         };
 
         sendEmail(emailData, (error, data) => {
