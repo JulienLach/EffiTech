@@ -38,8 +38,13 @@
 }
 
 .documentLink {
-    margin-bottom: 5em;
     color: #c93c2c;
+    text-align: center;
+}
+
+.documentLink i {
+    font-size: 1.1em;
+    color: #b73c2e;
 }
 
 h3 {
@@ -55,4 +60,40 @@ h3 {
     font-size: 1.5em;
     font-weight: 600;
     margin-bottom: 0.5em;
+}
+
+.mailButton {
+    padding: 0.75em;
+    margin-top: 0.7em;
+    border: none;
+    border-radius: 0.4em;
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+    background-color: #b73c2e;
+    color: white;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .alert {
+        position: fixed;
+        top: 95px;
+        right: 10px;
+        padding: 15px;
+        border-radius: 0.4em;
+        font-size: 1.2em;
+        background-color: #5aff60;
+        animation: slideInRight 0.08s ease-out;
+    }
 }

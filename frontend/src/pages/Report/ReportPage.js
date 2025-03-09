@@ -93,7 +93,7 @@ class ReportPage extends Component {
                     this.setState({ showAlert: true });
                     setTimeout(() => {
                         this.setState({ showAlert: false });
-                    }, 3000);
+                    }, 3500);
                 }
             });
         } catch (error) {
@@ -196,7 +196,20 @@ class ReportPage extends Component {
                                         {event.client.lastname}-{event.title}
                                     </a>
                                 </div>
+                                <button
+                                    className={stylesMobile.mailButton}
+                                    onClick={this.sendReport}
+                                >
+                                    <i className="fa-solid fa-paper-plane"></i>{" "}
+                                    Envoyer par email
+                                </button>
                             </div>
+                            {showAlert && (
+                                <div className={stylesMobile.alert}>
+                                    Email envoyé{" "}
+                                    <i className="fa-solid fa-check"></i>
+                                </div>
+                            )}
                         </div>
                     </>
                 ) : (
@@ -264,7 +277,7 @@ class ReportPage extends Component {
                                     </h3>
                                     <div className={styles.documentLink}>
                                         <a href="#">
-                                            <i className="fa-solid fa-file"></i>{" "}
+                                            <i class="fa-solid fa-file-pdf"></i>{" "}
                                             INT-{event.idEvent}-
                                             {event.client.firstname}-
                                             {event.client.lastname}-
