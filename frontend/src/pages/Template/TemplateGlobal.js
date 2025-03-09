@@ -5,6 +5,7 @@ import logo from "../../images/logo.svg";
 import CreateEventForm from "../../components/CreateEventForm/CreateEventForm";
 import InterventionForm from "../../components/InterventionForm/InterventionForm";
 import ClientForm from "../../components/ClientForm/ClientForm";
+import SupportForm from "../../components/SupportForm/SupportForm";
 
 function TemplateGlobalWrapper(props) {
     const navigate = useNavigate();
@@ -17,8 +18,10 @@ class TemplateGlobal extends Component {
         this.state = {
             currentPath: window.location.pathname,
             showProfileMenu: false,
+            showSupportMenu: false,
+            showSupportForm: false,
             initials: "",
-            isCreateModalOpen: false, // État pour gérer l'affichage de la modal
+            isCreateModalOpen: false,
             isCreateEventModalOpen: false,
             isCreateClientModalOpen: false,
             isEventModalOpen: false,
@@ -27,6 +30,7 @@ class TemplateGlobal extends Component {
             idEmployee: localStorage.getItem("idEmployee"),
         };
         this.toggleProfileMenu = this.toggleProfileMenu.bind(this);
+        this.toggleSupportMenu = this.toggleSupportMenu.bind(this);
         this.logout = this.logout.bind(this);
         this.handleNotificationClick = this.handleNotificationClick.bind(this);
         this.toggleCreateModal = this.toggleCreateModal.bind(this); // Méthode pour ouvrir/fermer la modal
@@ -38,6 +42,8 @@ class TemplateGlobal extends Component {
         this.getIdEmployeeLocalStorage =
             this.getIdEmployeeLocalStorage.bind(this);
         this.handleProfileClick = this.handleProfileClick.bind(this);
+        this.handleSupportClick = this.handleSupportClick.bind(this); // Ajouté
+        this.toggleSupportForm = this.toggleSupportForm.bind(this); // Ajouté
     }
 
     componentDidMount() {
@@ -75,6 +81,19 @@ class TemplateGlobal extends Component {
         }));
     }
 
+    toggleSupportMenu() {
+        this.setState((prevState) => ({
+            showSupportMenu: !prevState.showSupportMenu,
+        }));
+    }
+
+    toggleSupportForm() {
+        // Nouvelle méthode ajoutée
+        this.setState((prevState) => ({
+            showSupportForm: !prevState.showSupportForm,
+        }));
+    }
+
     getIdEmployeeLocalStorage() {
         return localStorage.getItem("idEmployee");
     }
@@ -82,6 +101,12 @@ class TemplateGlobal extends Component {
     handleProfileClick() {
         const idEmployee = this.getIdEmployeeLocalStorage();
         this.props.navigate("/employee-details", { state: { idEmployee } });
+    }
+
+    handleSupportClick() {
+        // Modifié pour harmoniser
+        this.toggleSupportMenu();
+        this.toggleSupportForm();
     }
 
     logout() {
@@ -135,6 +160,8 @@ class TemplateGlobal extends Component {
         const {
             currentPath,
             showProfileMenu,
+            showSupportMenu,
+            showSupportForm,
             initials,
             isCreateModalOpen,
             isCreateEventModalOpen,
@@ -175,6 +202,31 @@ class TemplateGlobal extends Component {
                                     className={styles.notificationCount}
                                 ></span>
                             </div>
+                            <div
+                                className={styles.supportModal}
+                                onClick={this.toggleSupportMenu}
+                            >
+                                <a>
+                                    <i class="fa-solid fa-headset"></i>
+                                </a>
+                            </div>
+                            {showSupportMenu && (
+                                <div className={styles.supportMenu}>
+                                    <ul>
+                                        <li>
+                                            <a
+                                                href="#"
+                                                onClick={
+                                                    this.handleSupportClick
+                                                }
+                                            >
+                                                Contacter le support{" "}
+                                                <i class="fa-solid fa-paper-plane"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            )}
                             <div
                                 className={styles.profileBubble}
                                 onClick={this.toggleProfileMenu}
@@ -365,6 +417,14 @@ class TemplateGlobal extends Component {
                             />
                         </div>
                     </div>
+                )}
+
+                {/* Modal pour le formulaire de support */}
+                {showSupportForm && (
+                    <div className={styles.modalBackground}></div>
+                )}
+                {showSupportForm && (
+                    <SupportForm closeModal={this.toggleSupportForm} />
                 )}
             </>
         );
