@@ -188,3 +188,42 @@ h2 {
     text-align: center;
     margin-right: 0.3em;
 }
+
+.tabContainer {
+    display: flex;
+    gap: 0.5em;
+    margin: 1.25em 0;
+}
+
+.tabButton {
+    background: none;
+    border: none;
+    font-size: 1.15em;
+    color: #3c3c3c;
+    cursor: pointer;
+    font-weight: 550;
+    margin: 0 0.5em 0 0;
+}
+
+.tabButton.activeTab {
+    color: #c93c2c;
+    text-decoration: underline;
+    text-decoration-color: #c93c2c;
+    text-underline-offset: 0.22em;
+    text-decoration-thickness: 0.15em;
+}
+
+.interventionsTable table {
+    border-collapse: collapse;
+}
+
+.interventionsTable th,
+.interventionsTable td {
+    text-align: start;
+    padding: 0.6em;
+    border-bottom: 0.06em solid #d3d3d3;
+}
+
+.interventionsTable th {
+    font-weight: 550;
+}

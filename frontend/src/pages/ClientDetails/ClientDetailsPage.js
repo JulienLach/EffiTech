@@ -20,6 +20,7 @@ class ClientDetailsPage extends Component {
         this.state = {
             client: client,
             idClient: client.idClient,
+            activeTab: "coordonnées",
         };
         this.handleButtonClick = this.handleButtonClick.bind(this);
     }
@@ -44,6 +45,10 @@ class ClientDetailsPage extends Component {
         this.props.navigate("/client-form", {
             state: { client: this.state.client },
         });
+    };
+
+    handleTabClick = (tab) => {
+        this.setState({ activeTab: tab });
     };
 
     getCategoryIndicator(category) {
@@ -84,7 +89,7 @@ class ClientDetailsPage extends Component {
     }
 
     render() {
-        const { client } = this.state;
+        const { client, activeTab } = this.state;
         console.log(client);
 
         const initial =
@@ -299,59 +304,148 @@ class ClientDetailsPage extends Component {
                                         </div>
                                     </div>
                                     <div className={styles.separation}></div>
-                                    <h2>Coordonnées</h2>
-                                    <div className={styles.contactInfo}>
-                                        <p className={styles.firstnamePro}>
-                                            <span
-                                                className={styles.clientLabel}
-                                            >
-                                                Contact client :
-                                            </span>{" "}
-                                            {client.firstname} {client.lastname}
-                                        </p>
-                                        <p>
-                                            <span
-                                                className={styles.clientLabel}
-                                            >
-                                                Téléphone :{" "}
-                                            </span>
-                                            <a
-                                                href={`tel:${client.phoneNumber}`}
-                                            >
-                                                {client.phoneNumber}
-                                            </a>
-                                        </p>
-                                        <p>
-                                            {" "}
-                                            <span
-                                                className={styles.clientLabel}
-                                            >
-                                                Adresse :
-                                            </span>{" "}
-                                            {clientAddress}
-                                        </p>
-                                        <p>
-                                            <a
-                                                href={googleMapsUrl}
-                                                target="_blank"
-                                                rel="noreferrer"
-                                                className={styles.openMapsLink}
-                                            >
-                                                <i className="fa-solid fa-location-dot"></i>
-                                                Voir sur Google Maps
-                                            </a>
-                                        </p>
-                                        <p>
-                                            <span
-                                                className={styles.clientLabel}
-                                            >
-                                                Mail :
-                                            </span>{" "}
-                                            <a href={`mailto:${client.email}`}>
-                                                {client.email}
-                                            </a>
-                                        </p>
+                                    {/* Ajout des onglets */}
+                                    <div className={styles.tabContainer}>
+                                        <button
+                                            className={`${styles.tabButton} ${
+                                                activeTab === "coordonnées"
+                                                    ? styles.activeTab
+                                                    : ""
+                                            }`}
+                                            onClick={() =>
+                                                this.handleTabClick(
+                                                    "coordonnées"
+                                                )
+                                            }
+                                        >
+                                            Coordonnées
+                                        </button>
+                                        <button
+                                            className={`${styles.tabButton} ${
+                                                activeTab === "interventions"
+                                                    ? styles.activeTab
+                                                    : ""
+                                            }`}
+                                            onClick={() =>
+                                                this.handleTabClick(
+                                                    "interventions"
+                                                )
+                                            }
+                                        >
+                                            Interventions
+                                        </button>
                                     </div>
+                                    {/* Contenu conditionnel des onglets */}
+                                    {activeTab === "coordonnées" ? (
+                                        <>
+                                            <div className={styles.contactInfo}>
+                                                <p
+                                                    className={
+                                                        styles.firstnamePro
+                                                    }
+                                                >
+                                                    <span
+                                                        className={
+                                                            styles.clientLabel
+                                                        }
+                                                    >
+                                                        Contact client :
+                                                    </span>{" "}
+                                                    {client.firstname}{" "}
+                                                    {client.lastname}
+                                                </p>
+                                                <p>
+                                                    <span
+                                                        className={
+                                                            styles.clientLabel
+                                                        }
+                                                    >
+                                                        Téléphone :{" "}
+                                                    </span>
+                                                    <a
+                                                        href={`tel:${client.phoneNumber}`}
+                                                    >
+                                                        {client.phoneNumber}
+                                                    </a>
+                                                </p>
+                                                <p>
+                                                    {" "}
+                                                    <span
+                                                        className={
+                                                            styles.clientLabel
+                                                        }
+                                                    >
+                                                        Adresse :
+                                                    </span>{" "}
+                                                    {clientAddress}
+                                                </p>
+                                                <p>
+                                                    <a
+                                                        href={googleMapsUrl}
+                                                        target="_blank"
+                                                        rel="noreferrer"
+                                                        className={
+                                                            styles.openMapsLink
+                                                        }
+                                                    >
+                                                        <i className="fa-solid fa-location-dot"></i>
+                                                        Voir sur Google Maps
+                                                    </a>
+                                                </p>
+                                                <p>
+                                                    <span
+                                                        className={
+                                                            styles.clientLabel
+                                                        }
+                                                    >
+                                                        Mail :
+                                                    </span>{" "}
+                                                    <a
+                                                        href={`mailto:${client.email}`}
+                                                    >
+                                                        {client.email}
+                                                    </a>
+                                                </p>
+                                            </div>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <div
+                                                className={
+                                                    styles.interventionsTable
+                                                }
+                                            >
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>ID</th>
+                                                            <th>Date</th>
+                                                            <th>Description</th>
+                                                            <th>Statut</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {/* Exemple de données fictives */}
+                                                        <tr>
+                                                            <td>1</td>
+                                                            <td>2023-01-15</td>
+                                                            <td>
+                                                                Réparation
+                                                                urgente
+                                                            </td>
+                                                            <td>Terminé</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2</td>
+                                                            <td>2023-02-20</td>
+                                                            <td>Maintenance</td>
+                                                            <td>En cours</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </>
+                                    )}
                                     <button
                                         className={styles.editButton}
                                         onClick={this.handleButtonClick}
@@ -402,57 +496,117 @@ class ClientDetailsPage extends Component {
                                         </div>
                                     </div>
                                     <div className={styles.separation}></div>
-                                    <h2>Coordonnées</h2>
-                                    <div className={styles.contactInfo}>
-                                        <p>
-                                            <span
-                                                className={styles.clientLabel}
-                                            >
-                                                Téléphone :
-                                            </span>{" "}
-                                            <a
-                                                href={`tel:${client.phoneNumber}`}
-                                            >
-                                                {client.phoneNumber}
-                                            </a>
-                                        </p>
-                                        <p>
-                                            <span
-                                                className={styles.clientLabel}
-                                            >
-                                                Adresse :
-                                            </span>{" "}
-                                            {clientAddress}
-                                        </p>
-                                        <p>
-                                            <a
-                                                href={googleMapsUrl}
-                                                target="_blank"
-                                                rel="noreferrer"
-                                                className={styles.openMapsLink}
-                                            >
-                                                <i className="fa-solid fa-location-dot"></i>
-                                                Voir sur Google Maps
-                                            </a>
-                                        </p>
-                                        <p>
-                                            <span
-                                                className={styles.clientLabel}
-                                            >
-                                                Mail :
-                                            </span>{" "}
-                                            <a href={`mailto:${client.email}`}>
-                                                {client.email}
-                                            </a>
-                                        </p>
+                                    {/* Ajout des onglets */}
+                                    <div className={styles.tabContainer}>
+                                        <button
+                                            className={`${styles.tabButton} ${
+                                                activeTab === "coordonnées"
+                                                    ? styles.activeTab
+                                                    : ""
+                                            }`}
+                                            onClick={() =>
+                                                this.handleTabClick(
+                                                    "coordonnées"
+                                                )
+                                            }
+                                        >
+                                            Coordonnées
+                                        </button>
+                                        <button
+                                            className={`${styles.tabButton} ${
+                                                activeTab === "interventions"
+                                                    ? styles.activeTab
+                                                    : ""
+                                            }`}
+                                            onClick={() =>
+                                                this.handleTabClick(
+                                                    "interventions"
+                                                )
+                                            }
+                                        >
+                                            Interventions
+                                        </button>
                                     </div>
-                                    <button
-                                        className={styles.editButton}
-                                        onClick={this.handleButtonClick}
-                                    >
-                                        <i className="fa-solid fa-pen"></i>
-                                        Modifier
-                                    </button>
+                                    {/* Contenu conditionnel des onglets */}
+                                    {activeTab === "coordonnées" ? (
+                                        <>
+                                            <div className={styles.contactInfo}>
+                                                <p>
+                                                    <span
+                                                        className={
+                                                            styles.clientLabel
+                                                        }
+                                                    >
+                                                        Téléphone :
+                                                    </span>{" "}
+                                                    <a
+                                                        href={`tel:${client.phoneNumber}`}
+                                                    >
+                                                        {client.phoneNumber}
+                                                    </a>
+                                                </p>
+                                                <p>
+                                                    <span
+                                                        className={
+                                                            styles.clientLabel
+                                                        }
+                                                    >
+                                                        Adresse :
+                                                    </span>{" "}
+                                                    {clientAddress}
+                                                </p>
+                                                <p>
+                                                    <a
+                                                        href={googleMapsUrl}
+                                                        target="_blank"
+                                                        rel="noreferrer"
+                                                        className={
+                                                            styles.openMapsLink
+                                                        }
+                                                    >
+                                                        <i className="fa-solid fa-location-dot"></i>
+                                                        Voir sur Google Maps
+                                                    </a>
+                                                </p>
+                                                <p>
+                                                    <span
+                                                        className={
+                                                            styles.clientLabel
+                                                        }
+                                                    >
+                                                        Mail :
+                                                    </span>{" "}
+                                                    <a
+                                                        href={`mailto:${client.email}`}
+                                                    >
+                                                        {client.email}
+                                                    </a>
+                                                </p>
+                                            </div>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <div
+                                                className={
+                                                    styles.interventionsTable
+                                                }
+                                            >
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Référence</th>
+                                                            <th>Type</th>
+                                                            <th>Titre</th>
+                                                            <th>Statut</th>
+                                                            <th>Date</th>
+                                                            <th>Employé</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                            </div>
+                                        </>
+                                    )}
                                 </div>
                             )}
                         </div>

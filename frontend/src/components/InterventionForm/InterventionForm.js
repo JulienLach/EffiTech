@@ -485,7 +485,7 @@ class InterventionForm extends Component {
                                 </div>
                                 <div>
                                     <span className={styles.eventLabel}>
-                                        Technicien intervenant :{" "}
+                                        Technicien :{" "}
                                     </span>{" "}
                                     {event.employee.firstname}{" "}
                                     {event.employee.lastname}
