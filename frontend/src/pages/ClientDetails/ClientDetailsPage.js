@@ -5,7 +5,7 @@ import TemplateGlobal from "../Template/TemplateGlobal";
 import TemplateGlobalMobile from "../Template/TemplateGlobalMobile";
 import styles from "./ClientDetailsPage.module.css";
 import stylesMobile from "./ClientDetailsPageMobile.module.css";
-import { getClientById } from "../../services/api";
+import { getClientById, getEventsByClientId } from "../../services/api";
 
 function ClientDetailsPageWrapper() {
     const navigate = useNavigate();
@@ -37,6 +37,19 @@ class ClientDetailsPage extends Component {
             } else {
                 this.setState({ client: data });
                 console.log("Données du client récupérées:", data);
+            }
+        });
+
+        getEventsByClientId(idClient, (error, data) => {
+            if (error) {
+                console.error(
+                    "Erreur lors de la récupération des événements",
+                    error
+                );
+                this.setState({ error: error.message });
+            } else {
+                this.setState({ events: data });
+                console.log("Données des événements récupérées:", data);
             }
         });
     }
@@ -89,7 +102,7 @@ class ClientDetailsPage extends Component {
     }
 
     render() {
-        const { client, activeTab } = this.state;
+        const { client, activeTab, events } = this.state;
         console.log(client);
 
         const initial =
@@ -418,29 +431,66 @@ class ClientDetailsPage extends Component {
                                                 <table>
                                                     <thead>
                                                         <tr>
-                                                            <th>ID</th>
-                                                            <th>Date</th>
-                                                            <th>Description</th>
+                                                            <th>Référence</th>
+                                                            <th>Type</th>
+                                                            <th>Titre</th>
                                                             <th>Statut</th>
+                                                            <th>Date</th>
+                                                            <th>Employé</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        {/* Exemple de données fictives */}
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td>2023-01-15</td>
-                                                            <td>
-                                                                Réparation
-                                                                urgente
-                                                            </td>
-                                                            <td>Terminé</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2</td>
-                                                            <td>2023-02-20</td>
-                                                            <td>Maintenance</td>
-                                                            <td>En cours</td>
-                                                        </tr>
+                                                        {events &&
+                                                            events.map(
+                                                                (event) => (
+                                                                    <tr
+                                                                        key={
+                                                                            event.idEvent
+                                                                        }
+                                                                    >
+                                                                        <td>
+                                                                            {(() => {
+                                                                                if (
+                                                                                    event.type ===
+                                                                                    "Intervention"
+                                                                                ) {
+                                                                                    return "INT-";
+                                                                                } else {
+                                                                                    return "RDV-";
+                                                                                }
+                                                                            })()}
+                                                                            {
+                                                                                event.idEvent
+                                                                            }
+                                                                        </td>
+                                                                        <td>
+                                                                            {
+                                                                                event.type
+                                                                            }
+                                                                        </td>
+                                                                        <td>
+                                                                            {
+                                                                                event.title
+                                                                            }
+                                                                        </td>
+                                                                        <td>
+                                                                            {
+                                                                                event.status
+                                                                            }
+                                                                        </td>
+                                                                        <td>
+                                                                            {event.startingDate
+                                                                                ? new Date(
+                                                                                      event.startingDate
+                                                                                  ).toLocaleDateString()
+                                                                                : ""}
+                                                                        </td>
+                                                                        <td>
+                                                                            {`${event.employee.firstname} ${event.employee.lastname}`}
+                                                                        </td>
+                                                                    </tr>
+                                                                )
+                                                            )}
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -602,11 +652,70 @@ class ClientDetailsPage extends Component {
                                                             <th>Employé</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody></tbody>
+                                                    <tbody>
+                                                        {events &&
+                                                            events.map(
+                                                                (event) => (
+                                                                    <tr
+                                                                        key={
+                                                                            event.idEvent
+                                                                        }
+                                                                    >
+                                                                        <td>
+                                                                            {(() => {
+                                                                                if (
+                                                                                    event.type ===
+                                                                                    "Intervention"
+                                                                                ) {
+                                                                                    return "INT-";
+                                                                                } else {
+                                                                                    return "RDV-";
+                                                                                }
+                                                                            })()}
+                                                                            {
+                                                                                event.idEvent
+                                                                            }
+                                                                        </td>
+                                                                        <td>
+                                                                            {
+                                                                                event.type
+                                                                            }
+                                                                        </td>
+                                                                        <td>
+                                                                            {
+                                                                                event.title
+                                                                            }
+                                                                        </td>
+                                                                        <td>
+                                                                            {
+                                                                                event.status
+                                                                            }
+                                                                        </td>
+                                                                        <td>
+                                                                            {event.startingDate
+                                                                                ? new Date(
+                                                                                      event.startingDate
+                                                                                  ).toLocaleDateString()
+                                                                                : ""}
+                                                                        </td>
+                                                                        <td>
+                                                                            {`${event.employee.firstname} ${event.employee.lastname}`}
+                                                                        </td>
+                                                                    </tr>
+                                                                )
+                                                            )}
+                                                    </tbody>
                                                 </table>
                                             </div>
                                         </>
                                     )}
+                                    <button
+                                        className={styles.editButton}
+                                        onClick={this.handleButtonClick}
+                                    >
+                                        <i className="fa-solid fa-pen"></i>
+                                        Modifier
+                                    </button>
                                 </div>
                             )}
                         </div>

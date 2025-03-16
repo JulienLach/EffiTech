@@ -277,7 +277,7 @@ class ReportPage extends Component {
                                     </h3>
                                     <div className={styles.documentLink}>
                                         <a href="#">
-                                            <i class="fa-solid fa-file-pdf"></i>{" "}
+                                            <i className="fa-solid fa-file-pdf"></i>{" "}
                                             INT-{event.idEvent}-
                                             {event.client.firstname}-
                                             {event.client.lastname}-

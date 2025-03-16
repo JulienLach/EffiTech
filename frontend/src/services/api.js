@@ -1038,6 +1038,24 @@ function sendEmployeeCredentials(emailData, callback) {
     xhr.send(JSON.stringify(emailData));
 }
 
+function getEventsByClientId(idClient, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", `${API_URL}/events/client/${idClient}`);
+    xhr.withCredentials = true;
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            callback(null, JSON.parse(xhr.responseText));
+        } else {
+            console.error(
+                "Erreur de récupération des événements",
+                xhr.statusText
+            );
+            callback(new Error(xhr.statusText), null);
+        }
+    };
+    xhr.send();
+}
+
 export {
     getAllEvents,
     getAllClients,
@@ -1070,4 +1088,5 @@ export {
     sendReport,
     sendEmail,
     sendEmployeeCredentials,
+    getEventsByClientId,
 };

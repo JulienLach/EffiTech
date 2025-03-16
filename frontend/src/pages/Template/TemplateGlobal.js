@@ -207,7 +207,7 @@ class TemplateGlobal extends Component {
                                 onClick={this.toggleSupportMenu}
                             >
                                 <a>
-                                    <i class="fa-solid fa-headset"></i>
+                                    <i className="fa-solid fa-headset"></i>
                                 </a>
                             </div>
                             {showSupportMenu && (
@@ -221,7 +221,7 @@ class TemplateGlobal extends Component {
                                                 }
                                             >
                                                 Contacter le support{" "}
-                                                <i class="fa-solid fa-paper-plane"></i>
+                                                <i className="fa-solid fa-paper-plane"></i>
                                             </a>
                                         </li>
                                     </ul>
