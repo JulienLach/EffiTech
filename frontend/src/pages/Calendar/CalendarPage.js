@@ -729,7 +729,7 @@ class CalendarPage extends Component {
                                                                 </a>
                                                             </td>
                                                             <td>
-                                                                {this.getStatusIndicator(
+                                                                {getStatusIndicator(
                                                                     event.status
                                                                 )}
                                                             </td>

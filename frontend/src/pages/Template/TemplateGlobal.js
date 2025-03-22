@@ -358,7 +358,7 @@ class TemplateGlobal extends Component {
                                     currentPath === "/" ? styles.active : ""
                                 }
                             >
-                                <a href="/calendar">
+                                <a href="/parameters">
                                     <i className="fa-solid fa-gear"></i>
                                     Paramètres
                                 </a>
