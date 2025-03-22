@@ -23,10 +23,21 @@ class ParametersPage extends Component {
     render() {
         return (
             <>
-                {isMobile ? <TemplateGlobalMobile /> : <TemplateGlobal />}
+                <TemplateGlobal />
                 <div className={styles.container}>
                     <h1 className={styles.pageTitle}>Paramètres</h1>
                     <div className={styles.divider}></div>
+                    <div className={styles.cardContainer}>
+                        <div className={styles.card}>
+                            <h2 className={styles.cardTitle}>
+                                <i class="fa-solid fa-wrench"></i> Métiers
+                            </h2>
+                            <p>Modifier vos métiers</p>
+                            <button className={styles.modifyButton}>
+                                <i class="fa-solid fa-pen"></i> Modifier
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </>
         );

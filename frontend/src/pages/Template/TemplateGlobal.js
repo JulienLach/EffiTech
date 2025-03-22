@@ -355,7 +355,9 @@ class TemplateGlobal extends Component {
                             </li>
                             <li
                                 className={
-                                    currentPath === "/" ? styles.active : ""
+                                    currentPath === "/parameters"
+                                        ? styles.active
+                                        : ""
                                 }
                             >
                                 <a href="/parameters">

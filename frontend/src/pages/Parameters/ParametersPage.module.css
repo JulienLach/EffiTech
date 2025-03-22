@@ -1,16 +1,59 @@
 .container {
     display: flex;
     flex-direction: column;
-    width: 80%;
     margin: 2em 1.25em 0 15.6em;
 }
 
 .pageTitle {
     font-size: 1.9em;
     font-weight: 550;
+}
+
+.divider {
+    margin: 1em 0;
+    border-bottom: 1px solid #e7e7f5;
+}
+
+.cardContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(390px, 1fr));
+    gap: 1em;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.4em;
+    border-radius: 0.7em;
+    border: 0.5px solid #e7e7f5;
+    box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+
+.cardContainer .card:only-child {
+    width: 30%;
+    margin: 0;
+}
+
+.cardTitle {
+    font-size: 1.4em;
+    font-weight: 600;
     margin-bottom: 1em;
 }
 
-.rightPart {
-    margin-left: auto;
+.modifyButton {
+    background-color: #c93c2c;
+    padding: 0.35em 0.65em;
+    border: none;
+    border-radius: 0.4em;
+    color: white;
+    font-size: 1.125em;
+    font-weight: 500;
+    cursor: pointer;
+    align-self: flex-end;
+}
+
+.modifyButton:hover {
+    background-color: #a32a1f;
 }
