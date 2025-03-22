@@ -6,6 +6,7 @@ import TemplateGlobalMobile from "../Template/TemplateGlobalMobile";
 import styles from "./ClientDetailsPage.module.css";
 import stylesMobile from "./ClientDetailsPageMobile.module.css";
 import { getClientById, getEventsByClientId } from "../../services/api";
+import getStatusIndicator from "../../components/Utils/StatusUtils"; // Importez getStatusIndicator ici
 
 function ClientDetailsPageWrapper() {
     const navigate = useNavigate();
@@ -21,6 +22,7 @@ class ClientDetailsPage extends Component {
             client: client,
             idClient: client.idClient,
             activeTab: "coordonnées",
+            events: [],
         };
         this.handleButtonClick = this.handleButtonClick.bind(this);
     }
@@ -98,12 +100,13 @@ class ClientDetailsPage extends Component {
                         Particulier
                     </span>
                 );
+            default:
+                return null;
         }
     }
 
     render() {
         const { client, activeTab, events } = this.state;
-        console.log(client);
 
         const initial =
             client.category === "Professionnel"
@@ -140,7 +143,6 @@ class ClientDetailsPage extends Component {
                                     <div
                                         className={stylesMobile.infoClientCard}
                                     >
-                                        {" "}
                                         <div
                                             className={
                                                 stylesMobile.profilInitial
@@ -208,7 +210,6 @@ class ClientDetailsPage extends Component {
                                     <div
                                         className={stylesMobile.infoClientCard}
                                     >
-                                        {" "}
                                         <div
                                             className={
                                                 stylesMobile.profilInitial
@@ -278,7 +279,6 @@ class ClientDetailsPage extends Component {
                         <div className={styles.container}>
                             {client.category === "Professionnel" ? (
                                 <div className={styles.pro}>
-                                    {/* code pour le professionnel ici */}
                                     <div className={styles.profilInfo}>
                                         <h1 className={styles.pageTitle}>
                                             Détails client
@@ -317,7 +317,6 @@ class ClientDetailsPage extends Component {
                                         </div>
                                     </div>
                                     <div className={styles.separation}></div>
-                                    {/* Ajout des onglets */}
                                     <div className={styles.tabContainer}>
                                         <button
                                             className={`${styles.tabButton} ${
@@ -348,7 +347,6 @@ class ClientDetailsPage extends Component {
                                             Interventions
                                         </button>
                                     </div>
-                                    {/* Contenu conditionnel des onglets */}
                                     {activeTab === "coordonnées" ? (
                                         <>
                                             <div className={styles.contactInfo}>
@@ -474,9 +472,9 @@ class ClientDetailsPage extends Component {
                                                                             }
                                                                         </td>
                                                                         <td>
-                                                                            {
+                                                                            {getStatusIndicator(
                                                                                 event.status
-                                                                            }
+                                                                            )}{" "}
                                                                         </td>
                                                                         <td>
                                                                             {event.startingDate
@@ -506,7 +504,6 @@ class ClientDetailsPage extends Component {
                                 </div>
                             ) : (
                                 <div className={styles.part}>
-                                    {/* code pour le particulier ici */}
                                     <div className={styles.profilInfo}>
                                         <h1 className={styles.pageTitle}>
                                             Détails client
@@ -546,7 +543,6 @@ class ClientDetailsPage extends Component {
                                         </div>
                                     </div>
                                     <div className={styles.separation}></div>
-                                    {/* Ajout des onglets */}
                                     <div className={styles.tabContainer}>
                                         <button
                                             className={`${styles.tabButton} ${
@@ -577,7 +573,6 @@ class ClientDetailsPage extends Component {
                                             Interventions
                                         </button>
                                     </div>
-                                    {/* Contenu conditionnel des onglets */}
                                     {activeTab === "coordonnées" ? (
                                         <>
                                             <div className={styles.contactInfo}>
@@ -687,9 +682,10 @@ class ClientDetailsPage extends Component {
                                                                             }
                                                                         </td>
                                                                         <td>
-                                                                            {
+                                                                            {getStatusIndicator(
                                                                                 event.status
-                                                                            }
+                                                                            )}{" "}
+                                                                            {/* Utilisation de getStatusIndicator ici */}
                                                                         </td>
                                                                         <td>
                                                                             {event.startingDate

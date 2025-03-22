@@ -11,6 +11,7 @@ import InterventionForm from "../../components/InterventionForm/InterventionForm
 import UpdateInterventionForm from "../../components/UpdateInterventionForm/UpdateInterventionForm";
 import CreateEventForm from "../../components/CreateEventForm/CreateEventForm";
 import Calendar from "../../components/Calendar/Calendar";
+import getStatusIndicator from "../../components/Utils/StatusUtils";
 
 // Composant wrapper pour utiliser les hooks
 function CalendarPageWrapper() {
@@ -121,79 +122,6 @@ class CalendarPage extends Component {
         this.setState((prevState) => ({
             currentPage: Math.max(prevState.currentPage - 1, 1),
         }));
-    }
-
-    getStatusIndicator(status) {
-        const style = {
-            padding: "2px 10px",
-            borderRadius: "8px",
-            color: "white",
-            fontSize: "0.9em",
-            fontWeight: "500",
-        };
-
-        switch (status) {
-            case 1:
-                return (
-                    <span
-                        style={{
-                            ...style,
-                            backgroundColor: "#EBEBEB",
-                            color: "#505050",
-                        }}
-                    >
-                        À planifier
-                    </span>
-                );
-            case 2:
-                return (
-                    <span
-                        style={{
-                            ...style,
-                            backgroundColor: "#FFDEDE",
-                            color: "#923838",
-                        }}
-                    >
-                        En retard
-                    </span>
-                );
-            case 3:
-                return (
-                    <span
-                        style={{
-                            ...style,
-                            backgroundColor: "#D3F4FF",
-                            color: "#2C5BA1",
-                        }}
-                    >
-                        Aujourd&apos;hui
-                    </span>
-                );
-            case 4:
-                return (
-                    <span
-                        style={{
-                            ...style,
-                            backgroundColor: "#FFECCF",
-                            color: "#C35E00",
-                        }}
-                    >
-                        À venir
-                    </span>
-                );
-            case 5:
-                return (
-                    <span
-                        style={{
-                            ...style,
-                            backgroundColor: "#DCFFD6",
-                            color: "#48903C",
-                        }}
-                    >
-                        Terminé
-                    </span>
-                );
-        }
     }
 
     toggleEventModal(event = null) {
@@ -358,7 +286,7 @@ class CalendarPage extends Component {
                                                         stylesMobile.status
                                                     }
                                                 >
-                                                    {this.getStatusIndicator(
+                                                    {getStatusIndicator(
                                                         event.status
                                                     )}
                                                 </p>
@@ -622,7 +550,7 @@ class CalendarPage extends Component {
                                                                 </a>
                                                             </td>
                                                             <td>
-                                                                {this.getStatusIndicator(
+                                                                {getStatusIndicator(
                                                                     event.status
                                                                 )}
                                                             </td>
