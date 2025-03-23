@@ -243,26 +243,30 @@ class ReportPage extends Component {
                                 <div className={styles.infoTitle}>
                                     <h3>Client :</h3>
                                     <p>
-                                        Nom : {event.client.firstname}{" "}
+                                        <strong>Nom : </strong>
+                                        {event.client.firstname}{" "}
                                         {event.client.lastname}
                                     </p>
                                     <p>
-                                        Téléphone : {event.client.phoneNumber}
+                                        <strong>Téléphone : </strong>{" "}
+                                        {event.client.phoneNumber}
                                     </p>
                                     <p>
-                                        Adresse : {event.client.address.address}
-                                        , {event.client.address.zipcode},{" "}
+                                        <strong>Adresse :</strong>{" "}
+                                        {event.client.address.address},{" "}
+                                        {event.client.address.zipcode},{" "}
                                         {event.client.address.city}
                                     </p>
                                 </div>
                                 <div className={styles.infoTitle}>
                                     <h3>Technicien :</h3>
                                     <p>
-                                        Nom : {event.employee.firstname}{" "}
+                                        <strong>Nom : </strong>
+                                        {event.employee.firstname}{" "}
                                         {event.employee.lastname}
                                     </p>
                                     <p>
-                                        Intervenu le :{" "}
+                                        <strong>Intervenu le : </strong>{" "}
                                         {new Date(
                                             event.startingDate
                                         ).toLocaleDateString()}{" "}
