@@ -110,8 +110,8 @@ class EmployeesPage extends Component {
                                         className={styles.typeFilter}
                                         onClick={this.openCategoryModal}
                                     >
-                                        <i className="fa-solid fa-screwdriver-wrench"></i>
-                                        <p>Poste</p>
+                                        <i class="fa-solid fa-wrench"></i>
+                                        <p>Métier</p>
                                     </div>
                                 </div>
                             </div>

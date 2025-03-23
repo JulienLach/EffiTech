@@ -135,8 +135,7 @@ class SupportForm extends Component {
                                 type="submit"
                                 className={styles.submitButton}
                             >
-                                <i className="fas fa-check"></i>
-                                Envoyer
+                                <i class="fa-solid fa-paper-plane"></i> Envoyer
                             </button>
                         </div>
                     </div>

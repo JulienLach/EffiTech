@@ -493,14 +493,7 @@ class ClientDetailsPage extends Component {
                                                 </table>
                                             </div>
                                         </>
-                                    )}
-                                    <button
-                                        className={styles.editButton}
-                                        onClick={this.handleButtonClick}
-                                    >
-                                        <i className="fa-solid fa-pen"></i>
-                                        Modifier
-                                    </button>
+                                    )}{" "}
                                 </div>
                             ) : (
                                 <div className={styles.part}>
@@ -705,13 +698,15 @@ class ClientDetailsPage extends Component {
                                             </div>
                                         </>
                                     )}
-                                    <button
-                                        className={styles.editButton}
-                                        onClick={this.handleButtonClick}
-                                    >
-                                        <i className="fa-solid fa-pen"></i>
-                                        Modifier
-                                    </button>
+                                    {activeTab === "coordonnées" && (
+                                        <button
+                                            className={styles.editButton}
+                                            onClick={this.handleButtonClick}
+                                        >
+                                            <i className="fa-solid fa-pen"></i>
+                                            Modifier
+                                        </button>
+                                    )}
                                 </div>
                             )}
                         </div>

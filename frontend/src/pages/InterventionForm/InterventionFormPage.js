@@ -114,16 +114,14 @@ class InterventionFormPage extends Component {
 
         const errors = {};
         if (!breakdown) {
-            errors.breakdown = "* Champ obligatoire";
-        } else if (!/^[a-zA-ZÀ-ÿ\d\s-'"()-]+$/.test(breakdown)) {
-            errors.breakdown =
-                "* Ne doit contenir que des lettres, des chiffres, des tirets et des espaces";
+            errors.breakdown = "* Ce champ est requis";
+        } else if (!/^[a-zA-ZÀ-ÿ\d\s.,!?;:'"()-]+$/.test(breakdown)) {
+            errors.breakdown = "* Caractère invalide";
         }
         if (!workDone) {
-            errors.workDone = "* Champ obligatoire";
-        } else if (!/^[a-zA-ZÀ-ÿ\d\s-'"()-]+$/.test(breakdown)) {
-            errors.breakdown =
-                "* Ne doit contenir que des lettres, des chiffres, des tirets et des espaces";
+            errors.workDone = "* Ce champ est requis";
+        } else if (!/^[a-zA-ZÀ-ÿ\d\s.,!?;:'"()-]+$/.test(workDone)) {
+            errors.workDone = "* Caractère invalide";
         }
         if (!clientSignature) {
             errors.clientSignature = "* Champ obligatoire";

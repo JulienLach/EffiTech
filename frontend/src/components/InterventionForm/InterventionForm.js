@@ -218,6 +218,9 @@ class InterventionForm extends Component {
                                     <h3 className={stylesMobile.title}>
                                         Client
                                     </h3>
+                                    <h3 className={stylesMobile.title}>
+                                        Client
+                                    </h3>
                                     <p className={stylesMobile.dataElement}>
                                         {event.client.firstname}{" "}
                                         {event.client.lastname}
@@ -412,6 +415,7 @@ class InterventionForm extends Component {
                                     </h2>
                                 </div>
                                 <div className={styles.separator}></div>
+                                <h3>Détails</h3>
                                 {event.client.company &&
                                     event.client.company !== "N/A" && (
                                         <div>
@@ -423,7 +427,10 @@ class InterventionForm extends Component {
                                     )}
                                 <div>
                                     <span className={styles.eventLabel}>
-                                        Client :
+                                        {event.client.category === "Particulier"
+                                            ? "Client"
+                                            : "Contact client"}{" "}
+                                        :
                                     </span>{" "}
                                     {event.client.firstname}{" "}
                                     {event.client.lastname}
@@ -587,7 +594,7 @@ class InterventionForm extends Component {
                                             type="button"
                                             onClick={this.handleDelete}
                                         >
-                                            <i className="fa-solid fa-xmark"></i>{" "}
+                                            <i className="fa-solid fa-trash"></i>{" "}
                                             Supprimer
                                         </button>
                                     )}

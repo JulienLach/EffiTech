@@ -261,7 +261,7 @@ class UpdateInterventionForm extends Component {
                         </div>
                         <div className={styles.labelInput}>
                             <label className={styles.eventLabels}>
-                                Heure de fin:
+                                Heure de fin :
                                 <input
                                     type="time"
                                     name="endingHour"

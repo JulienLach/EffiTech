@@ -471,6 +471,7 @@ class CalendarPage extends Component {
                                     </button>
                                     <div className={styles.divider}></div>
                                 </div>
+                                <div className={styles.divider}></div>
                                 {view === "calendar" ? (
                                     <Calendar events={calendarEvents} />
                                 ) : view === "list" ? (
