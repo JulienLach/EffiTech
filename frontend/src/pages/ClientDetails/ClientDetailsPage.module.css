@@ -227,3 +227,7 @@ h2 {
 .interventionsTable th {
     font-weight: 550;
 }
+
+.divider {
+    border-bottom: 0.06em solid #d3d3d3;
+}

@@ -440,6 +440,12 @@ class Event {
             FROM events 
             LEFT JOIN employees ON events.id_employee = employees.id_employee
             WHERE events.id_client = $1
+            ORDER BY 
+                events.status ASC, 
+                CASE 
+                    WHEN events.status = 5 THEN events.starting_date
+                END DESC,
+                events.starting_date ASC
         `;
         const values = [idClient];
         pool.query(query, values, (error, result) => {

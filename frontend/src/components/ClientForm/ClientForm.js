@@ -251,7 +251,9 @@ class ClientForm extends Component {
                         )}
                     </div>
                     <div className={styles.labelInput}>
-                        <label htmlFor="city">Ville :</label>
+                        <label htmlFor="city">
+                            Ville <span className={styles.required}>*</span> :
+                        </label>
                         <input type="text" id="city" name="city" />
                         {errors.city && (
                             <span className={styles.error}>{errors.city}</span>

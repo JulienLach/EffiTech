@@ -388,6 +388,9 @@ class ClientDetailsPage extends Component {
                                                     styles.interventionsTable
                                                 }
                                             >
+                                                <div
+                                                    className={styles.divider}
+                                                ></div>
                                                 <table>
                                                     <thead>
                                                         <tr>

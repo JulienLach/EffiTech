@@ -12,7 +12,7 @@
 .selectedCategory {
     display: flex;
     align-items: center;
-    gap: 1em;
+    gap: 0.55em;
     margin: 1em 0em;
 }
 
@@ -24,9 +24,11 @@
 .radioParticulier {
     margin-left: 0.5em;
     color: #c35e00;
-    font-size: 1.15em;
     font-weight: 500;
     cursor: pointer;
+    background-color: #ffe4bc;
+    padding: 0.18em 0.55em;
+    border-radius: 0.4em;
 }
 
 .radioForm {
@@ -36,9 +38,11 @@
 
 .radioProfessionnel {
     color: #2c5ba1;
-    font-size: 1.15em;
     font-weight: 500;
     cursor: pointer;
+    background-color: #c1f0ff;
+    padding: 0.18em 0.55em;
+    border-radius: 0.4em;
 }
 
 .labelInput {

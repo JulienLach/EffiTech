@@ -251,7 +251,7 @@ class EmployeeForm extends Component {
                         </div>
                         <div className={styles.labelAdminInput}>
                             <label htmlFor="isAdmin">
-                                Compte administrareur :{" "}
+                                Compte administrateur :{" "}
                             </label>
                             <label className={styles.switch}>
                                 <input
