@@ -9,6 +9,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## Changes
 
 -   Add Interventions and contact details tabs to employee details
+-   Refactoring frontend pages with utils methods
+
+## Fix
+
+-   various UI/UX fixes
 
 # [0.8.3] (2025-09-03)
 

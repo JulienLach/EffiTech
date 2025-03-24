@@ -146,18 +146,19 @@ ul li:hover {
 .sidebar li {
     display: flex;
     align-items: center;
-    margin: 0.6em;
+    margin: 0.5em;
     padding: 0.3em;
 }
 
 .sidebar li a {
     display: flex;
     align-items: center;
-    margin-left: 0.6em;
     text-decoration: none;
     font-size: 1.25em;
     font-weight: 450;
     color: black;
+    width: 100%;
+    padding: 0.02em 0.4em;
 }
 
 .sidebar li i {
