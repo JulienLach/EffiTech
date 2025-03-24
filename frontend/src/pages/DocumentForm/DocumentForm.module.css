@@ -126,3 +126,7 @@
     margin: 0 0 0 1em;
     color: rgb(226, 12, 12);
 }
+
+.required {
+    color: rgb(226, 12, 12);
+}

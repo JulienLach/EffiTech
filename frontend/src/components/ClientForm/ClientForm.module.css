@@ -124,3 +124,7 @@
     padding: 1.25em;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
+
+.required {
+    color: rgb(226, 12, 12);
+}

@@ -157,7 +157,8 @@ class InvoiceForm extends Component {
                         >
                             <div className={styles.labelInput}>
                                 <label htmlFor="searchClient">
-                                    Sélectionner un client :
+                                    Sélectionner un client{" "}
+                                    <span className={styles.required}>*</span> :
                                 </label>
                                 <Select
                                     options={clients.map((client) => ({
@@ -188,7 +189,8 @@ class InvoiceForm extends Component {
                             </div>
                             <div className={styles.labelInput}>
                                 <label htmlFor="amountIncludingTax">
-                                    Montant TTC :
+                                    Montant TTC{" "}
+                                    <span className={styles.required}>*</span> :
                                 </label>
                                 <input
                                     type="text"
@@ -205,7 +207,8 @@ class InvoiceForm extends Component {
                             </div>
                             <div className={styles.labelInput}>
                                 <label htmlFor="amountWithoutTax">
-                                    Montant HT :
+                                    Montant HT{" "}
+                                    <span className={styles.required}>*</span> :
                                 </label>
                                 <input
                                     type="text"
@@ -222,7 +225,8 @@ class InvoiceForm extends Component {
                             </div>
                             <div className={styles.labelInput}>
                                 <label htmlFor="invoiceDate">
-                                    Date de la facture :
+                                    Date de la facture{" "}
+                                    <span className={styles.required}>*</span> :
                                 </label>
                                 <input
                                     type="date"
@@ -238,7 +242,10 @@ class InvoiceForm extends Component {
                                 )}
                             </div>
                             <div className={styles.labelInput}>
-                                <label htmlFor="file">Document PDF :</label>
+                                <label htmlFor="file">
+                                    Document PDF{" "}
+                                    <span className={styles.required}>*</span> :
+                                </label>
                                 <input
                                     type="file"
                                     id="file"

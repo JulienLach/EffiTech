@@ -121,7 +121,10 @@ class DocumentForm extends Component {
                             onSubmit={this.handleSubmit}
                         >
                             <div className={styles.labelInput}>
-                                <label htmlFor="title">Titre :</label>
+                                <label htmlFor="title">
+                                    Titre{" "}
+                                    <span className={styles.required}>*</span> :
+                                </label>
                                 <input
                                     type="text"
                                     id="title"
@@ -137,7 +140,8 @@ class DocumentForm extends Component {
                             </div>
                             <div className={styles.labelInput}>
                                 <label htmlFor="brand">
-                                    Marque de l'équipement :
+                                    Marque de l'équipement{" "}
+                                    <span className={styles.required}>*</span> :
                                 </label>
                                 <input
                                     type="text"
@@ -154,7 +158,8 @@ class DocumentForm extends Component {
                             </div>
                             <div className={styles.labelInput}>
                                 <label htmlFor="model">
-                                    Modèle de l'équipement :
+                                    Modèle de l'équipement{" "}
+                                    <span className={styles.required}>*</span> :
                                 </label>
                                 <input
                                     type="text"
@@ -170,7 +175,10 @@ class DocumentForm extends Component {
                                 )}
                             </div>
                             <div className={styles.labelInput}>
-                                <label htmlFor="file">Document PDF :</label>
+                                <label htmlFor="file">
+                                    Document PDF{" "}
+                                    <span className={styles.required}>*</span> :
+                                </label>
                                 <input
                                     type="file"
                                     id="file"

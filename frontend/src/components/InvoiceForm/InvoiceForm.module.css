@@ -127,3 +127,7 @@
     font-weight: 400;
     font-size: 0.95em;
 }
+
+.required {
+    color: rgb(226, 12, 12);
+}

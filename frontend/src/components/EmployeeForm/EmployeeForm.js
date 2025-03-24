@@ -125,7 +125,9 @@ class EmployeeForm extends Component {
                         onSubmit={this.handleSubmit}
                     >
                         <div className={styles.labelInput}>
-                            <label htmlFor="lastname">Nom : </label>
+                            <label htmlFor="lastname">
+                                Nom <span className={styles.required}>*</span> :{" "}
+                            </label>
                             <input
                                 type="text"
                                 id="lastname"
@@ -140,7 +142,10 @@ class EmployeeForm extends Component {
                             )}
                         </div>
                         <div className={styles.labelInput}>
-                            <label htmlFor="firstname">Prénom : </label>
+                            <label htmlFor="firstname">
+                                Prénom{" "}
+                                <span className={styles.required}>*</span> :{" "}
+                            </label>
                             <input
                                 type="text"
                                 id="firstname"
@@ -155,7 +160,10 @@ class EmployeeForm extends Component {
                             )}
                         </div>
                         <div className={styles.labelInput}>
-                            <label htmlFor="job">Métier : </label>
+                            <label htmlFor="job">
+                                Métier{" "}
+                                <span className={styles.required}>*</span> :{" "}
+                            </label>
                             <input
                                 type="text"
                                 id="job"
@@ -170,7 +178,10 @@ class EmployeeForm extends Component {
                             )}
                         </div>
                         <div className={styles.labelInput}>
-                            <label htmlFor="speciality">Spécialité : </label>
+                            <label htmlFor="speciality">
+                                Spécialité{" "}
+                                <span className={styles.required}>*</span> :{" "}
+                            </label>
                             <input
                                 type="text"
                                 id="speciality"
@@ -185,7 +196,10 @@ class EmployeeForm extends Component {
                             )}
                         </div>
                         <div className={styles.labelInput}>
-                            <label htmlFor="email">Adresse email : </label>
+                            <label htmlFor="email">
+                                Adresse email{" "}
+                                <span className={styles.required}>*</span> :{" "}
+                            </label>
                             <input
                                 type="email"
                                 id="email"
@@ -200,7 +214,10 @@ class EmployeeForm extends Component {
                             )}
                         </div>
                         <div className={styles.labelInput}>
-                            <label htmlFor="phone">Téléphone : </label>
+                            <label htmlFor="phone">
+                                Téléphone{" "}
+                                <span className={styles.required}>*</span> :{" "}
+                            </label>
                             <input
                                 type="text"
                                 id="phoneNumber"
@@ -215,7 +232,10 @@ class EmployeeForm extends Component {
                             )}
                         </div>
                         <div className={styles.labelInput}>
-                            <label htmlFor="password">Mot de passe : </label>
+                            <label htmlFor="password">
+                                Mot de passe{" "}
+                                <span className={styles.required}>*</span> :{" "}
+                            </label>
                             <input
                                 type="password"
                                 id="password"
