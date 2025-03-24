@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./InterventionForm.module.css";
 import stylesMobile from "./InterventionFormMobile.module.css";
 import { deleteEvent, createNotification } from "../../services/api";
+import getStatusIndicator from "../../components/Utils/StatusUtils";
 
 // Composant wrapper pour utiliser les hooks
 function InterventionFormWrapper(props) {
@@ -83,79 +84,6 @@ class InterventionForm extends Component {
         navigate("/report", { state: { event, report: event.report } });
     }
 
-    getStatusIndicator(status) {
-        const style = {
-            padding: "0.14em 0.7em",
-            borderRadius: ".5em",
-            color: "white",
-            fontSize: "0.85em",
-            fontWeight: "500",
-        };
-
-        switch (status) {
-            case 1:
-                return (
-                    <span
-                        style={{
-                            ...style,
-                            backgroundColor: "#EBEBEB",
-                            color: "#505050",
-                        }}
-                    >
-                        À planifier
-                    </span>
-                );
-            case 2:
-                return (
-                    <span
-                        style={{
-                            ...style,
-                            backgroundColor: "#FFDEDE",
-                            color: "#923838",
-                        }}
-                    >
-                        En retard
-                    </span>
-                );
-            case 3:
-                return (
-                    <span
-                        style={{
-                            ...style,
-                            backgroundColor: "#D3F4FF",
-                            color: "#2C5BA1",
-                        }}
-                    >
-                        Aujourd&apos;hui
-                    </span>
-                );
-            case 4:
-                return (
-                    <span
-                        style={{
-                            ...style,
-                            backgroundColor: "#FFECCF",
-                            color: "#C35E00",
-                        }}
-                    >
-                        À venir
-                    </span>
-                );
-            case 5:
-                return (
-                    <span
-                        style={{
-                            ...style,
-                            backgroundColor: "#DCFFD6",
-                            color: "#48903C",
-                        }}
-                    >
-                        Terminé
-                    </span>
-                );
-        }
-    }
-
     render() {
         const { event, closeModal } = this.props;
 
@@ -205,9 +133,7 @@ class InterventionForm extends Component {
                                             {event.idEvent}
                                         </p>
                                         <p>
-                                            {this.getStatusIndicator(
-                                                event.status
-                                            )}
+                                            {getStatusIndicator(event.status)}
                                         </p>
                                     </div>
                                     <p className={stylesMobile.boldElement}>
@@ -398,7 +324,7 @@ class InterventionForm extends Component {
                                         Retour
                                     </button>
                                 </div>
-                                <p>{this.getStatusIndicator(event.status)}</p>
+                                <p>{getStatusIndicator(event.status)}</p>
                             </div>
 
                             <div className={styles.eventData}>

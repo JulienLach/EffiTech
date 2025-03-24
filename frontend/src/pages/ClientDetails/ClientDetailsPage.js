@@ -6,7 +6,8 @@ import TemplateGlobalMobile from "../Template/TemplateGlobalMobile";
 import styles from "./ClientDetailsPage.module.css";
 import stylesMobile from "./ClientDetailsPageMobile.module.css";
 import { getClientById, getEventsByClientId } from "../../services/api";
-import getStatusIndicator from "../../components/Utils/StatusUtils"; // Importez getStatusIndicator ici
+import getStatusIndicator from "../../components/Utils/StatusUtils";
+import getCategoryIndicator from "../../components/Utils/CategoryUtils";
 
 function ClientDetailsPageWrapper() {
     const navigate = useNavigate();
@@ -65,45 +66,6 @@ class ClientDetailsPage extends Component {
     handleTabClick = (tab) => {
         this.setState({ activeTab: tab });
     };
-
-    getCategoryIndicator(category) {
-        const style = {
-            padding: "2px 11px",
-            borderRadius: "8px",
-            color: "white",
-            fontSize: "0.9em",
-            fontWeight: "500",
-        };
-
-        switch (category) {
-            case "Professionnel":
-                return (
-                    <span
-                        style={{
-                            ...style,
-                            backgroundColor: "#C1F0FF",
-                            color: "#2C5BA1",
-                        }}
-                    >
-                        Professionnel
-                    </span>
-                );
-            case "Particulier":
-                return (
-                    <span
-                        style={{
-                            ...style,
-                            backgroundColor: "#FFE4BC",
-                            color: "#C35E00",
-                        }}
-                    >
-                        Particulier
-                    </span>
-                );
-            default:
-                return null;
-        }
-    }
 
     render() {
         const { client, activeTab, events } = this.state;
@@ -310,7 +272,7 @@ class ClientDetailsPage extends Component {
                                                 C-{client.idClient}
                                             </p>
                                             <p>
-                                                {this.getCategoryIndicator(
+                                                {getCategoryIndicator(
                                                     client.category
                                                 )}
                                             </p>
@@ -529,7 +491,7 @@ class ClientDetailsPage extends Component {
                                                 C-{client.idClient}
                                             </p>
                                             <p>
-                                                {this.getCategoryIndicator(
+                                                {getCategoryIndicator(
                                                     client.category
                                                 )}
                                             </p>
