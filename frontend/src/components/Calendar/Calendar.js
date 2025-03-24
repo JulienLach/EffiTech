@@ -88,7 +88,7 @@ class Calendar extends Component {
                 };
             } else {
                 return {
-                    selectedEmployees: [idEmployee],
+                    selectedEmployees: [...selectedEmployees, idEmployee],
                 };
             }
         });
