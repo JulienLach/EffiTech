@@ -45,6 +45,64 @@ function eventStyleGetter(event) {
     };
 }
 
+// CustomToolbar pour le calendrier
+const CustomToolbar = ({ date, onNavigate, onView }) => {
+    const label = moment(date).format("dddd D MMMM"); // "Mardi 25 Mars"
+    return (
+        <div
+            className="rbc-toolbar"
+            style={{
+                top: "0",
+            }}
+        >
+            <span className="rbc-btn-group">
+                <button onClick={() => onNavigate("TODAY")}>
+                    <span style={{ fontSize: "1.3em" }}>Aujourd'hui</span>
+                </button>
+                <button onClick={() => onNavigate("PREV")}>
+                    <i
+                        className="fa fa-chevron-left"
+                        style={{ fontSize: "1.5em" }}
+                    ></i>
+                </button>
+                <button onClick={() => onNavigate("NEXT")}>
+                    <i
+                        className="fa fa-chevron-right"
+                        style={{ fontSize: "1.5em" }}
+                    ></i>
+                </button>
+            </span>
+            <span
+                className="rbc-toolbar-label"
+                style={{
+                    fontSize: "1.2em",
+                    textTransform: "capitalize",
+                    margin: "0.5em",
+                    fontWeight: "500",
+                    color: "#262626",
+                    backgroundColor: "#f5f5f5",
+                    borderRadius: "0.35em",
+                    padding: "0.1em 0.85em",
+                }}
+            >
+                {label}
+            </span>
+            <span className="rbc-btn-group">
+                <button onClick={() => onView("work_week")}>
+                    <span style={{ fontSize: "1.3em", padding: "0 1em" }}>
+                        Semaine
+                    </span>
+                </button>
+                <button onClick={() => onView("day")}>
+                    <span style={{ fontSize: "1.3em", padding: "0 1em" }}>
+                        Jour
+                    </span>
+                </button>
+            </span>
+        </div>
+    );
+};
+
 class CalendarMobile extends Component {
     constructor(props) {
         super(props);
@@ -94,11 +152,15 @@ class CalendarMobile extends Component {
                         dayFormat: (date, culture, localizer) =>
                             [1, 2, 3, 4, 5].includes(date.getDay())
                                 ? localizer.format(date, "ddd DD/MM", culture)
-                                : "", // Masquer samedi et dimanche
-                        monthHeaderFormat: "MMMM YYYY", // Format des mois
+                                : "", // Colonnes inchangées
+                        monthHeaderFormat: "MMMM YYYY",
                     }}
                     messages={{
-                        today: "Aujourd'hui",
+                        today: (
+                            <span style={{ fontSize: "1.3em" }}>
+                                Aujourd'hui
+                            </span>
+                        ),
                         previous: <i className="fa fa-chevron-left"></i>,
                         next: <i className="fa fa-chevron-right"></i>,
                         work_week: "Semaine",
@@ -108,8 +170,9 @@ class CalendarMobile extends Component {
                         event: "Évènement",
                     }}
                     eventPropGetter={eventStyleGetter}
-                    onSelectEvent={this.openEventModal} // Ajout de l'événement de clic
+                    onSelectEvent={this.openEventModal}
                     components={{
+                        toolbar: CustomToolbar, // Toolbar custom
                         event: ({ event }) => (
                             <span className="event-title">
                                 {event.title} - {event.client}
@@ -144,7 +207,9 @@ class CalendarMobile extends Component {
                                 <i className="fa-solid fa-xmark"></i>
                             </button>
                             <h3>{selectedEvent.title}</h3>
-                            <p>Client : {selectedEvent.client}</p>
+                            <p>
+                                Client : <a>{selectedEvent.client}</a>
+                            </p>
                             <p>Description : {selectedEvent.description}</p>
                         </div>
                     </div>

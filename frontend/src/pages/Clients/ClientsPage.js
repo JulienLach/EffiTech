@@ -292,14 +292,7 @@ class ClientsPage extends Component {
                                                         this.closeCategoryModal
                                                     }
                                                 >
-                                                    Annuler
-                                                </button>
-                                                <button
-                                                    onClick={
-                                                        this.closeCategoryModal
-                                                    }
-                                                >
-                                                    Filtrer
+                                                    Fermer
                                                 </button>
                                             </div>
                                         </div>

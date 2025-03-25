@@ -15,11 +15,11 @@
     flex-direction: column;
     gap: 0.5em;
     background: white;
-    padding: 1.5em;
+    padding: 1.2em;
     border-radius: 0.5em;
     max-width: 400px;
     width: 90%;
-    box-shadow: 0 0 1px rgba(0, 0, 0, 1);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 1);
     border: 1px solid #cbcbcb;
 }
 
@@ -29,7 +29,7 @@
     border: none;
     position: fixed;
     padding: 0.25em 0.2em;
-    border-radius: 0.4em;
+    border-radius: 0.3em;
     font-size: 1em;
     cursor: pointer;
     align-self: flex-end;
