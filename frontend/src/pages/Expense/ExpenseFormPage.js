@@ -46,13 +46,15 @@ class ExpenseFormPage extends Component {
                                 (window.location.href = "/calendar#")
                             }
                         >
+                            <i className="fas fa-times"></i>
                             Annuler
                         </button>
                         <button
                             className={stylesMobile.validateButton}
                             type="submit"
                         >
-                            Valider ma dépense
+                            <i className="fas fa-check"></i>
+                            Enregistrer
                         </button>
                     </div>
                 </div>
