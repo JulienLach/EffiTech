@@ -10,7 +10,7 @@
     justify-content: space-between;
     gap: 1em;
     align-items: center;
-    padding: 0 1.25em;
+    padding: 0 1em;
     height: 5em;
     border-radius: 0 0 0.6em 0.6em;
     background-color: white;
@@ -23,7 +23,7 @@
 
 .title {
     margin: 0;
-    font-size: 1.6em;
+    font-size: 1.55em;
     font-weight: 600;
 }
 
@@ -38,7 +38,7 @@
 
 .notificationIcon {
     position: relative;
-    margin-right: 1em;
+    margin-right: 0.85em;
     font-size: 1.5em;
 }
 
@@ -46,13 +46,13 @@
     display: flex;
     position: absolute;
     top: -0.25em;
-    right: -0.35em;
+    right: -0.25em;
     background-color: #cf2f1d;
     color: white;
     border-radius: 1em;
     height: 1.2em;
     width: 1em;
-    font-size: 0.55em;
+    font-size: 0.5em;
     min-width: 1.2em;
     align-items: center;
     justify-content: center;
@@ -94,8 +94,9 @@
 }
 
 .navbarIcon {
-    font-size: 2em;
+    font-size: 1.9em;
     color: #333;
+    margin-bottom: 0.45em;
 }
 
 .logoMobile {

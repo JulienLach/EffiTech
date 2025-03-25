@@ -341,7 +341,13 @@ class InterventionFormPage extends Component {
                             </div>
                             <div>
                                 <div className={stylesMobile.inputDisplay}>
-                                    <label>Heure de fin :</label>
+                                    <label>
+                                        Heure de fin{" "}
+                                        <span className={styles.required}>
+                                            *
+                                        </span>{" "}
+                                        :
+                                    </label>
                                     <input
                                         type="time"
                                         name="endingHour"
