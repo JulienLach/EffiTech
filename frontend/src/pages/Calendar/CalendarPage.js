@@ -534,16 +534,14 @@ class CalendarPage extends Component {
                                                                 }
                                                             >
                                                                 <a href="#">
-                                                                    {
-                                                                        event
-                                                                            .client
-                                                                            .firstname
-                                                                    }{" "}
-                                                                    {
-                                                                        event
-                                                                            .client
-                                                                            .lastname
-                                                                    }
+                                                                    {event
+                                                                        .client
+                                                                        .category ===
+                                                                    "Professionnel"
+                                                                        ? event
+                                                                              .client
+                                                                              .company
+                                                                        : `${event.client.firstname} ${event.client.lastname}`}{" "}
                                                                 </a>
                                                             </td>
                                                             <td>
@@ -713,16 +711,14 @@ class CalendarPage extends Component {
                                                                 }
                                                             >
                                                                 <a href="#">
-                                                                    {
-                                                                        event
-                                                                            .client
-                                                                            .firstname
-                                                                    }{" "}
-                                                                    {
-                                                                        event
-                                                                            .client
-                                                                            .lastname
-                                                                    }
+                                                                    {event
+                                                                        .client
+                                                                        .category ===
+                                                                    "Professionnel"
+                                                                        ? event
+                                                                              .client
+                                                                              .company
+                                                                        : `${event.client.firstname} ${event.client.lastname}`}{" "}
                                                                 </a>
                                                             </td>
                                                             <td>

@@ -223,7 +223,10 @@ class CreateEventForm extends Component {
 
         const clientOptions = clients.map((client) => ({
             value: client.idClient,
-            label: `${client.firstname} ${client.lastname}`,
+            label:
+                client.category === "Professionnel"
+                    ? client.company
+                    : `${client.firstname} ${client.lastname}`,
         }));
 
         const employeeOptions = employees.map((employee) => ({
