@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 -   Add Interventions and contact details tabs to employee details
 -   Refactoring frontend pages with utils methods
+-   Add Progressive Web App feature
 
 ## Fix
 
