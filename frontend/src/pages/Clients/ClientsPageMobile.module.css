@@ -126,7 +126,7 @@
 .searchInput i {
     position: absolute;
     top: 50%;
-    left: 0.625em;
+    left: 0.6em;
     transform: translateY(-50%);
     color: #999;
     pointer-events: none;
@@ -134,9 +134,11 @@
 
 /* Search input style */
 .searchInput input {
-    padding: 0.625em 0.625em 0.625em 4em;
-    border: 0.06em solid #c0c0c0;
+    padding: 0.6em 0.6em 0.6em 4em;
+    border: 0.07em solid #c0c0c0;
     border-radius: 0.4em;
+    font-size: 0.8em;
+    height: 2.58em;
 }
 
 /* style de la modal */
@@ -294,4 +296,32 @@
 .pagination button:hover {
     background-color: #c93c2c;
     color: white;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    padding: 1em;
+    margin-bottom: 4em;
+}
+
+.pagination button {
+    background-color: #c93c2c;
+    color: white;
+    border: none;
+    border-radius: 0.3em;
+    padding: 0.5em;
+    cursor: pointer;
+}
+
+.pagination button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.pagination span {
+    font-size: 1em;
+    font-weight: 500;
 }

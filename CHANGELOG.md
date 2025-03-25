@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -   Refactoring frontend pages with utils methods
 -   Add Progressive Web App feature
 -   Add paging to calendar mobile page
+-   Add paging to clients mobile page
 -   Add Ubuntu bold to react pdf component
 -   Add event modal on mobile calendar component
 
