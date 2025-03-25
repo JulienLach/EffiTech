@@ -144,9 +144,6 @@ class InterventionForm extends Component {
                                     <h3 className={stylesMobile.title}>
                                         Client
                                     </h3>
-                                    <h3 className={stylesMobile.title}>
-                                        Client
-                                    </h3>
                                     <p className={stylesMobile.dataElement}>
                                         {event.client.firstname}{" "}
                                         {event.client.lastname}

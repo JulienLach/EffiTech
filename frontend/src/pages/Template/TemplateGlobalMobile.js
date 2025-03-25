@@ -138,7 +138,9 @@ class TemplateGlobalMobile extends Component {
                         ></i>
                     </a>
                     <a href="/expense">
-                        <i className={`fas fa-euro ${styles.navbarIcon}`}></i>
+                        <i
+                            className={`fas fa-file-lines ${styles.navbarIcon}`}
+                        ></i>
                     </a>
                     <a href="/clients">
                         <i
