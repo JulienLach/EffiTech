@@ -59,7 +59,9 @@ class CalendarMobilePage extends Component {
                 title: event.title,
                 description: event.description,
                 idEmployee: event.employee.idEmployee,
-                client: event.client.firstname + " " + event.client.lastname,
+                client: event.client.company
+                    ? event.client.company
+                    : event.client.firstname + " " + event.client.lastname,
                 start: startDateTime,
                 end: endDateTime,
                 allDay: false,

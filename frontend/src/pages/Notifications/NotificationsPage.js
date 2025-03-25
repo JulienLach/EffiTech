@@ -133,6 +133,7 @@ class NotificationsPage extends Component {
 
     render() {
         const { notifications, currentPage, notificationsPerPage } = this.state;
+        const { navigate } = this.props;
 
         // Calculer les notifications à afficher pour la page actuelle
         const indexOfLastNotification = currentPage * notificationsPerPage;
@@ -154,6 +155,13 @@ class NotificationsPage extends Component {
                     <>
                         <TemplateGlobalMobile />
                         <div className={stylesMobile.container}>
+                            <button
+                                className={stylesMobile.backButton}
+                                type="button"
+                                onClick={() => navigate(-1)}
+                            >
+                                <i className="fa fa-arrow-left"></i> Retour
+                            </button>
                             {currentNotifications.map((notification) => (
                                 <div
                                     key={notification.idNotification}
