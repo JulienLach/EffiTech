@@ -19,7 +19,7 @@
     width: 100%;
     border-radius: 0.6em;
     margin: 1em 0 0.5em 0;
-    box-shadow: 0 0.2em 0.2em rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.2em 0.2em rgba(0, 0, 0, 0.2);
     border-left: 10px solid #87c2f9;
     border-top: 1px solid #e7e7e7;
 }
@@ -32,7 +32,7 @@
     width: 100%;
     border-radius: 0.6em;
     margin: 1em 0 0.5em 0;
-    box-shadow: 0 0.2em 0.2em rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.2em 0.2em rgba(0, 0, 0, 0.2);
     border-left: 10px solid #fccd86;
     border-top: 1px solid #e7e7e7;
 }

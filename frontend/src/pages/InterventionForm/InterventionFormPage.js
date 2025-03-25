@@ -325,7 +325,7 @@ class InterventionFormPage extends Component {
                                         type="date"
                                         name="startingDate"
                                         value={startingDate}
-                                        onChange={this.handleChange}
+                                        readOnly
                                     />
                                 </div>
                             </div>
@@ -547,7 +547,7 @@ class InterventionFormPage extends Component {
                                 </div>
                                 <div>
                                     <div className={styles.labelInput}>
-                                        <label>Date d'intervention :</label>
+                                        <label>Date de l'intervention :</label>
                                         <input
                                             type="date"
                                             name="startingDate"

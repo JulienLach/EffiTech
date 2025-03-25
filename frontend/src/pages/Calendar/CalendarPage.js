@@ -291,7 +291,6 @@ class CalendarPage extends Component {
                                                     )}
                                                 </p>
                                             </div>
-
                                             {event.client.category ===
                                             "Professionnel" ? (
                                                 <p
@@ -368,6 +367,24 @@ class CalendarPage extends Component {
                                     </div>
                                 </div>
                             ))}
+                            {/* Ajout de la pagination ici */}
+                            <div className={stylesMobile.pagination}>
+                                <button
+                                    onClick={this.handlePreviousPage}
+                                    disabled={currentPage === 1}
+                                >
+                                    <i className="fa-solid fa-chevron-left"></i>
+                                </button>
+                                <span>
+                                    Page {currentPage} / {totalPages}
+                                </span>
+                                <button
+                                    onClick={this.handleNextPage}
+                                    disabled={currentPage === totalPages}
+                                >
+                                    <i className="fa-solid fa-chevron-right"></i>
+                                </button>
+                            </div>
                         </div>
                         {isEventModalOpen && !isUpdateFormOpen && (
                             <InterventionForm
