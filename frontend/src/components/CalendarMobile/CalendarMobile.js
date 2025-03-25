@@ -46,7 +46,25 @@ function eventStyleGetter(event) {
 }
 
 class CalendarMobile extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            openEventModal: false,
+            selectedEvent: null,
+        };
+    }
+
+    openEventModal = (event) => {
+        this.setState({ openEventModal: true, selectedEvent: event });
+    };
+
+    closeEventModal = () => {
+        this.setState({ openEventModal: false, selectedEvent: null });
+    };
+
     render() {
+        const { openEventModal, selectedEvent } = this.state;
+
         return (
             <div
                 className="height"
@@ -90,6 +108,7 @@ class CalendarMobile extends Component {
                         event: "Évènement",
                     }}
                     eventPropGetter={eventStyleGetter}
+                    onSelectEvent={this.openEventModal} // Ajout de l'événement de clic
                     components={{
                         event: ({ event }) => (
                             <span className="event-title">
@@ -109,6 +128,27 @@ class CalendarMobile extends Component {
                         return {};
                     }}
                 />
+                {openEventModal && selectedEvent && (
+                    <div
+                        className="modalOverlay"
+                        onClick={this.closeEventModal}
+                    >
+                        <div
+                            className="modalContent"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <button
+                                className="closeButton"
+                                onClick={this.closeEventModal}
+                            >
+                                <i className="fa-solid fa-xmark"></i>
+                            </button>
+                            <h3>{selectedEvent.title}</h3>
+                            <p>Client : {selectedEvent.client}</p>
+                            <p>Description : {selectedEvent.description}</p>
+                        </div>
+                    </div>
+                )}
             </div>
         );
     }
