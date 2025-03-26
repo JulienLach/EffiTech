@@ -41,8 +41,13 @@ class CalendarPage extends Component {
             selectedType: "",
         };
 
-        this.toggleEventModal = this.toggleEventModal.bind(this);
+        this.toggleStatusModal = this.toggleStatusModal.bind(this);
+        this.handleStatusChange = this.handleStatusChange.bind(this);
+        this.toggleTypeModal = this.toggleTypeModal.bind(this);
+        this.handleTypeChange = this.handleTypeChange.bind(this);
+        this.handleResetFilter = this.handleResetFilter.bind(this);
         this.toggleCreateEventModal = this.toggleCreateEventModal.bind(this);
+        this.toggleEventModal = this.toggleEventModal.bind(this);
         this.toggleView = this.toggleView.bind(this);
         this.openUpdateForm = this.openUpdateForm.bind(this);
         this.closeUpdateForm = this.closeUpdateForm.bind(this);
@@ -50,11 +55,6 @@ class CalendarPage extends Component {
         this.handleNextPage = this.handleNextPage.bind(this);
         this.handlePreviousPage = this.handlePreviousPage.bind(this);
         this.handleSearchChange = this.handleSearchChange.bind(this);
-        this.toggleStatusModal = this.toggleStatusModal.bind(this);
-        this.handleStatusChange = this.handleStatusChange.bind(this);
-        this.toggleTypeModal = this.toggleTypeModal.bind(this);
-        this.handleTypeChange = this.handleTypeChange.bind(this);
-        this.handleResetFilter = this.handleResetFilter.bind(this);
     }
 
     componentDidMount() {
@@ -250,7 +250,17 @@ class CalendarPage extends Component {
                     <>
                         <TemplateGlobalMobile />
                         <div className={stylesMobile.filterBar}>
-                            <FilterBar />
+                            <FilterBar
+                                toggleStatusModal={this.toggleStatusModal}
+                                isStatusModalOpen={isStatusModalOpen}
+                                handleStatusChange={this.handleStatusChange}
+                                toggleTypeModal={this.toggleTypeModal}
+                                isTypeModalOpen={isTypeModalOpen}
+                                handleTypeChange={this.handleTypeChange}
+                                handleResetFilter={this.handleResetFilter}
+                                selectedStatus={selectedStatus}
+                                selectedType={selectedType}
+                            />
                         </div>
                         <div className={stylesMobile.container}>
                             {currentEvents.map((event) => (

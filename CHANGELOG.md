@@ -17,6 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -   Add event modal on mobile calendar component
 -   Add disconnect button on mobile profil page
 -   Add report PDF displayed on mobile
+-   Add types status and reset filter on calendar mobile
 
 ## Fix
 
