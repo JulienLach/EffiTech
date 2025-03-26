@@ -87,7 +87,7 @@ const CustomToolbar = ({ date, onNavigate, onView }) => {
                     color: "#262626",
                     backgroundColor: "#f5f5f5",
                     borderRadius: "0.35em",
-                    padding: "0.1em 0.85em",
+                    padding: "0.1em 1.5em",
                 }}
             >
                 {label}
