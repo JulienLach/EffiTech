@@ -15,10 +15,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -   Add paging to clients mobile page
 -   Add Ubuntu bold to react pdf component
 -   Add event modal on mobile calendar component
+-   Add disconnect button on mobile profil page
 
 ## Fix
 
--   various UI/UX fixes
+-   Various UI/UX fixes and updates
 
 # [0.8.3] (2025-09-03)
 
