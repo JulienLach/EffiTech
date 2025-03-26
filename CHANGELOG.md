@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -   Add Ubuntu bold to react pdf component
 -   Add event modal on mobile calendar component
 -   Add disconnect button on mobile profil page
+-   Add report PDF displayed on mobile
 
 ## Fix
 

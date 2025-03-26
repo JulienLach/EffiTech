@@ -204,6 +204,15 @@ class ReportPage extends Component {
                                     Envoyer par email
                                 </button>
                             </div>
+                            <div className={stylesMobile.pdfMobile}>
+                                {reportDetails && companyData && (
+                                    <PDFGenerator
+                                        report={reportDetails}
+                                        reportData={reportData}
+                                        companyData={companyData}
+                                    />
+                                )}
+                            </div>
                             {showAlert && (
                                 <div className={stylesMobile.alert}>
                                     Email envoyé{" "}

@@ -64,7 +64,7 @@ h3 {
 
 .mailButton {
     padding: 0.75em;
-    margin-bottom: 5em;
+    margin-bottom: 3em;
     margin-top: 0.7em;
     border: none;
     border-radius: 0.4em;
@@ -98,4 +98,14 @@ h3 {
         border: 1px solid #6cb96c;
         animation: slideInRight 0.08s ease-out;
     }
+}
+
+.pdfContainer {
+    width: 20%;
+    height: auto;
+    margin-top: 20px;
+}
+
+.pdfMobile {
+    margin-bottom: 4em;
 }
