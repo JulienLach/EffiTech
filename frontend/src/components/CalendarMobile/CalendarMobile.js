@@ -1,10 +1,15 @@
 import React, { Component } from "react";
+import { useNavigate } from "react-router-dom";
 import { Calendar as BigCalendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment-timezone";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "moment/locale/fr";
 
-// Setup the localizer by providing the moment Object to the correct localizer.
+function CalendarMobileWrapper(props) {
+    const navigate = useNavigate();
+    return <CalendarMobile {...props} navigate={navigate} />;
+}
+
 moment.tz.setDefault("Europe/Paris");
 moment.locale("fr");
 const localizer = momentLocalizer(moment);
@@ -120,8 +125,21 @@ class CalendarMobile extends Component {
         this.setState({ openEventModal: false, selectedEvent: null });
     };
 
+    handleClientClick = () => {
+        const { selectedEvent } = this.state;
+        if (selectedEvent && selectedEvent.client) {
+            this.props.navigate("/client-details", {
+                state: { idClient: selectedEvent.idClient },
+            });
+        } else {
+            console.error("Aucun idClient trouvé dans selectedEvent");
+        }
+    };
+
     render() {
         const { openEventModal, selectedEvent } = this.state;
+
+        console.log("selectedEvent", selectedEvent);
 
         return (
             <div
@@ -208,9 +226,17 @@ class CalendarMobile extends Component {
                             </button>
                             <h3>{selectedEvent.title}</h3>
                             <p>
-                                Client : <a>{selectedEvent.client}</a>
+                                <span className="modalLabels">Client :</span>{" "}
+                                <a href="#" onClick={this.handleClientClick}>
+                                    {selectedEvent.client}{" "}
+                                </a>
                             </p>
-                            <p>Description : {selectedEvent.description}</p>
+                            <p>
+                                <span className="modalLabels">
+                                    Description :
+                                </span>{" "}
+                                {selectedEvent.description}
+                            </p>
                         </div>
                     </div>
                 )}
@@ -219,4 +245,4 @@ class CalendarMobile extends Component {
     }
 }
 
-export default CalendarMobile;
+export default CalendarMobileWrapper;

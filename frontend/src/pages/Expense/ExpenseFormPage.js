@@ -16,26 +16,26 @@ class ExpenseFormPage extends Component {
                 <TemplateGlobalMobile />
                 <div className={stylesMobile.container}>
                     <div className={stylesMobile.inputDisplay}>
-                        <label>Matériel</label>
+                        <label>Matériel :</label>
                         <input type="text" />
                     </div>
                     <div className={stylesMobile.inputDisplay}>
-                        <label>Prix TTC</label>
-                        <input type="text" />
+                        <label>Prix TTC :</label>
+                        <input type="number" />
                     </div>
                     <div className={stylesMobile.inputDisplay}>
-                        <label>Justificatif</label>
+                        <label>Justificatif :</label>
                         <input
                             className={stylesMobile.download}
                             type="file"
                         ></input>
                     </div>
                     <div className={stylesMobile.inputDisplay}>
-                        <label>Numéro d'intervention</label>
+                        <label>Numéro d'intervention :</label>
                         <input type="text" />
                     </div>
                     <div className={stylesMobile.textArea}>
-                        <label>Commentaire</label>
+                        <label>Commentaire :</label>
                         <textarea rows="5" name="breakdown"></textarea>
                     </div>
                     <div className={stylesMobile.modalFooter}>

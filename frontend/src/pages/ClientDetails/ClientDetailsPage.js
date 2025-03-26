@@ -18,10 +18,10 @@ function ClientDetailsPageWrapper() {
 class ClientDetailsPage extends Component {
     constructor(props) {
         super(props);
-        const { client } = this.props.location.state;
+        const { client, idClient } = this.props.location.state;
         this.state = {
             client: client,
-            idClient: client.idClient,
+            idClient: idClient || (client ? client.idClient : null), // idClient envoyé à partir de calendar ou objet client complet à partir de clients page
             activeTab: "coordonnées",
             events: [],
         };
@@ -69,6 +69,7 @@ class ClientDetailsPage extends Component {
 
     render() {
         const { client, activeTab, events } = this.state;
+        if (!client) return <div></div>; // pour charger l'idClient avant de récupérer les données, corriger la logique d'ordre de récupération des données
 
         const initial =
             client.category === "Professionnel"

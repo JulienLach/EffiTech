@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { getAllEvents } from "../../services/api";
 import TemplateGlobalMobile from "../Template/TemplateGlobalMobile";
 import styles from "./CalendarMobilePage.module.css";
-import CalendarMobile from "../../components/CalendarMobile/CalendarMobile";
+import CalendarMobileWrapper from "../../components/CalendarMobile/CalendarMobile";
 
 // Composant wrapper pour utiliser les hooks
 function CalendarMobilePageWrapper() {
@@ -62,6 +62,7 @@ class CalendarMobilePage extends Component {
                 client: event.client.company
                     ? event.client.company
                     : event.client.firstname + " " + event.client.lastname,
+                idClient: event.client.idClient,
                 start: startDateTime,
                 end: endDateTime,
                 allDay: false,
@@ -76,7 +77,10 @@ class CalendarMobilePage extends Component {
             <>
                 <TemplateGlobalMobile />
                 <div className={styles.container}>
-                    <CalendarMobile events={calendarEvents} />
+                    <CalendarMobileWrapper
+                        events={calendarEvents}
+                        navigate={this.props.navigate}
+                    />
                 </div>
             </>
         );
