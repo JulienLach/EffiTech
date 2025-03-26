@@ -238,29 +238,29 @@
 }
 
 .modalFilter {
-    padding: 1em 2em;
+    padding: 1em 1.2em;
     text-align: start;
     border: 0.06em solid #c0c0c0;
-    width: 92%;
+    width: 75%;
     margin: 0.3em auto;
     border-radius: 0.4em;
 }
 
 .modalFilter input {
-    margin: 0.325em;
-    padding: 0.325em;
+    margin: 0.35em;
+    padding: 0.35em;
     border: none;
     border-radius: 0.4em;
-    font-size: 1em;
+    font-size: 1.1em;
     font-weight: 500;
     cursor: pointer;
 }
 
 .modalFilter button {
-    margin: 0.3em;
+    margin: 0.45em 0 0 0;
     padding: 0.4em 0.6em;
     border: none;
-    border-radius: 0.4em;
+    border-radius: 0.35em;
     font-size: 1em;
     cursor: pointer;
 }

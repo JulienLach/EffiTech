@@ -230,26 +230,26 @@ class ClientsPage extends Component {
                                         >
                                             <div>
                                                 <div>
-                                                    <input
-                                                        type="radio"
-                                                        id="all"
-                                                        name="clientType"
-                                                        value="All"
-                                                        checked={
-                                                            this.state
-                                                                .selectedCategory ===
-                                                            "All"
-                                                        }
-                                                        onChange={
-                                                            this
-                                                                .handleCategoryChange
-                                                        }
-                                                    />
-                                                    <label htmlFor="all">
+                                                    <label>
+                                                        <input
+                                                            type="radio"
+                                                            id="all"
+                                                            name="clientType"
+                                                            value="All"
+                                                            checked={
+                                                                this.state
+                                                                    .selectedCategory ===
+                                                                "All"
+                                                            }
+                                                            onChange={
+                                                                this
+                                                                    .handleCategoryChange
+                                                            }
+                                                        />
                                                         Tous
                                                     </label>
                                                 </div>
-                                                <div>
+                                                <label>
                                                     <input
                                                         type="radio"
                                                         name="clientType"
@@ -264,26 +264,24 @@ class ClientsPage extends Component {
                                                                 .handleCategoryChange
                                                         }
                                                     />
-                                                    <label htmlFor="particuliers">
-                                                        Particuliers
-                                                    </label>
-                                                </div>
+                                                    Particuliers
+                                                </label>
                                                 <div>
-                                                    <input
-                                                        type="radio"
-                                                        name="clientType"
-                                                        value="Professionnel"
-                                                        checked={
-                                                            this.state
-                                                                .selectedCategory ===
-                                                            "Professionnel"
-                                                        }
-                                                        onChange={
-                                                            this
-                                                                .handleCategoryChange
-                                                        }
-                                                    />
-                                                    <label htmlFor="professionnels">
+                                                    <label>
+                                                        <input
+                                                            type="radio"
+                                                            name="clientType"
+                                                            value="Professionnel"
+                                                            checked={
+                                                                this.state
+                                                                    .selectedCategory ===
+                                                                "Professionnel"
+                                                            }
+                                                            onChange={
+                                                                this
+                                                                    .handleCategoryChange
+                                                            }
+                                                        />
                                                         Professionnels
                                                     </label>
                                                 </div>
