@@ -383,6 +383,7 @@ class CalendarPage extends Component {
                                     onClick={this.handlePreviousPage}
                                     disabled={currentPage === 1}
                                     aria-label="Page précédente"
+                                    title="Page précédente"
                                 >
                                     <i className="fa-solid fa-chevron-left"></i>
                                 </button>
@@ -393,6 +394,7 @@ class CalendarPage extends Component {
                                     onClick={this.handleNextPage}
                                     disabled={currentPage === totalPages}
                                     aria-label="Page suivante"
+                                    title="Page suivante"
                                 >
                                     <i className="fa-solid fa-chevron-right"></i>
                                 </button>
@@ -625,6 +627,7 @@ class CalendarPage extends Component {
                                                     this.handlePreviousPage(e)
                                                 }
                                                 disabled={currentPage === 1}
+                                                title="Page précédente"
                                             >
                                                 <i className="fa-solid fa-chevron-left"></i>
                                             </button>
@@ -662,6 +665,7 @@ class CalendarPage extends Component {
                                                 disabled={
                                                     currentPage === totalPages
                                                 }
+                                                title="Page suivante"
                                             >
                                                 <i className="fa-solid fa-chevron-right"></i>
                                             </button>
@@ -802,6 +806,7 @@ class CalendarPage extends Component {
                                                     this.handlePreviousPage(e)
                                                 }
                                                 disabled={currentPage === 1}
+                                                title="Page précédente"
                                             >
                                                 <i className="fa-solid fa-chevron-left"></i>
                                             </button>
@@ -839,6 +844,7 @@ class CalendarPage extends Component {
                                                 disabled={
                                                     currentPage === totalPages
                                                 }
+                                                title="Page suivante"
                                             >
                                                 <i className="fa-solid fa-chevron-right"></i>
                                             </button>
