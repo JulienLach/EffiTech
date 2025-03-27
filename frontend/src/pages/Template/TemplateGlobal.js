@@ -178,7 +178,12 @@ class TemplateGlobal extends Component {
                     <div className={styles.headerDiv}>
                         <div className={styles.logo}>
                             <a href="/calendar">
-                                <img src={logo} alt="Effitech Logo" />
+                                <img
+                                    src={logo}
+                                    alt="Effitech Logo"
+                                    width="150"
+                                    height="50"
+                                />
                             </a>
                         </div>
                         <div className={styles.headerRight}>
