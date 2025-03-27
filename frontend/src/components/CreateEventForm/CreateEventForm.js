@@ -126,9 +126,8 @@ class CreateEventForm extends Component {
         const errors = {};
         if (!title) {
             errors.title = "* Champ obligatoire";
-        } else if (!/^[a-zA-ZÀ-ÿ\d\s-]+$/.test(title)) {
-            errors.title =
-                "* Ne doit contenir que des lettres, des chiffres, des espaces et des tirets";
+        } else if (!/^[a-zA-ZÀ-ÿ\d\s\-']+$/.test(title)) {
+            errors.title = "* Caractère non valide";
         }
 
         if (!selectedClient) {
@@ -352,7 +351,7 @@ class CreateEventForm extends Component {
                                 placeholder={
                                     <span>
                                         <i className="fa fa-search"></i>{" "}
-                                        Rechercher un client
+                                        Rechercher
                                     </span>
                                 }
                                 className={styles.reactSelect}
@@ -381,7 +380,7 @@ class CreateEventForm extends Component {
                                 placeholder={
                                     <span>
                                         <i className="fa fa-search"></i>{" "}
-                                        Rechercher un client
+                                        Rechercher
                                     </span>
                                 }
                                 className={styles.reactSelect}

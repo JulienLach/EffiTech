@@ -1,4 +1,3 @@
-/* CSS for parent div with red and white background */
 .container {
     display: flex;
     flex-direction: column;
@@ -9,7 +8,6 @@
     background: linear-gradient(160deg, white 50%, #c93c2c 50%);
 }
 
-/* CSS of the card for the login form */
 .loginFormCard {
     display: flex;
     flex-direction: column;
@@ -24,13 +22,11 @@
     padding: 1em;
 }
 
-/* CSS title style font */
 .titleCard {
-    font-size: 1.9em;
+    font-size: 1.5em;
     font-weight: 500;
 }
 
-/* CSS for input & label */
 .labelInput {
     font-size: 1.1em;
     font-weight: 400;
@@ -39,7 +35,6 @@
     margin-bottom: 0.9em;
 }
 
-/* CSS for input comportement */
 .labelInput input {
     margin: 0 1.6em;
     padding: 0.6em;
@@ -47,14 +42,13 @@
     border-radius: 0.4em;
 }
 
-/* CSS for the label comportement */
 .labelInput label {
     margin: 0 1.3em;
     padding: 0.2em 0;
     font-size: 1em;
+    font-weight: 500;
 }
 
-/* CSS for elements placement */
 .formElements {
     display: flex;
     flex-direction: column;
@@ -62,14 +56,12 @@
     margin-top: 1em;
 }
 
-/* CSS for button positioning */
 .buttonPosition {
     display: flex;
     margin-bottom: 1.25em;
     margin-top: 1.2em;
 }
 
-/* CSS for cancel button */
 .cancelButton {
     background-color: #ababab;
     margin: auto;
@@ -82,7 +74,10 @@
     cursor: pointer;
 }
 
-/* CSS for create button */
+.cancelButton:hover {
+    background-color: #7a7a7a;
+}
+
 .submitButton {
     background-color: #c93c2c;
     margin: auto;

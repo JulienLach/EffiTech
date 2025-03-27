@@ -31,6 +31,7 @@ class UpdateInterventionForm extends Component {
             idEmployee: props.event.employee.idEmployee || "",
             workToDo: props.event.workToDo || "",
             employees: [],
+            errors: {},
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleCancel = this.handleCancel.bind(this);
@@ -80,6 +81,18 @@ class UpdateInterventionForm extends Component {
             idEmployee,
             workToDo,
         } = this.state;
+
+        const errors = {};
+        if (!title) {
+            errors.title = "* Champ obligatoire";
+        } else if (!/^[a-zA-ZÀ-ÿ\d\s\-']+$/.test(title)) {
+            errors.title = "* Caractère non valide";
+        }
+
+        if (Object.keys(errors).length > 0) {
+            this.setState({ errors });
+            return;
+        }
 
         const eventData = {
             idEvent: event.idEvent,
@@ -153,6 +166,7 @@ class UpdateInterventionForm extends Component {
             workToDo,
             employees,
             idEmployee,
+            errors,
         } = this.state;
 
         const employeeOptions = employees.map((employee) => ({
@@ -190,6 +204,11 @@ class UpdateInterventionForm extends Component {
                                     value={title}
                                     onChange={this.handleChange}
                                 />
+                                {errors.title && (
+                                    <span className={styles.error}>
+                                        {errors.title}
+                                    </span>
+                                )}
                             </label>
                         </div>
                         <div className={styles.labelInput}>

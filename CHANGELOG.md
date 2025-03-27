@@ -24,6 +24,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 -   Various UI/UX fixes and updates
 -   Fix automatic zoom on field focus on mobile
+-   Regex fixes in event forms
 
 # [0.8.3] (2025-09-03)
 

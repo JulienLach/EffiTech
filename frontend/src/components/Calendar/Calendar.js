@@ -200,7 +200,9 @@ class Calendar extends Component {
                                 <i className="fa-solid fa-xmark"></i>
                             </button>
                             <h3>{selectedEvent.title}</h3>
-                            <p>Client : {selectedEvent.client}</p>
+                            <p>
+                                Client : <a>{selectedEvent.client}</a>
+                            </p>
                             <p>Description : {selectedEvent.description}</p>
                         </div>
                     </div>

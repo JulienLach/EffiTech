@@ -124,3 +124,9 @@
     border: 0.06em solid #cccccc;
     border-radius: 0.4em;
 }
+
+.error {
+    color: red;
+    font-size: 0.8em;
+    margin-top: 0.2em;
+}
