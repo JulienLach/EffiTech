@@ -75,9 +75,18 @@ class DocumentDetailsPage extends Component {
                     </div>
                     <div className={styles.separation}></div>
                     <div className={styles.documentDetails}>
-                        <p>Titre : {document.title}</p>
-                        <p>Marque : {document.brand}</p>
-                        <p>Modèle : {document.model}</p>
+                        <p>
+                            <strong>Titre : </strong>
+                            {document.title}
+                        </p>
+                        <p>
+                            <strong>Marque : </strong>
+                            {document.brand}
+                        </p>
+                        <p>
+                            <strong>Modèle : </strong>
+                            {document.model}
+                        </p>
                     </div>
                     <div className={styles.pdfContainer}>
                         <embed

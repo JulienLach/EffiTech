@@ -136,8 +136,8 @@ class InvoicesPage extends Component {
                                             {invoice.clientFirstname}{" "}
                                             {invoice.clientLastname}
                                         </td>
-                                        <td>{invoice.amountWithoutTax}€</td>
-                                        <td>{invoice.amountIncludingTax}€</td>
+                                        <td>{invoice.amountWithoutTax} €</td>
+                                        <td>{invoice.amountIncludingTax} €</td>
                                         <td>
                                             {this.formatDate(
                                                 invoice.invoiceDate
