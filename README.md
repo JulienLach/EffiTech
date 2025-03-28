@@ -4,7 +4,7 @@
 
 <p align="center">
     <a href="https://github.com/JulienLach/EffiTech/releases">
-        <img src="https://img.shields.io/badge/Release-0.8.3-red?logo=github" alt="Release" />
+        <img src="https://img.shields.io/badge/Release-0.9.0-red?logo=github" alt="Release" />
     </a>
 </p>
 
@@ -174,7 +174,7 @@ This project uses **GitHub Actions** to automate unit tests and create new relea
 
 -   To automatically run **CD** actions, follow these steps:
 
-    -   Update `CHANGELOG.md` with all new changes and fixes and add the new tag [x.x.x] (yyyy-dd-mm)
+    -   Update `README.md` and `CHANGELOG.md` with all new changes and fixes and add the new tag [x.x.x] (yyyy-dd-mm)
     -   Merge your current working branch into the `develop` branch
     -   Create a new pull request (PR) to merge `develop` into `main`, check all the code.
     -   Merge your PR `develop` into `main`

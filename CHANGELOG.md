@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+# [0.9.0] (2025-28-03)
+
 ## Changes
 
 -   Add Interventions and contact details tabs to employee details
