@@ -219,11 +219,13 @@ You can run the app in Docker with `docker-compose up --build` or `docker-compos
 
 To stop run `docker-compose down`
 
+Docker Hub latest images : https://hub.docker.com/r/julienlach/effitech/tags
+
 ### <a name="documentation"></a> Documentation
 
 This project uses **JSDoc** and **apidoc** to generate documentation.
 
--   **JSDoc**: Move to `/backend` folder, run `npm run doc` to generate documentation for the `/data` files.
--   **apidoc**: Move to `/backend` folder, for API documentation written in the `/services/api.js` file, run `npm run apidoc`.
+-   **JSDoc** : Move to `/backend` folder, run `npm run doc` to generate documentation for the `/data` files.
+-   **apidoc** : Move to `/backend` folder, for API documentation written in the `/services/api.js` file, run `npm run apidoc`.
 
 Then to see the documentation pages, run `index.html` from both folders with LiveServer VSCode extension for exemple.
