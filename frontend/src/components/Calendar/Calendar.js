@@ -1,10 +1,16 @@
 import React, { Component } from "react";
 import { Calendar as BigCalendar, momentLocalizer } from "react-big-calendar";
+import { useNavigate } from "react-router-dom";
 import moment from "moment-timezone";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "moment/locale/fr";
 import { getAllEmployees } from "../../services/api";
 import "./Calendar.css";
+
+function CalendarWrapper(props) {
+    const navigate = useNavigate();
+    return <Calendar {...props} navigate={navigate} />;
+}
 
 moment.tz.setDefault("Europe/Paris");
 moment.locale("fr");
@@ -75,6 +81,17 @@ class Calendar extends Component {
 
     closeEventModal = () => {
         this.setState({ openEventModal: false, selectedEvent: null });
+    };
+
+    handleClientClick = () => {
+        const { selectedEvent } = this.state;
+        if (selectedEvent && selectedEvent.client) {
+            this.props.navigate("/client-details", {
+                state: { idClient: selectedEvent.idClient },
+            });
+        } else {
+            console.error("Aucun idClient trouvé dans selectedEvent");
+        }
     };
 
     handleCheckboxChange = (idEmployee) => {
@@ -201,7 +218,10 @@ class Calendar extends Component {
                             </button>
                             <h3>{selectedEvent.title}</h3>
                             <p>
-                                Client : <a>{selectedEvent.client}</a>
+                                Client :{" "}
+                                <a href="" onClick={this.handleClientClick}>
+                                    {selectedEvent.client}{" "}
+                                </a>
                             </p>
                             <p>Description : {selectedEvent.description}</p>
                         </div>
@@ -212,4 +232,4 @@ class Calendar extends Component {
     }
 }
 
-export default Calendar;
+export default CalendarWrapper;

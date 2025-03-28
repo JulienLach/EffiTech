@@ -10,7 +10,7 @@ import FilterBar from "../../components/FilterBar/FilterBar";
 import InterventionForm from "../../components/InterventionForm/InterventionForm";
 import UpdateInterventionForm from "../../components/UpdateInterventionForm/UpdateInterventionForm";
 import CreateEventForm from "../../components/CreateEventForm/CreateEventForm";
-import Calendar from "../../components/Calendar/Calendar";
+import CalendarWrapper from "../../components/Calendar/Calendar";
 import getStatusIndicator from "../../components/Utils/StatusUtils";
 
 // Composant wrapper pour utiliser les hooks
@@ -98,6 +98,7 @@ class CalendarPage extends Component {
                 start: startDateTime,
                 end: endDateTime,
                 allDay: false,
+                idClient: event.client.idClient,
             };
         });
     }
@@ -504,7 +505,10 @@ class CalendarPage extends Component {
                                 </div>
                                 <div className={styles.divider}></div>
                                 {view === "calendar" ? (
-                                    <Calendar events={calendarEvents} />
+                                    <CalendarWrapper
+                                        events={calendarEvents}
+                                        navigate={this.props.navigate}
+                                    />
                                 ) : view === "list" ? (
                                     <div>
                                         <table>

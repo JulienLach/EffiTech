@@ -381,6 +381,19 @@ class ClientDetailsPage extends Component {
                                                     </a>
                                                 </p>
                                             </div>
+                                            {activeTab === "coordonnées" && (
+                                                <button
+                                                    className={
+                                                        styles.editButton
+                                                    }
+                                                    onClick={
+                                                        this.handleButtonClick
+                                                    }
+                                                >
+                                                    <i className="fa-solid fa-pen"></i>
+                                                    Modifier
+                                                </button>
+                                            )}
                                         </>
                                     ) : (
                                         <>
