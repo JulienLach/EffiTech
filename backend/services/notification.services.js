@@ -19,7 +19,7 @@ function getAllNotifications(req, res) {
             );
         }
 
-        res.status(200).send(notifications); // Renvoyer toutes les notifications
+        res.status(200).send(notifications);
     });
 }
 function createNotification(req, res) {

@@ -11,7 +11,6 @@ class UpdateInterventionForm extends Component {
     constructor(props) {
         super(props);
 
-        // Convertir la date pour affichage dans le champs
         const startingDate = props.event.startingDate
             ? new Date(props.event.startingDate).toLocaleDateString("en-CA")
             : null;

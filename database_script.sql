@@ -1,4 +1,3 @@
--- Créer les tables
 CREATE TABLE employees(
    id_employee SERIAL PRIMARY KEY,
    firstname VARCHAR(50) NOT NULL,

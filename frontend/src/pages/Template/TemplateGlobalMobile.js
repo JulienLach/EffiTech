@@ -127,7 +127,6 @@ class TemplateGlobalMobile extends Component {
                     </div>
                 </div>
 
-                {/* Partie bar navigation bottom */}
                 <div className={styles.navbarBottom}>
                     <a href="/calendar" aria-label="Accueil">
                         <i className={`fas fa-home ${styles.navbarIcon}`}></i>

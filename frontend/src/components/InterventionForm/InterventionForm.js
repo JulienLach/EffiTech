@@ -6,7 +6,6 @@ import stylesMobile from "./InterventionFormMobile.module.css";
 import { deleteEvent, createNotification } from "../../services/api";
 import getStatusIndicator from "../../components/Utils/StatusUtils";
 
-// Composant wrapper pour utiliser les hooks
 function InterventionFormWrapper(props) {
     const navigate = useNavigate();
     return (

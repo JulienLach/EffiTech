@@ -28,7 +28,7 @@ class CreateEventForm extends Component {
             endingHour: "",
             description: "",
             isPlanned: false,
-            selectedTab: "Intervention", // Par défaut sur l'onglet Intervention
+            selectedTab: "Intervention",
             searchQuery: "",
             errors: {},
         };

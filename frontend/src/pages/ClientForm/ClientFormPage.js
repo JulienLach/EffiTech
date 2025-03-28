@@ -4,7 +4,6 @@ import TemplateGlobal from "../Template/TemplateGlobal";
 import styles from "./ClientFormPage.module.css";
 import { getClientById, updateClient } from "../../services/api";
 
-// Composant wrapper pour utiliser les hooks
 function ClientFormPageWrapper() {
     const navigate = useNavigate();
     const location = useLocation();

@@ -9,7 +9,7 @@ function getAllInvoices(req, res) {
                 error: error.message,
             });
         }
-        res.status(200).send(invoices); // Renvoyer toutes les factures
+        res.status(200).send(invoices);
     });
 }
 
