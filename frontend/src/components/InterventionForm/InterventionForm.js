@@ -178,6 +178,8 @@ class InterventionForm extends Component {
                                         {event.employee.firstname}{" "}
                                         {event.employee.lastname}
                                     </p>
+                                    <h3>Travaux à réaliser</h3>
+                                    <p>{event.workToDo}</p>
                                     <h3 className={stylesMobile.title}>
                                         Début{" "}
                                         {(() => {

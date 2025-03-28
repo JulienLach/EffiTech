@@ -21,7 +21,7 @@
 
 ### <a name="overview"></a> Overview
 
--   EffiTech is an intervention management application. Manage scheduling of interventions for technicians.
+-   EffiTech is an intervention management application built as a Progressive Web App (PWA). Manage scheduling of interventions for technicians.
 
 ### <a name="features"></a> Features
 

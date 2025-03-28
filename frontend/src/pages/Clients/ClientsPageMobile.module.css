@@ -87,7 +87,6 @@
     text-align: center;
 }
 
-/* Style barre de recherche et filtre  */
 .typeFilter {
     font-size: 1em;
     font-weight: 500;
@@ -99,25 +98,16 @@
     padding: 0 1.25em;
 }
 
-.typeFilter:hover {
-    color: white;
-    cursor: pointer;
-    background-color: #c93c2c;
-}
-
 .typeFilter i {
     margin-right: 0.625em;
     color: #000;
 }
 
-.typeFilter i:hover {
-    color: white;
-}
-
 .searchInput {
     position: relative;
     display: inline-block;
-    margin-right: 0.3em;
+    margin-right: 0.6em;
+    top: -0.1em;
 }
 
 .searchInput i {
@@ -129,16 +119,14 @@
     pointer-events: none;
 }
 
-/* Search input style */
 .searchInput input {
     padding: 0.6em 0.4em 0.6em 2.6em;
     border: 0.07em solid #c0c0c0;
     border-radius: 0.4em;
     font-size: 0.8em;
-    height: 2.58em;
+    height: 2.6em;
 }
 
-/* style de la modal */
 .modalOverlay {
     position: fixed;
     top: 0;
@@ -194,7 +182,6 @@
     margin-bottom: 0.625em;
 }
 
-/* CSS for input comportement */
 .labelInput input {
     margin: 0 1em;
     padding: 0.6em;
@@ -202,13 +189,11 @@
     border-radius: 0.5em;
 }
 
-/* CSS for the label comportement */
 .labelInput label {
     margin: 0 1em;
     padding: 0.15em;
 }
 
-/* CSS for button positioning */
 .buttonPosition {
     display: flex;
     justify-content: start;
@@ -216,9 +201,7 @@
     margin-left: 1em;
 }
 
-/* Common styles for buttons */
 .buttonPosition button {
-    /* margin: 0; */
     padding: 0.625em;
     border: none;
     border-radius: 0.4em;
@@ -228,12 +211,10 @@
     cursor: pointer;
 }
 
-/* Specific styles for cancel button */
 .cancelButton {
     background-color: #ababab;
 }
 
-/* Specific styles for submit button */
 .submitButton {
     background-color: #c93c2c;
 }
@@ -242,14 +223,14 @@
     padding: 1em 1.2em;
     text-align: start;
     border: 0.06em solid #c0c0c0;
-    width: 75%;
+    width: 85%;
     margin: 0.3em auto;
     border-radius: 0.4em;
 }
 
 .modalFilter input {
     margin: 0.35em;
-    padding: 0.35em;
+    padding: 0.35em 0.5em;
     border: none;
     border-radius: 0.4em;
     font-size: 1.1em;
@@ -264,11 +245,6 @@
     border-radius: 0.35em;
     font-size: 1em;
     cursor: pointer;
-}
-
-.modalFilter button:hover {
-    background-color: #c93c2c;
-    color: white;
 }
 
 .pagination {

@@ -19,6 +19,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -   Add report PDF displayed on mobile
 -   Add types status and reset filter on calendar mobile
 -   Add client link to event modal on calendar mobile
+-   Add work to do to intervention/appointment form on mobile
 
 ## Fixes
 
