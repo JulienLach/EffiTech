@@ -42,6 +42,7 @@ class Invoice {
                 clients.lastname AS client_lastname 
             FROM invoices 
             JOIN clients ON invoices.id_client = clients.id_client
+            ORDER BY invoices.id_invoice DESC
         `;
         pool.query(query, (error, result) => {
             if (error) {
@@ -63,6 +64,7 @@ class Invoice {
             callback(null, invoices);
         });
     }
+
     /**
      * Récupère une facture par son identifiant.
      * @param {number} idInvoice - L'identifiant de la facture.
