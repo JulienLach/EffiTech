@@ -20,7 +20,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -   Add types status and reset filter on calendar mobile
 -   Add client link to event modal on calendar mobile
 
-## Fix
+## Fixes
 
 -   Various UI/UX fixes and updates
 -   Fix automatic zoom on field focus on mobile
