@@ -424,6 +424,9 @@ class InterventionForm extends Component {
                                 <div className={styles.workToDo}>
                                     {(event.type === "Rendez-vous" &&
                                         event.status === 5) ||
+                                    event.status === 4 ||
+                                    event.status === 3 ||
+                                    event.status === 2 ||
                                     (event.type === "Intervention" &&
                                         event.status === 1) ? (
                                         <>
