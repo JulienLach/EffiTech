@@ -10,7 +10,8 @@ import FilterBar from "../../components/FilterBar/FilterBar";
 import InterventionForm from "../../components/InterventionForm/InterventionForm";
 import UpdateInterventionForm from "../../components/UpdateInterventionForm/UpdateInterventionForm";
 import CreateEventForm from "../../components/CreateEventForm/CreateEventForm";
-import Calendar from "../../components/Calendar/Calendar";
+import CalendarWrapper from "../../components/Calendar/Calendar";
+import getStatusIndicator from "../../components/Utils/StatusUtils";
 
 // Composant wrapper pour utiliser les hooks
 function CalendarPageWrapper() {
@@ -40,8 +41,13 @@ class CalendarPage extends Component {
             selectedType: "",
         };
 
-        this.toggleEventModal = this.toggleEventModal.bind(this);
+        this.toggleStatusModal = this.toggleStatusModal.bind(this);
+        this.handleStatusChange = this.handleStatusChange.bind(this);
+        this.toggleTypeModal = this.toggleTypeModal.bind(this);
+        this.handleTypeChange = this.handleTypeChange.bind(this);
+        this.handleResetFilter = this.handleResetFilter.bind(this);
         this.toggleCreateEventModal = this.toggleCreateEventModal.bind(this);
+        this.toggleEventModal = this.toggleEventModal.bind(this);
         this.toggleView = this.toggleView.bind(this);
         this.openUpdateForm = this.openUpdateForm.bind(this);
         this.closeUpdateForm = this.closeUpdateForm.bind(this);
@@ -49,11 +55,6 @@ class CalendarPage extends Component {
         this.handleNextPage = this.handleNextPage.bind(this);
         this.handlePreviousPage = this.handlePreviousPage.bind(this);
         this.handleSearchChange = this.handleSearchChange.bind(this);
-        this.toggleStatusModal = this.toggleStatusModal.bind(this);
-        this.handleStatusChange = this.handleStatusChange.bind(this);
-        this.toggleTypeModal = this.toggleTypeModal.bind(this);
-        this.handleTypeChange = this.handleTypeChange.bind(this);
-        this.handleResetFilter = this.handleResetFilter.bind(this);
     }
 
     componentDidMount() {
@@ -97,6 +98,7 @@ class CalendarPage extends Component {
                 start: startDateTime,
                 end: endDateTime,
                 allDay: false,
+                idClient: event.client.idClient,
             };
         });
     }
@@ -121,79 +123,6 @@ class CalendarPage extends Component {
         this.setState((prevState) => ({
             currentPage: Math.max(prevState.currentPage - 1, 1),
         }));
-    }
-
-    getStatusIndicator(status) {
-        const style = {
-            padding: "2px 10px",
-            borderRadius: "8px",
-            color: "white",
-            fontSize: "0.9em",
-            fontWeight: "500",
-        };
-
-        switch (status) {
-            case 1:
-                return (
-                    <span
-                        style={{
-                            ...style,
-                            backgroundColor: "#EBEBEB",
-                            color: "#505050",
-                        }}
-                    >
-                        À planifier
-                    </span>
-                );
-            case 2:
-                return (
-                    <span
-                        style={{
-                            ...style,
-                            backgroundColor: "#FFDEDE",
-                            color: "#923838",
-                        }}
-                    >
-                        En retard
-                    </span>
-                );
-            case 3:
-                return (
-                    <span
-                        style={{
-                            ...style,
-                            backgroundColor: "#D3F4FF",
-                            color: "#2C5BA1",
-                        }}
-                    >
-                        Aujourd&apos;hui
-                    </span>
-                );
-            case 4:
-                return (
-                    <span
-                        style={{
-                            ...style,
-                            backgroundColor: "#FFECCF",
-                            color: "#C35E00",
-                        }}
-                    >
-                        À venir
-                    </span>
-                );
-            case 5:
-                return (
-                    <span
-                        style={{
-                            ...style,
-                            backgroundColor: "#DCFFD6",
-                            color: "#48903C",
-                        }}
-                    >
-                        Terminé
-                    </span>
-                );
-        }
     }
 
     toggleEventModal(event = null) {
@@ -322,7 +251,17 @@ class CalendarPage extends Component {
                     <>
                         <TemplateGlobalMobile />
                         <div className={stylesMobile.filterBar}>
-                            <FilterBar />
+                            <FilterBar
+                                toggleStatusModal={this.toggleStatusModal}
+                                isStatusModalOpen={isStatusModalOpen}
+                                handleStatusChange={this.handleStatusChange}
+                                toggleTypeModal={this.toggleTypeModal}
+                                isTypeModalOpen={isTypeModalOpen}
+                                handleTypeChange={this.handleTypeChange}
+                                handleResetFilter={this.handleResetFilter}
+                                selectedStatus={selectedStatus}
+                                selectedType={selectedType}
+                            />
                         </div>
                         <div className={stylesMobile.container}>
                             {currentEvents.map((event) => (
@@ -358,12 +297,11 @@ class CalendarPage extends Component {
                                                         stylesMobile.status
                                                     }
                                                 >
-                                                    {this.getStatusIndicator(
+                                                    {getStatusIndicator(
                                                         event.status
                                                     )}
                                                 </p>
                                             </div>
-
                                             {event.client.category ===
                                             "Professionnel" ? (
                                                 <p
@@ -440,6 +378,28 @@ class CalendarPage extends Component {
                                     </div>
                                 </div>
                             ))}
+                            {/* Ajout de la pagination ici */}
+                            <div className={stylesMobile.pagination}>
+                                <button
+                                    onClick={this.handlePreviousPage}
+                                    disabled={currentPage === 1}
+                                    aria-label="Page précédente"
+                                    title="Page précédente"
+                                >
+                                    <i className="fa-solid fa-chevron-left"></i>
+                                </button>
+                                <span>
+                                    Page {currentPage} / {totalPages}
+                                </span>
+                                <button
+                                    onClick={this.handleNextPage}
+                                    disabled={currentPage === totalPages}
+                                    aria-label="Page suivante"
+                                    title="Page suivante"
+                                >
+                                    <i className="fa-solid fa-chevron-right"></i>
+                                </button>
+                            </div>
                         </div>
                         {isEventModalOpen && !isUpdateFormOpen && (
                             <InterventionForm
@@ -490,9 +450,9 @@ class CalendarPage extends Component {
                                         }
                                     />
                                 </div>
-                                <h3 className={styles.eventTitle}>
+                                <h2 className={styles.eventTitle}>
                                     Évènements
-                                </h3>
+                                </h2>
                             </div>
                             <div className={styles.listView}>
                                 <div className={styles.tabs}>
@@ -543,8 +503,12 @@ class CalendarPage extends Component {
                                     </button>
                                     <div className={styles.divider}></div>
                                 </div>
+                                <div className={styles.divider}></div>
                                 {view === "calendar" ? (
-                                    <Calendar events={calendarEvents} />
+                                    <CalendarWrapper
+                                        events={calendarEvents}
+                                        navigate={this.props.navigate}
+                                    />
                                 ) : view === "list" ? (
                                     <div>
                                         <table>
@@ -588,16 +552,14 @@ class CalendarPage extends Component {
                                                                 }
                                                             >
                                                                 <a href="#">
-                                                                    {
-                                                                        event
-                                                                            .client
-                                                                            .firstname
-                                                                    }{" "}
-                                                                    {
-                                                                        event
-                                                                            .client
-                                                                            .lastname
-                                                                    }
+                                                                    {event
+                                                                        .client
+                                                                        .category ===
+                                                                    "Professionnel"
+                                                                        ? event
+                                                                              .client
+                                                                              .company
+                                                                        : `${event.client.firstname} ${event.client.lastname}`}{" "}
                                                                 </a>
                                                             </td>
                                                             <td>
@@ -622,7 +584,7 @@ class CalendarPage extends Component {
                                                                 </a>
                                                             </td>
                                                             <td>
-                                                                {this.getStatusIndicator(
+                                                                {getStatusIndicator(
                                                                     event.status
                                                                 )}
                                                             </td>
@@ -669,6 +631,7 @@ class CalendarPage extends Component {
                                                     this.handlePreviousPage(e)
                                                 }
                                                 disabled={currentPage === 1}
+                                                title="Page précédente"
                                             >
                                                 <i className="fa-solid fa-chevron-left"></i>
                                             </button>
@@ -706,6 +669,7 @@ class CalendarPage extends Component {
                                                 disabled={
                                                     currentPage === totalPages
                                                 }
+                                                title="Page suivante"
                                             >
                                                 <i className="fa-solid fa-chevron-right"></i>
                                             </button>
@@ -767,16 +731,14 @@ class CalendarPage extends Component {
                                                                 }
                                                             >
                                                                 <a href="#">
-                                                                    {
-                                                                        event
-                                                                            .client
-                                                                            .firstname
-                                                                    }{" "}
-                                                                    {
-                                                                        event
-                                                                            .client
-                                                                            .lastname
-                                                                    }
+                                                                    {event
+                                                                        .client
+                                                                        .category ===
+                                                                    "Professionnel"
+                                                                        ? event
+                                                                              .client
+                                                                              .company
+                                                                        : `${event.client.firstname} ${event.client.lastname}`}{" "}
                                                                 </a>
                                                             </td>
                                                             <td>
@@ -801,7 +763,7 @@ class CalendarPage extends Component {
                                                                 </a>
                                                             </td>
                                                             <td>
-                                                                {this.getStatusIndicator(
+                                                                {getStatusIndicator(
                                                                     event.status
                                                                 )}
                                                             </td>
@@ -848,6 +810,7 @@ class CalendarPage extends Component {
                                                     this.handlePreviousPage(e)
                                                 }
                                                 disabled={currentPage === 1}
+                                                title="Page précédente"
                                             >
                                                 <i className="fa-solid fa-chevron-left"></i>
                                             </button>
@@ -885,6 +848,7 @@ class CalendarPage extends Component {
                                                 disabled={
                                                     currentPage === totalPages
                                                 }
+                                                title="Page suivante"
                                             >
                                                 <i className="fa-solid fa-chevron-right"></i>
                                             </button>

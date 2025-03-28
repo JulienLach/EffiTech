@@ -28,7 +28,7 @@ class CreateEventForm extends Component {
             endingHour: "",
             description: "",
             isPlanned: false,
-            selectedTab: "Intervention", // Par défaut sur l'onglet Intervention
+            selectedTab: "Intervention",
             searchQuery: "",
             errors: {},
         };
@@ -126,9 +126,8 @@ class CreateEventForm extends Component {
         const errors = {};
         if (!title) {
             errors.title = "* Champ obligatoire";
-        } else if (!/^[a-zA-ZÀ-ÿ\d\s-]+$/.test(title)) {
-            errors.title =
-                "* Ne doit contenir que des lettres, des chiffres, des espaces et des tirets";
+        } else if (!/^[a-zA-ZÀ-ÿ\d\s\-']+$/.test(title)) {
+            errors.title = "* Caractère non valide";
         }
 
         if (!selectedClient) {
@@ -223,7 +222,10 @@ class CreateEventForm extends Component {
 
         const clientOptions = clients.map((client) => ({
             value: client.idClient,
-            label: `${client.firstname} ${client.lastname}`,
+            label:
+                client.category === "Professionnel"
+                    ? client.company
+                    : `${client.firstname} ${client.lastname}`,
         }));
 
         const employeeOptions = employees.map((employee) => ({
@@ -349,7 +351,7 @@ class CreateEventForm extends Component {
                                 placeholder={
                                     <span>
                                         <i className="fa fa-search"></i>{" "}
-                                        Rechercher un client
+                                        Rechercher
                                     </span>
                                 }
                                 className={styles.reactSelect}
@@ -378,7 +380,7 @@ class CreateEventForm extends Component {
                                 placeholder={
                                     <span>
                                         <i className="fa fa-search"></i>{" "}
-                                        Rechercher un client
+                                        Rechercher
                                     </span>
                                 }
                                 className={styles.reactSelect}

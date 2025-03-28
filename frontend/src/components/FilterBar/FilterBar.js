@@ -9,17 +9,193 @@ class FilterBar extends Component {
             <>
                 {isMobile ? (
                     <div className={stylesMobile.filterDiv}>
-                        <div className={stylesMobile.typeFilter}>
+                        <div
+                            className={stylesMobile.typeFilter}
+                            onClick={this.props.toggleStatusModal}
+                        >
                             <i className="fa-solid fa-tag"></i>
                             <p>Statut</p>
                         </div>
-                        <div className={stylesMobile.typeFilter}>
+                        {this.props.isStatusModalOpen && (
+                            <div className={stylesMobile.statutModalOverlay}>
+                                <div className={stylesMobile.modalContent}>
+                                    <div className={stylesMobile.modalBody}>
+                                        <label>
+                                            <input
+                                                type="radio"
+                                                name="status"
+                                                value="1"
+                                                checked={
+                                                    this.props
+                                                        .selectedStatus === "1"
+                                                }
+                                                onChange={
+                                                    this.props
+                                                        .handleStatusChange
+                                                }
+                                            />
+                                            À planifier
+                                        </label>
+                                        <label>
+                                            <input
+                                                type="radio"
+                                                name="status"
+                                                value="2"
+                                                checked={
+                                                    this.props
+                                                        .selectedStatus === "2"
+                                                }
+                                                onChange={
+                                                    this.props
+                                                        .handleStatusChange
+                                                }
+                                            />
+                                            En retard
+                                        </label>
+                                        <label>
+                                            <input
+                                                type="radio"
+                                                name="status"
+                                                value="3"
+                                                checked={
+                                                    this.props
+                                                        .selectedStatus === "3"
+                                                }
+                                                onChange={
+                                                    this.props
+                                                        .handleStatusChange
+                                                }
+                                            />
+                                            Aujourd'hui
+                                        </label>
+                                        <label>
+                                            <input
+                                                type="radio"
+                                                name="status"
+                                                value="4"
+                                                checked={
+                                                    this.props
+                                                        .selectedStatus === "4"
+                                                }
+                                                onChange={
+                                                    this.props
+                                                        .handleStatusChange
+                                                }
+                                            />
+                                            À venir
+                                        </label>
+                                        <label>
+                                            <input
+                                                type="radio"
+                                                name="status"
+                                                value="5"
+                                                checked={
+                                                    this.props
+                                                        .selectedStatus === "5"
+                                                }
+                                                onChange={
+                                                    this.props
+                                                        .handleStatusChange
+                                                }
+                                            />
+                                            Terminé
+                                        </label>
+                                        <label>
+                                            <input
+                                                type="radio"
+                                                name="status"
+                                                value=""
+                                                checked={
+                                                    this.props
+                                                        .selectedStatus === ""
+                                                }
+                                                onChange={
+                                                    this.props
+                                                        .handleStatusChange
+                                                }
+                                            />
+                                            Tous
+                                        </label>
+                                    </div>
+                                    <button
+                                        onClick={this.props.toggleStatusModal}
+                                    >
+                                        Fermer
+                                    </button>
+                                </div>
+                            </div>
+                        )}
+                        <div
+                            className={stylesMobile.typeFilter}
+                            onClick={this.props.toggleTypeModal}
+                        >
                             <i className="fa-solid fa-filter"></i>
                             <p>Type</p>
                         </div>
-                        <div className={stylesMobile.typeFilter}>
-                            <i className="fa-solid fa-user"></i>
-                            <p>Clients</p>
+                        {this.props.isTypeModalOpen && (
+                            <div className={stylesMobile.typeModalOverlay}>
+                                <div className={stylesMobile.modalContent}>
+                                    <div className={stylesMobile.modalBody}>
+                                        <label>
+                                            <input
+                                                type="radio"
+                                                name="type"
+                                                value=""
+                                                checked={
+                                                    this.props.selectedType ===
+                                                    ""
+                                                }
+                                                onChange={
+                                                    this.props.handleTypeChange
+                                                }
+                                            />
+                                            Tous
+                                        </label>
+                                        <label>
+                                            <input
+                                                type="radio"
+                                                name="type"
+                                                value="Intervention"
+                                                checked={
+                                                    this.props.selectedType ===
+                                                    "Intervention"
+                                                }
+                                                onChange={
+                                                    this.props.handleTypeChange
+                                                }
+                                            />
+                                            Intervention
+                                        </label>
+                                        <label>
+                                            <input
+                                                type="radio"
+                                                name="type"
+                                                value="Rendez-vous"
+                                                checked={
+                                                    this.props.selectedType ===
+                                                    "Rendez-vous"
+                                                }
+                                                onChange={
+                                                    this.props.handleTypeChange
+                                                }
+                                            />
+                                            Rendez-vous
+                                        </label>
+                                    </div>
+                                    <button
+                                        onClick={this.props.toggleTypeModal}
+                                    >
+                                        Fermer
+                                    </button>
+                                </div>
+                            </div>
+                        )}
+                        <div
+                            className={stylesMobile.typeFilter}
+                            onClick={this.props.handleResetFilter}
+                        >
+                            <i class="fa-solid fa-arrow-rotate-left"></i>
+                            <p>Réinitialiser</p>
                         </div>
                     </div>
                 ) : (

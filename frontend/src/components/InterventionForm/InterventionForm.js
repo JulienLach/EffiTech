@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import styles from "./InterventionForm.module.css";
 import stylesMobile from "./InterventionFormMobile.module.css";
 import { deleteEvent, createNotification } from "../../services/api";
+import getStatusIndicator from "../../components/Utils/StatusUtils";
 
-// Composant wrapper pour utiliser les hooks
 function InterventionFormWrapper(props) {
     const navigate = useNavigate();
     return (
@@ -83,79 +83,6 @@ class InterventionForm extends Component {
         navigate("/report", { state: { event, report: event.report } });
     }
 
-    getStatusIndicator(status) {
-        const style = {
-            padding: "0.14em 0.7em",
-            borderRadius: ".5em",
-            color: "white",
-            fontSize: "0.85em",
-            fontWeight: "500",
-        };
-
-        switch (status) {
-            case 1:
-                return (
-                    <span
-                        style={{
-                            ...style,
-                            backgroundColor: "#EBEBEB",
-                            color: "#505050",
-                        }}
-                    >
-                        À planifier
-                    </span>
-                );
-            case 2:
-                return (
-                    <span
-                        style={{
-                            ...style,
-                            backgroundColor: "#FFDEDE",
-                            color: "#923838",
-                        }}
-                    >
-                        En retard
-                    </span>
-                );
-            case 3:
-                return (
-                    <span
-                        style={{
-                            ...style,
-                            backgroundColor: "#D3F4FF",
-                            color: "#2C5BA1",
-                        }}
-                    >
-                        Aujourd&apos;hui
-                    </span>
-                );
-            case 4:
-                return (
-                    <span
-                        style={{
-                            ...style,
-                            backgroundColor: "#FFECCF",
-                            color: "#C35E00",
-                        }}
-                    >
-                        À venir
-                    </span>
-                );
-            case 5:
-                return (
-                    <span
-                        style={{
-                            ...style,
-                            backgroundColor: "#DCFFD6",
-                            color: "#48903C",
-                        }}
-                    >
-                        Terminé
-                    </span>
-                );
-        }
-    }
-
     render() {
         const { event, closeModal } = this.props;
 
@@ -205,9 +132,7 @@ class InterventionForm extends Component {
                                             {event.idEvent}
                                         </p>
                                         <p>
-                                            {this.getStatusIndicator(
-                                                event.status
-                                            )}
+                                            {getStatusIndicator(event.status)}
                                         </p>
                                     </div>
                                     <p className={stylesMobile.boldElement}>
@@ -252,6 +177,8 @@ class InterventionForm extends Component {
                                         {event.employee.firstname}{" "}
                                         {event.employee.lastname}
                                     </p>
+                                    <h3>Travaux à réaliser</h3>
+                                    <p>{event.workToDo}</p>
                                     <h3 className={stylesMobile.title}>
                                         Début{" "}
                                         {(() => {
@@ -395,7 +322,7 @@ class InterventionForm extends Component {
                                         Retour
                                     </button>
                                 </div>
-                                <p>{this.getStatusIndicator(event.status)}</p>
+                                <p>{getStatusIndicator(event.status)}</p>
                             </div>
 
                             <div className={styles.eventData}>
@@ -412,6 +339,7 @@ class InterventionForm extends Component {
                                     </h2>
                                 </div>
                                 <div className={styles.separator}></div>
+                                <h3>Détails</h3>
                                 {event.client.company &&
                                     event.client.company !== "N/A" && (
                                         <div>
@@ -423,7 +351,10 @@ class InterventionForm extends Component {
                                     )}
                                 <div>
                                     <span className={styles.eventLabel}>
-                                        Client :
+                                        {event.client.category === "Particulier"
+                                            ? "Client"
+                                            : "Contact client"}{" "}
+                                        :
                                     </span>{" "}
                                     {event.client.firstname}{" "}
                                     {event.client.lastname}
@@ -485,7 +416,7 @@ class InterventionForm extends Component {
                                 </div>
                                 <div>
                                     <span className={styles.eventLabel}>
-                                        Technicien intervenant :{" "}
+                                        Technicien :{" "}
                                     </span>{" "}
                                     {event.employee.firstname}{" "}
                                     {event.employee.lastname}
@@ -494,6 +425,9 @@ class InterventionForm extends Component {
                                 <div className={styles.workToDo}>
                                     {(event.type === "Rendez-vous" &&
                                         event.status === 5) ||
+                                    event.status === 4 ||
+                                    event.status === 3 ||
+                                    event.status === 2 ||
                                     (event.type === "Intervention" &&
                                         event.status === 1) ? (
                                         <>
@@ -587,7 +521,7 @@ class InterventionForm extends Component {
                                             type="button"
                                             onClick={this.handleDelete}
                                         >
-                                            <i className="fa-solid fa-xmark"></i>{" "}
+                                            <i className="fa-solid fa-trash"></i>{" "}
                                             Supprimer
                                         </button>
                                     )}

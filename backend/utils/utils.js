@@ -2,34 +2,31 @@ const fs = require("fs");
 const path = require("path");
 const { Event } = require("../data/event.data.js");
 
-// Pour passer n'importe quel argument à la méthode addLog
-// Exemple : Utils.addLog("Erreur : " + error.message); ou Utils.addLog("Message", employee.name);
 class Utils {
+    // Ajoute un message au fichier log.txt avec la date
     static addLog(message) {
-        // Définit le chemin du dossier logs et du fichier log.txt à partir du dossier courant
-        const logDir = path.join(__dirname, "logs");
-        // définir le chemin du fichier log.txt à partir du dossier logs
-        // grace à la méthode path.join qui permet de concaténer les chemins
-        const logFile = path.join(logDir, "log.txt");
+        const logDir = path.join(__dirname, "logs"); // Chemin du dossier logs
+        const logFile = path.join(logDir, "log.txt"); // Chemin du fichier log.txt
 
-        // Vérifie si le dossier logs existe, sinon le crée
+        // Crée le dossier logs s'il n'existe pas
         if (!fs.existsSync(logDir)) {
             fs.mkdirSync(logDir);
         }
 
-        // Ajoute le message au fichier log.txt
+        // Écrit le message dans le fichier avec un timestamp
         const logMessage = `${new Date().toISOString()} - ${message}\n`;
         fs.appendFileSync(logFile, logMessage, "utf8");
     }
 
+    // Récupérer des statistiques sur tous les événements
     static getAllEventStatistics(callback) {
         Event.getAllEvents(function (error, events) {
             if (error) {
                 callback(error, null);
             } else {
                 const eventStatistics = {
-                    totalEvents: events.length,
-                    events: events,
+                    totalEvents: events.length, // Nombre total d'événements
+                    events: events, // Liste des événements
                 };
                 callback(null, eventStatistics);
             }

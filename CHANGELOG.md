@@ -6,6 +6,31 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+# [0.9.0] (2025-28-03)
+
+## Changes
+
+-   Add Interventions and contact details tabs to employee details
+-   Refactoring frontend pages with utils methods
+-   Add Progressive Web App feature
+-   Add paging to calendar mobile page
+-   Add paging to clients mobile page
+-   Add Ubuntu bold to react pdf component
+-   Add event modal on mobile calendar component
+-   Add disconnect button on mobile profil page
+-   Add report PDF displayed on mobile
+-   Add types status and reset filter on calendar mobile
+-   Add client link to event modal on calendar mobile and desktop
+-   Add work to do to intervention/appointment form on mobile
+-   Update API documentation
+
+## Fixes
+
+-   Various UI/UX fixes and updates
+-   Fix automatic zoom on field focus on mobile
+-   Regex fixes in event forms
+-   Accessibility fixes
+
 # [0.8.3] (2025-09-03)
 
 ## Changes

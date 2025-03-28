@@ -30,6 +30,7 @@ class EmployeeDetailsPage extends Component {
             error: null,
         };
         this.handleButtonClick = this.handleButtonClick.bind(this);
+        this.handleLogout = this.handleLogout.bind(this); // Ajout du handler pour la déconnexion
     }
 
     componentDidMount() {
@@ -52,6 +53,10 @@ class EmployeeDetailsPage extends Component {
         this.props.navigate("/employee-form", {
             state: { employee: this.state.employee },
         });
+    };
+
+    handleLogout = () => {
+        this.props.navigate("/login");
     };
 
     render() {
@@ -81,7 +86,6 @@ class EmployeeDetailsPage extends Component {
                                 </button>
                             </div>
                             <div className={stylesMobile.infoEmployeeCard}>
-                                {" "}
                                 <div className={stylesMobile.profilInitial}>
                                     {initial}
                                 </div>
@@ -102,6 +106,14 @@ class EmployeeDetailsPage extends Component {
                                 <h3>Téléphone</h3>
                                 <p>{employee.phoneNumber}</p>
                             </div>
+                            <button
+                                className={stylesMobile.logoutButton}
+                                type="button"
+                                onClick={this.handleLogout}
+                            >
+                                <i className="fa-solid fa-sign-out-alt"></i>
+                                Déconnexion
+                            </button>
                         </div>
                     </>
                 ) : (
@@ -178,7 +190,7 @@ class EmployeeDetailsPage extends Component {
                                 <i className="fa-solid fa-pen"></i>
                                 Modifier
                             </button>
-                        </div>{" "}
+                        </div>
                     </>
                 )}
             </>

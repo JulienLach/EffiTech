@@ -200,6 +200,19 @@ function deleteEvent(req, res) {
     });
 }
 
+function getEventsByClientId(req, res) {
+    const idClient = req.params.idClient;
+    Event.getEventsByClientId(idClient, (error, events) => {
+        if (error) {
+            return res.status(500).send({
+                message: "Erreur lors de la récupération des évènements",
+                error: error.message,
+            });
+        }
+        res.status(200).send(events);
+    });
+}
+
 function submitInterventionForm(req, res) {
     const {
         idEvent,
@@ -298,5 +311,6 @@ exports.getEventById = getEventById;
 exports.createEvent = createEvent;
 exports.updateEvent = updateEvent;
 exports.deleteEvent = deleteEvent;
+exports.getEventsByClientId = getEventsByClientId;
 exports.submitInterventionForm = submitInterventionForm;
 exports.submitAppointmentForm = submitAppointmentForm;

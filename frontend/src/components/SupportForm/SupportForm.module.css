@@ -36,6 +36,7 @@
     align-items: center;
     flex-direction: column;
     gap: 0.7em;
+    margin-top: 1.5em;
 }
 
 .form input,
@@ -62,13 +63,17 @@
 }
 
 .modalFooter button {
-    padding: 0.45em 1.3em;
+    padding: 0.45em 1.2em;
     border: none;
     border-radius: 0.4em;
     font-size: 1em;
     font-weight: 500;
     cursor: pointer;
     color: #fff;
+}
+
+.modalFooter button i {
+    margin-right: 0.4em;
 }
 
 .cancelButton {

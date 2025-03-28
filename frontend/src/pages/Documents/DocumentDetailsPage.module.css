@@ -56,7 +56,7 @@
 .documentDetails {
     display: flex;
     flex-direction: column;
-    gap: 0.4em;
+    gap: 0.2em;
     margin-top: 1em;
     font-size: 1em;
 }

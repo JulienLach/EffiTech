@@ -230,26 +230,26 @@ class ClientsPage extends Component {
                                         >
                                             <div>
                                                 <div>
-                                                    <input
-                                                        type="radio"
-                                                        id="all"
-                                                        name="clientType"
-                                                        value="All"
-                                                        checked={
-                                                            this.state
-                                                                .selectedCategory ===
-                                                            "All"
-                                                        }
-                                                        onChange={
-                                                            this
-                                                                .handleCategoryChange
-                                                        }
-                                                    />
-                                                    <label htmlFor="all">
+                                                    <label>
+                                                        <input
+                                                            type="radio"
+                                                            id="all"
+                                                            name="clientType"
+                                                            value="All"
+                                                            checked={
+                                                                this.state
+                                                                    .selectedCategory ===
+                                                                "All"
+                                                            }
+                                                            onChange={
+                                                                this
+                                                                    .handleCategoryChange
+                                                            }
+                                                        />
                                                         Tous
                                                     </label>
                                                 </div>
-                                                <div>
+                                                <label>
                                                     <input
                                                         type="radio"
                                                         name="clientType"
@@ -264,26 +264,24 @@ class ClientsPage extends Component {
                                                                 .handleCategoryChange
                                                         }
                                                     />
-                                                    <label htmlFor="particuliers">
-                                                        Particuliers
-                                                    </label>
-                                                </div>
+                                                    Particuliers
+                                                </label>
                                                 <div>
-                                                    <input
-                                                        type="radio"
-                                                        name="clientType"
-                                                        value="Professionnel"
-                                                        checked={
-                                                            this.state
-                                                                .selectedCategory ===
-                                                            "Professionnel"
-                                                        }
-                                                        onChange={
-                                                            this
-                                                                .handleCategoryChange
-                                                        }
-                                                    />
-                                                    <label htmlFor="professionnels">
+                                                    <label>
+                                                        <input
+                                                            type="radio"
+                                                            name="clientType"
+                                                            value="Professionnel"
+                                                            checked={
+                                                                this.state
+                                                                    .selectedCategory ===
+                                                                "Professionnel"
+                                                            }
+                                                            onChange={
+                                                                this
+                                                                    .handleCategoryChange
+                                                            }
+                                                        />
                                                         Professionnels
                                                     </label>
                                                 </div>
@@ -292,14 +290,7 @@ class ClientsPage extends Component {
                                                         this.closeCategoryModal
                                                     }
                                                 >
-                                                    Annuler
-                                                </button>
-                                                <button
-                                                    onClick={
-                                                        this.closeCategoryModal
-                                                    }
-                                                >
-                                                    Filtrer
+                                                    Fermer
                                                 </button>
                                             </div>
                                         </div>
@@ -342,6 +333,24 @@ class ClientsPage extends Component {
                                     )}
                                 </div>
                             ))}
+                            {/* Ajout de la pagination ici */}
+                            <div className={stylesMobile.pagination}>
+                                <button
+                                    onClick={this.handlePreviousPage}
+                                    disabled={currentPage === 1}
+                                >
+                                    <i className="fa-solid fa-chevron-left"></i>
+                                </button>
+                                <span>
+                                    Page {currentPage} / {totalPages}
+                                </span>
+                                <button
+                                    onClick={this.handleNextPage}
+                                    disabled={currentPage === totalPages}
+                                >
+                                    <i className="fa-solid fa-chevron-right"></i>
+                                </button>
+                            </div>
                         </div>
                     </>
                 ) : (

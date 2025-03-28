@@ -91,6 +91,7 @@ class Canvas extends Component {
                         padding: "0.5em",
                         borderRadius: "0.4em",
                         backgroundColor: "#ebebeb",
+                        color: "#4f4f4f",
                         border: "none",
                         cursor: "pointer",
                     }}

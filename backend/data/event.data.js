@@ -419,6 +419,64 @@ class Event {
             callback(null, deletedEvent);
         });
     }
+
+    static getEventsByClientId(idClient, callback) {
+        const query = `
+            SELECT 
+                events.id_event, 
+                events.title, 
+                events.description, 
+                events.status, 
+                events.is_planned, 
+                events.type, 
+                events.starting_date, 
+                events.starting_hour, 
+                events.ending_hour, 
+                events.id_client, 
+                events.id_address, 
+                events.id_employee,
+                employees.firstname AS employee_firstname, 
+                employees.lastname AS employee_lastname
+            FROM events 
+            LEFT JOIN employees ON events.id_employee = employees.id_employee
+            WHERE events.id_client = $1
+            ORDER BY 
+                events.status ASC, 
+                CASE 
+                    WHEN events.status = 5 THEN events.starting_date
+                END DESC,
+                events.starting_date ASC
+        `;
+        const values = [idClient];
+        pool.query(query, values, (error, result) => {
+            if (error) {
+                return callback(error, null);
+            }
+            const events = result.rows.map((row) => {
+                const event = new Event(
+                    row.id_event,
+                    row.title,
+                    row.description,
+                    row.status,
+                    row.is_planned,
+                    row.type,
+                    row.id_client,
+                    row.id_address,
+                    row.starting_date,
+                    row.starting_hour,
+                    row.ending_hour,
+                    (row.id_employee = {
+                        idEmployee: row.id_employee,
+                        firstname: row.employee_firstname,
+                        lastname: row.employee_lastname,
+                    }),
+                    row.work_to_do
+                );
+                return event;
+            });
+            callback(null, events);
+        });
+    }
 }
 
 class Appointment extends Event {

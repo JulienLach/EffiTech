@@ -5,7 +5,9 @@ import TemplateGlobal from "../Template/TemplateGlobal";
 import TemplateGlobalMobile from "../Template/TemplateGlobalMobile";
 import styles from "./ClientDetailsPage.module.css";
 import stylesMobile from "./ClientDetailsPageMobile.module.css";
-import { getClientById } from "../../services/api";
+import { getClientById, getEventsByClientId } from "../../services/api";
+import getStatusIndicator from "../../components/Utils/StatusUtils";
+import getCategoryIndicator from "../../components/Utils/CategoryUtils";
 
 function ClientDetailsPageWrapper() {
     const navigate = useNavigate();
@@ -16,10 +18,12 @@ function ClientDetailsPageWrapper() {
 class ClientDetailsPage extends Component {
     constructor(props) {
         super(props);
-        const { client } = this.props.location.state;
+        const { client, idClient } = this.props.location.state;
         this.state = {
             client: client,
-            idClient: client.idClient,
+            idClient: idClient || (client ? client.idClient : null), // idClient envoyé à partir de calendar ou objet client complet à partir de clients page
+            activeTab: "coordonnées",
+            events: [],
         };
         this.handleButtonClick = this.handleButtonClick.bind(this);
     }
@@ -38,6 +42,19 @@ class ClientDetailsPage extends Component {
                 console.log("Données du client récupérées:", data);
             }
         });
+
+        getEventsByClientId(idClient, (error, data) => {
+            if (error) {
+                console.error(
+                    "Erreur lors de la récupération des événements",
+                    error
+                );
+                this.setState({ error: error.message });
+            } else {
+                this.setState({ events: data });
+                console.log("Données des événements récupérées:", data);
+            }
+        });
     }
 
     handleButtonClick = () => {
@@ -46,46 +63,13 @@ class ClientDetailsPage extends Component {
         });
     };
 
-    getCategoryIndicator(category) {
-        const style = {
-            padding: "2px 11px",
-            borderRadius: "8px",
-            color: "white",
-            fontSize: "0.9em",
-            fontWeight: "500",
-        };
-
-        switch (category) {
-            case "Professionnel":
-                return (
-                    <span
-                        style={{
-                            ...style,
-                            backgroundColor: "#C1F0FF",
-                            color: "#2C5BA1",
-                        }}
-                    >
-                        Professionnel
-                    </span>
-                );
-            case "Particulier":
-                return (
-                    <span
-                        style={{
-                            ...style,
-                            backgroundColor: "#FFE4BC",
-                            color: "#C35E00",
-                        }}
-                    >
-                        Particulier
-                    </span>
-                );
-        }
-    }
+    handleTabClick = (tab) => {
+        this.setState({ activeTab: tab });
+    };
 
     render() {
-        const { client } = this.state;
-        console.log(client);
+        const { client, activeTab, events } = this.state;
+        if (!client) return <div></div>; // pour charger l'idClient avant de récupérer les données, corriger la logique d'ordre de récupération des données
 
         const initial =
             client.category === "Professionnel"
@@ -122,7 +106,6 @@ class ClientDetailsPage extends Component {
                                     <div
                                         className={stylesMobile.infoClientCard}
                                     >
-                                        {" "}
                                         <div
                                             className={
                                                 stylesMobile.profilInitial
@@ -190,7 +173,6 @@ class ClientDetailsPage extends Component {
                                     <div
                                         className={stylesMobile.infoClientCard}
                                     >
-                                        {" "}
                                         <div
                                             className={
                                                 stylesMobile.profilInitial
@@ -260,7 +242,6 @@ class ClientDetailsPage extends Component {
                         <div className={styles.container}>
                             {client.category === "Professionnel" ? (
                                 <div className={styles.pro}>
-                                    {/* code pour le professionnel ici */}
                                     <div className={styles.profilInfo}>
                                         <h1 className={styles.pageTitle}>
                                             Détails client
@@ -292,77 +273,209 @@ class ClientDetailsPage extends Component {
                                                 C-{client.idClient}
                                             </p>
                                             <p>
-                                                {this.getCategoryIndicator(
+                                                {getCategoryIndicator(
                                                     client.category
                                                 )}
                                             </p>
                                         </div>
                                     </div>
                                     <div className={styles.separation}></div>
-                                    <h2>Coordonnées</h2>
-                                    <div className={styles.contactInfo}>
-                                        <p className={styles.firstnamePro}>
-                                            <span
-                                                className={styles.clientLabel}
-                                            >
-                                                Contact client :
-                                            </span>{" "}
-                                            {client.firstname} {client.lastname}
-                                        </p>
-                                        <p>
-                                            <span
-                                                className={styles.clientLabel}
-                                            >
-                                                Téléphone :{" "}
-                                            </span>
-                                            <a
-                                                href={`tel:${client.phoneNumber}`}
-                                            >
-                                                {client.phoneNumber}
-                                            </a>
-                                        </p>
-                                        <p>
-                                            {" "}
-                                            <span
-                                                className={styles.clientLabel}
-                                            >
-                                                Adresse :
-                                            </span>{" "}
-                                            {clientAddress}
-                                        </p>
-                                        <p>
-                                            <a
-                                                href={googleMapsUrl}
-                                                target="_blank"
-                                                rel="noreferrer"
-                                                className={styles.openMapsLink}
-                                            >
-                                                <i className="fa-solid fa-location-dot"></i>
-                                                Voir sur Google Maps
-                                            </a>
-                                        </p>
-                                        <p>
-                                            <span
-                                                className={styles.clientLabel}
-                                            >
-                                                Mail :
-                                            </span>{" "}
-                                            <a href={`mailto:${client.email}`}>
-                                                {client.email}
-                                            </a>
-                                        </p>
+                                    <div className={styles.tabContainer}>
+                                        <button
+                                            className={`${styles.tabButton} ${
+                                                activeTab === "coordonnées"
+                                                    ? styles.activeTab
+                                                    : ""
+                                            }`}
+                                            onClick={() =>
+                                                this.handleTabClick(
+                                                    "coordonnées"
+                                                )
+                                            }
+                                        >
+                                            Coordonnées
+                                        </button>
+                                        <button
+                                            className={`${styles.tabButton} ${
+                                                activeTab === "interventions"
+                                                    ? styles.activeTab
+                                                    : ""
+                                            }`}
+                                            onClick={() =>
+                                                this.handleTabClick(
+                                                    "interventions"
+                                                )
+                                            }
+                                        >
+                                            Interventions
+                                        </button>
                                     </div>
-                                    <button
-                                        className={styles.editButton}
-                                        onClick={this.handleButtonClick}
-                                    >
-                                        <i className="fa-solid fa-pen"></i>
-                                        Modifier
-                                    </button>
+                                    {activeTab === "coordonnées" ? (
+                                        <>
+                                            <div className={styles.contactInfo}>
+                                                <p
+                                                    className={
+                                                        styles.firstnamePro
+                                                    }
+                                                >
+                                                    <span
+                                                        className={
+                                                            styles.clientLabel
+                                                        }
+                                                    >
+                                                        Contact client :
+                                                    </span>{" "}
+                                                    {client.firstname}{" "}
+                                                    {client.lastname}
+                                                </p>
+                                                <p>
+                                                    <span
+                                                        className={
+                                                            styles.clientLabel
+                                                        }
+                                                    >
+                                                        Téléphone :{" "}
+                                                    </span>
+                                                    <a
+                                                        href={`tel:${client.phoneNumber}`}
+                                                    >
+                                                        {client.phoneNumber}
+                                                    </a>
+                                                </p>
+                                                <p>
+                                                    {" "}
+                                                    <span
+                                                        className={
+                                                            styles.clientLabel
+                                                        }
+                                                    >
+                                                        Adresse :
+                                                    </span>{" "}
+                                                    {clientAddress}
+                                                </p>
+                                                <p>
+                                                    <a
+                                                        href={googleMapsUrl}
+                                                        target="_blank"
+                                                        rel="noreferrer"
+                                                        className={
+                                                            styles.openMapsLink
+                                                        }
+                                                    >
+                                                        <i className="fa-solid fa-location-dot"></i>
+                                                        Voir sur Google Maps
+                                                    </a>
+                                                </p>
+                                                <p>
+                                                    <span
+                                                        className={
+                                                            styles.clientLabel
+                                                        }
+                                                    >
+                                                        Mail :
+                                                    </span>{" "}
+                                                    <a
+                                                        href={`mailto:${client.email}`}
+                                                    >
+                                                        {client.email}
+                                                    </a>
+                                                </p>
+                                            </div>
+                                            {activeTab === "coordonnées" && (
+                                                <button
+                                                    className={
+                                                        styles.editButton
+                                                    }
+                                                    onClick={
+                                                        this.handleButtonClick
+                                                    }
+                                                >
+                                                    <i className="fa-solid fa-pen"></i>
+                                                    Modifier
+                                                </button>
+                                            )}
+                                        </>
+                                    ) : (
+                                        <>
+                                            <div
+                                                className={
+                                                    styles.interventionsTable
+                                                }
+                                            >
+                                                <div
+                                                    className={styles.divider}
+                                                ></div>
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Référence</th>
+                                                            <th>Type</th>
+                                                            <th>Titre</th>
+                                                            <th>Statut</th>
+                                                            <th>Date</th>
+                                                            <th>Employé</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {events &&
+                                                            events.map(
+                                                                (event) => (
+                                                                    <tr
+                                                                        key={
+                                                                            event.idEvent
+                                                                        }
+                                                                    >
+                                                                        <td>
+                                                                            {(() => {
+                                                                                if (
+                                                                                    event.type ===
+                                                                                    "Intervention"
+                                                                                ) {
+                                                                                    return "INT-";
+                                                                                } else {
+                                                                                    return "RDV-";
+                                                                                }
+                                                                            })()}
+                                                                            {
+                                                                                event.idEvent
+                                                                            }
+                                                                        </td>
+                                                                        <td>
+                                                                            {
+                                                                                event.type
+                                                                            }
+                                                                        </td>
+                                                                        <td>
+                                                                            {
+                                                                                event.title
+                                                                            }
+                                                                        </td>
+                                                                        <td>
+                                                                            {getStatusIndicator(
+                                                                                event.status
+                                                                            )}{" "}
+                                                                        </td>
+                                                                        <td>
+                                                                            {event.startingDate
+                                                                                ? new Date(
+                                                                                      event.startingDate
+                                                                                  ).toLocaleDateString()
+                                                                                : ""}
+                                                                        </td>
+                                                                        <td>
+                                                                            {`${event.employee.firstname} ${event.employee.lastname}`}
+                                                                        </td>
+                                                                    </tr>
+                                                                )
+                                                            )}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </>
+                                    )}{" "}
                                 </div>
                             ) : (
                                 <div className={styles.part}>
-                                    {/* code pour le particulier ici */}
                                     <div className={styles.profilInfo}>
                                         <h1 className={styles.pageTitle}>
                                             Détails client
@@ -395,64 +508,184 @@ class ClientDetailsPage extends Component {
                                                 C-{client.idClient}
                                             </p>
                                             <p>
-                                                {this.getCategoryIndicator(
+                                                {getCategoryIndicator(
                                                     client.category
                                                 )}
                                             </p>
                                         </div>
                                     </div>
                                     <div className={styles.separation}></div>
-                                    <h2>Coordonnées</h2>
-                                    <div className={styles.contactInfo}>
-                                        <p>
-                                            <span
-                                                className={styles.clientLabel}
-                                            >
-                                                Téléphone :
-                                            </span>{" "}
-                                            <a
-                                                href={`tel:${client.phoneNumber}`}
-                                            >
-                                                {client.phoneNumber}
-                                            </a>
-                                        </p>
-                                        <p>
-                                            <span
-                                                className={styles.clientLabel}
-                                            >
-                                                Adresse :
-                                            </span>{" "}
-                                            {clientAddress}
-                                        </p>
-                                        <p>
-                                            <a
-                                                href={googleMapsUrl}
-                                                target="_blank"
-                                                rel="noreferrer"
-                                                className={styles.openMapsLink}
-                                            >
-                                                <i className="fa-solid fa-location-dot"></i>
-                                                Voir sur Google Maps
-                                            </a>
-                                        </p>
-                                        <p>
-                                            <span
-                                                className={styles.clientLabel}
-                                            >
-                                                Mail :
-                                            </span>{" "}
-                                            <a href={`mailto:${client.email}`}>
-                                                {client.email}
-                                            </a>
-                                        </p>
+                                    <div className={styles.tabContainer}>
+                                        <button
+                                            className={`${styles.tabButton} ${
+                                                activeTab === "coordonnées"
+                                                    ? styles.activeTab
+                                                    : ""
+                                            }`}
+                                            onClick={() =>
+                                                this.handleTabClick(
+                                                    "coordonnées"
+                                                )
+                                            }
+                                        >
+                                            Coordonnées
+                                        </button>
+                                        <button
+                                            className={`${styles.tabButton} ${
+                                                activeTab === "interventions"
+                                                    ? styles.activeTab
+                                                    : ""
+                                            }`}
+                                            onClick={() =>
+                                                this.handleTabClick(
+                                                    "interventions"
+                                                )
+                                            }
+                                        >
+                                            Interventions
+                                        </button>
                                     </div>
-                                    <button
-                                        className={styles.editButton}
-                                        onClick={this.handleButtonClick}
-                                    >
-                                        <i className="fa-solid fa-pen"></i>
-                                        Modifier
-                                    </button>
+                                    {activeTab === "coordonnées" ? (
+                                        <>
+                                            <div className={styles.contactInfo}>
+                                                <p>
+                                                    <span
+                                                        className={
+                                                            styles.clientLabel
+                                                        }
+                                                    >
+                                                        Téléphone :
+                                                    </span>{" "}
+                                                    <a
+                                                        href={`tel:${client.phoneNumber}`}
+                                                    >
+                                                        {client.phoneNumber}
+                                                    </a>
+                                                </p>
+                                                <p>
+                                                    <span
+                                                        className={
+                                                            styles.clientLabel
+                                                        }
+                                                    >
+                                                        Adresse :
+                                                    </span>{" "}
+                                                    {clientAddress}
+                                                </p>
+                                                <p>
+                                                    <a
+                                                        href={googleMapsUrl}
+                                                        target="_blank"
+                                                        rel="noreferrer"
+                                                        className={
+                                                            styles.openMapsLink
+                                                        }
+                                                    >
+                                                        <i className="fa-solid fa-location-dot"></i>
+                                                        Voir sur Google Maps
+                                                    </a>
+                                                </p>
+                                                <p>
+                                                    <span
+                                                        className={
+                                                            styles.clientLabel
+                                                        }
+                                                    >
+                                                        Mail :
+                                                    </span>{" "}
+                                                    <a
+                                                        href={`mailto:${client.email}`}
+                                                    >
+                                                        {client.email}
+                                                    </a>
+                                                </p>
+                                            </div>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <div
+                                                className={
+                                                    styles.interventionsTable
+                                                }
+                                            >
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Référence</th>
+                                                            <th>Type</th>
+                                                            <th>Titre</th>
+                                                            <th>Statut</th>
+                                                            <th>Date</th>
+                                                            <th>Employé</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {events &&
+                                                            events.map(
+                                                                (event) => (
+                                                                    <tr
+                                                                        key={
+                                                                            event.idEvent
+                                                                        }
+                                                                    >
+                                                                        <td>
+                                                                            {(() => {
+                                                                                if (
+                                                                                    event.type ===
+                                                                                    "Intervention"
+                                                                                ) {
+                                                                                    return "INT-";
+                                                                                } else {
+                                                                                    return "RDV-";
+                                                                                }
+                                                                            })()}
+                                                                            {
+                                                                                event.idEvent
+                                                                            }
+                                                                        </td>
+                                                                        <td>
+                                                                            {
+                                                                                event.type
+                                                                            }
+                                                                        </td>
+                                                                        <td>
+                                                                            {
+                                                                                event.title
+                                                                            }
+                                                                        </td>
+                                                                        <td>
+                                                                            {getStatusIndicator(
+                                                                                event.status
+                                                                            )}{" "}
+                                                                            {/* Utilisation de getStatusIndicator ici */}
+                                                                        </td>
+                                                                        <td>
+                                                                            {event.startingDate
+                                                                                ? new Date(
+                                                                                      event.startingDate
+                                                                                  ).toLocaleDateString()
+                                                                                : ""}
+                                                                        </td>
+                                                                        <td>
+                                                                            {`${event.employee.firstname} ${event.employee.lastname}`}
+                                                                        </td>
+                                                                    </tr>
+                                                                )
+                                                            )}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </>
+                                    )}
+                                    {activeTab === "coordonnées" && (
+                                        <button
+                                            className={styles.editButton}
+                                            onClick={this.handleButtonClick}
+                                        >
+                                            <i className="fa-solid fa-pen"></i>
+                                            Modifier
+                                        </button>
+                                    )}
                                 </div>
                             )}
                         </div>

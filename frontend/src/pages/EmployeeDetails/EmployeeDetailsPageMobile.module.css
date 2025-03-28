@@ -35,7 +35,7 @@
 }
 
 .contactCard {
-    margin-bottom: 4em;
+    margin-bottom: 0.5em;
 }
 
 .profilInitial {
@@ -50,4 +50,25 @@
     border-radius: 100%;
     width: 2.1em;
     height: 2.1em;
+}
+
+.logoutButton {
+    padding: 10px 20px;
+    background-color: #c93c2c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    font-size: 1.1em;
+    font-weight: 500;
+    width: 50vw;
+    margin: 0.7em auto;
+}
+
+.logoutButton:hover {
+    background-color: #c93c2c;
 }

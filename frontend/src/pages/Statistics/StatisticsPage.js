@@ -30,7 +30,7 @@ class StatisticsPage extends Component {
     }
 
     countEventsByTypeAndMonth(type) {
-        const currentMonth = new Date().getMonth() + 1; //en js les mois commencent à 0 jusqu'à 11
+        const currentMonth = new Date().getMonth() + 1;
         return (
             this.state.events?.events.filter(
                 (event) =>

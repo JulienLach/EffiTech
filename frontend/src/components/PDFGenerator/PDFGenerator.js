@@ -9,11 +9,15 @@ import {
     Image,
 } from "@react-pdf/renderer";
 import { Font } from "@react-pdf/renderer";
-import UbuntuFont from "./fonts/Ubuntu-Regular.ttf";
+import UbuntuRegular from "./fonts/Ubuntu-Regular.ttf";
+import UbuntuBold from "./fonts/Ubuntu-Bold.ttf";
 
 Font.register({
     family: "Ubuntu",
-    src: UbuntuFont,
+    fonts: [
+        { src: UbuntuRegular, fontWeight: "normal" },
+        { src: UbuntuBold, fontWeight: "bold" },
+    ],
 });
 
 const styles = StyleSheet.create({
@@ -40,6 +44,7 @@ const styles = StyleSheet.create({
         fontSize: 15,
         textAlign: "center",
         marginTop: 20,
+        fontWeight: "bold",
     },
     interventionIdTitle: {
         fontSize: 14,

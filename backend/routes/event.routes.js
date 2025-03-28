@@ -13,6 +13,8 @@ router.put("/:idEvent", eventServices.updateEvent);
 
 router.delete("/:idEvent", eventServices.deleteEvent);
 
+router.get("/client/:idClient", eventServices.getEventsByClientId);
+
 // Méthodes spécifiques aux sous classes
 router.post(
     "/:idEvent/submitInterventionForm",

@@ -28,6 +28,7 @@ import NotificationsPage from "./pages/Notifications/NotificationsPage";
 import CalendarMobilePage from "./pages/CalendarMobile/CalendarMobilePage";
 import InvoicesPage from "./pages/Invoices/InvoicesPage";
 import StatisticsPage from "./pages/Statistics/StatisticsPage";
+import ParametersPage from "./pages/Parameters/ParametersPage";
 
 const App = () => {
     return (
@@ -71,6 +72,7 @@ const App = () => {
                 />
                 <Route path="/invoices" element={<InvoicesPage />} />
                 <Route path="/statistics" element={<StatisticsPage />} />
+                <Route path="/parameters" element={<ParametersPage />} />
             </Routes>
         </Router>
     );

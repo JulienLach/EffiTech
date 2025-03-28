@@ -152,9 +152,7 @@ class ClientForm extends Component {
                     onSubmit={this.handleSubmit}
                 >
                     <div className={styles.selectedCategory}>
-                        <label className={styles.labelRadio}>
-                            Type de client :
-                        </label>
+                        <label className={styles.labelRadio}>Type :</label>
                         <div>
                             <label className={styles.radioParticulier}>
                                 <input
@@ -186,7 +184,8 @@ class ClientForm extends Component {
                     {category === "Professionnel" && (
                         <div className={styles.labelInput}>
                             <label htmlFor="company">
-                                Nom de l'entreprise :{" "}
+                                Nom de l'entreprise{" "}
+                                <span className={styles.required}>*</span> :{" "}
                             </label>
                             <input
                                 type="text"
@@ -207,7 +206,9 @@ class ClientForm extends Component {
                         </div>
                     )}
                     <div className={styles.labelInput}>
-                        <label htmlFor="lastname">Nom :</label>
+                        <label htmlFor="lastname">
+                            Nom <span className={styles.required}>*</span> :
+                        </label>
                         <input type="text" id="lastname" name="lastname" />
                         {errors.lastname && (
                             <span className={styles.error}>
@@ -216,7 +217,9 @@ class ClientForm extends Component {
                         )}
                     </div>
                     <div className={styles.labelInput}>
-                        <label htmlFor="firstname">Prénom :</label>
+                        <label htmlFor="firstname">
+                            Prénom <span className={styles.required}>*</span> :
+                        </label>
                         <input type="text" id="firstname" name="firstname" />
                         {errors.firstname && (
                             <span className={styles.error}>
@@ -225,7 +228,9 @@ class ClientForm extends Component {
                         )}
                     </div>
                     <div className={styles.labelInput}>
-                        <label htmlFor="address">Adresse :</label>
+                        <label htmlFor="address">
+                            Adresse <span className={styles.required}>*</span> :
+                        </label>
                         <input type="text" id="address" name="address" />
                         {errors.address && (
                             <span className={styles.error}>
@@ -234,7 +239,10 @@ class ClientForm extends Component {
                         )}
                     </div>
                     <div className={styles.labelInput}>
-                        <label htmlFor="zipcode">Code postal :</label>
+                        <label htmlFor="zipcode">
+                            Code postal{" "}
+                            <span className={styles.required}>*</span> :
+                        </label>
                         <input type="text" id="zipcode" name="zipcode" />
                         {errors.zipcode && (
                             <span className={styles.error}>
@@ -243,21 +251,28 @@ class ClientForm extends Component {
                         )}
                     </div>
                     <div className={styles.labelInput}>
-                        <label htmlFor="city">Ville :</label>
+                        <label htmlFor="city">
+                            Ville <span className={styles.required}>*</span> :
+                        </label>
                         <input type="text" id="city" name="city" />
                         {errors.city && (
                             <span className={styles.error}>{errors.city}</span>
                         )}
                     </div>
                     <div className={styles.labelInput}>
-                        <label htmlFor="mail">Email :</label>
+                        <label htmlFor="mail">
+                            Email <span className={styles.required}>*</span> :
+                        </label>
                         <input type="email" id="mail" name="mail" />
                         {errors.email && (
                             <span className={styles.error}>{errors.email}</span>
                         )}
                     </div>
                     <div className={styles.labelInput}>
-                        <label htmlFor="phone">Téléphone :</label>
+                        <label htmlFor="phone">
+                            Téléphone <span className={styles.required}>*</span>{" "}
+                            :
+                        </label>
                         <input type="text" id="phone" name="phone" />
                         {errors.phone && (
                             <span className={styles.error}>{errors.phone}</span>

@@ -204,6 +204,15 @@ class ReportPage extends Component {
                                     Envoyer par email
                                 </button>
                             </div>
+                            <div className={stylesMobile.pdfMobile}>
+                                {reportDetails && companyData && (
+                                    <PDFGenerator
+                                        report={reportDetails}
+                                        reportData={reportData}
+                                        companyData={companyData}
+                                    />
+                                )}
+                            </div>
                             {showAlert && (
                                 <div className={stylesMobile.alert}>
                                     Email envoyé{" "}
@@ -243,26 +252,30 @@ class ReportPage extends Component {
                                 <div className={styles.infoTitle}>
                                     <h3>Client :</h3>
                                     <p>
-                                        Nom : {event.client.firstname}{" "}
+                                        <strong>Nom : </strong>
+                                        {event.client.firstname}{" "}
                                         {event.client.lastname}
                                     </p>
                                     <p>
-                                        Téléphone : {event.client.phoneNumber}
+                                        <strong>Téléphone : </strong>{" "}
+                                        {event.client.phoneNumber}
                                     </p>
                                     <p>
-                                        Adresse : {event.client.address.address}
-                                        , {event.client.address.zipcode},{" "}
+                                        <strong>Adresse :</strong>{" "}
+                                        {event.client.address.address},{" "}
+                                        {event.client.address.zipcode},{" "}
                                         {event.client.address.city}
                                     </p>
                                 </div>
                                 <div className={styles.infoTitle}>
                                     <h3>Technicien :</h3>
                                     <p>
-                                        Nom : {event.employee.firstname}{" "}
+                                        <strong>Nom : </strong>
+                                        {event.employee.firstname}{" "}
                                         {event.employee.lastname}
                                     </p>
                                     <p>
-                                        Intervenu le :{" "}
+                                        <strong>Intervenu le : </strong>{" "}
                                         {new Date(
                                             event.startingDate
                                         ).toLocaleDateString()}{" "}
@@ -277,7 +290,7 @@ class ReportPage extends Component {
                                     </h3>
                                     <div className={styles.documentLink}>
                                         <a href="#">
-                                            <i class="fa-solid fa-file-pdf"></i>{" "}
+                                            <i className="fa-solid fa-file-pdf"></i>{" "}
                                             INT-{event.idEvent}-
                                             {event.client.firstname}-
                                             {event.client.lastname}-

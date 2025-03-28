@@ -15,20 +15,22 @@
     flex-direction: column;
     gap: 0.5em;
     background: white;
-    padding: 1.5em;
+    padding: 1.2em;
     border-radius: 0.5em;
     max-width: 400px;
     width: 90%;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    border: 2px solid #f0f0f0;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 1);
+    border: 1px solid #cbcbcb;
 }
 
 .closeButton {
     color: #fff;
     background: #c93c2c;
     border: none;
-    padding: 0.25em 0.25em;
-    border-radius: 0.4em;
+    display: flex;
+    position: fixed;
+    padding: 0.3em 0.2em;
+    border-radius: 0.3em;
     font-size: 1em;
     cursor: pointer;
     align-self: flex-end;
@@ -40,4 +42,8 @@
 
 .event-hover:hover {
     transform: scale(1.01);
+}
+
+.modalLabels {
+    font-weight: 500;
 }

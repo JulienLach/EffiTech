@@ -89,12 +89,11 @@
 }
 
 .buttonPosition button {
-    /* margin: 0; */
-    padding: 0.625em;
+    padding: 0.55em;
     border: none;
     border-radius: 0.4em;
     color: white;
-    font-size: 1.125em;
+    font-size: 1em;
     font-weight: 500;
     cursor: pointer;
 }
@@ -126,4 +125,8 @@
     width: 18.3vw;
     font-weight: 400;
     font-size: 0.95em;
+}
+
+.required {
+    color: rgb(226, 12, 12);
 }

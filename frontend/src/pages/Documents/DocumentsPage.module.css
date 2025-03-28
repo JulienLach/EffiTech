@@ -1,7 +1,6 @@
 .container {
     display: flex;
     flex-direction: column;
-    width: 80%;
     margin: 2em 1.25em 0 15.6em;
 }
 
@@ -24,7 +23,7 @@
 
 .addClient {
     background-color: #c93c2c;
-    padding: 0.6em 0.94em;
+    padding: 0.5em 0.75em;
     border: none;
     border-radius: 0.4em;
     color: white;

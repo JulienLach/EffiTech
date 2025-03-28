@@ -18,8 +18,8 @@
     padding: 1.2em;
     width: 100%;
     border-radius: 0.6em;
-    margin: 1em 0 0.5em 0;
-    box-shadow: 0 0.2em 0.2em rgba(0, 0, 0, 0.1);
+    margin: 0.9em 0 0.5em 0;
+    box-shadow: 0 0.2em 0.2em rgba(0, 0, 0, 0.2);
     border-left: 10px solid #87c2f9;
     border-top: 1px solid #e7e7e7;
 }
@@ -31,8 +31,8 @@
     padding: 1.2em;
     width: 100%;
     border-radius: 0.6em;
-    margin: 1em 0 0.5em 0;
-    box-shadow: 0 0.2em 0.2em rgba(0, 0, 0, 0.1);
+    margin: 0.9em 0 0.5em 0;
+    box-shadow: 0 0.2em 0.2em rgba(0, 0, 0, 0.2);
     border-left: 10px solid #fccd86;
     border-top: 1px solid #e7e7e7;
 }
@@ -40,6 +40,7 @@
 .clientCardParticulier i,
 .clientCardProfessionnel i {
     font-size: 1.8em;
+    color: #474747;
 }
 
 .rightPart {
@@ -86,8 +87,6 @@
     text-align: center;
 }
 
-/* Style barre de recherche et filtre  */
-/* style for each filter button */
 .typeFilter {
     font-size: 1em;
     font-weight: 500;
@@ -99,64 +98,47 @@
     padding: 0 1.25em;
 }
 
-/* style when you hover over the filter button */
-.typeFilter:hover {
-    color: white;
-    cursor: pointer;
-    background-color: #c93c2c;
-}
-
 .typeFilter i {
     margin-right: 0.625em;
     color: #000;
 }
 
-.typeFilter i:hover {
-    color: white;
-}
-
-/* Search input container style */
 .searchInput {
     position: relative;
     display: inline-block;
-    margin-right: 0.3em;
+    margin-right: 0.6em;
+    top: -0.1em;
 }
 
-/* icon position inside the input */
 .searchInput i {
     position: absolute;
     top: 50%;
-    left: 0.625em;
+    left: 0.6em;
     transform: translateY(-50%);
     color: #999;
     pointer-events: none;
 }
 
-/* Search input style */
 .searchInput input {
-    padding: 0.625em 0.625em 0.625em 4em;
-    border: 0.06em solid #c0c0c0;
+    padding: 0.6em 0.4em 0.6em 2.6em;
+    border: 0.07em solid #c0c0c0;
     border-radius: 0.4em;
+    font-size: 0.8em;
+    height: 2.6em;
 }
 
-/* style de la modal */
 .modalOverlay {
     position: fixed;
     top: 0;
     right: 0;
-    width: 30%; /* Ajustez la largeur selon vos besoins */
+    width: 30%;
     height: 100%;
     border-top-left-radius: 1.25em;
-    background-color: rgba(
-        0,
-        0,
-        0,
-        0.5
-    ); /* Optionnel : pour un fond semi-transparent */
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
-    align-items: flex-start; /* Aligne le contenu en haut */
-    justify-content: flex-end; /* Aligne le contenu à droite */
-    z-index: 1000; /* Assurez-vous que la modale est au-dessus des autres éléments */
+    align-items: flex-start;
+    justify-content: flex-end;
+    z-index: 1000;
 }
 
 .modalContent {
@@ -200,7 +182,6 @@
     margin-bottom: 0.625em;
 }
 
-/* CSS for input comportement */
 .labelInput input {
     margin: 0 1em;
     padding: 0.6em;
@@ -208,13 +189,11 @@
     border-radius: 0.5em;
 }
 
-/* CSS for the label comportement */
 .labelInput label {
     margin: 0 1em;
     padding: 0.15em;
 }
 
-/* CSS for button positioning */
 .buttonPosition {
     display: flex;
     justify-content: start;
@@ -222,9 +201,7 @@
     margin-left: 1em;
 }
 
-/* Common styles for buttons */
 .buttonPosition button {
-    /* margin: 0; */
     padding: 0.625em;
     border: none;
     border-radius: 0.4em;
@@ -234,47 +211,40 @@
     cursor: pointer;
 }
 
-/* Specific styles for cancel button */
 .cancelButton {
     background-color: #ababab;
 }
 
-/* Specific styles for submit button */
 .submitButton {
     background-color: #c93c2c;
 }
 
 .modalFilter {
-    padding: 1em 2em;
+    padding: 1em 1.2em;
     text-align: start;
     border: 0.06em solid #c0c0c0;
-    width: 92%;
+    width: 85%;
     margin: 0.3em auto;
     border-radius: 0.4em;
 }
 
 .modalFilter input {
-    margin: 0.325em;
-    padding: 0.325em;
+    margin: 0.35em;
+    padding: 0.35em 0.5em;
     border: none;
     border-radius: 0.4em;
-    font-size: 1em;
+    font-size: 1.1em;
     font-weight: 500;
     cursor: pointer;
 }
 
 .modalFilter button {
-    margin: 0.3em;
+    margin: 0.45em 0 0 0;
     padding: 0.4em 0.6em;
     border: none;
-    border-radius: 0.4em;
+    border-radius: 0.35em;
     font-size: 1em;
     cursor: pointer;
-}
-
-.modalFilter button:hover {
-    background-color: #c93c2c;
-    color: white;
 }
 
 .pagination {
@@ -294,4 +264,32 @@
 .pagination button:hover {
     background-color: #c93c2c;
     color: white;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    padding: 1em;
+    margin-bottom: 4em;
+}
+
+.pagination button {
+    background-color: #c93c2c;
+    color: white;
+    border: none;
+    border-radius: 0.3em;
+    padding: 0.5em;
+    cursor: pointer;
+}
+
+.pagination button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.pagination span {
+    font-size: 1em;
+    font-weight: 500;
 }

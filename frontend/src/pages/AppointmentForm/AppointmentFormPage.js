@@ -204,7 +204,6 @@ class AppointmentFormPage extends Component {
             }
 
             if (updatedEvent) {
-                console.log("Rendez-vous terminé avec succès");
                 window.location.href = "/calendar";
             }
         });

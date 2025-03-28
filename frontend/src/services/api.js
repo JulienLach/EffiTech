@@ -1,5 +1,5 @@
-const API_URL = "http://localhost:3001";
-const LOGIN_URL = "http://localhost:3000/login";
+const API_URL = `http://${window.location.hostname}:3001`;
+const LOGIN_URL = `${window.location.origin}/login`;
 
 /**
  * @api {get} /events Get all events
@@ -307,7 +307,7 @@ function updateEvent(eventData, callback) {
  * @apiParam {String} phoneNumber The phone number of the employee.
  * @apiParam {String} email The email of the employee.
  * @apiParam {Boolean} [isAdmin=false] Indicates if the employee is an administrator.
- * @apiParam {String} [password=""] The password of the employee.
+ * @apiParam {String} password The password of the employee.
  * @apiParam {String} speciality The speciality of the employee.
  * @apiSuccess {Object} employee The created employee object.
  * @apiSuccess {Number} employee.idEmployee Employee ID.
@@ -846,6 +846,23 @@ function getAllDocuments(callback) {
     xhr.send();
 }
 
+/**
+ * @api {post} /documents Import a new document
+ * @apiName ImportDocument
+ * @apiGroup Documents
+ * @apiVersion 1.0.0
+ * @apiParam {String} title Document title.
+ * @apiParam {String} brand Document brand.
+ * @apiParam {String} model Document model.
+ * @apiParam {File} file The document file to upload.
+ * @apiSuccess {Object} document The imported document.
+ * @apiSuccess {Number} document.idDocument Document ID.
+ * @apiSuccess {String} document.title Document title.
+ * @apiSuccess {String} document.brand Document brand.
+ * @apiSuccess {String} document.model Document model.
+ * @apiSuccess {String} document.file URL to download the document.
+ * @apiError {String} error Error message.
+ */
 function importDocument(formData, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", `${API_URL}/documents`);
@@ -862,6 +879,20 @@ function importDocument(formData, callback) {
     xhr.send(formData);
 }
 
+/**
+ * @api {get} /documents/:idDocument Get a document by ID
+ * @apiName GetDocumentById
+ * @apiGroup Documents
+ * @apiVersion 1.0.0
+ * @apiParam {Number} idDocument Document ID (in URL path).
+ * @apiSuccess {Object} document The requested document.
+ * @apiSuccess {Number} document.idDocument Document ID.
+ * @apiSuccess {String} document.title Document title.
+ * @apiSuccess {String} document.brand Document brand.
+ * @apiSuccess {String} document.model Document model.
+ * @apiSuccess {String} document.file Document file content (Base64 encoded).
+ * @apiError {String} error Error message.
+ */
 function getDocumentById(idDocument, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", `${API_URL}/documents/${idDocument}`);
@@ -877,6 +908,24 @@ function getDocumentById(idDocument, callback) {
     xhr.send();
 }
 
+/**
+ * @api {get} /notifications Get all notifications
+ * @apiName GetAllNotifications
+ * @apiGroup Notifications
+ * @apiVersion 1.0.0
+ * @apiSuccess {Object[]} notifications List of notifications.
+ * @apiSuccess {Number} notifications.idNotification Notification ID.
+ * @apiSuccess {String} notifications.action Notification action.
+ * @apiSuccess {String} notifications.type Notification type.
+ * @apiSuccess {String} notifications.title Notification title.
+ * @apiSuccess {String} notifications.creationDate Creation date (ISO format).
+ * @apiSuccess {String} notifications.creationHour Creation hour.
+ * @apiSuccess {Number} notifications.idEmployee Employee ID linked to the notification.
+ * @apiSuccess {String} notifications.firstName Employee's first name.
+ * @apiSuccess {String} notifications.lastName Employee's last name.
+ * @apiSuccess {Number} [notifications.idEvent] Event ID (optional).
+ * @apiError {String} error Error message.
+ */
 function getAllNotifications(callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", `${API_URL}/notifications`);
@@ -895,6 +944,27 @@ function getAllNotifications(callback) {
     xhr.send();
 }
 
+/**
+ * @api {post} /notifications Create a new notification
+ * @apiName CreateNotification
+ * @apiGroup Notifications
+ * @apiVersion 1.0.0
+ * @apiParam {String} action Notification action.
+ * @apiParam {String} type Notification type.
+ * @apiParam {String} title Notification title.
+ * @apiParam {String} creationDate Creation date (ISO format).
+ * @apiParam {String} creationHour Creation hour.
+ * @apiParam {Number} idEmployee Employee ID linked to the notification.
+ * @apiSuccess {Object} notification The created notification.
+ * @apiSuccess {Number} notification.idNotification Notification ID.
+ * @apiSuccess {String} notification.action Notification action.
+ * @apiSuccess {String} notification.type Notification type.
+ * @apiSuccess {String} notification.title Notification title.
+ * @apiSuccess {String} notification.creationDate Creation date (ISO format).
+ * @apiSuccess {String} notification.creationHour Creation hour.
+ * @apiSuccess {Number} notification.idEmployee Employee ID.
+ * @apiError {String} error Error message.
+ */
 function createNotification(notificationData, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", `${API_URL}/notifications`);
@@ -915,6 +985,16 @@ function createNotification(notificationData, callback) {
     xhr.send(JSON.stringify(notificationData));
 }
 
+/**
+ * @api {get} /statistics Get all event statistics
+ * @apiName GetAllEventStatistics
+ * @apiGroup Statistics
+ * @apiVersion 1.0.0
+ * @apiSuccess {Object} eventStatistics Event statistics.
+ * @apiSuccess {Number} eventStatistics.totalEvents Total number of events.
+ * @apiSuccess {Object[]} eventStatistics.events List of events.
+ * @apiError {String} error Error message.
+ */
 function getAllEventStatistics(callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", `${API_URL}/statistics`);
@@ -934,6 +1014,15 @@ function getAllEventStatistics(callback) {
     xhr.send();
 }
 
+/**
+ * @api {get} /documents/download/:idDocument Download a document by ID
+ * @apiName DownloadDocument
+ * @apiGroup Documents
+ * @apiVersion 1.0.0
+ * @apiParam {Number} idDocument Document ID (in URL path).
+ * @apiSuccess {Blob} file The document file as a binary blob.
+ * @apiError {String} error Error message.
+ */
 function downloadDocument(idDocument, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", `${API_URL}/documents/download/${idDocument}`);
@@ -953,6 +1042,22 @@ function downloadDocument(idDocument, callback) {
     xhr.send();
 }
 
+/**
+ * @api {get} /invoices Get all invoices
+ * @apiName GetAllInvoices
+ * @apiGroup Invoices
+ * @apiVersion 1.0.0
+ * @apiSuccess {Object[]} invoices List of invoices.
+ * @apiSuccess {Number} invoices.idInvoice Invoice ID.
+ * @apiSuccess {Number} invoices.idClient Client ID linked to the invoice.
+ * @apiSuccess {String} invoices.clientFirstname Client's first name.
+ * @apiSuccess {String} invoices.clientLastname Client's last name.
+ * @apiSuccess {Number} invoices.amountIncludingTax Amount including tax.
+ * @apiSuccess {Number} invoices.amountWithoutTax Amount without tax.
+ * @apiSuccess {String} invoices.invoiceDate Invoice date (ISO format).
+ * @apiSuccess {String} invoices.file Invoice file content (Base64 encoded).
+ * @apiError {String} error Error message.
+ */
 function getAllInvoices(callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", `${API_URL}/invoices`);
@@ -971,6 +1076,25 @@ function getAllInvoices(callback) {
     xhr.send();
 }
 
+/**
+ * @api {post} /invoices Import a new invoice
+ * @apiName ImportInvoice
+ * @apiGroup Invoices
+ * @apiVersion 1.0.0
+ * @apiParam {Number} idClient Client ID linked to the invoice.
+ * @apiParam {Number} amountIncludingTax Amount including tax.
+ * @apiParam {Number} amountWithoutTax Amount without tax.
+ * @apiParam {String} invoiceDate Invoice date (ISO format).
+ * @apiParam {String} file Invoice file content (e.g., Base64 encoded or binary).
+ * @apiSuccess {Object} invoice The imported invoice.
+ * @apiSuccess {Number} invoice.idInvoice Invoice ID.
+ * @apiSuccess {Number} invoice.idClient Client ID.
+ * @apiSuccess {Number} invoice.amountIncludingTax Amount including tax.
+ * @apiSuccess {Number} invoice.amountWithoutTax Amount without tax.
+ * @apiSuccess {String} invoice.invoiceDate Invoice date (ISO format).
+ * @apiSuccess {String} invoice.file Invoice file content.
+ * @apiError {String} error Error message.
+ */
 function importInvoice(formData, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", `${API_URL}/invoices`);
@@ -987,6 +1111,22 @@ function importInvoice(formData, callback) {
     xhr.send(formData);
 }
 
+/**
+ * @api {post} /email Send a report via email
+ * @apiName SendReport
+ * @apiGroup Email
+ * @apiVersion 1.0.0
+ * @apiParam {String} to Recipient email address.
+ * @apiParam {String} subject Email subject.
+ * @apiParam {String} text Email body text.
+ * @apiParam {Object[]} [attachments] Array of attachments (optional).
+ * @apiParam {String} attachments.filename Attachment file name.
+ * @apiParam {String} attachments.content Attachment content (Base64 encoded).
+ * @apiParam {String} attachments.contentType Attachment MIME type (e.g., "application/pdf").
+ * @apiSuccess {Object} response Email sending confirmation.
+ * @apiSuccess {String} response.message Confirmation message (e.g., "Mail bien envoyé").
+ * @apiError {String} error Error message.
+ */
 function sendReport(emailData, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", `${API_URL}/email`);
@@ -997,13 +1137,29 @@ function sendReport(emailData, callback) {
             console.log(JSON.parse(xhr.responseText));
             callback(null, JSON.parse(xhr.responseText));
         } else {
-            console.error("Erreur d'envois du mail", xhr.statusText);
+            console.error("Erreur d'envoi du mail", xhr.statusText);
             callback(new Error(xhr.statusText), null);
         }
     };
     xhr.send(JSON.stringify(emailData));
 }
 
+/**
+ * @api {post} /email Send an email
+ * @apiName SendEmail
+ * @apiGroup Email
+ * @apiVersion 1.0.0
+ * @apiParam {String} to Recipient email address.
+ * @apiParam {String} subject Email subject.
+ * @apiParam {String} text Email body text.
+ * @apiParam {Object[]} [attachments] Array of attachments (optional).
+ * @apiParam {String} attachments.filename Attachment file name.
+ * @apiParam {String} attachments.content Attachment content (Base64 encoded).
+ * @apiParam {String} attachments.contentType Attachment MIME type (e.g., "application/pdf").
+ * @apiSuccess {Object} response Email sending confirmation.
+ * @apiSuccess {String} response.message Confirmation message (e.g., "Mail bien envoyé").
+ * @apiError {String} error Error message.
+ */
 function sendEmail(emailData, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", `${API_URL}/email`);
@@ -1014,13 +1170,25 @@ function sendEmail(emailData, callback) {
             console.log(JSON.parse(xhr.responseText));
             callback(null, JSON.parse(xhr.responseText));
         } else {
-            console.error("Erreur d'envois du mail", xhr.statusText);
+            console.error("Erreur d'envoi du mail", xhr.statusText);
             callback(new Error(xhr.statusText), null);
         }
     };
     xhr.send(JSON.stringify(emailData));
 }
 
+/**
+ * @api {post} /email/employeeCredentials Send employee credentials via email
+ * @apiName SendEmployeeCredentials
+ * @apiGroup Email
+ * @apiVersion 1.0.0
+ * @apiParam {String} to Recipient email address.
+ * @apiParam {String} subject Email subject.
+ * @apiParam {String} text Email body text.
+ * @apiSuccess {Object} response Email sending confirmation.
+ * @apiSuccess {String} response.message Confirmation message (e.g., "Mail bien envoyé").
+ * @apiError {String} error Error message.
+ */
 function sendEmployeeCredentials(emailData, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", `${API_URL}/email/employeeCredentials`);
@@ -1031,11 +1199,54 @@ function sendEmployeeCredentials(emailData, callback) {
             console.log(JSON.parse(xhr.responseText));
             callback(null, JSON.parse(xhr.responseText));
         } else {
-            console.error("Erreur d'envois du mail", xhr.statusText);
+            console.error("Erreur d'envoi du mail", xhr.statusText);
             callback(new Error(xhr.statusText), null);
         }
     };
     xhr.send(JSON.stringify(emailData));
+}
+
+/**
+ * @api {get} /events/client/:idClient Get events by client ID
+ * @apiName GetEventsByClientId
+ * @apiGroup Events
+ * @apiVersion 1.0.0
+ * @apiParam {Number} idClient Client ID (in URL path).
+ * @apiSuccess {Object[]} events List of events for the client.
+ * @apiSuccess {Number} events.idEvent Event ID.
+ * @apiSuccess {String} events.title Event title.
+ * @apiSuccess {String} events.description Event description.
+ * @apiSuccess {Number} events.status Event status.
+ * @apiSuccess {Boolean} events.isPlanned Whether the event is planned.
+ * @apiSuccess {String} events.type Event type.
+ * @apiSuccess {Number} events.idClient Client ID.
+ * @apiSuccess {Number} events.idAddress Address ID.
+ * @apiSuccess {String} events.startingDate Starting date (ISO format).
+ * @apiSuccess {String} events.startingHour Starting hour.
+ * @apiSuccess {String} events.endingHour Ending hour.
+ * @apiSuccess {Object} events.idEmployee Employee details (optional).
+ * @apiSuccess {Number} events.idEmployee.idEmployee Employee ID.
+ * @apiSuccess {String} events.idEmployee.firstname Employee first name.
+ * @apiSuccess {String} events.idEmployee.lastname Employee last name.
+ * @apiSuccess {String} [events.workToDo] Work to do (optional).
+ * @apiError {String} error Error message.
+ */
+function getEventsByClientId(idClient, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", `${API_URL}/events/client/${idClient}`);
+    xhr.withCredentials = true;
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            callback(null, JSON.parse(xhr.responseText));
+        } else {
+            console.error(
+                "Erreur de récupération des événements",
+                xhr.statusText
+            );
+            callback(new Error(xhr.statusText), null);
+        }
+    };
+    xhr.send();
 }
 
 export {
@@ -1070,4 +1281,5 @@ export {
     sendReport,
     sendEmail,
     sendEmployeeCredentials,
+    getEventsByClientId,
 };

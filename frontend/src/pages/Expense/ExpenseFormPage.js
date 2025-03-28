@@ -16,26 +16,26 @@ class ExpenseFormPage extends Component {
                 <TemplateGlobalMobile />
                 <div className={stylesMobile.container}>
                     <div className={stylesMobile.inputDisplay}>
-                        <label>Matériel</label>
+                        <h3>Matériel :</h3>
                         <input type="text" />
                     </div>
                     <div className={stylesMobile.inputDisplay}>
-                        <label>Prix TTC</label>
-                        <input type="text" />
+                        <h3>Prix TTC :</h3>
+                        <input type="number" />
                     </div>
                     <div className={stylesMobile.inputDisplay}>
-                        <label>Justificatif</label>
+                        <h3>Justificatif :</h3>
                         <input
                             className={stylesMobile.download}
                             type="file"
                         ></input>
                     </div>
                     <div className={stylesMobile.inputDisplay}>
-                        <label>Numéro d'intervention</label>
+                        <h3>Numéro d'intervention :</h3>
                         <input type="text" />
                     </div>
                     <div className={stylesMobile.textArea}>
-                        <label>Commentaire</label>
+                        <h3>Commentaire :</h3>
                         <textarea rows="5" name="breakdown"></textarea>
                     </div>
                     <div className={stylesMobile.modalFooter}>
@@ -46,13 +46,15 @@ class ExpenseFormPage extends Component {
                                 (window.location.href = "/calendar#")
                             }
                         >
+                            <i className="fas fa-times"></i>
                             Annuler
                         </button>
                         <button
                             className={stylesMobile.validateButton}
                             type="submit"
                         >
-                            Valider ma dépense
+                            <i className="fas fa-check"></i>
+                            Enregistrer
                         </button>
                     </div>
                 </div>

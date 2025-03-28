@@ -90,7 +90,7 @@
 }
 
 .modalFooter button {
-    padding: 0.4em 1em;
+    padding: 0.55em 1em;
     border: none;
     color: #fff;
     border-radius: 0.4em;
@@ -123,4 +123,10 @@
     padding: 0.5em;
     border: 0.06em solid #cccccc;
     border-radius: 0.4em;
+}
+
+.error {
+    color: red;
+    font-size: 0.8em;
+    margin-top: 0.2em;
 }

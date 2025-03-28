@@ -39,22 +39,33 @@
     width: auto;
     color: white;
     border: none;
-    border-radius: 0.5em;
-    padding: 0.5em;
-    font-size: 1.2em;
+    border-radius: 0.35em;
+    padding: 0.5em 1.1em;
+    font-size: 1.1em;
+    font-weight: 500;
     margin: 1em 0 1em 0;
     text-align: center;
 }
+
+.validateButton i {
+    margin-right: 0.5em;
+}
+
 .cancelButton {
     background-color: #ababab;
     width: auto;
     color: white;
     border: none;
-    border-radius: 0.5em;
-    padding: 0.5em;
-    font-size: 1.2em;
+    border-radius: 0.35em;
+    padding: 0.5em 1.1em;
+    font-size: 1.1em;
+    font-weight: 500;
     margin: 1em 0 1em 0;
     text-align: center;
+}
+
+.cancelButton i {
+    margin-right: 0.5em;
 }
 
 .textArea {

@@ -1,10 +1,16 @@
 import React, { Component } from "react";
 import { Calendar as BigCalendar, momentLocalizer } from "react-big-calendar";
+import { useNavigate } from "react-router-dom";
 import moment from "moment-timezone";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "moment/locale/fr";
 import { getAllEmployees } from "../../services/api";
 import "./Calendar.css";
+
+function CalendarWrapper(props) {
+    const navigate = useNavigate();
+    return <Calendar {...props} navigate={navigate} />;
+}
 
 moment.tz.setDefault("Europe/Paris");
 moment.locale("fr");
@@ -20,7 +26,7 @@ const employeeColors = {
     7: "#CCCC33",
     8: "#9933CC",
     9: "#33CC99",
-    10: "#CC3333",
+    10: "#7777CC",
     11: "#3399CC",
     12: "#CC3333",
     13: "#33CC33",
@@ -77,6 +83,17 @@ class Calendar extends Component {
         this.setState({ openEventModal: false, selectedEvent: null });
     };
 
+    handleClientClick = () => {
+        const { selectedEvent } = this.state;
+        if (selectedEvent && selectedEvent.client) {
+            this.props.navigate("/client-details", {
+                state: { idClient: selectedEvent.idClient },
+            });
+        } else {
+            console.error("Aucun idClient trouvé dans selectedEvent");
+        }
+    };
+
     handleCheckboxChange = (idEmployee) => {
         this.setState((prevState) => {
             const { selectedEmployees } = prevState;
@@ -88,7 +105,7 @@ class Calendar extends Component {
                 };
             } else {
                 return {
-                    selectedEmployees: [idEmployee],
+                    selectedEmployees: [...selectedEmployees, idEmployee],
                 };
             }
         });
@@ -200,7 +217,12 @@ class Calendar extends Component {
                                 <i className="fa-solid fa-xmark"></i>
                             </button>
                             <h3>{selectedEvent.title}</h3>
-                            <p>Client : {selectedEvent.client}</p>
+                            <p>
+                                Client :{" "}
+                                <a href="" onClick={this.handleClientClick}>
+                                    {selectedEvent.client}{" "}
+                                </a>
+                            </p>
                             <p>Description : {selectedEvent.description}</p>
                         </div>
                     </div>
@@ -210,4 +232,4 @@ class Calendar extends Component {
     }
 }
 
-export default Calendar;
+export default CalendarWrapper;

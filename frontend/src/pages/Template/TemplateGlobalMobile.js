@@ -127,20 +127,21 @@ class TemplateGlobalMobile extends Component {
                     </div>
                 </div>
 
-                {/* Partie bar navigation bottom */}
                 <div className={styles.navbarBottom}>
-                    <a href="/calendar">
+                    <a href="/calendar" aria-label="Accueil">
                         <i className={`fas fa-home ${styles.navbarIcon}`}></i>
                     </a>
-                    <a href="/calendar-mobile">
+                    <a href="/calendar-mobile" aria-label="Calendrier">
                         <i
                             className={`fas fa-calendar ${styles.navbarIcon}`}
                         ></i>
                     </a>
-                    <a href="/expense">
-                        <i className={`fas fa-euro ${styles.navbarIcon}`}></i>
+                    <a href="/expense" aria-label="Notes de frais">
+                        <i
+                            className={`fas fa-file-lines ${styles.navbarIcon}`}
+                        ></i>
                     </a>
-                    <a href="/clients">
+                    <a href="/clients" aria-label="Clients">
                         <i
                             className={`fas fa-user-group ${styles.navbarIcon}`}
                         ></i>

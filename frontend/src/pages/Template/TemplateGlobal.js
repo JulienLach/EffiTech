@@ -33,17 +33,17 @@ class TemplateGlobal extends Component {
         this.toggleSupportMenu = this.toggleSupportMenu.bind(this);
         this.logout = this.logout.bind(this);
         this.handleNotificationClick = this.handleNotificationClick.bind(this);
-        this.toggleCreateModal = this.toggleCreateModal.bind(this); // Méthode pour ouvrir/fermer la modal
+        this.toggleCreateModal = this.toggleCreateModal.bind(this);
         this.toggleCreateEventModal = this.toggleCreateEventModal.bind(this);
         this.toggleCreateClientModal = this.toggleCreateClientModal.bind(this);
         this.toggleEventModal = this.toggleEventModal.bind(this);
-        this.handleCreateEventClick = this.handleCreateEventClick.bind(this); // Méthode pour gérer le clic sur "Créer un événement"
-        this.handleCreateClientClick = this.handleCreateClientClick.bind(this); // Méthode pour gérer le clic sur "Créer un client"
+        this.handleCreateEventClick = this.handleCreateEventClick.bind(this);
+        this.handleCreateClientClick = this.handleCreateClientClick.bind(this);
         this.getIdEmployeeLocalStorage =
             this.getIdEmployeeLocalStorage.bind(this);
         this.handleProfileClick = this.handleProfileClick.bind(this);
-        this.handleSupportClick = this.handleSupportClick.bind(this); // Ajouté
-        this.toggleSupportForm = this.toggleSupportForm.bind(this); // Ajouté
+        this.handleSupportClick = this.handleSupportClick.bind(this);
+        this.toggleSupportForm = this.toggleSupportForm.bind(this);
     }
 
     componentDidMount() {
@@ -88,7 +88,6 @@ class TemplateGlobal extends Component {
     }
 
     toggleSupportForm() {
-        // Nouvelle méthode ajoutée
         this.setState((prevState) => ({
             showSupportForm: !prevState.showSupportForm,
         }));
@@ -104,13 +103,11 @@ class TemplateGlobal extends Component {
     }
 
     handleSupportClick() {
-        // Modifié pour harmoniser
         this.toggleSupportMenu();
         this.toggleSupportForm();
     }
 
     logout() {
-        // Supprimer le cookie employee
         document.cookie =
             "employee=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         window.location.href = "/login";
@@ -142,7 +139,7 @@ class TemplateGlobal extends Component {
         this.setState({
             selectedEvent: event,
             isEventModalOpen: event !== null,
-            isUpdateFormOpen: false, // Fermer le formulaire de mise à jour si un autre événement est sélectionné
+            isUpdateFormOpen: false,
         });
     }
 
@@ -173,12 +170,16 @@ class TemplateGlobal extends Component {
 
         return (
             <>
-                {/* Partie header */}
                 <div className={styles.header}>
                     <div className={styles.headerDiv}>
                         <div className={styles.logo}>
                             <a href="/calendar">
-                                <img src={logo} alt="Effitech Logo" />
+                                <img
+                                    src={logo}
+                                    alt="Effitech Logo"
+                                    width="150"
+                                    height="50"
+                                />
                             </a>
                         </div>
                         <div className={styles.headerRight}>
@@ -207,7 +208,7 @@ class TemplateGlobal extends Component {
                                 onClick={this.toggleSupportMenu}
                             >
                                 <a>
-                                    <i class="fa-solid fa-headset"></i>
+                                    <i className="fa-solid fa-headset"></i>
                                 </a>
                             </div>
                             {showSupportMenu && (
@@ -221,7 +222,7 @@ class TemplateGlobal extends Component {
                                                 }
                                             >
                                                 Contacter le support{" "}
-                                                <i class="fa-solid fa-paper-plane"></i>
+                                                <i className="fa-solid fa-paper-plane"></i>
                                             </a>
                                         </li>
                                     </ul>
@@ -355,10 +356,12 @@ class TemplateGlobal extends Component {
                             </li>
                             <li
                                 className={
-                                    currentPath === "/" ? styles.active : ""
+                                    currentPath === "/parameters"
+                                        ? styles.active
+                                        : ""
                                 }
                             >
-                                <a href="/calendar">
+                                <a href="/parameters">
                                     <i className="fa-solid fa-gear"></i>
                                     Paramètres
                                 </a>
@@ -368,11 +371,6 @@ class TemplateGlobal extends Component {
                     <div className={styles.sideOrange}></div>
                 </div>
 
-                {/* partie container à copier pour les nouvelles pages */}
-                {/* <div className={styles.container}>
-                </div> */}
-
-                {/* Modal pour créer */}
                 {isCreateModalOpen && (
                     <div className={styles.CreatemodalOverlay}>
                         <div className={styles.CreatemodalContent}>
@@ -394,7 +392,6 @@ class TemplateGlobal extends Component {
                     </div>
                 )}
 
-                {/* Modal pour afficher un événement */}
                 {isEventModalOpen && !isUpdateFormOpen && (
                     <InterventionForm
                         event={selectedEvent}
@@ -403,12 +400,10 @@ class TemplateGlobal extends Component {
                     />
                 )}
 
-                {/* Modal pour créer un événement */}
                 {isCreateEventModalOpen && (
                     <CreateEventForm closeModal={this.toggleCreateEventModal} />
                 )}
 
-                {/* Modal pour créer un client */}
                 {isCreateClientModalOpen && (
                     <div className={styles.isCreatemodalOverlay}>
                         <div className={styles.isCreatemodalContent}>
@@ -419,7 +414,6 @@ class TemplateGlobal extends Component {
                     </div>
                 )}
 
-                {/* Modal pour le formulaire de support */}
                 {showSupportForm && (
                     <div className={styles.modalBackground}></div>
                 )}

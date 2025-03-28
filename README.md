@@ -4,7 +4,7 @@
 
 <p align="center">
     <a href="https://github.com/JulienLach/EffiTech/releases">
-        <img src="https://img.shields.io/badge/Release-0.8.3-red?logo=github" alt="Release" />
+        <img src="https://img.shields.io/badge/Release-0.9.0-red?logo=github" alt="Release" />
     </a>
 </p>
 
@@ -18,12 +18,10 @@
 -   [CI/CD](#cicd)
 -   [Docker](#docker)
 -   [Documentation](#documentation)
--   [End-to-End Functional Test](#end-to-end-functional-test)
--   [Other Functionalities](#other-functionalities)
 
 ### <a name="overview"></a> Overview
 
--   EffiTech is an intervention management application. Manage scheduling of interventions for technicians.
+-   EffiTech is an intervention management application built as a Progressive Web App (PWA). Manage scheduling of interventions for technicians.
 
 ### <a name="features"></a> Features
 
@@ -95,7 +93,7 @@ To start a new server in pgadmin4, create a new server, add `127.0.0.1` to hostn
 
 #### Configure the .env file
 
-Create a .env file in the root of your backend project and add the following content, replacing newpassword with the password you set for the postgres user:
+Create a `.env` file in the root of your backend project and add the following content, replacing newpassword with the password you set for the postgres user:
 
 ```bash
 # Environment
@@ -176,7 +174,7 @@ This project uses **GitHub Actions** to automate unit tests and create new relea
 
 -   To automatically run **CD** actions, follow these steps:
 
-    -   Update `CHANGELOG.md` with all new changes and fixes and add the new tag [x.x.x] (yyyy-dd-mm)
+    -   Update `README.md` and `CHANGELOG.md` with all new changes and fixes and add the new tag [x.x.x] (yyyy-dd-mm)
     -   Merge your current working branch into the `develop` branch
     -   Create a new pull request (PR) to merge `develop` into `main`, check all the code.
     -   Merge your PR `develop` into `main`
@@ -229,58 +227,3 @@ This project uses **JSDoc** and **apidoc** to generate documentation.
 -   **apidoc**: Move to `/backend` folder, for API documentation written in the `/services/api.js` file, run `npm run apidoc`.
 
 Then to see the documentation pages, run `index.html` from both folders with LiveServer VSCode extension for exemple.
-
-### <a name="end-to-end-functional-test"></a> End-to-End Functional Test
-
-<details>
-<summary>Scenario 1: Plan and Assign Initial Intervention</summary>
-
-1. **Supervisor receives a call from a client reporting a machine failure.**
-
-2. **Supervisor logs into the EffiTech app.**
-
-    - Enters client details (if not already in the system).
-    - Creates a new intervention event for initial assessment.
-    - Assigns a technician for the initial visit.
-    - Ensures client details are correctly recorded.
-
-3. **Technician performs the initial assessment.**
-    - Technician logs into the app.
-    - Views the schedule and client details for the intervention.
-    - Visits the client, assesses the issue, and fills out an initial report.
-    - Obtains the client’s electronic signature on the report.
-    - Submits the report to the supervisor.
-
-</details>
-
-### <a name="other-functionalities"></a> Other Functionalities
-
-<details>
-<summary>Enter Company Data</summary>
-
-1. **Admin logs into the EffiTech app.**
-    - Navigates to the company settings section.
-    - Enters and saves company details such as:
-        - Address
-        - Contact information
-        - Logo
-        - Various company informations
-    - Confirms that the entered information is displayed correctly in the company page.
-
-</details>
-
-<details>
-<summary>Create Employee Profiles</summary>
-
-1. **Admin logs into the EffiTech app.**
-    - Navigates to the employee management section.
-    - Clicks on "Add New Employee."
-    - Enters employee details, including:
-        - Firstname, lastname
-        - Job and speciality
-        - Phone number
-        - Credentials (e.g., email, password)
-    - Saves the new employee profile.
-    - Verifies that the new employee can log in and access the app according to their role.
-
-</details>

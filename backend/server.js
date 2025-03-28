@@ -24,8 +24,20 @@ const SERVER_URL = process.env.SERVER_URL;
 
 const app = express();
 
+// Liste des url autorisées pour les requêtes CORS
+const allowedOrigins = [
+    ORIGIN_URL, // http://localhost:3000
+];
+
 const corsOptions = {
-    origin: ORIGIN_URL,
+    origin: (origin, callback) => {
+        // Autorise les requêtes sans origin (ex. Postman) ou celles dans allowedOrigins
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
     credentials: true,
     methods: "GET, POST, PUT, DELETE, OPTIONS",
 };
