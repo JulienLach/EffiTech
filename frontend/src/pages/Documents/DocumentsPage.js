@@ -168,7 +168,7 @@ class DocumentsPage extends Component {
                                 type="text"
                                 id="search"
                                 name="search"
-                                placeholder="Rechercher par titre"
+                                placeholder="Rechercher"
                                 onChange={this.handleSearchChange}
                             />
                         </div>
