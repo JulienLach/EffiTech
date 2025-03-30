@@ -15,6 +15,7 @@ const statisticRoutes = require("./routes/statistic.routes.js");
 const invoiceRoutes = require("./routes/invoice.routes.js");
 const emailRoutes = require("./routes/email.routes.js");
 const authenticateToken = require("./middlewares/auth.middleware");
+const runMigrations = require("./migrations/migrations.js");
 
 dotenv.config({ path: ".env" });
 
@@ -93,6 +94,17 @@ app.use("/invoices", authenticateToken, invoiceRoutes);
 // Route des emails
 app.use("/email", authenticateToken, emailRoutes);
 
-app.listen(PORT, () => {
-    console.log(`Server is running on ${SERVER_URL}`);
-});
+// Fonction pour démarrer le serveur avec les migrations
+async function startServer() {
+    try {
+        await runMigrations();
+        app.listen(PORT, () => {
+            console.log(`Server is running on ${SERVER_URL}`);
+        });
+    } catch (error) {
+        console.error("Failed to start server:", error);
+        process.exit(1);
+    }
+}
+
+startServer();
