@@ -88,7 +88,7 @@ class DocumentDetailsPage extends Component {
                             {document.model}
                         </p>
                         <button className={styles.updateBtn}>
-                            <i class="fa-solid fa-pen"></i>Modifier
+                            <i className="fa-solid fa-pen"></i>Modifier
                         </button>
                     </div>
                     <div className={styles.pdfContainer}>
