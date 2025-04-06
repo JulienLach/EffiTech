@@ -393,19 +393,13 @@ class ClientDetailsPage extends Component {
                                                     </a>
                                                 </p>
                                             </div>
-                                            {activeTab === "coordonnées" && (
-                                                <button
-                                                    className={
-                                                        styles.editButton
-                                                    }
-                                                    onClick={
-                                                        this.handleButtonClick
-                                                    }
-                                                >
-                                                    <i className="fa-solid fa-pen"></i>
-                                                    Modifier
-                                                </button>
-                                            )}
+                                            <button
+                                                className={styles.editButton}
+                                                onClick={this.handleButtonClick}
+                                            >
+                                                <i className="fa-solid fa-pen"></i>
+                                                Modifier
+                                            </button>
                                         </>
                                     ) : activeTab === "interventions" ? (
                                         <>
@@ -566,6 +560,18 @@ class ClientDetailsPage extends Component {
                                         >
                                             Interventions
                                         </button>
+                                        <button
+                                            className={`${styles.tabButton} ${
+                                                activeTab === "Factures"
+                                                    ? styles.activeTab
+                                                    : ""
+                                            }`}
+                                            onClick={() =>
+                                                this.handleTabClick("Factures")
+                                            }
+                                        >
+                                            Factures
+                                        </button>
                                     </div>
                                     {activeTab === "coordonnées" ? (
                                         <>
@@ -622,8 +628,15 @@ class ClientDetailsPage extends Component {
                                                     </a>
                                                 </p>
                                             </div>
+                                            <button
+                                                className={styles.editButton}
+                                                onClick={this.handleButtonClick}
+                                            >
+                                                <i className="fa-solid fa-pen"></i>
+                                                Modifier
+                                            </button>
                                         </>
-                                    ) : (
+                                    ) : activeTab === "interventions" ? (
                                         <>
                                             <div
                                                 className={
@@ -678,8 +691,7 @@ class ClientDetailsPage extends Component {
                                                                         <td>
                                                                             {getStatusIndicator(
                                                                                 event.status
-                                                                            )}{" "}
-                                                                            {/* Utilisation de getStatusIndicator ici */}
+                                                                            )}
                                                                         </td>
                                                                         <td>
                                                                             {event.startingDate
@@ -688,9 +700,7 @@ class ClientDetailsPage extends Component {
                                                                                   ).toLocaleDateString()
                                                                                 : ""}
                                                                         </td>
-                                                                        <td>
-                                                                            {`${event.employee.firstname} ${event.employee.lastname}`}
-                                                                        </td>
+                                                                        <td>{`${event.employee.firstname} ${event.employee.lastname}`}</td>
                                                                     </tr>
                                                                 )
                                                             )}
@@ -698,15 +708,18 @@ class ClientDetailsPage extends Component {
                                                 </table>
                                             </div>
                                         </>
-                                    )}
-                                    {activeTab === "coordonnées" && (
-                                        <button
-                                            className={styles.editButton}
-                                            onClick={this.handleButtonClick}
-                                        >
-                                            <i className="fa-solid fa-pen"></i>
-                                            Modifier
-                                        </button>
+                                    ) : (
+                                        <>
+                                            <div
+                                                className={
+                                                    styles.interventionsTable
+                                                }
+                                            >
+                                                <div
+                                                    className={styles.divider}
+                                                ></div>
+                                            </div>
+                                        </>
                                     )}
                                 </div>
                             )}
