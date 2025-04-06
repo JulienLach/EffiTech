@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 -   Add migration.js script to automate database updates with Ansible
 -   Add table view for employees page
+-   Add brand and model filters to document search field
 
 # [0.9.0] (2025-28-03)
 
