@@ -13,6 +13,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -   Add brand and model filters to document search field
 -   Add invoices tab to client details page
 
+## Fixes
+
+-   Fix error for reports send by email by setting JSON limit to 10MB.
+
 # [0.9.0] (2025-28-03)
 
 ## Changes

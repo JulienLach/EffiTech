@@ -44,7 +44,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.use(express.json());
+app.use(express.json({ limit: "10mb" })); // Limite de taille de 10MB pour le corps de la requête pour traiter les fichiers et les base64 large
 
 app.use(
     fileUpload({
