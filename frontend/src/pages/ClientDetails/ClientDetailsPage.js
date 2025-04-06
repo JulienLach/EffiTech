@@ -5,7 +5,11 @@ import TemplateGlobal from "../Template/TemplateGlobal";
 import TemplateGlobalMobile from "../Template/TemplateGlobalMobile";
 import styles from "./ClientDetailsPage.module.css";
 import stylesMobile from "./ClientDetailsPageMobile.module.css";
-import { getClientById, getEventsByClientId } from "../../services/api";
+import {
+    getClientById,
+    getEventsByClientId,
+    getClientInvoices,
+} from "../../services/api";
 import getStatusIndicator from "../../components/Utils/StatusUtils";
 import getCategoryIndicator from "../../components/Utils/CategoryUtils";
 
@@ -55,6 +59,19 @@ class ClientDetailsPage extends Component {
                 console.log("Données des événements récupérées:", data);
             }
         });
+
+        getClientInvoices(idClient, (error, data) => {
+            if (error) {
+                console.error(
+                    "Erreur lors de la récupération des factures",
+                    error
+                );
+                this.setState({ error: error.message });
+            } else {
+                this.setState({ invoices: data });
+                console.log("Données des factures récupérées:", data);
+            }
+        });
     }
 
     handleButtonClick = () => {
@@ -68,7 +85,7 @@ class ClientDetailsPage extends Component {
     };
 
     render() {
-        const { client, activeTab, events } = this.state;
+        const { client, activeTab, events, invoices } = this.state;
         if (!client) return <div></div>; // pour charger l'idClient avant de récupérer les données, corriger la logique d'ordre de récupération des données
 
         const initial =
@@ -643,6 +660,9 @@ class ClientDetailsPage extends Component {
                                                     styles.interventionsTable
                                                 }
                                             >
+                                                <div
+                                                    className={styles.divider}
+                                                ></div>
                                                 <table>
                                                     <thead>
                                                         <tr>
@@ -718,6 +738,55 @@ class ClientDetailsPage extends Component {
                                                 <div
                                                     className={styles.divider}
                                                 ></div>
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Référence</th>
+                                                            <th>Montant HT</th>
+                                                            <th>Montant TTC</th>
+                                                            <th>
+                                                                Date de
+                                                                facturation
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {invoices &&
+                                                            invoices.map(
+                                                                (invoice) => (
+                                                                    <tr
+                                                                        key={
+                                                                            invoice.idInvoice
+                                                                        }
+                                                                    >
+                                                                        <td>
+                                                                            FC-
+                                                                            {
+                                                                                invoice.idInvoice
+                                                                            }
+                                                                        </td>
+                                                                        <td>
+                                                                            {
+                                                                                invoice.amountWithoutTax
+                                                                            }{" "}
+                                                                            €
+                                                                        </td>
+                                                                        <td>
+                                                                            {
+                                                                                invoice.amountIncludingTax
+                                                                            }{" "}
+                                                                            €
+                                                                        </td>
+                                                                        <td>
+                                                                            {new Date(
+                                                                                invoice.invoiceDate
+                                                                            ).toLocaleDateString()}
+                                                                        </td>
+                                                                    </tr>
+                                                                )
+                                                            )}
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </>
                                     )}

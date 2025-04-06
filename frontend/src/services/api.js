@@ -1249,6 +1249,39 @@ function getEventsByClientId(idClient, callback) {
     xhr.send();
 }
 
+/**
+ * @api {get} /invoices/:idClient Get invoices by client ID
+ * @apiName GetClientInvoices
+ * @apiGroup Invoices
+ * @apiVersion 1.0.0
+ * @apiParam {Number} idClient Client ID (in URL path).
+ * @apiSuccess {Object[]} invoices List of invoices for the client.
+ * @apiSuccess {Number} invoices.idInvoice Invoice ID.
+ * @apiSuccess {Number} invoices.idClient Client ID.
+ * @apiSuccess {Number} invoices.amountIncludingTax Amount including tax.
+ * @apiSuccess {Number} invoices.amountWithoutTax Amount without tax.
+ * @apiSuccess {String} invoices.invoiceDate Invoice date (ISO format).
+ * @apiSuccess {String} invoices.file Invoice file content (Base64 encoded or URL).
+ * @apiError {String} error Error message.
+ */
+function getClientInvoices(idClient, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", `${API_URL}/invoices/${idClient}`);
+    xhr.withCredentials = true;
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            callback(null, JSON.parse(xhr.responseText));
+        } else {
+            console.error(
+                "Erreur de récupération des factures du client",
+                xhr.statusText
+            );
+            callback(new Error(xhr.statusText), null);
+        }
+    };
+    xhr.send();
+}
+
 export {
     getAllEvents,
     getAllClients,
@@ -1282,4 +1315,5 @@ export {
     sendEmail,
     sendEmployeeCredentials,
     getEventsByClientId,
+    getClientInvoices,
 };
