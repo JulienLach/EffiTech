@@ -191,7 +191,7 @@ h2 {
 
 .tabContainer {
     display: flex;
-    gap: 0.5em;
+    gap: 1em;
     margin: 1.25em 0;
 }
 
