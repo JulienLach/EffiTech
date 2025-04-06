@@ -29,6 +29,7 @@ import CalendarMobilePage from "./pages/CalendarMobile/CalendarMobilePage";
 import InvoicesPage from "./pages/Invoices/InvoicesPage";
 import StatisticsPage from "./pages/Statistics/StatisticsPage";
 import ParametersPage from "./pages/Parameters/ParametersPage";
+import ForgotPasswordPageWrapper from "./pages/ForgotPassword/ForgotPasswordPage";
 
 const App = () => {
     return (
@@ -73,6 +74,10 @@ const App = () => {
                 <Route path="/invoices" element={<InvoicesPage />} />
                 <Route path="/statistics" element={<StatisticsPage />} />
                 <Route path="/parameters" element={<ParametersPage />} />
+                <Route
+                    path="/forgot-password"
+                    element={<ForgotPasswordPageWrapper />}
+                />
             </Routes>
         </Router>
     );
