@@ -6,4 +6,6 @@ router.get("/", invoiceServices.getAllInvoices);
 
 router.post("/", invoiceServices.importInvoice);
 
+router.get("/:idClient", invoiceServices.getClientInvoices);
+
 module.exports = router;

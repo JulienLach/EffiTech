@@ -79,6 +79,21 @@ function importInvoice(req, res) {
     );
 }
 
+function getClientInvoices(req, res) {
+    const idClient = req.params.idClient;
+    Invoice.getClientInvoices(idClient, (error, invoices) => {
+        if (error) {
+            return res.status(500).send({
+                message:
+                    "Erreur lors de la récupération des factures du client",
+                error: error.message,
+            });
+        }
+        res.status(200).send(invoices);
+    });
+}
+
 exports.getAllInvoices = getAllInvoices;
 exports.getInvoiceById = getInvoiceById;
 exports.importInvoice = importInvoice;
+exports.getClientInvoices = getClientInvoices;

@@ -138,6 +138,39 @@ class Invoice {
             callback(null, invoice);
         });
     }
+
+    static getClientInvoices(idClient, callback) {
+        const query = `
+            SELECT 
+                invoices.*, 
+                clients.firstname AS client_firstname, 
+                clients.lastname AS client_lastname 
+            FROM invoices 
+            JOIN clients ON invoices.id_client = clients.id_client
+            WHERE invoices.id_client = $1
+            ORDER BY invoices.id_invoice DESC
+        `;
+        const values = [idClient];
+        pool.query(query, values, (error, result) => {
+            if (error) {
+                return callback(error, null);
+            }
+            const invoices = result.rows.map(function (row) {
+                const fileBase64 = row.file.toString("base64");
+                return {
+                    idInvoice: row.id_invoice,
+                    idClient: row.id_client,
+                    clientFirstname: row.client_firstname,
+                    clientLastname: row.client_lastname,
+                    amountIncludingTax: row.amount_including_tax,
+                    amountWithoutTax: row.amount_without_tax,
+                    invoiceDate: row.invoice_date,
+                    file: fileBase64,
+                };
+            });
+            callback(null, invoices);
+        });
+    }
 }
 
 module.exports = Invoice;
