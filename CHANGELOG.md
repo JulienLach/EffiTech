@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## Changes
 
 -   Add migration.js script to automate database updates with Ansible
+-   Add table view for employees page
 
 # [0.9.0] (2025-28-03)
 
