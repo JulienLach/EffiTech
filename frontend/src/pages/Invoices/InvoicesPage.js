@@ -70,6 +70,12 @@ class InvoicesPage extends Component {
         }));
     }
 
+    handleButtonClick(invoice) {
+        this.props.navigate("/invoice-details", {
+            state: { invoice: invoice },
+        });
+    }
+
     formatDate(invoiceDate) {
         const date = new Date(invoiceDate);
         return date.toLocaleDateString("fr-FR", {
@@ -130,7 +136,15 @@ class InvoicesPage extends Component {
                                 {currentFilteredInvoices.map((invoice) => (
                                     <tr key={invoice.id}>
                                         <td>
-                                            <a>FC-{invoice.idInvoice}</a>
+                                            <a
+                                                onClick={() =>
+                                                    this.handleButtonClick(
+                                                        invoice
+                                                    )
+                                                }
+                                            >
+                                                FC-{invoice.idInvoice}
+                                            </a>
                                         </td>
                                         <td>
                                             {invoice.clientFirstname}{" "}

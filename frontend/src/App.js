@@ -27,6 +27,7 @@ import DocumentDetailsPage from "./pages/Documents/DocumentDetailsPage";
 import NotificationsPage from "./pages/Notifications/NotificationsPage";
 import CalendarMobilePage from "./pages/CalendarMobile/CalendarMobilePage";
 import InvoicesPage from "./pages/Invoices/InvoicesPage";
+import InvoiceDetailsPage from "./pages/InvoiceDetails/InvoiceDetailsPage";
 import StatisticsPage from "./pages/Statistics/StatisticsPage";
 import ParametersPage from "./pages/Parameters/ParametersPage";
 import ForgotPasswordPageWrapper from "./pages/ForgotPassword/ForgotPasswordPage";
@@ -72,6 +73,10 @@ const App = () => {
                     element={<CalendarMobilePage />}
                 />
                 <Route path="/invoices" element={<InvoicesPage />} />
+                <Route
+                    path="/invoice-details"
+                    element={<InvoiceDetailsPage />}
+                />
                 <Route path="/statistics" element={<StatisticsPage />} />
                 <Route path="/parameters" element={<ParametersPage />} />
                 <Route
