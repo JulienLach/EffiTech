@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -   Add brand and model filters to document search field
 -   Add invoices tab to client details page
 -   Add full report PDF layout send by email
+-   Add invoice details page
 
 ## Fixes
 

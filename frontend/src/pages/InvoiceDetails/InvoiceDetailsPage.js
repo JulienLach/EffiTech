@@ -34,7 +34,46 @@ class InvoiceDetailsPage extends Component {
     }
 
     render() {
-        const { document, error } = this.state;
+        const { invoice, error } = this.state;
+
+        //URI de la string base64 du PDF
+        const pdfDataUri = `data:application/pdf;base64,${invoice.file}`;
+
+        return (
+            <>
+                <TemplateGlobal />
+                <div className={styles.container}>
+                    <div className={styles.documentInfo}>
+                        <h1 className={styles.pageTitle}>Facture</h1>
+                        <div className={styles.alignBackButton}>
+                            <div className={styles.names}></div>
+                            <button
+                                type="button"
+                                className={styles.backButton}
+                                onClick={() => this.props.navigate("/invoices")}
+                            >
+                                <i className="fa-solid fa-arrow-right"></i>
+                                Retour
+                            </button>
+                        </div>
+                    </div>
+                    <div className={styles.separation}></div>
+                    <div className={styles.documentDetails}>
+                        <p>
+                            <p>FC-{invoice.idInvoice}</p>
+                        </p>
+                    </div>
+                    <div className={styles.pdfContainer}>
+                        <embed
+                            src={pdfDataUri}
+                            type="application/pdf"
+                            width="100%"
+                            height="750px"
+                        ></embed>
+                    </div>
+                </div>
+            </>
+        );
     }
 }
 
