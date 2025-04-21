@@ -1,4 +1,4 @@
-const pool = require("../config/db.config"); // Réutilise le Pool existant de ton projet
+const pool = require("../config/db.config");
 
 async function runMigrations() {
     const client = await pool.connect();
@@ -13,7 +13,7 @@ async function runMigrations() {
     `);
         const hasCompaniesTable = tableExists.rows[0].exists;
 
-        // Récupérer la version actuelle de la base depuis companies
+        // Récupérer la version actuelle de la base depuis la table companies
         let currentVersion = "0.9.0"; // Dernière version déployée en prod
         if (hasCompaniesTable) {
             const result = await client.query(`
@@ -25,24 +25,26 @@ async function runMigrations() {
             }
         }
 
-        // Version cible depuis les variables d'environnement injectées par Ansible via docker-compose.yml
+        // Version cible depuis les variables d'environnement injectées par Ansible dans le fichier vars.yml
         const targetVersion = process.env.DATABASE_VERSION || "0.9.0";
         console.log(
             `Current DB version: ${currentVersion}, Target version: ${targetVersion}`
         );
 
-        // Si la version actuelle est >= à la cible, pas de migration nécessaire
+        // Si la version actuelle est >= à la cible, pas de migration, exemple si en prod
+        // on est en 0.9.0 et qu'on déploie la même version, pas de migration
         if (currentVersion >= targetVersion) {
             console.log("No migrations needed, database is up to date");
             return;
         }
 
-        // Liste des migrations avec un exemple de migration
+        // Si la version en base est inférieure à la cible, on applique les migrations
+        // Exemple de migration : ajouter une colonne test_column à la table employees
         const migrations = [
             /*
             {
-                version: "1.0.0", // Sans 'v' pour cohérence avec companies.database_version
-                up: async () => {
+                version: "1.0.0", // nouvelle version pour la migration
+                updateDatabase: async () => {
                     await client.query(`
                         ALTER TABLE employees
                         ADD COLUMN IF NOT EXISTS test_column BOOLEAN DEFAULT FALSE;
@@ -53,6 +55,9 @@ async function runMigrations() {
                 },
             },
             */
+            /*
+            On ajoute à la suite du tableau les migration suivantes et on incrémente la version pour correspondre à la version dans le vars.yml d'ansible
+           */
         ];
 
         // Appliquer les migrations nécessaires
@@ -62,7 +67,7 @@ async function runMigrations() {
                 migration.version <= targetVersion
             ) {
                 console.log(`Applying migration to ${migration.version}`);
-                await migration.up();
+                await migration.updateDatabase();
             }
         }
 
