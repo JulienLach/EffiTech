@@ -145,12 +145,12 @@ class LoginPage extends Component {
                                     >
                                         Connexion
                                     </button>
-                                    <p>
+                                    {/* <p>
                                         Pas encore de compte ?{" "}
                                         <a href="/create-account">
                                             Je créer mon compte
                                         </a>
-                                    </p>
+                                    </p> */}
                                 </form>
                             </div>
                         </div>
