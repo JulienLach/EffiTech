@@ -277,3 +277,14 @@ input:checked + .slider:before {
     gap: 0.25em;
     font-weight: 500;
 }
+
+.description.active {
+    display: block;
+    border: 1px solid lightgrey;
+    border-radius: 0.55em;
+    padding: 1em;
+}
+
+.description {
+    display: none;
+}

@@ -33,12 +33,14 @@ class InterventionFormPage extends Component {
             clientSignature: "",
             employeeSignature: "",
             duration: "",
+            description: "",
             errors: {},
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSignatureChange = this.handleSignatureChange.bind(this);
+        this.displayDescription = this.displayDescription.bind(this);
     }
 
     componentDidMount() {
@@ -63,6 +65,25 @@ class InterventionFormPage extends Component {
             .toISOString()
             .substring(11, 16);
         return duration;
+    }
+
+    displayDescription(event) {
+        // afficher un textaera pour la description de l'intervention
+        const { name, checked } = event.target;
+        if (name === "reschedule") {
+            this.setState({ reschedule: checked });
+
+            const description = document.querySelector(
+                `.${styles.description}`
+            );
+            if (description) {
+                if (checked) {
+                    description.classList.add(styles.active);
+                } else {
+                    description.classList.remove(styles.active);
+                }
+            }
+        }
     }
 
     handleChange(event) {
@@ -141,7 +162,7 @@ class InterventionFormPage extends Component {
         if (reschedule) {
             const eventToCreate = {
                 title: "Nouvelle intervention",
-                description: "",
+                description: this.state.description,
                 status: 1,
                 isPlanned: false,
                 type: "Intervention",
@@ -666,11 +687,22 @@ class InterventionFormPage extends Component {
                                                 name="reschedule"
                                                 checked={reschedule}
                                                 onChange={this.handleChange}
+                                                onClick={
+                                                    this.displayDescription
+                                                }
                                             />
                                             <span
                                                 className={styles.slider}
                                             ></span>
                                         </label>
+                                        <textarea
+                                            rows="7"
+                                            cols="40"
+                                            name="description"
+                                            value={this.state.description}
+                                            onChange={this.handleChange}
+                                            className={styles.description}
+                                        ></textarea>
                                     </div>
                                 </div>
                                 <div className={styles.separation}></div>

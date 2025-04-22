@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -   Add full report PDF layout send by email
 -   Add invoice details page
 -   Add paging to client details events tab
+-   Add description field for new event when rescheduling an intervention
 
 ## Fixes
 
