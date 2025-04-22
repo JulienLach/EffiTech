@@ -101,9 +101,31 @@ class ClientDetailsPage extends Component {
         }));
     }
 
+    handlePreviousPage(event) {
+        event.preventDefault();
+        this.setState((prevState) => ({
+            currentPage: Math.max(prevState.currentPage - 1, 1),
+        }));
+    }
+
     render() {
-        const { client, activeTab, events, invoices } = this.state;
+        const {
+            client,
+            activeTab,
+            events,
+            invoices,
+            currentPage,
+            eventsPerPage,
+        } = this.state;
         if (!client) return <div></div>; // pour charger l'idClient avant de récupérer les données, corriger la logique d'ordre de récupération des données
+
+        // Calculer les events à afficher pour la page actuelle
+        const indexOfLastEvent = currentPage * eventsPerPage;
+        const indexOfFirstEvent = indexOfLastEvent - eventsPerPage;
+        const currentEvents = events.slice(indexOfFirstEvent, indexOfLastEvent);
+
+        // Calculer le nombre total de pages
+        const totalPages = Math.ceil(events.length / eventsPerPage);
 
         const initial =
             client.category === "Professionnel"
@@ -508,6 +530,37 @@ class ClientDetailsPage extends Component {
                                                             )}
                                                     </tbody>
                                                 </table>
+                                                <div
+                                                    className={
+                                                        styles.pagination
+                                                    }
+                                                >
+                                                    <button
+                                                        onClick={(e) =>
+                                                            this.handlePreviousPage(
+                                                                e
+                                                            )
+                                                        }
+                                                        disabled={
+                                                            currentPage === 1
+                                                        }
+                                                    >
+                                                        <i className="fa-solid fa-chevron-left"></i>
+                                                    </button>
+                                                    <button
+                                                        onClick={(e) =>
+                                                            this.handleNextPage(
+                                                                e
+                                                            )
+                                                        }
+                                                        disabled={
+                                                            currentPage ===
+                                                            totalPages
+                                                        }
+                                                    >
+                                                        <i className="fa-solid fa-chevron-right"></i>
+                                                    </button>
+                                                </div>
                                             </div>
                                         </>
                                     ) : (
