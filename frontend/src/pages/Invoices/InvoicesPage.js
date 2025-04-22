@@ -148,8 +148,10 @@ class InvoicesPage extends Component {
                                             </a>
                                         </td>
                                         <td>
-                                            {invoice.clientFirstname}{" "}
-                                            {invoice.clientLastname}
+                                            <a>
+                                                {invoice.clientFirstname}{" "}
+                                                {invoice.clientLastname}
+                                            </a>
                                         </td>
                                         <td>{invoice.amountWithoutTax} €</td>
                                         <td>{invoice.amountIncludingTax} €</td>

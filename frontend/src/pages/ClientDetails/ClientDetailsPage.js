@@ -508,9 +508,11 @@ class ClientDetailsPage extends Component {
                                                                             }
                                                                         </td>
                                                                         <td>
-                                                                            {
-                                                                                event.title
-                                                                            }
+                                                                            <a>
+                                                                                {
+                                                                                    event.title
+                                                                                }
+                                                                            </a>
                                                                         </td>
                                                                         <td>
                                                                             {getStatusIndicator(
@@ -774,9 +776,11 @@ class ClientDetailsPage extends Component {
                                                                             }
                                                                         </td>
                                                                         <td>
-                                                                            {
-                                                                                event.title
-                                                                            }
+                                                                            <a>
+                                                                                {
+                                                                                    event.title
+                                                                                }
+                                                                            </a>
                                                                         </td>
                                                                         <td>
                                                                             {getStatusIndicator(
