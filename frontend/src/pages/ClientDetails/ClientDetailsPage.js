@@ -28,6 +28,8 @@ class ClientDetailsPage extends Component {
             idClient: idClient || (client ? client.idClient : null), // idClient envoyé à partir de calendar ou objet client complet à partir de clients page
             activeTab: "coordonnées",
             events: [],
+            eventsPerPage: 10,
+            currentPage: 1,
         };
         this.handleButtonClick = this.handleButtonClick.bind(this);
     }
@@ -83,6 +85,21 @@ class ClientDetailsPage extends Component {
     handleTabClick = (tab) => {
         this.setState({ activeTab: tab });
     };
+
+    handlePageChange(event, pageNumber) {
+        event.preventDefault();
+        this.setState({ currentPage: pageNumber });
+    }
+
+    handleNextPage(event) {
+        event.preventDefault();
+        this.setState((prevState) => ({
+            currentPage: Math.min(
+                prevState.currentPage + 1,
+                Math.ceil(prevState.events.length / prevState.eventsPerPage)
+            ),
+        }));
+    }
 
     render() {
         const { client, activeTab, events, invoices } = this.state;

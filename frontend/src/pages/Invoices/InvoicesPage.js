@@ -137,6 +137,7 @@ class InvoicesPage extends Component {
                                     <tr key={invoice.id}>
                                         <td>
                                             <a
+                                                className={styles.titleLink}
                                                 onClick={() =>
                                                     this.handleButtonClick(
                                                         invoice

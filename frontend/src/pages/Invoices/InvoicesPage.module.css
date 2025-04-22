@@ -51,3 +51,8 @@
     background-color: #c93c2c;
     color: white;
 }
+
+.titleLink:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
