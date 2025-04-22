@@ -695,14 +695,20 @@ class InterventionFormPage extends Component {
                                                 className={styles.slider}
                                             ></span>
                                         </label>
-                                        <textarea
-                                            rows="7"
-                                            cols="40"
-                                            name="description"
-                                            value={this.state.description}
-                                            onChange={this.handleChange}
-                                            className={styles.description}
-                                        ></textarea>
+                                        <div className={styles.description}>
+                                            <label
+                                                className={styles.labelInput}
+                                            >
+                                                Description
+                                            </label>
+                                            <textarea
+                                                rows="7"
+                                                cols="40"
+                                                name="description"
+                                                value={this.state.description}
+                                                onChange={this.handleChange}
+                                            ></textarea>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className={styles.separation}></div>

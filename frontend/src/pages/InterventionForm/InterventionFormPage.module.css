@@ -280,11 +280,18 @@ input:checked + .slider:before {
 
 .description.active {
     display: block;
-    border: 1px solid lightgrey;
-    border-radius: 0.55em;
-    padding: 1em;
 }
 
 .description {
     display: none;
+}
+
+.descriptionLabel {
+    display: block;
+}
+
+.description textarea {
+    border: 1px solid lightgrey;
+    border-radius: 0.55em;
+    padding: 1em;
 }
