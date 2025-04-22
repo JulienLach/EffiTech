@@ -699,7 +699,7 @@ class InterventionFormPage extends Component {
                                             <label
                                                 className={styles.labelInput}
                                             >
-                                                Description
+                                                Description :
                                             </label>
                                             <textarea
                                                 rows="7"

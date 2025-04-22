@@ -38,10 +38,12 @@ class AppointmentFormPage extends Component {
             address: {},
             employee: {},
             errors: {},
+            description: "",
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.displayDescription = this.displayDescription.bind(this);
     }
 
     componentDidMount() {
@@ -70,6 +72,25 @@ class AppointmentFormPage extends Component {
             .toISOString()
             .substring(11, 16);
         return duration;
+    }
+
+    displayDescription(event) {
+        // afficher un textaera pour la description de l'intervention
+        const { name, checked } = event.target;
+        if (name === "reschedule") {
+            this.setState({ reschedule: checked });
+
+            const description = document.querySelector(
+                `.${styles.description}`
+            );
+            if (description) {
+                if (checked) {
+                    description.classList.add(styles.active);
+                } else {
+                    description.classList.remove(styles.active);
+                }
+            }
+        }
     }
 
     handleChange(event) {
@@ -148,7 +169,7 @@ class AppointmentFormPage extends Component {
         if (reschedule) {
             const eventToCreate = {
                 title: "A planifier",
-                description: "",
+                description: this.state.description,
                 status: 1,
                 isPlanned: false,
                 type: "Intervention",
@@ -333,9 +354,22 @@ class AppointmentFormPage extends Component {
                                             name="reschedule"
                                             checked={reschedule}
                                             onChange={this.handleChange}
+                                            onClick={this.displayDescription}
                                         />
                                         <span className={styles.slider}></span>
                                     </label>
+                                    <div className={styles.description}>
+                                        <label className={styles.labelInput}>
+                                            Description
+                                        </label>
+                                        <textarea
+                                            rows="7"
+                                            cols="40"
+                                            name="description"
+                                            value={this.state.description}
+                                            onChange={this.handleChange}
+                                        ></textarea>
+                                    </div>
                                 </div>
                             </div>
                             <div className={stylesMobile.modalFooter}>
@@ -499,11 +533,28 @@ class AppointmentFormPage extends Component {
                                                 name="reschedule"
                                                 checked={reschedule}
                                                 onChange={this.handleChange}
+                                                onClick={
+                                                    this.displayDescription
+                                                }
                                             />
                                             <span
                                                 className={styles.slider}
                                             ></span>
                                         </label>
+                                        <div className={styles.description}>
+                                            <label
+                                                className={styles.labelInput}
+                                            >
+                                                Description :
+                                            </label>
+                                            <textarea
+                                                rows="7"
+                                                cols="40"
+                                                name="description"
+                                                value={this.state.description}
+                                                onChange={this.handleChange}
+                                            ></textarea>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className={styles.separation}></div>
