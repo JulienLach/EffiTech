@@ -250,6 +250,8 @@ class InvoiceForm extends Component {
                                     type="file"
                                     id="file"
                                     name="file"
+                                    mimetype="application/pdf"
+                                    accept="application/pdf"
                                     onChange={this.handleFileChange}
                                 />
                                 {errors.file && (
