@@ -11,13 +11,18 @@
     font-weight: 550;
 }
 
+.label {
+    font-weight: 550;
+    font-size: 1.2em;
+}
+
 .documentInfo {
     width: 100%;
 }
 
 .alignBackButton {
     display: flex;
-    margin-right: 15em;
+    margin-right: 5em;
 }
 
 .names {

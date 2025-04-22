@@ -71,7 +71,7 @@ class TemplateGlobalMobile extends Component {
                 pageTitle = "Détails client";
                 break;
             case "/expense":
-                pageTitle = "Dépense / Frais";
+                pageTitle = "Ajout dépense";
                 break;
             case "/report":
                 pageTitle = "Rapport";

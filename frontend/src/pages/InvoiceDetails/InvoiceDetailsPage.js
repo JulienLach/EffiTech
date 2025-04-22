@@ -60,7 +60,15 @@ class InvoiceDetailsPage extends Component {
                     <div className={styles.separation}></div>
                     <div className={styles.documentDetails}>
                         <p>
-                            <p>FC-{invoice.idInvoice}</p>
+                            <p>
+                                <strong>Référence : </strong>
+                                FC-{invoice.idInvoice}
+                            </p>
+                            <p>
+                                <strong>Client : </strong>
+                                {invoice.clientFirstname}{" "}
+                                {invoice.clientLastname}
+                            </p>
                         </p>
                     </div>
                     <div className={styles.pdfContainer}>

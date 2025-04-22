@@ -28,6 +28,8 @@ const app = express();
 // Liste des url autorisées pour les requêtes CORS
 const allowedOrigins = [
     ORIGIN_URL, // http://localhost:3000
+    // ip locale wifi
+    "http://192.168.1.203:3000",
 ];
 
 const corsOptions = {
