@@ -75,19 +75,23 @@ class AppointmentFormPage extends Component {
     }
 
     displayDescription(event) {
-        // afficher un textaera pour la description de l'intervention
         const { name, checked } = event.target;
         if (name === "reschedule") {
             this.setState({ reschedule: checked });
 
-            const description = document.querySelector(
-                `.${styles.description}`
-            );
+            const description = isMobile
+                ? document.querySelector(`.${stylesMobile.description}`)
+                : document.querySelector(`.${styles.description}`);
+
             if (description) {
                 if (checked) {
-                    description.classList.add(styles.active);
+                    description.classList.add(
+                        isMobile ? stylesMobile.active : styles.active
+                    );
                 } else {
-                    description.classList.remove(styles.active);
+                    description.classList.remove(
+                        isMobile ? stylesMobile.active : styles.active
+                    );
                 }
             }
         }
@@ -346,9 +350,9 @@ class AppointmentFormPage extends Component {
                                 <h4>Planification :</h4>
                                 <div className={stylesMobile.checkbox}>
                                     <label>
-                                        Créer l'intervention à planifier
+                                        Créer une nouvelle intervention :
                                     </label>
-                                    <label className={styles.switch}>
+                                    <label className={stylesMobile.switch}>
                                         <input
                                             type="checkbox"
                                             name="reschedule"
@@ -358,9 +362,11 @@ class AppointmentFormPage extends Component {
                                         />
                                         <span className={styles.slider}></span>
                                     </label>
-                                    <div className={styles.description}>
-                                        <label className={styles.labelInput}>
-                                            Description
+                                    <div className={stylesMobile.description}>
+                                        <label
+                                            className={stylesMobile.labelInput}
+                                        >
+                                            Description :
                                         </label>
                                         <textarea
                                             rows="7"
