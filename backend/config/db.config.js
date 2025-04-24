@@ -5,7 +5,7 @@ require("dotenv").config({
 
 const { Pool } = require("pg");
 
-// ajouter une varaible dbHost pour docker, dans le contexte du conteneur docker le DB_HOST est "db" avec postgres par defaut
+// Variable dbHost pour docker, dans le contexte du conteneur docker le DB_HOST est "db" avec postgres par defaut
 const dbHost = process.env.NODE_ENV === "docker" ? "db" : process.env.DB_HOST;
 
 const pool = new Pool({

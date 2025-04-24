@@ -151,7 +151,11 @@ class InterventionForm extends Component {
                                         Téléphone
                                     </h3>
                                     <p className={stylesMobile.dataElement}>
-                                        {event.client.phoneNumber}
+                                        <a
+                                            href={`tel:${event.client.phoneNumber}`}
+                                        >
+                                            {event.client.phoneNumber}
+                                        </a>
                                     </p>
                                     <h3 className={stylesMobile.title}>
                                         Adresse
@@ -183,9 +187,9 @@ class InterventionForm extends Component {
                                         Début{" "}
                                         {(() => {
                                             if (event.type === "Intervention") {
-                                                return "de l'intervention :";
+                                                return "de l'intervention";
                                             } else {
-                                                return "du rendez-vous :";
+                                                return "du rendez-vous";
                                             }
                                         })()}
                                     </h3>
@@ -207,9 +211,9 @@ class InterventionForm extends Component {
                                         Fin{" "}
                                         {(() => {
                                             if (event.type === "Intervention") {
-                                                return "de l'intervention :";
+                                                return "de l'intervention";
                                             } else {
-                                                return "du rendez-vous :";
+                                                return "du rendez-vous";
                                             }
                                         })()}
                                     </h3>
