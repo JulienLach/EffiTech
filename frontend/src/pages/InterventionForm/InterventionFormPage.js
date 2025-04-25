@@ -58,6 +58,10 @@ class InterventionFormPage extends Component {
             duration,
             endingHour: event.endingHour,
         });
+
+        if (isMobile) {
+            window.scrollTo(0, 0);
+        }
     }
 
     calculateDuration(startingHour, endingHour) {

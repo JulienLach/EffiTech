@@ -65,6 +65,10 @@ class AppointmentFormPage extends Component {
             employee: event.employee,
             endingHour: event.endingHour,
         });
+
+        if (isMobile) {
+            window.scrollTo(0, 0);
+        }
     }
 
     calculateDuration(startingHour, endingHour) {
