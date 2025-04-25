@@ -20,7 +20,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Fixes
 
--   Fix error for reports send by email by setting JSON limit to 10MB.
+-   Fix error for reports send by email by setting JSON limit to 10MB
+-   Fix autocapitalize email on login page mobile
 
 # [0.9.0] (2025-28-03)
 

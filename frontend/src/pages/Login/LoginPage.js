@@ -70,6 +70,7 @@ class LoginPage extends Component {
                                         name="email"
                                         value={this.state.email}
                                         onChange={this.handleChange}
+                                        autoCapitalize="none"
                                     />
                                 </div>
                                 <div className={stylesMobile.labelInput}>
