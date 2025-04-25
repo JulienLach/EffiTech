@@ -1300,6 +1300,35 @@ function getInvoiceById(idInvoice, callback) {
     xhr.send();
 }
 
+/**
+ * @api {post} /email/requestPasswordReset Request password reset
+ * @apiName RequestPasswordReset
+ * @apiGroup Email
+ * @apiVersion 1.0.0
+ * @apiParam {String} to Recipient email address.
+ * @apiSuccess {Object} response Confirmation of email sending.
+ * @apiSuccess {String} response.message Confirmation message (e.g., "Email de réinitialisation envoyé").
+ * @apiError {String} error Error message.
+ */
+function requestPasswordReset(emailData, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", `${API_URL}/email/requestPasswordReset`);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.withCredentials = true;
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            callback(null, JSON.parse(xhr.responseText));
+        } else {
+            console.error(
+                "Erreur lors de la demande de réinitialisation",
+                xhr.statusText
+            );
+            callback(new Error(xhr.statusText), null);
+        }
+    };
+    xhr.send(JSON.stringify(emailData));
+}
+
 export {
     getAllEvents,
     getAllClients,
@@ -1335,4 +1364,5 @@ export {
     getEventsByClientId,
     getClientInvoices,
     getInvoiceById,
+    requestPasswordReset,
 };

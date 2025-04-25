@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styles from "./ForgotPasswordPage.module.css";
 import { useNavigate } from "react-router-dom";
 import LogoDesktop from "../../components/LogoDesktop/LogoDesktop";
-import { sendEmployeeCredentials } from "../../services/api";
+import { requestPasswordReset } from "../../services/api";
 
 // Composant fonctionnel pour passer la fonction navigate
 function ForgotPasswordPageWrapper(props) {
@@ -15,6 +15,8 @@ class ForgotPasswordPage extends Component {
         super(props);
         this.state = {
             email: "",
+            error: "",
+            success: "",
         };
         this.handleCancel = this.handleCancel.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,6 +27,8 @@ class ForgotPasswordPage extends Component {
         const { name, value } = event.target;
         this.setState({
             [name]: value,
+            error: "",
+            success: "",
         });
     }
 
@@ -35,9 +39,24 @@ class ForgotPasswordPage extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        const { email } = this.state;
+
+        requestPasswordReset({ to: email }, (error, data) => {
+            if (error) {
+                this.setState({
+                    error: "Erreur lors de l'envoi. Vérifiez l'email.",
+                });
+            } else {
+                this.setState({
+                    success: "Lien de réinitialisation envoyé par email.",
+                });
+            }
+        });
     }
 
     render() {
+        const { error, success } = this.state;
+
         return (
             <div className={styles.container}>
                 <LogoDesktop />
@@ -57,20 +76,25 @@ class ForgotPasswordPage extends Component {
                                 required
                             />
                         </div>
+                        {error && <span className={styles.error}>{error}</span>}
+                        {success && (
+                            <span className={styles.success}>{success}</span>
+                        )}
                         <div className={styles.buttonPosition}>
                             <button
                                 type="reset"
                                 onClick={this.handleCancel}
                                 className={styles.cancelButton}
                             >
-                                <i className="fa-solid fa-xmark"></i> Annuler
+                                <i className="fa-solid fa-arrow-left"></i>{" "}
+                                Retour
                             </button>
                             <button
                                 type="submit"
                                 className={styles.submitButton}
                             >
-                                <i className="fa-solid fa-envelope"></i>{" "}
-                                Récupérer mon mot de passe
+                                <i className="fa-solid fa-paper-plane"></i>{" "}
+                                Réinitialiser le mot de passe
                             </button>
                         </div>
                     </form>
