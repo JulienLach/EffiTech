@@ -45,22 +45,22 @@ class EmployeeForm extends Component {
         const errors = {};
         if (!lastname) {
             errors.lastname = "* Champ obligatoire";
-        } else if (!/^[a-zA-Z\s-]+$/.test(lastname)) {
+        } else if (!/^[a-zA-ZÀ-ÿÇç\s-]+$/.test(lastname)) {
             errors.lastname = "* Ne doit contenir que des lettres";
         }
         if (!firstname) {
             errors.firstname = "* Champ obligatoire";
-        } else if (!/^[a-zA-Z\s-]+$/.test(firstname)) {
+        } else if (!/^[a-zA-ZÀ-ÿÇç\s-]+$/.test(firstname)) {
             errors.firstname = "* Ne doit contenir que des lettres";
         }
         if (!job) {
             errors.job = "* Champ obligatoire";
-        } else if (!/^[a-zA-Z\s-]+$/.test(job)) {
+        } else if (!/^[a-zA-ZÀ-ÿÇç\s-]+$/.test(job)) {
             errors.job = "* Ne doit contenir que des lettres";
         }
         if (!speciality) {
             errors.speciality = "* Champ obligatoire";
-        } else if (!/^[a-zA-Z\s-]+$/.test(speciality)) {
+        } else if (!/^[a-zA-ZÀ-ÿÇç\s-]+$/.test(speciality)) {
             errors.speciality = "* Ne doit contenir que des lettres";
         }
         if (!email) {
