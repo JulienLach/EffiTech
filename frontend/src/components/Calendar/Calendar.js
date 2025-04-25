@@ -160,7 +160,7 @@ class Calendar extends Component {
                         startAccessor="start"
                         endAccessor="end"
                         defaultView="work_week"
-                        views={["work_week", "day"]}
+                        views={["work_week", "day", "month"]}
                         min={new Date(1970, 1, 1, 8, 0, 0)}
                         max={new Date(1970, 1, 1, 20, 0, 0)}
                         timeslots={2}
@@ -186,9 +186,11 @@ class Calendar extends Component {
                             next: <i className="fa-solid fa-chevron-right"></i>,
                             work_week: "Semaine",
                             day: "Jour",
+                            month: "Mois",
                             date: "Date",
                             time: "Heure",
                             event: "Évènement",
+                            showMore: (count) => `+ ${count} de plus`,
                         }}
                         eventPropGetter={eventStyleGetter}
                         onSelectEvent={this.openEventModal}
