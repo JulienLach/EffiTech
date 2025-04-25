@@ -22,6 +22,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 -   Fix error for reports send by email by setting JSON limit to 10MB
 -   Fix autocapitalize email on login page mobile
+-   Ensure mobile scroll to top for appointment/intervention form pages on mobile
 
 # [0.9.0] (2025-28-03)
 
