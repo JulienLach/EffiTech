@@ -31,6 +31,7 @@ import InvoiceDetailsPage from "./pages/InvoiceDetails/InvoiceDetailsPage";
 import StatisticsPage from "./pages/Statistics/StatisticsPage";
 import ParametersPage from "./pages/Parameters/ParametersPage";
 import ForgotPasswordPageWrapper from "./pages/ForgotPassword/ForgotPasswordPage";
+import ResetPasswordPageWrapper from "./pages/ResetPassword/ResetPasswordPage";
 
 const App = () => {
     return (
@@ -82,6 +83,10 @@ const App = () => {
                 <Route
                     path="/forgot-password"
                     element={<ForgotPasswordPageWrapper />}
+                />
+                <Route
+                    path="/reset-password"
+                    element={<ResetPasswordPageWrapper />}
                 />
             </Routes>
         </Router>

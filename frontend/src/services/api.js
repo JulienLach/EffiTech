@@ -1329,6 +1329,37 @@ function requestPasswordReset(emailData, callback) {
     xhr.send(JSON.stringify(emailData));
 }
 
+/**
+ * @api {post} /email/resetPassword Reset password
+ * @apiName ResetPassword
+ * @apiGroup Email
+ * @apiVersion 1.0.0
+ * @apiParam {String} email Employee email address.
+ * @apiParam {String} token JWT token from reset link.
+ * @apiParam {String} newPassword New password to set.
+ * @apiSuccess {Object} response Confirmation of password reset.
+ * @apiSuccess {String} response.message Confirmation message (e.g., "Mot de passe réinitialisé").
+ * @apiError {String} error Error message.
+ */
+function resetPassword(passwordData, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", `${API_URL}/email/resetPassword`);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.withCredentials = true;
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            callback(null, JSON.parse(xhr.responseText));
+        } else {
+            console.error(
+                "Erreur lors de la réinitialisation du mot de passe",
+                xhr.statusText
+            );
+            callback(new Error(xhr.statusText), null);
+        }
+    };
+    xhr.send(JSON.stringify(passwordData));
+}
+
 export {
     getAllEvents,
     getAllClients,
@@ -1365,4 +1396,5 @@ export {
     getClientInvoices,
     getInvoiceById,
     requestPasswordReset,
+    resetPassword,
 };
