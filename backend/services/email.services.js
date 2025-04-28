@@ -2,6 +2,7 @@ require("dotenv").config();
 const sendMail = require("../utils/email.js");
 const pool = require("../config/db.config.js");
 const jwt = require("jsonwebtoken");
+const crypto = require("crypto");
 
 function sendReport(req, res) {
     const { to, subject, text, attachments } = req.body;
@@ -57,6 +58,61 @@ async function sendPasswordResetLink(req, res) {
     }
 }
 
+async function resetPassword(req, res) {
+    const { email, token, newPassword } = req.body;
+
+    try {
+        // Vérification du token JWT
+        let decoded;
+        try {
+            decoded = jwt.verify(token, process.env.JWT_SECRET);
+        } catch (error) {
+            return res.status(400).send({ error: "Lien invalide ou expiré" });
+        }
+
+        // Vérification que l'email du token correspond
+        if (decoded.email !== email) {
+            return res.status(400).send({ error: "Email invalide" });
+        }
+
+        // Recherche de l'employé par email
+        const query = "SELECT id_employee FROM employees WHERE email = $1";
+        const values = [email];
+        const result = await pool.query(query, values);
+
+        if (result.rows.length === 0) {
+            return res.status(404).send({ error: "Employé non trouvé" });
+        }
+
+        const employee = result.rows[0];
+
+        // Vérification que l'ID de l'employé correspond
+        if (decoded.id !== employee.id_employee) {
+            return res.status(400).send({ error: "Lien invalide" });
+        }
+
+        // Hachage du nouveau mot de passe (comme dans Employee.createEmployee)
+        const hash = crypto.createHash("sha512");
+        hash.update(newPassword);
+        const hashedPassword = hash.digest("hex");
+
+        // Mise à jour du mot de passe dans la base de données
+        const updateQuery =
+            "UPDATE employees SET password = $1 WHERE email = $2";
+        const updateValues = [hashedPassword, email];
+        await pool.query(updateQuery, updateValues);
+
+        res.status(200).send({ message: "Mot de passe réinitialisé" });
+    } catch (error) {
+        console.error(
+            "Erreur lors de la réinitialisation du mot de passe",
+            error
+        );
+        res.status(500).send({ error: "Erreur serveur" });
+    }
+}
+
 exports.sendReport = sendReport;
 exports.sendEmployeeCredentials = sendEmployeeCredentials;
 exports.sendPasswordResetLink = sendPasswordResetLink;
+exports.resetPassword = resetPassword;

@@ -58,8 +58,10 @@ app.get("/", (req, res) => {
     res.send("Test!");
 });
 
-// Route de connexion (publique)
+// Routes de connexion (publique)
 app.use("/auth", authRoutes);
+app.post("/email/requestPasswordReset", emailRoutes);
+app.post("/email/resetPassword", emailRoutes);
 
 // Routes d'employés
 app.use("/employees", authenticateToken, employeeRoutes);

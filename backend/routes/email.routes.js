@@ -8,4 +8,6 @@ router.post("/employeeCredentials", emailServices.sendEmployeeCredentials);
 
 router.post("/requestPasswordReset", emailServices.sendPasswordResetLink);
 
+router.post("/resetPassword", emailServices.resetPassword);
+
 module.exports = router;
