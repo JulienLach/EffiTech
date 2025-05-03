@@ -15,6 +15,7 @@ const statisticRoutes = require("./routes/statistic.routes.js");
 const invoiceRoutes = require("./routes/invoice.routes.js");
 const emailRoutes = require("./routes/email.routes.js");
 const authenticateToken = require("./middlewares/auth.middleware");
+const runMigrations = require("./migrations/migrations.js");
 
 dotenv.config({ path: ".env" });
 
@@ -43,7 +44,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.use(express.json());
+app.use(express.json({ limit: "10mb" })); // Limite de taille de 10MB pour le corps de la requête pour traiter les fichiers et les base64 large
 
 app.use(
     fileUpload({
@@ -57,8 +58,10 @@ app.get("/", (req, res) => {
     res.send("Test!");
 });
 
-// Route de connexion (publique)
+// Routes de connexion (publique)
 app.use("/auth", authRoutes);
+app.post("/email/requestPasswordReset", emailRoutes);
+app.post("/email/resetPassword", emailRoutes);
 
 // Routes d'employés
 app.use("/employees", authenticateToken, employeeRoutes);
@@ -93,6 +96,17 @@ app.use("/invoices", authenticateToken, invoiceRoutes);
 // Route des emails
 app.use("/email", authenticateToken, emailRoutes);
 
-app.listen(PORT, () => {
-    console.log(`Server is running on ${SERVER_URL}`);
-});
+// Fonction pour démarrer le serveur avec les migrations
+async function startServer() {
+    try {
+        await runMigrations();
+        app.listen(PORT, () => {
+            console.log(`Server is running on ${SERVER_URL}`);
+        });
+    } catch (error) {
+        console.error("Failed to start server:", error);
+        process.exit(1);
+    }
+}
+
+startServer();

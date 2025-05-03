@@ -70,6 +70,12 @@ class InvoicesPage extends Component {
         }));
     }
 
+    handleButtonClick(invoice) {
+        this.props.navigate("/invoice-details", {
+            state: { invoice: invoice },
+        });
+    }
+
     formatDate(invoiceDate) {
         const date = new Date(invoiceDate);
         return date.toLocaleDateString("fr-FR", {
@@ -130,11 +136,22 @@ class InvoicesPage extends Component {
                                 {currentFilteredInvoices.map((invoice) => (
                                     <tr key={invoice.id}>
                                         <td>
-                                            <a>FC-{invoice.idInvoice}</a>
+                                            <a
+                                                className={styles.titleLink}
+                                                onClick={() =>
+                                                    this.handleButtonClick(
+                                                        invoice
+                                                    )
+                                                }
+                                            >
+                                                FC-{invoice.idInvoice}
+                                            </a>
                                         </td>
                                         <td>
-                                            {invoice.clientFirstname}{" "}
-                                            {invoice.clientLastname}
+                                            <a>
+                                                {invoice.clientFirstname}{" "}
+                                                {invoice.clientLastname}
+                                            </a>
                                         </td>
                                         <td>{invoice.amountWithoutTax} €</td>
                                         <td>{invoice.amountIncludingTax} €</td>

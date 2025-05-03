@@ -20,11 +20,13 @@ class EmployeesPage extends Component {
             filteredEmployees: [],
             isModalOpen: false,
             searchItem: "",
+            view: "cards",
         };
         this.handleButtonClick = this.handleButtonClick.bind(this);
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.handleSearchChange = this.handleSearchChange.bind(this);
+        this.toggleView = this.toggleView.bind(this);
     }
 
     componentDidMount() {
@@ -68,8 +70,12 @@ class EmployeesPage extends Component {
         this.setState({ isModalOpen: false });
     }
 
+    toggleView(view) {
+        this.setState({ view });
+    }
+
     render() {
-        const { filteredEmployees, isModalOpen } = this.state;
+        const { filteredEmployees, isModalOpen, view } = this.state;
 
         return (
             <>
@@ -105,72 +111,165 @@ class EmployeesPage extends Component {
                                         onChange={this.handleSearchChange}
                                     />
                                 </div>
-                                <div className={styles.columnModalFilter}>
-                                    <div
-                                        className={styles.typeFilter}
-                                        onClick={this.openCategoryModal}
-                                    >
-                                        <i className="fa-solid fa-wrench"></i>
-                                        <p>Métier</p>
-                                    </div>
-                                </div>
                             </div>
-                            <div className={styles.divider}></div>
-                            <div className={styles.cardContainer}>
-                                {filteredEmployees.map((employee) => (
-                                    <div
-                                        key={employee.idEmployee}
-                                        className={styles.card}
-                                        onClick={() =>
-                                            this.handleButtonClick(employee)
-                                        }
-                                    >
-                                        <div className={styles.profilPicture}>
-                                            <div className={styles.iconWrapper}>
-                                                <i className="fa-solid fa-user"></i>
-                                            </div>
-                                        </div>
-                                        <div className={styles.profilInfo}>
-                                            <p className={styles.name}>
-                                                {employee.firstname}{" "}
-                                                {employee.lastname}
-                                                {employee.isAdmin && (
-                                                    <span
-                                                        className={
-                                                            styles.adminBadge
-                                                        }
-                                                    >
-                                                        Administrateur
-                                                    </span>
-                                                )}
-                                            </p>
-                                            <p className={styles.job}>
-                                                {employee.job}
-                                            </p>
-                                            <p className={styles.info}>
-                                                {employee.phoneNumber}
-                                            </p>
-                                            <p className={styles.info}>
-                                                {employee.email}
-                                            </p>
-                                            <div className={styles.moreInfo}>
-                                                <button
-                                                    type="button"
-                                                    onClick={() =>
-                                                        this.handleButtonClick(
-                                                            employee
-                                                        )
+                            <div className={styles.tabs}>
+                                <button
+                                    className={`${styles.viewButton} ${
+                                        view === "cards"
+                                            ? styles.viewButtonActive
+                                            : ""
+                                    }`}
+                                    onClick={() => this.toggleView("cards")}
+                                >
+                                    Cartes
+                                </button>
+                                <button
+                                    className={`${styles.viewButton} ${
+                                        view === "table"
+                                            ? styles.viewButtonActive
+                                            : ""
+                                    }`}
+                                    onClick={() => this.toggleView("table")}
+                                >
+                                    Tableau
+                                </button>
+                            </div>
+                            {view === "cards" ? (
+                                <div className={styles.cardContainer}>
+                                    {filteredEmployees.map((employee) => (
+                                        <div
+                                            key={employee.idEmployee}
+                                            className={styles.card}
+                                            onClick={() =>
+                                                this.handleButtonClick(employee)
+                                            }
+                                        >
+                                            <div
+                                                className={styles.profilPicture}
+                                            >
+                                                <div
+                                                    className={
+                                                        styles.iconWrapper
                                                     }
                                                 >
-                                                    {" "}
-                                                    Profil employé
-                                                    <i className="fa-solid fa-user"></i>{" "}
-                                                </button>
+                                                    <i className="fa-solid fa-user"></i>
+                                                </div>
+                                            </div>
+                                            <div className={styles.profilInfo}>
+                                                <p className={styles.name}>
+                                                    {employee.firstname}{" "}
+                                                    {employee.lastname}
+                                                    {employee.isAdmin && (
+                                                        <span
+                                                            className={
+                                                                styles.adminBadge
+                                                            }
+                                                        >
+                                                            Administrateur
+                                                        </span>
+                                                    )}
+                                                </p>
+                                                <p className={styles.job}>
+                                                    {employee.job}
+                                                </p>
+                                                <p className={styles.info}>
+                                                    {employee.phoneNumber}
+                                                </p>
+                                                <p className={styles.info}>
+                                                    {employee.email}
+                                                </p>
+                                                <div
+                                                    className={styles.moreInfo}
+                                                >
+                                                    <button
+                                                        type="button"
+                                                        onClick={() =>
+                                                            this.handleButtonClick(
+                                                                employee
+                                                            )
+                                                        }
+                                                    >
+                                                        Profil employé{" "}
+                                                        <i className="fa-solid fa-user"></i>{" "}
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                ))}
-                            </div>
+                                    ))}
+                                </div>
+                            ) : (
+                                <div>
+                                    <div className={styles.divider}></div>
+                                    <table>
+                                        <thead className={styles.stickyThead}>
+                                            <tr>
+                                                <th>Nom</th>
+                                                <th>Prénom</th>
+                                                <th>Métier</th>
+                                                <th>Email</th>
+                                                <th>Téléphone</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {filteredEmployees.map(
+                                                (employee) => (
+                                                    <tr
+                                                        key={
+                                                            employee.idEmployee
+                                                        }
+                                                    >
+                                                        <td>
+                                                            <a
+                                                                href="#"
+                                                                onClick={() =>
+                                                                    this.handleButtonClick(
+                                                                        employee
+                                                                    )
+                                                                }
+                                                            >
+                                                                {
+                                                                    employee.lastname
+                                                                }
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <a
+                                                                href="#"
+                                                                onClick={() =>
+                                                                    this.handleButtonClick(
+                                                                        employee
+                                                                    )
+                                                                }
+                                                            >
+                                                                {
+                                                                    employee.firstname
+                                                                }
+                                                            </a>
+                                                        </td>
+                                                        <td>{employee.job}</td>
+                                                        <td>
+                                                            <a
+                                                                href={`mailto:${employee.email}`}
+                                                            >
+                                                                {employee.email}
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <a
+                                                                href={`tel:${employee.phoneNumber}`}
+                                                            >
+                                                                {
+                                                                    employee.phoneNumber
+                                                                }
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                )
+                                            )}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            )}
                         </div>
                     </>
                 )}

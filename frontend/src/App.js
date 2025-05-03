@@ -27,8 +27,11 @@ import DocumentDetailsPage from "./pages/Documents/DocumentDetailsPage";
 import NotificationsPage from "./pages/Notifications/NotificationsPage";
 import CalendarMobilePage from "./pages/CalendarMobile/CalendarMobilePage";
 import InvoicesPage from "./pages/Invoices/InvoicesPage";
+import InvoiceDetailsPage from "./pages/InvoiceDetails/InvoiceDetailsPage";
 import StatisticsPage from "./pages/Statistics/StatisticsPage";
 import ParametersPage from "./pages/Parameters/ParametersPage";
+import ForgotPasswordPageWrapper from "./pages/ForgotPassword/ForgotPasswordPage";
+import ResetPasswordPageWrapper from "./pages/ResetPassword/ResetPasswordPage";
 
 const App = () => {
     return (
@@ -36,7 +39,7 @@ const App = () => {
             <Routes>
                 <Route path="/" element={<Navigate to="/login" />} />
                 <Route path="/login" element={<LoginPage />} />
-                <Route path="/create-account" element={<CreateAccountPage />} />
+                {/* <Route path="/create-account" element={<CreateAccountPage />} /> */}
                 <Route path="/calendar" element={<CalendarPage />} />
                 <Route
                     path="/intervention-form"
@@ -71,8 +74,20 @@ const App = () => {
                     element={<CalendarMobilePage />}
                 />
                 <Route path="/invoices" element={<InvoicesPage />} />
+                <Route
+                    path="/invoice-details"
+                    element={<InvoiceDetailsPage />}
+                />
                 <Route path="/statistics" element={<StatisticsPage />} />
                 <Route path="/parameters" element={<ParametersPage />} />
+                <Route
+                    path="/forgot-password"
+                    element={<ForgotPasswordPageWrapper />}
+                />
+                <Route
+                    path="/reset-password"
+                    element={<ResetPasswordPageWrapper />}
+                />
             </Routes>
         </Router>
     );

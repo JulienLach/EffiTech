@@ -189,3 +189,23 @@ input:checked + .slider:before {
 .eventId {
     margin-bottom: 0.4em;
 }
+
+.description.active {
+    display: block;
+}
+
+.description {
+    display: none;
+}
+
+.descriptionLabel {
+    display: block;
+}
+
+.description textarea {
+    border: 1px solid lightgrey;
+    border-radius: 0.55em;
+    padding: 1em;
+    width: 100%;
+    font-size: 0.9em;
+}

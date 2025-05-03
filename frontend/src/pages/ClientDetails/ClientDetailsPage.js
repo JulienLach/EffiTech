@@ -5,7 +5,11 @@ import TemplateGlobal from "../Template/TemplateGlobal";
 import TemplateGlobalMobile from "../Template/TemplateGlobalMobile";
 import styles from "./ClientDetailsPage.module.css";
 import stylesMobile from "./ClientDetailsPageMobile.module.css";
-import { getClientById, getEventsByClientId } from "../../services/api";
+import {
+    getClientById,
+    getEventsByClientId,
+    getClientInvoices,
+} from "../../services/api";
 import getStatusIndicator from "../../components/Utils/StatusUtils";
 import getCategoryIndicator from "../../components/Utils/CategoryUtils";
 
@@ -24,6 +28,8 @@ class ClientDetailsPage extends Component {
             idClient: idClient || (client ? client.idClient : null), // idClient envoyé à partir de calendar ou objet client complet à partir de clients page
             activeTab: "coordonnées",
             events: [],
+            eventsPerPage: 10,
+            currentPage: 1,
         };
         this.handleButtonClick = this.handleButtonClick.bind(this);
     }
@@ -55,6 +61,19 @@ class ClientDetailsPage extends Component {
                 console.log("Données des événements récupérées:", data);
             }
         });
+
+        getClientInvoices(idClient, (error, data) => {
+            if (error) {
+                console.error(
+                    "Erreur lors de la récupération des factures",
+                    error
+                );
+                this.setState({ error: error.message });
+            } else {
+                this.setState({ invoices: data });
+                console.log("Données des factures récupérées:", data);
+            }
+        });
     }
 
     handleButtonClick = () => {
@@ -67,9 +86,46 @@ class ClientDetailsPage extends Component {
         this.setState({ activeTab: tab });
     };
 
+    handlePageChange(event, pageNumber) {
+        event.preventDefault();
+        this.setState({ currentPage: pageNumber });
+    }
+
+    handleNextPage(event) {
+        event.preventDefault();
+        this.setState((prevState) => ({
+            currentPage: Math.min(
+                prevState.currentPage + 1,
+                Math.ceil(prevState.events.length / prevState.eventsPerPage)
+            ),
+        }));
+    }
+
+    handlePreviousPage(event) {
+        event.preventDefault();
+        this.setState((prevState) => ({
+            currentPage: Math.max(prevState.currentPage - 1, 1),
+        }));
+    }
+
     render() {
-        const { client, activeTab, events } = this.state;
+        const {
+            client,
+            activeTab,
+            events,
+            invoices,
+            currentPage,
+            eventsPerPage,
+        } = this.state;
         if (!client) return <div></div>; // pour charger l'idClient avant de récupérer les données, corriger la logique d'ordre de récupération des données
+
+        // Calculer les events à afficher pour la page actuelle
+        const indexOfLastEvent = currentPage * eventsPerPage;
+        const indexOfFirstEvent = indexOfLastEvent - eventsPerPage;
+        const currentEvents = events.slice(indexOfFirstEvent, indexOfLastEvent);
+
+        // Calculer le nombre total de pages
+        const totalPages = Math.ceil(events.length / eventsPerPage);
 
         const initial =
             client.category === "Professionnel"
@@ -309,6 +365,18 @@ class ClientDetailsPage extends Component {
                                         >
                                             Interventions
                                         </button>
+                                        <button
+                                            className={`${styles.tabButton} ${
+                                                activeTab === "Factures"
+                                                    ? styles.activeTab
+                                                    : ""
+                                            }`}
+                                            onClick={() =>
+                                                this.handleTabClick("Factures")
+                                            }
+                                        >
+                                            Factures
+                                        </button>
                                     </div>
                                     {activeTab === "coordonnées" ? (
                                         <>
@@ -381,21 +449,15 @@ class ClientDetailsPage extends Component {
                                                     </a>
                                                 </p>
                                             </div>
-                                            {activeTab === "coordonnées" && (
-                                                <button
-                                                    className={
-                                                        styles.editButton
-                                                    }
-                                                    onClick={
-                                                        this.handleButtonClick
-                                                    }
-                                                >
-                                                    <i className="fa-solid fa-pen"></i>
-                                                    Modifier
-                                                </button>
-                                            )}
+                                            <button
+                                                className={styles.editButton}
+                                                onClick={this.handleButtonClick}
+                                            >
+                                                <i className="fa-solid fa-pen"></i>
+                                                Modifier
+                                            </button>
                                         </>
-                                    ) : (
+                                    ) : activeTab === "interventions" ? (
                                         <>
                                             <div
                                                 className={
@@ -446,14 +508,16 @@ class ClientDetailsPage extends Component {
                                                                             }
                                                                         </td>
                                                                         <td>
-                                                                            {
-                                                                                event.title
-                                                                            }
+                                                                            <a>
+                                                                                {
+                                                                                    event.title
+                                                                                }
+                                                                            </a>
                                                                         </td>
                                                                         <td>
                                                                             {getStatusIndicator(
                                                                                 event.status
-                                                                            )}{" "}
+                                                                            )}
                                                                         </td>
                                                                         <td>
                                                                             {event.startingDate
@@ -462,17 +526,58 @@ class ClientDetailsPage extends Component {
                                                                                   ).toLocaleDateString()
                                                                                 : ""}
                                                                         </td>
-                                                                        <td>
-                                                                            {`${event.employee.firstname} ${event.employee.lastname}`}
-                                                                        </td>
+                                                                        <td>{`${event.employee.firstname} ${event.employee.lastname}`}</td>
                                                                     </tr>
                                                                 )
                                                             )}
                                                     </tbody>
                                                 </table>
+                                                <div
+                                                    className={
+                                                        styles.pagination
+                                                    }
+                                                >
+                                                    <button
+                                                        onClick={(e) =>
+                                                            this.handlePreviousPage(
+                                                                e
+                                                            )
+                                                        }
+                                                        disabled={
+                                                            currentPage === 1
+                                                        }
+                                                    >
+                                                        <i className="fa-solid fa-chevron-left"></i>
+                                                    </button>
+                                                    <button
+                                                        onClick={(e) =>
+                                                            this.handleNextPage(
+                                                                e
+                                                            )
+                                                        }
+                                                        disabled={
+                                                            currentPage ===
+                                                            totalPages
+                                                        }
+                                                    >
+                                                        <i className="fa-solid fa-chevron-right"></i>
+                                                    </button>
+                                                </div>
                                             </div>
                                         </>
-                                    )}{" "}
+                                    ) : (
+                                        <>
+                                            <div
+                                                className={
+                                                    styles.interventionsTable
+                                                }
+                                            >
+                                                <div
+                                                    className={styles.divider}
+                                                ></div>
+                                            </div>
+                                        </>
+                                    )}
                                 </div>
                             ) : (
                                 <div className={styles.part}>
@@ -544,6 +649,18 @@ class ClientDetailsPage extends Component {
                                         >
                                             Interventions
                                         </button>
+                                        <button
+                                            className={`${styles.tabButton} ${
+                                                activeTab === "Factures"
+                                                    ? styles.activeTab
+                                                    : ""
+                                            }`}
+                                            onClick={() =>
+                                                this.handleTabClick("Factures")
+                                            }
+                                        >
+                                            Factures
+                                        </button>
                                     </div>
                                     {activeTab === "coordonnées" ? (
                                         <>
@@ -600,14 +717,24 @@ class ClientDetailsPage extends Component {
                                                     </a>
                                                 </p>
                                             </div>
+                                            <button
+                                                className={styles.editButton}
+                                                onClick={this.handleButtonClick}
+                                            >
+                                                <i className="fa-solid fa-pen"></i>
+                                                Modifier
+                                            </button>
                                         </>
-                                    ) : (
+                                    ) : activeTab === "interventions" ? (
                                         <>
                                             <div
                                                 className={
                                                     styles.interventionsTable
                                                 }
                                             >
+                                                <div
+                                                    className={styles.divider}
+                                                ></div>
                                                 <table>
                                                     <thead>
                                                         <tr>
@@ -649,15 +776,16 @@ class ClientDetailsPage extends Component {
                                                                             }
                                                                         </td>
                                                                         <td>
-                                                                            {
-                                                                                event.title
-                                                                            }
+                                                                            <a>
+                                                                                {
+                                                                                    event.title
+                                                                                }
+                                                                            </a>
                                                                         </td>
                                                                         <td>
                                                                             {getStatusIndicator(
                                                                                 event.status
-                                                                            )}{" "}
-                                                                            {/* Utilisation de getStatusIndicator ici */}
+                                                                            )}
                                                                         </td>
                                                                         <td>
                                                                             {event.startingDate
@@ -666,8 +794,67 @@ class ClientDetailsPage extends Component {
                                                                                   ).toLocaleDateString()
                                                                                 : ""}
                                                                         </td>
+                                                                        <td>{`${event.employee.firstname} ${event.employee.lastname}`}</td>
+                                                                    </tr>
+                                                                )
+                                                            )}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <div
+                                                className={
+                                                    styles.interventionsTable
+                                                }
+                                            >
+                                                <div
+                                                    className={styles.divider}
+                                                ></div>
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Référence</th>
+                                                            <th>Montant HT</th>
+                                                            <th>Montant TTC</th>
+                                                            <th>
+                                                                Date de
+                                                                facturation
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {invoices &&
+                                                            invoices.map(
+                                                                (invoice) => (
+                                                                    <tr
+                                                                        key={
+                                                                            invoice.idInvoice
+                                                                        }
+                                                                    >
                                                                         <td>
-                                                                            {`${event.employee.firstname} ${event.employee.lastname}`}
+                                                                            FC-
+                                                                            {
+                                                                                invoice.idInvoice
+                                                                            }
+                                                                        </td>
+                                                                        <td>
+                                                                            {
+                                                                                invoice.amountWithoutTax
+                                                                            }{" "}
+                                                                            €
+                                                                        </td>
+                                                                        <td>
+                                                                            {
+                                                                                invoice.amountIncludingTax
+                                                                            }{" "}
+                                                                            €
+                                                                        </td>
+                                                                        <td>
+                                                                            {new Date(
+                                                                                invoice.invoiceDate
+                                                                            ).toLocaleDateString()}
                                                                         </td>
                                                                     </tr>
                                                                 )
@@ -676,15 +863,6 @@ class ClientDetailsPage extends Component {
                                                 </table>
                                             </div>
                                         </>
-                                    )}
-                                    {activeTab === "coordonnées" && (
-                                        <button
-                                            className={styles.editButton}
-                                            onClick={this.handleButtonClick}
-                                        >
-                                            <i className="fa-solid fa-pen"></i>
-                                            Modifier
-                                        </button>
                                     )}
                                 </div>
                             )}

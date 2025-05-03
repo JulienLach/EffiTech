@@ -117,8 +117,11 @@ class DocumentsPage extends Component {
     handleSearchChange(event) {
         const searchItem = event.target.value.toLowerCase();
         this.setState((prevState) => {
-            const filteredDocuments = prevState.documents.filter((document) =>
-                document.title.toLowerCase().includes(searchItem)
+            const filteredDocuments = prevState.documents.filter(
+                (document) =>
+                    document.title.toLowerCase().includes(searchItem) ||
+                    document.brand.toLowerCase().includes(searchItem) ||
+                    document.model.toLowerCase().includes(searchItem)
             );
             return { searchItem, filteredDocuments, currentPage: 1 };
         });
@@ -168,7 +171,7 @@ class DocumentsPage extends Component {
                                 type="text"
                                 id="search"
                                 name="search"
-                                placeholder="Rechercher par titre"
+                                placeholder="Rechercher"
                                 onChange={this.handleSearchChange}
                             />
                         </div>

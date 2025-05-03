@@ -33,12 +33,14 @@ class InterventionFormPage extends Component {
             clientSignature: "",
             employeeSignature: "",
             duration: "",
+            description: "",
             errors: {},
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSignatureChange = this.handleSignatureChange.bind(this);
+        this.displayDescription = this.displayDescription.bind(this);
     }
 
     componentDidMount() {
@@ -56,6 +58,10 @@ class InterventionFormPage extends Component {
             duration,
             endingHour: event.endingHour,
         });
+
+        if (isMobile) {
+            window.scrollTo(0, 0);
+        }
     }
 
     calculateDuration(startingHour, endingHour) {
@@ -63,6 +69,29 @@ class InterventionFormPage extends Component {
             .toISOString()
             .substring(11, 16);
         return duration;
+    }
+
+    displayDescription(event) {
+        const { name, checked } = event.target;
+        if (name === "reschedule") {
+            this.setState({ reschedule: checked });
+
+            const description = isMobile
+                ? document.querySelector(`.${stylesMobile.description}`)
+                : document.querySelector(`.${styles.description}`);
+
+            if (description) {
+                if (checked) {
+                    description.classList.add(
+                        isMobile ? stylesMobile.active : styles.active
+                    );
+                } else {
+                    description.classList.remove(
+                        isMobile ? stylesMobile.active : styles.active
+                    );
+                }
+            }
+        }
     }
 
     handleChange(event) {
@@ -141,7 +170,7 @@ class InterventionFormPage extends Component {
         if (reschedule) {
             const eventToCreate = {
                 title: "Nouvelle intervention",
-                description: "",
+                description: this.state.description,
                 status: 1,
                 isPlanned: false,
                 type: "Intervention",
@@ -427,11 +456,26 @@ class InterventionFormPage extends Component {
                                             name="reschedule"
                                             checked={reschedule}
                                             onChange={this.handleChange}
+                                            onClick={this.displayDescription}
                                         />
                                         <span
                                             className={stylesMobile.slider}
                                         ></span>
                                     </label>
+                                    <div className={stylesMobile.description}>
+                                        <label
+                                            className={stylesMobile.labelInput}
+                                        >
+                                            Description :
+                                        </label>
+                                        <textarea
+                                            rows="7"
+                                            cols="40"
+                                            name="description"
+                                            value={this.state.description}
+                                            onChange={this.handleChange}
+                                        ></textarea>
+                                    </div>
                                 </div>
                             </div>
                             <div className={stylesMobile.modalFooter}>
@@ -666,11 +710,28 @@ class InterventionFormPage extends Component {
                                                 name="reschedule"
                                                 checked={reschedule}
                                                 onChange={this.handleChange}
+                                                onClick={
+                                                    this.displayDescription
+                                                }
                                             />
                                             <span
                                                 className={styles.slider}
                                             ></span>
                                         </label>
+                                        <div className={styles.description}>
+                                            <label
+                                                className={styles.labelInput}
+                                            >
+                                                Description :
+                                            </label>
+                                            <textarea
+                                                rows="7"
+                                                cols="40"
+                                                name="description"
+                                                value={this.state.description}
+                                                onChange={this.handleChange}
+                                            ></textarea>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className={styles.separation}></div>

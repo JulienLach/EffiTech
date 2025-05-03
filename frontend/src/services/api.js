@@ -1249,6 +1249,117 @@ function getEventsByClientId(idClient, callback) {
     xhr.send();
 }
 
+/**
+ * @api {get} /invoices/:idClient Get invoices by client ID
+ * @apiName GetClientInvoices
+ * @apiGroup Invoices
+ * @apiVersion 1.0.0
+ * @apiParam {Number} idClient Client ID (in URL path).
+ * @apiSuccess {Object[]} invoices List of invoices for the client.
+ * @apiSuccess {Number} invoices.idInvoice Invoice ID.
+ * @apiSuccess {Number} invoices.idClient Client ID.
+ * @apiSuccess {Number} invoices.amountIncludingTax Amount including tax.
+ * @apiSuccess {Number} invoices.amountWithoutTax Amount without tax.
+ * @apiSuccess {String} invoices.invoiceDate Invoice date (ISO format).
+ * @apiSuccess {String} invoices.file Invoice file content (Base64 encoded or URL).
+ * @apiError {String} error Error message.
+ */
+function getClientInvoices(idClient, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", `${API_URL}/invoices/${idClient}`);
+    xhr.withCredentials = true;
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            callback(null, JSON.parse(xhr.responseText));
+        } else {
+            console.error(
+                "Erreur de récupération des factures du client",
+                xhr.statusText
+            );
+            callback(new Error(xhr.statusText), null);
+        }
+    };
+    xhr.send();
+}
+
+function getInvoiceById(idInvoice, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", `${API_URL}/invoices/${idInvoice}`);
+    xhr.withCredentials = true;
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            callback(null, JSON.parse(xhr.responseText));
+        } else {
+            console.error(
+                "Erreur de récupération de la facture",
+                xhr.statusText
+            );
+            callback(new Error(xhr.statusText), null);
+        }
+    };
+    xhr.send();
+}
+
+/**
+ * @api {post} /email/requestPasswordReset Request password reset
+ * @apiName RequestPasswordReset
+ * @apiGroup Email
+ * @apiVersion 1.0.0
+ * @apiParam {String} to Recipient email address.
+ * @apiSuccess {Object} response Confirmation of email sending.
+ * @apiSuccess {String} response.message Confirmation message (e.g., "Email de réinitialisation envoyé").
+ * @apiError {String} error Error message.
+ */
+function requestPasswordReset(emailData, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", `${API_URL}/email/requestPasswordReset`);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.withCredentials = true;
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            callback(null, JSON.parse(xhr.responseText));
+        } else {
+            console.error(
+                "Erreur lors de la demande de réinitialisation",
+                xhr.statusText
+            );
+            callback(new Error(xhr.statusText), null);
+        }
+    };
+    xhr.send(JSON.stringify(emailData));
+}
+
+/**
+ * @api {post} /email/resetPassword Reset password
+ * @apiName ResetPassword
+ * @apiGroup Email
+ * @apiVersion 1.0.0
+ * @apiParam {String} email Employee email address.
+ * @apiParam {String} token JWT token from reset link.
+ * @apiParam {String} newPassword New password to set.
+ * @apiSuccess {Object} response Confirmation of password reset.
+ * @apiSuccess {String} response.message Confirmation message (e.g., "Mot de passe réinitialisé").
+ * @apiError {String} error Error message.
+ */
+function resetPassword(passwordData, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", `${API_URL}/email/resetPassword`);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.withCredentials = true;
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            callback(null, JSON.parse(xhr.responseText));
+        } else {
+            console.error(
+                "Erreur lors de la réinitialisation du mot de passe",
+                xhr.statusText
+            );
+            callback(new Error(xhr.statusText), null);
+        }
+    };
+    xhr.send(JSON.stringify(passwordData));
+}
+
 export {
     getAllEvents,
     getAllClients,
@@ -1282,4 +1393,8 @@ export {
     sendEmail,
     sendEmployeeCredentials,
     getEventsByClientId,
+    getClientInvoices,
+    getInvoiceById,
+    requestPasswordReset,
+    resetPassword,
 };

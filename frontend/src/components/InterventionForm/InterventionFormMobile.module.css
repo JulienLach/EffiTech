@@ -112,6 +112,7 @@ h3 {
 .planCard h3,
 .planCard p {
     margin-bottom: 0.25em;
+    margin-top: 0.15em;
 }
 
 .fillButton {

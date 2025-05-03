@@ -138,11 +138,11 @@ class InvoiceForm extends Component {
         const { invoice, clients, searchQuery, errors } = this.state;
 
         // Filtrer les clients en fonction de la recherche
-        const filteredClients = clients.filter((client) =>
-            `${client.firstname} ${client.lastname}`
-                .toLowerCase()
-                .includes(searchQuery.toLowerCase())
-        );
+        // const filteredClients = clients.filter((client) =>
+        //     `${client.firstname} ${client.lastname}`
+        //         .toLowerCase()
+        //         .includes(searchQuery.toLowerCase())
+        // );
 
         return (
             <>
@@ -250,6 +250,8 @@ class InvoiceForm extends Component {
                                     type="file"
                                     id="file"
                                     name="file"
+                                    mimetype="application/pdf"
+                                    accept="application/pdf"
                                     onChange={this.handleFileChange}
                                 />
                                 {errors.file && (

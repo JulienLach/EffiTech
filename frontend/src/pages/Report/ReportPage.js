@@ -63,15 +63,41 @@ class ReportPage extends Component {
     }
 
     sendReport() {
-        const { clientEmail, event } = this.state;
+        const { clientEmail, reportData, companyData } = this.state;
+
+        if (!reportData || !companyData) {
+            console.error("Données manquantes pour générer le PDF");
+            return;
+        }
+
+        // Construire reportDetails comme dans le render
+        const { event } = this.state;
+        const reportDetails = {
+            idEvent: event.idEvent,
+            title: event.title,
+            breakdown: reportData.breakdown,
+            workDone: reportData.workDone,
+            startingDate: event.startingDate,
+            startingHour: event.startingHour,
+            endingHour: event.endingHour,
+            duration: reportData.duration,
+            client: event.client,
+            clientSignature: reportData.client_signature,
+            employeeSignature: reportData.employee_signature,
+            employee: event.employee,
+        };
 
         try {
-            const dataUrl = generatePDF(event.title);
+            const dataUrl = generatePDF({
+                report: reportDetails,
+                reportData: reportData,
+                companyData: companyData,
+            });
             const base64Data = dataUrl.split(",")[1];
 
             const attachments = [
                 {
-                    filename: "rapport_intervention.pdf",
+                    filename: `rapport_intervention_INT-${event.idEvent}.pdf`,
                     content: base64Data,
                     contentType: "application/pdf",
                     encoding: "base64",
@@ -80,8 +106,10 @@ class ReportPage extends Component {
 
             const emailData = {
                 to: clientEmail,
-                subject: "Rapport d'intervention",
-                text: `Bonjour, ci-joint le rapport d'intervention réalisé ce jour.`,
+                subject: `Rapport d'intervention INT-${event.idEvent}`,
+                text: `Bonjour, ci-joint le rapport d'intervention réalisé le ${new Date(
+                    event.startingDate
+                ).toLocaleDateString()}.`,
                 attachments: attachments,
             };
 

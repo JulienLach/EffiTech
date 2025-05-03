@@ -8,7 +8,7 @@
     box-shadow: -0.17em 0 0.17em rgba(0, 0, 0, 0.1);
     z-index: 1000;
     padding: 1.5em;
-    border-radius: 1em;
+    border-top-left-radius: 1.25em;
     display: none;
 }
 

@@ -871,17 +871,23 @@ class CalendarPage extends Component {
                             </div>
                         </div>
                         {isEventModalOpen && !isUpdateFormOpen && (
-                            <InterventionForm
-                                event={selectedEvent}
-                                closeModal={() => this.toggleEventModal()}
-                                openUpdateForm={this.openUpdateForm}
-                            />
+                            <>
+                                <InterventionForm
+                                    event={selectedEvent}
+                                    closeModal={() => this.toggleEventModal()}
+                                    openUpdateForm={this.openUpdateForm}
+                                />
+                                <div className={styles.modalBackground}></div>
+                            </>
                         )}
                         {isUpdateFormOpen && (
-                            <UpdateInterventionForm
-                                event={selectedEvent}
-                                closeModal={this.closeUpdateForm}
-                            />
+                            <>
+                                <UpdateInterventionForm
+                                    event={selectedEvent}
+                                    closeModal={this.closeUpdateForm}
+                                />
+                                <div className={styles.modalBackground}></div>
+                            </>
                         )}
                         {isCreateEventModalOpen && (
                             <CreateEventForm

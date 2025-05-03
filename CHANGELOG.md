@@ -6,6 +6,27 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+# [0.9.1] (2025-03-05)
+
+## Changes
+
+-   Add migration.js script to automate database updates with Ansible
+-   Add table view for employees page
+-   Add brand and model filters to document search field
+-   Add invoices tab to client details page
+-   Add full report PDF layout send by email
+-   Add invoice details page
+-   Add paging to client details events tab
+-   Add description field for new event when rescheduling an intervention
+-   Add month view to desktop calendar
+-   Add reset password feature
+
+## Fixes
+
+-   Fix error for reports send by email by setting JSON limit to 10MB
+-   Fix autocapitalize email on login page mobile
+-   Ensure mobile scroll to top for appointment/intervention form pages on mobile
+
 # [0.9.0] (2025-28-03)
 
 ## Changes

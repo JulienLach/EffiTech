@@ -11,6 +11,11 @@
     font-weight: 550;
 }
 
+.label {
+    font-weight: 550;
+    font-size: 1.2em;
+}
+
 .documentInfo {
     width: 100%;
 }
@@ -105,7 +110,6 @@
     font-weight: 500;
     cursor: pointer;
     margin-top: 0.5em;
-    width: 40%;
 }
 
 .updateBtn i {

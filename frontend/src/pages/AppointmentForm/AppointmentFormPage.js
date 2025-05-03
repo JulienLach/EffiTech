@@ -38,10 +38,12 @@ class AppointmentFormPage extends Component {
             address: {},
             employee: {},
             errors: {},
+            description: "",
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.displayDescription = this.displayDescription.bind(this);
     }
 
     componentDidMount() {
@@ -63,6 +65,10 @@ class AppointmentFormPage extends Component {
             employee: event.employee,
             endingHour: event.endingHour,
         });
+
+        if (isMobile) {
+            window.scrollTo(0, 0);
+        }
     }
 
     calculateDuration(startingHour, endingHour) {
@@ -70,6 +76,29 @@ class AppointmentFormPage extends Component {
             .toISOString()
             .substring(11, 16);
         return duration;
+    }
+
+    displayDescription(event) {
+        const { name, checked } = event.target;
+        if (name === "reschedule") {
+            this.setState({ reschedule: checked });
+
+            const description = isMobile
+                ? document.querySelector(`.${stylesMobile.description}`)
+                : document.querySelector(`.${styles.description}`);
+
+            if (description) {
+                if (checked) {
+                    description.classList.add(
+                        isMobile ? stylesMobile.active : styles.active
+                    );
+                } else {
+                    description.classList.remove(
+                        isMobile ? stylesMobile.active : styles.active
+                    );
+                }
+            }
+        }
     }
 
     handleChange(event) {
@@ -148,7 +177,7 @@ class AppointmentFormPage extends Component {
         if (reschedule) {
             const eventToCreate = {
                 title: "A planifier",
-                description: "",
+                description: this.state.description,
                 status: 1,
                 isPlanned: false,
                 type: "Intervention",
@@ -325,17 +354,32 @@ class AppointmentFormPage extends Component {
                                 <h4>Planification :</h4>
                                 <div className={stylesMobile.checkbox}>
                                     <label>
-                                        Créer l'intervention à planifier
+                                        Créer une nouvelle intervention :
                                     </label>
-                                    <label className={styles.switch}>
+                                    <label className={stylesMobile.switch}>
                                         <input
                                             type="checkbox"
                                             name="reschedule"
                                             checked={reschedule}
                                             onChange={this.handleChange}
+                                            onClick={this.displayDescription}
                                         />
                                         <span className={styles.slider}></span>
                                     </label>
+                                    <div className={stylesMobile.description}>
+                                        <label
+                                            className={stylesMobile.labelInput}
+                                        >
+                                            Description :
+                                        </label>
+                                        <textarea
+                                            rows="7"
+                                            cols="40"
+                                            name="description"
+                                            value={this.state.description}
+                                            onChange={this.handleChange}
+                                        ></textarea>
+                                    </div>
                                 </div>
                             </div>
                             <div className={stylesMobile.modalFooter}>
@@ -499,11 +543,28 @@ class AppointmentFormPage extends Component {
                                                 name="reschedule"
                                                 checked={reschedule}
                                                 onChange={this.handleChange}
+                                                onClick={
+                                                    this.displayDescription
+                                                }
                                             />
                                             <span
                                                 className={styles.slider}
                                             ></span>
                                         </label>
+                                        <div className={styles.description}>
+                                            <label
+                                                className={styles.labelInput}
+                                            >
+                                                Description :
+                                            </label>
+                                            <textarea
+                                                rows="7"
+                                                cols="40"
+                                                name="description"
+                                                value={this.state.description}
+                                                onChange={this.handleChange}
+                                            ></textarea>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className={styles.separation}></div>

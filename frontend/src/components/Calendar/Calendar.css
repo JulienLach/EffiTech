@@ -47,3 +47,11 @@
 .modalLabels {
     font-weight: 500;
 }
+
+.rbc-show-more {
+    color: #c93c2c;
+}
+
+.rbc-show-more:hover {
+    color: #a72b1c;
+}
