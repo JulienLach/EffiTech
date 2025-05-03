@@ -139,3 +139,13 @@ a {
     text-underline-offset: 0.2em;
     text-decoration-thickness: 0.15em;
 }
+
+.modalBackground {
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.57);
+}
