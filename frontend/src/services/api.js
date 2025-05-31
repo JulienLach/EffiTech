@@ -1,4 +1,5 @@
-const API_URL = `//${window.location.hostname}:3001`;
+const protocol = window.location.protocol;
+const API_URL = `${protocol}//${window.location.hostname}:3001`;
 const LOGIN_URL = `${window.location.origin}/login`;
 
 /**
