@@ -1,5 +1,8 @@
 const protocol = window.location.protocol;
-const API_URL = `${protocol}//${window.location.hostname}:3001`;
+const isLocalhost = window.location.hostname === "localhost";
+const API_URL = `${protocol}//${window.location.hostname}${
+    isLocalhost ? ":3001" : "/api"
+}`;
 const LOGIN_URL = `${window.location.origin}/login`;
 
 /**
