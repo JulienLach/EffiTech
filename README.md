@@ -41,6 +41,8 @@
 
 ### <a name="how-to-run-the-app"></a> How to run the app
 
+#### For Linux users
+
 -   Install **Node.js 18** and **npm** :
 
 ```bash
@@ -78,12 +80,26 @@ psql --version
 
 # Check the status of PostgreSQL service
 sudo systemctl status postgresql
+
+# Enable auto-start on boot
+sudo systemctl enable postgresql
 ```
 
--   Install **pgAdmin4** to manage the database, please follow official doc at https://www.pgadmin.org/download/pgadmin-4-apt/
--   Create a **new database** and run `database_script.sql` in **pgAdmin4** in SQL query field
+-   Install **pgAdmin4** :
 
-For Linux/Debian OS, after installing pgadmin4 and postgreSQL you need to set password for postgres user. Besure to set the same password in your `.env` file.
+```bash
+sudo apt update && sudo apt upgrade -y
+
+curl -fsS https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo gpg --dearmor -o /usr/share/keyrings/packages-pgadmin-org.gpg
+
+sudo sh -c 'echo "deb [signed-by=/usr/share/keyrings/packages-pgadmin-org.gpg] https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list'
+
+sudo apt update
+
+sudo apt install pgadmin4-desktop -y
+```
+
+For Linux users, after installing pgadmin4 and postgreSQL you need to set password for postgres user. Be sure to set the same password in your `.env` file.
 
 ```bash
 sudo -u postgres psql
@@ -93,7 +109,15 @@ sudo -u postgres psql
 ALTER USER postgres PASSWORD 'postgres';
 ```
 
-To start a new server in pgadmin4, create a new server, add `127.0.0.1` to hostname, with postgres user and the password you set previous step, then click on save. Now to database and the server are running.
+-   Then open pgaAdmin and create a **new database**, run `database_script.sql` in SQL query field
+
+To start a new server in pgadmin4, create a new server, add `127.0.0.1` to hostname, with postgres user and the password you set previous step, then click on save. Now the server should be connected and you can see the databases.
+
+#### For Windows users
+
+For windows users, you can download the lastest vresion of PostgreSQL from https://www.enterprisedb.com/downloads/postgres-postgresql-downloads and follow the installation steps. During the installation, you will be prompted to set a password for the `postgres` user. Make sure to remember this password as you will need it later.
+
+Then you can download the official installer of pgAdmin from https://www.pgadmin.org/download/pgadmin-4-windows/ and follow the installation steps. After installation, you can open pgAdmin4 and create a new server with the same settings as above.
 
 #### Configure the .env file
 
@@ -113,11 +137,11 @@ DB_PORT=5432
 DATABASE_VERSION=x.x.x
 
 # Authentication
-JWT_SECRET=**************
+JWT_SECRET=**********************
 
 # Email SMTP
 EMAIL=exemple@mail.com
-MAILJET_API_KEY=***************
+MAILJET_API_KEY=*****************
 MAILJET_SECRET_KEY=**************
 
 # URLs
@@ -130,6 +154,8 @@ For `JWT_SECRET`, generate a random token and replace your_randomly_generated_to
 ```bash
 openssl rand -hex 64
 ```
+
+For `DATABASE_VERSION`, you must set the latest release version of the application.
 
 #### Install project dependencies
 
@@ -161,7 +187,7 @@ npm start
 
 And access the application at http://localhost:3000 or at the `ORIGIN_URL` defined in your `.env` file.
 
-### <a name="email-configuration"></a> Email configuration
+### <a name="email-configuration"></a> Email configuration
 
 To configure email sending, you can use **Mailjet** or any other SMTP service. Just add your email created from your web hosting provider and API keys from your SMTP provider in the `.env` file as shown above.
 
