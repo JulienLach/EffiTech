@@ -14,6 +14,7 @@
 -   [Features](#features)
 -   [Requirements](#requirements)
 -   [How to run the app](#how-to-run-the-app)
+-   [Email configuration](#email-configuration)
 -   [Testing](#testing)
 -   [CI/CD](#cicd)
 -   [Docker](#docker)
@@ -33,9 +34,9 @@
 
 ### <a name="requirements"></a> Requirements
 
--   PostgreSQL 15.10
--   Node.js 18.19.0
--   React 18.3.1
+-   PostgreSQL 17
+-   Node.js 18 or above
+-   React 18.3.1 or above
 -   Docker
 
 ### <a name="how-to-run-the-app"></a> How to run the app
@@ -57,23 +58,26 @@ node -v
 npm -v
 ```
 
--   Install **PostgreSQL 15** :
+-   Install **PostgreSQL 17** :
 
 ```bash
-# Add the PostgreSQL APT repository
-echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list
+# Add the PostgreSQL Global Development Group (PGDG) repository
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo tee /usr/share/keyrings/pgdg.asc
 
-# Import the repository signing key
-wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+# Add the PostgreSQL repository to your sources list
+echo "deb [signed-by=/usr/share/keyrings/pgdg.asc] http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list
 
-# Update the package list
+# Update the package list to include the new repository
 sudo apt-get update
 
-# Install PostgreSQL 15
-sudo apt-get install -y postgresql-15
+# Install PostgreSQL 17
+sudo apt-get install -y postgresql-17
 
-# Verify the installation
+# Check the installation
 psql --version
+
+# Check the status of PostgreSQL service
+sudo systemctl status postgresql
 ```
 
 -   Install **pgAdmin4** to manage the database, please follow official doc at https://www.pgadmin.org/download/pgadmin-4-apt/
@@ -124,7 +128,7 @@ SERVER_URL=http://localhost:3001
 For `JWT_SECRET`, generate a random token and replace your_randomly_generated_token with it. You can use a command like the following to generate a secure token:
 
 ```bash
-openssl rand -base64 32
+openssl rand -hex 64
 ```
 
 #### Install project dependencies
@@ -155,7 +159,11 @@ cd frontend
 npm start
 ```
 
-And access the application at http://localhost:3000
+And access the application at http://localhost:3000 or at the `ORIGIN_URL` defined in your `.env` file.
+
+### <a name="email-configuration"></a> Email configuration
+
+To configure email sending, you can use **Mailjet** or any other SMTP service. Just add your email created from your web hosting provider and API keys from your SMTP provider in the `.env` file as shown above.
 
 ### <a name="testing"></a> Testing
 
