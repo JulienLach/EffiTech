@@ -14,7 +14,7 @@ async function runMigrations() {
         const hasCompaniesTable = tableExists.rows[0].exists;
 
         // Récupérer la version actuelle de la base depuis la table companies
-        let currentVersion = "0.9.0"; // Dernière version déployée en prod
+        let currentVersion = "0.9.1"; // Dernière version déployée en prod
         if (hasCompaniesTable) {
             const result = await client.query(`
         SELECT database_version FROM companies
