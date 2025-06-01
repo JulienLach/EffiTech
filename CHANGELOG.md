@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## Fixes
 
 -   Fix client form regex for address
+-   Fix appointment form description input
 
 # [0.9.1] (2025-03-05)
 
