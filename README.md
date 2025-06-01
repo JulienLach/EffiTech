@@ -17,7 +17,8 @@
 -   [Email configuration](#email-configuration)
 -   [Testing](#testing)
 -   [CI/CD](#cicd)
--   [Docker](#docker)
+-   [Deployment with Ansible and Docker](#deployment-with-ansible-and-docker)
+-   [Docker images](#docker-images)
 -   [Documentation](#documentation)
 
 ### <a name="overview"></a> Overview
@@ -245,9 +246,36 @@ This project uses **GitHub Actions** to automate unit tests and create new relea
         git push origin :refs/tags/x.x.x
         ```
 
-### <a name="docker"></a> Docker
+### <a name="deployment-with-ansible-and-docker"></a> Deployment with Ansible and Docker
 
-The app is divided into three images: one for the backend, one for the frontend, and one for the database.
+This project uses **Ansible** to deploy the application on a remote server.
+
+For every new deployement with new version, you need to update the `migration.js`. For example :
+
+```javascript
+const migrations = [
+    {
+        version: "0.9.3", // Target version for this migration/release
+        updateDatabase: async () => {
+            // Add some SQL queries to update the database data
+            // Then update the database version to the new version
+            await client.query(`
+                UPDATE companies SET database_version = '0.9.3';
+            `);
+        },
+    },
+];
+```
+
+Then in your `vars.yml` file, you need to update the `database_version` variable to the new version.
+
+```yaml
+database_version: "0.9.3"
+```
+
+### <a name="docker-images"></a> Docker
+
+The app is divided into three images : for backend, frontend, and for the database.
 
 You can run the app in Docker with `docker-compose up --build` or `docker-compose up --build -d`
 
