@@ -139,9 +139,10 @@ class CompanyDetails extends Component {
             <>
                 <TemplateGlobal />
                 <div className={styles.container}>
-                    <h1 className={styles.pageTitle}>Modifier Société</h1>
+                    <h1 className={styles.pageTitle}>Modifier la société</h1>
                     <form onSubmit={this.handleSubmit}>
                         <div className={styles.logoCompany}>
+                            <label>Logo : </label>
                             <img
                                 src={`data:image/jpeg;base64,${company.logo}`}
                                 alt="Logo de la société"
@@ -166,123 +167,98 @@ class CompanyDetails extends Component {
                         <div className={styles.separator}></div>
                         <div className={styles.companyData}>
                             <h3>Coordonnées</h3>
-                            <label>
-                                Nom :
-                                <input
-                                    type="text"
-                                    name="name"
-                                    value={company.name}
-                                    onChange={this.handleChange}
-                                />
-                                {errors.name && (
-                                    <p className={styles.error}>
-                                        {errors.name}
-                                    </p>
-                                )}
-                            </label>
-                            <label>
-                                Adresse :
-                                <input
-                                    type="text"
-                                    name="address"
-                                    value={company.idAddress.address}
-                                    onChange={this.handleChange}
-                                />
-                                {errors.address && (
-                                    <p className={styles.error}>
-                                        {errors.address}
-                                    </p>
-                                )}
-                            </label>
-                            <label>
-                                Code Postal :
-                                <input
-                                    type="text"
-                                    name="zipcode"
-                                    value={company.idAddress.zipcode}
-                                    onChange={this.handleChange}
-                                />
-                                {errors.zipcode && (
-                                    <p className={styles.error}>
-                                        {errors.zipcode}
-                                    </p>
-                                )}
-                            </label>
-                            <label>
-                                Ville :
-                                <input
-                                    type="text"
-                                    name="city"
-                                    value={company.idAddress.city}
-                                    onChange={this.handleChange}
-                                />
-                                {errors.city && (
-                                    <p className={styles.error}>
-                                        {errors.city}
-                                    </p>
-                                )}
-                            </label>
-                            <label>
-                                Téléphone :
-                                <input
-                                    type="text"
-                                    name="phoneNumber"
-                                    value={company.phoneNumber}
-                                    onChange={this.handleChange}
-                                />
-                                {errors.phoneNumber && (
-                                    <p className={styles.error}>
-                                        {errors.phoneNumber}
-                                    </p>
-                                )}
-                            </label>
+                            <label>Nom : </label>
+                            <input
+                                type="text"
+                                name="name"
+                                value={company.name}
+                                onChange={this.handleChange}
+                            />
+                            {errors.name && (
+                                <p className={styles.error}>{errors.name}</p>
+                            )}
+
+                            <label>Adresse : </label>
+                            <input
+                                type="text"
+                                name="address"
+                                value={company.idAddress.address}
+                                onChange={this.handleChange}
+                            />
+                            {errors.address && (
+                                <p className={styles.error}>{errors.address}</p>
+                            )}
+
+                            <label>Code Postal : </label>
+                            <input
+                                type="text"
+                                name="zipcode"
+                                value={company.idAddress.zipcode}
+                                onChange={this.handleChange}
+                            />
+                            {errors.zipcode && (
+                                <p className={styles.error}>{errors.zipcode}</p>
+                            )}
+                            <label>Ville : </label>
+                            <input
+                                type="text"
+                                name="city"
+                                value={company.idAddress.city}
+                                onChange={this.handleChange}
+                            />
+                            {errors.city && (
+                                <p className={styles.error}>{errors.city}</p>
+                            )}
+
+                            <label>Téléphone : </label>
+                            <input
+                                type="text"
+                                name="phoneNumber"
+                                value={company.phoneNumber}
+                                onChange={this.handleChange}
+                            />
+                            {errors.phoneNumber && (
+                                <p className={styles.error}>
+                                    {errors.phoneNumber}
+                                </p>
+                            )}
                         </div>
                         <div className={styles.separator}></div>
                         <div className={styles.companyData}>
                             <h3>Informations</h3>
-                            <label>
-                                SIRET :
-                                <input
-                                    type="text"
-                                    name="siret"
-                                    value={company.siret}
-                                    onChange={this.handleChange}
-                                />
-                                {errors.siret && (
-                                    <p className={styles.error}>
-                                        {errors.siret}
-                                    </p>
-                                )}
-                            </label>
-                            <label>
-                                N° TVA Intracommunautaire :
-                                <input
-                                    type="text"
-                                    name="vatNumber"
-                                    value={company.vatNumber}
-                                    onChange={this.handleChange}
-                                />
-                                {errors.vatNumber && (
-                                    <p className={styles.error}>
-                                        {errors.vatNumber}
-                                    </p>
-                                )}
-                            </label>
-                            <label>
-                                Capital :
-                                <input
-                                    type="text"
-                                    name="capital"
-                                    placeholder=" €"
-                                    value={company.capital}
-                                    onChange={this.handleChange}
-                                />
-                                {errors.capital && (
-                                    <p className={styles.error}>
-                                        {errors.capital}
-                                    </p>
-                                )}
-                            </label>
+                            <label>SIRET : </label>
+                            <input
+                                type="text"
+                                name="siret"
+                                value={company.siret}
+                                onChange={this.handleChange}
+                            />
+                            {errors.siret && (
+                                <p className={styles.error}>{errors.siret}</p>
+                            )}
+                            <label>N° TVA Intracommunautaire : </label>
+                            <input
+                                type="text"
+                                name="vatNumber"
+                                value={company.vatNumber}
+                                onChange={this.handleChange}
+                            />
+                            {errors.vatNumber && (
+                                <p className={styles.error}>
+                                    {errors.vatNumber}
+                                </p>
+                            )}
+                            <label>Capital : </label>
+                            <input
+                                type="text"
+                                name="capital"
+                                placeholder=" €"
+                                value={company.capital}
+                                onChange={this.handleChange}
+                            />
+                            {errors.capital && (
+                                <p className={styles.error}>{errors.capital}</p>
+                            )}
                         </div>
                         <div className={styles.buttons}>
                             <button

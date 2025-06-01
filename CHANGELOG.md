@@ -6,6 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## Changes
+
+-   Fix API URL to make it works for both development and production environments
+-   Compayn form UI update
+
+## Fixes
+
+-   Fix client form regex for address
+
 # [0.9.1] (2025-03-05)
 
 ## Changes

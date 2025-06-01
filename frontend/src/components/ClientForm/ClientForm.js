@@ -95,7 +95,7 @@ class ClientForm extends Component {
         }
         if (!data.addressDetails.address) {
             errors.address = "* Champ obligatoire";
-        } else if (!/^[a-zA-ZÀ-ÿ\d\s-]+$/.test(data.addressDetails.address)) {
+        } else if (!/^[a-zA-ZÀ-ÿ\d\s'-]+$/.test(data.addressDetails.address)) {
             errors.address =
                 "* Ne doit contenir que des lettres, des chiffres, des espaces et des tirets";
         }
