@@ -14,19 +14,19 @@ async function runMigrations() {
         const hasCompaniesTable = tableExists.rows[0].exists;
 
         // Récupérer la version actuelle de la base depuis la table companies
-        let currentVersion = "0.9.1"; // Dernière version déployée en prod
+        let currentVersion = "0.9.2"; // Dernière version déployée en prod
         if (hasCompaniesTable) {
             const result = await client.query(`
         SELECT database_version FROM companies
         LIMIT 1
       `);
             if (result.rows.length > 0) {
-                currentVersion = result.rows[0].database_version || "0.9.0";
+                currentVersion = result.rows[0].database_version || "0.9.2";
             }
         }
 
         // Version cible depuis les variables d'environnement injectées par Ansible dans le fichier vars.yml
-        const targetVersion = process.env.DATABASE_VERSION || "0.9.0";
+        const targetVersion = process.env.DATABASE_VERSION || "0.9.2";
         console.log(
             `Current DB version: ${currentVersion}, Target version: ${targetVersion}`
         );

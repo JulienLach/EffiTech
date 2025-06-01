@@ -208,7 +208,7 @@ This project uses **GitHub Actions** to automate unit tests and create new relea
 
 -   To automatically run **CD** actions, follow these steps:
 
-    -   Update `README.md` and `CHANGELOG.md` with all new changes and fixes and add the new tag [x.x.x] (yyyy-dd-mm)
+    -   Update `README.md` and `CHANGELOG.md` and `migration.js` with all new changes and fixes and add the new tag [x.x.x] (yyyy-dd-mm)
     -   Merge your current working branch into the `develop` branch
     -   Create a new pull request (PR) to merge `develop` into `main`, check all the code.
     -   Merge your PR `develop` into `main`
