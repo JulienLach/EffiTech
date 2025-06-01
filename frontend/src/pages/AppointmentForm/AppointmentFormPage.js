@@ -83,11 +83,12 @@ class AppointmentFormPage extends Component {
         if (name === "reschedule") {
             this.setState({ reschedule: checked });
 
-            const description = isMobile
-                ? document.querySelector(`.${stylesMobile.description}`)
-                : document.querySelector(`.${styles.description}`);
+            const descriptions = isMobile
+                ? document.getElementsByClassName(stylesMobile.description)
+                : document.getElementsByClassName(styles.description);
 
-            if (description) {
+            if (descriptions) {
+                const description = descriptions[0];
                 if (checked) {
                     description.classList.add(
                         isMobile ? stylesMobile.active : styles.active
@@ -364,7 +365,9 @@ class AppointmentFormPage extends Component {
                                             onChange={this.handleChange}
                                             onClick={this.displayDescription}
                                         />
-                                        <span className={styles.slider}></span>
+                                        <span
+                                            className={stylesMobile.slider}
+                                        ></span>
                                     </label>
                                     <div className={stylesMobile.description}>
                                         <label

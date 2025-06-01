@@ -35,13 +35,14 @@
 
 .companyData label {
     display: block;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.35em;
+    margin-top: 0.4em;
 }
 
 .companyData input {
     padding: 0.5em;
-    margin: 0.25em 0 0 0.5em;
-    width: 35%;
+    margin: 0.3em 0 0.55em 0;
+    width: 30%;
     border: 1px solid #ccc;
     border-radius: 0.25em;
 }
