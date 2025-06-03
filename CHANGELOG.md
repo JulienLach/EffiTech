@@ -6,15 +6,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## Changes
+
+-   Improved statistics graph by setting integer steps on Y-axis for employee event counts
+-   Various UI/UX updates
+
+## Fixes
+
+-   Fix unclear labels on statistics page
+
 # [0.9.2] (2025-01-06)
 
 ## Changes
 
--   Fix API URL to make it works for both development and production environments
--   Compayn form UI update
+-   Company form UI updates
 
 ## Fixes
 
+-   Fix API URL to make it works for both development and production environments
 -   Fix client form regex for address
 -   Fix appointment form description input
 

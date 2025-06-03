@@ -1,5 +1,6 @@
 .modalHeader {
     text-align: center;
+    font-weight: 500;
 }
 
 .modal {
@@ -46,7 +47,7 @@
     width: 25vw;
     border: 0.063em solid #ccc;
     border-radius: 0.3em;
-    margin-top: 0.3em;
+    margin-top: 1em;
 }
 
 .form textarea {
@@ -63,9 +64,9 @@
 }
 
 .modalFooter button {
-    padding: 0.45em 1.2em;
+    padding: 0.65em 1.2em;
     border: none;
-    border-radius: 0.4em;
+    border-radius: 0.35em;
     font-size: 1em;
     font-weight: 500;
     cursor: pointer;
