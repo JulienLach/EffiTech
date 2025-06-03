@@ -14,19 +14,19 @@ async function runMigrations() {
         const hasCompaniesTable = tableExists.rows[0].exists;
 
         // Récupérer la version actuelle de la base depuis la table companies
-        let currentVersion = "0.9.2"; // Dernière version déployée en prod
+        let currentVersion = "0.9.1"; // Dernière version déployée en prod
         if (hasCompaniesTable) {
             const result = await client.query(`
         SELECT database_version FROM companies
         LIMIT 1
       `);
             if (result.rows.length > 0) {
-                currentVersion = result.rows[0].database_version || "0.9.2";
+                currentVersion = result.rows[0].database_version || "0.9.1";
             }
         }
 
         // Version cible depuis les variables d'environnement injectées par Ansible dans le fichier vars.yml
-        const targetVersion = process.env.DATABASE_VERSION || "0.9.2";
+        const targetVersion = process.env.DATABASE_VERSION || "0.9.3";
         console.log(
             `Current DB version: ${currentVersion}, Target version: ${targetVersion}`
         );
@@ -41,20 +41,16 @@ async function runMigrations() {
         // Si la version en base est inférieure à la cible, on applique les migrations
         // Exemple de migration : ajouter une colonne test_column à la table employees
         const migrations = [
-            /*
             {
-                version: "1.0.0", // nouvelle version pour la migration
+                version: "0.9.3", // Target version for this migration/release
                 updateDatabase: async () => {
+                    // Add all required SQL queries to update the database data
+                    // Then update the database version to the new version
                     await client.query(`
-                        ALTER TABLE employees
-                        ADD COLUMN IF NOT EXISTS test_column BOOLEAN DEFAULT FALSE;
-                    `);
-                    await client.query(`
-                        UPDATE companies SET database_version = '1.0.0';
-                    `);
+                UPDATE companies SET database_version = '0.9.3';
+            `);
                 },
             },
-            */
             /*
             On ajoute à la suite du tableau les migration suivantes et on incrémente la version pour correspondre à la version dans le vars.yml d'ansible
            */

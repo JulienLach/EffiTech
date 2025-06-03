@@ -138,3 +138,9 @@
     display: flex;
     flex-direction: column;
 }
+
+.activeFilter {
+    background-color: #c93c2c;
+    color: #fff;
+    border: 1px solid #c93c2c;
+}

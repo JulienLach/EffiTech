@@ -48,7 +48,6 @@ a {
     font-weight: 500;
     cursor: pointer;
     margin: 1em 0em;
-    transition: 0.1s;
 }
 
 .editButton:hover {

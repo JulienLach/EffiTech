@@ -216,7 +216,11 @@ class FilterBar extends Component {
                             <p>Client</p>
                         </div>
                         <div
-                            className={styles.typeFilter}
+                            className={`${styles.typeFilter} ${
+                                this.props.isStatusModalOpen
+                                    ? styles.activeFilter
+                                    : ""
+                            }`}
                             onClick={this.props.toggleStatusModal}
                         >
                             <i className="fa-solid fa-tag"></i>
@@ -312,7 +316,11 @@ class FilterBar extends Component {
                             <p>Employé</p>
                         </div>
                         <div
-                            className={styles.typeFilter}
+                            className={`${styles.typeFilter} ${
+                                this.props.isTypeModalOpen
+                                    ? styles.activeFilter
+                                    : ""
+                            }`}
                             onClick={this.props.toggleTypeModal}
                         >
                             <i className="fa-solid fa-filter"></i>

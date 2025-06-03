@@ -208,7 +208,7 @@ class TemplateGlobal extends Component {
                                 onClick={this.toggleSupportMenu}
                             >
                                 <a>
-                                    <i className="fa-solid fa-headset"></i>
+                                    <i className="fa-regular fa-message"></i>
                                 </a>
                             </div>
                             {showSupportMenu && (
@@ -220,9 +220,10 @@ class TemplateGlobal extends Component {
                                                 onClick={
                                                     this.handleSupportClick
                                                 }
+                                                className={styles.supportIcon}
                                             >
                                                 Contacter le support{" "}
-                                                <i className="fa-solid fa-paper-plane"></i>
+                                                <i className="fa-regular fa-message"></i>
                                             </a>
                                         </li>
                                     </ul>

@@ -49,7 +49,7 @@
 
 .modifyButton {
     background-color: #c93c2c;
-    padding: 0.35em 0.65em;
+    padding: 0.55em 0.8em;
     border: none;
     border-radius: 0.3em;
     color: white;
@@ -60,5 +60,5 @@
 }
 
 .modifyButton:hover {
-    background-color: #a32a1f;
+    background-color: #b83429;
 }

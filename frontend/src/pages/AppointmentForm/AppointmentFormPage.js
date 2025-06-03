@@ -315,7 +315,6 @@ class AppointmentFormPage extends Component {
                                         type="date"
                                         name="startingDate"
                                         value={startingDate}
-                                        onChange={this.handleChange}
                                         readOnly
                                     />
                                 </div>

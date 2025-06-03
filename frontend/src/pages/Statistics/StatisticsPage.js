@@ -90,6 +90,18 @@ class StatisticsPage extends Component {
             ],
         };
 
+        const chartOptions = {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 1,
+                        precision: 0,
+                    },
+                },
+            },
+        };
+
         return (
             <>
                 <TemplateGlobal />
@@ -113,11 +125,14 @@ class StatisticsPage extends Component {
                     </div>
                     <div className={styles.eventCard}>
                         <h3>
-                            Répartition par employé en{" "}
+                            Répartition des évènements par employé en{" "}
                             {this.getCurrentMonthName()}
                         </h3>
                         <div className={styles.employeeChart}>
-                            <Bar data={employeeEventChart} />
+                            <Bar
+                                data={employeeEventChart}
+                                options={chartOptions}
+                            />
                         </div>
                     </div>
                 </div>
