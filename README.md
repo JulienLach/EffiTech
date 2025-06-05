@@ -128,6 +128,8 @@ Create a `.env` file in the root of your backend project and add the following c
 # Environment
 NODE_ENV=development
 PORT=3001
+PORT_BACKEND=3001
+PORT_FRONTEND=3000
 
 # Database
 DB_USER=postgres
@@ -281,7 +283,38 @@ You can run the app in Docker with `docker-compose up --build` or `docker-compos
 
 To stop run `docker-compose down`
 
-Docker Hub latest images : https://hub.docker.com/r/julienlach/effitech/tags
+The `docker-compose.yml` file is used for local development and builds images from the project Dockerfiles:
+
+```yaml
+# Start the application in development environment
+docker-compose up --build
+
+# Detached container mode
+docker-compose up --build -d
+
+# Stop the application
+docker-compose down
+```
+
+The `docker-compose.prod.yml` file is used for production deployment with Ansible and uses pre-built images from Docker Hub:
+
+```yaml
+# Structure of docker-compose.prod.yml file
+services:
+    backend:
+        image: julienlach/effitech:backend-${TAG_NAME}
+        # ...
+
+    frontend:
+        image: julienlach/effitech:frontend-${TAG_NAME}
+        # ...
+
+    db:
+        image: julienlach/effitech:postgres-${TAG_NAME}
+        # ...
+```
+
+-   Docker Hub latest images : https://hub.docker.com/r/julienlach/effitech/tags
 
 ### <a name="documentation"></a> Documentation
 
@@ -291,3 +324,7 @@ This project uses **JSDoc** and **apidoc** to generate documentation.
 -   **apidoc** : Move to `/backend` folder, for API documentation written in the `/services/api.js` file, run `npm run apidoc`.
 
 Then to see the documentation pages, run `index.html` from both folders with LiveServer VSCode extension for exemple.
+
+```
+
+```
