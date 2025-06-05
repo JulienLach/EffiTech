@@ -1,10 +1,12 @@
 <p align="center">
- <img alt="Logo" src="frontend/src/images/logo.svg" width=400 align="center">
-</p>
-
-<p align="center">
     <a href="https://github.com/JulienLach/EffiTech/releases">
         <img src="https://img.shields.io/badge/Release-0.9.3-red?logo=github" alt="Release" />
+    </a>
+    <a href="https://hub.docker.com/r/julienlach/effitech/tags">
+        <img src="https://img.shields.io/badge/Docker-Hub-blue?logo=docker" alt="Docker Hub" />
+    </a>
+    <a href="#documentation">
+        <img src="https://img.shields.io/badge/API-Documented-red" alt="API Documentation" />
     </a>
 </p>
 
@@ -275,6 +277,18 @@ Then in your `vars.yml` file, you need to update the `database_version` variable
 database_version: "0.9.3"
 ```
 
+To deploy the application with Ansible, use:
+
+````bash
+ansible-playbook -i inventory.ini deploy.yml --ask-vault-pass -e "ansible_tag_name=x.x.x" --become --become-user=root --ask-become-pass
+
+Where:
+
+`inventory.ini` defines targeted servers
+`deploy.yml` contains the deployment playbook
+`vars.yml` (encrypted with ansible-vault) contains environment variables
+`x.x.x` is the latest release tag to deploy
+
 ### <a name="docker-images"></a> Docker
 
 The app is divided into three images : for backend, frontend, and for the database.
@@ -294,7 +308,7 @@ docker-compose up --build -d
 
 # Stop the application
 docker-compose down
-```
+````
 
 The `docker-compose.prod.yml` file is used for production deployment with Ansible and uses pre-built images from Docker Hub:
 
@@ -324,7 +338,3 @@ This project uses **JSDoc** and **apidoc** to generate documentation.
 -   **apidoc** : Move to `/backend` folder, for API documentation written in the `/services/api.js` file, run `npm run apidoc`.
 
 Then to see the documentation pages, run `index.html` from both folders with LiveServer VSCode extension for exemple.
-
-```
-
-```
