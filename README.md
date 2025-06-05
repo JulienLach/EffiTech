@@ -48,7 +48,7 @@
 
 ### <a name="how-to-run-the-app"></a> How to run the app
 
-#### For Linux users
+#### For Linux users
 
 -   Install **Node.js 18** and **npm** :
 
@@ -133,7 +133,6 @@ Create a `.env` file in the root of your backend project and add the following c
 ```bash
 # Environment
 NODE_ENV=development
-PORT=3001
 PORT_BACKEND=3001
 PORT_FRONTEND=3000
 
@@ -281,17 +280,60 @@ Then in your `vars.yml` file, you need to update the `database_version` variable
 database_version: "0.9.3"
 ```
 
-To deploy the application with Ansible, use:
+To deploy the application with Ansible, use :
 
-````bash
+```bash
 ansible-playbook -i inventory.ini deploy.yml --ask-vault-pass -e "ansible_tag_name=x.x.x" --become --become-user=root --ask-become-pass
+```
 
 Where:
 
-`inventory.ini` defines targeted servers
-`deploy.yml` contains the deployment playbook
-`vars.yml` (encrypted with ansible-vault) contains environment variables
-`x.x.x` is the latest release tag to deploy
+-   `inventory.ini` defines targeted servers
+-   `deploy.yml` contains the deployment playbook
+-   `vars.yml` (encrypted with ansible-vault) contains environment variables
+-   `x.x.x` is the latest release tag to deploy
+
+The `vars.yml` file should be encrypted using `ansible-vault create vars.yml` and structured like this:
+
+```yaml
+# Environment
+node_env: "docker" # Must be "docker" for production environment
+port_backend: "3001"
+port_frontend: "3000"
+
+# Database
+db_user: "myuser"
+db_host: "db" # Always "db" when using Docker containers
+db_name: "EffiTech"
+db_password: "secure_password"
+db_port: "5432"
+database_version: "0.9.3" # Latest release version
+
+# Authentication
+jwt_secret: "*********************************"
+
+# Email SMTP
+email: "contact@yourdomain.com"
+mailjet_api_key: "****************************"
+mailjet_secret_key: "*************************"
+
+# URLs
+origin_url: "https://client.yourdomain.com"
+server_url: "https://client.yourdomain.com"
+```
+
+This structure mirrors your local `.env` file but with production values. You can create or edit this file using:
+
+```bash
+# Create a new encrypted file
+ansible-vault create vars.yml
+
+# Edit an existing encrypted file
+ansible-vault edit vars.yml
+
+# View the content of an encrypted file
+ansible-vault view vars.yml
+```
 
 ### <a name="docker-images"></a> Docker
 
@@ -301,7 +343,7 @@ You can run the app in Docker with `docker-compose up --build` or `docker-compos
 
 To stop run `docker-compose down`
 
-The `docker-compose.yml` file is used for local development and builds images from the project Dockerfiles:
+The `docker-compose.yml` file is used for local development and builds images from the project Dockerfiles :
 
 ```yaml
 # Start the application in development environment
@@ -312,7 +354,7 @@ docker-compose up --build -d
 
 # Stop the application
 docker-compose down
-````
+```
 
 The `docker-compose.prod.yml` file is used for production deployment with Ansible and uses pre-built images from Docker Hub:
 

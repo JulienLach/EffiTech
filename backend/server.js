@@ -19,7 +19,7 @@ const runMigrations = require("./migrations/migrations.js");
 
 dotenv.config({ path: ".env" });
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT_BACKEND;
 const ORIGIN_URL = process.env.ORIGIN_URL;
 const SERVER_URL = process.env.SERVER_URL;
 
