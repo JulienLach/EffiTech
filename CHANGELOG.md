@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## Fixes
+
+-   Fix docker-compose.yml and add docker-compose.prod.yml files to deploy the app with Ansible
+
 # [0.9.3] (2025-03-06)
 
 ## Changes

@@ -7,7 +7,7 @@
         <img src="https://img.shields.io/badge/Release-0.9.3-red?logo=github" alt="Release" />
     </a>
     <a href="https://hub.docker.com/r/julienlach/effitech/tags">
-        <img src="https://img.shields.io/badge/Docker-Hub-blue?logo=docker" alt="Docker Hub" />
+        <img src="https://img.shields.io/badge/Docker-Hub-red?logo=docker&logoColor=white" alt="Docker Hub" />
     </a>
     <a href="#documentation">
         <img src="https://img.shields.io/badge/API-Documented-red" alt="API Documentation" />
