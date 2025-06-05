@@ -1254,7 +1254,7 @@ function getEventsByClientId(idClient, callback) {
 }
 
 /**
- * @api {get} /invoices/:idClient Get invoices by client ID
+ * @api {get} /invoices/client/:idClient Get invoices by client ID
  * @apiName GetClientInvoices
  * @apiGroup Invoices
  * @apiVersion 1.0.0
@@ -1262,15 +1262,17 @@ function getEventsByClientId(idClient, callback) {
  * @apiSuccess {Object[]} invoices List of invoices for the client.
  * @apiSuccess {Number} invoices.idInvoice Invoice ID.
  * @apiSuccess {Number} invoices.idClient Client ID.
+ * @apiSuccess {String} invoices.clientFirstname Client's first name.
+ * @apiSuccess {String} invoices.clientLastname Client's last name.
  * @apiSuccess {Number} invoices.amountIncludingTax Amount including tax.
  * @apiSuccess {Number} invoices.amountWithoutTax Amount without tax.
  * @apiSuccess {String} invoices.invoiceDate Invoice date (ISO format).
- * @apiSuccess {String} invoices.file Invoice file content (Base64 encoded or URL).
+ * @apiSuccess {String} invoices.file Invoice file content (Base64 encoded).
  * @apiError {String} error Error message.
  */
 function getClientInvoices(idClient, callback) {
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", `${API_URL}/invoices/${idClient}`);
+    xhr.open("GET", `${API_URL}/invoices/client/${idClient}`);
     xhr.withCredentials = true;
     xhr.onload = function () {
         if (xhr.status === 200) {
