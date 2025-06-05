@@ -1,4 +1,8 @@
 <p align="center">
+    <img alt="Logo" src="frontend/src/images/logo.svg" width=300 align="center">
+</p>
+
+<p align="center">
     <a href="https://github.com/JulienLach/EffiTech/releases">
         <img src="https://img.shields.io/badge/Release-0.9.3-red?logo=github" alt="Release" />
     </a>
