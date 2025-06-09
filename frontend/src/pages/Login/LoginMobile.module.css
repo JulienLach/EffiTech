@@ -1,4 +1,3 @@
-/* CSS for parent div with red and white background */
 .container {
     display: flex;
     flex-direction: column;
@@ -10,16 +9,14 @@
     width: 14em;
 }
 
-/* CSS title style font */
 .title {
     text-align: center;
     font-size: 2em;
     font-weight: 500;
 }
 
-/* CSS for input & label */
 .labelInput {
-    font-size: 1.4em;
+    font-size: 1.3em;
     font-weight: 500;
     display: flex;
     flex-direction: column;
@@ -27,30 +24,26 @@
     margin: 0.9em auto;
 }
 
-/* CSS for input comportement */
 .labelInput input {
-    margin: auto;
-    width: 80%;
-    padding: 0.7em;
-    border: 0.15em solid #cccccc;
+    margin: 0.5em auto;
+    width: 84%;
+    padding: 0.8em;
+    border: 0.1em solid #adadad;
     border-radius: 0.6em;
     font-size: 0.7em;
 }
 
-/* CSS for the label comportement */
 .labelInput label {
     margin: 0 1.8em;
     padding: 0.3em 0;
 }
 
-/* CSS for elements placement */
 .formElements {
     display: flex;
     flex-direction: column;
     width: 100%;
 }
 
-/* CSS for create button */
 .submitButton {
     background-color: #c93c2c;
     margin: auto;
@@ -65,14 +58,12 @@
     margin-top: 2em;
 }
 
-/* CSS for paragraph style */
 .formElements p {
     font-size: 1.1em;
     margin-top: 1.25em;
     text-align: center;
 }
 
-/* CSS for link style */
 .formElements a {
     text-align: center;
     font-size: 1.2em;

@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## Changes
+
+-   Add forgot and reset password mobile pages
+
 ## Fixes
 
 -   Fix docker-compose.yml and add docker-compose.prod.yml files to deploy the app with Ansible
