@@ -69,3 +69,15 @@
     font-size: 1.2em;
     margin-top: 0.8em;
 }
+
+.error {
+    color: #c93c2c;
+    background-color: #fef1f2;
+    margin: 0.5em 2em;
+    padding: 0.65em;
+    border: 0.1em solid #cb8179;
+    border-radius: 0.35em;
+    font-size: 1.1em;
+    text-align: center;
+    margin-top: 0.5em;
+}

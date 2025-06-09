@@ -133,6 +133,7 @@ Create a `.env` file in the root of your backend project and add the following c
 ```bash
 # Environment
 NODE_ENV=development
+PORT=3001
 PORT_BACKEND=3001
 PORT_FRONTEND=3000
 
