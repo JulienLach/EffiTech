@@ -4,7 +4,7 @@
 
 <p align="center">
     <a href="https://github.com/JulienLach/EffiTech/releases">
-        <img src="https://img.shields.io/badge/Release-0.9.4-red?logo=github" alt="Release" />
+        <img src="https://img.shields.io/badge/Release-0.9.5-red?logo=github" alt="Release" />
     </a>
     <a href="https://hub.docker.com/r/julienlach/effitech/tags">
         <img src="https://img.shields.io/badge/Docker-Hub-red?logo=docker&logoColor=white" alt="Docker Hub" />
@@ -133,6 +133,7 @@ Create a `.env` file in the root of your backend project and add the following c
 ```bash
 # Environment
 NODE_ENV=development
+PORT=3001
 PORT_BACKEND=3001
 PORT_FRONTEND=3000
 

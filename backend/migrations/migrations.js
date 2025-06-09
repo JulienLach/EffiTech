@@ -26,7 +26,7 @@ async function runMigrations() {
         }
 
         // Version cible depuis les variables d'environnement injectées par Ansible dans le fichier vars.yml
-        const targetVersion = process.env.DATABASE_VERSION || "0.9.4";
+        const targetVersion = process.env.DATABASE_VERSION || "0.9.5";
         console.log(
             `Current DB version: ${currentVersion}, Target version: ${targetVersion}`
         );
@@ -56,6 +56,14 @@ async function runMigrations() {
                 updateDatabase: async () => {
                     await client.query(`
                 UPDATE companies SET database_version = '0.9.4';
+            `);
+                },
+            },
+            {
+                version: "0.9.5", // Target version for this migration/release
+                updateDatabase: async () => {
+                    await client.query(`
+                UPDATE companies SET database_version = '0.9.5';
             `);
                 },
             },
