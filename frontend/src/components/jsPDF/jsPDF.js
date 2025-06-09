@@ -30,6 +30,7 @@ const generatePDF = ({ report, reportData, companyData }) => {
 
         // Info société (à droite)
         doc.text(companyData.name, 210 - margin, yPosition, { align: "right" });
+        doc.setFont("helvetica", "bold");
         yPosition += 7;
 
         // Info client (à gauche)

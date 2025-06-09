@@ -90,7 +90,9 @@ class LoginPage extends Component {
                                         {this.state.error}
                                     </p>
                                 )}
-                                <a href="/login">Mot de passe oublié</a>
+                                <a href="/forgot-password">
+                                    Mot de passe oublié
+                                </a>
                                 <button
                                     type="submit"
                                     className={stylesMobile.submitButton}

@@ -2,18 +2,15 @@ version: "3.8"
 
 services:
     backend:
-        build:
-            context: ./backend
-            dockerfile: Dockerfile.backend
-        working_dir: /app
+        image: julienlach/effitech:backend-${TAG_NAME}
         ports:
             - "${PORT_BACKEND}:${PORT_BACKEND}"
         environment:
             - NODE_ENV=${NODE_ENV}
             - DB_USER=${DB_USER}
-            - DB_PASSWORD=${DB_PASSWORD}
-            - DB_NAME=${DB_NAME}
             - DB_HOST=${DB_HOST}
+            - DB_NAME=${DB_NAME}
+            - DB_PASSWORD=${DB_PASSWORD}
             - DB_PORT=${DB_PORT}
             - JWT_SECRET=${JWT_SECRET}
             - PORT=${PORT_BACKEND}
@@ -25,26 +22,22 @@ services:
             - SERVER_URL=${SERVER_URL}
         depends_on:
             - db
-        command: ["npm", "start"]
 
     frontend:
-        build:
-            context: ./frontend
-            dockerfile: Dockerfile.frontend
+        image: julienlach/effitech:frontend-${TAG_NAME}
         ports:
             - "${PORT_FRONTEND}:${PORT_FRONTEND}"
         environment:
             - NODE_ENV=${NODE_ENV}
             - SERVER_URL=${SERVER_URL}
             - ORIGIN_URL=${ORIGIN_URL}
-        command: ["npm", "start"]
 
     db:
-        image: postgres:13
+        image: julienlach/effitech:postgres-${TAG_NAME}
         environment:
-            POSTGRES_USER: ${DB_USER}
-            POSTGRES_PASSWORD: ${DB_PASSWORD}
-            POSTGRES_DB: ${DB_NAME}
+            - POSTGRES_USER=${DB_USER}
+            - POSTGRES_PASSWORD=${DB_PASSWORD}
+            - POSTGRES_DB=${DB_NAME}
         ports:
             - "${DB_PORT}:${DB_PORT}"
         volumes:

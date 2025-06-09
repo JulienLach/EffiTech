@@ -1,7 +1,10 @@
 import React, { Component } from "react";
-import styles from "./ResetPasswordPage.module.css"; // Créez ce fichier CSS
+import styles from "./ResetPasswordPage.module.css";
+import stylesMobile from "./ResetPasswordPageMobile.module.css";
 import { useNavigate, useLocation } from "react-router-dom";
+import { isMobile } from "react-device-detect";
 import LogoDesktop from "../../components/LogoDesktop/LogoDesktop";
+import LogoMobile from "../../images/logoMobile.svg";
 import { resetPassword } from "../../services/api";
 
 // Composant fonctionnel pour passer navigate et location
@@ -84,63 +87,151 @@ class ResetPasswordPage extends Component {
         const { error, success } = this.state;
 
         return (
-            <div className={styles.container}>
-                <LogoDesktop />
-                <div className={styles.loginFormCard}>
-                    <h2 className={styles.titleCard}>
-                        Réinitialiser le mot de passe
-                    </h2>
-                    <form
-                        className={styles.formElements}
-                        onSubmit={this.handleSubmit}
-                    >
-                        <div className={styles.labelInput}>
-                            <label htmlFor="newPassword">
-                                Nouveau mot de passe :
-                            </label>
-                            <input
-                                type="password"
-                                name="newPassword"
-                                value={this.state.newPassword}
-                                onChange={this.handleChange}
-                                required
-                            />
+            <>
+                {isMobile ? (
+                    <>
+                        <div className={stylesMobile.container}>
+                            <div className={stylesMobile.logoContainer}>
+                                <LogoDesktop />
+                            </div>
+                            <div className={stylesMobile.formCard}>
+                                <h2 className={stylesMobile.titleCard}>
+                                    Réinitialiser le mot de passe
+                                </h2>
+                                <form
+                                    className={stylesMobile.formElements}
+                                    onSubmit={this.handleSubmit}
+                                >
+                                    <div className={stylesMobile.inputGroup}>
+                                        <label htmlFor="newPassword">
+                                            Nouveau mot de passe
+                                        </label>
+                                        <input
+                                            type="password"
+                                            name="newPassword"
+                                            value={this.state.newPassword}
+                                            onChange={this.handleChange}
+                                            required
+                                        />
+                                    </div>
+                                    <div className={stylesMobile.inputGroup}>
+                                        <label htmlFor="confirmPassword">
+                                            Confirmer le mot de passe
+                                        </label>
+                                        <input
+                                            type="password"
+                                            name="confirmPassword"
+                                            value={this.state.confirmPassword}
+                                            onChange={this.handleChange}
+                                            required
+                                        />
+                                    </div>
+                                    {error && (
+                                        <p className={stylesMobile.error}>
+                                            {error}
+                                        </p>
+                                    )}
+                                    {success && (
+                                        <p className={stylesMobile.success}>
+                                            {success}
+                                        </p>
+                                    )}
+                                    <div
+                                        className={stylesMobile.buttonContainer}
+                                    >
+                                        <button
+                                            type="reset"
+                                            onClick={this.handleCancel}
+                                            className={
+                                                stylesMobile.cancelButton
+                                            }
+                                        >
+                                            <i className="fa-solid fa-xmark"></i>{" "}
+                                            Annuler
+                                        </button>
+                                        <button
+                                            type="submit"
+                                            className={
+                                                stylesMobile.submitButton
+                                            }
+                                        >
+                                            <i className="fa-solid fa-check"></i>{" "}
+                                            Réinitialiser
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                        <div className={styles.labelInput}>
-                            <label htmlFor="confirmPassword">
-                                Confirmer le mot de passe :
-                            </label>
-                            <input
-                                type="password"
-                                name="confirmPassword"
-                                value={this.state.confirmPassword}
-                                onChange={this.handleChange}
-                                required
-                            />
+                    </>
+                ) : (
+                    <>
+                        <div className={styles.container}>
+                            <LogoDesktop />
+                            <div className={styles.loginFormCard}>
+                                <h2 className={styles.titleCard}>
+                                    Réinitialiser le mot de passe
+                                </h2>
+                                <form
+                                    className={styles.formElements}
+                                    onSubmit={this.handleSubmit}
+                                >
+                                    <div className={styles.labelInput}>
+                                        <label htmlFor="newPassword">
+                                            Nouveau mot de passe :
+                                        </label>
+                                        <input
+                                            type="password"
+                                            name="newPassword"
+                                            value={this.state.newPassword}
+                                            onChange={this.handleChange}
+                                            required
+                                        />
+                                    </div>
+                                    <div className={styles.labelInput}>
+                                        <label htmlFor="confirmPassword">
+                                            Confirmer le mot de passe :
+                                        </label>
+                                        <input
+                                            type="password"
+                                            name="confirmPassword"
+                                            value={this.state.confirmPassword}
+                                            onChange={this.handleChange}
+                                            required
+                                        />
+                                    </div>
+                                    {error && (
+                                        <span className={styles.error}>
+                                            {error}
+                                        </span>
+                                    )}
+                                    {success && (
+                                        <span className={styles.success}>
+                                            {success}
+                                        </span>
+                                    )}
+                                    <div className={styles.buttonPosition}>
+                                        <button
+                                            type="reset"
+                                            onClick={this.handleCancel}
+                                            className={styles.cancelButton}
+                                        >
+                                            <i className="fa-solid fa-xmark"></i>{" "}
+                                            Annuler
+                                        </button>
+                                        <button
+                                            type="submit"
+                                            className={styles.submitButton}
+                                        >
+                                            <i className="fa-solid fa-check"></i>{" "}
+                                            Réinitialiser
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                        {error && <span className={styles.error}>{error}</span>}
-                        {success && (
-                            <span className={styles.success}>{success}</span>
-                        )}
-                        <div className={styles.buttonPosition}>
-                            <button
-                                type="reset"
-                                onClick={this.handleCancel}
-                                className={styles.cancelButton}
-                            >
-                                <i className="fa-solid fa-xmark"></i> Annuler
-                            </button>
-                            <button
-                                type="submit"
-                                className={styles.submitButton}
-                            >
-                                <i className="fa-solid fa-check"></i>{" "}
-                                Réinitialiser
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+                    </>
+                )}
+            </>
         );
     }
 }
