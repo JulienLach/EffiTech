@@ -38,6 +38,7 @@
 }
 
 .documentLink {
+    margin: 0.4em 0;
     color: #c93c2c;
     text-align: center;
 }
@@ -94,8 +95,8 @@ h3 {
         padding: 15px;
         border-radius: 0.4em;
         font-size: 1.2em;
-        background-color: #82ec85;
-        border: 1px solid #6cb96c;
+        background-color: #d9fcda;
+        border: 1px solid #4cab4c;
         animation: slideInRight 0.08s ease-out;
     }
 }

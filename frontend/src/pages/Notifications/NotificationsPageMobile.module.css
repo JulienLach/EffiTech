@@ -30,7 +30,7 @@
 .notificationHeader {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    /* align-items: center; */
     margin-bottom: 0.5em;
 }
 
@@ -71,7 +71,7 @@
 .backButton {
     font-size: 1em;
     margin: 0.5em 0 0.5em auto;
-    width: 28vw;
+    width: 24vw;
     background-color: #e2e2e2;
     border-radius: 0.3em;
     padding: 0.3em 0.6em;

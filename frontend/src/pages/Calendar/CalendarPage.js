@@ -367,10 +367,10 @@ class CalendarPage extends Component {
                                                     stylesMobile.initiale
                                                 }
                                             >
-                                                {event.employee.lastname
+                                                {event.employee.firstname
                                                     .charAt(0)
                                                     .toUpperCase()}
-                                                {event.employee.firstname
+                                                {event.employee.lastname
                                                     .charAt(0)
                                                     .toUpperCase()}
                                             </p>
