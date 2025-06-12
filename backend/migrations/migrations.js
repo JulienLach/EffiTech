@@ -75,6 +75,14 @@ async function runMigrations() {
             `);
                 },
             },
+            {
+                version: "0.9.7", // Target version for this migration/release
+                updateDatabase: async () => {
+                    await client.query(`
+                UPDATE companies SET database_version = '0.9.7';
+            `);
+                },
+            },
             /*
             On ajoute à la suite du tableau les migration suivantes et on incrémente la version pour correspondre à la version dans le vars.yml d'ansible
            */

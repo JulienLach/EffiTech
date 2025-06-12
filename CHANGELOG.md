@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+# [0.9.7] (2025-12-06)
+
+## Fixes
+
+-   Add nginx conf file to Frontend Dockerfile to properly serve the React build
+
 # [0.9.6] (2025-12-06)
 
 ## Fixes
