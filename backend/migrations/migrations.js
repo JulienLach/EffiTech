@@ -76,7 +76,7 @@ async function runMigrations() {
                 },
             },
             {
-                version: "0.9.6", // Target version for this migration/release
+                version: "0.9.7", // Target version for this migration/release
                 updateDatabase: async () => {
                     await client.query(`
                 UPDATE companies SET database_version = '0.9.7';
