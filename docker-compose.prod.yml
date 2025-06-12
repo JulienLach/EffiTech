@@ -26,7 +26,7 @@ services:
     frontend:
         image: julienlach/effitech:frontend-${TAG_NAME}
         ports:
-            - "${PORT_FRONTEND}:${PORT_FRONTEND}"
+            - "${PORT_FRONTEND}:80"
         environment:
             - NODE_ENV=${NODE_ENV}
             - SERVER_URL=${SERVER_URL}
