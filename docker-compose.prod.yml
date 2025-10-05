@@ -2,9 +2,11 @@ version: "3.8"
 
 services:
     backend:
-        image: julienlach/effitech:backend-${TAG_NAME}
+        build:
+            context: ./backend
+            dockerfile: Dockerfile
         ports:
-            - "${PORT_BACKEND}:${PORT_BACKEND}"
+            - "127.0.0.1:${PORT_BACKEND}:${PORT_BACKEND}"
         environment:
             - NODE_ENV=${NODE_ENV}
             - DB_USER=${DB_USER}
@@ -22,26 +24,31 @@ services:
             - SERVER_URL=${SERVER_URL}
         depends_on:
             - db
+        restart: unless-stopped
 
     frontend:
-        image: julienlach/effitech:frontend-${TAG_NAME}
+        build:
+            context: ./frontend
+            dockerfile: Dockerfile.frontend
         ports:
-            - "${PORT_FRONTEND}:80"
+            - "127.0.0.1:${PORT_FRONTEND}:80"
         environment:
             - NODE_ENV=${NODE_ENV}
             - SERVER_URL=${SERVER_URL}
             - ORIGIN_URL=${ORIGIN_URL}
+        depends_on:
+            - backend
+        restart: unless-stopped
 
     db:
-        image: julienlach/effitech:postgres-${TAG_NAME}
+        image: postgres:14-alpine # Utilise l'image officielle PostgreSQL au lieu de Docker Hub custom
         environment:
             - POSTGRES_USER=${DB_USER}
             - POSTGRES_PASSWORD=${DB_PASSWORD}
             - POSTGRES_DB=${DB_NAME}
         ports:
-            - "${DB_PORT}:${DB_PORT}"
+            - "127.0.0.1:${DB_PORT}:${DB_PORT}"
         volumes:
-            # stocker les données de la base de données dans un volume
             - pgdata:/var/lib/postgresql/data
             - ./database_script.sql:/docker-entrypoint-initdb.d/init.sql
         healthcheck:
@@ -49,7 +56,7 @@ services:
             interval: 10s
             timeout: 5s
             retries: 5
-        command: ["postgres", "-c", "fsync=off"]
+        restart: unless-stopped
 
 volumes:
     pgdata:
