@@ -1,0 +1,48 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for deploy
+- name: Créer le répertoire /opt/app
+  ansible.builtin.file:
+      path: /opt/app
+      state: directory
+      mode: "0755"
+
+- name: Copier le docker-compose.yml
+  copy:
+      src: ../../../../docker-compose-prod.yml # Chemin relatif depuis ansible/roles/deploy/tasks/
+      dest: /opt/app/docker-compose.yml
+
+- name: Copier le script SQL pour la base de données
+  copy:
+      src: ../../../../database_script.sql
+      dest: /opt/app/database_script.sql
+
+- name: Copier le répertoire backend
+  copy:
+      src: ../../../../backend
+      dest: /opt/app/
+
+- name: Copier le répertoire frontend
+  copy:
+      src: ../../../../frontend
+      dest: /opt/app/
+
+- name: Lancer les conteneurs avec docker-compose
+  command: docker compose -f /opt/app/docker-compose.yml up -d --build
+  args:
+      chdir: /opt/app
+  environment:
+      NODE_ENV: "{{ node_env }}"
+      DB_USER: "{{ db_user }}"
+      DB_HOST: "{{ db_host }}"
+      DB_NAME: "{{ db_name }}"
+      DB_PASSWORD: "{{ db_password }}"
+      DB_PORT: "{{ db_port }}"
+      PORT_BACKEND: "{{ port_backend }}"
+      PORT_FRONTEND: "{{ port_frontend }}"
+      JWT_SECRET: "{{ jwt_secret }}"
+      EMAIL: "{{ email }}"
+      MAILJET_API_KEY: "{{ mailjet_api_key }}"
+      MAILJET_SECRET_KEY: "{{ mailjet_secret_key }}"
+      ORIGIN_URL: "{{ origin_url }}"
+      SERVER_URL: "{{ server_url }}"

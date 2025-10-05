@@ -1,0 +1,4 @@
+- hosts: vps
+  become: true
+  roles:
+      - deploy

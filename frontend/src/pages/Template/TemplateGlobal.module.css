@@ -154,8 +154,8 @@ ul li:hover {
     display: flex;
     align-items: center;
     text-decoration: none;
-    font-size: 1.25em;
-    font-weight: 450;
+    font-size: 1.2em;
+    font-weight: 600;
     color: black;
     width: 100%;
     padding: 0.02em 0.4em;
@@ -195,7 +195,7 @@ i {
     align-items: center;
     background-color: #c93c2c;
     height: auto;
-    width: 0.7em;
+    width: 0.5em;
     margin: 0.2em 0;
     border-top-right-radius: 0.6em;
     border-bottom-right-radius: 0.6em;

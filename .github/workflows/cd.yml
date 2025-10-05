@@ -12,7 +12,7 @@ jobs:
         steps:
             # Step 1: Checkout code
             - name: Checkout code
-              uses: actions/checkout@v2
+              uses: actions/checkout@v4
 
             # Step 2: Verify commit is on main branch
             - name: Verify commit is on main
@@ -23,20 +23,7 @@ jobs:
                     exit 1
                   fi
 
-            # Step 3: Extract release notes from CHANGELOG.md
-            - name: Extract release notes
-              id: extract_notes
-              run: |
-                  TAG_NAME=$(echo ${{ github.ref }} | sed 's/refs\/tags\///')
-                  PREVIOUS_TAG=$(git describe --tags --abbrev=0 ${TAG_NAME}^ 2>/dev/null || echo "HEAD")
-                  if [ "${PREVIOUS_TAG}" = "HEAD" ]; then
-                    RELEASE_NOTES=$(awk "/# \[${TAG_NAME}\]/,0" CHANGELOG.md)
-                  else
-                    RELEASE_NOTES=$(awk "/# \[${TAG_NAME}\]/,/# \[${PREVIOUS_TAG}\]/" CHANGELOG.md | sed '$d')
-                  fi
-                  echo "::set-output name=notes::${RELEASE_NOTES}"
-
-            # Step 4: Create a GitHub release with the release notes
+            # Step 3: Create a GitHub release with the release notes
             - name: Create GitHub Release
               id: create_release
               uses: actions/create-release@v1
@@ -45,35 +32,62 @@ jobs:
               with:
                   tag_name: ${{ github.ref }}
                   release_name: ${{ github.ref }}
-                  body: ${{ steps.extract_notes.outputs.notes }}
                   draft: false
                   prerelease: false
 
-            # Step 5: Log in to Docker Hub
-            - name: Log in to Docker Hub
-              uses: docker/login-action@v2
-              with:
-                  username: ${{ secrets.DOCKER_USERNAME }}
-                  password: ${{ secrets.DOCKER_PASSWORD }}
-
-            # Step 6: Build and push Docker images
-            - name: Build and push Docker images
+            # Step 4: Generate Ansible inventory
+            - name: Générer le fichier de l'inventaire Ansible
               run: |
-                  # Extract the tag name
-                  TAG_NAME=$(echo ${{ github.ref }} | sed 's/refs\/tags\///')
-                  IMAGE_NAME_FRONTEND=julienlach/effitech:frontend-${TAG_NAME}
-                  IMAGE_NAME_BACKEND=julienlach/effitech:backend-${TAG_NAME}
-                  IMAGE_NAME_POSTGRES=julienlach/effitech:postgres-${TAG_NAME}
+                  if [ -z "${{ secrets.VPS_IP }}" ] || [ -z "${{ secrets.VPS_USER }}" ] || [ -z "${{ secrets.SSH_PRIVATE_KEY }}" ] || [ -z "${{ secrets.VPS_SSH_PORT }}" ]; then
+                    echo "Erreur : VPS_IP, VPS_USER, SSH_PRIVATE_KEY ou VPS_SSH_PORT non défini"
+                    exit 1
+                  fi
+                  echo "[vps]" > ansible/inventory.ini
+                  echo "${{ secrets.VPS_IP }} ansible_user=${{ secrets.VPS_USER }} ansible_port=${{ secrets.VPS_SSH_PORT }} ansible_ssh_common_args='-o StrictHostKeyChecking=no'" >> ansible/inventory.ini
 
-                  # Build and push frontend image
-                  docker build -t $IMAGE_NAME_FRONTEND -f frontend/Dockerfile.frontend frontend
-                  docker push $IMAGE_NAME_FRONTEND
+            # Step 5: Debug inventory file and test Ansible ping
+            - name: Debug inventory file
+              run: |
+                  echo "Current directory: $(pwd)"
+                  echo "Listing ansible/ directory:"
+                  ls -l ansible/
+                  echo "Contents of ansible/inventory.ini:"
+                  cat ansible/inventory.ini || echo "Error: ansible/inventory.ini not found"
+                  echo "Validating inventory with ansible-inventory:"
+                  ansible-inventory -i ansible/inventory.ini --list || echo "Error: Failed to parse inventory"
+                  echo "Testing Ansible ping:"
+                  echo "${{ secrets.SSH_PRIVATE_KEY }}" > ssh_key
+                  chmod 600 ssh_key
+                  ansible -i ansible/inventory.ini vps -m ping -u ${{ secrets.VPS_USER }} --private-key=ssh_key -vvv || echo "Error: Ansible ping failed"
 
-                  # Build and push backend image
-                  docker build -t $IMAGE_NAME_BACKEND -f backend/Dockerfile.backend backend
-                  docker push $IMAGE_NAME_BACKEND
+            # Step 6: Test SSH connection
+            - name: Tester la connexion SSH
+              run: |
+                  if [ -z "${{ secrets.VPS_IP }}" ] || [ -z "${{ secrets.VPS_USER }}" ] || [ -z "${{ secrets.SSH_PRIVATE_KEY }}" ] || [ -z "${{ secrets.VPS_SSH_PORT }}" ]; then
+                    echo "Erreur : VPS_IP, VPS_USER, SSH_PRIVATE_KEY ou VPS_SSH_PORT non défini"
+                    exit 1
+                  fi
+                  echo "${{ secrets.SSH_PRIVATE_KEY }}" > ssh_key
+                  chmod 600 ssh_key
+                  ssh -i ssh_key -o StrictHostKeyChecking=no -p ${{ secrets.VPS_SSH_PORT }} ${{ secrets.VPS_USER }}@${{ secrets.VPS_IP }} "echo Connexion SSH réussie"
 
-                  # Push existing postgres image
-                  docker pull julienlach/effitech:postgres
-                  docker tag julienlach/effitech:postgres $IMAGE_NAME_POSTGRES
-                  docker push $IMAGE_NAME_POSTGRES
+            # Step 7: Deploy on VPS with Ansible
+            - name: Déployer sur le VPS avec Ansible
+              run: |
+                  echo "${{ secrets.SSH_PRIVATE_KEY }}" > ssh_key
+                  chmod 600 ssh_key
+                  ansible-playbook -i ansible/inventory.ini ansible/playbook.yml -u ${{ secrets.VPS_USER }} --private-key=ssh_key -vvv \
+                    -e "node_env=${{ secrets.NODE_ENV }}" \
+                    -e "port_backend=${{ secrets.PORT_BACKEND }}" \
+                    -e "port_frontend=${{ secrets.PORT_FRONTEND }}" \
+                    -e "db_user=${{ secrets.DB_USER }}" \
+                    -e "db_host=${{ secrets.DB_HOST }}" \
+                    -e "db_name=${{ secrets.DB_NAME }}" \
+                    -e "db_password=${{ secrets.DB_PASSWORD }}" \
+                    -e "db_port=${{ secrets.DB_PORT }}" \
+                    -e "jwt_secret=${{ secrets.JWT_SECRET }}" \
+                    -e "email=${{ secrets.EMAIL }}" \
+                    -e "mailjet_api_key=${{ secrets.MAILJET_API_KEY }}" \
+                    -e "mailjet_secret_key=${{ secrets.MAILJET_SECRET_KEY }}" \
+                    -e "origin_url=${{ secrets.ORIGIN_URL }}" \
+                    -e "server_url=${{ secrets.SERVER_URL }}"
