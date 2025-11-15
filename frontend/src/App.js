@@ -1,13 +1,7 @@
 import React from "react";
-import {
-    BrowserRouter as Router,
-    Route,
-    Routes,
-    Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import "./styles/GlobalStyles.module.css";
 import LoginPage from "./pages/Login/LoginPage";
-import CreateAccountPage from "./pages/CreateAccount/CreateAccountPage";
 import CalendarPage from "./pages/Calendar/CalendarPage";
 import InterventionFormPage from "./pages/InterventionForm/InterventionFormPage";
 import ReportPage from "./pages/Report/ReportPage";
@@ -39,22 +33,12 @@ const App = () => {
             <Routes>
                 <Route path="/" element={<Navigate to="/login" />} />
                 <Route path="/login" element={<LoginPage />} />
-                {/* <Route path="/create-account" element={<CreateAccountPage />} /> */}
                 <Route path="/calendar" element={<CalendarPage />} />
-                <Route
-                    path="/intervention-form"
-                    element={<InterventionFormPage />}
-                />
+                <Route path="/intervention-form" element={<InterventionFormPage />} />
                 <Route path="/report" element={<ReportPage />} />
                 <Route path="/employees" element={<EmployeesPage />} />
-                <Route
-                    path="/employee-details"
-                    element={<EmployeeDetailsPage />}
-                />
-                <Route
-                    path="/appointment-form"
-                    element={<AppointmentFormPage />}
-                />
+                <Route path="/employee-details" element={<EmployeeDetailsPage />} />
+                <Route path="/appointment-form" element={<AppointmentFormPage />} />
                 <Route path="/employee-form" element={<EmployeeFormPage />} />
                 <Route path="/clients" element={<ClientsPage />} />
                 <Route path="/client-details" element={<ClientDetailsPage />} />
@@ -64,30 +48,15 @@ const App = () => {
                 <Route path="/company-details" element={<CompanyDetails />} />
                 <Route path="/expense" element={<ExpensePage />} />
                 <Route path="/documents" element={<DocumentsPage />} />
-                <Route
-                    path="/document-details"
-                    element={<DocumentDetailsPage />}
-                />
+                <Route path="/document-details" element={<DocumentDetailsPage />} />
                 <Route path="/notifications" element={<NotificationsPage />} />
-                <Route
-                    path="/calendar-mobile"
-                    element={<CalendarMobilePage />}
-                />
+                <Route path="/calendar-mobile" element={<CalendarMobilePage />} />
                 <Route path="/invoices" element={<InvoicesPage />} />
-                <Route
-                    path="/invoice-details"
-                    element={<InvoiceDetailsPage />}
-                />
+                <Route path="/invoice-details" element={<InvoiceDetailsPage />} />
                 <Route path="/statistics" element={<StatisticsPage />} />
                 <Route path="/parameters" element={<ParametersPage />} />
-                <Route
-                    path="/forgot-password"
-                    element={<ForgotPasswordPageWrapper />}
-                />
-                <Route
-                    path="/reset-password"
-                    element={<ResetPasswordPageWrapper />}
-                />
+                <Route path="/forgot-password" element={<ForgotPasswordPageWrapper />} />
+                <Route path="/reset-password" element={<ResetPasswordPageWrapper />} />
             </Routes>
         </Router>
     );
