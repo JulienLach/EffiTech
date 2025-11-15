@@ -1,6 +1,24 @@
 version: "3.8"
 
 services:
+    # Base de données
+    db:
+        image: postgres:14-alpine
+        environment:
+            - POSTGRES_USER=${DB_USER}
+            - POSTGRES_PASSWORD=${DB_PASSWORD}
+            - POSTGRES_DB=${DB_NAME}
+        volumes:
+            - pgdata:/var/lib/postgresql/data
+            - ./database_script.sql:/docker-entrypoint-initdb.d/init.sql
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+        restart: unless-stopped
+
+    # Backend
     backend:
         build:
             context: ./backend
@@ -8,12 +26,12 @@ services:
         ports:
             - "127.0.0.1:${PORT_BACKEND}:${PORT_BACKEND}"
         environment:
-            - NODE_ENV=${NODE_ENV}
+            - NODE_ENV=production
             - DB_USER=${DB_USER}
-            - DB_HOST=${DB_HOST}
+            - DB_HOST=db
             - DB_NAME=${DB_NAME}
             - DB_PASSWORD=${DB_PASSWORD}
-            - DB_PORT=${DB_PORT}
+            - DB_PORT=5432
             - JWT_SECRET=${JWT_SECRET}
             - PORT=${PORT_BACKEND}
             - EMAIL=${EMAIL}
@@ -23,39 +41,23 @@ services:
             - ORIGIN_URL=${ORIGIN_URL}
             - SERVER_URL=${SERVER_URL}
         depends_on:
-            - db
+            db:
+                condition: service_healthy
         restart: unless-stopped
 
+    # Frontend
     frontend:
         build:
             context: ./frontend
             dockerfile: Dockerfile.frontend
         ports:
-            - "127.0.0.1:${PORT_FRONTEND}:80"
+            - "${PORT_FRONTEND}:80"
         environment:
-            - NODE_ENV=${NODE_ENV}
+            - NODE_ENV=production
             - SERVER_URL=${SERVER_URL}
             - ORIGIN_URL=${ORIGIN_URL}
         depends_on:
             - backend
-        restart: unless-stopped
-
-    db:
-        image: postgres:14-alpine # Utilise l'image officielle PostgreSQL au lieu de Docker Hub custom
-        environment:
-            - POSTGRES_USER=${DB_USER}
-            - POSTGRES_PASSWORD=${DB_PASSWORD}
-            - POSTGRES_DB=${DB_NAME}
-        ports:
-            - "127.0.0.1:${DB_PORT}:${DB_PORT}"
-        volumes:
-            - pgdata:/var/lib/postgresql/data
-            - ./database_script.sql:/docker-entrypoint-initdb.d/init.sql
-        healthcheck:
-            test: ["CMD-SHELL", "pg_isready -U ${DB_USER}"]
-            interval: 10s
-            timeout: 5s
-            retries: 5
         restart: unless-stopped
 
 volumes:

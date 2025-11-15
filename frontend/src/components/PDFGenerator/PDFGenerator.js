@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-    Page,
-    Text,
-    View,
-    Document,
-    StyleSheet,
-    pdf,
-    Image,
-} from "@react-pdf/renderer";
+import { Page, Text, View, Document, StyleSheet, pdf, Image } from "@react-pdf/renderer";
 import { Font } from "@react-pdf/renderer";
 import UbuntuRegular from "./fonts/Ubuntu-Regular.ttf";
 import UbuntuBold from "./fonts/Ubuntu-Bold.ttf";
@@ -54,14 +46,18 @@ const styles = StyleSheet.create({
         fontSize: 12,
         margin: 10,
         padding: 15,
-        border: 0.4,
+        borderWidth: 0.4,
+        borderStyle: "solid",
+        borderColor: "black",
         borderRadius: 3,
     },
     workDone: {
         fontSize: 12,
         margin: 10,
         padding: 15,
-        border: 0.4,
+        borderWidth: 0.4,
+        borderStyle: "solid",
+        borderColor: "black",
         borderRadius: 3,
     },
     dateAndHour: {
@@ -88,38 +84,26 @@ const PDFGenerator = ({ report, reportData, companyData }) => {
     useEffect(() => {
         const generatePdf = async () => {
             const doc = (
-                <Document
-                    title={`Rapport d'intervention - INT-${report.idEvent} - ${report.title}`}
-                >
+                <Document title={`Rapport d'intervention - INT-${report.idEvent} - ${report.title}`}>
                     <Page size="A4" style={styles.page}>
-                        <Image
-                            style={styles.logo}
-                            src={`data:image/jpeg;base64,${companyData.logo}`}
-                        />{" "}
+                        <Image style={styles.logo} src={`data:image/jpeg;base64,${companyData.logo}`} />{" "}
                         <View style={styles.infoClientCompany}>
                             <View>
-                                <Text style={styles.title}>
-                                    {companyData.name}
-                                </Text>
+                                <Text style={styles.title}>{companyData.name}</Text>
                                 <Text style={styles.title}>Client :</Text>
                                 <Text>
-                                    Nom : {report.client.firstname}{" "}
-                                    {report.client.lastname}
+                                    Nom : {report.client.firstname} {report.client.lastname}
                                 </Text>
                                 <Text>
-                                    Adresse : {report.client.address.address}{" "}
-                                    {report.client.address.zipcode}{" "}
+                                    Adresse : {report.client.address.address} {report.client.address.zipcode}{" "}
                                     {report.client.address.city}
                                 </Text>
-                                <Text>
-                                    Téléphone : {report.client.phoneNumber}
-                                </Text>
+                                <Text>Téléphone : {report.client.phoneNumber}</Text>
                             </View>
                             <View>
                                 <Text style={styles.title}>Technicien :</Text>
                                 <Text>
-                                    Nom : {report.employee.firstname}{" "}
-                                    {report.employee.lastname}
+                                    Nom : {report.employee.firstname} {report.employee.lastname}
                                 </Text>
                             </View>
                         </View>
@@ -127,44 +111,27 @@ const PDFGenerator = ({ report, reportData, companyData }) => {
                         <Text style={styles.interventionIdTitle}>
                             INT-{report.idEvent} - {report.title}
                         </Text>
-                        <Text style={styles.dateAndHour}>
-                            Panne constatée :
-                        </Text>
+                        <Text style={styles.dateAndHour}>Panne constatée :</Text>
                         <Text style={styles.breakdown}>{report.breakdown}</Text>
                         <Text style={styles.dateAndHour}>Réparation :</Text>
                         <Text style={styles.workDone}>{report.workDone}</Text>
                         <Text style={styles.dateAndHour}>
-                            Intervenu le :{" "}
-                            {new Date(report.startingDate).toLocaleDateString()}
+                            Intervenu le : {new Date(report.startingDate).toLocaleDateString()}
                         </Text>
                         <Text style={styles.dateAndHour}>
-                            Heure de l’intervention : de {report.startingHour} à{" "}
-                            {report.endingHour}
+                            Heure de l’intervention : de {report.startingHour} à {report.endingHour}
                         </Text>
-                        <Text style={styles.dateAndHour}>
-                            Durée de l’intervention : {report.duration} heures
-                        </Text>
+                        <Text style={styles.dateAndHour}>Durée de l’intervention : {report.duration} heures</Text>
                         <View style={styles.signature}>
-                            <Text style={styles.dateAndHour}>
-                                Signature du client :
-                            </Text>
-                            <Image
-                                src={`data:image/png;base64,${reportData.clientSignature}`}
-                            />
-                            <Text style={styles.dateAndHour}>
-                                Signature du technicien :
-                            </Text>
-                            <Image
-                                src={`data:image/png;base64,${reportData.employeeSignature}`}
-                            />
+                            <Text style={styles.dateAndHour}>Signature du client :</Text>
+                            <Image src={`data:image/png;base64,${reportData.clientSignature}`} />
+                            <Text style={styles.dateAndHour}>Signature du technicien :</Text>
+                            <Image src={`data:image/png;base64,${reportData.employeeSignature}`} />
                         </View>
                         <Text style={styles.footer}>
-                            {companyData.name} | SIRET: {companyData.siret} |
-                            TVA: {companyData.vatNumber} | Capital:{" "}
-                            {companyData.capital} € | Adresse:{" "}
-                            {companyData.idAddress.address},{" "}
-                            {companyData.idAddress.city},{" "}
-                            {companyData.idAddress.zipcode} | Téléphone:{" "}
+                            {companyData.name} | SIRET: {companyData.siret} | TVA: {companyData.vatNumber} | Capital:{" "}
+                            {companyData.capital} € | Adresse: {companyData.idAddress.address},{" "}
+                            {companyData.idAddress.city}, {companyData.idAddress.zipcode} | Téléphone:{" "}
                             {companyData.phoneNumber}
                         </Text>
                     </Page>
@@ -182,14 +149,7 @@ const PDFGenerator = ({ report, reportData, companyData }) => {
 
     return (
         <div>
-            {pdfBlob && (
-                <iframe
-                    src={URL.createObjectURL(pdfBlob)}
-                    width="100%"
-                    height="850px"
-                    title="PDF Document"
-                />
-            )}
+            {pdfBlob && <iframe src={URL.createObjectURL(pdfBlob)} width="100%" height="850px" title="PDF Document" />}
         </div>
     );
 };

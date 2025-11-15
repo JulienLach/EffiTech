@@ -67,16 +67,7 @@ class ClientFormPage extends Component {
     handleSubmit(event) {
         event.preventDefault();
         const { client } = this.state;
-        const {
-            idClient,
-            category,
-            firstname,
-            lastname,
-            email,
-            phoneNumber,
-            company,
-            address,
-        } = client;
+        const { idClient, category, firstname, lastname, email, phoneNumber, company, address } = client;
         const addressDetails = {
             address: address.address,
             city: address.city,
@@ -110,14 +101,12 @@ class ClientFormPage extends Component {
         if (!phoneNumber) {
             errors.phoneNumber = "* Champ obligatoire";
         } else if (!/^[\d\s]+$/.test(phoneNumber)) {
-            errors.phoneNumber =
-                "* Ne doit contenir que des chiffres et des espaces";
+            errors.phoneNumber = "* Ne doit contenir que des chiffres et des espaces";
         }
         if (!addressDetails.address) {
             errors.address = "* Champ obligatoire";
         } else if (!/^[a-zA-ZÀ-ÿ\d\s-]+$/.test(addressDetails.address)) {
-            errors.address =
-                "* Ne doit contenir que des lettres, des chiffres, des espaces et des tirets";
+            errors.address = "* Ne doit contenir que des lettres, des chiffres, des espaces et des tirets";
         }
         if (!addressDetails.zipcode) {
             errors.zipcode = "* Champ obligatoire";
@@ -127,8 +116,7 @@ class ClientFormPage extends Component {
         if (!addressDetails.city) {
             errors.city = "* Champ obligatoire";
         } else if (!/^[a-zA-ZÀ-ÿ\s-]+$/.test(addressDetails.city)) {
-            errors.city =
-                "* Ne doit contenir que des lettres, des espaces et des tirets";
+            errors.city = "* Ne doit contenir que des lettres, des espaces et des tirets";
         }
         if (!email) {
             errors.email = "* Champ obligatoire";
@@ -170,47 +158,21 @@ class ClientFormPage extends Component {
                     </div>
                     <div className={styles.separation}></div>
                     <h2 className={styles.header}>Coordonnées</h2>
-                    <form
-                        className={styles.formElements}
-                        onSubmit={this.handleSubmit}
-                    >
+                    <form className={styles.formElements} onSubmit={this.handleSubmit}>
                         <div className={styles.labelInput}>
                             <label htmlFor="lastname">Nom :</label>
-                            <input
-                                type="text"
-                                name="lastname"
-                                value={client.lastname}
-                                onChange={this.handleChange}
-                            />
-                            {errors.lastname && (
-                                <span className={styles.error}>
-                                    {errors.lastname}
-                                </span>
-                            )}
+                            <input type="text" name="lastname" value={client.lastname} onChange={this.handleChange} />
+                            {errors.lastname && <span className={styles.error}>{errors.lastname}</span>}
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="firstname">Prénom :</label>
-                            <input
-                                type="text"
-                                name="firstname"
-                                value={client.firstname}
-                                onChange={this.handleChange}
-                            />
-                            {errors.firstname && (
-                                <span className={styles.error}>
-                                    {errors.firstname}
-                                </span>
-                            )}
+                            <input type="text" name="firstname" value={client.firstname} onChange={this.handleChange} />
+                            {errors.firstname && <span className={styles.error}>{errors.firstname}</span>}
                         </div>
                         {client.category !== "Particulier" && (
                             <div className={styles.labelInput}>
                                 <label htmlFor="company">Entreprise :</label>
-                                <input
-                                    type="text"
-                                    name="company"
-                                    value={client.company}
-                                    onChange={this.handleChange}
-                                />
+                                <input type="text" name="company" value={client.company} onChange={this.handleChange} />
                             </div>
                         )}
                         <div className={styles.labelInput}>
@@ -221,11 +183,7 @@ class ClientFormPage extends Component {
                                 value={client.phoneNumber}
                                 onChange={this.handleChange}
                             />
-                            {errors.phoneNumber && (
-                                <span className={styles.error}>
-                                    {errors.phoneNumber}
-                                </span>
-                            )}
+                            {errors.phoneNumber && <span className={styles.error}>{errors.phoneNumber}</span>}
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="address">Adresse :</label>
@@ -235,11 +193,7 @@ class ClientFormPage extends Component {
                                 value={client.address.address}
                                 onChange={this.handleChange}
                             />
-                            {errors.address && (
-                                <span className={styles.error}>
-                                    {errors.address}
-                                </span>
-                            )}
+                            {errors.address && <span className={styles.error}>{errors.address}</span>}
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="zipcode">Code postal : </label>
@@ -249,56 +203,26 @@ class ClientFormPage extends Component {
                                 value={client.address.zipcode}
                                 onChange={this.handleChange}
                             />
-                            {errors.zipcode && (
-                                <span className={styles.error}>
-                                    {errors.zipcode}
-                                </span>
-                            )}
+                            {errors.zipcode && <span className={styles.error}>{errors.zipcode}</span>}
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="city">Ville :</label>
-                            <input
-                                type="text"
-                                name="city"
-                                value={client.address.city}
-                                onChange={this.handleChange}
-                            />
-                            {errors.city && (
-                                <span className={styles.error}>
-                                    {errors.city}
-                                </span>
-                            )}
+                            <input type="text" name="city" value={client.address.city} onChange={this.handleChange} />
+                            {errors.city && <span className={styles.error}>{errors.city}</span>}
                         </div>
                         <div className={styles.labelInput}>
                             <label htmlFor="email">Mail :</label>
-                            <input
-                                type="text"
-                                name="email"
-                                value={client.email}
-                                onChange={this.handleChange}
-                            />
-                            {errors.email && (
-                                <span className={styles.error}>
-                                    {errors.email}
-                                </span>
-                            )}
+                            <input type="text" name="email" value={client.email} onChange={this.handleChange} />
+                            {errors.email && <span className={styles.error}>{errors.email}</span>}
                         </div>
                         <div className={styles.buttonPosition}>
-                            <button
-                                type="button"
-                                onClick={this.handleCancel}
-                                className={styles.cancelButton}
-                            >
+                            <button type="button" onClick={this.handleCancel} className={styles.cancelButton}>
                                 {" "}
                                 <i className="fa-solid fa-xmark"></i> Annuler
                             </button>
-                            <button
-                                type="submit"
-                                className={styles.submitButton}
-                            >
+                            <button type="submit" className={styles.submitButton}>
                                 {" "}
-                                <i className="fa-solid fa-check"></i>{" "}
-                                Enregistrer
+                                <i className="fa-solid fa-check"></i> Enregistrer
                             </button>
                         </div>
                     </form>

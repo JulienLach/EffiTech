@@ -1,19 +1,38 @@
 version: "3.8"
 
 services:
+    # Base de données de développement
+    db:
+        image: postgres:14-alpine
+        environment:
+            - POSTGRES_USER=${DB_USER}
+            - POSTGRES_PASSWORD=${DB_PASSWORD}
+            - POSTGRES_DB=${DB_NAME}
+        ports:
+            - "${DB_PORT}:${DB_PORT}"
+        volumes:
+            - pgdata:/var/lib/postgresql/data
+            - ./database_script.sql:/docker-entrypoint-initdb.d/init.sql
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+        restart: unless-stopped
+
+    # Backend de développement
     backend:
         build:
             context: ./backend
             dockerfile: Dockerfile.backend
-        working_dir: /app
         ports:
             - "${PORT_BACKEND}:${PORT_BACKEND}"
         environment:
             - NODE_ENV=${NODE_ENV}
             - DB_USER=${DB_USER}
-            - DB_PASSWORD=${DB_PASSWORD}
+            - DB_HOST=db
             - DB_NAME=${DB_NAME}
-            - DB_HOST=${DB_HOST}
+            - DB_PASSWORD=${DB_PASSWORD}
             - DB_PORT=${DB_PORT}
             - JWT_SECRET=${JWT_SECRET}
             - PORT=${PORT_BACKEND}
@@ -24,9 +43,14 @@ services:
             - ORIGIN_URL=${ORIGIN_URL}
             - SERVER_URL=${SERVER_URL}
         depends_on:
-            - db
-        command: ["npm", "start"]
+            db:
+                condition: service_healthy
+        volumes:
+            - ./backend:/app
+            - /app/node_modules
+        restart: unless-stopped
 
+    # Frontend de développement
     frontend:
         build:
             context: ./frontend
@@ -37,26 +61,12 @@ services:
             - NODE_ENV=${NODE_ENV}
             - SERVER_URL=${SERVER_URL}
             - ORIGIN_URL=${ORIGIN_URL}
-        command: ["npm", "start"]
-
-    db:
-        image: postgres:13
-        environment:
-            POSTGRES_USER: ${DB_USER}
-            POSTGRES_PASSWORD: ${DB_PASSWORD}
-            POSTGRES_DB: ${DB_NAME}
-        ports:
-            - "${DB_PORT}:${DB_PORT}"
+        depends_on:
+            - backend
         volumes:
-            # stocker les données de la base de données dans un volume
-            - pgdata:/var/lib/postgresql/data
-            - ./database_script.sql:/docker-entrypoint-initdb.d/init.sql
-        healthcheck:
-            test: ["CMD-SHELL", "pg_isready -U ${DB_USER}"]
-            interval: 10s
-            timeout: 5s
-            retries: 5
-        command: ["postgres", "-c", "fsync=off"]
+            - ./frontend:/app
+            - /app/node_modules
+        restart: unless-stopped
 
 volumes:
     pgdata:

@@ -6,6 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## Fixes
+
+-   Fix PDF generation error with @react-pdf/renderer v4 border styles
+-   Add security overrides for npm vulnerabilities (nth-check, postcss, semver)
+-   Secure docker-compose.prod.yml by removing exposed database port
+-   Update Docker images to latest versions (node:20-alpine, postgres:14-alpine)
+-   Fix CORS configuration with proper headers for preflight requests
+-   Update package versions for better security and compatibility
+-   Optimize Dockerfiles for better build performance and security
+-   Improve development workflow with updated docker-compose.yml
+
 # [0.9.7] (2025-12-06)
 
 ## Fixes

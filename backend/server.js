@@ -41,6 +41,8 @@ const corsOptions = {
     },
     credentials: true,
     methods: "GET, POST, PUT, DELETE, OPTIONS",
+    allowedHeaders: ["Content-Type", "Authorization"],
+    optionsSuccessStatus: 200, // Certains navigateurs attendent 200 au lieu de 204 pour les requêtes OPTIONS
 };
 
 app.use(cors(corsOptions));
